@@ -138,5 +138,28 @@ namespace _5051.Backend
 
             return myReturn;
         }
+
+        /// <summary>
+        /// Helper function that returns the Avatar Image URI
+        /// </summary>
+        /// <param name="data">The avatarId to look up</param>
+        /// <returns>null, or the avatar image URI</returns>
+        public string GetAvatarUri(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return null;
+            }
+
+            string myReturn = null;
+
+            var myData = DataSource.Read(data);
+            if (myData != null)
+            {
+                myReturn = myData.Uri;
+            }
+
+            return myReturn;
+        }
     }
 }
