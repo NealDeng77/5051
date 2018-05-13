@@ -1,0 +1,33 @@
+﻿@model _5051.Models.AvatarViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Avatars</h2>
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model.AvatarList == null)
+            {
+                <p>No Avatars</p>
+            }
+
+            foreach (var item in Model.AvatarList)
+            {
+                <a id="@item.Id" href="~/Avatar/Update/@item.Id">
+                    <div class="col-sm-2">
+                        <img src="~/Content/img/@item.Uri" width="75" height="75" />
+                        <span>
+                            @item.Name
+                        </span>
+                    </div>
+                </a>
+            }
+        }
+
+    </div>
+</div>
+
