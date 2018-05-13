@@ -41,7 +41,13 @@
         <hr />
         <footer>
             <div class="footer navbar-fixed-bottom">
-                <p>&copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved</p>
+                <p>
+                    &copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved
+                    &nbsp;&nbsp;
+                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { @class = "btn btn-link" })
+                    @Html.ActionLink("Contact", "Contact", "Home", new { @class = "btn btn-link" })
+                </p>
+                
             </div>
         </footer>
     </div>
