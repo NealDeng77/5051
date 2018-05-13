@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace _5051.Backend
 {
@@ -123,7 +124,7 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Returns the First Avatar ID in the list, this will be used for creating new avatars if no avatarID is specified
+        /// Helper that returns the First Avatar ID in the list, this will be used for creating new avatars if no avatarID is specified
         /// </summary>
         /// <returns>Null, or Avatar ID of the first avatar in the list.</returns>
         public string GetFirstAvatarId()
@@ -158,6 +159,27 @@ namespace _5051.Backend
             {
                 myReturn = myData.Uri;
             }
+
+            return myReturn;
+        }
+
+        /// <summary>
+        /// Helper that gets the list of Items, and converst them to a SelectList, so they can show in a Drop Down List box
+        /// </summary>
+        /// <param name="id">optional paramater, of the Item that is currently selected</param>
+        /// <returns>List of SelectListItems as a SelectList</returns>
+        public List<SelectListItem> GetAvatarListItem(string id=null)
+        {
+            var myDataList = DataSource.Index();
+
+            //var myReturn = new SelectList(myDataList);
+
+            var myReturn = myDataList.Select(a => new SelectListItem
+            {
+                Text = a.Name,
+                Value = a.Id,
+                Selected = (a.Id == id),
+            }).ToList();
 
             return myReturn;
         }
