@@ -29,7 +29,7 @@ namespace _5051.Models
 
         public AvatarModel()
         {
-
+            Id = Guid.NewGuid().ToString();
         }
 
         public AvatarModel(string uri, string name, string description)

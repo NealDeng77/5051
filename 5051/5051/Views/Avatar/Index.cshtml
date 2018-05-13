@@ -10,7 +10,7 @@
     <div class="row">
 
         @{
-                if (Model.AvatarList == null || !Model.AvatarList.Any())
+            if (Model.AvatarList == null || !Model.AvatarList.Any())
             {
                 <br />
                 <p>No Avatars in the System</p>
@@ -32,6 +32,13 @@
             }
         }
 
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+        </div>
     </div>
 </div>
 

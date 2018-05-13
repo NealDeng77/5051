@@ -282,6 +282,7 @@
     <Content Include="Views\Avatar\Update.cshtml" />
     <Content Include="Views\Avatar\Delete.cshtml" />
     <Content Include="Views\Avatar\Read.cshtml" />
+    <Content Include="Views\Avatar\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

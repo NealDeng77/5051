@@ -48,7 +48,8 @@ namespace _5051.Controllers
         // GET: Avatar/Create
         public ActionResult Create()
         {
-            return View();
+            var myData = new AvatarModel();
+            return View(myData);
         }
 
         /// <summary>
@@ -58,17 +59,38 @@ namespace _5051.Controllers
         /// <returns></returns>
         // POST: Avatar/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include=
+                                        "Id,"+
+                                        "Name,"+
+                                        "Description,"+
+                                        "Uri,"+
+                                        "")] AvatarModel data)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    if (data == null)
+                    {
+                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                    }
 
-                return RedirectToAction("Index");
+                    if (string.IsNullOrEmpty(data.Id))
+                    {
+                        return View(data);
+                    }
+
+                    avatarBackend.DataSource.Create(data);
+
+                    return RedirectToAction("Index");
+                }
+
+                // Send back for edit
+                return View(data);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
         }
 
