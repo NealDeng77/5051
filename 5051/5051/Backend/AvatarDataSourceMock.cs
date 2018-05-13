@@ -86,16 +86,16 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(AvatarModel data)
+        public bool Delete(string Id)
         {
-            if (data == null)
+            if (string.IsNullOrEmpty(Id))
             {
                 return false;
             }
 
-            var myReturn = avatarList.Find(n => n.Id == data.Id);
-            avatarList.Remove(myReturn);
-            return true;
+            var myData = avatarList.Find(n => n.Id == Id);
+            var myReturn = avatarList.Remove(myData);
+            return myReturn;
         }
 
         /// <summary>

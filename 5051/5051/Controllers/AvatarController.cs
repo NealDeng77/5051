@@ -11,10 +11,17 @@ namespace _5051.Controllers
 {
     public class AvatarController : Controller
     {
+        // A ViewModel used for the Avatar that contains the AvatarList
         private AvatarViewModel avatarViewModel = new AvatarViewModel();
+
+        // The Backend Data source
         private AvatarBackend avatarBackend = new AvatarBackend();
 
         // GET: Avatar
+        /// <summary>
+        /// Index, the page that shows all the avatars
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             // Load the list of data into the AvatarList
@@ -22,19 +29,33 @@ namespace _5051.Controllers
             return View(avatarViewModel);
         }
 
+        /// <summary>
+        /// Read information on a single avatar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Avatar/Details/5
-        public ActionResult Details(string id = null)
+        public ActionResult Read(string id = null)
         {
             var myData = avatarBackend.DataSource.Read(id);
             return View(myData);
         }
 
+        /// <summary>
+        /// This opens up the make a new Avatar screen
+        /// </summary>
+        /// <returns></returns>
         // GET: Avatar/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Make a new avatar sent in by the create avatar screen
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         // POST: Avatar/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -51,6 +72,11 @@ namespace _5051.Controllers
             }
         }
 
+        /// <summary>
+        /// This will show the details of the avatar to update
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Avatar/Edit/5
         public ActionResult Update(string id = null)
         {
@@ -58,6 +84,11 @@ namespace _5051.Controllers
             return View(myData);
         }
 
+        /// <summary>
+        /// This updates the avatar based on the information posted from the udpate page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         // POST: Avatar/Update/5
         [HttpPost]
         public ActionResult Update([Bind(Include=
@@ -95,28 +126,59 @@ namespace _5051.Controllers
             }
         }
 
+        /// <summary>
+        /// This shows the avatar info to be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Avatar/Delete/5
         public ActionResult Delete(string id = null)
         {
-            return View();
+            var myData = avatarBackend.DataSource.Read(id);
+            return View(myData);
         }
 
+        /// <summary>
+        /// This deletes the avatar sent up as a post from the avatar delete page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         // POST: Avatar/Delete/5
         [HttpPost]
         public ActionResult Delete([Bind(Include=
                                         "Id,"+
+                                        "Name,"+
+                                        "Description,"+
+                                        "Uri,"+
                                         "")] AvatarModel data)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (ModelState.IsValid)
+                {
+                    if (data == null)
+                    {
+                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                    }
 
-                return RedirectToAction("Index");
+                    if (string.IsNullOrEmpty(data.Id))
+                    {
+                        return View(data);
+                    }
+
+                    avatarBackend.DataSource.Delete(data.Id);
+
+                    return RedirectToAction("Index");
+                }
+
+                // Send back for edit
+                return View(data);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
         }
     }
 }

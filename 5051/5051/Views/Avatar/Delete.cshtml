@@ -38,47 +38,19 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m=>m.Id)
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.Description)
+                        @Html.HiddenFor(m => m.Uri)
 
-                        <div class="row">
-                            <div class="col-sm-2 text-right">
-                                @Html.DisplayNameFor(m => m.Name)
-                            </div>
-                            <div class="col-sm-2">
-                                @Html.EditorFor(m => m.Name)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-2 text-right">
-                                @Html.DisplayNameFor(m => m.Description)
-                            </div>
-                            <div class="col-sm-2">
-                                @Html.EditorFor(m => m.Description)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-2 text-right">
-                                @Html.DisplayNameFor(m => m.Uri)
-                            </div>
-                            <div class="col-sm-2">
-                                @Html.EditorFor(m => m.Uri)
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
                         <div class="row">
                             <div class="col-sm-2 text-right">
                             </div>
                             <div class="col-sm-2">
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="Delete" class="btn btn-danger">
                             </div>
                         </div>
-
                     }
-
 
                 </div>
             }

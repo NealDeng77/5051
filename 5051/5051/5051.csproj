@@ -280,6 +280,8 @@
     <Content Include="Views\Kiosk\Indedx.cshtml" />
     <Content Include="Views\Avatar\Index.cshtml" />
     <Content Include="Views\Avatar\Update.cshtml" />
+    <Content Include="Views\Avatar\Delete.cshtml" />
+    <Content Include="Views\Avatar\Read.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

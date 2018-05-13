@@ -10,21 +10,25 @@
     <div class="row">
 
         @{
-            if (Model.AvatarList == null)
+                if (Model.AvatarList == null || !Model.AvatarList.Any())
             {
-                <p>No Avatars</p>
+                <br />
+                <p>No Avatars in the System</p>
+                <br />
             }
-
-            foreach (var item in Model.AvatarList)
+            else
             {
-                <a id="@item.Id" href="~/Avatar/Update/@item.Id">
-                    <div class="col-sm-2">
-                        <img src="~/Content/img/@item.Uri" width="75" height="75" />
-                        <span>
-                            @item.Name
-                        </span>
-                    </div>
-                </a>
+                foreach (var item in Model.AvatarList)
+                {
+                    <a id="@item.Id" href="~/Avatar/Read/@item.Id">
+                        <div class="col-sm-2">
+                            <img src="~/Content/img/@item.Uri" width="75" height="75" />
+                            <span>
+                                @item.Name
+                            </span>
+                        </div>
+                    </a>
+                }
             }
         }
 
