@@ -1,0 +1,45 @@
+﻿@model _5051.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Students</h2>
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model.StudentList == null || !Model.StudentList.Any())
+            {
+                <br />
+                <p>No Students in the System</p>
+                <br />
+            }
+            else
+            {
+                foreach (var item in Model.StudentList)
+                {
+                    <a id="@item.Id" href="~/Student/Read/@item.Id">
+                        <div class="col-sm-2">
+                            <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
+                            <br />
+                            <span>
+                                @item.Name
+                            </span>
+                        </div>
+                    </a>
+                }
+            }
+        }
+
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+</div>
+

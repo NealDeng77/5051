@@ -25,7 +25,8 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             // Load the list of data into the StudentList
-            StudentViewModel.StudentList = StudentBackend.Index();
+            var myDataList = StudentBackend.Index();
+            var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
         }
 

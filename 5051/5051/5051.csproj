@@ -208,6 +208,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AvatarModel.cs" />
+    <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -290,6 +291,7 @@
     <Content Include="Views\Avatar\Read.cshtml" />
     <Content Include="Views\Avatar\Create.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

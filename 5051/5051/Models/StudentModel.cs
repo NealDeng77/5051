@@ -10,6 +10,9 @@ using _5051.Backend;
 
 namespace _5051.Models
 {
+    /// <summary>
+    /// The Student, this holds the student id, name, tokens.  Other things about the student such as their attendance is pulled from the attendance data, or the owned items, from the inventory data
+    /// </summary>
     public class StudentModel
     {
         [Key]
@@ -33,12 +36,22 @@ namespace _5051.Models
         [Required(ErrorMessage = "Tokens are required")]
         public int Tokens { get; set; }
 
-
-        public StudentModel()
+        /// <summary>
+        /// The defaults for a new student
+        /// </summary>
+        public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
             Tokens = 0;
             AvatarLevel = 0;
+        }
+
+        /// <summary>
+        /// Constructor for a student
+        /// </summary>
+        public StudentModel()
+        {
+            Initialize();
         }
 
         /// <summary>
@@ -48,6 +61,8 @@ namespace _5051.Models
         /// <param name="avatarId">The avatar to use, if not specified, will call the backend to get an ID</param>
         public StudentModel(string name, string avatarId)
         {
+            Initialize();
+
             Name = name;
 
             // If no avatar ID is sent in, then go and get the first avatar ID from the backend data as the default to use.
@@ -56,6 +71,26 @@ namespace _5051.Models
                 avatarId = AvatarBackend.Instance.GetFirstAvatarId();
             }
             AvatarId = avatarId;
+        }
+    }
+
+    /// <summary>
+    /// For the Index View, add the Avatar URI to the Student, so it shows the student with the picture
+    /// </summary>
+    public class StudentDisplayViewModel:StudentModel
+    {
+        [Display(Name = "Avatar Uri", Description = "Avatar Picture to Show")]
+        [Required(ErrorMessage = "Picture is required")]
+        public string AvatarUri { get; set; }
+
+        public StudentDisplayViewModel(StudentModel data)
+        {
+            Id = data.Id;
+            Name = data.Name;
+            Tokens = data.Tokens;
+            AvatarLevel = data.AvatarLevel;
+            AvatarId = data.AvatarId;
+            AvatarUri = AvatarBackend.Instance.GetAvatarUri(AvatarId);
         }
     }
 }
