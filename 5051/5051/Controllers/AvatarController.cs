@@ -15,7 +15,7 @@ namespace _5051.Controllers
         private AvatarViewModel avatarViewModel = new AvatarViewModel();
 
         // The Backend Data source
-        private AvatarBackend avatarBackend = new AvatarBackend();
+        private AvatarBackend avatarBackend = AvatarBackend.Instance;
 
         // GET: Avatar
         /// <summary>
@@ -25,7 +25,7 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             // Load the list of data into the AvatarList
-            avatarViewModel.AvatarList = avatarBackend.DataSource.Index();
+            avatarViewModel.AvatarList = avatarBackend.Index();
             return View(avatarViewModel);
         }
 
@@ -37,7 +37,7 @@ namespace _5051.Controllers
         // GET: Avatar/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = avatarBackend.DataSource.Read(id);
+            var myData = avatarBackend.Read(id);
             return View(myData);
         }
 
@@ -80,7 +80,7 @@ namespace _5051.Controllers
                         return View(data);
                     }
 
-                    avatarBackend.DataSource.Create(data);
+                    avatarBackend.Create(data);
 
                     return RedirectToAction("Index");
                 }
@@ -102,7 +102,7 @@ namespace _5051.Controllers
         // GET: Avatar/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = avatarBackend.DataSource.Read(id);
+            var myData = avatarBackend.Read(id);
             return View(myData);
         }
 
@@ -134,7 +134,7 @@ namespace _5051.Controllers
                         return View(data);
                     }
 
-                    avatarBackend.DataSource.Update(data);
+                    avatarBackend.Update(data);
 
                     return RedirectToAction("Index");
                 }
@@ -156,7 +156,7 @@ namespace _5051.Controllers
         // GET: Avatar/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myData = avatarBackend.DataSource.Read(id);
+            var myData = avatarBackend.Read(id);
             return View(myData);
         }
 
@@ -188,7 +188,7 @@ namespace _5051.Controllers
                         return View(data);
                     }
 
-                    avatarBackend.DataSource.Delete(data.Id);
+                    avatarBackend.Delete(data.Id);
 
                     return RedirectToAction("Index");
                 }
