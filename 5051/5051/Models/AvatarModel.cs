@@ -14,7 +14,6 @@ namespace _5051.Models
         [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
 
-        [DisplayName("Uri")]
         [Display(Name = "Uri", Description = "Picture to Show")]
         [Required(ErrorMessage = "Picture is required")]
         public string Uri { get; set; }
