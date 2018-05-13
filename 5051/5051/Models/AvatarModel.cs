@@ -8,6 +8,9 @@ using System.Web.Mvc;
 
 namespace _5051.Models
 {
+    /// <summary>
+    /// Avatars for the system
+    /// </summary>
     public class AvatarModel
     {
         [Display(Name = "Id", Description = "Avatar Id")]
@@ -26,14 +29,32 @@ namespace _5051.Models
         [Required(ErrorMessage = "Avatar Description is required")]
         public string Description { get; set; }
 
-        public AvatarModel()
+        /// <summary>
+        /// Create the default values
+        /// </summary>
+        public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
         }
 
+        /// <summary>
+        /// New Avatar
+        /// </summary>
+        public AvatarModel()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Make an Avatar from values passed in
+        /// </summary>
+        /// <param name="uri">The Picture path</param>
+        /// <param name="name">Avatar Name</param>
+        /// <param name="description">Avatar Description</param>
         public AvatarModel(string uri, string name, string description)
         {
-            Id = Guid.NewGuid().ToString();
+            Initialize();
+
             Uri = uri;
             Name = name;
             Description = description;
