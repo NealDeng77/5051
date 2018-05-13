@@ -10,7 +10,7 @@ namespace _5051.Models
 {
     public class StudentModel
     {
-
+        [Key]
         [Display(Name = "Id", Description = "Student Id")]
         [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
@@ -27,5 +27,22 @@ namespace _5051.Models
         [Required(ErrorMessage = "Tokens are required")]
         public int Tokens { get; set; }
 
+
+        public StudentModel()
+        {
+            Id = Guid.NewGuid().ToString();
+            Tokens = 0;
+        }
+
+        public StudentModel(string name, string avatarId)
+        {
+            Name = name;
+
+            if (string.IsNullOrEmpty(avatarId))
+            {
+                avatarId = ""
+            }
+            AvatarId = avatarId;
+        }
     }
 }

@@ -7,16 +7,16 @@ using System.Web;
 namespace _5051.Backend
 {
     /// <summary>
-    /// Avatar Backend handles the business logic and data for Avatars
+    /// Student Backend handles the business logic and data for Students
     /// </summary>
-    public class AvatarBackend
+    public class StudentBackend
     {
-        private static volatile AvatarBackend instance;
+        private static volatile StudentBackend instance;
         private static object syncRoot = new Object();
 
-        private AvatarBackend() { }
+        private StudentBackend() { }
 
-        public static AvatarBackend Instance
+        public static StudentBackend Instance
         {
             get
             {
@@ -26,7 +26,7 @@ namespace _5051.Backend
                     {
                         if (instance == null)
                         {
-                            instance = new AvatarBackend();
+                            instance = new StudentBackend();
                             SetDataSource(SystemGlobals.Instance.DataSourceValue);
                         }
                     }
@@ -37,7 +37,7 @@ namespace _5051.Backend
         }
 
         // Get the Datasource to use
-        private static IAvatarInterface DataSource;
+        private static IStudentInterface DataSource;
 
         public static void SetDataSource(DataSourceEnum dataSourceEnum)
         {
@@ -48,16 +48,16 @@ namespace _5051.Backend
             }
 
             // Default is to use the Mock
-            DataSource =  AvatarDataSourceMock.Instance;
+            DataSource =  StudentDataSourceMock.Instance;
         }
 
 
         /// <summary>
-        /// Makes a new Avatar
+        /// Makes a new Student
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>Avatar Passed In</returns>
-        public AvatarModel Create(AvatarModel data)
+        /// <returns>Student Passed In</returns>
+        public StudentModel Create(StudentModel data)
         {
             DataSource.Create(data);
             return data;
@@ -68,7 +68,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Null or valid data</returns>
-        public AvatarModel Read(string id)
+        public StudentModel Read(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -84,7 +84,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Null or updated data</returns>
-        public AvatarModel Update(AvatarModel data)
+        public StudentModel Update(StudentModel data)
         {
             if (data == null)
             {
@@ -115,28 +115,11 @@ namespace _5051.Backend
         /// <summary>
         /// Return the full dataset
         /// </summary>
-        /// <returns>List of Avatars</returns>
-        public List<AvatarModel> Index()
+        /// <returns>List of Students</returns>
+        public List<StudentModel> Index()
         {
             var myData = DataSource.Index();
             return myData;
-        }
-
-        /// <summary>
-        /// Returns the First Avatar ID in the list, this will be used for creating new avatars if no avatarID is specified
-        /// </summary>
-        /// <returns>Null, or Avatar ID of the first avatar in the list.</returns>
-        public string GetFirstAvatarId()
-        {
-            string myReturn = null;
-
-            var myData = DataSource.Index().ToList().FirstOrDefault();
-            if (myData != null)
-            {
-                myReturn = myData.Id;
-            }
-
-            return myReturn;
         }
     }
 }

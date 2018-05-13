@@ -189,11 +189,15 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\StudentInterface.cs" />
+    <Compile Include="Backend\StudentDataSourceMock.cs" />
+    <Compile Include="Backend\StudentBackend.cs" />
     <Compile Include="Backend\AvatarBackend.cs" />
     <Compile Include="Backend\AvatarDataSourceMock.cs" />
     <Compile Include="Backend\AvatarInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KioskController.cs" />
