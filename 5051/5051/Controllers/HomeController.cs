@@ -27,5 +27,21 @@ namespace _5051.Controllers
         {
             return View();
         }
+
+        public ActionResult ShopExample ()
+        {
+            return View();
+        }
+
+        public ActionResult StudentExample()
+        {
+            return View();
+        }
+
+        public ActionResult HouseExample()
+        {
+            return View();
+        }
+
     }
 }
