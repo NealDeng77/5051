@@ -78,6 +78,7 @@ namespace _5051.Controllers
                                         "Description,"+
                                         "Uri,"+
                                         "AvatarId,"+
+                                        "Status,"+
                                         "")] StudentModel data)
         {
             try
@@ -145,7 +146,7 @@ namespace _5051.Controllers
                                         "AvatarId,"+
                                         "AvatarLevel,"+
                                         "Tokens,"+
-
+                                        "Status,"+
                                         "")] StudentDisplayViewModel data)
         {
             try

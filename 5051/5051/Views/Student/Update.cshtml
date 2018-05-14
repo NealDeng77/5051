@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-sm-2">
                                 @Html.EditorFor(m => m.Name)
-                                @Html.ValidationMessageFor(m=>m.Name)
+                                @Html.ValidationMessageFor(m => m.Name)
                             </div>
                         </div>
 
@@ -82,6 +82,15 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Status)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.EnumDropDownListFor(x => x.Status,"Select Status")
+                                @Html.ValidationMessageFor(m => m.Status)
+                            </div>
+                        </div>
 
                         <br />
                         <br />

@@ -36,6 +36,10 @@ namespace _5051.Models
         [Required(ErrorMessage = "Tokens are required")]
         public int Tokens { get; set; }
 
+        [Display(Name = "Current Status", Description = "Status of the Student")]
+        [Required(ErrorMessage = "Status is required")]
+        public StudentStatusEnum Status { get; set; }
+
         /// <summary>
         /// The defaults for a new student
         /// </summary>
@@ -44,6 +48,7 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
             Tokens = 0;
             AvatarLevel = 0;
+            Status = StudentStatusEnum.Out;
         }
 
         /// <summary>
@@ -85,6 +90,7 @@ namespace _5051.Models
             AvatarId = data.AvatarId;
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
+            Status = data.Status;
         }
 
         /// <summary>
@@ -103,6 +109,7 @@ namespace _5051.Models
             AvatarId = data.AvatarId;
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
+            Status = data.Status;
 
             return true;
         }
@@ -135,7 +142,7 @@ namespace _5051.Models
             Tokens = data.Tokens;
             AvatarLevel = data.AvatarLevel;
             AvatarId = data.AvatarId;
-
+            Status = data.Status;
 
             var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
             if (myDataAvatar == null)
@@ -148,5 +155,23 @@ namespace _5051.Models
             AvatarDescription = myDataAvatar.Description;
             AvatarUri = myDataAvatar.Uri;
         }
+    }
+
+    /// <summary>
+    /// Student Status Options
+    /// </summary>
+    public enum StudentStatusEnum
+    {
+        // Not initialized
+        Unknown = 0,
+
+        // Logged In
+        In = 1,
+
+        // Logged Out
+        Out = 2,
+
+        // Student on hold
+        Hold = 3
     }
 }
