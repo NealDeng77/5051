@@ -39,7 +39,18 @@ namespace _5051.Controllers
         public ActionResult Read(string id = null)
         {
             var myDataStudent = StudentBackend.Read(id);
+            if (myDataStudent == null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
+
+
             var myData = new StudentDisplayViewModel(myDataStudent);
+            if (myData== null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
+
             return View(myData);
         }
 
@@ -66,6 +77,7 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "AvatarId,"+
                                         "")] StudentModel data)
         {
             try
@@ -105,7 +117,16 @@ namespace _5051.Controllers
         public ActionResult Update(string id = null)
         {
             var myDataStudent = StudentBackend.Read(id);
+            if (myDataStudent == null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
+
             var myData = new StudentDisplayViewModel(myDataStudent);
+            if (myData == null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
             return View(myData);
         }
 
@@ -165,7 +186,17 @@ namespace _5051.Controllers
         public ActionResult Delete(string id = null)
         {
             var myDataStudent = StudentBackend.Read(id);
+            if (myDataStudent == null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
+
             var myData = new StudentDisplayViewModel(myDataStudent);
+            if (myData == null)
+            {
+                RedirectToAction("Error", "Home", "Invalid Record");
+            }
+
             return View(myData);
         }
 
