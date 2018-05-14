@@ -48,7 +48,7 @@ namespace _5051.Backend
             }
 
             // Default is to use the Mock
-            DataSource =  StudentDataSourceMock.Instance;
+            DataSource = StudentDataSourceMock.Instance;
         }
 
 
@@ -91,6 +91,20 @@ namespace _5051.Backend
                 return null;
             }
 
+            var myData = DataSource.Read(data.Id);
+            if (myData == null)
+            {
+                // Not found
+                return null;
+            }
+
+            if (myData.Status != data.Status)
+            {
+                // Status Changed, need to process the status change
+                ToggleStatus(myData);
+            }
+
+            // Update the record
             var myReturn = DataSource.Update(data);
 
             return myReturn;
@@ -120,6 +134,92 @@ namespace _5051.Backend
         {
             var myData = DataSource.Index();
             return myData;
+        }
+
+        /// <summary>
+        /// Sets the student to be logged In
+        /// </summary>
+        /// <param name="id">The Student ID</param>
+        public void SetLogIn(StudentModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            data.Status = StudentStatusEnum.In;
+
+            // TODO:  Make call to the Attendance Log, to track when the student logged In.
+
+        }
+
+        /// <summary>
+        /// Sets the student to be logged Out
+        /// </summary>
+        /// <param name="id">The Student ID</param>
+        public void SetLogOut(StudentModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            data.Status = StudentStatusEnum.Out;
+
+            // TODO:  Make call to the Attendance Log, to track when the student logged out.
+        }
+
+        /// <summary>
+        /// Use the ID to toggle the status
+        /// </summary>
+        /// <param name="id">Id of the student</param>
+        public void ToggleStatusById(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return;
+            }
+
+            var myData = DataSource.Read(id);
+            if (myData == null)
+            {
+                return;
+            }
+
+            ToggleStatus(myData);
+        }
+
+        /// <summary>
+        /// Change the Status of the student
+        /// </summary>
+        /// <param name="id">The Student ID</param>
+        public void ToggleStatus(StudentModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            switch (data.Status)
+            {
+                case StudentStatusEnum.In:
+                    SetLogOut(data);
+                    break;
+
+                case StudentStatusEnum.Out:
+                    SetLogIn(data);
+                    break;
+
+                case StudentStatusEnum.Hold:
+                    SetLogOut(data);
+                    break;
+
+            }
+
+            DataSource.Update(data);
+
+            // TODO:  Make call to the Attendance Log, to track when the student logged out.
+
         }
     }
 }

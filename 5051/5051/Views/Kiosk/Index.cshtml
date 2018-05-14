@@ -1,0 +1,81 @@
+﻿@model _5051.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Students</h2>
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model.StudentList == null || !Model.StudentList.Any())
+            {
+                <br />
+                <p>No Students in the System</p>
+                <br />
+            }
+            else
+            {
+                // List out the Logged IN Students, then the Logged Out students
+
+                <div class="row">
+                    <h2>Logged In</h2>
+
+                    @{
+                        // Logged IN first
+                        foreach (var item in Model.StudentList)
+                        {
+                            if (item.Status == _5051.Models.StudentStatusEnum.In)
+                            {
+                                <div class="col-sm-2">
+                                    <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
+                                        <div class="">
+                                            <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
+                                            <br />
+                                            <span>
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <h2>Logged Out</h2>
+                    @{
+                        // Logged Out first
+                        foreach (var item in Model.StudentList)
+                        {
+                            if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                            {
+                                <div class="col-sm-2">
+                                    <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
+
+                                        <div class="">
+                                            <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
+                                            <br />
+                                            <span>
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+        }
+
+    </div>
+
+</div>
+
