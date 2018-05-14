@@ -104,7 +104,8 @@ namespace _5051.Controllers
         // GET: Student/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = StudentBackend.Read(id);
+            var myDataStudent = StudentBackend.Read(id);
+            var myData = new StudentDisplayViewModel(myDataStudent);
             return View(myData);
         }
 
