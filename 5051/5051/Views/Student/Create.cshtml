@@ -21,6 +21,7 @@
                 </div>
                 <div class="col-sm-2">
                     @Html.EditorFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
 
@@ -30,6 +31,7 @@
                 </div>
                 <div class="col-sm-2">
                     @Html.EditorFor(m => m.AvatarId)
+                    @Html.ValidationMessageFor(m => m.AvatarId)
                 </div>
             </div>
 
