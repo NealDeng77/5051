@@ -1,9 +1,8 @@
-﻿@model _5051.Models.StudentModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
     ViewBag.Title = "Update";
 }
-
 
 <div class="container">
     <div class="row">
@@ -40,6 +39,10 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.AvatarId)
+                        @Html.HiddenFor(m => m.AvatarLevel)
+                        @Html.HiddenFor(m => m.Tokens)
 
                         <div class="row">
                             <div class="col-sm-2 text-right">

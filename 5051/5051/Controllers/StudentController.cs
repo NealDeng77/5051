@@ -38,7 +38,8 @@ namespace _5051.Controllers
         // GET: Student/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = StudentBackend.Read(id);
+            var myDataStudent = StudentBackend.Read(id);
+            var myData = new StudentDisplayViewModel(myDataStudent);
             return View(myData);
         }
 
@@ -119,7 +120,7 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "")] StudentModel data)
+                                        "")] StudentDisplayViewModel data)
         {
             try
             {
@@ -135,7 +136,8 @@ namespace _5051.Controllers
                         return View(data);
                     }
 
-                    StudentBackend.Update(data);
+                    var myDataStudent = new StudentModel(data);
+                    StudentBackend.Update(myDataStudent);
 
                     return RedirectToAction("Index");
                 }
@@ -157,7 +159,8 @@ namespace _5051.Controllers
         // GET: Student/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myData = StudentBackend.Read(id);
+            var myDataStudent = StudentBackend.Read(id);
+            var myData = new StudentDisplayViewModel(myDataStudent);
             return View(myData);
         }
 
@@ -172,8 +175,9 @@ namespace _5051.Controllers
                                         "Id,"+
                                         "Name,"+
                                         "Description,"+
+                                        "AvatarId,"+
                                         "Uri,"+
-                                        "")] StudentModel data)
+                                        "")] StudentDisplayViewModel data)
         {
             try
             {

@@ -1,4 +1,4 @@
-﻿@model _5051.Models.StudentModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
     ViewBag.Title = "Update";
@@ -25,7 +25,7 @@
                         <div class="col-sm-2 text-right">
                         </div>
                         <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.AvatarId" width="75" height="75" />
+                            <img src="~/Content/img/@Model.AvatarUri" width="75" height="75" />
                             <br />
                             <span>
                                 @Model.Name
@@ -47,10 +47,19 @@
 
                     <div class="row">
                         <div class="col-sm-2 text-right">
-                            @Html.DisplayNameFor(m => m.AvatarId)
+                            @Html.DisplayNameFor(m => m.AvatarName)
                         </div>
                         <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.AvatarId)
+                            @Html.DisplayFor(m => m.AvatarName)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2 text-right">
+                            @Html.DisplayNameFor(m => m.AvatarDescription)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(m => m.AvatarDescription)
                         </div>
                     </div>
 
@@ -72,7 +81,6 @@
                         </div>
                     </div>
 
-
                     <br />
                     <br />
                     <div class="row">
@@ -84,8 +92,6 @@
                             @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
-
-
 
                 </div>
             }

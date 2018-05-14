@@ -72,17 +72,42 @@ namespace _5051.Models
             }
             AvatarId = avatarId;
         }
+
+        /// <summary>
+        /// Convert a Student Display View Model, to a Student Model, used for when passed data from Views that use the full Student Display View Model.
+        /// </summary>
+        /// <param name="data">The student data to pull</param>
+        public StudentModel(StudentDisplayViewModel data)
+        {
+            Id = data.Id;
+            Name = data.Name;
+
+            AvatarId = data.AvatarId;
+            AvatarLevel = data.AvatarLevel;
+            Tokens = data.Tokens;
+        }
     }
 
     /// <summary>
     /// For the Index View, add the Avatar URI to the Student, so it shows the student with the picture
     /// </summary>
-    public class StudentDisplayViewModel:StudentModel
+    public class StudentDisplayViewModel : StudentModel
     {
-        [Display(Name = "Avatar Uri", Description = "Avatar Picture to Show")]
-        [Required(ErrorMessage = "Picture is required")]
+        [Display(Name = "Avatar Picture", Description = "Avatar Picture to Show")]
         public string AvatarUri { get; set; }
 
+        [Display(Name = "Avatar Name", Description = "Avatar Name")]
+        public string AvatarName { get; set; }
+
+        [Display(Name = "Avatar Description", Description = "Avatar Description")]
+        public string AvatarDescription { get; set; }
+
+        public StudentDisplayViewModel() { }
+
+        /// <summary>
+        /// Creates a Student Display View Model from a Student Model
+        /// </summary>
+        /// <param name="data">The Student Model to create</param>
         public StudentDisplayViewModel(StudentModel data)
         {
             Id = data.Id;
@@ -90,7 +115,13 @@ namespace _5051.Models
             Tokens = data.Tokens;
             AvatarLevel = data.AvatarLevel;
             AvatarId = data.AvatarId;
-            AvatarUri = AvatarBackend.Instance.GetAvatarUri(AvatarId);
+
+
+            var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
+
+            AvatarName = myDataAvatar.Name;
+            AvatarDescription = myDataAvatar.Description;
+            AvatarUri = myDataAvatar.Uri;
         }
     }
 }
