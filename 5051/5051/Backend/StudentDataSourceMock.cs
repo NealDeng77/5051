@@ -74,9 +74,8 @@ namespace _5051.Backend
                 return null;
             }
             var myReturn = StudentList.Find(n => n.Id == data.Id);
-            myReturn.Name = data.Name;
-            myReturn.AvatarId = data.AvatarId;
-            myReturn.Tokens = data.Tokens;
+
+            myReturn.Update(data);
 
             return myReturn;
         }

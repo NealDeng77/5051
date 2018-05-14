@@ -121,6 +121,10 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "AvatarId,"+
+                                        "AvatarLevel,"+
+                                        "Tokens,"+
+
                                         "")] StudentDisplayViewModel data)
         {
             try

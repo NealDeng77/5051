@@ -86,6 +86,26 @@ namespace _5051.Models
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
         }
+
+        /// <summary>
+        /// Update the Data Fields with the values passed in, do not update the ID.
+        /// </summary>
+        /// <param name="data">The values to update</param>
+        /// <returns>False if null, else true</returns>
+        public bool Update(StudentModel data)
+        {
+            if (data == null)
+            {
+                return false;
+            }
+
+            Name = data.Name;
+            AvatarId = data.AvatarId;
+            AvatarLevel = data.AvatarLevel;
+            Tokens = data.Tokens;
+
+            return true;
+        }
     }
 
     /// <summary>
