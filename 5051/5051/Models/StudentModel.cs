@@ -162,14 +162,11 @@ namespace _5051.Models
     /// </summary>
     public enum StudentStatusEnum
     {
-        // Not initialized
-        Unknown = 0,
-
-        // Logged In
-        In = 1,
-
         // Logged Out
-        Out = 2,
+        Out = 1,
+        
+        // Logged In
+        In = 2,
 
         // Student on hold
         Hold = 3
