@@ -138,6 +138,11 @@ namespace _5051.Models
 
 
             var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
+            if (myDataAvatar == null)
+            {
+                // Nothing to convert
+                return;
+            }
 
             AvatarName = myDataAvatar.Name;
             AvatarDescription = myDataAvatar.Description;
