@@ -5,9 +5,14 @@ using System.Web;
 
 namespace _5051.Models
 {
+    /// <summary>
+    /// System wide Global variables
+    /// </summary>
     public class SystemGlobals
     {
-
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
         private static volatile SystemGlobals instance;
         private static object syncRoot = new Object();
 
@@ -37,6 +42,9 @@ namespace _5051.Models
         public DataSourceEnum DataSourceValue = DataSourceEnum.Mock;
     }
 
+    /// <summary>
+    /// The Mock Status
+    /// </summary>
     public enum DataSourceEnum
     {
         // Not specified
