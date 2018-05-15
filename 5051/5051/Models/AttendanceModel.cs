@@ -5,6 +5,9 @@ using System.Web;
 
 namespace _5051.Models
 {
+    /// <summary>
+    /// Data to Track Attendance
+    /// </summary>
     public class AttendanceModel
     {
         public string StudentId;
