@@ -9,6 +9,9 @@ using _5051.Backend;
 
 namespace _5051.Controllers
 {
+    /// <summary>
+    /// Avatar Contoller manages the avatar web pages including how to make new ones, change them, and delete them
+    /// </summary>
     public class AvatarController : Controller
     {
         // A ViewModel used for the Avatar that contains the AvatarList
