@@ -12,6 +12,8 @@ namespace _5051.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void Controller_Home_Index_Default_Should_Pass()
         {
@@ -22,7 +24,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -35,7 +37,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -48,7 +50,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -61,7 +63,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -74,7 +76,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.ShopExample() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -87,7 +89,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.StudentExample() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -100,7 +102,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.HouseExample() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
     }
