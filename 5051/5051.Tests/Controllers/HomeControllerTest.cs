@@ -13,7 +13,7 @@ namespace _5051.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void Controller_Home_Index_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -26,7 +26,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void About()
+        public void Controller_Home_About_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -39,7 +39,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Contact()
+        public void Controller_Home_Contact_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -52,7 +52,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Privacy()
+        public void Controller_Home_Privacy_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -65,7 +65,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void ShopExample ()
+        public void Controller_Home_ShopExample_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -78,7 +78,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void StudentExample()
+        public void Controller_Home_StudentExample_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -91,7 +91,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void HouseExample()
+        public void Controller_Home_HouseExample_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
