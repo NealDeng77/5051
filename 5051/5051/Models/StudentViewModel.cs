@@ -10,8 +10,14 @@ namespace _5051.Models
     /// </summary>
     public class StudentViewModel
     {
+        /// <summary>
+        /// The student List to return to the View
+        /// </summary>
         public List<StudentDisplayViewModel> StudentList = new List<StudentDisplayViewModel>();
 
+        /// <summary>
+        /// Default constructor, needed becase of the constructor that takes a List of Student Models
+        /// </summary>
         public StudentViewModel() { }
 
         /// <summary>
