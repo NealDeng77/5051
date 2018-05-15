@@ -115,6 +115,15 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Reset the Data, and reload it
+        /// </summary>
+        public void Reset()
+        {
+            StudentList.Clear();
+            Initialize();
+        }
+
+        /// <summary>
         /// Create Placeholder Initial Data
         /// </summary>
         public void Initialize()

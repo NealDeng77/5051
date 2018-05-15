@@ -227,5 +227,13 @@ namespace _5051.Backend
             // TODO:  Make call to the Attendance Log, to track when the student logged out.
 
         }
+
+        /// <summary>
+        /// Helper function that resets the DataSource, and rereads it.
+        /// </summary>
+        public void Reset()
+        {
+            DataSource.Reset();
+        }
     }
 }

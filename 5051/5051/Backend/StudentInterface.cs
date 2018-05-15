@@ -16,5 +16,6 @@ namespace _5051.Backend
         StudentModel Update(StudentModel data);
         bool Delete(string id);
         List<StudentModel> Index();
+        void Reset();
     }
 }
