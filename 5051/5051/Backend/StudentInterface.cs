@@ -6,6 +6,9 @@ using _5051.Models;
 
 namespace _5051.Backend
 {
+    /// <summary>
+    /// The interface for the Student DataSource.
+    /// </summary>
     public interface IStudentInterface
     {
         StudentModel Create(StudentModel data);
