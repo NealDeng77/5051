@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 using _5051.Models;
+
 namespace _5051.Backend
 {
+    /// <summary>
+    /// Holds the Student Data as a Mock Data set, used for Unit Testing, System Testing, Offline Development etc.
+    /// </summary>
     public class StudentDataSourceMock : IStudentInterface
     {
+        /// <summary>
+        /// Make into a singleton
+        /// </summary>
         private static volatile StudentDataSourceMock instance;
         private static object syncRoot = new Object();
 
@@ -33,6 +38,9 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// The Data for the Students
+        /// </summary>
         private List<StudentModel> StudentList = new List<StudentModel>();
 
         /// <summary>
