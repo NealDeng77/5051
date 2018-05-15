@@ -186,19 +186,4 @@ namespace _5051.Models
             AvatarUri = myDataAvatar.Uri;
         }
     }
-
-    /// <summary>
-    /// Student Status Options
-    /// </summary>
-    public enum StudentStatusEnum
-    {
-        // Logged Out
-        Out = 1,
-        
-        // Logged In
-        In = 2,
-
-        // Student on hold
-        Hold = 3
-    }
 }

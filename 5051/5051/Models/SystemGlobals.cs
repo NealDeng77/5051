@@ -41,19 +41,4 @@ namespace _5051.Models
         // Default to Mock
         public DataSourceEnum DataSourceValue = DataSourceEnum.Mock;
     }
-
-    /// <summary>
-    /// The Mock Status
-    /// </summary>
-    public enum DataSourceEnum
-    {
-        // Not specified
-        Unknown = 0,
-
-        // Mock Dataset
-        Mock = 1,
-
-        // SQL Dataset
-        SQL = 2
-    }
 }
