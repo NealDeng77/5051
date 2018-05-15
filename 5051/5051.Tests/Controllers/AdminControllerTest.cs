@@ -12,6 +12,8 @@ namespace _5051.Tests.Controllers
     [TestClass]
     public class AdminControllerTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void Controller_Admin_Index_Default_Should_Pass()
         {
@@ -22,7 +24,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result,TestContext.TestName);
         }
 
     }
