@@ -6,8 +6,14 @@ using System.Web;
 using _5051.Models;
 namespace _5051.Backend
 {
+    /// <summary>
+    /// Backend Mock DataSource for Avatars, to manage them
+    /// </summary>
     public class AvatarDataSourceMock : IAvatarInterface
     {
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
         private static volatile AvatarDataSourceMock instance;
         private static object syncRoot = new Object();
 
@@ -33,6 +39,9 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// The Avatar List
+        /// </summary>
         private List<AvatarModel> avatarList = new List<AvatarModel>();
 
         /// <summary>
