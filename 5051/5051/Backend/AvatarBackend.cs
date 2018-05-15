@@ -189,5 +189,13 @@ namespace _5051.Backend
 
             return myReturn;
         }
+
+        /// <summary>
+        /// Helper function that resets the DataSource, and rereads it.
+        /// </summary>
+        public void Reset()
+        {
+            DataSource.Reset();
+        }
     }
 }

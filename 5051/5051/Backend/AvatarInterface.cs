@@ -17,5 +17,6 @@ namespace _5051.Backend
         AvatarModel Update(AvatarModel data);
         bool Delete(string id);
         List<AvatarModel> Index();
+        void Reset();
     }
 }
