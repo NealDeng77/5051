@@ -11,6 +11,9 @@ namespace _5051.Backend
     /// </summary>
     public class StudentBackend
     {
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
         private static volatile StudentBackend instance;
         private static object syncRoot = new Object();
 
@@ -39,6 +42,10 @@ namespace _5051.Backend
         // Get the Datasource to use
         private static IStudentInterface DataSource;
 
+        /// <summary>
+        /// Switches between Live, and Mock Datasets
+        /// </summary>
+        /// <param name="dataSourceEnum"></param>
         public static void SetDataSource(DataSourceEnum dataSourceEnum)
         {
             if (dataSourceEnum == DataSourceEnum.SQL)
@@ -50,7 +57,6 @@ namespace _5051.Backend
             // Default is to use the Mock
             DataSource = StudentDataSourceMock.Instance;
         }
-
 
         /// <summary>
         /// Makes a new Student
