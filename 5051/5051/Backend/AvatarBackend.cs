@@ -12,6 +12,9 @@ namespace _5051.Backend
     /// </summary>
     public class AvatarBackend
     {
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
         private static volatile AvatarBackend instance;
         private static object syncRoot = new Object();
 
@@ -40,6 +43,10 @@ namespace _5051.Backend
         // Get the Datasource to use
         private static IAvatarInterface DataSource;
 
+        /// <summary>
+        /// Sets the Datasource to be Mock or SQL
+        /// </summary>
+        /// <param name="dataSourceEnum"></param>
         public static void SetDataSource(DataSourceEnum dataSourceEnum)
         {
             if (dataSourceEnum == DataSourceEnum.SQL)
@@ -51,8 +58,7 @@ namespace _5051.Backend
             // Default is to use the Mock
             DataSource =  AvatarDataSourceMock.Instance;
         }
-
-
+        
         /// <summary>
         /// Makes a new Avatar
         /// </summary>
