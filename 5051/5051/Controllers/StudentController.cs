@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
-
 
 namespace _5051.Controllers
 {
@@ -44,9 +39,8 @@ namespace _5051.Controllers
                 RedirectToAction("Error", "Home", "Invalid Record");
             }
 
-
             var myData = new StudentDisplayViewModel(myDataStudent);
-            if (myData== null)
+            if (myData == null)
             {
                 RedirectToAction("Error", "Home", "Invalid Record");
             }
@@ -81,32 +75,27 @@ namespace _5051.Controllers
                                         "Status,"+
                                         "")] StudentModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    StudentBackend.Create(data);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Return back for Edit
+                return View(data);
+            }
+
+            StudentBackend.Create(data);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -149,33 +138,28 @@ namespace _5051.Controllers
                                         "Status,"+
                                         "")] StudentDisplayViewModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    var myDataStudent = new StudentModel(data);
-                    StudentBackend.Update(myDataStudent);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            var myDataStudent = new StudentModel(data);
+            StudentBackend.Update(myDataStudent);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -216,33 +200,26 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "")] StudentDisplayViewModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    StudentBackend.Delete(data.Id);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+            if (data == null)
             {
+                // Send to Error page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            StudentBackend.Delete(data.Id);
+
+            return RedirectToAction("Index");
         }
     }
 }
