@@ -7,104 +7,117 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-sm-4">
+            @{
+                if (Model == null)
+                {
+                    <p>No Student</p>
+                }
 
-        @{
-            if (Model == null)
-            {
-                <p>No Student</p>
+                else
+                {
+                    <div class="row">
+                        <h2>Read Student</h2>
+                        <br />
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="~/Content/img/@Model.AvatarUri" width="75" height="75" />
+                                <br />
+                                <span>
+                                    @Model.Name
+                                    <br />
+                                    <br />
+                                    <br />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Name)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(m => m.Name)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.AvatarName)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(m => m.AvatarName)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.AvatarDescription)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(m => m.AvatarDescription)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.AvatarLevel)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(m => m.AvatarLevel)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Tokens)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(m => m.Tokens)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Status)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.DisplayFor(x => x.Status)
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
             }
-
-            else
-            {
-                <div class="row">
-                    <h2>Read Student</h2>
-                    <br />
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.AvatarUri" width="75" height="75" />
-                            <br />
-                            <span>
-                                @Model.Name
-                                <br />
-                                <br />
-                                <br />
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Name)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.Name)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.AvatarName)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.AvatarName)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.AvatarDescription)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.AvatarDescription)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.AvatarLevel)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.AvatarLevel)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Tokens)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(m => m.Tokens)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Status)
-                        </div>
-                        <div class="col-sm-2">
-                            @Html.DisplayFor(x => x.Status)
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
-                        </div>
-                    </div>
-
+        </div>
+        @*<div col="col-sm-8">
+            <img src="~/Content/img/StudentProfileBio.png" width="625" height="500" />
+            <div class="row">
+                <div class="col-sm-3 text-right">
                 </div>
-            }
-
-        }
+                <div class="col-sm-4">
+                    @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>*@
     </div>
 </div>
