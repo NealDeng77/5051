@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
-
 
 namespace _5051.Controllers
 {
@@ -69,32 +64,27 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Create(data);
-
-                    return RedirectToAction("Index");
-                }
-
-                // Send back for edit
+                // Send back for edit, with Error Message
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Sind back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Create(data);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -123,32 +113,27 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Update(data);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to error page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Update(data);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -177,33 +162,27 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Delete(data.Id);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Delete(data.Id);
+
+            return RedirectToAction("Index");
         }
     }
 }
