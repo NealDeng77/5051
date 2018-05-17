@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-sm-3 text-right">
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <img src="~/Content/img/@Model.Uri" width="75" height="75" />
                             <br />
                             <span>
@@ -45,8 +45,9 @@
                             <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Name)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Name)
+                                @Html.ValidationMessageFor(m=>m.Name)
                             </div>
                         </div>
 
@@ -54,8 +55,9 @@
                             <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Description)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Description)
+                                @Html.ValidationMessageFor(m => m.Description)
                             </div>
                         </div>
 
@@ -63,8 +65,9 @@
                             <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Uri)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Uri)
+                                @Html.ValidationMessageFor(m => m.Uri)
                             </div>
                         </div>
 
