@@ -9,6 +9,17 @@ namespace _5051.Controllers
     public class PortalController : Controller
     {
         /// <summary>
+        /// The Login in page for the Portal, shows all the Students
+        /// </summary>
+        /// <returns></returns>
+        // GET: Portal
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+
+        /// <summary>
         /// Index Page
         /// </summary>
         /// <returns></returns>

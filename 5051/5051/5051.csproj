@@ -314,6 +314,7 @@
     <Content Include="Views\Portal\Avatar.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Portal\Group.cshtml" />
+    <Content Include="Views\Portal\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
