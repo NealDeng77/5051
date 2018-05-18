@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Student Portal";
+}
+
+<h2>Welcome to the Student Portal</h2>
+
+
+@Html.ActionLink("Me", "Read", "Student", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("Reports", "Index", "Report", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("My House", "Index", "Calendar", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("My Avatar", "Index", "Calendar", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("Shop", "Index", "Student", null, new { @class = "btn btn-primary" })
