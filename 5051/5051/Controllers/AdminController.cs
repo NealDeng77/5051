@@ -33,5 +33,15 @@ namespace _5051.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Attendance Editing
+        /// </summary>
+        /// <returns></returns>
+        // GET: Attendance
+        public ActionResult Attendance()
+        {
+            return View();
+        }
     }
 }

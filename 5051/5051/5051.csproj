@@ -328,6 +328,7 @@
     <Content Include="Views\Shop\Buy.cshtml" />
     <Content Include="Views\Admin\Report.cshtml" />
     <Content Include="Views\Admin\Calendar.cshtml" />
+    <Content Include="Views\Admin\Attendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
