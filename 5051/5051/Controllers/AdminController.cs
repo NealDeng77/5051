@@ -13,5 +13,25 @@ namespace _5051.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Reports
+        /// </summary>
+        /// <returns></returns>
+        // GET: Report
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Calendar
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult Calendar()
+        {
+            return View();
+        }
     }
 }
