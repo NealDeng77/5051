@@ -1,8 +1,39 @@
-﻿
+﻿@model _5051.Models.StudentViewModel
+
 @{
     ViewBag.Title = "Reports";
 }
 
-<h2>Welcome to Admin Report</h2>
+<h2>Reports</h2>
 
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-12">
+            @{
+                if (Model.StudentList == null || !Model.StudentList.Any())
+                {
+                    <br />
+                    <p>No Students in the System</p>
+                    <br />
+                }
+                else
+                {
+                    foreach (var item in Model.StudentList)
+                    {
+                        <div class="col-sm-3">
+                            <a id="@item.Id" href="~/Admin/StudentReport/@item.Id">
+                                <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
+                                <img src="~/Content/img/ChartPlaceholder.png" width="75" height="75" />
+                                <br />
+                                <span>
+                                    @item.Name
+                                </span>
+                            </a>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
 
