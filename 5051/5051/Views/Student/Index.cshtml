@@ -8,31 +8,31 @@
 
 <div class="container">
     <div class="row">
-
-        @{
-            if (Model.StudentList == null || !Model.StudentList.Any())
-            {
-                <br />
-                <p>No Students in the System</p>
-                <br />
-            }
-            else
-            {
-                foreach (var item in Model.StudentList)
+        <div class="col-sm-12">
+            @{
+                if (Model.StudentList == null || !Model.StudentList.Any())
                 {
-                    <a id="@item.Id" href="~/Student/Read/@item.Id">
+                    <br />
+                    <p>No Students in the System</p>
+                    <br />
+                }
+                else
+                {
+                    foreach (var item in Model.StudentList)
+                    {
                         <div class="col-sm-2">
-                            <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
-                            <br />
-                            <span>
-                                @item.Name
-                            </span>
+                            <a id="@item.Id" href="~/Student/Read/@item.Id">
+                                <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
+                                <br />
+                                <span>
+                                    @item.Name
+                                </span>
+                            </a>
                         </div>
-                    </a>
+                    }
                 }
             }
-        }
-
+        </div>
     </div>
     <br />
     <br />
