@@ -323,6 +323,9 @@
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Portal\Group.cshtml" />
     <Content Include="Views\Portal\Login.cshtml" />
+    <Content Include="Views\Shop\Discounts.cshtml" />
+    <Content Include="Views\Shop\Specials.cshtml" />
+    <Content Include="Views\Shop\Buy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
