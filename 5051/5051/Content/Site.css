@@ -23,8 +23,8 @@ textarea {
     max-width: 280px;
 }
 
-/* Set Rows to center divs */
-.row.text-center > div {
+/* Set items in a div */
+.div-center {
     display: inline-block;
     float: none;
 }
