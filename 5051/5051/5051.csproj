@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -306,6 +307,12 @@
     <Content Include="Views\Home\ShopExample.cshtml" />
     <Content Include="Views\Home\HouseExample.cshtml" />
     <Content Include="Views\Portal\Index.cshtml" />
+    <Content Include="Views\Portal\Settings.cshtml" />
+    <Content Include="Views\Portal\Report.cshtml" />
+    <Content Include="Views\Portal\House.cshtml" />
+    <Content Include="Views\Portal\Avatar.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Portal\Group.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
