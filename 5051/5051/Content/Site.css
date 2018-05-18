@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Set Rows to center divs */
+.row.text-center > div {
+    display: inline-block;
+    float: none;
+}
