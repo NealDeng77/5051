@@ -64,7 +64,7 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Portal
-        public ActionResult Setting()
+        public ActionResult Settings()
         {
             return View();
         }
