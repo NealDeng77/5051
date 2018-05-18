@@ -1,26 +1,48 @@
-﻿
-@{
+﻿@{
+
     ViewBag.Title = "Student Portal";
 }
 
 <h2>Welcome to my Student Portal</h2>
 
+<div class="row">
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="~/Portal/Report">
+                <img src="~/Content/img/PortalReports.png" />
+                <span>Reports</span>
+            </a>
+        </div>
 
-@Html.ActionLink("My Information", "Profile", "Portal", null, new { @class = "btn btn-primary" })
+        <div class="col-sm-3">
+            <a href="~/Portal/House">
+                <img src="~/Content/img/PortalHouse.png" />
+                <span>House</span>
+            </a>
+        </div>
 
-<br />
-<br />
-@Html.ActionLink("My Reports", "Report", "Portal", null, new { @class = "btn btn-primary" })
+        <div class="col-sm-3">
+            <a href="~/Portal/Store">
+                <img src="~/Content/img/PortalStore.png" />
+                <span>Customize</span>
+            </a>
+        </div>
+    </div>
 
-<br />
-<br />
-@Html.ActionLink("My House", "House", "Portal", null, new { @class = "btn btn-primary" })
+    <div class="row">
 
-<br />
-<br />
-@Html.ActionLink("My Avatar", "Avatar", "Portal", null, new { @class = "btn btn-primary" })
+        <div class="col-sm-3">
+            <a href="~/Portal/Settings">
+                <img src="~/Content/img/PortalCustomize.png" />
+                <span>Customize</span>
+            </a>
+        </div>
 
-<br />
-<br />
-@Html.ActionLink("Shop", "Index", "Shop", null, new { @class = "btn btn-primary" })
-
+        <div class="col-sm-3">
+            <a href="~/Portal/Avatars">
+                <img src="~/Content/img/PortalAvatars.png" />
+                <span>Avatars</span>
+            </a>
+        </div>
+    </div>
+</div>
