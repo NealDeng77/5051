@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace _5051.Controllers
 {
@@ -36,6 +37,9 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Avatar()
         {
+           // var currentUser = User.Identity.GetUserName();
+            //var currentUserId = User.Identity.GetUserId();
+
             return View();
         }
 
