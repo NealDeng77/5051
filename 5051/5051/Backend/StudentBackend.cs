@@ -235,5 +235,15 @@ namespace _5051.Backend
         {
             DataSource.Reset();
         }
+
+        /// <summary>
+        /// Returns the First Student in the system
+        /// </summary>
+        /// <returns>Null or valid data</returns>
+        public StudentModel GetDefault()
+        {
+            var myReturn = DataSource.Index().First();
+            return myReturn;
+        }
     }
 }
