@@ -65,7 +65,7 @@ namespace _5051.Models
         {
             Id = Guid.NewGuid().ToString();
             Tokens = 0;
-            AvatarLevel = 0;
+            AvatarLevel = 1;
             Status = StudentStatusEnum.Out;
         }
 
