@@ -57,11 +57,13 @@ namespace _5051.Controllers
         /// <returns></returns>
         // POST: Avatar/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include=
                                         "Id,"+
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
             if (!ModelState.IsValid)
@@ -110,6 +112,7 @@ namespace _5051.Controllers
                                         "Id,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
             if (!ModelState.IsValid)

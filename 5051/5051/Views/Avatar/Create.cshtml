@@ -45,6 +45,16 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.Level)
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(m => m.Level)
+                    @Html.ValidationMessageFor(m => m.Level)
+                </div>
+            </div>
+
             <br />
             <br />
             <div class="row">

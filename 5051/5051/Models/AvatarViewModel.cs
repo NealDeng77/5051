@@ -14,5 +14,31 @@ namespace _5051.Models
         /// The List of Avatars
         /// </summary>
         public List<AvatarModel> AvatarList = new List<AvatarModel>();
+        public int ListLevel;
+    }
+
+    /// <summary>
+    /// Adds a list of Avatar Lists per Level, making it easier to select
+    /// </summary>
+    public class AvatarListViewModel : AvatarViewModel
+    {
+        public List<AvatarViewModel> AvatarLevelList;
+        public int MaxLevel;
+    }
+
+    /// <summary>
+    /// Returns the selected Avatar and the Avatar List
+    /// </summary>
+    public class SelectedAvatarViewModel : AvatarListViewModel
+    {
+        public AvatarModel SelectedAvatar;
+    }
+
+    /// <summary>
+    /// Adds the Student Information to the View Model for the Avatars availble for the student to select
+    /// </summary>
+    public class SelectedAvatarForStudentViewModel : SelectedAvatarViewModel
+    {
+        public StudentModel Student;
     }
 }

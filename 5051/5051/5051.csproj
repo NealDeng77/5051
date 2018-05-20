@@ -212,6 +212,7 @@
     <Compile Include="Models\AvatarModel.cs" />
     <Compile Include="Models\Enums\StudentStatusEnum.cs" />
     <Compile Include="Models\Enums\DataSourceEnum.cs" />
+    <Compile Include="Models\StudentAvatarModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />

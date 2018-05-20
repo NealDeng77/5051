@@ -36,44 +36,53 @@
                         </div>
                     </div>
 
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.Name)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.DisplayFor(m => m.Name)
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Name)
                         </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Name)
+                        </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.Description)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.DisplayFor(m => m.Description)
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Description)
                         </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Description)
+                        </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.Uri)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.DisplayFor(m => m.Uri)
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Uri)
                         </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Uri)
+                        </div>
+                    </div>
 
-                        <br />
-                        <br />
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                                @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Level)
                         </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Level)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
 
 
 

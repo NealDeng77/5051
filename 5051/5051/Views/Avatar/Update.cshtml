@@ -39,7 +39,7 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m=>m.Id)
+                        @Html.HiddenFor(m => m.Id)
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Name)
-                                @Html.ValidationMessageFor(m=>m.Name)
+                                @Html.ValidationMessageFor(m => m.Name)
                             </div>
                         </div>
 
@@ -68,6 +68,16 @@
                             <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Uri)
                                 @Html.ValidationMessageFor(m => m.Uri)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Level)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.Level)
+                                @Html.ValidationMessageFor(m => m.Level)
                             </div>
                         </div>
 
