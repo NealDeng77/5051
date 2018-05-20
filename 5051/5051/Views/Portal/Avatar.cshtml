@@ -56,8 +56,6 @@
                                     {
                                         using (Html.BeginForm())
                                         {
-                                            Html.AntiForgeryToken();
-
                                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                                             Html.Hidden("AvatarId", outputAvatar.Id);
                                             Html.Hidden("StudentId", Model.Student.Id);

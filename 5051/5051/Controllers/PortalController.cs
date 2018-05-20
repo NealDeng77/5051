@@ -38,7 +38,6 @@ namespace _5051.Controllers
         /// <returns></returns>
         // Post: Portal
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Avatar([Bind(Include=
                                         "AvatarId,"+
                                         "StudentId,"+
