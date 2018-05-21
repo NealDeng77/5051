@@ -110,6 +110,7 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult Update([Bind(Include=
                                         "Id,"+
+                                        "Name,"+
                                         "Description,"+
                                         "Uri,"+
                                         "Level,"+
