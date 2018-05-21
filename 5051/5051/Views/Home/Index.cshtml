@@ -7,10 +7,10 @@
     <p class="lead">Earn Points, Level up your Avatar all while attending class.</p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row" style="padding:0;margin:0">
+    <div class="col-md-3">
         <h2>Getting started</h2>
-        <p>
+        <p style="height:100px">
             Each student earns points while attending class, and can use the points to level up their personal Avatar, or shop for items to decorate the Avatar's house.
         </p>
         <p>
@@ -18,25 +18,31 @@
         </p>
     </div>
 
-    <div class="col-md-4">
-        <h2>Level up</h2>
-        <p>Earn Bonus points to level up your Avatar. Higher level avatars can buy special items, as well as get daily discounts.</p>
+    <div class="col-md-3">
+        <h2>Level Up</h2>
+        <p style="height:100px">
+            Earn Bonus points to level up your Avatar. Higher level avatars can buy special items, as well as get daily discounts.
+        </p>
         <p>
             @Html.ActionLink("Choose Avatars", "AvatarExample", "Home", null, new { @class = "btn btn-primary" })
         </p>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Shop</h2>
-        <p>Go Shopping to get fantastic deals, and decorations.</p>
+        <p style="height:100px">
+            Go Shopping to get fantastic deals, and decorations.
+        </p>
         <p>
             @Html.ActionLink("Shop", "ShopExample", "Home", null, new { @class = "btn btn-primary" })
         </p>
     </div>
 
-    <div class="col-md-4">
-        <h2>Track your Progress</h2>
-        <p>View your attendance history, and track your progress over the school year.</p>
+    <div class="col-md-3">
+        <h2>Track Progress</h2>
+        <p style="height:100px">
+            View your attendance history, and track your progress over the school year.
+        </p>
         <p>
             @Html.ActionLink("Show Me", "StudentExample", "Home", null, new { @class = "btn btn-primary" })
         </p>
