@@ -21,6 +21,15 @@ namespace _5051.Controllers
         }
 
         /// <summary>
+        /// The Error page for the site
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// The about page for Avatar Attendance
         /// </summary>
         /// <returns></returns>
