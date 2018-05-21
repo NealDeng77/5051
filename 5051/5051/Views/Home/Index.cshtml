@@ -22,6 +22,14 @@
         <h2>Level up</h2>
         <p>Earn Bonus points to level up your Avatar. Higher level avatars can buy special items, as well as get daily discounts.</p>
         <p>
+            @Html.ActionLink("Choose Avatars", "AvatarExample", "Home", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Shop</h2>
+        <p>Go Shopping to get fantastic deals, and decorations.</p>
+        <p>
             @Html.ActionLink("Shop", "ShopExample", "Home", null, new { @class = "btn btn-primary" })
         </p>
     </div>

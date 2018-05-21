@@ -235,6 +235,7 @@
     <Content Include="Content\img\avatar7.png" />
     <Content Include="Content\img\avatar8.png" />
     <Content Include="Content\img\avatar9.png" />
+    <Content Include="Content\img\AvatarLevel.png" />
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -333,6 +334,7 @@
     <Content Include="Views\Admin\Calendar.cshtml" />
     <Content Include="Views\Admin\Attendance.cshtml" />
     <Content Include="Views\Admin\StudentReport.cshtml" />
+    <Content Include="Views\Home\AvatarExample.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

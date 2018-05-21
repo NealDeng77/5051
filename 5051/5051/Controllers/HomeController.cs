@@ -74,5 +74,13 @@ namespace _5051.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Help/Example page for Avatar Levels
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AvatarExample()
+        {
+            return View();
+        }
     }
 }
