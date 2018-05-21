@@ -1,8 +1,99 @@
-﻿
+﻿@model _5051.Models.StudentDisplayViewModel
+
 @{
     ViewBag.Title = "My Settings";
 }
 
-<h2>Welcome to my Settings</h2>
+<h2>Welcome to My Settings</h2>
+
+
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model == null)
+            {
+                <p>No Student</p>
+            }
+
+            else
+            {
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-2">
+                            <img src="~/Content/img/@Model.AvatarUri" width="75" height="75" />
+                            <br />
+                            <span>
+                                @Model.Name
+                                <br />
+                                <br />
+                                <br />
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.AvatarLevel)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(m => m.AvatarLevel)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Tokens)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(m => m.Tokens)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Status)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(x => x.Status)
+                        </div>
+                    </div>
+
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Name)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.EditorFor(m => m.Name)
+                                @Html.ValidationMessageFor(m => m.Name)
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="submit" value="Update" class="btn btn-primary">
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+
 
 

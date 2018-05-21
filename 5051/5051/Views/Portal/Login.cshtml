@@ -1,12 +1,12 @@
-﻿
+﻿@model _5051.Models.StudentModel
 @{
     ViewBag.Title = "Login";
 }
 
 <div class="row text-center">
-    <a href="~/Portal/Index">
+    <a href="~/Portal/Index/@Model.Id">
         <img src="~/Content/img/PortalLogin.png" width="1000" />
         <br />
-        <span class="h2">Click and Avatar to get started</span>
+        <span class="h2">Click on an Avatar to get started</span>
     </a>
 </div>

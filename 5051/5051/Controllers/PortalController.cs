@@ -17,19 +17,43 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Login()
         {
-            return View();
+            var myStudent = Backend.StudentBackend.Instance.GetDefault();
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myReturn);
         }
 
 
         /// <summary>
         /// Index Page
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Student Id</param>
+        /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult Index()
+        public ActionResult Index(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.GetDefault();
-            return View(myStudent);
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myReturn);
         }
 
         /// <summary>
@@ -80,7 +104,8 @@ namespace _5051.Controllers
         /// <summary>
         /// Student's Avatar page
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Student Id</param>
+        /// <returns>Selected Avatar View Model</returns>
         // GET: Portal
         public ActionResult Avatar(string id = null)
         {
@@ -139,31 +164,70 @@ namespace _5051.Controllers
         /// <summary>
         ///  My House
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Student Id</param>
+        /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult House()
+        public ActionResult House(string id = null)
         {
-            return View();
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myReturn);
         }
 
         /// <summary>
         ///  My Settings
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Student Id</param>
+        /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult Settings()
+        public ActionResult Settings(string id = null)
         {
-            return View();
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myReturn);
         }
 
         /// <summary>
         /// My Attendance Reports
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Student Id</param>
+        /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult Report()
+        public ActionResult Report(string id = null)
         {
-            return View();
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myReturn);
         }
     }
 }
