@@ -71,7 +71,7 @@ namespace _5051.Controllers
             if (!ModelState.IsValid)
             {
                 // Send back for edit, with Error Message
-                return RedirectToAction("Index", "Portal");
+                return View(data);
             }
 
             // If the Avatar Id is blank, error out
@@ -98,7 +98,7 @@ namespace _5051.Controllers
             Backend.StudentBackend.Instance.Update(myStudent);
 
             // Editing is done, so go back to the Student Portal
-            return RedirectToAction("Index", "Portal");
+            return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
         }
 
         /// <summary>
@@ -115,13 +115,13 @@ namespace _5051.Controllers
             var myStudent = Backend.StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
-                return RedirectToAction("Error", "Home", new { Controller = "Home" });
+                return RedirectToAction("Error", "Home");
             }
 
             var myAvatar = Backend.AvatarBackend.Instance.Read(myStudent.AvatarId);
             if (myAvatar == null)
             {
-                return RedirectToAction("Error", "Home", new { Controller = "Home" });
+                return RedirectToAction("Error", "Home");
             }
 
             var SelectedAvatarViewModel = new SelectedAvatarForStudentViewModel();
