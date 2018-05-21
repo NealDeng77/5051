@@ -7,17 +7,19 @@
 
 <div class="row">
     <h2>My Avatar</h2>
+    <h3>
+        You can change to any avatar at or below Level @Html.DisplayFor(m => m.Student.AvatarLevel)
+    </h3>
     <div class="col-sm-10 col-sm-offset-1">
-        <h3>
-            @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
-        </h3>
-
         <div class="col-sm-2 text-center">
             <img src="~/Content/img/@Model.SelectedAvatar.Uri" width="75" height="75" />
             <br />
             <div class="text-center">
                 @Html.DisplayFor(m => m.SelectedAvatar.Name)
                 <br />
+                <span>
+                    @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
+                </span>
                 <br />
                 <br />
             </div>
@@ -39,8 +41,14 @@
                     ///Walk the SelectedAvatarViewModel.MaxLevel, and for each level lay out the Level, and the Avatars
                     for (var myList = 1; myList <= Model.MaxLevel; myList++)
                     {
+                        var disabledOn = "";
+                        if (Model.Student.AvatarLevel < myList)
+                        {
+                            disabledOn = "disabled";
+                        }
+
                         <br />
-                        <div class="row">
+                        <div class="row" @disabledOn>
                             @{
                                 <h3>Level @myList</h3>
 
@@ -64,7 +72,7 @@
                                             var picturURI = "/Content/img/" + outputAvatar.Uri;
 
                                             <div class="col-sm-2 text-center">
-                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" width="75" height="75" />
+                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" width="75" height="75" @disabledOn/>
                                                 <br />
                                                 <span class="text-center">
                                                     @outputAvatar.Name
