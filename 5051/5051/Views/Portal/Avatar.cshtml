@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "My Avatar";
 }
+
 <div class="row">
     <h2>My Avatar</h2>
     <div class="col-sm-10 col-sm-offset-1">
@@ -57,8 +58,9 @@
                                         using (Html.BeginForm())
                                         {
                                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                                            Html.Hidden("AvatarId", outputAvatar.Id);
-                                            Html.Hidden("StudentId", Model.Student.Id);
+                                            @Html.Hidden("StudentId", Model.Student.Id );
+                                            @Html.Hidden("AvatarId", outputAvatar.Id );
+
                                             var picturURI = "/Content/img/" + outputAvatar.Uri;
 
                                             <div class="col-sm-2 text-center">
