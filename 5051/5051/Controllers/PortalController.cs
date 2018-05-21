@@ -224,6 +224,7 @@ namespace _5051.Controllers
                                         "AvatarLevel,"+
                                         "Tokens,"+
                                         "Status,"+
+                                        "AvatarUri,"+
                                         "")] StudentDisplayViewModel data)
         {
             // If data passed up is not valid, go back to the Index page so the user can try again
