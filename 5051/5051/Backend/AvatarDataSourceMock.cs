@@ -83,9 +83,8 @@ namespace _5051.Backend
                 return null;
             }
             var myReturn = avatarList.Find(n => n.Id == data.Id);
-            myReturn.Name = data.Name;
-            myReturn.Description = data.Description;
-            myReturn.Uri = data.Uri;
+
+            myReturn.Update(data);
 
             return myReturn;
         }

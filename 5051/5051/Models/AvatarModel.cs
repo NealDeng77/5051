@@ -65,5 +65,23 @@ namespace _5051.Models
             Description = description;
             Level = level;
         }
+
+        /// <summary>
+        /// Used to Update Avatar Before doing a data save
+        /// Updates everything except for the ID
+        /// </summary>
+        /// <param name="data">Data to update</param>
+        public void Update(AvatarModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            Uri = data.Uri;
+            Name = data.Name;
+            Description = data.Description;
+            Level = data.Level;
+        }
     }
 }
