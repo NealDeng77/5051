@@ -1,4 +1,4 @@
-﻿@model _5051.Models.StudentModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
 
@@ -33,25 +33,25 @@
                     <span>Store</span>
                 </a>
             </div>
-        </div>
 
-        <div class="row text-center">
+            <div class="row text-center">
 
-            <div class="col-sm-4">
-                <a href="~/Portal/Settings/@Model.Id">
-                    <img src="~/Content/img/PortalCustomize.png" />
-                    <br />
-                    <span>Customize</span>
-                </a>
-            </div>
+                <div class="col-sm-4">
+                    <a href="~/Portal/Settings/@Model.Id">
+                        <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize2" />
+                        <br />
+                        <span>Customize</span>
+                    </a>
+                </div>
 
-            <div class="col-sm-4">
-                <a href="~/Portal/Avatar/@Model.Id">
-                    <img src="~/Content/img/PortalAvatars.png" />
-                    <br />
-                    <span>Avatars</span>
-                </a>
+                <div class="col-sm-4">
+                    <a href="~/Portal/Avatar/@Model.Id">
+                        <img src="~/Content/img/PortalAvatars.png" />
+                        <br />
+                        <span>Avatars</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>    
+</div>
