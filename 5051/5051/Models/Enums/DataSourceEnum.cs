@@ -19,4 +19,16 @@ namespace _5051.Models
         // SQL Dataset
         SQL = 2
     }
+
+    public enum DataSourceDataSetEnum
+    {
+        // Not specified
+        Default = 0,
+
+        // Mock Dataset
+        Demo = 1,
+
+        // SQL Dataset
+        UnitTest = 2
+    }
 }

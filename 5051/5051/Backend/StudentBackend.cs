@@ -51,11 +51,20 @@ namespace _5051.Backend
             if (dataSourceEnum == DataSourceEnum.SQL)
             {
                 // SQL not hooked up yet...
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
 
             // Default is to use the Mock
             DataSource = StudentDataSourceMock.Instance;
+        }
+
+        /// <summary>
+        /// Switch the data set between Demo, Default and Unit Test
+        /// </summary>
+        /// <param name="SetEnum"></param>
+        public static void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
+        {
+            StudentDataSourceMock.Instance.LoadDataSet(SetEnum);
         }
 
         /// <summary>

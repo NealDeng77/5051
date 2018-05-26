@@ -119,7 +119,6 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            StudentList.Clear();
             Initialize();
         }
 
@@ -128,10 +127,66 @@ namespace _5051.Backend
         /// </summary>
         public void Initialize()
         {
+            LoadDataSet(DataSourceDataSetEnum.Default);
+        }
+
+        /// <summary>
+        /// Clears the Data
+        /// </summary>
+        private void DataSetClear()
+        {
+            StudentList.Clear();
+        }
+
+        /// <summary>
+        /// The Defalt Data Set
+        /// </summary>
+        private void DataSetDefault()
+        {
+            DataSetClear();
             Create(new StudentModel("Mike", null));
-            Create(new StudentModel("Doug",null));
+            Create(new StudentModel("Doug", null));
             Create(new StudentModel("Jea", null));
             Create(new StudentModel("Sue", null));
+        }
+
+        /// <summary>
+        /// Data set for demo
+        /// </summary>
+        private void DataSetDemo()
+        {
+            DataSetDefault();
+        }
+        
+        /// <summary>
+        /// Unit Test data set
+        /// </summary>
+        private void DataSetUnitTest()
+        {
+            DataSetDefault();
+        }
+
+        /// <summary>
+        /// Set which data to load
+        /// </summary>
+        /// <param name="setEnum"></param>
+        public void LoadDataSet(DataSourceDataSetEnum setEnum)
+        {
+            switch (setEnum)
+            {
+                case DataSourceDataSetEnum.Demo:
+                    DataSetDemo();
+                    break;
+
+                case DataSourceDataSetEnum.UnitTest:
+                    DataSetUnitTest();
+                    break;
+
+                case DataSourceDataSetEnum.Default:
+                default:
+                    DataSetDefault();
+                    break;
+            }
         }
     }
 }

@@ -18,5 +18,6 @@ namespace _5051.Backend
         bool Delete(string id);
         List<AvatarModel> Index();
         void Reset();
+        void LoadDataSet(DataSourceDataSetEnum setEnum);
     }
 }

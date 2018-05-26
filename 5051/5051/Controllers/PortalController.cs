@@ -44,13 +44,13 @@ namespace _5051.Controllers
             var myStudent = Backend.StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Portal");
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
             if (myReturn == null)
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Portal");
             }
 
             return View(myReturn);
