@@ -1,12 +1,16 @@
 ﻿@model _5051.Models.StudentViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
-<h2>Students</h2>
 
 <div class="container">
+    <br />
+    <h2>Click on a student to edit the student information</h2>
+    <br />
+    <br />
+
     <div class="row text-center">
         <div class="col-sm-12">
             @{
@@ -21,13 +25,18 @@
                     foreach (var item in Model.StudentList)
                     {
                         <div class="col-sm-2">
-                            <a id="@item.Id" href="~/Student/Read/@item.Id">
-                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                            <div class="AvatarBox">
+                                <a id="@item.Id" href="~/Student/Read/@item.Id">
+                                    <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                </a>
                                 <br />
                                 <span>
                                     @item.Name
+                                    <br />
+                                    <br />
+                                    <br />
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     }
                 }
@@ -38,7 +47,7 @@
     <br />
     <div class="row">
         <div class="col-sm-2">
-            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New Student", "Create", null, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>
