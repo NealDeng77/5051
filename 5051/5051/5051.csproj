@@ -257,6 +257,7 @@
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
     <Content Include="Content\img\Store.png" />
+    <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
     <Content Include="Content\img\StudentProfileBio.png" />
     <Content Include="favicon.ico" />
