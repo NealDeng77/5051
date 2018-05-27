@@ -253,6 +253,7 @@
     <Content Include="Content\img\PortalStudents.png" />
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
+    <Content Include="Content\img\SchoolCalendar.png" />
     <Content Include="Content\img\Store.png" />
     <Content Include="Content\img\StudentProfile.png" />
     <Content Include="Content\img\StudentProfileBio.png" />
