@@ -7,43 +7,56 @@
 
 <div class="row text-center">
     <div class="col-sm-12">
+
+
         <div class="col-sm-4">
             <div class="PortalBox">
-                @Html.ActionLink("Avatar Editing", "Index", "Avatar", null, new { @class = "btn btn-primary" })
-                <br />
-                <br />
+                <a href="~/Admin/Report">
+                    <img src="~/Content/img/PortalReport.jpg" alt="Show Reports" class="PortalImage" />
+                    <br />
+                    <span>Show Reports</span>
+                </a>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="PortalBox">
-                @Html.ActionLink("Show Reports", "Report", "Admin", null, new { @class = "btn btn-primary" })
-                <br />
-                <br />
+                <a href="~/Admin/Index">
+                    <img src="~/Content/img/PortalStudents.png" alt="Manage Students" class="PortalImage" />
+                    <br />
+                    <span>Manage Students</span>
+                </a>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="PortalBox">
-                @Html.ActionLink("Manage Students", "Index", "Student", null, new { @class = "btn btn-primary" })
-                <br />
-                <br />
+                <a href="~/Admin/Calendar">
+                    <img src="~/Content/img/PortalCalendar.jpeg" alt="Manage Calendar" class="PortalImage" />
+                    <br />
+                    <span>Manage Calendar</span>
+                </a>
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="PortalBox">
-                @Html.ActionLink("School Calendar", "Calendar", "Admin", null, new { @class = "btn btn-primary" })
-                <br />
-                <br />
+                <a href="~/Avatar/Index">
+                    <img src="~/Content/img/PortalAvatars.png" alt="Manage Avatars" class="PortalImage" />
+                    <br />
+                    <span>Manage Avatars</span>
+                </a>
             </div>
         </div>
 
+
         <div class="col-sm-4">
             <div class="PortalBox">
-                @Html.ActionLink("Settings", "Settings", "Admin", null, new { @class = "btn btn-primary" })
-                <br />
-                <br />
+                <a href="~/Admin/Settings">
+                    <img src="~/Content/img/PortalSettings.png" alt="Settings" class="PortalImage" />
+                    <br />
+                    <span>Settings</span>
+                </a>
             </div>
         </div>
 
