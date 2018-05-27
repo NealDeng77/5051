@@ -155,7 +155,7 @@ namespace _5051.Backend
             Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Pigtails", "Love my hair", 3));
             Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Ninja", "Taste my Katana", 2));
             Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Circus", "Swinging from the Trapeese", 4));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Chief", "I love to cook", 4));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Chef", "I love to cook", 4));
         }
 
         /// <summary>
