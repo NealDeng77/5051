@@ -36,13 +36,13 @@ namespace _5051.Controllers
             var myDataStudent = StudentBackend.Read(id);
             if (myDataStudent == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                return RedirectToAction("Error", "Home");
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
             if (myData == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                return RedirectToAction("Error", "Home");
             }
 
             return View(myData);
@@ -109,13 +109,13 @@ namespace _5051.Controllers
             var myDataStudent = StudentBackend.Read(id);
             if (myDataStudent == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                return RedirectToAction("Error", "Home");
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
             if (myData == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                return RedirectToAction("Error", "Home");
             }
             return View(myData);
         }
@@ -173,13 +173,13 @@ namespace _5051.Controllers
             var myDataStudent = StudentBackend.Read(id);
             if (myDataStudent == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                RedirectToAction("Error", "Home");
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
             if (myData == null)
             {
-                RedirectToAction("Error", "Home", "Invalid Record");
+                RedirectToAction("Error", "Home");
             }
 
             return View(myData);
