@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.Controllers
 {
@@ -17,19 +18,23 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Login()
         {
-            var myStudent = Backend.StudentBackend.Instance.GetDefault();
-            if (myStudent == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            var myDataList = _5051.Backend.DataSourceBackend.Instance.StudentBackend.Index();
+            var StudentViewModel = new StudentViewModel(myDataList);
+            return View(StudentViewModel);
 
-            var myReturn = new StudentDisplayViewModel(myStudent);
-            if (myReturn == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            //var myStudent = Backend.StudentBackend.Instance.GetDefault();
+            //if (myStudent == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
 
-            return View(myReturn);
+            //var myReturn = new StudentDisplayViewModel(myStudent);
+            //if (myReturn == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
+
+            //return View(myReturn);
         }
 
 
