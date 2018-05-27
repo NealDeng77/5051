@@ -47,16 +47,6 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// Calendar
-        /// </summary>
-        /// <returns></returns>
-        // GET: Calendar
-        public ActionResult Calendar()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Attendance Editing
         /// </summary>
         /// <returns></returns>

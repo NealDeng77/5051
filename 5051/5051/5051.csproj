@@ -198,6 +198,7 @@
     <Compile Include="Backend\AvatarInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -237,6 +238,7 @@
     <Content Include="Content\img\avatar8.png" />
     <Content Include="Content\img\avatar9.png" />
     <Content Include="Content\img\AvatarLevel.png" />
+    <Content Include="Content\img\CalendarEditIcon.png" />
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\EditPicture.png" />
     <Content Include="Content\img\PortalAvatars.png" />
@@ -340,12 +342,13 @@
     <Content Include="Views\Shop\Specials.cshtml" />
     <Content Include="Views\Shop\Buy.cshtml" />
     <Content Include="Views\Admin\Report.cshtml" />
-    <Content Include="Views\Admin\Calendar.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Admin\Attendance.cshtml" />
     <Content Include="Views\Admin\StudentReport.cshtml" />
     <Content Include="Views\Home\AvatarExample.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
+    <Content Include="Views\Calendar\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
