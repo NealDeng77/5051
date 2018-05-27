@@ -12,31 +12,88 @@ namespace _5051.Controllers
     public class PortalController : Controller
     {
         /// <summary>
-        /// The Login in page for the Portal, shows all the Students
+        /// The list of all the active students in the class, so they can Roster
         /// </summary>
         /// <returns></returns>
         // GET: Portal
-        public ActionResult Login()
+        public ActionResult Roster()
         {
             var myDataList = _5051.Backend.DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
-
-            //var myStudent = Backend.StudentBackend.Instance.GetDefault();
-            //if (myStudent == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
-
-            //var myReturn = new StudentDisplayViewModel(myStudent);
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
-
-            //return View(myReturn);
         }
 
+        /// <summary>
+        /// The Roster in page for the Portal, shows all the Students
+        /// </summary>
+        /// <returns></returns>
+        // GET: Portal
+        public ActionResult Login(string id=null)
+        {
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Roster", "Portal");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Roster", "Portal");
+            }
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Login for the student, take the ID, the rest of the fields are required but not used
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>if all is OK, then redirect to the student protal page</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login([Bind(Include=
+                                        "Id,"+
+                                        "Name,"+
+                                        "Description,"+
+                                        "Uri,"+
+                                        "AvatarId,"+
+                                        "AvatarLevel,"+
+                                        "Tokens,"+
+                                        "Status,"+
+                                        "Password,"+
+                                        "")] StudentDisplayViewModel data)
+        {
+            // Any password is accepted for now. does not really login...
+
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return View(data);
+            }
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+            if (myStudent == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            // all is OK, so redirect to the student index page and pass in the student ID for now.
+            return RedirectToAction("Index","Portal", new { id = data.Id });
+        }
 
         /// <summary>
         /// Index Page
@@ -49,13 +106,13 @@ namespace _5051.Controllers
             var myStudent = Backend.StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
-                return RedirectToAction("Login", "Portal");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
             if (myReturn == null)
             {
-                return RedirectToAction("Login", "Portal");
+                return RedirectToAction("Roster", "Portal");
             }
 
             return View(myReturn);

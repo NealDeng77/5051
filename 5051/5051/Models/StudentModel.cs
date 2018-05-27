@@ -59,6 +59,13 @@ namespace _5051.Models
         public StudentStatusEnum Status { get; set; }
 
         /// <summary>
+        /// The status of the student, for example currently logged in, out
+        /// </summary>
+        [Display(Name = "Password", Description = "Student Password")]
+        [PasswordPropertyText]
+        public string Password{ get; set; }
+
+        /// <summary>
         /// The defaults for a new student
         /// </summary>
         public void Initialize()
