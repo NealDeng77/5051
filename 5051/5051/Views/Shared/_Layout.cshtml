@@ -41,15 +41,18 @@
         <footer>
             <div class="footer navbar-fixed-bottom">
                 <div class="FooterBar">
-                    <span class="FooterText">
-                        &nbsp;&nbsp;&copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved
-                        &nbsp;&nbsp;
-                    </span>
-                    @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    <div class="row">
+                        <span class="FooterText">
+                            &nbsp;&nbsp;&copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved
+                            &nbsp;&nbsp;
+                        </span>
+
+                        @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                        @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                        @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    </div>
                 </div>
-                
+
             </div>
         </footer>
     </div>
