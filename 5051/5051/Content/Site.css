@@ -33,6 +33,11 @@ textarea {
     width:200px;
     height:200px;
 }
+    .PortalBox:hover {
+ 
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
 
 .PortalImage{
     width:150px;
