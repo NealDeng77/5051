@@ -4,78 +4,79 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Students</h2>
 
 <div class="container">
     <div class="row">
-
-        @{
-            if (Model.StudentList == null || !Model.StudentList.Any())
-            {
-                <br />
-                <p>No Students in the System</p>
-                <br />
-            }
-            else
-            {
-                // List out the Logged IN Students, then the Logged Out students
-
-                <div class="row">
-                    <h2>Logged In</h2>
-
-                    @{
-                        // Logged IN first
-                        foreach (var item in Model.StudentList)
-                        {
-                            if (item.Status == _5051.Models.StudentStatusEnum.In)
-                            {
-                                <div class="col-sm-2">
-                                    <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
-                                        <div class="col-sm-1">
-                                            <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                            <br />
-                                            <span>
-                                                @item.Name
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
-
-                <br />
-                <br />
-                <br />
-                <div class="row">
-                    <h2>Logged Out</h2>
-                    @{
-                        // Logged Out first
-                        foreach (var item in Model.StudentList)
-                        {
-                            if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                            {
-                                <div class="col-sm-2">
-                                    <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
-
-                                        <div class="col-sm-1">
-                                            <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                            <br />
-                                            <span>
-                                                @item.Name
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
-            }
-        }
-
+        <h2>Click on your Avatar to Check In or Out of Class</h2>
     </div>
+    <br />
+    <br />
+
+    @{
+        if (Model.StudentList == null || !Model.StudentList.Any())
+        {
+            <br />
+            <p>No Students in the System</p>
+            <br />
+        }
+        else
+        {
+            // List out the Logged IN Students, then the Logged Out students
+
+            <div class="row">
+                <h2>Logged In</h2>
+
+                @{
+                    // Logged IN first
+                    foreach (var item in Model.StudentList)
+                    {
+                        if (item.Status == _5051.Models.StudentStatusEnum.In)
+                        {
+                            <div class="col-sm-2">
+                                <div class="AvatarBox text-center">
+                                    <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
+                                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                    </a>
+                                    <br />
+                                    <span class="text-center">
+                                        @item.Name
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                <h2>Logged Out</h2>
+                @{
+                    // Logged Out first
+                    foreach (var item in Model.StudentList)
+                    {
+                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                        {
+                            <div class="col-sm-2">
+                                <div class="PortalBox text-center">
+                                    <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
+                                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                    </a>
+                                    <br />
+                                    <span class="text-center">
+                                        @item.Name
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        }
+    }
 
 </div>
+
 
