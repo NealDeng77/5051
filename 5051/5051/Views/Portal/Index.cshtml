@@ -5,51 +5,71 @@
     ViewBag.Title = "Student Portal";
 }
 
-<h2>@Model.Name Welcome to your Student Portal</h2>
+<h2>Welcome to your Student Portal</h2>
+<br />
 
+<h3>
+    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" class="AvatarSize0" />
+    @Model.Name, good to see you back.
+</h3>
+
+<br />
+<h4>You are now at Level @Model.AvatarLevel</h4>
+<h4>You have @Model.Tokens Tokens in the Bank</h4>
+
+<br />
+<hr />
 <div class="row text-center">
     <div class="col-sm-12">
         <div class="row text-center">
+
             <div class="col-sm-4">
-                <a href="~/Portal/Report/@Model.Id">
-                    <img src="~/Content/img/PortalReports.png" class="PortalImage"/>
+                <div class="PortalBox">
+                    <a href="~/Portal/Report/@Model.Id">
+                        <img src="~/Content/img/PortalReport.jpg" alt="Reports" class="PortalImage" />
+                    </a>
                     <br />
                     <span>Reports</span>
-                </a>
+                </div>
             </div>
 
             <div class="col-sm-4">
-                <a href="~/Portal/House/@Model.Id">
-                    <img src="~/Content/img/PortalHouse.png" class="PortalImage"/>
+                <div class="PortalBox">
+                    <a href="~/Portal/House/@Model.Id">
+                        <img src="~/Content/img/PortalHouse.png" alt="House" class="PortalImage" />
+                    </a>
                     <br />
                     <span>House</span>
-                </a>
+                </div>
             </div>
 
             <div class="col-sm-4">
-                <a href="~/Shop/Index/@Model.Id">
-                    <img src="~/Content/img/PortalStore.png" class="PortalImage"/>
+                <div class="PortalBox">
+                    <a href="~/Shop/Index/@Model.Id">
+                        <img src="~/Content/img/PortalStore.png" alt="Store" class="PortalImage" />
+                    </a>
                     <br />
                     <span>Store</span>
-                </a>
+                </div>
             </div>
 
-            <div class="row text-center">
-
-                <div class="col-sm-4">
+            <div class="col-sm-4">
+                <div class="PortalBox">
                     <a href="~/Portal/Settings/@Model.Id">
-                        <img src="~/Content/img/@Model.AvatarUri" class="PortalImage"/>
-                        <br />
-                        <span>Customize</span>
+                        <img src="~/Content/img/@Model.AvatarUri" alt="Customize" class="PortalImage" />
                     </a>
+                    <br />
+                    <span>Customize</span>
                 </div>
+            </div>
 
-                <div class="col-sm-4">
+            <div class="col-sm-4">
+                <div class="PortalBox">
                     <a href="~/Portal/Avatar/@Model.Id">
-                        <img src="~/Content/img/PortalAvatars.png" class="PortalImage"/>
-                        <br />
-                        <span>Avatars</span>
+                        <img src="~/Content/img/PortalAvatars.png" alt="Choose Avatars" class="PortalImage" />
                     </a>
+                    <br />
+                    <span>Avatars</span>
                 </div>
             </div>
         </div>
