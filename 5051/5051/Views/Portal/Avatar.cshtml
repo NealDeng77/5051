@@ -42,9 +42,11 @@
                     for (var myList = 1; myList <= Model.MaxLevel; myList++)
                     {
                         var disabledOn = "";
+                        var avatarBoxHover = "AvatarBox";
                         if (Model.Student.AvatarLevel < myList)
                         {
                             disabledOn = "disabled";
+                            avatarBoxHover = "";    //don't show the hover effect
                         }
 
                         <br />
@@ -72,12 +74,14 @@
                                             var picturURI = "/Content/img/" + outputAvatar.Uri;
 
                                             <div class="col-sm-2 text-center">
-                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" class="AvatarSize1" @disabledOn/>
-                                                <br />
-                                                <span class="text-center">
-                                                    @outputAvatar.Name
+                                                <div class="@avatarBoxHover">
+                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" class="AvatarSize1" @disabledOn />
                                                     <br />
-                                                </span>
+                                                    <span class="text-center">
+                                                        @outputAvatar.Name
+                                                        <br />
+                                                    </span>
+                                                </div>
                                             </div>
                                         }
                                     }
