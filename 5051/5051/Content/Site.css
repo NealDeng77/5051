@@ -29,10 +29,14 @@ textarea {
     float: none;
 }
 
-
 .PortalBox{
     width:200px;
     height:200px;
+}
+
+.PortalImage{
+    width:150px;
+    height:150px;
 }
 
 .AvatarSize1 {
@@ -44,3 +48,4 @@ textarea {
     width: 150px;
     height: 150px;
 }
+
