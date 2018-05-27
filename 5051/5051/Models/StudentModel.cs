@@ -167,6 +167,12 @@ namespace _5051.Models
         /// <param name="data">The Student Model to create</param>
         public StudentDisplayViewModel(StudentModel data)
         {
+            if (data == null)
+            {
+                // Nothing to convert
+                return;
+            }
+
             Id = data.Id;
             Name = data.Name;
             Tokens = data.Tokens;
