@@ -1,0 +1,28 @@
+﻿@model _5051.Models.StudentDisplayViewModel
+
+@{
+    ViewBag.Title = "Logged In";
+}
+
+<br />
+<h1>@Model.LastDateTime.ToShortDateString() @Model.LastDateTime.ToShortTimeString()</h1>
+
+<br />
+<br />
+
+<h2>
+    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" class="AvatarSize0" />
+    @Model.Name, you are now logged in and accumulating experience.
+</h2>
+
+<br />
+<br />
+
+<h2>Exciting !</h2>
+
+<br />
+<br />
+
+<h4>The page will auto refresh, or click Done</h4>
+@Html.ActionLink("Done", "Index", null, new { @class = "btn btn-success" })
+

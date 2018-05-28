@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
+using System;
 
 namespace _5051.Controllers
 {
@@ -32,27 +29,79 @@ namespace _5051.Controllers
         }
 
         // GET: Kiosk/SetLogout/5
+        /// <summary>
+        /// Manages the Login action, toggles the state
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
         public ActionResult SetLogin(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Error","Home","Invalid Data");
+                return RedirectToAction("Error", "Home");
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
         }
 
         // GET: Kiosk/SetLogout/5
+        /// <summary>
+        /// Manages the logout action, toggles the state
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
         public ActionResult SetLogout(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Error", "Home", "Invalid Data");
+                return RedirectToAction("Error", "Home");
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("ConfirmLogout","Kiosk", new { id });
+        }
+
+        /// <summary>
+        /// Shows the login confirmation screen
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult ConfirmLogin(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myDataList = StudentBackend.Read(id);
+            var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+            //Todo, replace with actual transition time
+            StudentViewModel.LastDateTime = DateTime.Now;
+
+            return View(StudentViewModel);
+        }
+
+        /// <summary>
+        /// Shows the login confirmation screen
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult ConfirmLogout(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myDataList = StudentBackend.Read(id);
+            var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+            //Todo, replace with actual transition time
+            StudentViewModel.LastDateTime = DateTime.Now;
+
+            return View(StudentViewModel);
         }
     }
 }

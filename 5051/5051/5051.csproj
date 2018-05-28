@@ -354,6 +354,8 @@
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
     <Content Include="Views\Portal\Roster.cshtml" />
+    <Content Include="Views\Kiosk\ConfirmLogout.cshtml" />
+    <Content Include="Views\Kiosk\ConfirmLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

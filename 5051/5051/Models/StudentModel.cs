@@ -177,6 +177,12 @@ namespace _5051.Models
         public string AvatarDescription { get; set; }
 
         /// <summary>
+        /// DateTime of last transaction recorded, used for login and logout
+        /// </summary>
+        [Display(Name = "Date", Description = "Date and Time")]
+        public DateTime LastDateTime { get; set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public StudentDisplayViewModel() { }
