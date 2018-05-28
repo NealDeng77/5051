@@ -23,6 +23,14 @@
 <br />
 <br />
 
-<h4>The page will auto refresh, or click Done</h4>
-@Html.ActionLink("Done", "Index", null, new { @class = "btn btn-success" })
+<h4>The page will auto refresh, or click 
+@Html.ActionLink("Done", "Index", null, new { @class = "btn btn-primary" })
+</h4>
 
+<script>
+      window.setTimeout(function(){
+        // Move to a new location or you can do something else
+        window.location.href = "../../Kiosk/Index";
+    }, 3000);
+
+</script>
