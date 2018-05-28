@@ -40,6 +40,7 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Password)
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
@@ -84,10 +85,20 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.ExperiencePoints)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.EditorFor(m => m.ExperiencePoints)
+                                @Html.ValidationMessageFor(m => m.ExperiencePoints)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Status)
                             </div>
                             <div class="col-sm-2">
-                                @Html.EnumDropDownListFor(x => x.Status,"Select Status")
+                                @Html.EnumDropDownListFor(x => x.Status, "Select Status")
                                 @Html.ValidationMessageFor(m => m.Status)
                             </div>
                         </div>

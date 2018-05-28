@@ -136,6 +136,9 @@ namespace _5051.Controllers
                                         "AvatarLevel,"+
                                         "Tokens,"+
                                         "Status,"+
+                                        "ExperiencePoints,"+
+                                        "Password,"+
+
                                         "")] StudentDisplayViewModel data)
         {
             if (!ModelState.IsValid)

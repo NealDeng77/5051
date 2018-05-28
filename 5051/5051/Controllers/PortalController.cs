@@ -62,6 +62,8 @@ namespace _5051.Controllers
                                         "Tokens,"+
                                         "Status,"+
                                         "Password,"+
+                                        "ExperiencePoints,"+
+                                        "Password,"+
                                         "")] StudentDisplayViewModel data)
         {
             // Any password is accepted for now. does not really login...
@@ -287,6 +289,9 @@ namespace _5051.Controllers
                                         "Tokens,"+
                                         "Status,"+
                                         "AvatarUri,"+
+                                        "ExperiencePoints,"+
+                                        "Password,"+
+
                                         "")] StudentDisplayViewModel data)
         {
             // If data passed up is not valid, go back to the Index page so the user can try again
