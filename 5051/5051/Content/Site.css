@@ -97,3 +97,8 @@ textarea {
     margin: 0 auto;
     display: inline-block;
 }
+
+.table-fit{
+    white-space: nowrap;
+    width: 1%;
+}
