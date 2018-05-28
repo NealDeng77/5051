@@ -241,6 +241,8 @@
     <Content Include="Content\img\CalendarEditIcon.png" />
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\EditPicture.png" />
+    <Content Include="Content\img\HomeArrange.jpg" />
+    <Content Include="Content\img\HomeExample.jpg" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -257,6 +259,7 @@
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
     <Content Include="Content\img\Store.png" />
+    <Content Include="Content\img\StoreExample.jpg" />
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
     <Content Include="Content\img\StudentProfileBio.png" />
