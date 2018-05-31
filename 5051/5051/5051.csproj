@@ -215,6 +215,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
+    <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
     <Compile Include="Models\ShopInventoryViewModel.cs" />
     <Compile Include="Models\ShopInventoryModel.cs" />
     <Compile Include="Models\AvatarModel.cs" />
@@ -268,6 +269,15 @@
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
     <Content Include="Content\img\StudentProfileBio.png" />
+    <Content Include="Content\shop\guitar.png" />
+    <Content Include="Content\shop\headphone.png" />
+    <Content Include="Content\shop\moviecamera.png" />
+    <Content Include="Content\shop\radio.png" />
+    <Content Include="Content\shop\saxophone.png" />
+    <Content Include="Content\shop\telephone.png" />
+    <Content Include="Content\shop\television.png" />
+    <Content Include="Content\shop\trumpet.png" />
+    <Content Include="Content\shop\violin.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -369,7 +379,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\shop\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
