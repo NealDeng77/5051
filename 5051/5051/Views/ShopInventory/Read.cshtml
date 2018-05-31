@@ -4,7 +4,6 @@
     ViewBag.Title = "Read";
 }
 
-
 <div class="container">
     <div class="row">
 
@@ -13,7 +12,6 @@
             {
                 <p>No ShopInventory</p>
             }
-
             else
             {
                 <div class="row">
@@ -65,10 +63,20 @@
 
                     <div class="row">
                         <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Level)
+                            @Html.DisplayNameFor(m => m.Tokens)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.Level)
+                            @Html.DisplayFor(m => m.Tokens)
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Category)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Category)
                         </div>
                     </div>
 
@@ -83,12 +91,8 @@
                             @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
-
-
-
                 </div>
             }
-
         }
     </div>
 </div>
