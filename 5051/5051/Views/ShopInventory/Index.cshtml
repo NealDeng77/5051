@@ -27,12 +27,13 @@
                     <div class="col-sm-2">
                         <div class="ShopInventoryBox">
                             <a id="@item.Id" href="~/ShopInventory/Read/@item.Id">
-                                <img src="~/Content/img/@item.Uri" class="ShopInventorySize1" />
+                                <img src="~/Content/shop/@item.Uri" class="ShopInventorySize1" />
                             </a>
                             <br />
                             <span>
                                 @item.Name
                                 <br />
+                                @item.Tokens Tokens
                                 <br />
                                 <br />
                             </span>
@@ -47,7 +48,7 @@
     <br />
     <div class="row text-center">
         <div class="col-sm-2">
-            @Html.ActionLink("Create New ShopInventory", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New Item", "Create", null, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>
