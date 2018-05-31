@@ -163,6 +163,7 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
             if (!ModelState.IsValid)
