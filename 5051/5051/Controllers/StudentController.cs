@@ -73,6 +73,9 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "AvatarId,"+
                                         "Status,"+
+                                        "Tokens,"+
+                                        "ExperiencePoints,"+
+                                        "AvatarLevel,"+
                                         "")] StudentModel data)
         {
             if (!ModelState.IsValid)
@@ -138,7 +141,7 @@ namespace _5051.Controllers
                                         "Status,"+
                                         "ExperiencePoints,"+
                                         "Password,"+
-
+                                        "Tokens,"+
                                         "")] StudentDisplayViewModel data)
         {
             if (!ModelState.IsValid)
@@ -201,6 +204,10 @@ namespace _5051.Controllers
                                         "Description,"+
                                         "AvatarId,"+
                                         "Uri,"+
+                                        "Status,"+
+                                        "Tokens,"+
+                                        "ExperiencePoints,"+
+                                        "AvatarLevel,"+
                                         "")] StudentDisplayViewModel data)
         {
             if (!ModelState.IsValid)
