@@ -4,16 +4,13 @@
     ViewBag.Title = "Update";
 }
 
-
 <div class="container">
     <div class="row">
-
         @{
             if (Model == null)
             {
                 <p>No ShopInventory</p>
             }
-
             else
             {
                 <div class="row">
@@ -73,11 +70,22 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.Level)
+                                @Html.DisplayNameFor(m => m.Tokens)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.Level)
-                                @Html.ValidationMessageFor(m => m.Level)
+                                @Html.EditorFor(m => m.Tokens)
+                                @Html.ValidationMessageFor(m => m.Tokens)
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Category)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.Category)
+                                @Html.ValidationMessageFor(m => m.Category)
                             </div>
                         </div>
 
@@ -93,11 +101,8 @@
                         </div>
 
                     }
-
-
                 </div>
             }
-
         }
     </div>
 </div>
