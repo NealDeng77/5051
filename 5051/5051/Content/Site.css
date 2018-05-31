@@ -102,3 +102,21 @@ textarea {
     white-space: nowrap;
     width: 2%;
 }
+
+.AvatarBox {
+}
+
+    .ShopInventoryBox:hover {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+    }
+
+.ShopInventorySize1 {
+    width: 75px;
+    height: 75px;
+}
+
+.ShopInventorySize2 {
+    width: 150px;
+    height: 150px;
+}

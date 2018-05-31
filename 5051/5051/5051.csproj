@@ -189,6 +189,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\ShopInventoryBackend.cs" />
+    <Compile Include="Backend\ShopInventoryDataSourceMock.cs" />
+    <Compile Include="Backend\ShopInventoryInterface.cs" />
     <Compile Include="Backend\DataSourceBackend.cs" />
     <Compile Include="Backend\StudentInterface.cs" />
     <Compile Include="Backend\StudentDataSourceMock.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Backend\AvatarInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ShopInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -211,6 +215,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
+    <Compile Include="Models\ShopInventoryViewModel.cs" />
+    <Compile Include="Models\ShopInventoryModel.cs" />
     <Compile Include="Models\AvatarModel.cs" />
     <Compile Include="Models\Enums\StudentStatusEnum.cs" />
     <Compile Include="Models\Enums\DataSourceEnum.cs" />
@@ -355,6 +361,11 @@
     <Content Include="Views\Portal\Roster.cshtml" />
     <Content Include="Views\Kiosk\ConfirmLogout.cshtml" />
     <Content Include="Views\Kiosk\ConfirmLogin.cshtml" />
+    <Content Include="Views\ShopInventory\Create.cshtml" />
+    <Content Include="Views\ShopInventory\Delete.cshtml" />
+    <Content Include="Views\ShopInventory\Index.cshtml" />
+    <Content Include="Views\ShopInventory\Read.cshtml" />
+    <Content Include="Views\ShopInventory\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
