@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
 using _5051.Models;
 using _5051.Backend;
 
@@ -24,6 +25,12 @@ namespace _5051.Controllers
         {
             // Load the list of data into the AvatarList
             avatarViewModel.AvatarList = avatarBackend.Index();
+
+            if (avatarViewModel.AvatarList != null)
+            {
+                avatarViewModel.AvatarList = avatarViewModel.AvatarList.OrderBy(m => m.Level).ToList();
+            }
+
             return View(avatarViewModel);
         }
 
