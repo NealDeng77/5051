@@ -61,13 +61,14 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">ShopInventory Name</param>
         /// <param name="description">ShopInventory Description</param>
-        public ShopInventoryModel(string uri, string name, string description, int tokens)
+        public ShopInventoryModel(string uri, string name, string description, ShopInventoryCategoryEnum category, int tokens)
         {
             Initialize();
 
             Uri = uri;
             Name = name;
             Description = description;
+            Category = category;
             Tokens = tokens;
         }
 
