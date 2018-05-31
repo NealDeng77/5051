@@ -5,29 +5,21 @@
 }
 
 
-<div class="container">
+<div class="">
     <div class="row">
         <h2>Click on your Avatar to Check In or Out of Class</h2>
     </div>
-    <br />
-    <br />
 
     <div class="row">
-        <div class="col-sm-4">
-            <canvas id="canvas" width="175" height="175" style="background-color:#333"></canvas>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="row">
-                <h1>
-                    <span id="FullDate"></span>
-                    <br />
-                    <br />
-                    <span id="FullTime"></span>
-                </h1>
-            </div>
+        <div class="col-sm-12">
+            <span id="FullDate" class="h2"></span>
+            <br />
+            <canvas id="canvas" width="90" height="90" style="background-color:#333"></canvas>
+            <br />
+            <span id="FullTime" class="h2"></span>
         </div>
     </div>
+
     <script>
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -111,7 +103,7 @@
             var month = d.getMonth() + 1;
             var day = d.getDate();
 
-            var fullDate = 
+            var fullDate =
                 (('' + month).length < 2 ? '0' : '') + month + ' / ' +
                 (('' + day).length < 2 ? '0' : '') + day;
 
@@ -137,10 +129,7 @@
         }
     </script>
 
-
     <br />
-    <br />
-
     @{
         if (Model.StudentList == null || !Model.StudentList.Any())
         {
@@ -150,58 +139,60 @@
         }
         else
         {
-            // List out the Logged IN Students, then the Logged Out students
-
             <div class="row">
-                <h2>Logged In</h2>
+                <div class="col-sm-6">
 
-                @{
-                    // Logged IN first
-                    foreach (var item in Model.StudentList)
-                    {
-                        if (item.Status == _5051.Models.StudentStatusEnum.In)
-                        {
-                            <div class="col-sm-2">
-                                <div class="AvatarBox text-center">
-                                    <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
-                                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                    </a>
-                                    <br />
-                                    <span class="text-center">
-                                        @item.Name
-                                    </span>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <h2>Logged In</h2>
+                        @{
+                            // List out the Logged IN Students, then the Logged Out students
+                            // Logged IN first
+                            foreach (var item in Model.StudentList)
+                            {
+                                if (item.Status == _5051.Models.StudentStatusEnum.In)
+                                {
+                                    <div class="col-sm-2 NoPadding">
+                                        <div class="AvatarOuterBox AvatarBox text-center">
+                                            <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
+                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                            </a>
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         }
-                    }
-                }
-            </div>
+                    </div>
+                </div>
 
-            <br />
-            <br />
-            <br />
-            <div class="row">
-                <h2>Logged Out</h2>
-                @{
-                    // Logged Out first
-                    foreach (var item in Model.StudentList)
-                    {
-                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                        {
-                            <div class="col-sm-2">
-                                <div class="PortalBox text-center">
-                                    <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
-                                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                    </a>
-                                    <br />
-                                    <span class="text-center">
-                                        @item.Name
-                                    </span>
-                                </div>
-                            </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <h2>Logged Out</h2>
+                        @{
+                            // Logged Out first
+                            foreach (var item in Model.StudentList)
+                            {
+                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                {
+                                    <div class="col-sm-2 NoPadding">
+                                        <div class="AvatarOuterBox AvatarBox text-center">
+                                            <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
+                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                            </a>
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         }
-                    }
-                }
+                    </div>
+                </div>
             </div>
         }
     }

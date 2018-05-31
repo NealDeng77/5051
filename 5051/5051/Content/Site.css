@@ -29,6 +29,15 @@ textarea {
     float: none;
 }
 
+.NoPadding {
+    padding: 0;
+}
+
+.AvatarOuterBox {
+    width: 100px;
+    height: 100px;
+}
+
 .PortalBox{
     width:200px;
     height:200px;
@@ -81,7 +90,6 @@ textarea {
         color: #ffffff;
         background-color: transparent;
     }
-
 
 .body-content {
     padding: 0;
