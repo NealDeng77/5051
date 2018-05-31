@@ -63,7 +63,8 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "Level,"+
+                                        "Tokens,"+
+                                        "Category,"+
                                         "")] ShopInventoryModel data)
         {
             if (!ModelState.IsValid)
@@ -113,7 +114,8 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "Level,"+
+                                        "Tokens,"+
+                                        "Category,"+
                                         "")] ShopInventoryModel data)
         {
             if (!ModelState.IsValid)
@@ -163,6 +165,8 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Tokens,"+
+                                        "Category,"+
                                         "")] ShopInventoryModel data)
         {
             if (!ModelState.IsValid)
