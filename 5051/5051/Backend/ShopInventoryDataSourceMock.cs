@@ -150,8 +150,8 @@ namespace _5051.Backend
             Create(new ShopInventoryModel("trumpet.png", "Trumpet", "Love the Horn", ShopInventoryCategoryEnum.Music,10));
             Create(new ShopInventoryModel("violin.png", "Violin", "Sweet Melody", ShopInventoryCategoryEnum.Music,10));
 
-            Create(new ShopInventoryModel("radio.png", "radio", "Play some Tunes", ShopInventoryCategoryEnum.Entertainment,10));
-            Create(new ShopInventoryModel("telephone.png", "televion", "Talking with my buds", ShopInventoryCategoryEnum.Entertainment,10));
+            Create(new ShopInventoryModel("radio.png", "Radio", "Play some Tunes", ShopInventoryCategoryEnum.Entertainment,10));
+            Create(new ShopInventoryModel("telephone.png", "Telephone", "Talking with my buds", ShopInventoryCategoryEnum.Entertainment,10));
             Create(new ShopInventoryModel("television.png", "Television", "I love lucy again?", ShopInventoryCategoryEnum.Entertainment,10));
             Create(new ShopInventoryModel("headphone.png", "Headphone", "Just relazing", ShopInventoryCategoryEnum.Entertainment,10));
             Create(new ShopInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", ShopInventoryCategoryEnum.Entertainment,10));
