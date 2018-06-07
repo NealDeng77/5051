@@ -18,6 +18,8 @@
 <h4>You have @Model.Tokens Tokens in the Bank</h4>
 
 @{
+    <br />
+    <h4>Current Status is @Model.Status</h4>
     if (Model.Attendance == null || !Model.Attendance.Any())
     {
         //skip
