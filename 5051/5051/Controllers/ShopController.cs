@@ -124,12 +124,22 @@ namespace _5051.Controllers
                 return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
             }
 
+            // Check to see if the student already has the item.  If so, don't buy again, only 1 item per student
+            var ItemAlreadyExists = myStudent.Inventory.Find(m => m.Id == myItem.Id);
+            if (ItemAlreadyExists != null)
+            {
+                // Already own it.
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            // Time to buy !
+
             // Reduce the Student Tokens by Item Price
             myStudent.Tokens -= myItem.Tokens;
 
             // Add Item to Student Inventory
             // TODO:  Mike, add inventory to Students...
-            //myStudent.Inventory.Add(myItem);
+            myStudent.Inventory.Add(myItem);
 
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);

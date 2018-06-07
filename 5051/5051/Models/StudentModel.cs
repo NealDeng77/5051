@@ -73,6 +73,11 @@ namespace _5051.Models
         public string Password{ get; set; }
 
         /// <summary>
+        /// The inventory list for the student
+        /// </summary>
+        public List<ShopInventoryModel> Inventory { get; set; }
+
+        /// <summary>
         /// The defaults for a new student
         /// </summary>
         public void Initialize()
@@ -83,6 +88,7 @@ namespace _5051.Models
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
             Password = string.Empty;
+            Inventory = new List<ShopInventoryModel>();
         }
 
         /// <summary>
@@ -127,6 +133,7 @@ namespace _5051.Models
             Status = data.Status;
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
+            Inventory = data.Inventory;
         }
 
         /// <summary>
@@ -148,6 +155,7 @@ namespace _5051.Models
             Status = data.Status;
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
+            Inventory = data.Inventory;
 
             return true;
         }
@@ -207,6 +215,7 @@ namespace _5051.Models
             Status = data.Status;
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
+            Inventory = data.Inventory;
 
             var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
             if (myDataAvatar == null)
