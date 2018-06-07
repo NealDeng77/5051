@@ -83,7 +83,7 @@ namespace _5051.Models
         public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
-            Tokens = 0;
+            Tokens = 10;
             AvatarLevel = 1;
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
