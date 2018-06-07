@@ -125,8 +125,8 @@ namespace _5051.Controllers
             }
 
             // Check to see if the student already has the item.  If so, don't buy again, only 1 item per student
-            var ItemAlreadyExists = myStudent.Inventory.Find(m => m.Id == myItem.Id);
-            if (ItemAlreadyExists != null)
+            var ItemAlreadyExists = myStudent.Inventory.Exists(m => m.Id == myItem.Id);
+            if (ItemAlreadyExists)
             {
                 // Already own it.
                 return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
