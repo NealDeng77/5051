@@ -1,4 +1,4 @@
-﻿
+﻿@model _5051.Models.StudentModel
 @{
     ViewBag.Title = "Shop";
 }
@@ -17,15 +17,15 @@
 
 
 
-@Html.ActionLink("Discounts", "Discounts", "Shop", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Discounts", "Discounts", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 <br />
 <br />
-@Html.ActionLink("Special Items", "Specials", "Shop", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Special Items", "Specials", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 <br />
 <br />
-@Html.ActionLink("Buy", "Buy", "Shop", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Buy", "Buy", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 <br />
 <br />

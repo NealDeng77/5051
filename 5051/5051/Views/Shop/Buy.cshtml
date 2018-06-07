@@ -1,16 +1,111 @@
-﻿
+﻿@model _5051.Models.SelectedShopInventoryForStudentViewModel
 @{
-    ViewBag.Title = "Shop Buy";
+    ViewBag.Title = "Shop Inventory";
+
+    if (Model == null || Model.Student == null || Model.ShopInventoryCategoryList == null || !Model.ShopInventoryCategoryList.Any())
+    {
+        <h2>No Data to show</h2>
+    }
+
+    else
+    {
+        <div class="row">
+            <h2>See something cool?</h2>
+            <h3>Use your tokens to purchage items</h3>
+            <br />
+
+            Tokens Available: @Model.Student.Tokens
+            <hr />
+        </div>
+
+        var disabledOn = "";
+        var avatarBoxHover = "AvatarBox";
+        var ActiveTab = "";
+        var TabCount = 0;
+
+        <div class="row">
+            <ul class="nav nav-tabs">
+                @{
+                    TabCount = 0;
+                    foreach (var CurrentList in Model.ShopInventoryCategoryList)
+                    {
+                        ActiveTab = "";
+
+                        if (CurrentList == null)
+                        {
+                            continue;
+                        }
+
+                        TabCount++;
+                        if (TabCount == 1)
+                        {
+                            ActiveTab = "active";
+                        }
+
+                        <li class="@ActiveTab"><a data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category</a></li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="tab-content">
+            @{
+                TabCount = 0;
+                foreach (var CurrentList in Model.ShopInventoryCategoryList)
+                {
+                    ActiveTab = "";
+                    if (CurrentList == null)
+                    {
+                        continue;
+                    }
+
+                    TabCount++;
+                    if (TabCount == 1)
+                    {
+                        ActiveTab = "active";
+                    }
+
+                    <div id="@CurrentList.Category" class="tab-pane fade in @ActiveTab">
+                        <h3>@CurrentList.Category</h3>
+                        @{
+                            // If no items, the skip
+                            if (!CurrentList.ShopInventoryList.Any())
+                            {
+                                <div>No Items</div>
+                                continue;
+                            }
+
+                            //AvatarViewModel outputAvatar = new AvatarViewModel();
+                            foreach (var item in CurrentList.ShopInventoryList)
+                            {
+
+                                // Check if the user owns the item, if so disable it.
+                                // disabledOn = "disabled";
+                                // avatarBoxHover = "";    //don't show the hover effect
+
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.Student.Id);
+
+                                    var picturURI = "/Content/shop/" + item.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="@avatarBoxHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                                <br />
+                                                @item.Tokens
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+    }
 }
-
-<h2>Here you can buy items at the Shop</h2>
-
-
-<h3>Pick an item to purchange</h3>
-
-<br />
-
-<img src="~/Content/img/StoreExample.jpg" />
-
-<br />
-<br />

@@ -14,31 +14,22 @@ namespace _5051.Models
         /// The List of ShopInventorys
         /// </summary>
         public List<ShopInventoryModel> ShopInventoryList = new List<ShopInventoryModel>();
-        public int ListLevel;
+        public ShopInventoryCategoryEnum Category = ShopInventoryCategoryEnum.Unknown;
     }
 
     /// <summary>
-    /// Adds a list of ShopInventory Lists per Level, making it easier to select
+    /// Adds a list of ShopInventory Lists per Category, making it easier to select
     /// </summary>
-    public class ShopInventoryListViewModel : ShopInventoryViewModel
+    public class ShopInventoryListViewModel
     {
-        public List<ShopInventoryViewModel> ShopInventoryLevelList;
-        public int MaxLevel;
-    }
-
-    /// <summary>
-    /// Returns the selected ShopInventory and the ShopInventory List
-    /// </summary>
-    public class SelectedShopInventoryViewModel : ShopInventoryListViewModel
-    {
-        public ShopInventoryModel SelectedShopInventory;
+        public List<ShopInventoryViewModel> ShopInventoryCategoryList = new List<ShopInventoryViewModel>();
     }
 
     /// <summary>
     /// Adds the Student Information to the View Model for the ShopInventorys availble for the student to select
     /// </summary>
-    public class SelectedShopInventoryForStudentViewModel : SelectedShopInventoryViewModel
+    public class SelectedShopInventoryForStudentViewModel : ShopInventoryListViewModel
     {
-        public StudentModel Student;
+        public StudentModel Student = new StudentModel();
     }
 }
