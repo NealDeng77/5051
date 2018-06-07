@@ -22,6 +22,7 @@
         var BoxHover = "BoxWithHighlightHover";
         var ActiveTab = "";
         var TabCount = 0;
+        var DisplayText = "";
 
         <div class="row">
             <ul class="nav nav-tabs">
@@ -86,6 +87,7 @@
 
                             disabledOn = "";
                             BoxHover = "BoxWithHighlightHover";
+                            DisplayText = "";
 
                             // Check if the user owns the item, if so disable it.
                             var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
@@ -94,6 +96,8 @@
                                 // Already own it.
                                 disabledOn = "disabled";
                                 BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                DisplayText = "Purchaged";
+                                
                             }
 
                             <div class="col-sm-2 text-center">
@@ -104,6 +108,8 @@
                                         @item.Name
                                         <br />
                                         @item.Tokens
+                                        <br />
+                                        @DisplayText
                                     </span>
                                 </div>
                             </div>
