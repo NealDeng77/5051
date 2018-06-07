@@ -53,13 +53,19 @@ textarea {
     height:150px;
 }
 
-.AvatarBox {
+.BoxWithHighlightHover {
 }
 
-    .AvatarBox:hover {
+    .BoxWithHighlightHover:hover {
         opacity: 0.3;
         filter: alpha(opacity=30);
     }
+
+
+.BoxWithHighlightHoverOff {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
 
 .AvatarSize1 {
     width: 75px;

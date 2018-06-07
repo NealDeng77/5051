@@ -19,7 +19,7 @@
         </div>
 
         var disabledOn = "";
-        var avatarBoxHover = "AvatarBox";
+        var BoxHover = "BoxWithHighlightHover";
         var ActiveTab = "";
         var TabCount = 0;
 
@@ -77,21 +77,27 @@
                     //AvatarViewModel outputAvatar = new AvatarViewModel();
                     foreach (var item in CurrentList.ShopInventoryList)
                     {
-
-                        // Check if the user owns the item, if so disable it.
-                        // disabledOn = "disabled";
-                        // avatarBoxHover = "";    //don't show the hover effect
-
                         using (Html.BeginForm())
                         {
-                            //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.Student.Id);
                             @Html.Hidden("ItemId", item.Id);
 
                             var picturURI = "/Content/shop/" + item.Uri;
 
+                            disabledOn = "";
+                            BoxHover = "BoxWithHighlightHover";
+
+                            // Check if the user owns the item, if so disable it.
+                            var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
+                            if (ItemAlreadyExists)
+                            {
+                                // Already own it.
+                                disabledOn = "disabled";
+                                BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                            }
+
                             <div class="col-sm-2 text-center">
-                                <div class="@avatarBoxHover">
+                                <div class="@BoxHover">
                                     <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
                                     <br />
                                     <span class="text-center">
