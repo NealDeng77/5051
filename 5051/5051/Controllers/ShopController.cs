@@ -70,6 +70,72 @@ namespace _5051.Controllers
 
             return View(myData);
         }
+        [HttpPost]
+        public ActionResult Buy([Bind(Include=
+                                        "StudentId,"+
+                                        "ItemId,"+
+                                        "")] ShopBuyViewModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.ItemId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Student
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            if (myStudent == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Item
+            var myItem = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+            if (myItem == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            // Check the Student Token amount, If not enough, return error
+            if (myStudent.Tokens < myItem.Tokens)
+            {
+                // Not enough money...
+                // Send back for Edit
+                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            }
+
+            // Reduce the Student Tokens by Item Price
+            myStudent.Tokens -= myItem.Tokens;
+
+            // Add Item to Student Inventory
+            // TODO:  Mike, add inventory to Students...
+            //myStudent.Inventory.Add(myItem);
+
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+        }
 
         /// <summary>
         /// Things on sale at the store

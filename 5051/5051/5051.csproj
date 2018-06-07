@@ -216,6 +216,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
+    <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\ShopInventoryViewModel.cs" />
     <Compile Include="Models\ShopInventoryModel.cs" />
     <Compile Include="Models\AvatarModel.cs" />

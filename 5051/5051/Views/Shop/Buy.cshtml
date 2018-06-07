@@ -64,46 +64,47 @@
                         ActiveTab = "active";
                     }
 
-                    <div id="@CurrentList.Category" class="tab-pane fade in @ActiveTab">
-                        <h3>@CurrentList.Category</h3>
-                        @{
-                            // If no items, the skip
-                            if (!CurrentList.ShopInventoryList.Any())
-                            {
-                                <div>No Items</div>
-                                continue;
-                            }
+            <div id="@CurrentList.Category" class="tab-pane fade in @ActiveTab">
+                <h3>@CurrentList.Category</h3>
+                @{
+                    // If no items, the skip
+                    if (!CurrentList.ShopInventoryList.Any())
+                    {
+                        <div>No Items</div>
+                        continue;
+                    }
 
-                            //AvatarViewModel outputAvatar = new AvatarViewModel();
-                            foreach (var item in CurrentList.ShopInventoryList)
-                            {
+                    //AvatarViewModel outputAvatar = new AvatarViewModel();
+                    foreach (var item in CurrentList.ShopInventoryList)
+                    {
 
-                                // Check if the user owns the item, if so disable it.
-                                // disabledOn = "disabled";
-                                // avatarBoxHover = "";    //don't show the hover effect
+                        // Check if the user owns the item, if so disable it.
+                        // disabledOn = "disabled";
+                        // avatarBoxHover = "";    //don't show the hover effect
 
-                                using (Html.BeginForm())
-                                {
-                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                                    @Html.Hidden("StudentId", Model.Student.Id);
+                        using (Html.BeginForm())
+                        {
+                            //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                            @Html.Hidden("StudentId", Model.Student.Id);
+                            @Html.Hidden("ItemId", item.Id);
 
-                                    var picturURI = "/Content/shop/" + item.Uri;
+                            var picturURI = "/Content/shop/" + item.Uri;
 
-                                    <div class="col-sm-2 text-center">
-                                        <div class="@avatarBoxHover">
-                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
-                                            <br />
-                                            <span class="text-center">
-                                                @item.Name
-                                                <br />
-                                                @item.Tokens
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
-                            }
+                            <div class="col-sm-2 text-center">
+                                <div class="@avatarBoxHover">
+                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                    <br />
+                                    <span class="text-center">
+                                        @item.Name
+                                        <br />
+                                        @item.Tokens
+                                    </span>
+                                </div>
+                            </div>
                         }
-                    </div>
+                    }
+                }
+            </div>
                 }
             }
         </div>
