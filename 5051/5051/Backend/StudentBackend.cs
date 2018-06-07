@@ -231,10 +231,19 @@ namespace _5051.Backend
 
             }
 
+            // Update the Attendance Log, to track when the student logged out.
+            var Temp = new AttendanceModel
+            {
+                Time = DateTime.UtcNow,
+                Status = data.Status
+                // Todo mike
+                // Don't add duration now, need to calculate it when logout...  
+                // Temp.Duration = 
+            };
+
+            data.Attendance.Add(Temp);
+
             DataSource.Update(data);
-
-            // TODO:  Make call to the Attendance Log, to track when the student logged out.
-
         }
 
         /// <summary>

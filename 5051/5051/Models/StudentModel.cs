@@ -78,6 +78,12 @@ namespace _5051.Models
         public List<ShopInventoryModel> Inventory { get; set; }
 
         /// <summary>
+        /// The Attendance list for the student
+        /// </summary>
+        public List<AttendanceModel> Attendance{ get; set; }
+
+
+        /// <summary>
         /// The defaults for a new student
         /// </summary>
         public void Initialize()
@@ -89,6 +95,7 @@ namespace _5051.Models
             ExperiencePoints = 0;
             Password = string.Empty;
             Inventory = new List<ShopInventoryModel>();
+            Attendance = new List<AttendanceModel>();
         }
 
         /// <summary>
@@ -134,6 +141,7 @@ namespace _5051.Models
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
             Inventory = data.Inventory;
+            Attendance = data.Attendance;
         }
 
         /// <summary>
@@ -156,6 +164,7 @@ namespace _5051.Models
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
             Inventory = data.Inventory;
+            Attendance = data.Attendance;
 
             return true;
         }
@@ -216,6 +225,7 @@ namespace _5051.Models
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
             Inventory = data.Inventory;
+            Attendance = data.Attendance;
 
             var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
             if (myDataAvatar == null)

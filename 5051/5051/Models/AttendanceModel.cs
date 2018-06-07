@@ -10,9 +10,9 @@ namespace _5051.Models
     /// </summary>
     public class AttendanceModel
     {
-        public string StudentId;
-        public DateTime ClockIn;
-        public DateTime ClockOut;
-        public TimeSpan Time;
+        public string StudentId { get; set; }
+        public DateTime Time { get; set; }
+        public StudentStatusEnum Status { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

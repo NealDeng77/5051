@@ -17,6 +17,20 @@
 <h4>You are now at Level @Model.AvatarLevel with a total of @Model.ExperiencePoints Experience Points</h4>
 <h4>You have @Model.Tokens Tokens in the Bank</h4>
 
+@{
+    if (Model.Attendance == null || !Model.Attendance.Any())
+    {
+        //skip
+    }
+    {
+        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.Time).FirstOrDefault();
+        if (LastLoginIn != null)
+        {
+            <h4>You last logged in at: @LastLoginIn.Time.ToShortDateString() @LastLoginIn.Time.ToShortTimeString()</h4>
+        }
+    }
+}
+
 <br />
 <hr />
 <div class="row text-center">
