@@ -25,10 +25,10 @@
         //skip
     }
     {
-        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.Time).FirstOrDefault();
+        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
         if (LastLoginIn != null)
         {
-            <h4>You last logged in at: @LastLoginIn.Time.ToShortDateString() @LastLoginIn.Time.ToShortTimeString()</h4>
+            <h4>You last logged in at: @LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</h4>
         }
     }
 }
