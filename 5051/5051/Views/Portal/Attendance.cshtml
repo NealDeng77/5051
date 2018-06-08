@@ -1,0 +1,80 @@
+﻿@model _5051.Models.StudentDisplayViewModel
+
+@{
+
+    ViewBag.Title = "Student Attendance";
+}
+
+<h2>Welcome to your Attendance History</h2>
+<br />
+
+@{
+    <br />
+    <h4>Current Status is @Model.Status</h4>
+    if (Model.Attendance == null || !Model.Attendance.Any())
+    {
+        //skip
+    }
+    {
+        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
+        if (LastLoginIn != null)
+        {
+            <h4>You last logged in at: @LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</h4>
+        }
+    }
+}
+
+<br />
+<hr />
+<div class="row text-center">
+    <div class="col-sm-12">
+        <div class="row text-center">
+
+            @{
+                foreach (var item in Model.Attendance)
+                {
+                    <div class="col-sm-2" style="border:solid 1px; margin-right:5px">
+                        <div class="BoxWithHighlightHover">
+                            <br />
+                            @item.In.ToShortDateString()<br />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    In<br />
+                                    @item.In.ToShortTimeString()<br />
+                                </div>
+                                <div class="col-sm-6">
+                                    Out<br />
+                                    @{
+                                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                        {
+                                            @item.Out.ToShortTimeString()<br />
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br />
+                                Duration<br />
+                                @{
+                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                    {
+                                        <span>
+                                            @item.Duration.Hours Hours<br />
+                                            @item.Duration.Minutes Minutes<br />
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

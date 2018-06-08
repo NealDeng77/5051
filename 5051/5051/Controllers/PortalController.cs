@@ -121,6 +121,30 @@ namespace _5051.Controllers
         }
 
         /// <summary>
+        /// Attendance Page
+        /// </summary>
+        /// <param name="id">Student Id</param>
+        /// <returns>Student Record as a Student View Model</returns>
+        // GET: Portal
+        public ActionResult Attendance(string id = null)
+        {
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Roster", "Portal");
+            }
+
+            var myReturn = new StudentDisplayViewModel(myStudent);
+            if (myReturn == null)
+            {
+                return RedirectToAction("Roster", "Portal");
+            }
+
+            return View(myReturn);
+        }
+
+
+        /// <summary>
         /// Student's Avatar page
         /// </summary>
         /// <returns></returns>

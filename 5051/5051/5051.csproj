@@ -377,6 +377,7 @@
     <Content Include="Views\ShopInventory\Index.cshtml" />
     <Content Include="Views\ShopInventory\Read.cshtml" />
     <Content Include="Views\ShopInventory\Update.cshtml" />
+    <Content Include="Views\Portal\Attendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
