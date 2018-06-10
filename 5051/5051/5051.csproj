@@ -215,6 +215,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
+    <Compile Include="Models\Enums\AttendanceStatusEnum.cs" />
+    <Compile Include="Models\Enums\CheckOutStatusEnum.cs" />
+    <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
     <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\ShopInventoryViewModel.cs" />
@@ -223,6 +226,7 @@
     <Compile Include="Models\Enums\StudentStatusEnum.cs" />
     <Compile Include="Models\Enums\DataSourceEnum.cs" />
     <Compile Include="Models\StudentAvatarModel.cs" />
+    <Compile Include="Models\StudentReportViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />

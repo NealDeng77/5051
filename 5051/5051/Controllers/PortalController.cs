@@ -366,7 +366,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myReturn = new StudentDisplayViewModel(myStudent);
+            var myReturn = new StudentReportViewModel(myStudent);
             if (myReturn == null)
             {
                 return RedirectToAction("Error", "Home");
