@@ -1,13 +1,23 @@
 ﻿@model _5051.Models.StudentReportViewModel
 @{
     ViewBag.Title = "Student Reports";
+
+    var DblQuote = Convert.ToChar(34);
+    var SingleQuote = Convert.ToChar(39);
+    var DateRange = new List<String>();
+    foreach (var item in Model.AttendanceList)
+    {
+        var myString = SingleQuote + item.Date.ToShortDateString() + SingleQuote;
+        DateRange.Add(myString);
+    }
 }
 
 <div class="text-center">
     <h4>Attendance Statistics</h4>
     <br />
     <div>
-        Month of @Model.DateStart.Month
+        From @Model.DateStart.ToShortDateString()<br />
+        To   @Model.DateEnd.ToShortDateString()<br />
     </div>
 </div>
 <br />
@@ -18,7 +28,6 @@
 }
 else
 {
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <div class="bg-white">
@@ -85,22 +94,6 @@ else
         </table>
     </div>
 
-    <div>
-        @String.Join(", ", Model.AttendanceList.Select(m => m.Date.ToShortDateString()).ToArray())
-
-        @{
-            var DblQuote = Convert.ToChar(34);
-            var SingleQuote = Convert.ToChar(39);
-            var DateRange = new List<String>();
-            foreach (var item in Model.AttendanceList)
-            {
-                var myString = SingleQuote + item.Date.ToShortDateString() + SingleQuote;
-                DateRange.Add(myString);
-            }
-        }
-
-    </div>
-
     <div class="row justify-content-lg-center">
         <canvas id="barChart2" width="500" height="300"></canvas>
         <script>
@@ -116,7 +109,7 @@ else
                         labels: [@Html.Raw(String.Join(", ", DateRange.ToArray()))],
 
                         datasets: [{
-                    backgroundColor:
+                            backgroundColor:
                                 'rgba(54, 162, 235, 0.5)',
                             label: 'Daily Attended Hours' ,
 
@@ -157,27 +150,20 @@ else
 
     <br />
     <div class="row justify-content-lg-center">
-        <canvas id="accumulativeChart" width="1150" height="300"></canvas>
+        <canvas id="accumulativeChart" width="500" height="300"></canvas>
         <script>
         var ctx = document.getElementById("accumulativeChart").getContext('2d');
         var myChart = new Chart(ctx, {
-
-
             type: 'line',
             data: {
-
-
-                labels: [@String.Join(", ", Model.AttendanceList.Select(m=>m.Date).ToArray())],
+                labels: [@Html.Raw(String.Join(", ", DateRange.ToArray()))],
 
                 datasets: [{
                     label: 'Attended',
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.5)',
-
-
-
                     ],
-                    data: [@String.Join(", ", Model.AttendanceList.Select(m=>m.TotalHours).ToArray())],
+                    data: [@String.Join(", ", Model.AttendanceList.Select(m => m.TotalHours.TotalMinutes).ToArray())],
 
                     borderWidth: 1
                 }, {
@@ -185,7 +171,7 @@ else
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
                     ],
-                    data: [@String.Join(", ", Model.AttendanceList.Select(m=>m.TotalHoursExpected).ToArray())],
+                    data: [@String.Join(", ", Model.AttendanceList.Select(m => m.TotalHoursExpected.TotalMinutes).ToArray())],
 
                     borderWidth: 1
                 }]
