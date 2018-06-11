@@ -372,7 +372,7 @@ namespace _5051.Controllers
             dateStart = DateTime.Parse("6/1/2018");
             dateEnd = DateTime.Parse("7/1/2018");
 
-            var myReturn = new StudentReportViewModel(myStudent,dateStart,dateEnd);
+            var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent,dateStart,dateEnd);
             if (myReturn == null)
             {
                 return RedirectToAction("Error", "Home");

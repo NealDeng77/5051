@@ -189,6 +189,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\ReportBackend.cs" />
     <Compile Include="Backend\ShopInventoryBackend.cs" />
     <Compile Include="Backend\ShopInventoryDataSourceMock.cs" />
     <Compile Include="Backend\ShopInventoryInterface.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Models\Enums\StudentStatusEnum.cs" />
     <Compile Include="Models\Enums\DataSourceEnum.cs" />
     <Compile Include="Models\StudentAvatarModel.cs" />
+    <Compile Include="Models\StudentReportStatsModel.cs" />
     <Compile Include="Models\StudentReportViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
