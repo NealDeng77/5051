@@ -100,6 +100,10 @@ namespace _5051.Models
                 dateEnd = DateTime.UtcNow;
             }
 
+            // Reset the values to be 0, then add to them.
+            AccumlatedTotalHoursExpected = TimeSpan.Zero;
+            AccumlatedTotalHours = TimeSpan.Zero;
+
             currentDate = dateStart;
             while (currentDate.CompareTo(dateEnd) < 0)
             {
@@ -137,8 +141,8 @@ namespace _5051.Models
             var accumulativeHoursAttended = new TimeSpan();
             var accumulativeHoursExpected = new TimeSpan();
 
-            accumulativeHoursAttended = TimeSpan.MinValue;
-            accumulativeHoursExpected = TimeSpan.MinValue;
+            accumulativeHoursAttended = TimeSpan.Zero;
+            accumulativeHoursExpected = TimeSpan.Zero;
 
             // Pull out just the date range between Start and End
             var myData = AttendanceList.Where(m => m.Date.CompareTo(DateStart.AddDays(-1)) > 0 && m.Date.CompareTo(DateEnd.AddDays(1)) < 1).ToList();
@@ -148,6 +152,10 @@ namespace _5051.Models
             {
                 accumulativeHoursAttended += item.HoursAttended;
                 accumulativeHoursExpected += item.HoursExpected;
+
+                // Need to reset the values to reflect the date range
+                item.TotalHours = accumulativeHoursAttended;
+                item.TotalHoursExpected = accumulativeHoursExpected;
             }
 
             //Trim the AttendanceList down to be just the MyData list

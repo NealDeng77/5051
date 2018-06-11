@@ -134,3 +134,8 @@ textarea {
     width: 150px;
     height: 150px;
 }
+
+.FullChart {
+    height: 300px;
+    width: 500px;
+}
