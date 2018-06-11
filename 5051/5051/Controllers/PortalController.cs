@@ -366,7 +366,13 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myReturn = new StudentReportViewModel(myStudent);
+            DateTime dateStart = new DateTime();
+            DateTime dateEnd = new DateTime();
+
+            dateStart = DateTime.Parse("6/1/2018");
+            dateEnd = DateTime.Parse("7/1/2018");
+
+            var myReturn = new StudentReportViewModel(myStudent,dateStart,dateEnd);
             if (myReturn == null)
             {
                 return RedirectToAction("Error", "Home");
