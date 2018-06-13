@@ -145,17 +145,11 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            var count = 0;
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Police", "Happy Officer", 1));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Kunoichi", "Ninja Lady", 2));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Angry", "Angry, but happy", 1));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Playfull", "Anyone want a ride?", 1));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Pirate", "Where is my ship?", 2));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Blue", "Having a Blue Day", 3));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Pigtails", "Love my hair", 3));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Ninja", "Taste my Katana", 2));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Circus", "Swinging from the Trapeese", 4));
-            //Create(new SchoolDismissalSettingsModel("SchoolDismissalSettings" + count++.ToString() + ".png", "Chef", "I love to cook", 4));
+
+            // Call over to the Settings Model itself to have it set it's default settings
+            var Temp = new SchoolDismissalSettingsModel();
+            Temp.SetDefault();
+            Create(Temp);
         }
 
         /// <summary>

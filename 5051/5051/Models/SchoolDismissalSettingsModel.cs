@@ -40,6 +40,14 @@ namespace _5051.Models
         public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
+            SetDefault();
+        }
+
+        /// <summary>
+        /// Sets the default values for the Item
+        /// Because it is set here, there is no need to set defaults over in the Mock, call this instead
+        /// </summary>
+        public void SetDefault() { 
             StartNormal = TimeSpan.Parse("8:55");
             StartEarly = TimeSpan.Parse("8:00");
             StartLate = TimeSpan.Parse("10:55");
