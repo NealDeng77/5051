@@ -59,7 +59,6 @@ namespace _5051.Models
         /// </summary>
         public void Initialize()
         {
-            Id = Guid.NewGuid().ToString();
             SetDefault();
         }
 
@@ -69,6 +68,7 @@ namespace _5051.Models
         /// </summary>
         public void SetDefault()
         {
+            Id = Guid.NewGuid().ToString();
             StartNormal = TimeSpan.Parse("8:55");
             StartEarly = TimeSpan.Parse("8:00");
             StartLate = TimeSpan.Parse("10:55");
