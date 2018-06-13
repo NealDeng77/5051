@@ -150,8 +150,6 @@ namespace _5051.Backend
         {
             DataSetClear();
 
-            var temp = new SchoolCalendarModel();
-
             DateTime currentDate = new DateTime();
             DateTime dateStart = new DateTime();
             DateTime dateEnd = new DateTime();
@@ -170,6 +168,7 @@ namespace _5051.Backend
             // For every day from the start of the school year, until the end of the school year or now...
             while (currentDate.CompareTo(dateEnd) < 0)
             {
+                var temp = new SchoolCalendarModel();
                 temp.Date = currentDate;
                 temp.DayEnd = Models.Enums.SchoolCalendarDismissalEnum.Normal;
                 temp.DayStart = Models.Enums.SchoolCalendarDismissalEnum.Normal;

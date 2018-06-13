@@ -18,7 +18,8 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult Index()
         {
-            return View();
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Index();
+            return View(myData);
         }
 
         /// <summary>
