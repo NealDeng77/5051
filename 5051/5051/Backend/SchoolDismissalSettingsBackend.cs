@@ -105,5 +105,15 @@ namespace _5051.Backend
 
             return myReturn;
         }
+
+        /// <summary>
+        /// Returns the First record
+        /// </summary>
+        /// <returns>Null or valid data</returns>
+        public SchoolDismissalSettingsModel GetDefault()
+        {
+            var myReturn = DataSource.Index().First();
+            return myReturn;
+        }
     }
 }
