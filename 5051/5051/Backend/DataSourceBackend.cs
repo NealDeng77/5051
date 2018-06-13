@@ -15,6 +15,7 @@ namespace _5051.Backend
         public StudentBackend StudentBackend = StudentBackend.Instance;
         public ShopInventoryBackend ShopInventoryBackend = ShopInventoryBackend.Instance;
         public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
+        public SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
 
         /// <summary>
         /// Make into a Singleton
@@ -29,6 +30,7 @@ namespace _5051.Backend
             StudentBackend = StudentBackend.Instance;
             ShopInventoryBackend = ShopInventoryBackend.Instance;
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
+            SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
         }
 
         public static DataSourceBackend Instance
@@ -56,6 +58,7 @@ namespace _5051.Backend
         public void Reset()
         {
             SchoolCalendarBackend.Reset();
+            SchoolDismissalSettingsBackend.Reset();
             ShopInventoryBackend.Reset();
 
             AvatarBackend.Reset();
@@ -67,6 +70,7 @@ namespace _5051.Backend
         /// </summary>
         public void SetDataSource(DataSourceEnum dataSourceEnum)
         {
+            SchoolDismissalSettingsBackend.SetDataSource(dataSourceEnum);
             SchoolCalendarBackend.SetDataSource(dataSourceEnum);
 
             ShopInventoryBackend.SetDataSource(dataSourceEnum);
@@ -82,6 +86,7 @@ namespace _5051.Backend
         /// <param name="SetEnum"></param>
         public void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
         {
+            SchoolDismissalSettingsBackend.SetDataSourceDataSet(SetEnum);
             SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
             ShopInventoryBackend.SetDataSourceDataSet(SetEnum);
 

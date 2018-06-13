@@ -9,6 +9,9 @@ namespace _5051.Models
     /// </summary>
     public class SchoolDismissalSettingsModel
     {
+        // Used to access the settings instance, even if there is just one
+        public string Id { get; set; }
+
         // The Normal Start time.  8:55am
         public TimeSpan StartNormal { get; set; }
 
@@ -29,6 +32,14 @@ namespace _5051.Models
 
         public SchoolDismissalSettingsModel()
         {
+        }
+
+        /// <summary>
+        /// Create the default values
+        /// </summary>
+        public void Initialize()
+        {
+            Id = Guid.NewGuid().ToString();
             StartNormal = TimeSpan.Parse("8:55");
             StartEarly = TimeSpan.Parse("8:00");
             StartLate = TimeSpan.Parse("10:55");
@@ -36,6 +47,26 @@ namespace _5051.Models
             EndNormal = TimeSpan.Parse("15:45");
             EndEarly = TimeSpan.Parse("14:00");
             EndLate = TimeSpan.Parse("16:00");
+        }
+
+        /// <summary>
+        /// Used to Update Before doing a data save
+        /// Updates everything except for the ID
+        /// </summary>
+        /// <param name="data">Data to update</param>
+        public void Update(SchoolDismissalSettingsModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            StartNormal = data.StartNormal;
+            StartEarly = data.StartEarly;
+            StartLate = data.StartLate;
+            EndNormal = data.EndNormal;
+            EndEarly = data.EndEarly;
+            EndLate = data.EndLate;
         }
     }
 }
