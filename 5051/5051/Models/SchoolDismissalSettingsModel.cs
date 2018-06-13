@@ -35,6 +35,26 @@ namespace _5051.Models
         }
 
         /// <summary>
+        /// Create a copy of the item, used for updates.
+        /// </summary>
+        /// <param name="data"></param>
+        public SchoolDismissalSettingsModel(SchoolDismissalSettingsModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            StartNormal = data.StartNormal;
+            StartEarly = data.StartEarly;
+            StartLate = data.StartLate;
+            EndNormal = data.EndNormal;
+            EndEarly = data.EndEarly;
+            EndLate = data.EndLate;
+        }
+
+
+        /// <summary>
         /// Create the default values
         /// </summary>
         public void Initialize()
@@ -47,7 +67,8 @@ namespace _5051.Models
         /// Sets the default values for the Item
         /// Because it is set here, there is no need to set defaults over in the Mock, call this instead
         /// </summary>
-        public void SetDefault() { 
+        public void SetDefault()
+        {
             StartNormal = TimeSpan.Parse("8:55");
             StartEarly = TimeSpan.Parse("8:00");
             StartLate = TimeSpan.Parse("10:55");

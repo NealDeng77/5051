@@ -38,7 +38,7 @@ namespace _5051.Backend
         }
 
         // Get the Datasource to use
-        private static IStudentInterface DataSource;
+        private static ISchoolDismissalSettingsInterface DataSource;
 
         /// <summary>
         /// Switches between Live, and Mock Datasets
@@ -53,7 +53,7 @@ namespace _5051.Backend
             }
 
             // Default is to use the Mock
-            DataSource = StudentDataSourceMock.Instance;
+            DataSource = SchoolDismissalSettingsDataSourceMock.Instance;
         }
 
         /// <summary>
@@ -73,6 +73,37 @@ namespace _5051.Backend
             DataSource.Reset();
         }
 
-        // Add the School Calendar Backend here
+        /// <summary>
+        /// Return the data for the id passed in
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Null or valid data</returns>
+        public SchoolDismissalSettingsModel Read(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+
+            var myReturn = DataSource.Read(id);
+            return myReturn;
+        }
+
+        /// <summary>
+        /// Update all attributes to be what is passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Null or updated data</returns>
+        public SchoolDismissalSettingsModel Update(SchoolDismissalSettingsModel data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            var myReturn = DataSource.Update(data);
+
+            return myReturn;
+        }
     }
 }

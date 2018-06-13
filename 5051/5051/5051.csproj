@@ -212,6 +212,7 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\SchoolDismissalSettingsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
