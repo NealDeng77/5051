@@ -84,6 +84,10 @@ namespace _5051.Backend
             }
             var myReturn = avatarList.Find(n => n.Id == data.Id);
 
+            if (myReturn == null)
+            {
+                return null;
+            }
             myReturn.Update(data);
 
             return myReturn;
