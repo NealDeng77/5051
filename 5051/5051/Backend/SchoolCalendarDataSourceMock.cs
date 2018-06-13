@@ -149,17 +149,39 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            var count = 0;
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Police", "Happy Officer", 1));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Kunoichi", "Ninja Lady", 2));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Angry", "Angry, but happy", 1));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Playfull", "Anyone want a ride?", 1));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Pirate", "Where is my ship?", 2));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Blue", "Having a Blue Day", 3));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Pigtails", "Love my hair", 3));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Ninja", "Taste my Katana", 2));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Circus", "Swinging from the Trapeese", 4));
-            //Create(new SchoolCalendarModel("SchoolCalendar" + count++.ToString() + ".png", "Chef", "I love to cook", 4));
+
+            var temp = new SchoolCalendarModel();
+
+            DateTime currentDate = new DateTime();
+            DateTime dateStart = new DateTime();
+            DateTime dateEnd = new DateTime();
+
+            dateStart = DateTime.Parse("09/01/2017"); //Todo swap out with a data structure that models the school calendar
+            dateEnd = DateTime.Parse("07/01/2018"); //Todo swap out with a data structure that models the school calendar
+
+            // Don't go beyond today
+            if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
+            {
+                dateEnd = DateTime.UtcNow;
+            }
+
+            currentDate = dateStart;
+
+            // For every day from the start of the school year, until the end of the school year or now...
+            while (currentDate.CompareTo(dateEnd) < 0)
+            {
+                temp.Date = currentDate;
+                temp.DayEnd = Models.Enums.SchoolCalendarDismissalEnum.Normal;
+                temp.DayStart = Models.Enums.SchoolCalendarDismissalEnum.Normal;
+                temp.TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
+                temp.TimeStart = TimeSpan.Parse("8:55"); //todo replace with actual time Start for the day
+                temp.TimeMax = temp.TimeEnd.Subtract(temp.TimeStart);
+
+                //Add the new date to the list of dates
+                Create(temp);
+
+                currentDate = currentDate.AddDays(1);
+            }
         }
 
         /// <summary>

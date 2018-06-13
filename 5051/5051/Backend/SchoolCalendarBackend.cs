@@ -112,7 +112,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public SchoolCalendarModel GetDefault()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = DataSource.Index().Last();
             return myReturn;
         }
 
