@@ -4,11 +4,45 @@
     ViewBag.Title = "Calendar";
     var FirstDay = Model.First().Date;
     var LastDay = Model.Last().Date;
+
+    //Get the First and last month, and set the dates to the first of those months.
+    var dateStart = DateTime.Parse(Model.First().Date.Month.ToString() + "/01/" + Model.First().Date.Year.ToString());
+
+    // Go to the month after the last date
+    var dateEnd = DateTime.Parse((Model.Last().Date.Month + 1).ToString() + "/01/" + Model.Last().Date.Year.ToString());
+    dateEnd.AddDays(-1); // Back up 1 day to be the last day of the month
+
+    // Make a list of each month of the year, will be easier to output the months and the school info per month
+    List<List<SchoolCalendarModel>> Months = new List<List<SchoolCalendarModel>>();
+
+    DateTime currentDate = new DateTime();
+
+    //// Don't go beyond today
+    //if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
+    //{
+    //    dateEnd = DateTime.UtcNow;
+    //}
+
+    currentDate = dateStart;
+
+    // For every day from the start of the school year, until the end of the school year or now...
+    while (currentDate.CompareTo(dateEnd) < 0)
+    {
+        if (currentDate.Day == 1)
+        {
+
+            var temp = Model.Where(m => m.Date.Month == currentDate.Month).ToList();
+            Months.Add(temp);
+        }
+
+        currentDate = currentDate.AddDays(1);
+    }
+
 }
 
 <h2>Welcome to School Calendar</h2>
 <br />
-<h4>Days in Red are No School days</h4>
+<h4>Highlighted days are school days</h4>
 <br />
 <h4>Early dismissal every Wendsday</h4>
 
@@ -17,630 +51,130 @@
 <h4>Most Recend Day is @LastDay.ToString("MMMM dd, yyyy")</h4>
 
 <br />
+<hr />
+
+<div class="row">
+    @{
+        foreach (var MonthItem in Months)
+        {
+            <div class="col-sm-3" style="height:250px">
+
+                <div class="row">
+                    @MonthItem.First().Date.ToString("MMMM")<br />
+                </div>
+
+                <div class="row text-center">
+                    <table class="table table-bordered table-condensed table-fit table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mo</th>
+                                <th>Tu</th>
+                                <th>We</th>
+                                <th>Th</th>
+                                <th>Fr</th>
+                                <th>Sa</th>
+                                <th>Su</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var ColumnSpace = "<td/>";
+                                foreach (var dayItem in MonthItem)
+                                {
+                                    var newRow = "";
+                                    var endRow = "";
+
+                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Monday)
+                                    {
+                                        newRow = "<tr>";
+                                    }
+
+                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        endRow = "</tr>";
+                                    }
+
+                                    @Html.Raw(newRow)
+
+                                    if (dayItem.Date.Day == 1)
+                                    {
+                                        // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
+                                        // Don't include the column to show, so just the previous columns
+                                        DayOfWeek today = dayItem.Date.DayOfWeek;
+                                        switch (today)
+                                        {
+                                            case DayOfWeek.Monday:
+                                                //nothing
+                                                break;
+
+                                            case DayOfWeek.Tuesday:
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+
+                                            case DayOfWeek.Wednesday:
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+
+                                            case DayOfWeek.Thursday:
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+
+                                            case DayOfWeek.Friday:
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+
+                                            case DayOfWeek.Saturday:
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+
+                                            case DayOfWeek.Sunday:
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                @Html.Raw(ColumnSpace)
+                                                break;
+                                        }
+                                    }
+
+                                    // Output this date
+                                <td>
+                                    <div>
+                                        @dayItem.Date.Day
+                                    </div>
+                                </td>
+                                @Html.Raw(endRow)
+                            }
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+    }
+
+</div>
+
+
+
+
+<br />
 <br />
 
 @Html.ActionLink("Edit Days", "Edit", "Calendar", new { @class = "btn btn-primary" })
 
 <br />
 
-<hr />
-
-<div class="col-md-10 col-md-offset-1 RectangleBlck">
-    <h2>School Calendar</h2>
-    <div class="row">
-        <div class="month">
-            <div class="alignleft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10094;</div>
-            <span style="font-size:18px">2017 - 2018</span>
-            <div class="alignright">&#10095;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="month">September</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">October</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li><span class="active">13</span></li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">November</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li><span class="active">10</span></li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li><span class="active">20</span></li>
-                <li><span class="active">21</span></li>
-                <li><span class="active">22</span></li>
-                <li><span class="active">23</span></li>
-                <li><span class="active">24</span></li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="month">December</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li><span class="active">18</span></li>
-                <li><span class="active">19</span></li>
-                <li><span class="active">20</span></li>
-                <li><span class="active">21</span></li>
-                <li><span class="active">22</span></li>
-                <li><span class="active">23</span></li>
-                <li><span class="active">24</span></li>
-                <li><span class="active">25</span></li>
-                <li><span class="active">26</span></li>
-                <li><span class="active">27</span></li>
-                <li><span class="active">28</span></li>
-                <li><span class="active">29</span></li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">January</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li><span class="active">1</span></li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li><span class="active">15</span></li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li><span class="active">31</span></li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">February</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li><span class="active">19</span></li>
-                <li><span class="active">20</span></li>
-                <li><span class="active">21</span></li>
-                <li><span class="active">22</span></li>
-                <li><span class="active">23</span></li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="month">March</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">April</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li><span class="active">9</span></li>
-                <li><span class="active">10</span></li>
-                <li><span class="active">11</span></li>
-                <li><span class="active">12</span></li>
-                <li><span class="active">13</span></li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">May</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li><span class="active">28</span></li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="month">June</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li><span class="active">10</span></li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">July</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li><span class="active">10</span></li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <div class="month">August</div>
-
-            <ul class="weekdays">
-                <li>Mo</li>
-                <li>Tu</li>
-                <li>We</li>
-                <li>Th</li>
-                <li>Fr</li>
-                <li>Sa</li>
-                <li>Su</li>
-            </ul>
-
-            <ul class="days">
-                <li></li>
-                <li></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li><span class="active">10</span></li>
-                <li>11</li>
-                <li>12</li>
-                <li>13</li>
-                <li>14</li>
-                <li>15</li>
-                <li>16</li>
-                <li>17</li>
-                <li>18</li>
-                <li>19</li>
-                <li>20</li>
-                <li>21</li>
-                <li>22</li>
-                <li>23</li>
-                <li>24</li>
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li>29</li>
-                <li>30</li>
-                <li>31</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">&nbsp;</div>
-</div>
+<br />
