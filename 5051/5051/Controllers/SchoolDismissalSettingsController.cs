@@ -24,7 +24,12 @@ namespace _5051.Controllers
             var myData = SchoolDismissalSettingsBackend.Read(id);
             if (myData == null)
             {
-                return RedirectToAction("Error", "Home");
+                // If no ID is passed in, get the first one.
+                myData = SchoolDismissalSettingsBackend.GetDefault();
+                if (myData == null)
+                {
+                    return RedirectToAction("Error", "Home");
+                }
             }
 
             return View(myData);
@@ -83,10 +88,9 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            var myDataSchoolDismissalSettings = new SchoolDismissalSettingsModel(data);
-            SchoolDismissalSettingsBackend.Update(myDataSchoolDismissalSettings);
+            SchoolDismissalSettingsBackend.Update(data);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Calendar");
         }
     }
 }

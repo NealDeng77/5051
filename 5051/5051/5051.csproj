@@ -395,6 +395,8 @@
     <Content Include="Views\ShopInventory\Read.cshtml" />
     <Content Include="Views\ShopInventory\Update.cshtml" />
     <Content Include="Views\Portal\Attendance.cshtml" />
+    <Content Include="Views\SchoolDismissalSettings\Read.cshtml" />
+    <Content Include="Views\SchoolDismissalSettings\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,107 @@
+﻿@model _5051.Models.SchoolDismissalSettingsModel
+@{
+    ViewBag.Title = "Update";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model == null)
+            {
+                <p>No Avatar</p>
+            }
+
+            else
+            {
+                <div class="row">
+                    <h2>Update Avatar</h2>
+                    <br />
+                    <br />
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.StartNormal)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.StartNormal)
+                                @Html.ValidationMessageFor(m => m.StartNormal)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.StartEarly)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.StartEarly)
+                                @Html.ValidationMessageFor(m => m.StartEarly)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.StartLate)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.StartLate)
+                                @Html.ValidationMessageFor(m => m.StartLate)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.EndNormal)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.EndNormal)
+                                @Html.ValidationMessageFor(m => m.EndNormal)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.EndEarly)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.EndEarly)
+                                @Html.ValidationMessageFor(m => m.EndEarly)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.EndLate)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.EndLate)
+                                @Html.ValidationMessageFor(m => m.EndLate)
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ActionLink("Cancel", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                                <input type="submit" value="Update" class="btn btn-primary">
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+            }
+
+        }
+    </div>
+</div>

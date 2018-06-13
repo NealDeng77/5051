@@ -1,0 +1,90 @@
+﻿@model _5051.Models.SchoolDismissalSettingsModel
+
+@{
+    ViewBag.Title = "Read";
+}
+
+<div class="container">
+    <h2>School Dismissal Settings </h2>
+    <br />
+    <div class="row">
+        @{
+            if (Model == null)
+            {
+                <p>No Data</p>
+            }
+            else
+            {
+                <div class="row">
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.StartNormal)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.StartEarly)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.StartLate)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.EndNormal)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.EndEarly)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.EndLate)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.ActionLink("Cancel", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
