@@ -82,6 +82,10 @@ namespace _5051.Backend
                 return null;
             }
             var myReturn = StudentList.Find(n => n.Id == data.Id);
+            if (myReturn == null)
+            {
+                return null;
+            }
 
             myReturn.Update(data);
 
