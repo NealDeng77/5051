@@ -157,11 +157,11 @@ namespace _5051.Backend
             dateStart = DateTime.Parse("09/01/2017"); //Todo swap out with a data structure that models the school calendar
             dateEnd = DateTime.Parse("07/01/2018"); //Todo swap out with a data structure that models the school calendar
 
-            // Don't go beyond today
-            if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
-            {
-                dateEnd = DateTime.UtcNow;
-            }
+            //// Don't go beyond today
+            //if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
+            //{
+            //    dateEnd = DateTime.UtcNow;
+            //}
 
             currentDate = dateStart;
 
