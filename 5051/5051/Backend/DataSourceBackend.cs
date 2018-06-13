@@ -14,6 +14,7 @@ namespace _5051.Backend
         public AvatarBackend AvatarBackend = AvatarBackend.Instance;
         public StudentBackend StudentBackend = StudentBackend.Instance;
         public ShopInventoryBackend ShopInventoryBackend = ShopInventoryBackend.Instance;
+        public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
 
         /// <summary>
         /// Make into a Singleton
@@ -26,6 +27,8 @@ namespace _5051.Backend
             // Avatar must be before Student, because Student needs the default avatarID
             AvatarBackend = AvatarBackend.Instance;
             StudentBackend = StudentBackend.Instance;
+            ShopInventoryBackend = ShopInventoryBackend.Instance;
+            SchoolCalendarBackend = SchoolCalendarBackend.Instance;
         }
 
         public static DataSourceBackend Instance
@@ -52,6 +55,9 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
+            SchoolCalendarBackend.Reset();
+            ShopInventoryBackend.Reset();
+
             AvatarBackend.Reset();
             StudentBackend.Reset();
         }
@@ -61,6 +67,8 @@ namespace _5051.Backend
         /// </summary>
         public void SetDataSource(DataSourceEnum dataSourceEnum)
         {
+            SchoolCalendarBackend.SetDataSource(dataSourceEnum);
+
             ShopInventoryBackend.SetDataSource(dataSourceEnum);
 
             // Avatar must be reset before Student, because Student needs the default avatarID
@@ -74,6 +82,7 @@ namespace _5051.Backend
         /// <param name="SetEnum"></param>
         public void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
         {
+            SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
             ShopInventoryBackend.SetDataSourceDataSet(SetEnum);
 
             // Avatar must be reset before Student, because Student needs the default avatarID

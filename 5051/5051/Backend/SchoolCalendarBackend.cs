@@ -65,6 +65,14 @@ namespace _5051.Backend
             StudentDataSourceMock.Instance.LoadDataSet(SetEnum);
         }
 
+        /// <summary>
+        /// Helper function that resets the DataSource, and rereads it.
+        /// </summary>
+        public void Reset()
+        {
+            DataSource.Reset();
+        }
+
         // Add the School Calendar Backend here
     }
 }
