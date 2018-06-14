@@ -25,7 +25,7 @@ namespace _5051.Models
         /// The number of hours and minutes in the school day
         /// </summary>
         [Display(Name = "Max Time", Description = "Hours for the Day")]
-        public TimeSpan TimeMax { get; set; }
+        public TimeSpan TimeDuration { get; set; }
 
         /// <summary>
         /// The start of school time
@@ -83,7 +83,7 @@ namespace _5051.Models
             DayStart = SchoolCalendarDismissalEnum.Normal;
             TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
             TimeStart = TimeSpan.Parse("8:55"); //todo replace with actual time Start for the day
-            TimeMax = TimeEnd.Subtract(TimeStart);
+            TimeDuration = TimeEnd.Subtract(TimeStart);
         }
 
         /// <summary>
@@ -101,12 +101,13 @@ namespace _5051.Models
             }
 
             Date = data.Date;
-            TimeMax = data.TimeMax;
             TimeStart = data.TimeStart;
             TimeEnd = data.TimeEnd;
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
             Modified = data.Modified;
+
+            TimeDuration = data.TimeEnd.Subtract(TimeStart);
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace _5051.Models
             Modified = data.Modified;
 
             // The time in school is the delta of end - start
-            TimeMax = data.TimeEnd.Subtract(TimeStart);
+            TimeDuration = data.TimeEnd.Subtract(TimeStart);
 
         }
     }

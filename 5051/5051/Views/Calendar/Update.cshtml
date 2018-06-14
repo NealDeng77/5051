@@ -4,6 +4,7 @@
     var Today = Model.Date.ToShortDateString();
     var TimeStart = string.Format("{0:D1}:{1:D2}", Model.TimeStart.Hours, Model.TimeStart.Minutes);
     var TimeEnd = string.Format("{0:D1}:{1:D2}", Model.TimeEnd.Hours, Model.TimeEnd.Minutes);
+    var TimeDuration = string.Format("{0:D1}:{1:D2}", Model.TimeDuration.Hours, Model.TimeDuration.Minutes);
 }
 
 <br />
@@ -29,6 +30,7 @@
                     <h2>
                         @Today
                     </h2>
+                    <h3>Time in school: @TimeDuration</h3>
                 </div>
             </div>
 
