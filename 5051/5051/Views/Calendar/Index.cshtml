@@ -82,17 +82,17 @@
                                 var ColumnSpace = "<td/>";
                                 foreach (var dayItem in MonthItem)
                                 {
-                                    var newRow = "";
-                                    var endRow = "";
+                                    var newRow = "<td>";
+                                    var endRow = "</td>";
 
                                     if (dayItem.Date.DayOfWeek == DayOfWeek.Monday)
                                     {
-                                        newRow = "<tr>";
+                                        newRow = "<tr><td>";
                                     }
 
                                     if (dayItem.Date.DayOfWeek == DayOfWeek.Sunday)
                                     {
-                                        endRow = "</tr>";
+                                        endRow = "</td></tr>";
                                     }
 
                                     @Html.Raw(newRow)
@@ -140,11 +140,9 @@
                                     }
 
                                     // Output this date
-                                <td>
                                     <div>
                                         @dayItem.Date.Day
                                     </div>
-                                </td>
                                 @Html.Raw(endRow)
                             }
                             }
