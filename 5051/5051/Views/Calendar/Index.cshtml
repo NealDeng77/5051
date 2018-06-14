@@ -1,43 +1,7 @@
 ﻿@using _5051.Models
-@model List<SchoolCalendarModel>
+@model SchoolCalendarViewModel
 @{
     ViewBag.Title = "Calendar";
-    var FirstDay = Model.First().Date;
-    var LastDay = Model.Last().Date;
-
-    //Get the First and last month, and set the dates to the first of those months.
-    var dateStart = DateTime.Parse(Model.First().Date.Month.ToString() + "/01/" + Model.First().Date.Year.ToString());
-
-    // Go to the month after the last date
-    var dateEnd = DateTime.Parse((Model.Last().Date.Month + 1).ToString() + "/01/" + Model.Last().Date.Year.ToString());
-    dateEnd.AddDays(-1); // Back up 1 day to be the last day of the month
-
-    // Make a list of each month of the year, will be easier to output the months and the school info per month
-    List<List<SchoolCalendarModel>> Months = new List<List<SchoolCalendarModel>>();
-
-    DateTime currentDate = new DateTime();
-
-    //// Don't go beyond today
-    //if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
-    //{
-    //    dateEnd = DateTime.UtcNow;
-    //}
-
-    currentDate = dateStart;
-
-    // For every day from the start of the school year, until the end of the school year or now...
-    while (currentDate.CompareTo(dateEnd) < 0)
-    {
-        if (currentDate.Day == 1)
-        {
-
-            var temp = Model.Where(m => m.Date.Month == currentDate.Month).ToList();
-            Months.Add(temp);
-        }
-
-        currentDate = currentDate.AddDays(1);
-    }
-
 }
 
 <h2>Welcome to School Calendar</h2>
@@ -47,15 +11,15 @@
 <h4>Early dismissal every Wendsday</h4>
 
 
-<h4>First Day of School is @FirstDay.ToString("MMMM dd, yyyy")</h4>
-<h4>Most Recend Day is @LastDay.ToString("MMMM dd, yyyy")</h4>
+<h4>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h4>
+<h4>Most Recend Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h4>
 
 <br />
 <hr />
 
 <div class="row">
     @{
-        foreach (var MonthItem in Months)
+        foreach (var MonthItem in Model.Months)
         {
             <div class="col-sm-4 CalendarBox" >
 
