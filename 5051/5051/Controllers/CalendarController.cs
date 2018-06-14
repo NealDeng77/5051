@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using _5051.Models;
 
@@ -169,7 +167,6 @@ namespace _5051.Controllers
                 ModelState.AddModelError("TimeStart", "Start Time must be before End Time");
                 return View(data);
             }
-
 
             Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(data);
 
