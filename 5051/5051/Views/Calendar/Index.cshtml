@@ -57,23 +57,24 @@
     @{
         foreach (var MonthItem in Months)
         {
-            <div class="col-sm-3" style="height:250px">
+            <div class="col-sm-4" style="height:400px; min-width:375px">
 
                 <div class="row">
-                    @MonthItem.First().Date.ToString("MMMM")<br />
+                    <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
+                    <br />
                 </div>
 
                 <div class="row text-center">
                     <table class="table table-bordered table-condensed table-fit table-striped">
                         <thead>
-                            <tr>
-                                <th>Mo</th>
-                                <th>Tu</th>
-                                <th>We</th>
-                                <th>Th</th>
-                                <th>Fr</th>
-                                <th>Sa</th>
-                                <th>Su</th>
+                            <tr class="text-center">
+                                <th class="text-center">Mo</th>
+                                <th class="text-center">Tu</th>
+                                <th class="text-center">We</th>
+                                <th class="text-center">Th</th>
+                                <th class="text-center">Fr</th>
+                                <th class="text-center">Sa</th>
+                                <th class="text-center">Su</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -133,24 +134,32 @@
                                                 ColumnSpaceCount = 6;
                                                 break;
                                         }
-                                        for (var i = 0;i< ColumnSpaceCount; i++)
+                                        for (var i = 0; i < ColumnSpaceCount; i++)
                                         {
                                             @Html.Raw(ColumnSpace)
                                         }
                                     }
 
                                     // Output this date
-                                    <div>
-                                        @dayItem.Date.Day
-                                    </div>
-                                @Html.Raw(endRow)
+                            <div>
+                                @{
+                                    var buttonClass = "btn btn-normal";
+
+                                    if (dayItem.Modified == true)
+                                    {
+                                        buttonClass = "btn btn-success";
+                                    }
+                                }
+                                @Html.ActionLink(dayItem.Date.Day.ToString(), "Edit", new { id = dayItem.Id }, new { @class = buttonClass })
+                            </div>
+                                    @Html.Raw(endRow)
+                                }
                             }
-                            }
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-            }
+            </div>
+        }
     }
 
 </div>
