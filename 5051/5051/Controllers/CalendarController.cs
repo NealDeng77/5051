@@ -1,7 +1,7 @@
-﻿using System;
+﻿using _5051.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
-using _5051.Models;
 
 namespace _5051.Controllers
 {
@@ -222,6 +222,14 @@ namespace _5051.Controllers
 
             // Load the actual record, and only update TimeStart and Time End
             var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(data.Id);
+
+            /// See if there was any change at all
+            if (myData.TimeEnd == data.TimeEnd && myData.TimeStart == data.TimeStart)
+            {
+                // No change happened, so return
+                return RedirectToAction("Index");
+            }
+
             myData.TimeStart = data.TimeStart;
             myData.TimeEnd = data.TimeEnd;
 
