@@ -157,24 +157,16 @@ namespace _5051.Backend
             dateStart = DateTime.Parse("09/01/2017"); //Todo swap out with a data structure that models the school calendar
             dateEnd = DateTime.Parse("07/01/2018"); //Todo swap out with a data structure that models the school calendar
 
-            //// Don't go beyond today
-            //if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
-            //{
-            //    dateEnd = DateTime.UtcNow;
-            //}
-
             currentDate = dateStart;
 
             // For every day from the start of the school year, until the end of the school year or now...
             while (currentDate.CompareTo(dateEnd) < 0)
             {
                 var temp = new SchoolCalendarModel();
+
+                // Set Default Values
+                temp.SetDefault();
                 temp.Date = currentDate;
-                temp.DayEnd = Models.Enums.SchoolCalendarDismissalEnum.Normal;
-                temp.DayStart = Models.Enums.SchoolCalendarDismissalEnum.Normal;
-                temp.TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
-                temp.TimeStart = TimeSpan.Parse("8:55"); //todo replace with actual time Start for the day
-                temp.TimeMax = temp.TimeEnd.Subtract(temp.TimeStart);
 
                 //Add the new date to the list of dates
                 Create(temp);

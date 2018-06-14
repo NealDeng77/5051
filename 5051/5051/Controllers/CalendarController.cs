@@ -63,7 +63,32 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// Calendar Edit
+        /// Calendar Default resets the date to defaults for that date type
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult Default(string id = null)
+        {
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.SetDefault(id);
+
+            return RedirectToAction("Update", "Calendar", new { id });
+        }
+
+        /// <summary>
+        /// Calendar Update
         /// </summary>
         /// <returns></returns>
         // GET: Calendar
@@ -86,7 +111,7 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// This updates the avatar based on the information posted from the udpate page
+        /// This updates the Calendar based on the information posted from the update page
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>

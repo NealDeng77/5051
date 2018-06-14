@@ -117,6 +117,30 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Returns this record to default settings
+        /// </summary>
+        /// <returns>Null or valid data</returns>
+        public SchoolCalendarModel SetDefault(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+
+            var myData = DataSource.Read(id);
+            if (myData == null)
+            {
+                return null;
+            }
+
+            myData.SetDefault();
+
+            var myReturn = DataSource.Update(myData);
+
+            return myReturn;
+        }
+
+        /// <summary>
         /// Makes a new Student
         /// </summary>
         /// <param name="data"></param>

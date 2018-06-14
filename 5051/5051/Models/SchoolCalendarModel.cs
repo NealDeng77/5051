@@ -72,6 +72,18 @@ namespace _5051.Models
         public SchoolCalendarModel()
         {
             Initialize();
+            SetDefault();
+        }
+
+        // Sets the Default Values
+        public void SetDefault()
+        {
+            Date = DateTime.UtcNow;
+            DayEnd = SchoolCalendarDismissalEnum.Normal;
+            DayStart = SchoolCalendarDismissalEnum.Normal;
+            TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
+            TimeStart = TimeSpan.Parse("8:55"); //todo replace with actual time Start for the day
+            TimeMax = TimeEnd.Subtract(TimeStart);
         }
 
         /// <summary>
