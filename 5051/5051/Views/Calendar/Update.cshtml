@@ -31,22 +31,6 @@
                         @Today
                     </h2>
 
-                    @{
-                        if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                        {
-                            <h3>
-                                @Model.DayStart Start
-                            </h3>
-                        }
-
-                        if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                        {
-                            <h3>
-                                @Model.DayEnd Dismissal
-                            </h3>
-                        }
-                    }
-
                     <h3>Time in school: @TimeDuration</h3>
 
                 </div>
@@ -62,24 +46,47 @@
                     <div class="col-sm-3 text-right">
                         @Html.DisplayNameFor(m => m.TimeStart)
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
                         <div class="row">
                             @Html.ValidationMessageFor(m => m.TimeStart)
                         </div>
                     </div>
+                    @{
+                        if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                        {
+                            <div class="col-sm-2">
+                                <div class="text-left">
+                                    @Model.DayStart Start
+                                </div>
+                            </div>
+
+                        }
+                    }
                 </div>
 
                 <div class="row">
                     <div class="col-sm-3 text-right">
                         @Html.DisplayNameFor(m => m.TimeEnd)
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
                         <div class="row">
                             @Html.ValidationMessageFor(m => m.TimeEnd)
                         </div>
                     </div>
+
+                    @{
+                        if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                        {
+                            <div class="col-sm-2">
+                                <div class="text-left">
+                                    @Model.DayEnd Dismissal
+                                </div>
+                            </div>
+
+                        }
+                    }
                 </div>
 
                 <br />
