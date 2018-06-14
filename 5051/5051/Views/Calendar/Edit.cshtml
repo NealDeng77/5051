@@ -1,18 +1,99 @@
-﻿
+﻿@model _5051.Models.SchoolCalendarModel
 @{
     ViewBag.Title = "Calendar Edit";
+    var Today = Model.Date.ToShortDateString();
 }
 
-<h2>Calendar Edit</h2>
-
 <br />
-<h4>Editing of school calendar will go here</h4>
-<br />
-<h4>Early dismissal every Wendsday</h4>
-<h4>First Day of School is Sept 4</h4>
-<h4>Last Day of School is June 15</h4>
 
-<br />
-<h4>List each day of No School</h4>
+<div class="row">
+    <h2>Calendar Edit</h2>
+    <br />
+    <h3>Enter the Information for this Day</h3>
+    <h3>To reset the day to default settings, click the Default button</h3>
+    <br />
 
-<img src="~/Content/img/CalendarEditIcon.png" alt="School Calendar" />
+    @{
+        if (Model == null)
+        {
+            <p>No Data</p>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                </div>
+                <div class="col-sm-4">
+                    <h2>
+                        @Today
+                    </h2>
+                </div>
+            </div>
+
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Modified)
+                @Html.HiddenFor(m => m.Date)
+                @Html.HiddenFor(m => m.TimeMax)
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.TimeStart)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(m => m.TimeStart)
+                        @Html.ValidationMessageFor(m => m.TimeStart)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.TimeEnd)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(m => m.TimeEnd)
+                        @Html.ValidationMessageFor(m => m.TimeEnd)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.DayStart)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(m => m.DayStart)
+                        @Html.ValidationMessageFor(m => m.DayStart)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.DayEnd)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(m => m.DayEnd)
+                        @Html.ValidationMessageFor(m => m.DayEnd)
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Default", "Default", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        <input type="submit" value="Update" class="btn btn-primary">
+                    </div>
+                </div>
+
+            }
+
+
+        }
+
+    }
+</div>
