@@ -122,12 +122,15 @@ namespace _5051.Models
             }
 
             Date = data.Date;
-            TimeMax = data.TimeMax;
             TimeStart = data.TimeStart;
             TimeEnd = data.TimeEnd;
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
             Modified = data.Modified;
+
+            // The time in school is the delta of end - start
+            TimeMax = data.TimeEnd.Subtract(TimeStart);
+
         }
     }
 }

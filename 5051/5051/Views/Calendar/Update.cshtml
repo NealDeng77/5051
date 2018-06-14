@@ -36,9 +36,6 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.Id)
-                @Html.HiddenFor(m => m.Modified)
-                @Html.HiddenFor(m => m.Date)
-                @Html.HiddenFor(m => m.TimeMax)
 
                 <div class="row">
                     <div class="col-sm-3 text-right">
@@ -64,39 +61,16 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.DayStart)
-                    </div>
-                    <div class="col-sm-4">
-                        @Html.EnumDropDownListFor(m => m.DayStart)
-                        <div class="row">
-                            @Html.ValidationMessageFor(m => m.DayStart)
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.DayEnd)
-                    </div>
-                    <div class="col-sm-4">
-                        @Html.EnumDropDownListFor(m => m.DayEnd)
-                        <div class="row">
-
-                            @Html.ValidationMessageFor(m => m.DayEnd)
-                        </div>
-                    </div>
-                </div>
-
                 <br />
                 <br />
                 <div class="row">
                     <div class="col-sm-3 text-right">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Default", "Default", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
                         <input type="submit" value="Update" class="btn btn-primary">
                     </div>
                 </div>

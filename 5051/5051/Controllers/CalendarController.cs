@@ -65,7 +65,7 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Calendar
-        public ActionResult Default(string id = null)
+        public ActionResult SetDefault(string id = null)
         {
             if (id == null)
             {
@@ -81,6 +81,63 @@ namespace _5051.Controllers
             }
 
             myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.SetDefault(id);
+
+            return RedirectToAction("Update", "Calendar", new { id });
+        }
+
+        /// <summary>
+        /// Calendar Default resets the date to defaults for that date type
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult SetLateStart(string id = null)
+        {
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            myData.DayStart = Models.Enums.SchoolCalendarDismissalEnum.Late;
+            myData.TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
+
+            myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
+
+            return RedirectToAction("Update", "Calendar", new { id });
+        }
+
+
+        /// <summary>
+        /// Calendar Default resets the date to defaults for that date type
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult SetEarlyEnd(string id = null)
+        {
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            myData.DayEnd = Models.Enums.SchoolCalendarDismissalEnum.Early;
+            myData.TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
+
+            myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
 
             return RedirectToAction("Update", "Calendar", new { id });
         }
@@ -117,13 +174,8 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult Update([Bind(Include=
                                         "Id,"+
-                                        "Modified,"+
-                                        "Date,"+
-                                        "TimeMax,"+
                                         "TimeStart,"+
                                         "TimeEnd,"+
-                                        "DayStart,"+
-                                        "DayEnd,"+
                                         "")] SchoolCalendarModel data)
         {
             if (!ModelState.IsValid)
@@ -168,7 +220,12 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(data);
+            // Load the actual record, and only update TimeStart and Time End
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(data.Id);
+            myData.TimeStart = data.TimeStart;
+            myData.TimeEnd = data.TimeEnd;
+
+            Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
 
             return RedirectToAction("Index");
         }
