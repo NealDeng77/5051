@@ -118,8 +118,33 @@ namespace _5051.Controllers
             if (string.IsNullOrEmpty(data.Id))
             {
                 // Send back for Edit
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            // Validate Date and Times
+            if (data.TimeStart.TotalHours < 1 || data.TimeStart.TotalHours > 24)
+            {
+                // Must be between 0 and 24
+                ModelState.AddModelError("TimeStart", "Enter Valid Start Time");
                 return View(data);
             }
+
+            // Validate Date and Times
+            if (data.TimeEnd.TotalHours < 1 || data.TimeEnd.TotalHours > 24)
+            {
+                // Must be between 0 and 24
+                ModelState.AddModelError("TimeEnd", "Enter Valid End Time");
+                return View(data);
+            }
+
+            // Validate Date and Times
+            if (data.TimeEnd.Subtract(data.TimeStart).Ticks < 1)
+            {
+                // End is before Start
+                ModelState.AddModelError("TimeStart", "Start Time must be before End Time");
+                return View(data);
+            }
+
 
             Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(data);
 
