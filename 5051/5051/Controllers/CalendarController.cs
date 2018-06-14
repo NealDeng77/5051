@@ -67,7 +67,7 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Calendar
-        public ActionResult Update(string id=null)
+        public ActionResult Update(string id = null)
         {
             if (id == null)
             {
@@ -83,6 +83,47 @@ namespace _5051.Controllers
             }
 
             return View(myData);
+        }
+
+        /// <summary>
+        /// This updates the avatar based on the information posted from the udpate page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        // POST: Avatar/Update/5
+        [HttpPost]
+        public ActionResult Update([Bind(Include=
+                                        "Id,"+
+                                        "Modified,"+
+                                        "Date,"+
+                                        "TimeMax,"+
+                                        "TimeStart,"+
+                                        "TimeEnd,"+
+                                        "DayStart,"+
+                                        "DayEnd,"+
+                                        "")] SchoolCalendarModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(data);
+
+            return RedirectToAction("Index");
         }
     }
 }
