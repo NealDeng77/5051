@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Calendar Update";
     var Today = Model.Date.ToShortDateString();
-    var TimeStart = string.Format("{0}:{1}",Model.TimeStart.Hours,Model.TimeStart.Minutes);
-    var TimeEnd = string.Format("{0}:{1}", Model.TimeEnd.Hours, Model.TimeEnd.Minutes);
+    var TimeStart = string.Format("{0:D1}:{1:D2}", Model.TimeStart.Hours,Model.TimeStart.Minutes);
+    var TimeEnd = string.Format("{0:D1}:{1:D2}", Model.TimeEnd.Hours, Model.TimeEnd.Minutes);
 }
 
 <br />
