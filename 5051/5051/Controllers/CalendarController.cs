@@ -67,10 +67,22 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Calendar
-        public ActionResult Edit()
+        public ActionResult Edit(string id=null)
         {
-            return View();
-        }
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
 
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myData);
+        }
     }
 }
