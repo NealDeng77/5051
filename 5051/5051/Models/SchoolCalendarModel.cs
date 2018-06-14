@@ -44,11 +44,17 @@ namespace _5051.Models
         public SchoolCalendarDismissalEnum DayEnd { get; set; }
 
         /// <summary>
+        /// Set to true if this record is modified from the default
+        /// </summary>
+        public bool Modified { get; set; }
+
+        /// <summary>
         /// Create the default values
         /// </summary>
         public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
+            Modified = false;
         }
 
         /// <summary>
@@ -79,6 +85,7 @@ namespace _5051.Models
             TimeEnd = data.TimeEnd;
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
+            Modified = data.Modified;
         }
 
         /// <summary>
@@ -99,6 +106,7 @@ namespace _5051.Models
             TimeEnd = data.TimeEnd;
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
+            Modified = data.Modified;
         }
     }
 }
