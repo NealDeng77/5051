@@ -101,6 +101,9 @@ namespace _5051.Backend
                 return null;
             }
 
+            // Set date as modified
+            data.Modified = true;
+
             var myReturn = DataSource.Update(data);
 
             return myReturn;
@@ -134,6 +137,9 @@ namespace _5051.Backend
             }
 
             myData.SetDefault();
+
+            // Clear modified flag on date
+            myData.Modified = false;
 
             var myReturn = DataSource.Update(myData);
 
