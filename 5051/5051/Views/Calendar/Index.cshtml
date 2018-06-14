@@ -78,6 +78,7 @@
                         </thead>
                         <tbody>
                             @{
+                                int ColumnSpaceCount = 0;
                                 var ColumnSpace = "<td/>";
                                 foreach (var dayItem in MonthItem)
                                 {
@@ -105,47 +106,36 @@
                                         {
                                             case DayOfWeek.Monday:
                                                 //nothing
+                                                ColumnSpaceCount = 0;
                                                 break;
 
                                             case DayOfWeek.Tuesday:
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 1;
                                                 break;
 
                                             case DayOfWeek.Wednesday:
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 2;
                                                 break;
 
                                             case DayOfWeek.Thursday:
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 3;
                                                 break;
 
                                             case DayOfWeek.Friday:
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 4;
                                                 break;
 
                                             case DayOfWeek.Saturday:
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 5;
                                                 break;
 
                                             case DayOfWeek.Sunday:
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
-                                                @Html.Raw(ColumnSpace)
+                                                ColumnSpaceCount = 6;
                                                 break;
+                                        }
+                                        for (var i = 0;i< ColumnSpaceCount; i++)
+                                        {
+                                            @Html.Raw(ColumnSpace)
                                         }
                                     }
 
