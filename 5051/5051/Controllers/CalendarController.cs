@@ -67,7 +67,7 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Calendar
-        public ActionResult Edit(string id=null)
+        public ActionResult Update(string id=null)
         {
             if (id == null)
             {

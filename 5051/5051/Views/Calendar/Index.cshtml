@@ -114,7 +114,7 @@
                                         buttonClass = "btn btn-success";
                                     }
                                 }
-                                @Html.ActionLink(dayItem.Date.Day.ToString(), "Edit", new { id = dayItem.Id }, new { @class = buttonClass })
+                                @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass })
                             </div>
                                     @Html.Raw(endRow)
                                 }

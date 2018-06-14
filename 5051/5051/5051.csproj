@@ -386,7 +386,7 @@
     <Content Include="Views\Home\AvatarExample.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
-    <Content Include="Views\Calendar\Edit.cshtml" />
+    <Content Include="Views\Calendar\Update.cshtml" />
     <Content Include="Views\Portal\Roster.cshtml" />
     <Content Include="Views\Kiosk\ConfirmLogout.cshtml" />
     <Content Include="Views\Kiosk\ConfirmLogin.cshtml" />
