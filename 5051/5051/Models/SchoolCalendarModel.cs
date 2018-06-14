@@ -78,7 +78,7 @@ namespace _5051.Models
         // Sets the Default Values
         public void SetDefault()
         {
-            Date = DateTime.UtcNow;
+            // Date = DateTime.UtcNow;  // Date is not set in the default.  
             DayEnd = SchoolCalendarDismissalEnum.Normal;
             DayStart = SchoolCalendarDismissalEnum.Normal;
             TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
