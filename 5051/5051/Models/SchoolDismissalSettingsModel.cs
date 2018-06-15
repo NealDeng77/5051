@@ -30,6 +30,12 @@ namespace _5051.Models
         // The Late Dismissal 4pm
         public TimeSpan EndLate { get; set; }
 
+        // First day of school
+        public DateTime DayFirst { get; set; }
+
+        // Last day of school
+        public DateTime DayLast { get; set; }
+
         public SchoolDismissalSettingsModel()
         {
         }
@@ -51,8 +57,9 @@ namespace _5051.Models
             EndNormal = data.EndNormal;
             EndEarly = data.EndEarly;
             EndLate = data.EndLate;
+            DayFirst = data.DayFirst;
+            DayLast = data.DayLast;
         }
-
 
         /// <summary>
         /// Create the default values
@@ -76,6 +83,15 @@ namespace _5051.Models
             EndNormal = TimeSpan.Parse("15:45");
             EndEarly = TimeSpan.Parse("14:00");
             EndLate = TimeSpan.Parse("16:00");
+
+            var Year = DateTime.UtcNow.Year;
+            if (DateTime.UtcNow.Month > 6)
+            {
+                Year--;
+            }
+
+            DayFirst = DateTime.Parse("09/01/"+Year.ToString());
+            DayLast =  DateTime.Parse("06/30/"+(Year+1).ToString()); 
         }
 
         /// <summary>
@@ -96,6 +112,8 @@ namespace _5051.Models
             EndNormal = data.EndNormal;
             EndEarly = data.EndEarly;
             EndLate = data.EndLate;
+            DayFirst = data.DayFirst;
+            DayLast = data.DayLast;
         }
     }
 }

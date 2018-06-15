@@ -67,6 +67,8 @@ namespace _5051.Controllers
                                         "EndNormal," +
                                         "EndEarly," +
                                         "EndLate," +
+                                        "DayFirst," +
+                                        "DayLast," +
 
                                         "")] SchoolDismissalSettingsModel data)
         {

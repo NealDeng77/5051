@@ -85,6 +85,26 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.DayFirst)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.DayFirst)
+                                @Html.ValidationMessageFor(m => m.DayFirst)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.DayLast)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.DayLast)
+                                @Html.ValidationMessageFor(m => m.DayLast)
+                            </div>
+                        </div>
+
                         <br />
                         <br />
                         <div class="row">
