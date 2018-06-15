@@ -1,4 +1,5 @@
 ﻿@using _5051.Models
+@using _5051.Models.Enums
 @model SchoolCalendarViewModel
 @{
     ViewBag.Title = "Calendar";
@@ -109,9 +110,24 @@
                                 @{
                                     var buttonClass = "btn btn-default";
 
+                                    if (dayItem.SchoolDay == false)
+                                    {
+                                        buttonClass = "btn";
+                                    }
+
                                     if (dayItem.Modified == true)
                                     {
-                                        buttonClass = "btn btn-success";
+                                        buttonClass += "btn-success";
+                                    }
+
+                                    if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
+                                    {
+                                        buttonClass += " btn-info";
+                                    }
+
+                                    if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
+                                    {
+                                        buttonClass += " btn-info";
                                     }
                                 }
                                 @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass })
