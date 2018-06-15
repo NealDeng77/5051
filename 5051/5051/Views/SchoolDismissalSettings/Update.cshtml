@@ -1,6 +1,9 @@
 ﻿@model _5051.Models.SchoolDismissalSettingsModel
 @{
     ViewBag.Title = "Update";
+    var DayFirst = Model.DayFirst.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayFirst.Month, Model.DayFirst.Day, Model.);
+    var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
+
 }
 
 
@@ -30,7 +33,7 @@
                                 @Html.DisplayNameFor(m => m.StartNormal)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartNormal)
+                                @Html.EditorFor(m => m.StartNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.StartNormal)
                             </div>
                         </div>
@@ -40,7 +43,7 @@
                                 @Html.DisplayNameFor(m => m.StartEarly)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartEarly)
+                                @Html.EditorFor(m => m.StartEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.StartEarly)
                             </div>
                         </div>
@@ -50,7 +53,7 @@
                                 @Html.DisplayNameFor(m => m.StartLate)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartLate)
+                                @Html.EditorFor(m => m.StartLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.StartLate)
                             </div>
                         </div>
@@ -60,7 +63,7 @@
                                 @Html.DisplayNameFor(m => m.EndNormal)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndNormal)
+                                @Html.EditorFor(m => m.EndNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.EndNormal)
                             </div>
                         </div>
@@ -70,7 +73,7 @@
                                 @Html.DisplayNameFor(m => m.EndEarly)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndEarly)
+                                @Html.EditorFor(m => m.EndEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.EndEarly)
                             </div>
                         </div>
@@ -80,7 +83,7 @@
                                 @Html.DisplayNameFor(m => m.EndLate)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndLate)
+                                @Html.EditorFor(m => m.EndLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes) } })
                                 @Html.ValidationMessageFor(m => m.EndLate)
                             </div>
                         </div>
@@ -90,7 +93,7 @@
                                 @Html.DisplayNameFor(m => m.DayFirst)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.DayFirst)
+                                @Html.EditorFor(m => m.DayFirst, new { htmlAttributes = new { @Value = DayFirst } })
                                 @Html.ValidationMessageFor(m => m.DayFirst)
                             </div>
                         </div>
@@ -100,7 +103,7 @@
                                 @Html.DisplayNameFor(m => m.DayLast)
                             </div>
                             <div class="col-sm-4">
-                                @Html.EditorFor(m => m.DayLast)
+                                @Html.EditorFor(m => m.DayLast, new { htmlAttributes = new { @Value = DayLast } })
                                 @Html.ValidationMessageFor(m => m.DayLast)
                             </div>
                         </div>
@@ -111,7 +114,7 @@
                             <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
-                                @Html.ActionLink("Cancel", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
                                 <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </div>

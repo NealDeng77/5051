@@ -1,7 +1,9 @@
 ﻿@model _5051.Models.SchoolDismissalSettingsModel
-
 @{
     ViewBag.Title = "Read";
+
+    var DayFirst = Model.DayFirst.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayFirst.Month, Model.DayFirst.Day, Model.);
+    var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
 }
 
 <div class="container">
@@ -24,7 +26,7 @@
                             @Html.DisplayNameFor(m => m.StartNormal)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.StartNormal)
+                            @string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes)
                         </div>
                     </div>
 
@@ -33,7 +35,7 @@
                             @Html.DisplayNameFor(m => m.StartEarly)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.StartEarly)
+                            @string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes)
                         </div>
                     </div>
 
@@ -42,7 +44,7 @@
                             @Html.DisplayNameFor(m => m.StartLate)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.StartLate)
+                            @string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes)
                         </div>
                     </div>
 
@@ -51,7 +53,7 @@
                             @Html.DisplayNameFor(m => m.EndNormal)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.EndNormal)
+                            @string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes)
                         </div>
                     </div>
 
@@ -60,7 +62,7 @@
                             @Html.DisplayNameFor(m => m.EndEarly)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.EndEarly)
+                            @string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes)
                         </div>
                     </div>
 
@@ -69,7 +71,7 @@
                             @Html.DisplayNameFor(m => m.EndLate)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.EndLate)
+                            @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
                         </div>
                     </div>
 
@@ -78,7 +80,7 @@
                             @Html.DisplayNameFor(m => m.DayFirst)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.DayFirst)
+                            @DayFirst
                         </div>
                     </div>
 
@@ -87,7 +89,7 @@
                             @Html.DisplayNameFor(m => m.DayLast)
                         </div>
                         <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.DayLast)
+                            @DayLast
                         </div>
                     </div>
                     <br />
