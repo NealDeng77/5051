@@ -162,11 +162,7 @@ namespace _5051.Backend
             // For every day from the start of the school year, until the end of the school year or now...
             while (currentDate.CompareTo(dateEnd) < 0)
             {
-                var temp = new SchoolCalendarModel();
-
-                // Set Default Values
-                temp.SetDefault();
-                temp.Date = currentDate;
+                var temp = new SchoolCalendarModel(currentDate);
 
                 //Add the new date to the list of dates
                 Create(temp);

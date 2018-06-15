@@ -31,78 +31,89 @@
                         @Today
                     </h2>
 
-                    <h3>Time in school: @TimeDuration</h3>
+                    @{
+                        if (!Model.SchoolDay)
+                        {
+                            <H3>Not a school day</H3>
+                            @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        }
+                        else
+                        {
+                            <h3>Time in school: @TimeDuration</h3>
+                        }
+                    }
 
                 </div>
             </div>
             <br />
-
-            using (Html.BeginForm())
+            if (Model.SchoolDay)
             {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Id)
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.TimeStart)
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.TimeStart)
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
+                            <div class="row">
+                                @Html.ValidationMessageFor(m => m.TimeStart)
+                            </div>
+                        </div>
+                        @{
+                            if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                            {
+                                <div class="col-sm-2">
+                                    <div class="text-left">
+                                        @Model.DayStart Start
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
-                    <div class="col-sm-3">
-                        @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
-                        <div class="row">
-                            @Html.ValidationMessageFor(m => m.TimeStart)
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.TimeEnd)
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
+                            <div class="row">
+                                @Html.ValidationMessageFor(m => m.TimeEnd)
+                            </div>
+                        </div>
+
+                        @{
+                            if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                            {
+                                <div class="col-sm-2">
+                                    <div class="text-left">
+                                        @Model.DayEnd Dismissal
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                            <input type="submit" value="Update" class="btn btn-primary">
                         </div>
                     </div>
-                    @{
-                        if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                        {
-                            <div class="col-sm-2">
-                                <div class="text-left">
-                                    @Model.DayStart Start
-                                </div>
-                            </div>
-
-                        }
-                    }
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.TimeEnd)
-                    </div>
-                    <div class="col-sm-3">
-                        @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
-                        <div class="row">
-                            @Html.ValidationMessageFor(m => m.TimeEnd)
-                        </div>
-                    </div>
-
-                    @{
-                        if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                        {
-                            <div class="col-sm-2">
-                                <div class="text-left">
-                                    @Model.DayEnd Dismissal
-                                </div>
-                            </div>
-
-                        }
-                    }
-                </div>
-
-                <br />
-                <br />
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                    </div>
-                    <div class="col-sm-12">
-                        @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        <input type="submit" value="Update" class="btn btn-primary">
-                    </div>
-                </div>
-
+                }
             }
 
 

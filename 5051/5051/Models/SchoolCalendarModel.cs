@@ -58,32 +58,77 @@ namespace _5051.Models
         public bool Modified { get; set; }
 
         /// <summary>
+        /// Set to true if the day is a school day
+        /// </summary>
+        [Display(Name = "School Day", Description = "School Day")]
+        public bool SchoolDay { get; set; }
+
+        /// <summary>
         /// Create the default values
         /// </summary>
-        public void Initialize()
+        public void Initialize(DateTime date)
         {
             Id = Guid.NewGuid().ToString();
             Modified = false;
+            SchoolDay = true;
+            Date = date;
+
+            SetDefault();
+            SetSchoolDay();
         }
 
         /// <summary>
-        /// New SchoolCalendar
+        /// New SchoolCalendar, for now
         /// </summary>
         public SchoolCalendarModel()
         {
-            Initialize();
-            SetDefault();
+            Initialize(DateTime.UtcNow);
         }
 
-        // Sets the Default Values
+        /// <summary>
+        /// New SchoolCalendar, based on a date
+        /// </summary>
+        public SchoolCalendarModel(DateTime date)
+        {
+            Initialize(date);
+        }
+
+        /// <summary>
+        /// Sets the Default Values 
+        /// </summary>
         public void SetDefault()
         {
             // Date = DateTime.UtcNow;  // Date is not set in the default.  
             DayEnd = SchoolCalendarDismissalEnum.Normal;
             DayStart = SchoolCalendarDismissalEnum.Normal;
-            TimeEnd = TimeSpan.Parse("15:45"); //todo replace with actual time end for the day
-            TimeStart = TimeSpan.Parse("8:55"); //todo replace with actual time Start for the day
+            SchoolDay = true;
+
+            TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
+            TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
             TimeDuration = TimeEnd.Subtract(TimeStart);
+        }
+
+        /// <summary>
+        /// Sets if the school should be in sesson or not based on the school rules
+        /// </summary>
+        public void SetSchoolDay()
+        {
+            // todo, change this out to be a structure on the settings for each day.  Show if the school is in session, or start, end different
+            // Then walk each of the days of the week and apply those settings.
+            switch (Date.DayOfWeek)
+            {
+                case DayOfWeek.Saturday:
+                    SchoolDay = false;
+                    break;
+
+                case DayOfWeek.Sunday:
+                    SchoolDay = false;
+                    break;
+
+                case DayOfWeek.Wednesday:
+                    DayEnd = SchoolCalendarDismissalEnum.Early;
+                    break;
+            }
         }
 
         /// <summary>
@@ -92,7 +137,7 @@ namespace _5051.Models
         /// <param name="data">a valid model</param>
         public SchoolCalendarModel(SchoolCalendarModel data)
         {
-            Initialize();
+            Initialize(data.Date);
 
             if (data == null)
             {
@@ -106,6 +151,7 @@ namespace _5051.Models
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
             Modified = data.Modified;
+            SchoolDay = data.SchoolDay;
 
             TimeDuration = data.TimeEnd.Subtract(TimeStart);
         }
@@ -128,10 +174,10 @@ namespace _5051.Models
             DayStart = data.DayStart;
             DayEnd = data.DayEnd;
             Modified = data.Modified;
+            SchoolDay = data.SchoolDay;
 
             // The time in school is the delta of end - start
             TimeDuration = data.TimeEnd.Subtract(TimeStart);
-
         }
     }
 }
