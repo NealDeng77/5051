@@ -101,21 +101,28 @@
                         }
                     </div>
 
-                    <br />
-                    <br />
                     <div class="row">
                         <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-12">
-                            @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
                             <input type="submit" value="Update" class="btn btn-primary">
                         </div>
                     </div>
                 }
+
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
             }
 
 
