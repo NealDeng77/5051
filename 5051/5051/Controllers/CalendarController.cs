@@ -143,6 +143,60 @@ namespace _5051.Controllers
         }
 
         /// <summary>
+        /// Sets the school day as True, so times can be edited
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult SetSchoolDay(string id = null)
+        {
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            myData.SchoolDay = true;
+
+            myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
+
+            return RedirectToAction("Update", "Calendar", new { id });
+        }
+
+        /// <summary>
+        /// Sets the school day as True, so times can be edited
+        /// </summary>
+        /// <returns></returns>
+        // GET: Calendar
+        public ActionResult SetNoSchoolDay(string id = null)
+        {
+            if (id == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(id);
+            if (myData == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            myData.SchoolDay = false;
+
+            myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
+
+            return RedirectToAction("Update", "Calendar", new { id });
+        }
+
+        /// <summary>
         /// Calendar Update
         /// </summary>
         /// <returns></returns>
@@ -223,15 +277,9 @@ namespace _5051.Controllers
             // Load the actual record, and only update TimeStart and Time End
             var myData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Read(data.Id);
 
-            /// See if there was any change at all
-            if (myData.TimeEnd == data.TimeEnd && myData.TimeStart == data.TimeStart)
-            {
-                // No change happened, so return
-                return RedirectToAction("Index");
-            }
-
             myData.TimeStart = data.TimeStart;
             myData.TimeEnd = data.TimeEnd;
+            myData.SchoolDay = data.SchoolDay;
 
             Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Update(myData);
 

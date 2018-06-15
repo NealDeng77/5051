@@ -101,7 +101,7 @@ namespace _5051.Models
             // Date = DateTime.UtcNow;  // Date is not set in the default.  
             DayEnd = SchoolCalendarDismissalEnum.Normal;
             DayStart = SchoolCalendarDismissalEnum.Normal;
-            SchoolDay = true;
+            SetSchoolDay();
 
             TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
             TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;

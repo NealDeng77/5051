@@ -35,7 +35,9 @@
                         if (!Model.SchoolDay)
                         {
                             <H3>Not a school day</H3>
+                            @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
                             @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+
                         }
                         else
                         {
