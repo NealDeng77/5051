@@ -8,21 +8,30 @@
 <h2>Welcome to School Calendar</h2>
 <br />
 <h4>Highlighted days are school days</h4>
+<h4>Early dismissal are blue</h4>
+<h4>Modified days are Green</h4>
 <br />
 <h4>Early dismissal every Wendsday</h4>
 
 
 <h4>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h4>
-<h4>Most Recend Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h4>
+<h4>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h4>
 
 <br />
+<br />
+
+@Html.ActionLink("Change Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" }, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+
 <hr />
 
 <div class="row">
     @{
         foreach (var MonthItem in Model.Months)
         {
-            <div class="col-sm-4 CalendarBox" >
+            <div class="col-sm-4 CalendarBox">
 
                 <div class="row">
                     <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
@@ -106,32 +115,50 @@
                                     }
 
                                     // Output this date
-                            <div>
-                                @{
-                                    var buttonClass = "btn btn-default";
+                                    <div>
+                                        @{
+                                            var buttonClass = "btn btn-sm active btn-default";
 
-                                    if (dayItem.SchoolDay == false)
-                                    {
-                                        buttonClass = "btn";
-                                    }
+                                            if (dayItem.SchoolDay == false)
+                                            {
+                                                buttonClass = "btn btn-sm btn-default";
+                                            }
 
-                                    if (dayItem.Modified == true)
-                                    {
-                                        buttonClass += "btn-success";
-                                    }
+                                            else
+                                            {
+                                                if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-info";
+                                                }
 
-                                    if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
-                                    {
-                                        buttonClass += " btn-info";
-                                    }
+                                                if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-info";
+                                                }
 
-                                    if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
-                                    {
-                                        buttonClass += " btn-info";
-                                    }
-                                }
-                                @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass })
-                            </div>
+                                                if (dayItem.Modified == true)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-success";
+                                                }
+                                            }
+                                            @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass });
+
+
+                                            if (dayItem.TimeDuration.Ticks > 0)
+                                            {
+                                                <span>
+                                                    <br />
+                                                    @string.Format("{0:D1}:{1:D2}", dayItem.TimeDuration.Hours, dayItem.TimeDuration.Minutes)
+                                                    <br />
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <br />
+                                            }
+                                        }
+
+                                    </div>
                                     @Html.Raw(endRow)
                                 }
                             }
@@ -146,12 +173,7 @@
 
 
 
-
 <br />
 <br />
-
-@Html.ActionLink("Edit Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" },new { @class = "btn btn-primary" })
-
 <br />
 
-<br />
