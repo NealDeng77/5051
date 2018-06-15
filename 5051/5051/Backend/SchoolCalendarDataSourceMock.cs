@@ -154,8 +154,8 @@ namespace _5051.Backend
             DateTime dateStart = new DateTime();
             DateTime dateEnd = new DateTime();
 
-            dateStart = DateTime.Parse("09/01/2017"); //Todo swap out with a data structure that models the school calendar
-            dateEnd = DateTime.Parse("07/01/2018"); //Todo swap out with a data structure that models the school calendar
+            dateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            dateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
 
             currentDate = dateStart;
 
