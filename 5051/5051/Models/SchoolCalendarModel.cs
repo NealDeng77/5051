@@ -102,10 +102,10 @@ namespace _5051.Models
             DayEnd = SchoolCalendarDismissalEnum.Normal;
             DayStart = SchoolCalendarDismissalEnum.Normal;
             SetSchoolDay();
+            SetSchoolTime();
 
-            TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
-            TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
-            TimeDuration = TimeEnd.Subtract(TimeStart);
+            // If not school day reset times
+            SetNoSchoolDayTimes();
         }
 
         /// <summary>
@@ -128,6 +128,55 @@ namespace _5051.Models
                 case DayOfWeek.Wednesday:
                     DayEnd = SchoolCalendarDismissalEnum.Early;
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Based on the day of the school, decide the start and stop times
+        /// </summary>
+        public void SetSchoolTime()
+        {
+            
+            switch (DayStart)
+            {
+                case SchoolCalendarDismissalEnum.Early:
+                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartEarly;
+                    break;
+                case SchoolCalendarDismissalEnum.Late:
+                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
+                    break;
+                case SchoolCalendarDismissalEnum.Normal:
+                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
+                    break;
+            }
+
+            switch (DayEnd)
+            {
+                case SchoolCalendarDismissalEnum.Early:
+                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
+                    break;
+                case SchoolCalendarDismissalEnum.Late:
+                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndLate;
+                    break;
+                case SchoolCalendarDismissalEnum.Normal:
+                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
+                    break;
+            }
+
+            TimeDuration = TimeEnd.Subtract(TimeStart);
+        }
+
+        /// <summary>
+        /// No School day, so turn it off, and zero out the times.
+        /// </summary>
+        public void SetNoSchoolDayTimes()
+        {
+            // If there is no school, then set everything to zero
+            if (SchoolDay == false)
+            {
+                //TimeEnd = TimeSpan.Zero;
+                //TimeStart = TimeSpan.Zero;
+                TimeDuration = TimeSpan.Zero;
             }
         }
 
@@ -161,7 +210,7 @@ namespace _5051.Models
         /// Updates everything except for the ID
         /// </summary>
         /// <param name="data">Data to update</param>
-        public void Update (SchoolCalendarModel data)
+        public void Update(SchoolCalendarModel data)
         {
             if (data == null)
             {
@@ -178,6 +227,35 @@ namespace _5051.Models
 
             // The time in school is the delta of end - start
             TimeDuration = data.TimeEnd.Subtract(TimeStart);
+
+
+            // Check to make sure not set as early or late, if the time time is changed
+            // This solves the issue of having an item be set as early dismissal, and then the time changed to say 14:01, but it still shows as early dismissal.
+            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+            if (DayStart == SchoolCalendarDismissalEnum.Early && TimeStart != myDefault.StartEarly)
+            {
+                DayStart = SchoolCalendarDismissalEnum.Normal;
+            }
+
+            if (DayStart == SchoolCalendarDismissalEnum.Late && TimeStart != myDefault.StartLate)
+            {
+                DayStart = SchoolCalendarDismissalEnum.Normal;
+            }
+
+            if (DayEnd == SchoolCalendarDismissalEnum.Early && TimeEnd != myDefault.EndEarly)
+            {
+                DayEnd = SchoolCalendarDismissalEnum.Normal;
+            }
+
+            if (DayEnd == SchoolCalendarDismissalEnum.Late && TimeEnd != myDefault.EndLate)
+            {
+                DayEnd = SchoolCalendarDismissalEnum.Normal;
+            }
+
+
+            // If not a school day, then no time in class.
+            SetNoSchoolDayTimes();
         }
     }
 }
