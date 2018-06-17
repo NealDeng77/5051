@@ -209,5 +209,17 @@ namespace _5051.Backend
                     break;
             }
         }
+
+        /// <summary>
+        /// Find a date in the data store
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public SchoolCalendarModel ReadDate(DateTime date)
+        {
+            // Use the short date string because only checking dd.mm.yy not time...
+            var myData = SchoolCalendarList.Find(n => n.Date.ToShortDateString() == date.ToShortDateString());
+            return myData;
+        }
     }
 }

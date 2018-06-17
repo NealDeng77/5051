@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using _5051.Models.Enums;
 
 namespace _5051.Models
 {
@@ -32,5 +33,19 @@ namespace _5051.Models
         /// </summary>
         public TimeSpan HoursExpected { get; set; }
 
+        /// <summary>
+        /// If the attendance excused etc.
+        /// </summary>
+        public AttendanceStatusEnum AttendanceStatus { get; set; }
+
+        /// <summary>
+        /// The status of the checkin
+        /// </summary>
+        public CheckInStatusEnum CheckInStatus { get; set; }
+
+        /// <summary>
+        ///  The Status of the Checkout
+        /// </summary>
+        public CheckOutStatusEnum CheckOutStatus { get; set; }
     }
 }

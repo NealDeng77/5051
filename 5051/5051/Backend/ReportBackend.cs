@@ -41,9 +41,6 @@ namespace _5051.Backend
             }
         }
 
-        // Hold the current report
-        private StudentReportViewModel Report = new StudentReportViewModel();
-        
         /// <summary>
         ///  Generate the Report fo a Student
         /// </summary>
@@ -53,6 +50,9 @@ namespace _5051.Backend
         /// <returns>The Student Report View Model</returns>
         public StudentReportViewModel GenerateStudentReport(StudentModel student, DateTime dateStart, DateTime dateEnd)
         {
+            // Hold the current report
+            StudentReportViewModel Report = new StudentReportViewModel();
+
             // Confirm a student was passed in
             if (student == null)
             {
@@ -65,10 +65,14 @@ namespace _5051.Backend
             Report.DateEnd = dateEnd;
 
             // Call for the report to be generated
-            GenerateAttendance();
-            GenerateDateRange();
-            GenerateHoursAttended();
-            GenerateOther();
+            if (GenerateAttendance(Report) == false)
+            {
+                return null;
+            }
+
+            GenerateDateRange(Report);
+            GenerateHoursAttended(Report);
+            GenerateOther(Report);
 
             return Report;
         }
@@ -76,38 +80,71 @@ namespace _5051.Backend
         /// <summary>
         /// Walk the official school calendar and tally up what is expected
         /// </summary>
-        private void GenerateAttendance()
+        private bool GenerateAttendance(StudentReportViewModel Report)
         {
             DateTime currentDate = new DateTime();
-            DateTime dateStart = new DateTime();
-            DateTime dateEnd = new DateTime();
-
-            dateStart = DateTime.Parse("09/01/2017"); //Todo swap out with a data structure that models the school calendar
-            dateEnd = DateTime.Parse("07/01/2018"); //Todo swap out with a data structure that models the school calendar
 
             // Don't go beyond today
-            if (dateEnd.CompareTo(DateTime.UtcNow) > 0)
+            if (Report.DateEnd.CompareTo(DateTime.UtcNow) > 0)
             {
-                dateEnd = DateTime.UtcNow;
+                Report.DateEnd = DateTime.UtcNow;
             }
 
             // Reset the values to be 0, then add to them.
             Report.Stats.AccumlatedTotalHoursExpected = TimeSpan.Zero;
             Report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
 
-            currentDate = dateStart;
-            while (currentDate.CompareTo(dateEnd) < 0)
+            currentDate = Report.DateStart;
+            while (currentDate.CompareTo(Report.DateEnd) < 0)
             {
                 var temp = new AttendanceReportViewModel();
                 temp.Date = currentDate;
 
-                temp.HoursExpected = TimeSpan.Parse("5:00");  //Todo, replace with actual hours from school calendar
+                var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
+                if (myToday == null)
+                {
+                    return false;
+                }
+
+                temp.HoursExpected = myToday.TimeDuration;
 
                 // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
                 var myRange = Report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
                 foreach (var item in myRange)
                 {
-                    temp.HoursAttended += item.Duration;
+                    var tempDuration = item.Duration;
+                    if (item.Status == StudentStatusEnum.In)
+                    {
+                        // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
+                        var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
+
+                        // If the person is still checked in, and the day is over, then check them out.
+                        if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
+                        {
+
+                            var myDate = item.In.ToShortDateString()+" " + myItemDefault.TimeEnd.ToString();
+                            //Add the current date of Item, with the end time for the default date, and return that back as a date time.
+                            item.Out = DateTime.Parse(myDate);
+                            item.Status = StudentStatusEnum.Out;
+                            item.Duration = item.Out.Subtract(item.In);
+
+                            // Log the student out as well.
+                            Report.Student.Status = StudentStatusEnum.Out;
+
+                            // Update the change for that item be rewriting the student record back to the datastore
+                            DataSourceBackend.Instance.StudentBackend.Update(Report.Student);
+                        }
+                        else
+                        {
+                            // If the person is still checked in, and it is today, use now and add up till then.
+                            tempDuration = DateTime.UtcNow.Subtract(item.In);
+                        }
+                    }
+                    temp.HoursAttended += tempDuration;
+
+                    temp.AttendanceStatus = item.AttendanceStatus;
+                    temp.CheckInStatus = item.CheckInStatus;
+                    temp.CheckOutStatus = item.CheckOutStatus;
                 }
 
                 Report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
@@ -122,12 +159,14 @@ namespace _5051.Backend
                 // Look to the next day
                 currentDate = currentDate.AddDays(1);
             }
+
+            return true;
         }
 
         /// <summary>
         /// Walk the Dates between the Start and End, and only keep the ones to show.
         /// </summary>
-        private void GenerateDateRange()
+        private void GenerateDateRange(StudentReportViewModel Report)
         {
             var accumulativeHoursAttended = new TimeSpan();
             var accumulativeHoursExpected = new TimeSpan();
@@ -156,7 +195,7 @@ namespace _5051.Backend
             Report.Stats.AccumlatedTotalHoursExpected = accumulativeHoursExpected;
         }
 
-        private void GenerateHoursAttended()
+        private void GenerateHoursAttended(StudentReportViewModel Report)
         {
 
             //foreach (var item in Report.Student.Attendance)
@@ -186,15 +225,15 @@ namespace _5051.Backend
             //}
         }
 
-        private void GenerateOther()
+        private void GenerateOther(StudentReportViewModel Report)
         {
-            if (Report.Student.Attendance.Count != 0)
+            if (Report.AttendanceList.Count != 0)
             {
-                foreach (var item in Report.Student.Attendance)
+                foreach (var item in Report.AttendanceList)
                 {
                     // Count up the Data Totals for Excused, Present, Unexcused
                     switch (item.AttendanceStatus)
-                    {
+                    { 
                         case AttendanceStatusEnum.AbsentExcused:
                             Report.Stats.DaysAbsentExcused++;
                             break;

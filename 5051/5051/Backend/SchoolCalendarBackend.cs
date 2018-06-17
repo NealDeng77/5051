@@ -90,6 +90,23 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Return the data for the id passed in
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Null or valid data</returns>
+        public SchoolCalendarModel ReadDate(DateTime date)
+        {
+            // If the date is out of range, return null
+            if (date.Year < DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Year)
+            {
+                return null;
+            }
+
+            var myReturn = DataSource.ReadDate(date);
+            return myReturn;
+        }
+
+        /// <summary>
         /// Update all attributes to be what is passed in
         /// </summary>
         /// <param name="data"></param>

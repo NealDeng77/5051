@@ -19,5 +19,7 @@ namespace _5051.Backend
         List<SchoolCalendarModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+
+        SchoolCalendarModel ReadDate(DateTime date);
     }
 }
