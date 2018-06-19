@@ -85,7 +85,7 @@ namespace _5051.Models
             EndLate = TimeSpan.Parse("16:00");
 
             var Year = DateTime.UtcNow.Year;
-            if (DateTime.UtcNow.Month > 6)
+            if (DateTime.UtcNow.Month > 1)
             {
                 Year--;
             }
