@@ -170,20 +170,38 @@ namespace _5051.Tests.Controllers
         #endregion CreateRegion
 
         #region UpdateRegion
-        //[TestMethod]
-        //public void Controller_Avatar_Update_Get_Should_Return_New_Model()
-        //{
-        //    // Arrange
-        //    AvatarController controller = new AvatarController();
+        [TestMethod]
+        public void Controller_Avatar_Update_Get_Should_Return_New_Model()
+        {
+            // Arrange (from create)
+            AvatarController controller = new AvatarController();
 
-        //    // Act
-        //    ViewResult result = controller.Update() as ViewResult;
+            var data = new AvatarModel
+            {
+                Description = "description",
+                Id = "abc",
+                Name = "Name",
+                Uri = "picture"
+            };
+            // create test avatar
+            var result = (RedirectToRouteResult)controller.Create(data);
 
-        //    var resultAvatar = result.Model as AvatarModel;
+            // Check that the item is created (from create)
+            var resultAvatar = AvatarBackend.Instance.Read("abc");
+            Assert.AreEqual(data.Id, resultAvatar.Id, TestContext.TestName);
 
-        //    // Assert
-        //    Assert.AreNotEqual(null, resultAvatar.Id, TestContext.TestName);
-        //}
+
+            // Act
+            var updateResult = controller.Update(data.Id) as ViewResult;
+
+            resultAvatar = updateResult.Model as AvatarModel;
+
+            // Assert
+            Assert.AreNotEqual(null, resultAvatar.Id, TestContext.TestName);
+
+            // Reset the Avatars
+            AvatarBackend.Instance.Reset();
+        }
 
         [TestMethod]
         public void Controller_Avatar_Update_Post_Invalid_Null_Id_Should_Return_Model()
