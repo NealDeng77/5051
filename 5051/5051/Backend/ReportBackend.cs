@@ -122,7 +122,7 @@ namespace _5051.Backend
                         if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
                         {
 
-                            var myDate = item.In.ToShortDateString()+" " + myItemDefault.TimeEnd.ToString();
+                            var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
                             //Add the current date of Item, with the end time for the default date, and return that back as a date time.
                             item.Out = DateTime.Parse(myDate);
                             item.Status = StudentStatusEnum.Out;
@@ -227,13 +227,13 @@ namespace _5051.Backend
 
         private void GenerateOther(StudentReportViewModel Report)
         {
-            if (Report.AttendanceList.Count != 0)
+            if (Report.AttendanceList.Count != 0 && !Report.AttendanceList.Any())
             {
                 foreach (var item in Report.AttendanceList)
                 {
                     // Count up the Data Totals for Excused, Present, Unexcused
                     switch (item.AttendanceStatus)
-                    { 
+                    {
                         case AttendanceStatusEnum.AbsentExcused:
                             Report.Stats.DaysAbsentExcused++;
                             break;
@@ -276,7 +276,6 @@ namespace _5051.Backend
                 Report.Stats.PercUnexcused = 100 * Report.Stats.DaysAbsentUnexcused / Report.Student.Attendance.Count;
                 Report.Stats.PercAttendedHours = (int)(100 * Report.Stats.TotalHoursAttended / (Report.Stats.TotalHoursMissing + Report.Stats.TotalHoursAttended));
             }
-
         }
     }
 }
