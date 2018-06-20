@@ -30,5 +30,20 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion Instantiate
+
+        #region IndexRegion
+        [TestMethod]
+        public void Controller_Kiosk_Index_Default_Should_Pass()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion IndexRegion
     }
 }
