@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5051.Models
 {
@@ -13,27 +14,35 @@ namespace _5051.Models
         public string Id { get; set; }
 
         // The Normal Start time.  8:55am
+        [Display(Name = "Start Normal", Description = "Time Class Usualy Starts")]
         public TimeSpan StartNormal { get; set; }
 
         // The Early Start time.  8:30am
+        [Display(Name = "Start Early", Description = "Time Class Starts Early")]
         public TimeSpan StartEarly { get; set; }
 
         // The Late Start Time 10:55am (snow start)
+        [Display(Name = "Start Late", Description = "Late Start Time")]
         public TimeSpan StartLate { get; set; }
 
         // The Normal end time 3:45am
+        [Display(Name = "End Normal", Description = "Time Class Usualy Ends")]
         public TimeSpan EndNormal { get; set; }
 
         // The Early dismissal (wed 2pm)
+        [Display(Name = "End Early", Description = "Time Class Ends Early")]
         public TimeSpan EndEarly { get; set; }
 
         // The Late Dismissal 4pm
+        [Display(Name = "End Late", Description = "Time Class Ends if Late End")]
         public TimeSpan EndLate { get; set; }
 
         // First day of school
+        [Display(Name = "First Day", Description = "First Day of School")]
         public DateTime DayFirst { get; set; }
 
         // Last day of school
+        [Display(Name = "Last Day", Description = "Last Day of School")]
         public DateTime DayLast { get; set; }
 
         public SchoolDismissalSettingsModel()
