@@ -110,6 +110,7 @@ namespace _5051.Backend
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
                 if (myToday == null)
                 {
+                    //todo:  Consider changing this to be a Continue, so other days can be reviewed.  Need to figure out how to test when doing UTs for this one...
                     return false;
                 }
 
