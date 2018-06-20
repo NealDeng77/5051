@@ -142,16 +142,18 @@ namespace _5051.Backend
             return myReturn;
         }
 
-        /// <summary>
-        /// Walks each existing date in the calendar, and resets the dates based on the defaults.
-        /// </summary>
-        public void ResetDefaults()
-        {
-            foreach (var item in instance.Index())
-            {
-                Update(item);
-            }
-        }
+        // todo: Not ready yet, need to work out how to reset the calendar properly
+
+        ///// <summary>
+        ///// Walks each existing date in the calendar, and resets the dates based on the defaults.
+        ///// </summary>
+        //public void ResetDefaults()
+        //{
+        //    foreach (var item in instance.Index())
+        //    {
+        //        Update(item);
+        //    }
+        //}
 
         /// <summary>
         /// Returns the First record
