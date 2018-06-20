@@ -27,6 +27,8 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        #region AboutRegion
+
         [TestMethod]
         public void Controller_Home_About_Default_Should_Pass()
         {
@@ -39,6 +41,8 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion AboutRegion
 
         [TestMethod]
         public void Controller_Home_Contact_Default_Should_Pass()
