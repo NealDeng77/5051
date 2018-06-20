@@ -7,7 +7,7 @@
 }
 
 <div class="container">
-    <h2>School Dismissal Settings </h2>
+    <h2>School Dismissal Settings</h2>
     <br />
     <div class="row">
         @{
@@ -48,6 +48,8 @@
                         </div>
                     </div>
 
+                    <br />
+                    <br />
                     <div class="row">
                         <div class="col-sm-3 text-right">
                             @Html.DisplayNameFor(m => m.EndNormal)
@@ -75,6 +77,8 @@
                         </div>
                     </div>
 
+                    <br />
+                    <br />
                     <div class="row">
                         <div class="col-sm-3 text-right">
                             @Html.DisplayNameFor(m => m.DayFirst)
@@ -98,7 +102,7 @@
                         <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-4">
-                            @Html.ActionLink("Cancel", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
                             @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
                         </div>
                     </div>
