@@ -1,5 +1,4 @@
-﻿
-namespace _5051.Models.Enums
+﻿namespace _5051.Models.Enums
 {
     /// <summary>
     /// Used for the Attendance Status
