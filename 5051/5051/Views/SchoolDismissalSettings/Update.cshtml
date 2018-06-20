@@ -1,25 +1,23 @@
 ﻿@model _5051.Models.SchoolDismissalSettingsModel
 @{
     ViewBag.Title = "Update";
+
     var DayFirst = Model.DayFirst.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayFirst.Month, Model.DayFirst.Day, Model.);
     var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
-
 }
 
-
 <div class="container">
+    <h2>School Dismissal Settings</h2>
+    <br />
     <div class="row">
-
         @{
             if (Model == null)
             {
-                <p>No Avatar</p>
+                <p>No Data</p>
             }
-
             else
             {
                 <div class="row">
-                    <h2>Update Avatar</h2>
                     <br />
                     <br />
 
@@ -58,6 +56,9 @@
                             </div>
                         </div>
 
+                        <br />
+                        <br />
+
                         <div class="row">
                             <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.EndNormal)
@@ -88,6 +89,9 @@
                             </div>
                         </div>
 
+                        <br />
+                        <br />
+
                         <div class="row">
                             <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.DayFirst)
@@ -114,7 +118,7 @@
                             <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
-                                @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Back", "Read", new { id = Model.Id }, new { @class = "btn btn-success" })
                                 <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </div>
