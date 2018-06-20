@@ -102,7 +102,13 @@ namespace _5051.Backend
             }
 
             var myReturn = DataSource.Update(data);
-
+            if (myReturn != null)
+            {
+                // Changes to the Update, means a setting on the calendar is different.
+                // Need to go through the calendar and change things.  That way a change to the dismissal time is reflected if changed etc.
+                SchoolCalendarBackend.Instance.ResetDefaults();
+            }
+            
             return myReturn;
         }
 

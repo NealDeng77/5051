@@ -95,8 +95,15 @@ namespace _5051.Backend
             Report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
 
             currentDate = Report.DateStart;
+            
+            // Set current date to be 1 less, because will get added in the for loop
+            currentDate = currentDate.AddDays(-1);
+
             while (currentDate.CompareTo(Report.DateEnd) < 0)
             {
+                // Look to the next day
+                currentDate = currentDate.AddDays(1);
+
                 var temp = new AttendanceReportViewModel();
                 temp.Date = currentDate;
 
@@ -106,10 +113,18 @@ namespace _5051.Backend
                     return false;
                 }
 
+                // if the day is not a school day, leave it off the report.
+                if (myToday.SchoolDay == false)
+                {
+                    // Skip this one
+                    continue;
+                }
+
                 temp.HoursExpected = myToday.TimeDuration;
 
                 // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
                 var myRange = Report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
+                
                 foreach (var item in myRange)
                 {
                     var tempDuration = item.Duration;
@@ -155,9 +170,6 @@ namespace _5051.Backend
                 temp.TotalHours = Report.Stats.AccumlatedTotalHours;
 
                 Report.AttendanceList.Add(temp);
-
-                // Look to the next day
-                currentDate = currentDate.AddDays(1);
             }
 
             return true;
