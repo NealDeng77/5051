@@ -20,13 +20,13 @@ namespace _5051.Tests.Controllers
         public void Controller_Kiosk_Instantiate_Default_Should_Pass()
         {
             // Arrange
-            var controller = new AdminController();
+            var controller = new KioskController();
 
             // Act
             var result = controller.GetType();
 
             // Assert
-            Assert.AreEqual(result, new AdminController().GetType(), TestContext.TestName);
+            Assert.AreEqual(result, new KioskController().GetType(), TestContext.TestName);
         }
 
         #endregion Instantiate
