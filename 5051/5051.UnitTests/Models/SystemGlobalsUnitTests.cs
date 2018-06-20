@@ -26,6 +26,23 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(result, DataSourceEnum.Mock, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_SystemGlobals_Default_Existing_Should_Pass()
+        {
+            // Calls for the instance two times, the first time creates it, the second time uses the existing
+
+            // Arrange
+            var myFirstTime = SystemGlobals.Instance;
+            var myModel = SystemGlobals.Instance;
+
+            // Act
+            var result = myModel.DataSourceValue;
+
+            // Assert
+            Assert.AreEqual(result, DataSourceEnum.Mock, TestContext.TestName);
+        }
+
         #endregion Instantiate
     }
 }
