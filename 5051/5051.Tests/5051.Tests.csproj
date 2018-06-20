@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ShopInventoryControllerTest.cs" />
     <Compile Include="Controllers\ShopControllerTest.cs" />
     <Compile Include="Controllers\SchoolDismissalSettingsControllerTest.cs" />
     <Compile Include="Controllers\PortalControllerTest.cs" />
