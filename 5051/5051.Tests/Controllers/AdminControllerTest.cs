@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051;
 using _5051.Controllers;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -25,6 +26,21 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result,TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Avatar_Create_Get_Should_Return_New_Model()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            ViewResult result = controller.Report() as ViewResult;
+
+            var resultStudentViewModel = result.Model as StudentViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentViewModel, TestContext.TestName);
         }
 
         [TestMethod]
