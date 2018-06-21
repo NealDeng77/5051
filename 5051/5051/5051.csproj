@@ -405,6 +405,7 @@
     <Content Include="Views\SchoolDismissalSettings\Update.cshtml" />
     <Content Include="Views\KioskSettings\Read.cshtml" />
     <Content Include="Views\KioskSettings\Update.cshtml" />
+    <Content Include="Views\Kiosk\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
