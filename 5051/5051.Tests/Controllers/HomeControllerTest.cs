@@ -65,6 +65,8 @@ namespace _5051.Tests.Controllers
 
         #endregion ContactRegion
 
+        #region PrivacyRegion
+
         [TestMethod]
         public void Controller_Home_Privacy_Default_Should_Pass()
         {
@@ -72,11 +74,14 @@ namespace _5051.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = controller.Privacy() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion PrivacyRegion
+
 
         [TestMethod]
         public void Controller_Home_ShopExample_Default_Should_Pass()
