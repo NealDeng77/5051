@@ -231,5 +231,57 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion SetLateStartRegion
+
+        #region SetNoSchoolDayRegion
+
+        [TestMethod]
+        public void Controller_Calendar_SetNoSchoolDay_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetNoSchoolDay(null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_SetNoSchoolDay_myDataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetNoSchoolDay(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_SetNoSchoolDay_ShouldReturnCalendarPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetNoSchoolDay(id);
+
+            // Assert
+            Assert.AreEqual("Update", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Calendar", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        #endregion SetNoSchoolDayRegion
     }
 }
