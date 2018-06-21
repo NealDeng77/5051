@@ -47,33 +47,6 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_Calendar_Index_With_Empty_List_Should_Return_Error_Page()
-        {
-            // Arrange
-            CalendarController controller = new CalendarController();
-
-            // Set unit testing backend data
-            DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
-
-            // Make empty StudentList
-            while (DataSourceBackend.Instance.SchoolCalendarBackend.Index().Count != 0)
-            {
-                var first = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
-                DataSourceBackend.Instance.SchoolCalendarBackend.Delete(first.Id);
-            }
-
-            // Act
-            var result = (RedirectToRouteResult)controller.Index();
-
-            // Reset DataSourceBackend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
-        }
-
         #endregion IndexRegion
 
         #region SetDefaultRegion
