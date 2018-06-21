@@ -47,21 +47,32 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Controller_Kiosk_Index_With_Null_List_Should_Return_Error_Page()
-        //{
-        //    // Arrange
-        //    KioskController controller = new KioskController();
-        //    // run unit test datasource and update list to null
+        [TestMethod]
+        public void Controller_Kiosk_Index_With_Empty_List_Should_Return_Error_Page()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+            
+            // Set unitesting backend data
+            DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
 
-        //    // Act
-        //    var result = (RedirectToRouteResult)controller.Index();
-        //    // reset datasource
+            // Make empty StudentList
+            while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
+            {
+                var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
+                DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
+            }
 
-        //    // Assert
-        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-        //    Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
-        //}
+            // Act
+            var result = (RedirectToRouteResult)controller.Index();
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
+        }
         #endregion IndexRegion
     }
 }

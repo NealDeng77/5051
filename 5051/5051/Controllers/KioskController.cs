@@ -24,7 +24,7 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             var myDataList = StudentBackend.Index();
-            if (myDataList == null)
+            if (myDataList.Count == 0)
             {
                 // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
