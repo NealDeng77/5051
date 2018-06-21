@@ -24,6 +24,11 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             var myDataList = StudentBackend.Index();
+            if (myDataList == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
         }
