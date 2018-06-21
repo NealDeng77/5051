@@ -75,5 +75,22 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion IndexRegion
+
+        #region SetDefaultRegion
+
+        [TestMethod]
+        public void Controller_Calendar_SetDefault_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetDefault(null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion SetDefaultRegion
     }
 }
