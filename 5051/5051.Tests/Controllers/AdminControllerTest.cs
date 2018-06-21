@@ -135,7 +135,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSource is set to Default
+            //Check that the DataSourceSet is set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
@@ -153,7 +153,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSource is set to Demo
+            //Check that the DataSourceSet is set to Demo, Demo set not implemented yet, set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
@@ -171,9 +171,92 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSource is set to UnitTest
+            //Check that the DataSourceSet is set to UnitTest, UnitTest set not implemented yet, set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_IsNull_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(null);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_IsEmpty_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource("");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_Mock_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "Mock";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Mock
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_SQL_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "SQL";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Mock, SQL DataSource not implemented yet, set to Mock
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_Unknown_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "unkown";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Mock,  unkown DataSource not implemented yet, set to Mock
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
     }
