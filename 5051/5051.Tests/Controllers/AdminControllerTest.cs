@@ -27,5 +27,18 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result,TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Admin_StudentReport_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            ViewResult result = controller.StudentReport() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
     }
 }
