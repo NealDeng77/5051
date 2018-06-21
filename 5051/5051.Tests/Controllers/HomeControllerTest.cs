@@ -135,7 +135,6 @@ namespace _5051.Tests.Controllers
 
         #region HouseRegion
 
-
         [TestMethod]
         public void Controller_Home_HouseExample_Default_Should_Pass()
         {
@@ -150,6 +149,23 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion HouseRegion
+
+        #region AvatarRegion
+
+        [TestMethod]
+        public void Controller_Home_AvatarExample_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.AvatarExample() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion AvatarRegion
 
     }
 }
