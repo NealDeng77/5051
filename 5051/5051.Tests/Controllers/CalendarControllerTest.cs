@@ -110,6 +110,22 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Calendar_SetDefault_ShouldReturnCalendarPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetDefault(id);
+
+            // Assert
+            Assert.AreEqual("Update", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Calendar", result.RouteValues["controller"], TestContext.TestName);
+        }
+
         #endregion SetDefaultRegion
     }
 }
