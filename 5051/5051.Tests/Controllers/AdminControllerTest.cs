@@ -283,7 +283,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSource is set to unkown using avatar count, SQL DataSource not implemented yet, set to Mock
+            //Check that the DataSource is set to unknown using avatar count, unknown DataSource not implemented yet, set to Mock
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
