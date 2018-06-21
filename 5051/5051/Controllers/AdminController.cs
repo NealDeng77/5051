@@ -140,7 +140,6 @@ namespace _5051.Controllers
             }
 
             DataSourceBackend.Instance.SetDataSource(SetEnum);
-            DataSourceBackend.Instance.SetDataSource(SetEnum);
 
             return RedirectToAction("Index", "Admin");
         }
