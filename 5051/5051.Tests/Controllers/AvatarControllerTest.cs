@@ -135,16 +135,19 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
 
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            // No need to check the route, Assert.AreEqual("Avatar", result.RouteValues["route"], TestContext.TestName);
-
-            // Check that the item is created
-            var resultAvatar = AvatarBackend.Instance.Read("abc");
-            Assert.AreEqual(data.Id, resultAvatar.Id, TestContext.TestName);
+            var resultAvatar = AvatarBackend.Instance.Read("abc");           
 
             // Reset the Avatars
             AvatarBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            // Check that the item is created
+            Assert.AreEqual(data.Id, resultAvatar.Id, TestContext.TestName);
+            // No need to check the route, Assert.AreEqual("Avatar", result.RouteValues["route"], TestContext.TestName);
+
+
 
         }
 
