@@ -18,11 +18,13 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             var mySchoolDaysData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Index();
-            if (mySchoolDaysData.Count == 0)
-            {
-                // Send to Error Page
-                return RedirectToAction("Error", "Home");
-            }
+
+            // Removed null check: the data is OK to be count=0 but not possible to be null
+            //if (mySchoolDaysData == null)
+            //{
+            //    // Send to Error Page
+            //    return RedirectToAction("Error", "Home");
+            //}
 
             var myData = new SchoolCalendarViewModel
             {
