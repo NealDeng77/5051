@@ -18,7 +18,7 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             var mySchoolDaysData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Index();
-            if (mySchoolDaysData == null)
+            if (mySchoolDaysData.Count == 0)
             {
                 // Send to Error Page
                 return RedirectToAction("Error", "Home");
