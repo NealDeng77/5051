@@ -66,5 +66,18 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Admin_Reset_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
     }
 }
