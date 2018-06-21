@@ -14,6 +14,8 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        #region IndexRegion
+
         [TestMethod]
         public void Controller_Home_Index_Default_Should_Pass()
         {
@@ -26,6 +28,8 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion IndexRegion
 
         #region AboutRegion
 
