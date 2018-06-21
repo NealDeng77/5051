@@ -138,6 +138,9 @@ namespace _5051.Tests.Controllers
             //Check that the DataSourceSet is set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
         [TestMethod]
@@ -156,6 +159,9 @@ namespace _5051.Tests.Controllers
             //Check that the DataSourceSet is set to Demo, Demo set not implemented yet, set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
         [TestMethod]
@@ -174,6 +180,9 @@ namespace _5051.Tests.Controllers
             //Check that the DataSourceSet is set to UnitTest, UnitTest set not implemented yet, set to Default
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
         [TestMethod]
@@ -218,6 +227,9 @@ namespace _5051.Tests.Controllers
             //Check that the DataSource is set to Mock
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
         [TestMethod]
@@ -236,6 +248,9 @@ namespace _5051.Tests.Controllers
             //Check that the DataSource is set to Mock, SQL DataSource not implemented yet, set to Mock
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
         }
 
         [TestMethod]
