@@ -210,5 +210,70 @@ namespace _5051.Tests.Controllers
 
         //    return View(StudentViewModel);
         //}
+
+        #region ConfirmLogout
+        [TestMethod]
+        public void Controller_Kiosk_ConfirmLogout_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            var controller = new KioskController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.ConfirmLogout(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_ConfirmLogout_Null_Or_Empty_Id_Should_Return_Error_Page()
+        {
+            // Arrage
+            var controller = new KioskController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ConfirmLogout(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Controller_Kiosk_ConfirmLogout_Invalid_Id_Should_Return_Error_Page()
+        //{
+        //    // Arrange
+        //    var controller = new KioskController();
+        //    // Create new Id that does not existing in Student list
+        //    string id = Guid.NewGuid().ToString();
+
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.ConfirmLogout(id);
+
+        //    // Assert
+        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        //}
+        #endregion ConfirmLogout
+
+        //public ActionResult ConfirmLogout(string id)
+        //{
+        //    if (string.IsNullOrEmpty(id))
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+
+        //    var myDataList = StudentBackend.Read(id);
+        //    if (myDataList == null)
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+        //    var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+        //    //Todo, replace with actual transition time
+        //    StudentViewModel.LastDateTime = DateTime.Now;
+
+        //    return View(StudentViewModel);
+        //}
     }
 }
