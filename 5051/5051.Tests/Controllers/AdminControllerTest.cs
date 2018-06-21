@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051;
 using _5051.Controllers;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.Tests.Controllers
 {
@@ -93,6 +94,86 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSourceSet_Id_IsNull_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(null);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSourceSet_Id_IsEmpty_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet("");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSourceSet_Id_Equals_DeFault_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "Default";
+            
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Default
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSourceSet_Id_Equals_Demo_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "Demo";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Default
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSourceSet_Id_Equals_UnitTest_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "UnitTest";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSource is set to Default
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
     }
