@@ -115,17 +115,42 @@ namespace _5051.Tests.Controllers
         #endregion SetLoginRegion
 
         #region SetLogoutRegion
+        [TestMethod]
+        public void Controller_Kiosk_SetLogout_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            var controller = new KioskController();
+
+            // Get the first Studnet Id from the DataSource
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetLogout(id);
+
+            // check status change after SetLogout
+            var resultStatus = StudentBackend.Instance.Read(id).Status;
+            Assert.AreEqual(StudentStatusEnum.Out, resultStatus, TestContext.TestName);
+
+            // Assert
+            Assert.AreEqual("ConfirmLogout", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Kiosk", result.RouteValues["route"], TestContext.TestName);
+            Assert.AreEqual(id, result.RouteValues["id"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_SetLogout_Null_Or_Empty_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetLogout(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
+        }
         #endregion SetLogoutRegion
-
-        //public ActionResult SetLogout(string id)
-        //{
-        //    if (string.IsNullOrEmpty(id))
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    StudentBackend.ToggleStatusById(id);
-        //    return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
-        //}
     }
 }
