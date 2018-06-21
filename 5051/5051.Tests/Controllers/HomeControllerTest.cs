@@ -31,6 +31,23 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region ErrorRegion
+
+        [TestMethod]
+        public void Controller_Home_Error_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Error() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ErrorRegion
+
         #region AboutRegion
 
         [TestMethod]
