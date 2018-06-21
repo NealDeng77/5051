@@ -71,7 +71,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
         #endregion IndexRegion
 
@@ -94,8 +93,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("ConfirmLogin", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Kiosk", result.RouteValues["route"], TestContext.TestName);
-            Assert.AreEqual(id, result.RouteValues["id"], TestContext.TestName);
         }
 
         [TestMethod]
@@ -110,7 +107,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
         #endregion SetLoginRegion
 
@@ -133,8 +129,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("ConfirmLogout", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Kiosk", result.RouteValues["route"], TestContext.TestName);
-            Assert.AreEqual(id, result.RouteValues["id"], TestContext.TestName);
         }
 
         [TestMethod]
@@ -149,8 +143,39 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
         #endregion SetLogoutRegion
+
+        //#region ConfirmLogin
+        //[TestMethod]
+        //public void Controller_Kiosk_ConfirmLogin_Valid_Id_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new KioskController();
+        //    string id = StudentBackend.Instance.GetDefault().Id;
+
+        //    // Act
+        //    ViewResult result = controller.ConfirmLogin(id) as ViewResult;
+
+
+
+        //}
+        //#endregion ConfirmLogin
+
+        //    public ActionResult ConfirmLogin(string id)
+        //    {
+        //        if (string.IsNullOrEmpty(id))
+        //        {
+        //            return RedirectToAction("Error", "Home");
+        //        }
+
+        //        var myDataList = StudentBackend.Read(id);
+        //        var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+        //        //Todo, replace with actual transition time
+        //        StudentViewModel.LastDateTime = DateTime.Now;
+
+        //        return View(StudentViewModel);
+        //    }
     }
 }

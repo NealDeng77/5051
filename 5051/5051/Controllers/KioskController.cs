@@ -27,7 +27,7 @@ namespace _5051.Controllers
             if (myDataList.Count == 0)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
@@ -43,11 +43,11 @@ namespace _5051.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("ConfirmLogin", "Kiosk", new { route = "Kiosk", action = "ConfirmLogin", id });
+            return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
         }
 
         // GET: Kiosk/SetLogout/5
@@ -60,11 +60,11 @@ namespace _5051.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("ConfirmLogout", "Kiosk", new { route = "Kiosk", action = "ConfirmLogout", id });
+            return RedirectToAction("ConfirmLogout","Kiosk", new { id });
         }
 
         /// <summary>
