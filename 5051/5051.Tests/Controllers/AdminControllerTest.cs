@@ -171,7 +171,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSource is set to Default
+            //Check that the DataSource is set to UnitTest
             var resultAvatarCount = AvatarBackend.Instance.Index().Count;
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
