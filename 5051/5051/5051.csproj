@@ -189,6 +189,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\KioskSettingsInterface.cs" />
+    <Compile Include="Backend\KioskSettingsBackend.cs" />
+    <Compile Include="Backend\KioskSettingsDataSourceMock.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsInterface.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsDataSourceMock.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsBackend.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Backend\AvatarInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\KioskSettingsController.cs" />
     <Compile Include="Controllers\ShopInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
     <Compile Include="Models\SchoolCalendarViewModel.cs" />
     <Compile Include="Models\SchoolCalendarModel.cs" />
+    <Compile Include="Models\KioskSettingsModel.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\ShopInventoryViewModel.cs" />
@@ -398,6 +403,8 @@
     <Content Include="Views\Portal\Attendance.cshtml" />
     <Content Include="Views\SchoolDismissalSettings\Read.cshtml" />
     <Content Include="Views\SchoolDismissalSettings\Update.cshtml" />
+    <Content Include="Views\KioskSettings\Read.cshtml" />
+    <Content Include="Views\KioskSettings\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,7 @@
 
 <h2>Settings</h2>
 
-<div>
+<div class="row">
     <h3>What settings do you want to change?</h3>
     @Html.ActionLink("Reset Data", "Reset", "Admin", null, new { @class = "btn btn-primary" })
 
@@ -19,4 +19,10 @@
     @Html.ActionLink("Mock Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.Mock}, new { @class = "btn btn-primary" })
     @Html.ActionLink("SQL Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn-primary" })
 
+</div>
+
+
+<div class="row">
+    <h3>System Settings</h3>
+    @Html.ActionLink("Kiosk", "Read", "KioskSettings", null, new { @class = "btn btn-primary" })
 </div>
