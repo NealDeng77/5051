@@ -29,7 +29,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Avatar_Create_Get_Should_Return_New_Model()
+        public void Controller_Admin_Report_Should_Return_New_Model()
         {
             // Arrange
             AdminController controller = new AdminController();
