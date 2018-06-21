@@ -82,6 +82,7 @@ namespace _5051.Tests.Controllers
 
         #endregion PrivacyRegion
 
+        #region ShopRegion
 
         [TestMethod]
         public void Controller_Home_ShopExample_Default_Should_Pass()
@@ -95,6 +96,9 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion ShopRegion
+
 
         [TestMethod]
         public void Controller_Home_StudentExample_Default_Should_Pass()
