@@ -14,6 +14,22 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        #region Instantiate
+        [TestMethod]
+        public void Controller_Home_Instantiate_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.GetType();
+
+            // Assert
+            Assert.AreEqual(result, new HomeController().GetType(), TestContext.TestName);
+        }
+
+        #endregion Instantiate
+
         #region IndexRegion
 
         [TestMethod]
