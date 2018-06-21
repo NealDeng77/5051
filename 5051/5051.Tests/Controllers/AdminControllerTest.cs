@@ -17,7 +17,7 @@ namespace _5051.Tests.Controllers
         public TestContext TestContext { get; set; }
 
         [TestMethod]
-        public void Controller_Admin_Index_Default_Should_Pass()
+        public void Controller_Admin_Index_Default_ShouldPass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -30,7 +30,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Report_Should_Return_New_Model()
+        public void Controller_Admin_Report_ShouldReturnNewModel()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -45,7 +45,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_StudentReport_Should_Pass()
+        public void Controller_Admin_StudentReport_DeFault_ShouldPass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -58,7 +58,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Attendance_Should_Pass()
+        public void Controller_Admin_Attendance_Default_ShouldPass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -71,7 +71,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Settings_Should_Pass()
+        public void Controller_Admin_Settings_Default_ShouldPass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -84,7 +84,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Reset_Should_Return_Index_Page()
+        public void Controller_Admin_Reset_DeFault_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -97,7 +97,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_IsNull_Should_Return_Index_Page()
+        public void Controller_Admin_DataSourceSet_IdIsNull_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -110,7 +110,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_IsEmpty_Should_Return_Index_Page()
+        public void Controller_Admin_DataSourceSet_IdIsEmpty_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -123,7 +123,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_DeFault_Should_Return_Index_Page()
+        public void Controller_Admin_DataSourceSet_IdEqualsDeFault_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -147,7 +147,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_Demo_Should_Return_Index_Page()
+        public void Controller_Admin_DataSourceSet_IdEqualsDemo_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -170,7 +170,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_UnitTest_Should_Return_Index_Page()
+        public void Controller_Admin_DataSourceSet_IdEqualsUnitTest_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -193,7 +193,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSource_Id_IsNull_Should_Return_Index_Page()
+        public void Controller_Admin_DataSource_IdIsNull_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -206,7 +206,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSource_Id_IsEmpty_Should_Return_Index_Page()
+        public void Controller_Admin_DataSource_IdIsEmpty_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -219,7 +219,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_Mock_Should_Return_Index_Page()
+        public void Controller_Admin_DataSource_IdEqualsMock_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -242,7 +242,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_SQL_Should_Return_Index_Page()
+        public void Controller_Admin_DataSource_IdEqualsSQL_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -265,7 +265,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_Unknown_Should_Return_Index_Page()
+        public void Controller_Admin_DataSource_IdEqualsUnknown_ShouldReturnIndexPage()
         {
             // Arrange
             AdminController controller = new AdminController();
