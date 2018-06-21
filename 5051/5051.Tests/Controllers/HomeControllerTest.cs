@@ -48,6 +48,8 @@ namespace _5051.Tests.Controllers
 
         #endregion AboutRegion
 
+        #region ContactRegion
+
         [TestMethod]
         public void Controller_Home_Contact_Default_Should_Pass()
         {
@@ -60,6 +62,8 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion ContactRegion
 
         [TestMethod]
         public void Controller_Home_Privacy_Default_Should_Pass()
