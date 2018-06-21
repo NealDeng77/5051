@@ -116,6 +116,8 @@ namespace _5051.Tests.Controllers
 
         #endregion StudentRegion
 
+        #region HouseRegion
+
 
         [TestMethod]
         public void Controller_Home_HouseExample_Default_Should_Pass()
@@ -129,6 +131,8 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion HouseRegion
 
     }
 }
