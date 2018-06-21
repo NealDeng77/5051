@@ -74,5 +74,58 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
         #endregion IndexRegion
+
+        #region SetLoginRegion
+        [TestMethod]
+        public void Controller_Kiosk_SetLogin_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            var controller = new KioskController();
+
+            // Get the first Studnet Id from the DataSource
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetLogin(id);
+
+            // check status change after SetLogin
+            var resultStatus = StudentBackend.Instance.Read(id).Status;
+            Assert.AreEqual(StudentStatusEnum.In, resultStatus, TestContext.TestName);
+
+            // Assert
+            Assert.AreEqual("ConfirmLogin", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Kiosk", result.RouteValues["route"], TestContext.TestName);
+            Assert.AreEqual(id, result.RouteValues["id"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_SetLogin_Null_Or_Empty_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SetLogin(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
+        }
+        #endregion SetLoginRegion
+
+        #region SetLogoutRegion
+        #endregion SetLogoutRegion
+
+        //public ActionResult SetLogout(string id)
+        //{
+        //    if (string.IsNullOrEmpty(id))
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+
+        //    StudentBackend.ToggleStatusById(id);
+        //    return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
+        //}
     }
 }

@@ -43,11 +43,11 @@ namespace _5051.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
+            return RedirectToAction("ConfirmLogin", "Kiosk", new { route = "Kiosk", action = "ConfirmLogin", id });
         }
 
         // GET: Kiosk/SetLogout/5
