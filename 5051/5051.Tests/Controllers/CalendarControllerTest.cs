@@ -359,5 +359,23 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion UpdateRegion
+
+        #region UpdatePostRegion
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_DataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((SchoolCalendarModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion UpdatePostRegion
+
     }
 }
