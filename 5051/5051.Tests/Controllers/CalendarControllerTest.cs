@@ -417,6 +417,80 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", resultEmpty.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_TimeStartValidation_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel dataBelowMin = new SchoolCalendarModel
+            {
+                TimeStart = TimeSpan.FromHours(0) // less than 1
+            };
+
+            SchoolCalendarModel dataAboveMax = new SchoolCalendarModel
+            {
+                TimeStart = TimeSpan.FromHours(25) // greater than 24
+            };
+
+            // Act
+            ViewResult resultBelowMin = controller.Update(dataBelowMin) as ViewResult;
+            ViewResult resultAboveMax = controller.Update(dataAboveMax) as ViewResult;
+
+            // Assert
+            Assert.IsFalse(controller.ModelState.IsValid);
+            Assert.IsNotNull(resultBelowMin, TestContext.TestName);
+            Assert.IsNotNull(resultAboveMax, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_TimeEndValidation_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel dataBelowMin = new SchoolCalendarModel
+            {
+                TimeEnd = TimeSpan.FromHours(0) // less than 1
+            };
+
+            SchoolCalendarModel dataAboveMax = new SchoolCalendarModel
+            {
+                TimeEnd = TimeSpan.FromHours(25) // greater than 24
+            };
+
+            // Act
+            ViewResult resultBelowMin = controller.Update(dataBelowMin) as ViewResult;
+            ViewResult resultAboveMax = controller.Update(dataAboveMax) as ViewResult;
+
+            // Assert
+            Assert.IsFalse(controller.ModelState.IsValid);
+            Assert.IsNotNull(resultBelowMin, TestContext.TestName);
+            Assert.IsNotNull(resultAboveMax, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_TimeEndSubtractValidation_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel data = new SchoolCalendarModel
+            {
+                // End is before Start
+                TimeStart = TimeSpan.FromHours(4),
+                TimeEnd = TimeSpan.FromHours(2) 
+            };
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.IsFalse(controller.ModelState.IsValid); // model is invalid
+            Assert.IsTrue(data.TimeEnd.Subtract(data.TimeStart).Ticks < 1); // end is before start
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
         #endregion UpdatePostRegion
 
     }
