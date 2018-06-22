@@ -33,11 +33,24 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
+     /**************************
+        #region IndexRegion
+
         [TestMethod]
         public void Controller_Shop_Index_Default_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
+
+            ShopBuyViewModel data = new ShopBuyViewModel();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("Error", "Home");
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -45,6 +58,11 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion IndexRegion
+    ***************************************************/
+
+    /*************************************************
 
         [TestMethod]
         public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
@@ -63,6 +81,9 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+    *********************************************************/
+
 
         [TestMethod]
         public void Controller_Shop_Buy_Get_myDataIsNull_ShouldReturnErrorPage()
