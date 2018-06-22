@@ -15,19 +15,21 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
-        #region Instantiate
+        #region Roster
         [TestMethod]
-        public void Controller_Portal_Instantiate_Default_Should_Pass()
+        public void Controller_Portal_Roster_Default_Should_Pass()
         {
             // Arrange
-            var controller = new AdminController();
+            PortalController controller = new PortalController();
 
             // Act
-            var result = controller.GetType();
+            ViewResult result = controller.Roster() as ViewResult;
 
             // Assert
-            Assert.AreEqual(result, new AdminController().GetType(), TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
+
+
 
         #endregion Instantiate
     }
