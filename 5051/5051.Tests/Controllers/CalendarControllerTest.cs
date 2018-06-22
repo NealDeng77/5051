@@ -393,6 +393,30 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_IdIsNullOrEmpty_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel dataNull = new SchoolCalendarModel();
+            SchoolCalendarModel dataEmpty = new SchoolCalendarModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (RedirectToRouteResult)controller.Update(dataNull);
+            var resultEmpty = (RedirectToRouteResult)controller.Update(dataEmpty);
+
+            // Assert
+            Assert.AreEqual("Error", resultNull.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Error", resultEmpty.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion UpdatePostRegion
 
     }
