@@ -50,7 +50,7 @@ namespace _5051.Models
         public void SetDefault()
         {
             Id = Guid.NewGuid().ToString();
-            Password = "abc123!@#";
+            Password = "123";
         }
 
         /// <summary>

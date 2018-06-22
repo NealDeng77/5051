@@ -23,6 +23,8 @@ namespace _5051.Controllers
         // GET: Kiosk
         public ActionResult Index()
         {
+            //TODO: Need to add a check here to validate if the request comes from a validated login or not.
+
             var myDataList = StudentBackend.Index();
             if (myDataList.Count == 0)
             {
@@ -64,7 +66,7 @@ namespace _5051.Controllers
             }
 
             StudentBackend.ToggleStatusById(id);
-            return RedirectToAction("ConfirmLogout","Kiosk", new { id });
+            return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
         }
 
         /// <summary>
@@ -107,6 +109,54 @@ namespace _5051.Controllers
             StudentViewModel.LastDateTime = DateTime.Now;
 
             return View(StudentViewModel);
+        }
+
+        /// <summary>
+        /// Will prompt for the kiosk login
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Login takes the password sent in and compares it with the settings for kiosk
+        /// If they match, then it redirects to Index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login([Bind(Include=
+                                        "Password,"+
+                                        "")] KioskSettingsModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return View(data);
+            }
+
+            if (string.IsNullOrEmpty(data.Password))
+            {
+                ModelState.AddModelError("Password", "Please Enter a Password.");
+                return View(data);
+            }
+
+            var myKioskData = DataSourceBackend.Instance.KioskSettingsBackend.GetDefault();
+            // GetDefault always returns valid data.
+
+            // If the passwords match, then redirect
+            if (data.Password.Equals(myKioskData.Password))
+            {
+                //Todo, set flag to mark the current token for the kiosk
+                return RedirectToAction("Index", "Kiosk");
+            }
+
+            // Login failed, so send back with error message
+            ModelState.AddModelError("Password", "Invalid login attempt.");
+            return View(data);
         }
     }
 }
