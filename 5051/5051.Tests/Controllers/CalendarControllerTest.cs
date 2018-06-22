@@ -363,6 +363,24 @@ namespace _5051.Tests.Controllers
         #region UpdatePostRegion
 
         [TestMethod]
+        public void Controller_Calendar_Update_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel data = new SchoolCalendarModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Controller_Calendar_Update_Post_DataIsNull_ShouldReturnErrorPage()
         {
             // Arrange
