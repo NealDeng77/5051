@@ -308,5 +308,56 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion SetSchoolDayRegion
+
+        #region UpdateRegion
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Get_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Get_myDataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Calendar_Update_Get_Default_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.Update(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
     }
 }
