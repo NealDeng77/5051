@@ -25,7 +25,24 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        #endregion Instantiate
+        [TestMethod]
+        public void Models_StudentViewModel_Default_Instantiate_With_Data_Should_Pass()
+        {
+            // Arrange
+            List<StudentModel> data = new List<StudentModel>();
+            var data1 = new StudentModel();
+            data1.Id = "hi";
+            data.Add(data1);
+            var expect = "hi";
 
+            // Act
+            var returned = new StudentViewModel(data);
+            var result = returned.StudentList.FirstOrDefault().Id;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        #endregion Instantiate
     }
 }

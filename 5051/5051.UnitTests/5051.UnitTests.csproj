@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\KioskSettingsUnitTests.cs" />
+    <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
     <Compile Include="Models\StudentViewModelUnitTests.cs" />
     <Compile Include="Models\SystemGlobalsUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
