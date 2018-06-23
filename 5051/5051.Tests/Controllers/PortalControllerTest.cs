@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -17,7 +18,7 @@ namespace _5051.Tests.Controllers
 
         #region Roster
         [TestMethod]
-        public void Controller_Portal_Roster_Default_Should_Pass()
+        public void Controller_Portal_Roster_ShouldReturnNewModel()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -25,8 +26,10 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Roster() as ViewResult;
 
+            var resultStudentViewModel = result.Model as StudentViewModel;
+
             // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.IsNotNull(resultStudentViewModel, TestContext.TestName);
         }
         #endregion
 
