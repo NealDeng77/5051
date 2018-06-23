@@ -491,6 +491,21 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Calendar_Update_Post_Default_Should_Pass()
+        {
+            // Arrange
+            CalendarController controller = new CalendarController();
+
+            SchoolCalendarModel scm = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
+
+            // Act
+            var result = controller.Update(scm) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion UpdatePostRegion
 
     }
