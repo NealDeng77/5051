@@ -19,6 +19,7 @@ namespace _5051.Models
 
         public KioskSettingsModel()
         {
+            Initialize();
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace _5051.Models
         /// <summary>
         /// Create the default values
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
             SetDefault();
         }
