@@ -28,9 +28,57 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+        #endregion
+
+        #region Login(String)
+
+        #endregion
+
+        #region Login(bind)
+        #endregion
+
+        #region index
+        #endregion
+
+        #region Attendance
+        #endregion
+
+        #region Avatar(bind)
+        #endregion
+
+        #region Avatar(string)
+        #endregion
+
+        #region Group
+        [TestMethod]
+        public void Controller_Portal_Group_Default_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            ViewResult result = controller.Group() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region House
+        #endregion
+
+        #region Settings(string)
+        #endregion
+
+        #region Settings(bind)
+        #endregion
+
+        #region Report
+        #endregion
 
 
 
-        #endregion Instantiate
+
+
     }
 }
