@@ -48,9 +48,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\KioskSettingsUnitTests.cs" />
+    <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
     <Compile Include="Models\StudentViewModelUnitTests.cs" />
-    <Compile Include="Models\SystemGlobalsUnitTests.cs" />
+    <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ namespace _5051.Backend
                         if (instance == null)
                         {
                             instance = new SchoolDismissalSettingsBackend();
-                            SetDataSource(SystemGlobals.Instance.DataSourceValue);
+                            SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
                         }
                     }
                 }

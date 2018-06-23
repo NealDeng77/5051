@@ -10,7 +10,7 @@ using _5051.Backend;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class KioskSettingsUnitTests
+    public class KioskSettingsModelUnitTests
     {
         public TestContext TestContext { get; set; }
 
