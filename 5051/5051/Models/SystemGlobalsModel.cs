@@ -5,17 +5,17 @@ namespace _5051.Models
     /// <summary>
     /// System wide Global variables
     /// </summary>
-    public class SystemGlobals
+    public class SystemGlobalsModel
     {
         /// <summary>
         /// Make into a Singleton
         /// </summary>
-        private static volatile SystemGlobals instance;
+        private static volatile SystemGlobalsModel instance;
         private static object syncRoot = new Object();
 
-        private SystemGlobals() { }
+        private SystemGlobalsModel() { }
 
-        public static SystemGlobals Instance
+        public static SystemGlobalsModel Instance
         {
             get
             {
@@ -25,7 +25,7 @@ namespace _5051.Models
                     {
                         if (instance == null)
                         {
-                            instance = new SystemGlobals();
+                            instance = new SystemGlobalsModel();
                         }
                     }
                 }

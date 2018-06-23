@@ -9,7 +9,7 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class SystemGlobalsUnitTests
+    public class SystemGlobalsModelUnitTests
     {
         public TestContext TestContext { get; set; }
 
@@ -18,7 +18,7 @@ namespace _5051.UnitTests.Models
         public void Models_SystemGlobals_Default_Instantiate_Should_Pass()
         {
             // Arrange
-            var myModel = SystemGlobals.Instance;
+            var myModel = SystemGlobalsModel.Instance;
 
             // Act
             var result = myModel.DataSourceValue;
@@ -33,8 +33,8 @@ namespace _5051.UnitTests.Models
             // Calls for the instance two times, the first time creates it, the second time uses the existing
 
             // Arrange
-            var myFirstTime = SystemGlobals.Instance;
-            var myModel = SystemGlobals.Instance;
+            var myFirstTime = SystemGlobalsModel.Instance;
+            var myModel = SystemGlobalsModel.Instance;
 
             // Act
             var result = myModel.DataSourceValue;

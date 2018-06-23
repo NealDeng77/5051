@@ -31,7 +31,7 @@ namespace _5051.Backend
                         if (instance == null)
                         {
                             instance = new ShopInventoryBackend();
-                            SetDataSource(SystemGlobals.Instance.DataSourceValue);
+                            SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
                         }
                     }
                 }
