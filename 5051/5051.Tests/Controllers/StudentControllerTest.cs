@@ -242,5 +242,126 @@ namespace _5051.Tests.Controllers
 
         #endregion UpdateRegion
 
+        #region DeleteRegion
+        [TestMethod]
+        public void Controller_Student_Delete_Get_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Get_myDataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+            string id = Guid.NewGuid().ToString();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Get_Default_Should_Pass()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.Delete(id) as ViewResult;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DeleteRegion
+
+        #region DeletePostRegion
+        [TestMethod]
+        public void Controller_Student_Delete_Post_ModelIsInvalid_Send_Back_For_Edit()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Delete(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Post_DataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete((StudentDisplayViewModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Post_IdIsNullOrEmpty_Send_Back_For_Edit()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+            StudentDisplayViewModel dataNull = new StudentDisplayViewModel();
+            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.Delete(dataNull);
+            var resultEmpty = (ViewResult)controller.Delete(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Post_Default_ShouldReturnIndexPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+            // Get default student
+            StudentModel student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            StudentDisplayViewModel data = new StudentDisplayViewModel(student);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+        #endregion DeletePostRegion
     }
 }

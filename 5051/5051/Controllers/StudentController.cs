@@ -182,7 +182,7 @@ namespace _5051.Controllers
             var myDataStudent = StudentBackend.Read(id);
             if (myDataStudent == null)
             {
-                RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home");
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
