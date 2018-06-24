@@ -36,7 +36,7 @@ namespace _5051.Tests.Controllers
 
         #region LoginIDNullRegion
         [TestMethod]
-        public void Controller_Protal_Login_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Login_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -50,7 +50,7 @@ namespace _5051.Tests.Controllers
         }
 
        [TestMethod]
-        public void Controller_Protal_Login_IDValid_ShouldPass()
+        public void Controller_Portal_Login_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -72,7 +72,7 @@ namespace _5051.Tests.Controllers
 
         #region IndexIDNullRegion
         [TestMethod]
-        public void Controller_Protal_Index_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Index_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -86,7 +86,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Protal_Index_IDValid_ShouldPass()
+        public void Controller_Portal_Index_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -105,7 +105,7 @@ namespace _5051.Tests.Controllers
 
         #region AttendanceIDNullRegion
         [TestMethod]
-        public void Controller_Protal_Attendance_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Attendance_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -119,7 +119,7 @@ namespace _5051.Tests.Controllers
         }
 
        [TestMethod]
-        public void Controller_Protal_Attendance_IDValid_ShouldPass()
+        public void Controller_Portal_Attendance_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -159,7 +159,7 @@ namespace _5051.Tests.Controllers
 
         #region HouseRegion
         [TestMethod]
-        public void Controller_Protal_House_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_House_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -173,7 +173,7 @@ namespace _5051.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_Protal_House_IDValid_ShouldPass()
+        public void Controller_Portal_House_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -192,7 +192,7 @@ namespace _5051.Tests.Controllers
 
         #region SettingsIDNullRegion
         [TestMethod]
-        public void Controller_Protal_Settings_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Settings_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -206,7 +206,7 @@ namespace _5051.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_Protal_Settings_IDValid_ShouldPass()
+        public void Controller_Portal_Settings_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -228,7 +228,7 @@ namespace _5051.Tests.Controllers
 
         #region ReportRegion
         [TestMethod]
-        public void Cotroller_Protal_Report_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Report_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -241,7 +241,17 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
         
-        
+        //[TestMethod]
+        //public void Controller_Portal_Report_ReportIsNull_shouldReturnErrorPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+
+        //}
         #endregion
     }
 }
