@@ -36,7 +36,7 @@ namespace _5051.Tests.Controllers
 
         #region LoginIDNullRegion
         [TestMethod]
-        public void Cotroller_Protal_Login_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Protal_Login_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -50,7 +50,7 @@ namespace _5051.Tests.Controllers
         }
 
        [TestMethod]
-        public void Cotroller_Protal_Login_IDValid_Should_Pass()
+        public void Controller_Protal_Login_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -240,6 +240,8 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+        
+        
         #endregion
     }
 }
