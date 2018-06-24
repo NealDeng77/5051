@@ -86,7 +86,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Protal_Index_IDValid_Should_Pass()
+        public void Controller_Protal_Index_IDValid_ShouldPass()
         {
             // Arrange
             PortalController controller = new PortalController();
