@@ -9,23 +9,22 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopInventoryModelUnitTests
+    public class ShopInventoryViewModelTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopInventoryModel_Default_Instantiate_Should_Pass()
+        public void Models_ShopInventoryViewModel_Default_Instantiate_Should_Pass()
         {
 
             // Act
-            var result = new ShopInventoryModel();
+            var result = new ShopInventoryViewModel();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
         #endregion Instantiate
-
     }
 }
