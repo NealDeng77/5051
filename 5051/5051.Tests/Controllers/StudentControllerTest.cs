@@ -49,7 +49,6 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
-
         #region ReadStringRegion
         [TestMethod]
         public void Controller_Student_Read_Get_Default_Should_Pass()
@@ -100,5 +99,23 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion ReadStringRegion
+
+        #region CreateRegion
+
+        [TestMethod]
+        public void Controller_Student_Create_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new StudentController();
+
+            // Act
+            var result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateRegion
+
     }
 }
