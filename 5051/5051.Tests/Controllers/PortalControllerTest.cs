@@ -118,25 +118,7 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Cotroller_Protal_Attendance_ModelIsNull_ShouldReturnRosterPage()
-        //{
-        //    // Arrange
-        //    PortalController controller = new PortalController();
-        //    StudentModel data = new StudentModel();
-        //    data.AvatarId = null;
-        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
-
-        //    // Act
-        //    ViewResult result = controller.Index(id) as ViewResult;
-
-        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
-
-        //    // Assert
-
-        //}
-
-        [TestMethod]
+       [TestMethod]
         public void Cotroller_Protal_Attendance_IDValid_Should_Pass()
         {
             // Arrange
