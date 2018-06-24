@@ -264,10 +264,11 @@ namespace _5051.Controllers
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
-            if (myReturn == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            // Not possible for Null return, 
+            //if (myReturn == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
 
             return View(myReturn);
         }
