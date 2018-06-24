@@ -78,6 +78,7 @@ namespace _5051.Backend
         /// <returns>Null or updated data</returns>
         public AvatarModel Update(AvatarModel data)
         {
+            //Might be an impossible null check
             if (data == null)
             {
                 return null;
