@@ -83,6 +83,9 @@ namespace _5051.UnitTests.Models
             // Act
             var result = new StudentDisplayViewModel(data);
 
+
+            Backend.DataSourceBackend.Instance.AvatarBackend.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }

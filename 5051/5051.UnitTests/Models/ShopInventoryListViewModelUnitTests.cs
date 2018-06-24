@@ -9,17 +9,17 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopInventoryViewModelTests
+    public class ShopInventoryListViewModelTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopInventoryViewModel_Default_Instantiate_Should_Pass()
+        public void Models_ShopInventoryListViewModel_Default_Instantiate_Should_Pass()
         {
 
             // Act
-            var result = new ShopInventoryViewModel();
+            var result = new ShopInventoryListViewModel();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
