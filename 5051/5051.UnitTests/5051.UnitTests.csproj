@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
     <Compile Include="Models\AvatarModelUnitTests.cs" />
+    <Compile Include="Models\AvatarViewModelUnitTests.cs" />
     <Compile Include="Models\StudentDisplayViewModelUnitTests.cs" />
     <Compile Include="Models\StudentViewModelUnitTests.cs" />
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
