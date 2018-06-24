@@ -151,7 +151,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Create_Post_IdIsNullOrEmpty_ShouldReturnErrorPage()
+        public void Controller_Student_Create_Post_IdIsNullOrEmpty_Should_Pass()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -175,7 +175,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Create_Post_Default_Should_Pass()
+        public void Controller_Student_Create_Post_Default_ShouldReturnIndexPage()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -190,6 +190,57 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion CreatePostRegion
+
+        #region UpdateRegion
+
+        [TestMethod]
+        public void Controller_Student_Update_Get_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Update_Get_myDataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Update_Get_Default_Should_Pass()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.Update(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
 
     }
 }
