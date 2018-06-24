@@ -48,7 +48,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AttendanceModelUnitTests.cs" />
     <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
+    <Compile Include="Models\AvatarModelUnitTests.cs" />
+    <Compile Include="Models\AvatarViewModelUnitTests.cs" />
+    <Compile Include="Models\StudentDisplayViewModelUnitTests.cs" />
     <Compile Include="Models\StudentViewModelUnitTests.cs" />
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
