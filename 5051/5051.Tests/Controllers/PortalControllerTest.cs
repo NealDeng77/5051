@@ -55,11 +55,13 @@ namespace _5051.Tests.Controllers
         //    // Arrange
         //    PortalController controller = new PortalController();
         //    StudentModel data = new StudentModel();
+        //    data.AvatarId = null;
         //    string id = Backend.StudentBackend.Instance.Create(data).Id;
 
         //    // Act
         //    ViewResult result = controller.Login(id) as ViewResult;
-            
+
+        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
         //    // Assert
 
@@ -83,19 +85,115 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region Login(bind)
+        #region LoginBindRegion
         #endregion
 
-        #region index
+        #region IndexIDNullRegion
+        [TestMethod]
+        public void Cotroller_Protal_Index_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Index(id);
+
+            // Assert
+            Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Cotroller_Protal_Index_ModelIsNull_ShouldReturnRosterPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    data.AvatarId = null;
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+        //    ViewResult result = controller.Index(id) as ViewResult;
+
+        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+        //    // Assert
+
+        //}
+
+        [TestMethod]
+        public void Cotroller_Protal_Index_IDValid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.Index(id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
-        #region Attendance
+        #region AttendanceIDNullRegion
+        [TestMethod]
+        public void Cotroller_Protal_Attendance_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Attendance(id);
+
+            // Assert
+            Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Cotroller_Protal_Attendance_ModelIsNull_ShouldReturnRosterPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    data.AvatarId = null;
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+        //    ViewResult result = controller.Index(id) as ViewResult;
+
+        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+        //    // Assert
+
+        //}
+
+        [TestMethod]
+        public void Cotroller_Protal_Attendance_IDValid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.Attendance(id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
-        #region Avatar(bind)
+        #region AvatarBindRegion
         #endregion
 
-        #region Avatar(string)
+        #region AvatarIDNullRegion
         #endregion
 
         #region GroupRegion
@@ -113,21 +211,125 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region House
+        #region HouseRegion
+        [TestMethod]
+        public void Cotroller_Protal_House_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.House(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Cotroller_Protal_House_ModelIsNull_ShouldReturnRosterPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    data.AvatarId = null;
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+        //    ViewResult result = controller.Index(id) as ViewResult;
+
+        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+        //    // Assert
+
+        //}
+
+        [TestMethod]
+        public void Cotroller_Protal_House_IDValid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.House(id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
-        #region Settings(string)
+        #region SettingsIDNullRegion
+        [TestMethod]
+        public void Cotroller_Protal_Settings_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Cotroller_Protal_Settings_ModelIsNull_ShouldReturnRosterPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    data.AvatarId = null;
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+        //    ViewResult result = controller.Index(id) as ViewResult;
+
+        //    var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+        //    // Assert
+
+        //}
+
+        [TestMethod]
+        public void Cotroller_Protal_Settings_IDValid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.Settings(id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
-        #region Settings(bind)
+        #region SettingsBindRegion
         #endregion
 
-        #region Report
+        #region ReportRegion
+        [TestMethod]
+        public void Cotroller_Protal_Report_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Report(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
         #endregion
-
-
-
-
-
     }
 }
