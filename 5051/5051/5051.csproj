@@ -244,6 +244,7 @@
     <Compile Include="Models\Enums\StudentStatusEnum.cs" />
     <Compile Include="Models\Enums\DataSourceEnum.cs" />
     <Compile Include="Models\StudentAvatarModel.cs" />
+    <Compile Include="Models\StudentDisplayViewModel.cs" />
     <Compile Include="Models\StudentReportStatsModel.cs" />
     <Compile Include="Models\StudentReportViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
