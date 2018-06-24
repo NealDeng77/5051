@@ -72,7 +72,7 @@ namespace _5051.Tests.Controllers
 
         #region IndexIDNullRegion
         [TestMethod]
-        public void Cotroller_Protal_Index_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Protal_Index_IDIsNull_ShouldReturnRosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -86,7 +86,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Cotroller_Protal_Index_IDValid_Should_Pass()
+        public void Controller_Protal_Index_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
