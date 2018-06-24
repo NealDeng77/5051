@@ -113,10 +113,11 @@ namespace _5051.Controllers
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
-            if (myReturn == null)
-            {
-                return RedirectToAction("Roster", "Portal");
-            }
+            // Null not possible
+            //if (myReturn == null)
+            //{
+            //    return RedirectToAction("Roster", "Portal");
+            //}
 
             return View(myReturn);
         }
