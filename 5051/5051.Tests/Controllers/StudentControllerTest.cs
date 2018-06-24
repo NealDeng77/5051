@@ -20,15 +20,31 @@ namespace _5051.Tests.Controllers
         public void Controller_Student_Instantiate_Default_Should_Pass()
         {
             // Arrange
-            var controller = new AdminController();
+            var controller = new StudentController();
 
             // Act
             var result = controller.GetType();
 
             // Assert
-            Assert.AreEqual(result, new AdminController().GetType(), TestContext.TestName);
+            Assert.AreEqual(result, new StudentController().GetType(), TestContext.TestName);
         }
 
         #endregion Instantiate
+
+        #region IndexRegion
+        [TestMethod]
+        public void Controller_Student_Index_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new StudentController();
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion IndexRegion
     }
 }
