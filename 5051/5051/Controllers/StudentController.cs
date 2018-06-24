@@ -40,10 +40,11 @@ namespace _5051.Controllers
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
-            if (myData == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            // null not possible
+            //if (myData == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
 
             return View(myData);
         }
@@ -116,10 +117,12 @@ namespace _5051.Controllers
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
-            if (myData == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            // null not possible
+            //if (myData == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
+
             return View(myData);
         }
 
@@ -183,10 +186,11 @@ namespace _5051.Controllers
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
-            if (myData == null)
-            {
-                RedirectToAction("Error", "Home");
-            }
+            // null not possible
+            //if (myData == null)
+            //{
+            //    RedirectToAction("Error", "Home");
+            //}
 
             return View(myData);
         }
