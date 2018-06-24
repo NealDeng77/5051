@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Backend;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -46,5 +48,57 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion IndexRegion
+
+
+        #region ReadStringRegion
+        [TestMethod]
+        public void Controller_Student_Read_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new StudentController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            var result = controller.Read(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Read_Get_IdIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            var controller = new StudentController();
+
+            // Act
+            var result = controller.Read(null) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Read__Get_myDataStudentIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            var controller = new StudentController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Read(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        #endregion ReadStringRegion
     }
 }
