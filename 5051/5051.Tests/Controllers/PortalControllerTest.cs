@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051;
 using _5051.Controllers;
 using _5051.Models;
+using System.Diagnostics;
 
 namespace _5051.Tests.Controllers
 {
@@ -16,7 +17,7 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
-        #region Roster
+        #region RosterRegion
         [TestMethod]
         public void Controller_Portal_Roster_ShouldReturnNewModel()
         {
@@ -33,8 +34,53 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region Login(String)
+        #region LoginIDNullRegion
+        [TestMethod]
+        public void Cotroller_Protal_Login_IDIsNull_ShouldReturnRosterPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
 
+            // Act
+            var result = (RedirectToRouteResult)controller.Login(id);
+
+            // Assert
+            Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Cotroller_Protal_Login_ModelIsNull_ShouldReturnRosterPage()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+        //    // Act
+        //    ViewResult result = controller.Login(id) as ViewResult;
+            
+
+        //    // Assert
+
+        //}
+
+        [TestMethod]
+        public void Cotroller_Protal_Login_IDValid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.Login(id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
         #region Login(bind)
@@ -52,7 +98,7 @@ namespace _5051.Tests.Controllers
         #region Avatar(string)
         #endregion
 
-        #region Group
+        #region GroupRegion
         [TestMethod]
         public void Controller_Portal_Group_Default_Should_Pass()
         {
