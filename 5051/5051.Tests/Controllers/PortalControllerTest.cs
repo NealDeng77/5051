@@ -9,6 +9,7 @@ using _5051;
 using _5051.Controllers;
 using _5051.Models;
 using System.Diagnostics;
+using _5051.Backend;
 
 namespace _5051.Tests.Controllers
 {
@@ -239,19 +240,24 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }           
+
+        [TestMethod]
+        public void Controller_Portal_Report_IDValid_shouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+
+            // Act
+            var result = controller.Report(id) as ViewResult;
+
+            var resultStudentReportViewModel = result.Model as StudentReportViewModel;
+
+            // Assert
+            Assert.IsNotNull(resultStudentReportViewModel, TestContext.TestName);
         }
-        
-        //[TestMethod]
-        //public void Controller_Portal_Report_ReportIsNull_shouldReturnErrorPage()
-        //{
-        //    // Arrange
-        //    PortalController controller = new PortalController();
-        //    StudentModel data = new StudentModel();
-        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
-
-        //    // Act
-
-        //}
         #endregion
     }
 }
