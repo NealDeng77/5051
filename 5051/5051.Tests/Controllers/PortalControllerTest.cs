@@ -205,6 +205,80 @@ namespace _5051.Tests.Controllers
         #endregion
 
         #region AvatarBindRegion
+        [TestMethod]
+        public void Controller_Portal_Avatar_Post_Invalid_AvatarIDIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new StudentAvatarModel();
+            data.AvatarId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Avatar_Post_Invalid_StudentIDIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            var data = new StudentAvatarModel();
+            data.AvatarId = avartar.Id;
+            data.StudentId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Avatar_Post_Invalid_StudentModelIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            StudentModel student = new StudentModel();
+            var data = new StudentAvatarModel();
+            data.AvatarId = avartar.Id;
+            data.StudentId = student.Id;
+            
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Avatar_Post_Valid_ShouldReturnIndexPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            AvatarModel avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            StudentModel student = new StudentModel();
+            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            var data = new StudentAvatarModel();
+            data.AvatarId = avartar.Id;
+            data.StudentId = student.Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(data);
+
+            var resultAvatar = StudentBackend.Instance.Read(data.AvatarId);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);           
+        }
         #endregion
 
         #region AvatarIDNullRegion
