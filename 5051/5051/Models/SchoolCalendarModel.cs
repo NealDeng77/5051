@@ -186,13 +186,13 @@ namespace _5051.Models
         /// <param name="data">a valid model</param>
         public SchoolCalendarModel(SchoolCalendarModel data)
         {
-            Initialize(data.Date);
-
             if (data == null)
             {
                 // If the data is null, just return a regular initialized one
                 return;
             }
+
+            Initialize(data.Date);
 
             Date = data.Date;
             TimeStart = data.TimeStart;
