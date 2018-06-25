@@ -242,6 +242,65 @@ namespace _5051.Tests.Controllers
 
         #endregion UpdateRegion
 
+        #region UpdatePostRegion
+
+        [TestMethod]
+        public void Controller_Student_Update_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Update_Post_DataIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((StudentDisplayViewModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Update_Post_IdIsNullOrEmpty_Should_Pass()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            StudentDisplayViewModel dataNull = new StudentDisplayViewModel();
+            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.Update(dataNull);
+            var resultEmpty = (ViewResult)controller.Update(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        #endregion UpdatePostRegion
+
         #region DeleteRegion
         [TestMethod]
         public void Controller_Student_Delete_Get_IdIsNull_ShouldReturnErrorPage()
