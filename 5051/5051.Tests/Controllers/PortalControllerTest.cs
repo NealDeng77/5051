@@ -69,6 +69,73 @@ namespace _5051.Tests.Controllers
         #endregion
 
         #region LoginBindRegion
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_ShouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            var data = new StudentDisplayViewModel();
+            data = null;
+            
+            // Act
+            var result = (RedirectToRouteResult)controller.Login(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);    
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_IDIsNull_ShouldReturnModel()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel student = new StudentModel();
+            var data = new StudentDisplayViewModel(student);
+            data.Id = null;
+
+            // Act
+            ViewResult result = controller.Login(data) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Assert
+            Assert.AreEqual(data.AvatarDescription, resultStudentDisplayViewModel.AvatarDescription, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_StudentModelIsNull_ShouldReturnErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel student = new StudentModel();
+            var data = new StudentDisplayViewModel(student);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Login(data);        
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Valid_ShouldReturnIndexPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel student = new StudentModel("Peter", null);
+            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            var data = new StudentDisplayViewModel(student);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Login(data);
+
+            var resultStudent = StudentBackend.Instance.Read(data.Id);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(data.Id, resultStudent.Id, TestContext.TestName);
+        }
         #endregion
 
         #region IndexIDNullRegion
