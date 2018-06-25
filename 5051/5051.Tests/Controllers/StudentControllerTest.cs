@@ -303,7 +303,7 @@ namespace _5051.Tests.Controllers
 
         #region DeleteRegion
         [TestMethod]
-        public void Controller_Student_Delete_Get_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Delete_Get_Null_Id_Should_Return_Error()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -316,11 +316,11 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Delete_Get_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Delete_Invalid_Null_Data_Should_Return_Error()
         {
             // Arrange
             StudentController controller = new StudentController();
-            string id = Guid.NewGuid().ToString();
+            string id = "bogus";
 
             // Act
             var result = (RedirectToRouteResult)controller.Delete(id);
@@ -351,7 +351,7 @@ namespace _5051.Tests.Controllers
 
         #region DeletePostRegion
         [TestMethod]
-        public void Controller_Student_Delete_Post_ModelIsInvalid_Send_Back_For_Edit()
+        public void Controller_Student_Delete_Post_Invalid_Model_Should_Send_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -368,7 +368,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Delete_Post_DataIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Delete_Post_Null_Data_Should_Return_Error()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -381,33 +381,45 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Delete_Post_IdIsNullOrEmpty_Send_Back_For_Edit()
+        public void Controller_Student_Delete_Post_Null_Id_Should_Send_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
             StudentDisplayViewModel dataNull = new StudentDisplayViewModel();
-            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel();
 
             // Make data.Id = null
             dataNull.Id = null;
+
+            // Act
+            var resultNull = (ViewResult)controller.Delete(dataNull);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Student_Delete_Post_Empty_Id_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel();
 
             // Make data.Id empty
             dataEmpty.Id = "";
 
             // Act
-            var resultNull = (ViewResult)controller.Delete(dataNull);
             var resultEmpty = (ViewResult)controller.Delete(dataEmpty);
 
             // Assert
-            Assert.IsNotNull(resultNull, TestContext.TestName);
             Assert.IsNotNull(resultEmpty, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Student_Delete_Post_Default_ShouldReturnIndexPage()
+        public void Controller_Student_Delete_Post_Default_Should_Return_Index_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
+
             // Get default student
             StudentModel student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             StudentDisplayViewModel data = new StudentDisplayViewModel(student);
