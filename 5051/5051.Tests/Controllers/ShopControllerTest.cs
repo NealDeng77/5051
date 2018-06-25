@@ -33,56 +33,73 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
-     /**************************
-        #region IndexRegion
 
-        [TestMethod]
-        public void Controller_Shop_Index_Default_Should_Pass()
-        {
-            // Arrange
-            ShopController controller = new ShopController();
+        //#region IndexRegion
 
-            ShopBuyViewModel data = new ShopBuyViewModel();
+        //[TestMethod]
+        //public void Controller_Shop_Index_Default_Should_Pass()
+        //{
+        //    // Arrange
+        //    ShopController controller = new ShopController();
 
-            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+        //    // Act
+        //    ViewResult result = controller.Index() as ViewResult;
+            
 
-            // Reset DataSourceBackend
-            DataSourceBackend.Instance.Reset();
+        //    // Assert
+        //    Assert.IsNotNull(result, TestContext.TestName);
+        //}
 
-            // Make ModelState Invalid
-            controller.ModelState.AddModelError("Error", "Home");
+        //[TestMethod]
+        //public void Controller_Shop_Index_With_Empty_List_Should_Return_Error_Page()
+        //{
+        //    // Arrange
+        //    ShopController controller = new ShopController();
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
+        //    // Set unitesting backend data
+        //    DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
 
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
+        //    // Make empty StudentList
+        //    while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
+        //    {
+        //        var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
+        //        DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
+        //    }
 
-        #endregion IndexRegion
-    ***************************************************/
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Index();
 
-    /*************************************************
+        //    // Reset DataSourceBackend
+        //    DataSourceBackend.Instance.Reset();
 
-        [TestMethod]
-        public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
-        {
-            // Arrange
-            ShopController controller = new ShopController();
+        //    // Assert
+        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-            ShopBuyViewModel data = new ShopBuyViewModel();
+        //#endregion IndexRegion
 
-            // Make ModelState Invalid
-            controller.ModelState.AddModelError("test", "test");
 
-            // Act
-            ViewResult result = controller.Buy(data) as ViewResult;
+        /*************************************************
 
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
+            [TestMethod]
+            public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
+            {
+                // Arrange
+                ShopController controller = new ShopController();
 
-    *********************************************************/
+                ShopBuyViewModel data = new ShopBuyViewModel();
+
+                // Make ModelState Invalid
+                controller.ModelState.AddModelError("test", "test");
+
+                // Act
+                ViewResult result = controller.Buy(data) as ViewResult;
+
+                // Assert
+                Assert.IsNotNull(result, TestContext.TestName);
+            }
+
+        *********************************************************/
 
 
         [TestMethod]

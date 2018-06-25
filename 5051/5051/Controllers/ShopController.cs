@@ -28,7 +28,6 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
-
             return View(myStudent);
         }
 
