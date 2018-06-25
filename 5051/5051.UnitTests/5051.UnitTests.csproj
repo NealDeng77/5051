@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\SchoolCalendarModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryListViewModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
     <Compile Include="Models\StudentReportViewModelUnitTests.cs" />
