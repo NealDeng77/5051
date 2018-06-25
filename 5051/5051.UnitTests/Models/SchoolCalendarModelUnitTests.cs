@@ -148,5 +148,209 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
         #endregion SetScoolTime
+
+        #region Update
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+            test.SetSchoolTime();
+            var expect = test.TimeDuration;
+
+            // Act
+            data.Update(test);
+            var result = data.TimeDuration;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_InValid_Data_Null_Should_Pass()
+        {
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+            var expect = data.TimeDuration;
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+            test.SetSchoolTime();
+
+            // Act
+            data.Update(null);
+            var result = data.TimeDuration;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Models_SchoolCalendarModel_Update_Fix_DayStart_Should_Pass()
+        //{
+
+        //    if (DayStart == SchoolCalendarDismissalEnum.Early && TimeStart != myDefault.StartEarly)
+        //    {
+        //        DayStart = SchoolCalendarDismissalEnum.Normal;
+        //    }
+
+        //    Arrange
+        //   var data = new SchoolCalendarModel();
+        //    data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+        //    data.SetSchoolTime();
+
+        //    var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+        //    Test is different than initial
+        //   var test = new SchoolCalendarModel();
+        //    test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+        //    test.TimeStart = TimeSpan.Zero;
+
+        //    test.SetSchoolTime();
+        //    var expect = myDefault.StartEarly;
+
+        //    Act
+        //    data.Update(test);
+        //    var result = data.TimeStart;
+
+        //    Assert
+        //    Assert.AreEqual(expect, result, TestContext.TestName);
+        //}
+
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Fix_DayStart_StartEarly_Should_Pass()
+        {
+
+            //if (DayStart == SchoolCalendarDismissalEnum.Early && TimeStart != myDefault.StartEarly)
+            //{
+            //    DayStart = SchoolCalendarDismissalEnum.Normal;
+            //}
+
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+
+            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.SetSchoolTime();
+            test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            test.TimeStart = myDefault.StartLate;   // Set to Start late, Update will reset it
+
+            var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+
+            // Act
+            data.Update(test);
+            var result = data.DayStart;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Fix_DayStart_StartLate_Should_Pass()
+        {
+
+            //if (DayStart == SchoolCalendarDismissalEnum.Late && TimeStart != myDefault.StartLate)
+            //{
+            //    DayStart = SchoolCalendarDismissalEnum.Normal;
+            //}
+
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+
+            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.SetSchoolTime();
+            test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Late;
+            test.TimeStart = myDefault.StartEarly;   // Set to Start late, Update will reset it
+
+            var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+
+            // Act
+            data.Update(test);
+            var result = data.DayEnd;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Fix_DayEnd_EndEarly_Should_Pass()
+        {
+            //if (DayEnd == SchoolCalendarDismissalEnum.Early && TimeEnd != myDefault.EndEarly)
+            //{
+            //    DayEnd = SchoolCalendarDismissalEnum.Normal;
+            //}
+
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+
+            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.SetSchoolTime();
+            test.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            test.TimeStart = myDefault.EndLate;  
+
+            var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+
+            // Act
+            data.Update(test);
+            var result = data.DayStart;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Fix_DayEnd_EndLate_Should_Pass()
+        {
+            //if (DayEnd == SchoolCalendarDismissalEnum.Late && TimeEnd != myDefault.EndLate)
+            //{
+            //    DayEnd = SchoolCalendarDismissalEnum.Normal;
+            //}
+
+            // Arrange
+            var data = new SchoolCalendarModel();
+            data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            data.SetSchoolTime();
+
+            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
+            // Test is different than initial
+            var test = new SchoolCalendarModel();
+            test.SetSchoolTime();
+            test.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Late;
+            test.TimeStart = myDefault.EndNormal;
+
+            var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
+
+            // Act
+            data.Update(test);
+            var result = data.DayEnd;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion Update
     }
 }
