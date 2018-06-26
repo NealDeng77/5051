@@ -330,6 +330,80 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(id, resultAvatar.Id, TestContext.TestName);
         }
 
+
+        [TestMethod]
+        public void Controller_Avatar_Delete_Post_Invalid_Null_Id_Should_Return_Model()
+        {
+            // Arrange
+            AvatarController controller = new AvatarController();
+            var data = new AvatarModel
+            {
+                Description = "description",
+                Id = null,
+                Name = "Name",
+                Uri = "picture"
+            };
+
+            // Act
+            ViewResult result = controller.Delete(data) as ViewResult;
+
+            var resultAvatar = result.Model as AvatarModel;
+
+            // Assert
+            Assert.AreEqual(data.Description, resultAvatar.Description, TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Controller_Avatar_Update_Post_Valid_Should_Return_Index_Page()
+        //{
+        //    // Arrange
+        //    AvatarController controller = new AvatarController();
+
+        //    var data = new AvatarModel
+        //    {
+        //        Description = "description",
+        //        Id = "abc",
+        //        Name = "Name",
+        //        Uri = "picture"
+        //    };
+
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Update(data);
+
+        //    // Assert
+        //    Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        //    // No need to check the route, Assert.AreEqual("Avatar", result.RouteValues["route"], TestContext.TestName);
+
+        //    // Check that the item is Updated
+        //    var resultAvatar = AvatarBackend.Instance.Read("abc");
+        //    Assert.AreEqual(data.Id, resultAvatar.Id, TestContext.TestName);
+
+        //    // Reset the Avatars
+        //    AvatarBackend.Instance.Reset();
+
+        //}
+
+        [TestMethod]
+        public void Controller_Avatar_Delete_Post_InValid_Should_Return_Error_Page()
+        {
+            /// <summary>
+            /// This Test calls the Update, but passes null data
+            /// The controller will return a redirect to the error home page
+            /// So the test needs to cast the return to a redirect, and then check that it got to the home error page
+            /// </summary>
+
+            // Arrange
+            AvatarController controller = new AvatarController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete((AvatarModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
+        }
+
+
         #endregion DeleteRegion
 
         //    public ActionResult Update(string id = null)
