@@ -63,6 +63,9 @@ namespace _5051.Tests.Controllers
 
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
@@ -150,6 +153,9 @@ namespace _5051.Tests.Controllers
 
             var resultStudent = StudentBackend.Instance.Read(data.Id);
 
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual(data.Id, resultStudent.Id, TestContext.TestName);
@@ -184,6 +190,9 @@ namespace _5051.Tests.Controllers
 
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
@@ -216,6 +225,9 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Attendance(id) as ViewResult;
 
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -270,6 +282,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Avatar(data);
 
+            // Reset AvatarBackend
+            AvatarBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -289,6 +304,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Avatar(data);
+
+            // Reset AvatarBackend
+            AvatarBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -312,12 +330,72 @@ namespace _5051.Tests.Controllers
 
             var resultAvatar = StudentBackend.Instance.Read(data.AvatarId);
 
+            // Reset AvatarBackend and StudentBackend
+            AvatarBackend.Instance.Reset();
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);           
         }
         #endregion
 
-        #region AvatarIDNullRegion
+        #region AvatarStringRegion
+        [TestMethod]
+        public void Controller_Portal_Avatar_IDIsNull_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Avatar_Invalid_AvatarModelIsNull_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = new StudentModel();
+            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            var avatar = new AvatarModel();
+            avatar.Id = null;
+       
+            // Act
+            var result = (RedirectToRouteResult)controller.Avatar(id);
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Controller_Portal_Avatar_Valid_Should_Return_NewModel()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
+        //    AvatarModel avatar = new AvatarModel();
+        //    avatar.Id = Backend.AvatarBackend.Instance.Create(avatar).Id;
+        
+        //    // Act
+        //    ViewResult result = controller.Avatar(id) as ViewResult;
+        //    var resultSelectedAvatarViewModel = result.Model as SelectedAvatarViewModel;
+
+        //    // Reset AvatarBackend
+        //    StudentBackend.Instance.Reset();
+        //    AvatarBackend.Instance.Reset();
+
+        //    // Assert
+        //    Assert.IsNotNull(resultSelectedAvatarViewModel, TestContext.TestName);
+        //}
+
         #endregion
 
         #region GroupRegion
@@ -363,6 +441,9 @@ namespace _5051.Tests.Controllers
 
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
@@ -396,12 +477,15 @@ namespace _5051.Tests.Controllers
 
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
         #endregion
 
-        #region SettingsBindRegion
+        #region SettingsPostRegion
         [TestMethod]
         public void Controller_Portal_Settings_Post_ModelIsInvalid_Should_Pass()
         {
@@ -484,12 +568,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            AvatarModel avartar = new AvatarModel();
-            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            AvatarModel avatar = new AvatarModel();
+            avatar.Id = Backend.AvatarBackend.Instance.Create(avatar).Id;
             StudentModel student = new StudentModel();
             student.Id = Backend.StudentBackend.Instance.Create(student).Id;
             var data = new StudentDisplayViewModel();
-            data.AvatarId = avartar.Id;
+            data.AvatarId = avatar.Id;
             data.Id = student.Id;
 
             // Act
@@ -497,7 +581,7 @@ namespace _5051.Tests.Controllers
 
             var resultAvatar = StudentBackend.Instance.Read(data.AvatarId);
 
-            // Reset AvatarBackend
+            // Reset AvatarBackend and StudentBackend
             AvatarBackend.Instance.Reset();
             StudentBackend.Instance.Reset();
 
@@ -533,6 +617,9 @@ namespace _5051.Tests.Controllers
             var result = controller.Report(id) as ViewResult;
 
             var resultStudentReportViewModel = result.Model as StudentReportViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentReportViewModel, TestContext.TestName);
