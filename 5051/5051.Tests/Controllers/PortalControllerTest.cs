@@ -70,7 +70,25 @@ namespace _5051.Tests.Controllers
 
         #region LoginBindRegion
         [TestMethod]
-        public void Controller_Portal_Login_Post_Invalid_ShouldReturnErrorPage()
+        public void Controller_Portal_Login_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Login(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_Should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -86,7 +104,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Login_Post_Invalid_IDIsNull_ShouldReturnModel()
+        public void Controller_Portal_Login_Post_Invalid_IDIsNull_Should_Return_Model()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -104,7 +122,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Login_Post_Invalid_StudentModelIsNull_ShouldReturnErrorPage()
+        public void Controller_Portal_Login_Post_Invalid_StudentModelIsNull_Should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -119,7 +137,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Login_Post_Valid_ShouldReturnIndexPage()
+        public void Controller_Portal_Login_Post_Valid_Should_Return_IndexPage()
         {
             // Arrange
             PortalController controller = new PortalController();
