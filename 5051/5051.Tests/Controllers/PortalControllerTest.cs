@@ -20,7 +20,7 @@ namespace _5051.Tests.Controllers
 
         #region RosterRegion
         [TestMethod]
-        public void Controller_Portal_Roster_ShouldReturnNewModel()
+        public void Controller_Portal_Roster_Should_Return_NewModel()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -35,9 +35,9 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region LoginIDNullRegion
+        #region LoginStringRegion
         [TestMethod]
-        public void Controller_Portal_Login_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Login_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -68,7 +68,7 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region LoginBindRegion
+        #region LoginPostRegion
         [TestMethod]
         public void Controller_Portal_Login_Post_ModelIsInvalid_Should_Pass()
         {
@@ -156,9 +156,9 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region IndexIDNullRegion
+        #region IndexStringRegion
         [TestMethod]
-        public void Controller_Portal_Index_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Index_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -172,7 +172,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Index_IDValid_ShouldPass()
+        public void Controller_Portal_Index_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -189,9 +189,9 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region AttendanceIDNullRegion
+        #region AttendanceStringRegion
         [TestMethod]
-        public void Controller_Portal_Attendance_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Attendance_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -205,7 +205,7 @@ namespace _5051.Tests.Controllers
         }
 
        [TestMethod]
-        public void Controller_Portal_Attendance_IDValid_ShouldPass()
+        public void Controller_Portal_Attendance_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -222,9 +222,27 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region AvatarBindRegion
+        #region AvatarPostRegion
         [TestMethod]
-        public void Controller_Portal_Avatar_Post_Invalid_AvatarIDIsNull_ShouldReturnErrorPage()
+        public void Controller_Portal_Avatar_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            StudentAvatarModel data = new StudentAvatarModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Avatar(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Avatar_Post_Invalid_AvatarIDIsNull_Should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -239,7 +257,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Avatar_Post_Invalid_StudentIDIsNull_ShouldReturnErrorPage()
+        public void Controller_Portal_Avatar_Post_Invalid_StudentIDIsNull_Should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -257,7 +275,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Avatar_Post_Invalid_StudentModelIsNull_ShouldReturnErrorPage()
+        public void Controller_Portal_Avatar_Post_Invalid_StudentModelIsNull_Should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -277,7 +295,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Portal_Avatar_Post_Valid_ShouldReturnIndexPage()
+        public void Controller_Portal_Avatar_Post_Valid_Should_Return_IndexPage()
         {
             // Arrange
             PortalController controller = new PortalController();
