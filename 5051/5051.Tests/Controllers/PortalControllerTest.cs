@@ -374,27 +374,24 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Controller_Portal_Avatar_Valid_Should_Return_NewModel()
-        //{
-        //    // Arrange
-        //    PortalController controller = new PortalController();
-        //    StudentModel data = new StudentModel();
-        //    string id = Backend.StudentBackend.Instance.Create(data).Id;
-        //    AvatarModel avatar = new AvatarModel();
-        //    avatar.Id = Backend.AvatarBackend.Instance.Create(avatar).Id;
-        
-        //    // Act
-        //    ViewResult result = controller.Avatar(id) as ViewResult;
-        //    var resultSelectedAvatarViewModel = result.Model as SelectedAvatarViewModel;
+        [TestMethod]
+        public void Controller_Portal_Avatar_Valid_Should_Return_NewModel()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel student = new StudentModel("Peter", null);
+            string id = Backend.StudentBackend.Instance.Create(student).Id;
 
-        //    // Reset AvatarBackend
-        //    StudentBackend.Instance.Reset();
-        //    AvatarBackend.Instance.Reset();
+            // Act
+            ViewResult result = controller.Avatar(id) as ViewResult;
+            var resultSelectedAvatarForStudentViewModel = result.Model as SelectedAvatarForStudentViewModel;
 
-        //    // Assert
-        //    Assert.IsNotNull(resultSelectedAvatarViewModel, TestContext.TestName);
-        //}
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultSelectedAvatarForStudentViewModel, TestContext.TestName);
+        }
 
         #endregion
 
