@@ -47,6 +47,7 @@ namespace _5051.Models
 
         public SchoolDismissalSettingsModel()
         {
+            Initialize();
         }
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace _5051.Models
         /// <param name="data"></param>
         public SchoolDismissalSettingsModel(SchoolDismissalSettingsModel data)
         {
+            Initialize();
             if (data == null)
             {
                 return;
@@ -73,7 +75,7 @@ namespace _5051.Models
         /// <summary>
         /// Create the default values
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
             SetDefault();
         }
