@@ -378,10 +378,11 @@ namespace _5051.Controllers
             dateEnd = DateTime.Parse("7/1/2018");
 
             var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent,dateStart,dateEnd);
-            if (myReturn == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            // Not possible for Null return,
+            //if (myReturn == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
 
             return View(myReturn);
         }

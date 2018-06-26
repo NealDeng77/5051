@@ -50,7 +50,7 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
         }
 
-       [TestMethod]
+        [TestMethod]
         public void Controller_Portal_Login_IDValid_ShouldPass()
         {
             // Arrange
@@ -204,7 +204,7 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
         }
 
-       [TestMethod]
+        [TestMethod]
         public void Controller_Portal_Attendance_IDValid_Should_Pass()
         {
             // Arrange
@@ -337,7 +337,7 @@ namespace _5051.Tests.Controllers
 
         #region HouseRegion
         [TestMethod]
-        public void Controller_Portal_House_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_House_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -351,7 +351,7 @@ namespace _5051.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_Portal_House_IDValid_ShouldPass()
+        public void Controller_Portal_House_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -368,9 +368,9 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region SettingsIDNullRegion
+        #region SettingsStringRegion
         [TestMethod]
-        public void Controller_Portal_Settings_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Settings_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -384,7 +384,7 @@ namespace _5051.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_Portal_Settings_IDValid_ShouldPass()
+        public void Controller_Portal_Settings_IDValid_Should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -402,11 +402,113 @@ namespace _5051.Tests.Controllers
         #endregion
 
         #region SettingsBindRegion
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Settings(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Invalid_AvatarIDIsNull_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new StudentDisplayViewModel();
+            data.AvatarId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Invalid_IDIsNull_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            var data = new StudentDisplayViewModel();
+            data.AvatarId = avartar.Id;
+            data.Id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            // Reset AvatarBackend
+            AvatarBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Invalid_StudentModelIsNull_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            StudentModel student = new StudentModel();
+            var data = new StudentDisplayViewModel();
+            data.AvatarId = avartar.Id;
+            data.Id = student.Id;
+
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            // Reset AvatarBackend
+            AvatarBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Valid_Should_Return_IndexPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            AvatarModel avartar = new AvatarModel();
+            avartar.Id = Backend.AvatarBackend.Instance.Create(avartar).Id;
+            StudentModel student = new StudentModel();
+            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            var data = new StudentDisplayViewModel();
+            data.AvatarId = avartar.Id;
+            data.Id = student.Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            var resultAvatar = StudentBackend.Instance.Read(data.AvatarId);
+
+            // Reset AvatarBackend
+            AvatarBackend.Instance.Reset();
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
         #endregion
 
         #region ReportRegion
         [TestMethod]
-        public void Controller_Portal_Report_IDIsNull_ShouldReturnRosterPage()
+        public void Controller_Portal_Report_IDIsNull_Should_Return_RosterPage()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -420,7 +522,7 @@ namespace _5051.Tests.Controllers
         }           
 
         [TestMethod]
-        public void Controller_Portal_Report_IDValid_shouldReturnErrorPage()
+        public void Controller_Portal_Report_IDValid_should_Return_ErrorPage()
         {
             // Arrange
             PortalController controller = new PortalController();
