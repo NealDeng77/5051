@@ -279,6 +279,10 @@ namespace _5051.Tests.Controllers
         }
         #endregion UpdateRegion
 
+
+
+        #region DeleteRegion
+
         [TestMethod]
         public void Controller_Avatar_Delete_ID_Null_Should_Return_Empty_Model()
         {
@@ -294,9 +298,37 @@ namespace _5051.Tests.Controllers
         }
 
 
-        #region DeleteRegion
+        [TestMethod]
+        public void Controller_Avatar_Delete_ID_Bogus_Should_Return_Empty_Model()
+        {
+            // Arrange
+            AvatarController controller = new AvatarController();
+            string id = "bogus";
 
+            // Act
+            ViewResult result = controller.Delete(id) as ViewResult;
 
+            // Assert
+            Assert.AreEqual(null, result.Model, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Avatar_Delete_ID_Valid_Should_Pass()
+        {
+            // Arrange
+            AvatarController controller = new AvatarController();
+
+            // Get the first Avatar from the DataSource
+            string id = AvatarBackend.Instance.GetFirstAvatarId();
+
+            // Act
+            ViewResult result = controller.Delete(id) as ViewResult;
+
+            var resultAvatar = result.Model as AvatarModel;
+
+            // Assert
+            Assert.AreEqual(id, resultAvatar.Id, TestContext.TestName);
+        }
 
         #endregion DeleteRegion
 
