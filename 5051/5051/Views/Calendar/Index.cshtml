@@ -1,0 +1,179 @@
+﻿@using _5051.Models
+@using _5051.Models.Enums
+@model SchoolCalendarViewModel
+@{
+    ViewBag.Title = "Calendar";
+}
+
+<h2>Welcome to School Calendar</h2>
+<br />
+<h4>Highlighted days are school days</h4>
+<h4>Early dismissal are blue</h4>
+<h4>Modified days are Green</h4>
+<br />
+<h4>Early dismissal every Wendsday</h4>
+
+
+<h4>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h4>
+<h4>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h4>
+
+<br />
+<br />
+
+@Html.ActionLink("Change Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" }, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+
+<hr />
+
+<div class="row">
+    @{
+        foreach (var MonthItem in Model.Months)
+        {
+            <div class="col-sm-4 CalendarBox">
+
+                <div class="row">
+                    <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
+                    <br />
+                </div>
+
+                <div class="row text-center">
+                    <table class="table table-bordered table-condensed table-fit table-striped">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-center">Mo</th>
+                                <th class="text-center">Tu</th>
+                                <th class="text-center">We</th>
+                                <th class="text-center">Th</th>
+                                <th class="text-center">Fr</th>
+                                <th class="text-center">Sa</th>
+                                <th class="text-center">Su</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int ColumnSpaceCount = 0;
+                                var ColumnSpace = "<td/>";
+                                foreach (var dayItem in MonthItem)
+                                {
+                                    var newRow = "<td>";
+                                    var endRow = "</td>";
+
+                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Monday)
+                                    {
+                                        newRow = "<tr><td>";
+                                    }
+
+                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        endRow = "</td></tr>";
+                                    }
+
+                                    @Html.Raw(newRow)
+
+                                    if (dayItem.Date.Day == 1)
+                                    {
+                                        // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
+                                        // Don't include the column to show, so just the previous columns
+                                        DayOfWeek today = dayItem.Date.DayOfWeek;
+                                        switch (today)
+                                        {
+                                            case DayOfWeek.Monday:
+                                                //nothing
+                                                ColumnSpaceCount = 0;
+                                                break;
+
+                                            case DayOfWeek.Tuesday:
+                                                ColumnSpaceCount = 1;
+                                                break;
+
+                                            case DayOfWeek.Wednesday:
+                                                ColumnSpaceCount = 2;
+                                                break;
+
+                                            case DayOfWeek.Thursday:
+                                                ColumnSpaceCount = 3;
+                                                break;
+
+                                            case DayOfWeek.Friday:
+                                                ColumnSpaceCount = 4;
+                                                break;
+
+                                            case DayOfWeek.Saturday:
+                                                ColumnSpaceCount = 5;
+                                                break;
+
+                                            case DayOfWeek.Sunday:
+                                                ColumnSpaceCount = 6;
+                                                break;
+                                        }
+                                        for (var i = 0; i < ColumnSpaceCount; i++)
+                                        {
+                                            @Html.Raw(ColumnSpace)
+                                        }
+                                    }
+
+                                    // Output this date
+                                    <div>
+                                        @{
+                                            var buttonClass = "btn btn-sm active btn-default";
+
+                                            if (dayItem.SchoolDay == false)
+                                            {
+                                                buttonClass = "btn btn-sm btn-default";
+                                            }
+
+                                            else
+                                            {
+                                                if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-info";
+                                                }
+
+                                                if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-info";
+                                                }
+
+                                                if (dayItem.Modified == true)
+                                                {
+                                                    buttonClass += "btn btn-sm active btn-success";
+                                                }
+                                            }
+                                            @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass });
+
+
+                                            if (dayItem.TimeDuration.Ticks > 0)
+                                            {
+                                                <span>
+                                                    <br />
+                                                    @string.Format("{0:D1}:{1:D2}", dayItem.TimeDuration.Hours, dayItem.TimeDuration.Minutes)
+                                                    <br />
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <br />
+                                            }
+                                        }
+
+                                    </div>
+                                    @Html.Raw(endRow)
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+
+
+<br />
+<br />
+<br />
+

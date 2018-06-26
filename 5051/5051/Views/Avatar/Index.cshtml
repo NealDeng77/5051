@@ -1,13 +1,17 @@
 ﻿@model _5051.Models.AvatarViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Edit Avatar";
 }
 
-<h2>Avatars</h2>
 
 <div class="container">
-    <div class="row">
+    <br />
+    <h2>Click on an Avatar to Edit</h2>
+    <br />
+    <br />
+
+    <div class="row text-center">
 
         @{
             if (Model.AvatarList == null || !Model.AvatarList.Any())
@@ -20,15 +24,20 @@
             {
                 foreach (var item in Model.AvatarList)
                 {
-                    <a id="@item.Id" href="~/Avatar/Read/@item.Id">
-                        <div class="col-sm-2">
-                            <img src="~/Content/img/@item.Uri" width="75" height="75" />
+                    <div class="col-sm-2">
+                        <div class="BoxWithHighlightHover">
+                            <a id="@item.Id" href="~/Avatar/Read/@item.Id">
+                                <img src="~/Content/img/@item.Uri" class="AvatarSize1" />
+                            </a>
                             <br />
                             <span>
                                 @item.Name
+                                <br />
+                                <br />
+                                <br />
                             </span>
                         </div>
-                    </a>
+                    </div>
                 }
             }
         }
@@ -36,9 +45,9 @@
     </div>
     <br />
     <br />
-    <div class="row">
+    <div class="row text-center">
         <div class="col-sm-2">
-            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New Avatar", "Create", null, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>

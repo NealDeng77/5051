@@ -1,0 +1,57 @@
+﻿@model _5051.Models.StudentDisplayViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Enter your Password to login</h2>
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-sm-3 text-right">
+    </div>
+    <div class="col-sm-2">
+        <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize1" />
+        <br />
+        <span>
+            @Model.Name
+            <br />
+            <br />
+            <br />
+        </span>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.AvatarId)
+    @Html.HiddenFor(m => m.Tokens)
+    @Html.HiddenFor(m => m.Status)
+    @Html.HiddenFor(m => m.AvatarLevel)
+    @Html.HiddenFor(m => m.AvatarUri)
+    @Html.HiddenFor(m => m.AvatarDescription)
+
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @Html.DisplayNameFor(m => m.Password)
+        </div>
+        <div class="col-sm-2">
+            @Html.PasswordFor(m => m.Password)
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+        </div>
+        <div class="col-sm-4">
+            @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn-success" })
+            <input type="submit" value="Login" class="btn btn-primary">
+        </div>
+    </div>
+}

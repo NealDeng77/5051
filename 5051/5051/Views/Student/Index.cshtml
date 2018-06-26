@@ -1,44 +1,52 @@
 ﻿@model _5051.Models.StudentViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
-<h2>Students</h2>
-
 <div class="container">
-    <div class="row">
+    <br />
+    <h2>Click on a student to edit the student information</h2>
+    <br />
+    <br />
 
-        @{
-            if (Model.StudentList == null || !Model.StudentList.Any())
-            {
-                <br />
-                <p>No Students in the System</p>
-                <br />
-            }
-            else
-            {
-                foreach (var item in Model.StudentList)
+    <div class="row text-center">
+        <div class="col-sm-12">
+            @{
+                if (Model.StudentList == null || !Model.StudentList.Any())
                 {
-                    <a id="@item.Id" href="~/Student/Read/@item.Id">
+                    <br />
+                    <p>No Students in the System</p>
+                    <br />
+                }
+                else
+                {
+                    foreach (var item in Model.StudentList)
+                    {
                         <div class="col-sm-2">
-                            <img src="~/Content/img/@item.AvatarUri" width="75" height="75" />
-                            <br />
-                            <span>
-                                @item.Name
-                            </span>
+                            <div class="BoxWithHighlightHover">
+                                <a id="@item.Id" href="~/Student/Read/@item.Id">
+                                    <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                </a>
+                                <br />
+                                <span>
+                                    @item.Name
+                                    <br />
+                                    <br />
+                                    <br />
+                                </span>
+                            </div>
                         </div>
-                    </a>
+                    }
                 }
             }
-        }
-
+        </div>
     </div>
     <br />
     <br />
     <div class="row">
         <div class="col-sm-2">
-            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New Student", "Create", null, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>

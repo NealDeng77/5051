@@ -1,18 +1,73 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Administrator";
 }
 
-<h2>Welcome to the Admin Page</h2>
-
-
-@Html.ActionLink("Avatar Editing", "Index", "Avatar", null,new { @class = "btn btn-primary" })
+<h2>Welcome to the Administrator Page</h2>
 
 <br />
-@Html.ActionLink("Show Reports", "Index", "Report", null, new { @class = "btn btn-primary" })
-
 <br />
-@Html.ActionLink("Manage Students", "Index", "Student", null, new { @class = "btn btn-primary" })
 
-<br />
-@Html.ActionLink("School Calendar", "Index", "Calendar", null, new { @class = "btn btn-primary" })
+<div class="row text-center">
+    <div class="col-sm-12">
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/Admin/Report">
+                    <img src="~/Content/img/PortalReport.jpg" alt="Show Reports" class="PortalImage" />
+                </a>
+                <br />
+                <span>Show Reports</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/Student/Index">
+                    <img src="~/Content/img/PortalStudents.png" alt="Manage Students" class="PortalImage" />
+                </a>
+                <br />
+                <span>Manage Students</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/Calendar/Index">
+                    <img src="~/Content/img/PortalCalendar.jpeg" alt="Manage Calendar" class="PortalImage" />
+                </a>
+                <br />
+                <span>Manage Calendar</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/Avatar/Index">
+                    <img src="~/Content/img/PortalAvatars.png" alt="Manage Avatars" class="PortalImage" />
+                </a>
+                <br />
+                <span>Manage Avatars</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/Admin/Settings">
+                    <img src="~/Content/img/PortalSettings.png" alt="Settings" class="PortalImage" />
+                </a>
+                <br />
+                <span>Settings</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="PortalBox">
+                <a href="~/ShopInventory/Index">
+                    <img src="~/Content/img/PortalStore.png" alt="Manage Store Inventory" class="PortalImage" />
+                </a>
+                <br />
+                <span>Manage Store Inventory</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model _5051.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>Reports</h2>
+
+<h3>Click on the Student to view their individual report</h3>
+<br />
+
+@{
+    if (Model.StudentList == null || !Model.StudentList.Any())
+    {
+        <br />
+        <p>No Students in the System</p>
+        <br />
+    }
+    else
+    {
+        foreach (var item in Model.StudentList)
+        {
+            <div class="col-sm-3 text-center">
+                <div class="PortalBox">
+                    <a id="@item.Id" href="~/Admin/StudentReport/@item.Id">
+                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                        <img src="~/Content/img/ChartPlaceholder.png" class="AvatarSize1" />
+                    </a>
+                    <br />
+                    <span>
+                        @item.Name
+                    </span>
+                </div>
+            </div>
+        }
+    }
+}
+

@@ -22,3 +22,125 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Set items in a div */
+.div-center {
+    display: inline-block;
+    float: none;
+}
+
+.NoPadding {
+    padding: 0;
+}
+
+.AvatarOuterBox {
+    width: 100px;
+    height: 100px;
+}
+
+.PortalBox{
+    width:200px;
+    height:200px;
+}
+    .PortalBox:hover {
+ 
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.PortalImage{
+    width:150px;
+    height:150px;
+}
+
+.BoxWithHighlightHover {
+}
+
+    .BoxWithHighlightHover:hover {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+    }
+
+
+.BoxWithHighlightHoverOff {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.AvatarSize1 {
+    width: 75px;
+    height: 75px;
+}
+
+.AvatarSize2{
+    width: 150px;
+    height: 150px;
+}
+
+.AvatarSize0 {
+    width: 50px;
+    height: 50px;
+}
+
+.FooterBar{
+    background-color:black;
+}
+
+.FooterText {
+    color: #999999;
+}
+
+.FooterLink {
+}
+    .FooterLink:hover {
+        color: #ffffff;
+        background-color: transparent;
+    }
+
+.body-content {
+    padding: 0;
+    padding-left: 7px;
+}
+
+
+.CenterBoxParent {
+    text-align: center;
+}
+
+.CenterBoxChild {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.table-fit{
+    white-space: nowrap;
+    width: 2%;
+}
+
+.ShopInventoryBox {
+}
+
+    .ShopInventoryBox:hover {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+    }
+
+.ShopInventorySize1 {
+    width: 75px;
+    height: 75px;
+}
+
+.ShopInventorySize2 {
+    width: 150px;
+    height: 150px;
+}
+
+.FullChart {
+    height: 300px;
+    width: 500px;
+}
+
+.CalendarBox {
+    height:450px; 
+    min-width:380px
+}

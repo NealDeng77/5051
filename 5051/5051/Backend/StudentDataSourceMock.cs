@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 using _5051.Models;
+
 namespace _5051.Backend
 {
+    /// <summary>
+    /// Holds the Student Data as a Mock Data set, used for Unit Testing, System Testing, Offline Development etc.
+    /// </summary>
     public class StudentDataSourceMock : IStudentInterface
     {
+        /// <summary>
+        /// Make into a singleton
+        /// </summary>
         private static volatile StudentDataSourceMock instance;
         private static object syncRoot = new Object();
 
@@ -33,6 +38,9 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// The Data for the Students
+        /// </summary>
         private List<StudentModel> StudentList = new List<StudentModel>();
 
         /// <summary>
@@ -74,9 +82,12 @@ namespace _5051.Backend
                 return null;
             }
             var myReturn = StudentList.Find(n => n.Id == data.Id);
-            myReturn.Name = data.Name;
-            myReturn.AvatarId = data.AvatarId;
-            myReturn.Tokens = data.Tokens;
+            if (myReturn == null)
+            {
+                return null;
+            }
+
+            myReturn.Update(data);
 
             return myReturn;
         }
@@ -108,14 +119,78 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Reset the Data, and reload it
+        /// </summary>
+        public void Reset()
+        {
+            Initialize();
+        }
+
+        /// <summary>
         /// Create Placeholder Initial Data
         /// </summary>
         public void Initialize()
         {
+            LoadDataSet(DataSourceDataSetEnum.Default);
+        }
+
+        /// <summary>
+        /// Clears the Data
+        /// </summary>
+        private void DataSetClear()
+        {
+            StudentList.Clear();
+        }
+
+        /// <summary>
+        /// The Defalt Data Set
+        /// </summary>
+        private void DataSetDefault()
+        {
+            DataSetClear();
             Create(new StudentModel("Mike", null));
-            Create(new StudentModel("Doug",null));
+            Create(new StudentModel("Doug", null));
             Create(new StudentModel("Jea", null));
             Create(new StudentModel("Sue", null));
+        }
+
+        /// <summary>
+        /// Data set for demo
+        /// </summary>
+        private void DataSetDemo()
+        {
+            DataSetDefault();
+        }
+        
+        /// <summary>
+        /// Unit Test data set
+        /// </summary>
+        private void DataSetUnitTest()
+        {
+            DataSetDefault();
+        }
+
+        /// <summary>
+        /// Set which data to load
+        /// </summary>
+        /// <param name="setEnum"></param>
+        public void LoadDataSet(DataSourceDataSetEnum setEnum)
+        {
+            switch (setEnum)
+            {
+                case DataSourceDataSetEnum.Demo:
+                    DataSetDemo();
+                    break;
+
+                case DataSourceDataSetEnum.UnitTest:
+                    DataSetUnitTest();
+                    break;
+
+                case DataSourceDataSetEnum.Default:
+                default:
+                    DataSetDefault();
+                    break;
+            }
         }
     }
 }

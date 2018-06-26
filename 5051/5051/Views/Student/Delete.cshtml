@@ -1,9 +1,8 @@
-﻿@model _5051.Models.StudentModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Delete";
 }
-
 
 <div class="container">
     <div class="row">
@@ -22,10 +21,10 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-2 text-right">
+                        <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.AvatarId" width="75" height="75" />
+                            <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize1" />
                             <br />
                             <span>
                                 @Model.Name
@@ -40,9 +39,15 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.AvatarId)
+                        @Html.HiddenFor(m => m.AvatarLevel)
+                        @Html.HiddenFor(m => m.Tokens)
+                        @Html.HiddenFor(m => m.ExperiencePoints)
+                        @Html.HiddenFor(m => m.Password)
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
                                 @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })

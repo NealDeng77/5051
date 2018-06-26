@@ -1,7 +1,7 @@
 ﻿@model _5051.Models.AvatarModel
 
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Delete";
 }
 
 
@@ -22,10 +22,10 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-2 text-right">
+                        <div class="col-sm-3 text-right">
                         </div>
-                        <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.Uri" width="75" height="75" />
+                        <div class="col-sm-4">
+                            <img src="~/Content/img/@Model.Uri" class="AvatarSize1" />
                             <br />
                             <span>
                                 @Model.Name
@@ -43,9 +43,10 @@
                         @Html.HiddenFor(m => m.Name)
                         @Html.HiddenFor(m => m.Description)
                         @Html.HiddenFor(m => m.Uri)
+                        @Html.HiddenFor(m => m.Level)
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
                                 @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })

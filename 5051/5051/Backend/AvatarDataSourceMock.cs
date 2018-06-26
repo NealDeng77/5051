@@ -6,8 +6,14 @@ using System.Web;
 using _5051.Models;
 namespace _5051.Backend
 {
+    /// <summary>
+    /// Backend Mock DataSource for Avatars, to manage them
+    /// </summary>
     public class AvatarDataSourceMock : IAvatarInterface
     {
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
         private static volatile AvatarDataSourceMock instance;
         private static object syncRoot = new Object();
 
@@ -33,6 +39,9 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// The Avatar List
+        /// </summary>
         private List<AvatarModel> avatarList = new List<AvatarModel>();
 
         /// <summary>
@@ -69,14 +78,18 @@ namespace _5051.Backend
         /// <returns>Null or updated data</returns>
         public AvatarModel Update(AvatarModel data)
         {
+            //Might be an impossible null check
             if (data == null)
             {
                 return null;
             }
             var myReturn = avatarList.Find(n => n.Id == data.Id);
-            myReturn.Name = data.Name;
-            myReturn.Description = data.Description;
-            myReturn.Uri = data.Uri;
+
+            if (myReturn == null)
+            {
+                return null;
+            }
+            myReturn.Update(data);
 
             return myReturn;
         }
@@ -108,21 +121,85 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Reset the Data, and reload it
+        /// </summary>
+        public void Reset()
+        {
+            Initialize();
+        }
+
+        /// <summary>
         /// Create Placeholder Initial Data
         /// </summary>
         public void Initialize()
         {
+            LoadDataSet(DataSourceDataSetEnum.Default);
+        }
+
+        /// <summary>
+        /// Clears the Data
+        /// </summary>
+        private void DataSetClear()
+        {
+            avatarList.Clear();
+        }
+
+        /// <summary>
+        /// The Defalt Data Set
+        /// </summary>
+        private void DataSetDefault()
+        {
+            DataSetClear();
             var count = 0;
-            Create(new AvatarModel("avatar" + count++.ToString() +".png", "Police", "Happy Officer"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Kunoichi", "Ninja Lady"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Angry", "Angry, but happy"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Playfull", "Anyone want a ride?"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Pirate", "Where is my ship?"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Blue", "Having a Blue Day"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Pigtails", "Love my hair"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Ninja", "Taste my Katana"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Circus", "Swinging from the Trapeese"));
-            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Chief", "I love to cook"));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Police", "Happy Officer", 1));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Kunoichi", "Ninja Lady", 2));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Angry", "Angry, but happy", 1));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Playfull", "Anyone want a ride?", 1));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Pirate", "Where is my ship?", 2));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Blue", "Having a Blue Day", 3));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Pigtails", "Love my hair", 3));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Ninja", "Taste my Katana", 2));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Circus", "Swinging from the Trapeese", 4));
+            Create(new AvatarModel("avatar" + count++.ToString() + ".png", "Chef", "I love to cook", 4));
+        }
+
+        /// <summary>
+        /// Data set for demo
+        /// </summary>
+        private void DataSetDemo()
+        {
+            DataSetDefault();
+        }
+
+        /// <summary>
+        /// Unit Test data set
+        /// </summary>
+        private void DataSetUnitTest()
+        {
+            DataSetDefault();
+        }
+
+        /// <summary>
+        /// Set which data to load
+        /// </summary>
+        /// <param name="setEnum"></param>
+        public void LoadDataSet(DataSourceDataSetEnum setEnum)
+        {
+            switch (setEnum)
+            {
+                case DataSourceDataSetEnum.Demo:
+                    DataSetDemo();
+                    break;
+
+                case DataSourceDataSetEnum.UnitTest:
+                    DataSetUnitTest();
+                    break;
+
+                case DataSourceDataSetEnum.Default:
+                default:
+                    DataSetDefault();
+                    break;
+            }
         }
     }
 }

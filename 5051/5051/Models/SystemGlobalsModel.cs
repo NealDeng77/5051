@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace _5051.Models
 {
-    public class SystemGlobals
+    /// <summary>
+    /// System wide Global variables
+    /// </summary>
+    public class SystemGlobalsModel
     {
-
-        private static volatile SystemGlobals instance;
+        /// <summary>
+        /// Make into a Singleton
+        /// </summary>
+        private static volatile SystemGlobalsModel instance;
         private static object syncRoot = new Object();
 
-        private SystemGlobals() { }
+        private SystemGlobalsModel() { }
 
-        public static SystemGlobals Instance
+        public static SystemGlobalsModel Instance
         {
             get
             {
@@ -23,7 +25,7 @@ namespace _5051.Models
                     {
                         if (instance == null)
                         {
-                            instance = new SystemGlobals();
+                            instance = new SystemGlobalsModel();
                         }
                     }
                 }
@@ -35,17 +37,5 @@ namespace _5051.Models
         // The Enum to use for the current data source
         // Default to Mock
         public DataSourceEnum DataSourceValue = DataSourceEnum.Mock;
-    }
-
-    public enum DataSourceEnum
-    {
-        // Not specified
-        Unknown = 0,
-
-        // Mock Dataset
-        Mock = 1,
-
-        // SQL Dataset
-        SQL = 2
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Avatar Attendance</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -12,22 +12,21 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mike's Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Student", "Index", "Student")</li>
+                    <li>@Html.ActionLink("Student", "Roster", "Portal")</li>
                     <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("Kiosk Mode", "Index", "Kiosk")</li>
+                    <li>@Html.ActionLink("Kiosk Mode", "Login", "Kiosk")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,10 +37,21 @@
     </div>
 
     <div class="container body-content">
-        <hr />
         <footer>
             <div class="footer navbar-fixed-bottom">
-                <p>&copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved</p>
+                <div class="FooterBar body-content">
+                    <div class="row">
+                        <span class="FooterText">
+                            &nbsp;&nbsp;&copy; @DateTime.Now.Year - Avatar Attendance, all rights reserved
+                            &nbsp;&nbsp;
+                        </span>
+
+                        @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                        @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                        @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    </div>
+                </div>
+
             </div>
         </footer>
     </div>

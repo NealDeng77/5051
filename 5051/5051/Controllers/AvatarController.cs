@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Web.Mvc;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
 
-
 namespace _5051.Controllers
 {
+    /// <summary>
+    /// Avatar Contoller manages the avatar web pages including how to make new ones, change them, and delete them
+    /// </summary>
     public class AvatarController : Controller
     {
         // A ViewModel used for the Avatar that contains the AvatarList
@@ -26,6 +25,12 @@ namespace _5051.Controllers
         {
             // Load the list of data into the AvatarList
             avatarViewModel.AvatarList = avatarBackend.Index();
+
+            if (avatarViewModel.AvatarList != null)
+            {
+                avatarViewModel.AvatarList = avatarViewModel.AvatarList.OrderBy(m => m.Level).ToList();
+            }
+
             return View(avatarViewModel);
         }
 
@@ -59,39 +64,36 @@ namespace _5051.Controllers
         /// <returns></returns>
         // POST: Avatar/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include=
                                         "Id,"+
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Create(data);
-
-                    return RedirectToAction("Index");
-                }
-
-                // Send back for edit
+                // Send back for edit, with Error Message
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Sind back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Create(data);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -118,34 +120,30 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Update(data);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to error page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Update(data);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -172,35 +170,30 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
+                                        "Level,"+
                                         "")] AvatarModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    if (data == null)
-                    {
-                        return RedirectToAction("Error", new { route = "Home", action = "Error" });
-                    }
-
-                    if (string.IsNullOrEmpty(data.Id))
-                    {
-                        return View(data);
-                    }
-
-                    avatarBackend.Delete(data.Id);
-
-                    return RedirectToAction("Index");
-                }
-
                 // Send back for edit
                 return View(data);
             }
-            catch
+
+            if (data == null)
             {
+                // Send to Error Page
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            avatarBackend.Delete(data.Id);
+
+            return RedirectToAction("Index");
         }
     }
 }

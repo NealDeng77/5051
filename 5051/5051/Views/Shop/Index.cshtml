@@ -1,0 +1,31 @@
+﻿@model _5051.Models.StudentModel
+@{
+    ViewBag.Title = "Shop";
+}
+
+<h2>Welcome to the Store</h2>
+
+<h3>Spend your Tokens on items at the store</h3>
+
+<br />
+
+<img src="~/Content/img/StoreExample.jpg" />
+
+<br />
+<br />
+
+
+
+
+@Html.ActionLink("Discounts", "Discounts", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("Special Items", "Specials", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+@Html.ActionLink("Buy", "Buy", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+<br />
+<br />

@@ -12,8 +12,28 @@ namespace _5051.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+        public TestContext TestContext { get; set; }
+
+        #region Instantiate
         [TestMethod]
-        public void Index()
+        public void Controller_Home_Instantiate_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.GetType();
+
+            // Assert
+            Assert.AreEqual(result, new HomeController().GetType(), TestContext.TestName);
+        }
+
+        #endregion Instantiate
+
+        #region IndexRegion
+
+        [TestMethod]
+        public void Controller_Home_Index_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -22,11 +42,32 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        #endregion IndexRegion
+
+        #region ErrorRegion
+
         [TestMethod]
-        public void About()
+        public void Controller_Home_Error_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Error() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ErrorRegion
+
+        #region AboutRegion
+
+        [TestMethod]
+        public void Controller_Home_About_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -35,11 +76,15 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        #endregion AboutRegion
+
+        #region ContactRegion
+
         [TestMethod]
-        public void Contact()
+        public void Controller_Home_Contact_Default_Should_Pass()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -48,7 +93,95 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        #endregion ContactRegion
+
+        #region PrivacyRegion
+
+        [TestMethod]
+        public void Controller_Home_Privacy_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Privacy() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion PrivacyRegion
+
+        #region ShopRegion
+
+        [TestMethod]
+        public void Controller_Home_ShopExample_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.ShopExample() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ShopRegion
+
+        #region StudentRegion
+
+        [TestMethod]
+        public void Controller_Home_StudentExample_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.StudentExample() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion StudentRegion
+
+        #region HouseRegion
+
+        [TestMethod]
+        public void Controller_Home_HouseExample_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.HouseExample() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion HouseRegion
+
+        #region AvatarRegion
+
+        [TestMethod]
+        public void Controller_Home_AvatarExample_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.AvatarExample() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion AvatarRegion
+
     }
 }

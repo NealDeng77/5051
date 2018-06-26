@@ -1,0 +1,34 @@
+﻿@model _5051.Models.StudentDisplayViewModel
+
+@{
+    ViewBag.Title = "Logged out";
+}
+
+<br />
+<h1>@Model.LastDateTime.ToShortDateString() @Model.LastDateTime.ToShortTimeString()</h1>
+<br />
+
+<h2>
+    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" class="AvatarSize0" />
+    @Model.Name, you are now logged out.
+</h2>
+
+<br />
+<br />
+<h2>See you again soon !</h2>
+
+<br />
+<br />
+
+<h4>
+    The page will auto refresh, or click
+    @Html.ActionLink("Done", "Index", null, new { @class = "btn btn-primary" })
+</h4>
+
+<script>
+    window.setTimeout(function () {
+        // Move to a new location or you can do something else
+        window.location.href = "../../Kiosk/Index";
+    }, 3000);
+
+</script>

@@ -1,0 +1,118 @@
+﻿@model _5051.Models.SchoolDismissalSettingsModel
+@{
+    ViewBag.Title = "Read";
+
+    var DayFirst = Model.DayFirst.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayFirst.Month, Model.DayFirst.Day, Model.);
+    var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
+}
+
+<div class="container">
+    <h2>School Dismissal Settings</h2>
+    <br />
+    <div class="row">
+        @{
+            if (Model == null)
+            {
+                <p>No Data</p>
+            }
+            else
+            {
+                <div class="row">
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.DayFirst)
+                        </div>
+                        <div class="col-sm-4">
+                            @DayFirst
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.DayLast)
+                        </div>
+                        <div class="col-sm-4">
+                            @DayLast
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

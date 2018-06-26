@@ -1,0 +1,98 @@
+﻿@model _5051.Models.ShopInventoryModel
+
+@{
+    ViewBag.Title = "Read";
+}
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model == null)
+            {
+                <p>No Shop Inventory</p>
+            }
+            else
+            {
+                <div class="row">
+                    <h2>Shop Inventory Item</h2>
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="~/Content/shop/@Model.Uri" class="ShopInventorySize1" />
+                            <br />
+                            <span>
+                                @Model.Name
+                                <br />
+                                <br />
+                                <br />
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Name)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Name)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Description)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Description)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Uri)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Uri)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Tokens)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Tokens)
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.Category)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.DisplayFor(m => m.Category)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

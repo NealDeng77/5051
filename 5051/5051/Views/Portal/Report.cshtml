@@ -1,0 +1,348 @@
+﻿@model _5051.Models.StudentReportViewModel
+@{
+    ViewBag.Title = "Student Reports";
+
+    var DblQuote = Convert.ToChar(34);
+    var SingleQuote = Convert.ToChar(39);
+    var DateRange = new List<String>();
+    foreach (var item in Model.AttendanceList)
+    {
+        var myString = SingleQuote + item.Date.ToShortDateString() + SingleQuote;
+        DateRange.Add(myString);
+    }
+}
+
+<div class="text-center">
+    <h4>Attendance Statistics</h4>
+    <br />
+    <div>
+        From @Model.DateStart.ToShortDateString()<br />
+        To   @Model.DateEnd.ToShortDateString()<br />
+    </div>
+</div>
+<br />
+
+@if (Model.Student.Attendance.Count == 0)
+{
+    <p>No Data of this Month</p>
+}
+else
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+    <div class="bg-white">
+        <table class="table table-striped">
+            <thead>
+                <tr class="thead">
+                    <th>Attendance Status</th>
+                    <th>Days</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Present</td>
+                    <td>@Model.Stats.DaysPresent</td>
+                    <td>@Model.Stats.PercPresent%</td>
+                </tr>
+                <tr>
+                    <td>Absent Unexcused</td>
+                    <td>@Model.Stats.DaysAbsentUnexcused</td>
+                    <td>@Model.Stats.PercUnexcused%</td>
+                </tr>
+                <tr>
+                    <td>Absent Excused</td>
+                    <td>@Model.Stats.DaysAbsentExcused</td>
+                    <td>@Model.Stats.PercExcused%</td>
+                </tr>
+                <tr>
+                    <td>Total Days</td>
+                    <td>@Model.Student.Attendance.Count</td>
+                    <td>100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Attended</th>
+                    <th>Expected</th>
+                    <th>Total Attended</th>
+                    <th>Total Expected</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.AttendanceList)
+                    {
+                        <tr>
+                            <td>@item.Date.ToShortDateString()</td>
+                            <td>@string.Format("{0:%h}h {0:%m}m", item.HoursAttended)</td>
+                            <td>@string.Format("{0:%h}h {0:%m}m", item.HoursExpected)</td>
+
+                            <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHours)</td>
+                            <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHoursExpected)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-lg-center">
+        <canvas id="barChart2" width="500" height="300"></canvas>
+        <script>
+        var ctx = document.getElementById("barChart2").getContext('2d');
+                var myChart = new Chart(ctx, {
+
+
+                    type: 'bar',
+
+                    data: {
+
+
+                        labels: [@Html.Raw(String.Join(", ", DateRange.ToArray()))],
+
+                        datasets: [{
+                            backgroundColor:
+                                'rgba(54, 162, 235, 0.5)',
+                            label: 'Daily Attended Hours' ,
+
+                            data: [@String.Join(", ", Model.AttendanceList.Select(m => m.HoursAttended.TotalMinutes).ToArray())],
+
+                            borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 24,
+                    text: 'Attended Hours'
+                },
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: '# of Hours Attended'
+                        }
+                    }]
+                },
+            }
+        });
+
+        </script>
+    </div>
+
+    <br />
+    <div class="row justify-content-lg-center">
+        <canvas id="accumulativeChart" width="500" height="300"></canvas>
+        <script>
+        var ctx = document.getElementById("accumulativeChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [@Html.Raw(String.Join(", ", DateRange.ToArray()))],
+
+                datasets: [{
+                    label: 'Attended',
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                    ],
+                    data: [@String.Join(", ", Model.AttendanceList.Select(m => m.TotalHours.TotalMinutes).ToArray())],
+
+                    borderWidth: 1
+                }, {
+                    label: 'Expected',
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    data: [@String.Join(", ", Model.AttendanceList.Select(m => m.TotalHoursExpected.TotalMinutes).ToArray())],
+
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 24,
+                    text: 'Cumulative Attended Hours'
+                },
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: '# of Cummulative Hours'
+                        }
+                    }]
+                },
+            }
+        });
+
+        </script>
+    </div>
+    @*<br />
+        <div class="row justify-content-lg-center">
+            <div class="col-3">
+                <canvas id="pieChart" width="300" height="300"></canvas>
+                <script>
+                var ctx = document.getElementById("pieChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["Present", "Absent Excused", "Absent Unexcused"],
+                        datasets: [{
+                            data: [@Model.DaysPresent, @Model.DaysAbsentExcused, @Model.DaysAbsentUnexcused],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            fontSize: 20,
+                            text: 'Present vs Absent'
+                        },
+                        responsive: false,
+                    }
+                });
+
+                </script>
+            </div>
+            <div class="col-3">
+                <canvas id="pieChart4" width="300" height="300"></canvas>
+                <script>
+                var ctx = document.getElementById("pieChart4").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["Attended Hours", "Missing Hours"],
+                        datasets: [{
+                            data: [@Model.TotalHoursAttended, @Model.TotalHoursMissing],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            fontSize: 20,
+                            text: 'Attended Hours vs Missing Hours'
+                        },
+                        responsive: false,
+                    }
+                });
+
+                </script>
+            </div>
+            <div class="col-3">
+                <canvas id="pieChart2" width="300" height="300"></canvas>
+                <script>
+                var ctx = document.getElementById("pieChart2").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["On Time", "Late"],
+                        datasets: [{
+                            data: [@Model.DaysOnTime, @Model.DaysLate],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            fontSize: 20,
+                            text: 'On Time vs Late'
+                        },
+                        responsive: false,
+                    }
+                });
+
+                </script>
+            </div>
+            <div class="col-3">
+                <canvas id="pieChart3" width="300" height="300"></canvas>
+                <script>
+                var ctx = document.getElementById("pieChart3").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["Stayed", "Left Early"],
+                        datasets: [{
+                            data: [@Model.DaysStayed, @Model.DaysLeftEarly],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            fontSize: 20,
+                            text: 'Stayed vs Left Early'
+                        },
+                        responsive: false,
+                    }
+                });
+
+                </script>
+
+            </div>
+
+        </div>
+        <br />*@
+}

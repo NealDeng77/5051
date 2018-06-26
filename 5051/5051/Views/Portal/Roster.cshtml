@@ -1,0 +1,29 @@
+﻿@model _5051.Models.StudentViewModel
+@{
+    ViewBag.Title = "Roster";
+}
+
+<h2>Click on your Avatar to Login</h2>
+
+<br />
+<br />
+
+<div class="row text-center">
+
+    @{
+        foreach (var item in Model.StudentList)
+        {
+            <div class="col-sm-2">
+                <div class="BoxWithHighlightHover text-center">
+                    <a id="@item.Id" href="~/Portal/Login/@item.Id">
+                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                    </a>
+                    <br />
+                    <span class="text-center">
+                        @item.Name
+                    </span>
+                </div>
+            </div>
+        }
+    }
+</div>

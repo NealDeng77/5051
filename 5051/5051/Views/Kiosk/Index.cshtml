@@ -1,0 +1,202 @@
+﻿@model _5051.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "Kiosk";
+}
+
+
+<div class="">
+    <div class="row">
+        <h2>Click on your Avatar to Check In or Out of Class</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <span id="FullDate" class="h2"></span>
+            <br />
+            <canvas id="canvas" width="90" height="90" style="background-color:#333"></canvas>
+            <br />
+            <span id="FullTime" class="h2"></span>
+        </div>
+    </div>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var radius = canvas.height / 2;
+        ctx.translate(radius, radius);
+        radius = radius * 0.90
+        setInterval(drawClock, 1000);
+
+        function drawClock() {
+            drawFace(ctx, radius);
+            drawNumbers(ctx, radius);
+            drawTime(ctx, radius);
+            drawDigital();
+            //Output Text Time
+        }
+
+        function drawFace(ctx, radius) {
+            var grad;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+            grad.addColorStop(0, '#333');
+            grad.addColorStop(0.5, 'white');
+            grad.addColorStop(1, '#333');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = radius * 0.1;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+            ctx.fillStyle = '#333';
+            ctx.fill();
+        }
+
+        function drawNumbers(ctx, radius) {
+            var ang;
+            var num;
+            ctx.font = radius * 0.15 + "px arial";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            for (num = 1; num < 13; num++) {
+                ang = num * Math.PI / 6;
+                ctx.rotate(ang);
+                ctx.translate(0, -radius * 0.85);
+                ctx.rotate(-ang);
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.rotate(ang);
+                ctx.translate(0, radius * 0.85);
+                ctx.rotate(-ang);
+            }
+        }
+
+        function drawTime(ctx, radius) {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            //hour
+            hour = hour % 12;
+            hour = (hour * Math.PI / 6) +
+                (minute * Math.PI / (6 * 60)) +
+                (second * Math.PI / (360 * 60));
+            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+            //minute
+            minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+            drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+            // second
+            second = (second * Math.PI / 30);
+            drawHand(ctx, second, radius * 0.9, radius * 0.02);
+        }
+
+        function drawDigital() {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+
+            var d = new Date();
+
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+
+            var fullDate =
+                (('' + month).length < 2 ? '0' : '') + month + ' / ' +
+                (('' + day).length < 2 ? '0' : '') + day;
+
+            var fullTime =
+                (('' + hour).length < 2 ? '0' : '') + hour + ' : ' +
+                (('' + minute).length < 2 ? '0' : '') + minute;
+
+
+            $("#FullDate").text(fullDate);
+            $("#FullTime").text(fullTime);
+        }
+
+
+        function drawHand(ctx, pos, length, width) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, 0);
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.rotate(-pos);
+        }
+    </script>
+
+    <br />
+    @{
+        if (Model.StudentList == null || !Model.StudentList.Any())
+        {
+            <br />
+            <p>No Students in the System</p>
+            <br />
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="row">
+                        <h2>Logged In</h2>
+                        @{
+                            // List out the Logged IN Students, then the Logged Out students
+                            // Logged IN first
+                            foreach (var item in Model.StudentList)
+                            {
+                                if (item.Status == _5051.Models.StudentStatusEnum.In)
+                                {
+                                    <div class="col-sm-2 NoPadding">
+                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                            <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
+                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                            </a>
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <h2>Logged Out</h2>
+                        @{
+                            // Logged Out first
+                            foreach (var item in Model.StudentList)
+                            {
+                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                {
+                                    <div class="col-sm-2 NoPadding">
+                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                            <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
+                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                            </a>
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+

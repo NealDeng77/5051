@@ -22,10 +22,10 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-2 text-right">
+                        <div class="col-sm-3 text-right">
                         </div>
-                        <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.Uri" width="75" height="75" />
+                        <div class="col-sm-4">
+                            <img src="~/Content/img/@Model.Uri" class="AvatarSize1" />
                             <br />
                             <span>
                                 @Model.Name
@@ -39,39 +39,52 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m=>m.Id)
+                        @Html.HiddenFor(m => m.Id)
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Name)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Name)
+                                @Html.ValidationMessageFor(m => m.Name)
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Description)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Description)
+                                @Html.ValidationMessageFor(m => m.Description)
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Uri)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 @Html.EditorFor(m => m.Uri)
+                                @Html.ValidationMessageFor(m => m.Uri)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Level)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.Level)
+                                @Html.ValidationMessageFor(m => m.Level)
                             </div>
                         </div>
 
                         <br />
                         <br />
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
                                 @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })

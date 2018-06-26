@@ -1,89 +1,162 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using _5051.Models;
+using _5051.Backend;
+using System;
 
 namespace _5051.Controllers
 {
+    /// <summary>
+    /// The Kiosk that will run in the classroom
+    /// </summary>
     public class KioskController : Controller
     {
+        // A ViewModel used for the Student that contains the StudentList
+        private StudentViewModel StudentViewModel = new StudentViewModel();
+
+        // The Backend Data source
+        private StudentBackend StudentBackend = StudentBackend.Instance;
+
+        /// <summary>
+        /// Return the list of students with the status of logged in or out
+        /// </summary>
+        /// <returns></returns>
         // GET: Kiosk
         public ActionResult Index()
         {
-            return View();
+            //TODO: Need to add a check here to validate if the request comes from a validated login or not.
+
+            var myDataList = StudentBackend.Index();
+            if (myDataList.Count == 0)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+            var StudentViewModel = new StudentViewModel(myDataList);
+            return View(StudentViewModel);
         }
 
-        // GET: Kiosk/Details/5
-        public ActionResult Details(int id)
+        // GET: Kiosk/SetLogout/5
+        /// <summary>
+        /// Manages the Login action, toggles the state
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult SetLogin(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            StudentBackend.ToggleStatusById(id);
+            return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
+        }
+
+        // GET: Kiosk/SetLogout/5
+        /// <summary>
+        /// Manages the logout action, toggles the state
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult SetLogout(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            StudentBackend.ToggleStatusById(id);
+            return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
+        }
+
+        /// <summary>
+        /// Shows the login confirmation screen
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult ConfirmLogin(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myDataList = StudentBackend.Read(id);
+            var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+            //Todo, replace with actual transition time
+            StudentViewModel.LastDateTime = DateTime.Now;
+
+            return View(StudentViewModel);
+        }
+
+        /// <summary>
+        /// Shows the login confirmation screen
+        /// </summary>
+        /// <param name="id">Student ID</param>
+        /// <returns></returns>
+        public ActionResult ConfirmLogout(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myDataList = StudentBackend.Read(id);
+            var StudentViewModel = new StudentDisplayViewModel(myDataList);
+
+            //Todo, replace with actual transition time
+            StudentViewModel.LastDateTime = DateTime.Now;
+
+            return View(StudentViewModel);
+        }
+
+        /// <summary>
+        /// Will prompt for the kiosk login
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Login()
         {
             return View();
         }
 
-        // GET: Kiosk/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Kiosk/Create
+        /// <summary>
+        /// Login takes the password sent in and compares it with the settings for kiosk
+        /// If they match, then it redirects to Index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login([Bind(Include=
+                                        "Password,"+
+                                        "")] KioskSettingsModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                // Send back for edit, with Error Message
+                return View(data);
             }
-            catch
+
+            if (string.IsNullOrEmpty(data.Password))
             {
-                return View();
+                ModelState.AddModelError("Password", "Please Enter a Password.");
+                return View(data);
             }
-        }
 
-        // GET: Kiosk/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            var myKioskData = DataSourceBackend.Instance.KioskSettingsBackend.GetDefault();
+            // GetDefault always returns valid data.
 
-        // POST: Kiosk/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            // If the passwords match, then redirect
+            if (data.Password.Equals(myKioskData.Password))
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                //Todo, set flag to mark the current token for the kiosk
+                return RedirectToAction("Index", "Kiosk");
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Kiosk/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Kiosk/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            // Login failed, so send back with error message
+            ModelState.AddModelError("Password", "Invalid login attempt.");
+            return View(data);
         }
     }
 }

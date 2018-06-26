@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -116,12 +122,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -189,6 +189,20 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\KioskSettingsInterface.cs" />
+    <Compile Include="Backend\KioskSettingsBackend.cs" />
+    <Compile Include="Backend\KioskSettingsDataSourceMock.cs" />
+    <Compile Include="Backend\SchoolDismissalSettingsInterface.cs" />
+    <Compile Include="Backend\SchoolDismissalSettingsDataSourceMock.cs" />
+    <Compile Include="Backend\SchoolDismissalSettingsBackend.cs" />
+    <Compile Include="Backend\SchoolCalendarDataSourceMock.cs" />
+    <Compile Include="Backend\SchoolCalendarInterface.cs" />
+    <Compile Include="Backend\ReportBackend.cs" />
+    <Compile Include="Backend\SchoolCalendarBackend.cs" />
+    <Compile Include="Backend\ShopInventoryBackend.cs" />
+    <Compile Include="Backend\ShopInventoryDataSourceMock.cs" />
+    <Compile Include="Backend\ShopInventoryInterface.cs" />
+    <Compile Include="Backend\DataSourceBackend.cs" />
     <Compile Include="Backend\StudentInterface.cs" />
     <Compile Include="Backend\StudentDataSourceMock.cs" />
     <Compile Include="Backend\StudentBackend.cs" />
@@ -197,6 +211,12 @@
     <Compile Include="Backend\AvatarInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\KioskSettingsController.cs" />
+    <Compile Include="Controllers\ShopInventoryController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\SchoolDismissalSettingsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,13 +227,32 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
+    <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\Enums\AttendanceStatusEnum.cs" />
+    <Compile Include="Models\Enums\CheckOutStatusEnum.cs" />
+    <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
+    <Compile Include="Models\Enums\SchoolCalendarDismissalEnum.cs" />
+    <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
+    <Compile Include="Models\SchoolCalendarViewModel.cs" />
+    <Compile Include="Models\SchoolCalendarModel.cs" />
+    <Compile Include="Models\KioskSettingsModel.cs" />
+    <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
+    <Compile Include="Models\ShopBuyViewModel.cs" />
+    <Compile Include="Models\ShopInventoryViewModel.cs" />
+    <Compile Include="Models\ShopInventoryModel.cs" />
     <Compile Include="Models\AvatarModel.cs" />
+    <Compile Include="Models\Enums\StudentStatusEnum.cs" />
+    <Compile Include="Models\Enums\DataSourceEnum.cs" />
+    <Compile Include="Models\StudentAvatarModel.cs" />
+    <Compile Include="Models\StudentDisplayViewModel.cs" />
+    <Compile Include="Models\StudentReportStatsModel.cs" />
+    <Compile Include="Models\StudentReportViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StudentModel.cs" />
-    <Compile Include="Models\SystemGlobals.cs" />
+    <Compile Include="Models\SystemGlobalsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -230,6 +269,40 @@
     <Content Include="Content\img\avatar7.png" />
     <Content Include="Content\img\avatar8.png" />
     <Content Include="Content\img\avatar9.png" />
+    <Content Include="Content\img\AvatarLevel.png" />
+    <Content Include="Content\img\CalendarEditIcon.png" />
+    <Content Include="Content\img\ChartPlaceholder.png" />
+    <Content Include="Content\img\EditPicture.png" />
+    <Content Include="Content\img\HomeArrange.jpg" />
+    <Content Include="Content\img\HomeExample.jpg" />
+    <Content Include="Content\img\PortalAvatars.png" />
+    <Content Include="Content\img\PortalCalendar.jpeg" />
+    <Content Include="Content\img\PortalCustomize.png" />
+    <Content Include="Content\img\PortalHouse.png" />
+    <Content Include="Content\img\PortalIndex.png" />
+    <Content Include="Content\img\PortalLogin.png" />
+    <Content Include="Content\img\PortalReport.jpg" />
+    <Content Include="Content\img\PortalReports.png" />
+    <Content Include="Content\img\PortalSchool.png" />
+    <Content Include="Content\img\PortalSettings.png" />
+    <Content Include="Content\img\PortalStore.png" />
+    <Content Include="Content\img\PortalStudents.png" />
+    <Content Include="Content\img\ReportBar.png" />
+    <Content Include="Content\img\ReportStudentMay.png" />
+    <Content Include="Content\img\SchoolCalendar.png" />
+    <Content Include="Content\img\StoreExample.jpg" />
+    <Content Include="Content\img\StudentExample.png" />
+    <Content Include="Content\img\StudentProfile.png" />
+    <Content Include="Content\img\StudentProfileBio.png" />
+    <Content Include="Content\shop\guitar.png" />
+    <Content Include="Content\shop\headphone.png" />
+    <Content Include="Content\shop\moviecamera.png" />
+    <Content Include="Content\shop\radio.png" />
+    <Content Include="Content\shop\saxophone.png" />
+    <Content Include="Content\shop\telephone.png" />
+    <Content Include="Content\shop\television.png" />
+    <Content Include="Content\shop\trumpet.png" />
+    <Content Include="Content\shop\violin.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -239,6 +312,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\5051 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -284,7 +358,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Kiosk\Indedx.cshtml" />
+    <Content Include="Views\Kiosk\Index.cshtml" />
     <Content Include="Views\Avatar\Index.cshtml" />
     <Content Include="Views\Avatar\Update.cshtml" />
     <Content Include="Views\Avatar\Delete.cshtml" />
@@ -296,6 +370,43 @@
     <Content Include="Views\Student\Update.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\Home\StudentExample.cshtml" />
+    <Content Include="Views\Home\ShopExample.cshtml" />
+    <Content Include="Views\Home\HouseExample.cshtml" />
+    <Content Include="Views\Portal\Index.cshtml" />
+    <Content Include="Views\Portal\Settings.cshtml" />
+    <Content Include="Views\Portal\Report.cshtml" />
+    <Content Include="Views\Portal\House.cshtml" />
+    <Content Include="Views\Portal\Avatar.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Portal\Group.cshtml" />
+    <Content Include="Views\Portal\Login.cshtml" />
+    <Content Include="Views\Shop\Discounts.cshtml" />
+    <Content Include="Views\Shop\Specials.cshtml" />
+    <Content Include="Views\Shop\Buy.cshtml" />
+    <Content Include="Views\Admin\Report.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Admin\Attendance.cshtml" />
+    <Content Include="Views\Admin\StudentReport.cshtml" />
+    <Content Include="Views\Home\AvatarExample.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Admin\Settings.cshtml" />
+    <Content Include="Views\Calendar\Update.cshtml" />
+    <Content Include="Views\Portal\Roster.cshtml" />
+    <Content Include="Views\Kiosk\ConfirmLogout.cshtml" />
+    <Content Include="Views\Kiosk\ConfirmLogin.cshtml" />
+    <Content Include="Views\ShopInventory\Create.cshtml" />
+    <Content Include="Views\ShopInventory\Delete.cshtml" />
+    <Content Include="Views\ShopInventory\Index.cshtml" />
+    <Content Include="Views\ShopInventory\Read.cshtml" />
+    <Content Include="Views\ShopInventory\Update.cshtml" />
+    <Content Include="Views\Portal\Attendance.cshtml" />
+    <Content Include="Views\SchoolDismissalSettings\Read.cshtml" />
+    <Content Include="Views\SchoolDismissalSettings\Update.cshtml" />
+    <Content Include="Views\KioskSettings\Read.cshtml" />
+    <Content Include="Views\KioskSettings\Update.cshtml" />
+    <Content Include="Views\Kiosk\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

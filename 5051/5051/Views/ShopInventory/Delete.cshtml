@@ -1,0 +1,64 @@
+﻿@model _5051.Models.ShopInventoryModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model == null)
+            {
+                <p>No ShopInventory</p>
+            }
+
+            else
+            {
+                <div class="row">
+                    <h2>Delete ShopInventory</h2>
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="~/Content/shop/@Model.Uri" class="ShopInventorySize1" />
+                            <br />
+                            <span>
+                                @Model.Name
+                                <br />
+                                <br />
+                                <br />
+                            </span>
+                        </div>
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.Description)
+                        @Html.HiddenFor(m => m.Uri)
+                        @Html.HiddenFor(m => m.Tokens)
+                        @Html.HiddenFor(m => m.Category)
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                                <input type="submit" value="Delete" class="btn btn-danger">
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+        }
+    </div>
+</div>

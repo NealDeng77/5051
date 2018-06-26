@@ -1,4 +1,4 @@
-﻿@model _5051.Models.StudentModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
     ViewBag.Title = "Update";
@@ -22,10 +22,10 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-sm-2 text-right">
+                        <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-2">
-                            <img src="~/Content/img/@Model.AvatarId" width="75" height="75" />
+                            <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize1" />
                             <br />
                             <span>
                                 @Model.Name
@@ -40,48 +40,73 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Password)
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Name)
                             </div>
                             <div class="col-sm-2">
                                 @Html.EditorFor(m => m.Name)
+                                @Html.ValidationMessageFor(m => m.Name)
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.AvatarId)
                             </div>
                             <div class="col-sm-2">
-                                @Html.EditorFor(m => m.AvatarId)
+                                @Html.DropDownListFor(m => m.AvatarId, _5051.Backend.AvatarBackend.Instance.GetAvatarListItem(Model.AvatarId))
+                                @Html.ValidationMessageFor(m => m.AvatarId)
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.AvatarLevel)
                             </div>
                             <div class="col-sm-2">
                                 @Html.EditorFor(m => m.AvatarLevel)
+                                @Html.ValidationMessageFor(m => m.AvatarLevel)
+
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                                 @Html.DisplayNameFor(m => m.Tokens)
                             </div>
                             <div class="col-sm-2">
                                 @Html.EditorFor(m => m.Tokens)
+                                @Html.ValidationMessageFor(m => m.Tokens)
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.ExperiencePoints)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.EditorFor(m => m.ExperiencePoints)
+                                @Html.ValidationMessageFor(m => m.ExperiencePoints)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.Status)
+                            </div>
+                            <div class="col-sm-2">
+                                @Html.EnumDropDownListFor(x => x.Status, "Select Status")
+                                @Html.ValidationMessageFor(m => m.Status)
+                            </div>
+                        </div>
 
                         <br />
                         <br />
                         <div class="row">
-                            <div class="col-sm-2 text-right">
+                            <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
                                 @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })

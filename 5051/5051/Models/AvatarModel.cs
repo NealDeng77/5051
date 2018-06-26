@@ -29,12 +29,17 @@ namespace _5051.Models
         [Required(ErrorMessage = "Avatar Description is required")]
         public string Description { get; set; }
 
+        [Display(Name = "Level", Description = "Avatar Level")]
+        [Required(ErrorMessage = "Avatar Level is required")]
+        public int Level { get; set; }
+
         /// <summary>
         /// Create the default values
         /// </summary>
         public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
+            Level = 1;
         }
 
         /// <summary>
@@ -51,13 +56,32 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">Avatar Name</param>
         /// <param name="description">Avatar Description</param>
-        public AvatarModel(string uri, string name, string description)
+        public AvatarModel(string uri, string name, string description, int level)
         {
             Initialize();
 
             Uri = uri;
             Name = name;
             Description = description;
+            Level = level;
+        }
+
+        /// <summary>
+        /// Used to Update Avatar Before doing a data save
+        /// Updates everything except for the ID
+        /// </summary>
+        /// <param name="data">Data to update</param>
+        public void Update(AvatarModel data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            Uri = data.Uri;
+            Name = data.Name;
+            Description = data.Description;
+            Level = data.Level;
         }
     }
 }
