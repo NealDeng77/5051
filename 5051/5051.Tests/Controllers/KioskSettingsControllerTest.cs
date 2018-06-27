@@ -30,5 +30,50 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion Instantiate
+
+        #region ReadRegion
+        [TestMethod]
+        public void Controller_KioskSettings_Read_Id_Is_Null_Should_Return_Default_Model()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            string id = null;
+
+            // Act
+            var result = controller.Read(id);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Read_No_Id_Should_Return_Default_Model()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            // Act
+            var result = controller.Read();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Read_Invalid_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Read(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+        #endregion ReadRegion
     }
 }
