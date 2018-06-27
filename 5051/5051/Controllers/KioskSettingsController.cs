@@ -25,7 +25,10 @@ namespace _5051.Controllers
             if (myData == null)
             {
                 // If no ID is passed in, get the first one.
-                myData = KioskSettingsBackend.GetDefault();
+                if (id == null)
+                {
+                    myData = KioskSettingsBackend.GetDefault();
+                }
                 if (myData == null)
                 {
                     return RedirectToAction("Error", "Home");
