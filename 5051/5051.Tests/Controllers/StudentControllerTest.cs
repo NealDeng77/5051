@@ -299,6 +299,21 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(resultEmpty, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Student_Update_Post_Default_Should_Return_Index_Page()
+        {
+            // Arrange
+            StudentController controller = new StudentController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+
+            // Act
+            RedirectToRouteResult result = controller.Update(data) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion UpdatePostRegion
 
         #region DeleteRegion
