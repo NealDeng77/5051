@@ -309,7 +309,7 @@ namespace _5051.UnitTests.Models
             var test = new SchoolCalendarModel();
             test.SetSchoolTime();
             test.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
-            test.TimeStart = myDefault.EndLate;  
+            test.TimeEnd = myDefault.EndLate;  
 
             var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
 
@@ -340,7 +340,7 @@ namespace _5051.UnitTests.Models
             var test = new SchoolCalendarModel();
             test.SetSchoolTime();
             test.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Late;
-            test.TimeStart = myDefault.EndNormal;
+            test.TimeEnd = myDefault.EndEarly;
 
             var expect = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
 
