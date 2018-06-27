@@ -52,7 +52,7 @@ namespace _5051.Tests.Controllers
         #region SetDefaultRegion
 
         [TestMethod]
-        public void Controller_Calendar_SetDefault_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetDefault_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -65,7 +65,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetDefault_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetDefault_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -84,7 +84,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetDefault_ShouldReturnCalendarPage()
+        public void Controller_Calendar_SetDefault_Default_Should_Return_Update_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -104,7 +104,7 @@ namespace _5051.Tests.Controllers
         #region SetEarlyEndRegion
 
         [TestMethod]
-        public void Controller_Calendar_SetEarlyEnd_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetEarlyEnd_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -117,7 +117,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetEarlyEnd_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetEarlyEnd_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -136,7 +136,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetEarlyEnd_ShouldReturnCalendarPage()
+        public void Controller_Calendar_SetEarlyEnd_Should_Return_Update_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -156,7 +156,7 @@ namespace _5051.Tests.Controllers
         #region SetLateStartRegion
 
         [TestMethod]
-        public void Controller_Calendar_SetLateStart_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetLateStart_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -169,7 +169,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetLateStart_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetLateStart_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -188,7 +188,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetLateStart_ShouldReturnCalendarPage()
+        public void Controller_Calendar_SetLateStart_Should_Return_Update_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -208,7 +208,7 @@ namespace _5051.Tests.Controllers
         #region SetNoSchoolDayRegion
 
         [TestMethod]
-        public void Controller_Calendar_SetNoSchoolDay_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetNoSchoolDay_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -221,7 +221,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetNoSchoolDay_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetNoSchoolDay_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -240,7 +240,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetNoSchoolDay_ShouldReturnCalendarPage()
+        public void Controller_Calendar_SetNoSchoolDay_Should_Return_Update_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -260,7 +260,7 @@ namespace _5051.Tests.Controllers
         #region SetSchoolDayRegion
 
         [TestMethod]
-        public void Controller_Calendar_SetSchoolDay_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetSchoolDay_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -273,7 +273,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetSchoolDay_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_SetSchoolDay_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -292,7 +292,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_SetSchoolDay_ShouldReturnCalendarPage()
+        public void Controller_Calendar_SetSchoolDay_Should_Return_Update_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -363,7 +363,7 @@ namespace _5051.Tests.Controllers
         #region UpdatePostRegion
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_ModelIsInvalid_Should_Pass()
+        public void Controller_Calendar_Update_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -381,7 +381,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_DataIsNull_ShouldReturnErrorPage()
+        public void Controller_Calendar_Update_Post_Data_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -394,7 +394,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_IdIsNullOrEmpty_ShouldReturnErrorPage()
+        public void Controller_Calendar_Update_Post_Id_Is_Null_Or_Empty_Should_Return_Error_Page()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -418,7 +418,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_TimeStartValidation_Should_Pass()
+        public void Controller_Calendar_Update_Post_TimeStart_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -444,7 +444,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_TimeEndValidation_Should_Pass()
+        public void Controller_Calendar_Update_Post_TimeEnd_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             CalendarController controller = new CalendarController();
@@ -470,7 +470,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Calendar_Update_Post_TimeEndSubtractValidation_Should_Pass()
+        public void Controller_Calendar_Update_Post_TimeEnd_Subtract_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             CalendarController controller = new CalendarController();
