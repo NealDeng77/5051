@@ -284,7 +284,7 @@ namespace _5051.UnitTests.Models
 
             // Act
             data.Update(test);
-            var result = data.DayEnd;
+            var result = data.DayStart;
 
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
