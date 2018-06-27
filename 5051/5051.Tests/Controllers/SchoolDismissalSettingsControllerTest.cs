@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Backend;
 
 namespace _5051.Tests.Controllers
 {
@@ -74,5 +75,36 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
         #endregion ReadRegion
+
+        #region GetUpdateRegion
+        [TestMethod]
+        public void Controller_SchoolDismissalSetting_Get_Update_Valid_Id_Should_Return_Model()
+        {
+            // Arrange
+            var controller = new SchoolDismissalSettingsController();
+            string id = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().Id;
+
+            // Act
+            var result = controller.Update(id);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_SchoolDismissalSetting_Get_Update_Invalid_Id_Shoudl_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new SchoolDismissalSettingsController();
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+        #endregion GetUpdateRegion
     }
 }
