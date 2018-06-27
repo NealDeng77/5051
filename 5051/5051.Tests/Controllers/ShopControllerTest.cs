@@ -34,49 +34,49 @@ namespace _5051.Tests.Controllers
         #endregion Instantiate
 
 
-        //#region IndexRegion
+        #region IndexRegion
 
-        //[TestMethod]
-        //public void Controller_Shop_Index_Default_Should_Pass()
-        //{
-        //    // Arrange
-        //    ShopController controller = new ShopController();
+        [TestMethod]
+        public void Controller_Shop_Index_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
 
-        //    // Act
-        //    ViewResult result = controller.Index() as ViewResult;
-            
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
 
-        //    // Assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
 
-        //[TestMethod]
-        //public void Controller_Shop_Index_With_Empty_List_Should_Return_Error_Page()
-        //{
-        //    // Arrange
-        //    ShopController controller = new ShopController();
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-        //    // Set unitesting backend data
-        //    DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
+        [TestMethod]
+        public void Controller_Shop_Index_With_Empty_List_Should_Return_Error_Page()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
 
-        //    // Make empty StudentList
-        //    while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
-        //    {
-        //        var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
-        //        DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
-        //    }
+            // Set unitesting backend data
+            DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
 
-        //    // Act
-        //    var result = (RedirectToRouteResult)controller.Index();
+            // Make empty StudentList
+            while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
+            {
+                var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
+                DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
+            }
 
-        //    // Reset DataSourceBackend
-        //    DataSourceBackend.Instance.Reset();
+            // Act
+            var result = (RedirectToRouteResult)controller.Index();
 
-        //    // Assert
-        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-        //}
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
 
-        //#endregion IndexRegion
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion IndexRegion
 
 
         /*************************************************
