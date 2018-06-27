@@ -66,7 +66,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Read_Get_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Read_Get_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             var controller = new StudentController();
@@ -80,7 +80,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Read__Get_myDataStudentIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Read__Get_myDataStudent_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             var controller = new StudentController();
@@ -120,7 +120,7 @@ namespace _5051.Tests.Controllers
         #region CreatePostRegion
 
         [TestMethod]
-        public void Controller_Student_Create_Post_ModelIsInvalid_Should_Pass()
+        public void Controller_Student_Create_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -138,7 +138,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Create_Post_DataIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Create_Post_Data_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -151,7 +151,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Create_Post_IdIsNullOrEmpty_Should_Pass()
+        public void Controller_Student_Create_Post_Id_Is_Null_Or_Empty_Should_Return_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -175,7 +175,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Create_Post_Default_ShouldReturnIndexPage()
+        public void Controller_Student_Create_Post_Default_Should_Return_Index_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -194,7 +194,7 @@ namespace _5051.Tests.Controllers
         #region UpdateRegion
 
         [TestMethod]
-        public void Controller_Student_Update_Get_IdIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Update_Get_Id_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -207,7 +207,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Update_Get_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Update_Get_myData_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -245,7 +245,7 @@ namespace _5051.Tests.Controllers
         #region UpdatePostRegion
 
         [TestMethod]
-        public void Controller_Student_Update_Post_ModelIsInvalid_Should_Pass()
+        public void Controller_Student_Update_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -263,7 +263,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Update_Post_DataIsNull_ShouldReturnErrorPage()
+        public void Controller_Student_Update_Post_Data_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             StudentController controller = new StudentController();
@@ -276,7 +276,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Student_Update_Post_IdIsNullOrEmpty_Should_Pass()
+        public void Controller_Student_Update_Post_Id_Is_Null_Or_Empty_Should_Send_Back_For_Edit()
         {
             // Arrange
             StudentController controller = new StudentController();
