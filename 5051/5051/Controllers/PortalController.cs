@@ -375,7 +375,7 @@ namespace _5051.Controllers
             DateTime dateEnd = new DateTime();
 
             dateStart = DateTime.Parse("6/1/2018");
-            dateEnd = DateTime.Parse("7/1/2018");
+            dateEnd = DateTime.Parse("6/26/2018");
 
             var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent,dateStart,dateEnd);
             // Not possible for Null return,
