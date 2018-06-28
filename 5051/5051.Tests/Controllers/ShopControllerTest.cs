@@ -41,13 +41,14 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.Index(id) as ViewResult;
 
 
             // Assert
-           // Assert.IsNotNull(result, TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
