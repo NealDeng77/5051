@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Backend;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -75,5 +77,38 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
         #endregion ReadRegion
+
+        #region UpdateGetRegion
+        [TestMethod]
+        public void Controller_KioskSettings_Update_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            string id = DataSourceBackend.Instance.KioskSettingsBackend.GetDefault().Id;
+
+            // Act
+            var result = (ViewResult)controller.Update(id);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Update_Get_Invalid_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+        #endregion UpdateGetRegion
     }
 }
