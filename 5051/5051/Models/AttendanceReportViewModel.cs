@@ -14,6 +14,21 @@ namespace _5051.Models
         public DateTime Date { get; set; }
 
         /// <summary>
+        /// Is this a school day?
+        /// </summary>
+        public bool IsSchoolDay { get; set; } = true;
+
+        /// <summary>
+        /// Check-in time
+        /// </summary>
+        public DateTime TimeIn { get; set; }
+
+        /// <summary>
+        /// Check-out time
+        /// </summary>
+        public DateTime TimeOut { get; set; }
+
+        /// <summary>
         /// Total Hours attended from the start of school till now
         /// </summary>
         public TimeSpan TotalHours { get; set; }
@@ -32,6 +47,12 @@ namespace _5051.Models
         /// Hours Expected to Attend Today
         /// </summary>
         public TimeSpan HoursExpected { get; set; }
+
+
+        /// <summary>
+        /// HoursAttended divides HoursExpected
+        /// </summary>
+        public int PercentAttended { get; set; }
 
         /// <summary>
         /// If the attendance excused etc.

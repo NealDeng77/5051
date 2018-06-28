@@ -225,6 +225,8 @@ namespace _5051.Backend
                     //absent examples
                     else if (currentDate.Day == 8 || currentDate.Day == 14 || currentDate.Day == 25 || currentDate.Day == 29)
                     {
+                        temp.In = currentDate;
+                        temp.Out = currentDate;
                         temp.Duration = temp.Out.Subtract(temp.In);
                         temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.AbsentUnexcused;
                     }
