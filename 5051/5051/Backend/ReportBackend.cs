@@ -95,7 +95,7 @@ namespace _5051.Backend
             Report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
 
             currentDate = Report.DateStart;
-            
+
             // Set current date to be 1 less, because will get added in the for loop
             currentDate = currentDate.AddDays(-1);
 
@@ -108,67 +108,68 @@ namespace _5051.Backend
                 temp.Date = currentDate;
 
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
-                if (myToday == null)
+
+                // if the day is not a school day, set IsSchoolDay to false
+                if (myToday == null || myToday.SchoolDay == false)
                 {
-                    //todo:  Consider changing this to be a Continue, so other days can be reviewed.  Need to figure out how to test when doing UTs for this one...
-                    return false;
+                    temp.IsSchoolDay = false;
                 }
 
-                // if the day is not a school day, leave it off the report.
-                if (myToday.SchoolDay == false)
+                // if the day is a school day, perform calculations
+                else
                 {
-                    // Skip this one
-                    continue;
-                }
 
-                temp.HoursExpected = myToday.TimeDuration;
+                    temp.HoursExpected = myToday.TimeDuration;
 
-                // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
-                var myRange = Report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
-                
-                foreach (var item in myRange)
-                {
-                    var tempDuration = item.Duration;
-                    if (item.Status == StudentStatusEnum.In)
+                    // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
+                    var myRange = Report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
+
+                    foreach (var item in myRange)
                     {
-                        // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
-                        var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
-
-                        // If the person is still checked in, and the day is over, then check them out.
-                        if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
+                        var tempDuration = item.Duration;
+                        if (item.Status == StudentStatusEnum.In)
                         {
+                            // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
+                            var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
 
-                            var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
-                            //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-                            item.Out = DateTime.Parse(myDate);
-                            item.Status = StudentStatusEnum.Out;
-                            item.Duration = item.Out.Subtract(item.In);
+                            // If the person is still checked in, and the day is over, then check them out.
+                            if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
+                            {
 
-                            // Log the student out as well.
-                            Report.Student.Status = StudentStatusEnum.Out;
+                                var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
+                                //Add the current date of Item, with the end time for the default date, and return that back as a date time.
+                                item.Out = DateTime.Parse(myDate);
+                                item.Status = StudentStatusEnum.Out;
+                                item.Duration = item.Out.Subtract(item.In);
 
-                            // Update the change for that item be rewriting the student record back to the datastore
-                            DataSourceBackend.Instance.StudentBackend.Update(Report.Student);
+                                // Log the student out as well.
+                                Report.Student.Status = StudentStatusEnum.Out;
+
+                                // Update the change for that item be rewriting the student record back to the datastore
+                                DataSourceBackend.Instance.StudentBackend.Update(Report.Student);
+                            }
+                            else
+                            {
+                                // If the person is still checked in, and it is today, use now and add up till then.
+                                tempDuration = DateTime.UtcNow.Subtract(item.In);
+                            }
                         }
-                        else
-                        {
-                            // If the person is still checked in, and it is today, use now and add up till then.
-                            tempDuration = DateTime.UtcNow.Subtract(item.In);
-                        }
+                        temp.TimeIn = item.In;
+                        temp.TimeOut = item.Out;
+                        temp.HoursAttended += tempDuration;
+                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
+                        temp.AttendanceStatus = item.AttendanceStatus;
+                        temp.CheckInStatus = item.CheckInStatus;
+                        temp.CheckOutStatus = item.CheckOutStatus;
                     }
-                    temp.HoursAttended += tempDuration;
 
-                    temp.AttendanceStatus = item.AttendanceStatus;
-                    temp.CheckInStatus = item.CheckInStatus;
-                    temp.CheckOutStatus = item.CheckOutStatus;
+                    Report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
+                    Report.Stats.AccumlatedTotalHours += temp.HoursAttended;
+
+                    // Need to add the totals back to the temp, because the temp is new each iteration
+                    temp.TotalHoursExpected += Report.Stats.AccumlatedTotalHoursExpected;
+                    temp.TotalHours = Report.Stats.AccumlatedTotalHours;
                 }
-
-                Report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
-                Report.Stats.AccumlatedTotalHours += temp.HoursAttended;
-
-                // Need to add the totals back to the temp, because the temp is new each iteration
-                temp.TotalHoursExpected += Report.Stats.AccumlatedTotalHoursExpected;
-                temp.TotalHours = Report.Stats.AccumlatedTotalHours;
 
                 Report.AttendanceList.Add(temp);
             }
