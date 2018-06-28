@@ -159,7 +159,88 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetDemo()
         {
-            DataSetDefault();
+            DataSetClear();
+            Create(new StudentModel("Mike", null));
+            Create(new StudentModel("Doug", null));
+            Create(new StudentModel("Jea", null));
+            Create(new StudentModel("Sue", null));
+            //attendance test data
+            var myStudent = Backend.StudentBackend.Instance.GetDefault();
+
+
+            DateTime dateStart = new DateTime();
+            DateTime dateEnd = new DateTime();
+
+            //Generate attendance for may 2018
+            dateStart = DateTime.Parse("6/1/2018");
+            dateEnd = DateTime.Parse("7/1/2018");
+
+            // Set current date to be 1 less than the start day, because will get added in the for loop
+            DateTime currentDate = dateStart.AddDays(-1);
+            while (currentDate.CompareTo(dateEnd) < 0)
+            {
+
+                // Look to the next day
+                currentDate = currentDate.AddDays(1);
+
+                var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
+
+                // if the day is a school day
+                if (myToday != null && myToday.SchoolDay == true)
+                {
+                    var temp = new AttendanceModel
+                    {
+                        StudentId = myStudent.Id
+                    };
+                    //done early example
+                    if (currentDate.Day == 7 || currentDate.Day == 25)
+                    {
+                        temp.In = currentDate.AddHours(9); //in 9:00
+                        temp.Out = currentDate.AddHours(12);  // out 12:00                    
+                        temp.Duration = temp.Out.Subtract(temp.In);
+                        temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.Present;
+                        temp.CheckInStatus = Models.Enums.CheckInStatusEnum.ArriveOnTime;
+                        temp.CheckOutStatus = Models.Enums.CheckOutStatusEnum.DoneEarly;
+                    }
+                    //late  example
+                    else if (currentDate.Day == 22)
+                    {
+                        temp.In = currentDate.AddHours(10); //in 10:00
+                        temp.Out = currentDate.AddHours(15).AddMinutes(45); //out 15:45                 
+                        temp.Duration = temp.Out.Subtract(temp.In);
+                        temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.Present;
+                        temp.CheckInStatus = Models.Enums.CheckInStatusEnum.ArriveLate;
+                        temp.CheckOutStatus = Models.Enums.CheckOutStatusEnum.DoneAuto;
+                    }
+                    //wednesday early dismissal good attendance
+                    else if (currentDate.DayOfWeek == DayOfWeek.Wednesday)
+                    {
+                        temp.In = currentDate.AddHours(8).AddMinutes(55); //in 8:55
+                        temp.Out = currentDate.AddHours(14); //out 14:00                
+                        temp.Duration = temp.Out.Subtract(temp.In);
+                        temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.Present;
+                        temp.CheckInStatus = Models.Enums.CheckInStatusEnum.ArriveOnTime;
+                        temp.CheckOutStatus = Models.Enums.CheckOutStatusEnum.DoneAuto;
+                    }
+                    //absent examples
+                    else if (currentDate.Day == 8 || currentDate.Day == 14 || currentDate.Day == 25 || currentDate.Day == 29)
+                    {
+                        temp.Duration = temp.Out.Subtract(temp.In);
+                        temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.AbsentUnexcused;
+                    }
+                    //good attendance 
+                    else
+                    {
+                        temp.In = currentDate.AddHours(8).AddMinutes(55); //in 8:55
+                        temp.Out = currentDate.AddHours(15).AddMinutes(45); //out 15:45                 
+                        temp.Duration = temp.Out.Subtract(temp.In);
+                        temp.AttendanceStatus = Models.Enums.AttendanceStatusEnum.Present;
+                        temp.CheckInStatus = Models.Enums.CheckInStatusEnum.ArriveOnTime;
+                        temp.CheckOutStatus = Models.Enums.CheckOutStatusEnum.DoneAuto;
+                    }
+                    myStudent.Attendance.Add(temp);
+                }
+            }
         }
         
         /// <summary>
