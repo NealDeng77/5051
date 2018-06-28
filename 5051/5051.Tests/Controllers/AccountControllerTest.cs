@@ -100,5 +100,22 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion ForgotPasswordConfirmationRegion
+
+        #region ResetPasswordConfirmationRegion
+
+        [TestMethod]
+        public void Controller_Account_ResetPasswordConfirmation_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            // Act
+            var result = controller.ResetPasswordConfirmation() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ResetPasswordConfirmationRegion
     }
 }
