@@ -41,28 +41,59 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect,result.AvatarId, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_StudentModel_Instantiate_InValid_Data_Should_Fail()
+        {
+            // Arrange
+            string avatarId = null;
+            var name = "name";
+
+            var expect = Backend.AvatarBackend.Instance.GetFirstAvatarId();
+
+            // Act
+            var result = new StudentModel(name, avatarId);
+
+            // Assert
+            Assert.AreEqual(expect, result.AvatarId, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_StudentModel_Instantiate_Valid_Model_Data_Should_Pass()
+        {
+            // Arrange
+            var data = new StudentDisplayViewModel();
+            data.AvatarId = "avatarID";
+            var expect = "avatarID";
+                
+            // Act
+            var result = new StudentModel(data);
+
+            // Assert
+            Assert.AreEqual(expect, result.AvatarId, TestContext.TestName);
+        }
+
         #endregion Instantiate
 
         #region Update
-        //[TestMethod]
-        //public void Models_StudentModel_Update_With_Invalid_Data_Should_Fail()
-        //{
-        //    // Arrange
-        //    var expect = "test";
+        [TestMethod]
+        public void Models_StudentModel_Update_With_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var expect = "test";
 
-        //    var data = new StudentModel();
-        //    data.Uri = "bogus";
+            var data = new StudentModel();
+            data.AvatarId = "bogus";
 
-        //    var test = new StudentModel();
-        //    test.Uri = "test";
+            var test = new StudentModel();
+            test.AvatarId = "test";
 
-        //    // Act
-        //    data.Update(test);
-        //    var result = data.Uri;
+            // Act
+            data.Update(test);
+            var result = data.AvatarId;
 
-        //    // Assert
-        //    Assert.AreEqual(expect, result, TestContext.TestName);
-        //}
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
 
         [TestMethod]
         public void Models_StudentModel_Update_With_Invalid_Data_Null_Should_Fail()
