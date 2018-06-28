@@ -56,6 +56,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\ShopInventoryDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\SchoolDismissalSettingsDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\SchoolCalendarDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\StudentDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\AvatarDataSourceMockUnitTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
