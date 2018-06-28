@@ -24,7 +24,67 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_ShopInventoryModel_Instantiate_Valid_Should_Pass()
+        {
+            // Arrange
+            var uri = "uri";
+            var name = "name";
+            var description = "description";
+            ShopInventoryCategoryEnum category = ShopInventoryCategoryEnum.Music;
+            int tokens = 10;
+
+            var expect = uri;
+
+            // Act
+            var result = new ShopInventoryModel(uri, name, description,category,tokens);
+
+            // Assert
+            Assert.AreEqual(expect,result.Uri, TestContext.TestName);
+        }
+
         #endregion Instantiate
 
+        #region Update
+        [TestMethod]
+        public void Models_ShopInventoryModel_Update_With_Invalid_Data_Should_Fail()
+        {
+            // Arrange
+            var expect = "test";
+
+            var data = new ShopInventoryModel();
+            data.Uri = "bogus";
+
+            var test = new ShopInventoryModel();
+            test.Uri = "test";
+
+            // Act
+            data.Update(test);
+            var result = data.Uri;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_ShopInventoryModel_Update_With_Invalid_Data_Null_Should_Fail()
+        {
+            // Arrange
+
+            var expect = "test";
+
+            var data = new ShopInventoryModel();
+            data.Id = "test";
+
+            // Act
+            data.Update(null);
+            var result = data.Id;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        #endregion Update
     }
 }
