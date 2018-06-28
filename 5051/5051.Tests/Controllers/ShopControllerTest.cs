@@ -80,27 +80,40 @@ namespace _5051.Tests.Controllers
         #endregion IndexRegion
 
 
-        /*************************************************
+        #region BuyRegion
 
-            [TestMethod]
-            public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
-            {
-                // Arrange
-                ShopController controller = new ShopController();
+        [TestMethod]
+        public void Controller_Shop_Buy_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
-                ShopBuyViewModel data = new ShopBuyViewModel();
+            // Act
+            ViewResult result = controller.Buy(id) as ViewResult;
 
-                // Make ModelState Invalid
-                controller.ModelState.AddModelError("test", "test");
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-                // Act
-                ViewResult result = controller.Buy(data) as ViewResult;
+        [TestMethod]
+        public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            ShopBuyViewModel data = new ShopBuyViewModel();
 
-                // Assert
-                Assert.IsNotNull(result, TestContext.TestName);
-            }
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
 
-        *********************************************************/
+            // Act
+            ViewResult result = controller.Buy(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
+
 
 
         [TestMethod]
@@ -121,6 +134,8 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
+
+        #endregion BuyRegion
 
         #region DiscountsRegion
 
