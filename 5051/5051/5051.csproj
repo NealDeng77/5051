@@ -272,6 +272,7 @@
     <Content Include="Content\img\AvatarLevel.png" />
     <Content Include="Content\img\CalendarEditIcon.png" />
     <Content Include="Content\img\ChartPlaceholder.png" />
+    <Content Include="Content\img\CheckMark.png" />
     <Content Include="Content\img\EditPicture.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
@@ -294,6 +295,7 @@
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
     <Content Include="Content\img\StudentProfileBio.png" />
+    <Content Include="Content\img\White.png" />
     <Content Include="Content\shop\guitar.png" />
     <Content Include="Content\shop\headphone.png" />
     <Content Include="Content\shop\moviecamera.png" />
