@@ -31,6 +31,8 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
+        #region AccountUserSignInManagersRegion
+
         [TestMethod]
         public void Controller_Account_User_SignIn_Managers_Default_Should_Pass()
         {
@@ -43,5 +45,24 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual(result, new AccountController().GetType(), TestContext.TestName);
         }
+
+        #endregion AccountUserSignInManagersRegion
+
+        #region RegisterRegion
+
+        [TestMethod]
+        public void Controller_Account_Register_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            // Act
+            var result = controller.Register() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion RegisterRegion
     }
 }
