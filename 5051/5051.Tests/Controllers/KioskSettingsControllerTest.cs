@@ -110,5 +110,89 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
         #endregion UpdateGetRegion
+
+        #region PostUpdateRegion
+        [TestMethod]
+        public void Controller_KioskSettings_Post_Update_Invalid_Model_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+            KioskSettingsModel data = new KioskSettingsModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = (ViewResult)controller.Update(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Post_Update_Null_Data_Should_Return_Error()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((KioskSettingsModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Post_Update_Null_Id_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+            KioskSettingsModel dataNull = new KioskSettingsModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Act
+            var resultNull = (ViewResult)controller.Update(dataNull);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Post_Update_Empty_Id_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+            KioskSettingsModel dataEmpty = new KioskSettingsModel();
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultEmpty = (ViewResult)controller.Update(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_KioskSettings_Post_Update_Default_Should_Return_Admin_Settings_Page()
+        {
+            // Arrange
+            var controller = new KioskSettingsController();
+
+            // Get default KioskSettingsModel
+            KioskSettingsModel kioskSettingsModel = DataSourceBackend.Instance.KioskSettingsBackend.GetDefault();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(kioskSettingsModel);
+
+            // Assert
+            Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Admin", result.RouteValues["controller"], TestContext.TestName);
+        }
+        #endregion PostUpdateRegion
     }
 }
