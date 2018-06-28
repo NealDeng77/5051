@@ -168,6 +168,25 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Avatar_Create_Post_InValid_Model_Should_Return_Error()
+        {
+            // Arrange
+            var controller = new AvatarController();
+
+            var data = new AvatarModel();
+            data.Description = "description";
+
+            // Make a model error then try to send it as a Avatar
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Create(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
         #endregion CreateRegion
 
         #region UpdateRegion
@@ -226,7 +245,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(data.Description, resultAvatar.Description, TestContext.TestName);
         }
 
-
         [TestMethod]
         public void Controller_Avatar_Update_Post_InValid_Should_Return_Error_Page()
         {
@@ -246,9 +264,48 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Avatar_Update_Post_InValid_Model_Should_Return_Error()
+        {
+            // Arrange
+            var controller = new AvatarController();
+
+            var data = new AvatarModel();
+            data.Description = "description";
+
+            // Make a model error then try to send it as a Avatar
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Avatar_Update_Post_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var controller = new AvatarController();
+            var data = new AvatarModel();
+
+            // Add to the backend
+            AvatarBackend.Instance.Create(data);
+
+            data.Description = "Updated Description";
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+            var dataResult = AvatarBackend.Instance.Read(data.Id);
+
+            AvatarBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(data.Description, dataResult.Description, TestContext.TestName);
+        }
         #endregion UpdateRegion
-
-
 
         #region DeleteRegion
 
@@ -265,7 +322,6 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual(null, result.Model, TestContext.TestName);
         }
-
 
         [TestMethod]
         public void Controller_Avatar_Delete_ID_Bogus_Should_Return_Empty_Model()
@@ -295,10 +351,11 @@ namespace _5051.Tests.Controllers
 
             var resultAvatar = result.Model as AvatarModel;
 
+            AvatarBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(id, resultAvatar.Id, TestContext.TestName);
         }
-
 
         [TestMethod]
         public void Controller_Avatar_Delete_Post_Invalid_Null_Id_Should_Return_Model()
@@ -322,7 +379,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(data.Description, resultAvatar.Description, TestContext.TestName);
         }
 
-
         [TestMethod]
         public void Controller_Avatar_Delete_Post_InValid_Should_Return_Error_Page()
         {
@@ -343,6 +399,56 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Avatar_Delete_Post_InValid_Model_Should_Return_Error()
+        {
+            // Arrange
+            var controller = new AvatarController();
+
+            var data = new AvatarModel();
+            data.Description = "description";
+
+            // Make a model error then try to send it as a Avatar
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Delete(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Avatar_Delete_Post_Valid_Data_Should_Delete_Pass()
+        {
+            // Arrange
+            AvatarController controller = new AvatarController();
+            var data = new AvatarModel
+            {
+                Description = "description",
+                Name = "Name",
+                Uri = "picture"
+            };
+
+            var id = data.Id;
+
+            bool isFound = true;
+
+            // Make an avatar
+            AvatarBackend.Instance.Create(data);
+
+            // Act
+            ViewResult result = controller.Delete(data) as ViewResult;
+
+            var dataRead = AvatarBackend.Instance.Read(id);
+            if (dataRead == null)
+            {
+                isFound = false;
+            }
+
+            // Assert
+            Assert.AreEqual(false, isFound, TestContext.TestName);
+        }
 
         #endregion DeleteRegion
 
