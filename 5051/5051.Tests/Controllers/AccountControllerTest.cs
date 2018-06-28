@@ -117,5 +117,22 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion ResetPasswordConfirmationRegion
+
+        #region ExternalLoginFailureRegion
+
+        [TestMethod]
+        public void Controller_Account_ExternalLoginFailure_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            // Act
+            var result = controller.ExternalLoginFailure() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ExternalLoginFailureRegion
     }
 }
