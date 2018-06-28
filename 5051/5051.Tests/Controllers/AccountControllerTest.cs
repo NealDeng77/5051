@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Backend;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -64,5 +66,22 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion RegisterRegion
+
+        #region ForgotPasswordRegion
+
+        [TestMethod]
+        public void Controller_Account_ForgotPassword_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            // Act
+            var result = controller.ForgotPassword() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ForgotPasswordRegion
     }
 }
