@@ -134,5 +134,26 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion ExternalLoginFailureRegion
+
+        #region LoginRegion
+
+        [TestMethod]
+        public void Controller_Account_Login_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+          
+            string url = "abc";
+
+            // Act
+            var result = controller.Login(url) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(url, controller.ViewBag.ReturnUrl);
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion LoginRegion
+
     }
 }
