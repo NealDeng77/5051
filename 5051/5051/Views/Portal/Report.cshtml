@@ -13,7 +13,7 @@
 }
 
 <div class="text-center">
-    <h4>Attendance Statistics</h4>
+    <h4>This is a student monthly report wireframe</h4>
     <br />
     <div>
         From @Model.DateStart.ToShortDateString()<br />
@@ -22,7 +22,7 @@
 </div>
 <br />
 
-@if (Model.Student.Attendance.Count == 0)
+@if (Model.AttendanceList.Count == 0)
 {
     <p>No Data of this Month</p>
 }
