@@ -190,7 +190,8 @@ namespace _5051.Backend
                 {
                     var temp = new AttendanceModel
                     {
-                        StudentId = myStudent.Id
+                        StudentId = myStudent.Id,
+                        Status = StudentStatusEnum.Out
                     };
                     //done early example
                     if (currentDate.Day == 7 || currentDate.Day == 25)
