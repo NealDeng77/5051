@@ -34,5 +34,26 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion Instantiate
+
+        #region delete
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Delete_With_Invalid_ID_Null_Should_Fail()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var expect = false;
+
+            //act
+            var result = backend.Delete(null);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion delete
+
+
     }
 }
