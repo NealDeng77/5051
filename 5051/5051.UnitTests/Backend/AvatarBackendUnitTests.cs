@@ -48,6 +48,50 @@ namespace _5051.UnitTests.Models
         }
         #endregion GetAvatarListItem
 
+        #region GetAvatarUri
+        [TestMethod]
+        public void Backend_AvatarBackend_GetAvatarUri_Valid_Data_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var testID = test.GetFirstAvatarId();
+
+            //act
+            var result = test.GetAvatarUri(testID);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarBackend_GetAvatarUri_Invalid_Data_Null_Should_Fail()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+
+            //act
+            var result = test.GetAvatarUri(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarBackend_GetAvatarUri_Invalid_ID_Should_Fail()
+        {
+            //arrange
+            var data = new AvatarModel();
+            var test = Backend.AvatarBackend.Instance;
+            data.Id = "bogus";
+
+            //act
+            var result = test.GetAvatarUri(data.Id);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion GetAvatarUri
+
 
     }
 }
