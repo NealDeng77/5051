@@ -233,6 +233,7 @@
     <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnum.cs" />
     <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
+    <Compile Include="Models\Enums\EmotionStatusEnum.cs" />
     <Compile Include="Models\SchoolCalendarViewModel.cs" />
     <Compile Include="Models\SchoolCalendarModel.cs" />
     <Compile Include="Models\KioskSettingsModel.cs" />
