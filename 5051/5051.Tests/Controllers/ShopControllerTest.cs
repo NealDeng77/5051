@@ -81,7 +81,6 @@ namespace _5051.Tests.Controllers
 
 
         #region BuyRegion
-
         [TestMethod]
         public void Controller_Shop_Buy_Default_Should_Pass()
         {
@@ -112,10 +111,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
-
-
-
-
+        
         [TestMethod]
         public void Controller_Shop_Buy_Get_myDataIsNull_ShouldReturnErrorPage()
         {
@@ -135,6 +131,204 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Invalid_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            ShopBuyViewModel data;
+            data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Invalid_StudentID_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Invalid_ItemId_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = "studentID";
+            data.ItemId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Invalid_StudentId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = "bogus";
+            data.ItemId = "itemID";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Invalid_ItemId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_Valid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 1000;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 10;
+            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+
+            var expect = myStudent.Tokens - myInventory.Tokens;
+
+            // Act
+            ViewResult result = controller.Buy(data) as ViewResult;
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_InValid_Tokens_Not_Enough_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 10;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 100;
+            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+
+            // No purchage, so tokens stay the same
+            var expect = myStudent.Tokens;
+            var expectCount = myStudent.Inventory.Count();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
+        }
+
+
+        [TestMethod]
+        public void Controller_Shop_Buy_Data_InValid_Item_Already_Exists_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 1000;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 10;
+            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+
+            // Buy it one time, this puts the item in the student inventory
+            var myPurchage1 = (RedirectToRouteResult)controller.Buy(data);
+
+            // No purchage, so tokens stay the same
+            var expect = myStudent.Tokens;
+            var expectCount = myStudent.Inventory.Count();
+
+            // Act
+
+            // Trying to buy the second time will fail
+            var result = (RedirectToRouteResult)controller.Buy(data);
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
+        }
         #endregion BuyRegion
 
         #region DiscountsRegion
