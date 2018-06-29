@@ -92,6 +92,22 @@ namespace _5051.UnitTests.Models
         }
         #endregion GetAvatarUri
 
+        #region update
+        [TestMethod]
+        public void Models_AvatarBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
 
+            //act
+            var result = test.Update(null);
+
+            //reset
+            test.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion update
     }
 }
