@@ -142,15 +142,21 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AccountController();
-          
+
             string url = "abc";
+            string expect = url;
 
             // Act
             var result = controller.Login(url) as ViewResult;
 
+            var resultBag = controller.ViewBag;
+
+            string resultURL = "";
+            resultURL = controller.ViewData["ReturnUrl"].ToString();
+
             // Assert
-            Assert.AreEqual(url, controller.ViewBag.ReturnUrl);
-            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(expect,resultURL, "URL " + TestContext.TestName);
+            Assert.IsNotNull(result, "Null "+ TestContext.TestName);
         }
 
         #endregion LoginRegion
