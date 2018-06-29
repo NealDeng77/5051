@@ -47,9 +47,18 @@ namespace _5051.Controllers
         public ActionResult Update(string id = null)
         {
             var myData = SchoolDismissalSettingsBackend.Read(id);
+
             if (myData == null)
             {
-                return RedirectToAction("Error", "Home");
+                // If no ID is passed in, get the first one.
+                if (id == null)
+                {
+                    myData = SchoolDismissalSettingsBackend.GetDefault();
+                }
+                if (myData == null)
+                {
+                    return RedirectToAction("Error", "Home");
+                }
             }
 
             return View(myData);
