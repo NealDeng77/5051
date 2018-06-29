@@ -33,6 +33,21 @@ namespace _5051.UnitTests.Models
         }
         #endregion delete
 
+        #region GetAvatarListItem
+        [TestMethod]
+        public void Backend_AvatarBackend_GetAvatarListItem_ID_Null_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+
+            //act
+            var result = test.GetAvatarListItem(null);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetAvatarListItem
+
 
     }
 }
