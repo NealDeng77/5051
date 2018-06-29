@@ -177,8 +177,40 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual(viewModelResult, new LoginViewModel().GetType(), TestContext.TestName);
 
-            #endregion LoginRegion
-
         }
+        #endregion LoginRegion
+
+        #region ResetPasswordRegion
+        [TestMethod]
+        public void Controller_Account_ResetPassword_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            string code = "abc";
+
+            // Act
+            var result = controller.ResetPassword(code) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Account_ResetPassword_Null_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
+
+            string code = null;
+
+            // Act
+            var result = controller.ResetPassword(code) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion ResetPasswordRegion
     }
 }
