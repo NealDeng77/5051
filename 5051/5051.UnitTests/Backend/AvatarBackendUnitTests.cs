@@ -14,7 +14,25 @@ namespace _5051.UnitTests.Models
     {
         public TestContext TestContext { get; set; }
 
-        
+        #region delete
+        [TestMethod]
+        public void Models_AvatarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var expect = false;
+
+            //act
+            var result = test.Delete(null);
+
+            //reset
+            test.Reset();
+
+            //assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion delete
+
 
     }
 }
