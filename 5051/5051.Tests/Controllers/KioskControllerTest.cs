@@ -79,6 +79,8 @@ namespace _5051.Tests.Controllers
         public void Controller_Kiosk_SetLogin_Valid_Id_Should_Pass()
         {
             // Arrange
+            DataSourceBackend.Instance.Reset();
+
             var controller = new KioskController();
 
             // Get the first Studnet Id from the DataSource
@@ -89,9 +91,12 @@ namespace _5051.Tests.Controllers
 
             // check status change after SetLogin
             var resultStatus = StudentBackend.Instance.Read(id).Status;
-            Assert.AreEqual(StudentStatusEnum.In, resultStatus, TestContext.TestName);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
+            Assert.AreEqual(StudentStatusEnum.In, resultStatus, TestContext.TestName);
             Assert.AreEqual("ConfirmLogin", result.RouteValues["action"], TestContext.TestName);
         }
 
@@ -115,20 +120,28 @@ namespace _5051.Tests.Controllers
         public void Controller_Kiosk_SetLogout_Valid_Id_Should_Pass()
         {
             // Arrange
+            DataSourceBackend.Instance.Reset();
+
             var controller = new KioskController();
 
-            // Get the first Studnet Id from the DataSource
+            // Get the first Student Id from the DataSource
             string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Login, so logout can happen
+            controller.SetLogin(id);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetLogout(id);
 
             // check status change after SetLogout
             var resultStatus = StudentBackend.Instance.Read(id).Status;
-            Assert.AreEqual(StudentStatusEnum.Out, resultStatus, TestContext.TestName);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("ConfirmLogout", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(StudentStatusEnum.Out, resultStatus, TestContext.TestName);
         }
 
         [TestMethod]
