@@ -155,11 +155,30 @@ namespace _5051.Tests.Controllers
             resultURL = controller.ViewData["ReturnUrl"].ToString();
 
             // Assert
-            Assert.AreEqual(expect,resultURL, "URL " + TestContext.TestName);
-            Assert.IsNotNull(result, "Null "+ TestContext.TestName);
+            Assert.AreEqual(expect, resultURL, "URL " + TestContext.TestName);
+            Assert.IsNotNull(result, "Null " + TestContext.TestName);
         }
 
-        #endregion LoginRegion
+        [TestMethod]
+        public void Controller_Account_Login_Post_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AccountController();
 
+            LoginViewModel loginViewModel = new LoginViewModel();
+            var viewModelResult = loginViewModel.GetType();
+
+            string url = "abc";
+
+            // Act
+            var result = controller.Login(url) as ViewResult;
+            var resultViewModel = controller.Login(loginViewModel, url).GetType();
+
+            // Assert
+            Assert.AreEqual(viewModelResult, new LoginViewModel().GetType(), TestContext.TestName);
+
+            #endregion LoginRegion
+
+        }
     }
 }
