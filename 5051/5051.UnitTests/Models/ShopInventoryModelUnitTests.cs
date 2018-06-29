@@ -48,7 +48,7 @@ namespace _5051.UnitTests.Models
 
         #region Update
         [TestMethod]
-        public void Models_ShopInventoryModel_Update_With_Invalid_Data_Should_Fail()
+        public void Models_ShopInventoryModel_Update_With_Valid_Data_Should_Pass()
         {
             // Arrange
             var expect = "test";
