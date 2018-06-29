@@ -90,5 +90,23 @@ namespace _5051.UnitTests.Models
             Assert.IsNull(result, TestContext.TestName);
         }
         #endregion update
+
+        #region read
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Read_With_Invalid_ID_Null_Should_Fail()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+
+            //act
+            var result = backend.Read(null);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion read
     }
 }
