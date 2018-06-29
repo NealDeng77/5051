@@ -54,6 +54,41 @@ namespace _5051.UnitTests.Models
         }
         #endregion delete
 
+        #region update
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Update_With_Invalid_Data_Null_Should_Fail()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
 
+            //act
+            var result = backend.Update(null);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Update_With_Invalid_Data_AvatarID_Should_Fail()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var test = new AvatarModel();
+            var expected = "bogus";
+            test.Id = expected;
+
+            //act
+            var result = backend.Update(test);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion update
     }
 }
