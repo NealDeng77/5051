@@ -101,9 +101,6 @@ namespace _5051.UnitTests.Models
             //act
             var result = backend.Read(null);
 
-            //reset
-            backend.Reset();
-
             //assert
             Assert.IsNull(result, TestContext.TestName);
         }
