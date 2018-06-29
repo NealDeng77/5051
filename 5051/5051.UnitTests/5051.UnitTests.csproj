@@ -65,6 +65,7 @@
     <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\AvatarDataSourceMockUnitTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryModelUnitTests.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModelUnitTests.cs" />
