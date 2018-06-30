@@ -162,12 +162,17 @@ namespace _5051.UnitTests.Models
             var test = new SchoolCalendarModel();
             test.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
             test.SetSchoolTime();
+            test.SchoolDay = true;  // Force the day to a school day, so the test always runs even late at night, or on weekends when devs are running unit tests...
+
             var expect = test.TimeDuration;
 
             // Act
             data.Update(test);
             var result = data.TimeDuration;
 
+            //Reset
+            Backend.DataSourceBackend.Instance.Reset();
+            
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
