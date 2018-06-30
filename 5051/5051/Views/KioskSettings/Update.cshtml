@@ -5,9 +5,10 @@
 }
 
 <div class="container">
+    <br />
     <h2>Kiosk Settings</h2>
     <br />
-    <div class="row">
+    <div class="container">
         @{
             if (Model == null)
             {
@@ -43,6 +44,8 @@
                             </div>
                             <div class="col-sm-4">
                                 @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                            </div>
+                            <div class="col-sm-4">
                                 <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </div>
