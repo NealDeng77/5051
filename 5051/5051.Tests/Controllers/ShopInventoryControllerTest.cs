@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using _5051;
 using _5051.Controllers;
+using _5051.Models;
 
 namespace _5051.Tests.Controllers
 {
@@ -15,20 +16,21 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
-        #region Instantiate
+        #region IndexRegion
         [TestMethod]
-        public void Controller_ShopInventory_Instantiate_Default_Should_Pass()
+        public void Controller_ShopInventory_Index_Should_Pass()
         {
             // Arrange
-            var controller = new AdminController();
+            ShopInventoryController controller = new ShopInventoryController();
 
             // Act
-            var result = controller.GetType();
+            ViewResult result = controller.Index() as ViewResult;
+
+            var resultShopInventoryViewModel = result.Model as ShopInventoryViewModel;
 
             // Assert
-            Assert.AreEqual(result, new AdminController().GetType(), TestContext.TestName);
+            Assert.IsNotNull(resultShopInventoryViewModel, TestContext.TestName);
         }
-
-        #endregion Instantiate
+        #endregion IndexRegion
     }
 }
