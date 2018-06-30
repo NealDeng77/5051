@@ -96,6 +96,51 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
+        public void Models_StudentModel_Update_Check_All_Fields_Should_Pass()
+        {
+            // Arrange
+
+            // Set all the fields for a Student
+            var data = new StudentModel();
+
+            var test = new StudentModel();
+            test.Id = "Id";
+            test.Name = "Name";
+            test.Password = "Password";
+            test.Status = StudentStatusEnum.Hold;
+            test.Tokens = 1000;
+            test.ExperiencePoints = 1000;
+
+            test.AvatarId = "AvatarId";
+            test.AvatarLevel = 10;
+
+            var tempAttendance = new AttendanceModel();
+            test.Attendance.Add(tempAttendance);
+
+            var tempInventory = new ShopInventoryModel();
+            test.Inventory.Add(tempInventory);
+
+            // Act
+            data.Update(test);
+
+            // Assert
+
+            // Id should not change...
+            Assert.AreNotEqual(test.Id, data.Id, "Name " + TestContext.TestName);
+
+            //Check each value
+            Assert.AreEqual(test.Name, data.Name, "Name "+ TestContext.TestName);
+            Assert.AreEqual(test.Password, data.Password, "Password " + TestContext.TestName);
+            Assert.AreEqual(test.Status, data.Status, "Status " + TestContext.TestName);
+            Assert.AreEqual(test.Tokens, data.Tokens, "Tokens " + TestContext.TestName);
+            Assert.AreEqual(test.ExperiencePoints, data.ExperiencePoints, "ExperiencePoints " + TestContext.TestName);
+            Assert.AreEqual(test.AvatarId, data.AvatarId, "AvatarId " + TestContext.TestName);
+            Assert.AreEqual(test.AvatarLevel, data.AvatarLevel, "AvatarLevel " + TestContext.TestName);
+            Assert.AreEqual(test.Attendance.Count, data.Attendance.Count, "Attendance " + TestContext.TestName);
+            Assert.AreEqual(test.Inventory.Count, data.Inventory.Count, "Inventory " + TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Models_StudentModel_Update_With_Invalid_Data_Null_Should_Fail()
         {
             // Arrange

@@ -82,7 +82,6 @@ namespace _5051.Models
         /// </summary>
         public List<AttendanceModel> Attendance { get; set; }
 
-
         /// <summary>
         /// The defaults for a new student
         /// </summary>
