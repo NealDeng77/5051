@@ -5,11 +5,12 @@
     ViewBag.Title = "My Avatar";
 }
 
-<div class="row">
+<div class="container">
+    <br />
     <h2>My Avatar</h2>
-    <h3>
+    <h4>
         You can change to any avatar at or below Level @Html.DisplayFor(m => m.Student.AvatarLevel)
-    </h3>
+    </h4>
     <div class="col-sm-10 col-sm-offset-1">
         <div class="col-sm-2 text-center">
             <img src="~/Content/img/@Model.SelectedAvatar.Uri" class="AvatarSize1" />
@@ -30,12 +31,14 @@
 @{
     if (Model.AvatarList == null | !Model.AvatarList.Any())
     {
+        <br />
         <h2>No Avatars Available to Select</h2>
     }
     else
     {
+        <br />
         <h2>Avatars available to pick per Level.</h2>
-        <div class="row">
+        <div class="container">
             <div class="col-sm-10 col-sm-offset-1">
                 @{
                     ///Walk the SelectedAvatarViewModel.MaxLevel, and for each level lay out the Level, and the Avatars
