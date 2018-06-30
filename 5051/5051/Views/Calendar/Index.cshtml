@@ -4,14 +4,14 @@
 @{
     ViewBag.Title = "Calendar";
 }
-
+<br />
 <h2>Welcome to School Calendar</h2>
 <br />
-<h4>Highlighted days are school days</h4>
-<h4>Early dismissal are blue</h4>
+<h5>Highlighted days are school days</h5>
+<h5>Early dismissal are blue</h5>
 <h4>Modified days are Green</h4>
 <br />
-<h4>Early dismissal every Wendsday</h4>
+<h5>Early dismissal every Wendsday</h5>
 
 
 <h4>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h4>
@@ -32,14 +32,14 @@
         foreach (var MonthItem in Model.Months)
         {
             <div class="col-sm-4 CalendarBox">
-
+                <br />
                 <div class="row">
                     <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
                     <br />
                 </div>
 
                 <div class="row text-center">
-                    <table class="table table-bordered table-condensed table-fit table-striped">
+                    <table class="table table-bordered table-condensed table-fit table-sm table-striped">
                         <thead>
                             <tr class="text-center">
                                 <th class="text-center">Mo</th>
