@@ -113,6 +113,42 @@ namespace _5051.UnitTests.Models
 
         #region update
         [TestMethod]
+        public void Backend_AvatarBackend_Update_Valid_Data_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var data = new AvatarModel();
+            var createResult = test.Create(data);
+            var expectName = "GoodTestName";
+            var expectDesc = "Good Test Description";
+            var expectUri = "GoodTestUri";
+            var expectLevel = 7;
+
+
+            //act
+            data.Name = expectName;
+            data.Description = expectDesc;
+            data.Level = expectLevel;
+            data.Uri = expectUri;
+            var updateResult = test.Update(data);
+            var updateAfterRead = test.Read(data.Id);
+            var nameResult = updateAfterRead.Name;
+            var descResult = updateAfterRead.Description;
+            var uriResult = updateAfterRead.Uri;
+            var levelResult = updateAfterRead.Level;
+
+            //reset
+            test.Reset();
+
+            //assert
+            Assert.IsNotNull(updateResult, TestContext.TestName);
+            Assert.AreEqual(expectName, nameResult, TestContext.TestName);
+            Assert.AreEqual(expectDesc, descResult, TestContext.TestName);
+            Assert.AreEqual(expectUri, uriResult, TestContext.TestName);
+            Assert.AreEqual(expectLevel, levelResult, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Models_AvatarBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
