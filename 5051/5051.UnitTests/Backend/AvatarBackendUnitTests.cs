@@ -16,6 +16,25 @@ namespace _5051.UnitTests.Models
 
         #region delete
         [TestMethod]
+        public void Backend_AvatarBackend_Delete_Valid_Data_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var data = new AvatarModel();
+            var createResult = test.Create(data);
+            var expect = true;
+
+            //act
+            var deleteResult = test.Delete(data.Id);
+
+            //reset
+            test.Reset();
+
+            //assert
+            Assert.AreEqual(expect, deleteResult, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Models_AvatarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
