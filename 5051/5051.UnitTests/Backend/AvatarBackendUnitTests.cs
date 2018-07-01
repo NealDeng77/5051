@@ -109,5 +109,20 @@ namespace _5051.UnitTests.Models
             Assert.IsNull(result, TestContext.TestName);
         }
         #endregion update
+
+        #region index
+        [TestMethod]
+        public void Backend_AvatarBackend_Index_Valid_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+
+            //act
+            var result = test.Index();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion index
     }
 }
