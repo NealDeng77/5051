@@ -124,5 +124,34 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion index
+
+        #region read
+        [TestMethod]
+        public void Backend_AvatarBackend_Read_Invalid_ID_Null_Should_Fail()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+
+            //act
+            var result = test.Read(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarBackend_Read_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var testID = test.GetFirstAvatarId();
+
+            //act
+            var result = test.Read(testID);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion read
     }
 }
