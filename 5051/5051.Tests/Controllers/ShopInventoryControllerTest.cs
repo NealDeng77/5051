@@ -282,6 +282,112 @@ namespace _5051.Tests.Controllers
         }
         #endregion UpdatePostRegion
 
+        #region DeleteRegion
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_IDIsNull_Should_Pass()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+
+            // Act
+            ViewResult result = controller.Delete() as ViewResult;
+
+            // Assert
+            Assert.AreEqual(null, result.Model, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_IDValid_Should_Pass()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+            ShopInventoryModel data = new ShopInventoryModel();
+            string id = Backend.ShopInventoryBackend.Instance.Create(data).Id;
+
+            // Act
+            ViewResult result = controller.Delete(id) as ViewResult;
+
+            var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Reset StudentBackend
+            ShopInventoryBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
+
+        #region UpdatePostRegion
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+
+            ShopInventoryModel data = new ShopInventoryModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_Post_Invalid_Should_Return_ErrorPage()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+            ShopInventoryModel data = new ShopInventoryModel();
+            data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_Post_Invalid_IDIsNull_Should_Return_Model()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+            ShopInventoryModel data = new ShopInventoryModel();
+            data.Id = null;
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Assert
+            Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_ShopInventory_Delete_Post_Valid_Should_Return_IndexPage()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+            ShopInventoryModel data = new ShopInventoryModel();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(data);
+            var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
+
+            // Reset StudentBackend
+            ShopInventoryBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
+        }
+        #endregion UpdatePostRegion
 
 
     }
