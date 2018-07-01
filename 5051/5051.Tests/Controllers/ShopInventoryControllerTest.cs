@@ -17,6 +17,22 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        #region Instantiate
+        [TestMethod]
+        public void Controller_ShopInventory_Instantiate_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new ShopInventoryController();
+
+            // Act
+            var result = controller.GetType();
+
+            // Assert
+            Assert.AreEqual(result, new ShopInventoryController().GetType(), TestContext.TestName);
+        }
+
+        #endregion Instantiate
+
         #region IndexRegion
         [TestMethod]
         public void Controller_ShopInventory_Index_Should_Pass()
@@ -69,5 +85,23 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
         }
         #endregion ReadRegion
+
+        #region CreateRegion
+        [TestMethod]
+        public void Controller_ShopInventory_Create_Get_Should_Return_New_Model()
+        {
+            // Arrange
+            ShopInventoryController controller = new ShopInventoryController();
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Assert
+            Assert.AreNotEqual(null, resultShopInventoryModel.Id, TestContext.TestName);
+        }
+        #endregion CreateRegion
+
     }
 }
