@@ -224,7 +224,7 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             // Act
-            ViewResult result = controller.Create(data) as ViewResult;
+            ViewResult result = controller.Update(data) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -239,7 +239,7 @@ namespace _5051.Tests.Controllers
             data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Create(data);
+            var result = (RedirectToRouteResult)controller.Update(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -254,7 +254,7 @@ namespace _5051.Tests.Controllers
             data.Id = null;
 
             // Act
-            ViewResult result = controller.Create(data) as ViewResult;
+            ViewResult result = controller.Update(data) as ViewResult;
 
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
 
@@ -270,7 +270,7 @@ namespace _5051.Tests.Controllers
             ShopInventoryModel data = new ShopInventoryModel();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Create(data);
+            var result = (RedirectToRouteResult)controller.Update(data);
             var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
 
             // Reset StudentBackend
