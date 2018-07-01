@@ -173,5 +173,41 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(data.Id, result.Id, TestContext.TestName);
         }
         #endregion create
+
+        #region SetDataSourceDataSet
+        [TestMethod]
+        public void Backend_AvatarBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var mockEnum = DataSourceDataSetEnum.Demo;
+
+            //act
+            testDataSourceBackend.SetDataSourceDataSet(mockEnum);
+
+            //reset
+            test.Reset();
+
+            //assert
+        }
+
+        [TestMethod]
+        public void Backend_AvatarBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
+        {
+            //arange
+            var test = Backend.AvatarBackend.Instance;
+            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var SQLEnum = DataSourceEnum.SQL;
+
+            //act
+            testDataSourceBackend.SetDataSource(SQLEnum);
+
+            //reset
+            test.Reset();
+
+            //asset
+        }
+        #endregion SetDataSourceDataSet
     }
 }
