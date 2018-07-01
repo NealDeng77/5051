@@ -153,5 +153,25 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion read
+
+        #region create
+        [TestMethod]
+        public void Backend_AvatarBackend_Create_Valid_Data_Should_Pass()
+        {
+            //arrange
+            var test = Backend.AvatarBackend.Instance;
+            var data = new AvatarModel();
+
+            //act
+            var result = test.Create(data);
+
+            //reset
+            test.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(data.Id, result.Id, TestContext.TestName);
+        }
+        #endregion create
     }
 }
