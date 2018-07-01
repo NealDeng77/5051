@@ -45,10 +45,8 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
 
-            var resultShopInventoryModel = result.Model as ShopInventoryModel;
-
             // Assert
-            Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
+            Assert.AreEqual(null, result.Model, TestContext.TestName);
         }
 
         [TestMethod]
