@@ -316,9 +316,9 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
         }
 
-        #endregion UpdateRegion
+        #endregion DeleteRegion
 
-        #region UpdatePostRegion
+        #region DeletePostRegion
         [TestMethod]
         public void Controller_ShopInventory_Delete_Post_ModelIsInvalid_Should_Pass()
         {
@@ -331,7 +331,7 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             // Act
-            ViewResult result = controller.Update(data) as ViewResult;
+            ViewResult result = controller.Delete(data) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -346,7 +346,7 @@ namespace _5051.Tests.Controllers
             data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Update(data);
+            var result = (RedirectToRouteResult)controller.Delete(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -361,7 +361,7 @@ namespace _5051.Tests.Controllers
             data.Id = null;
 
             // Act
-            ViewResult result = controller.Update(data) as ViewResult;
+            ViewResult result = controller.Delete(data) as ViewResult;
 
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
 
@@ -377,7 +377,7 @@ namespace _5051.Tests.Controllers
             ShopInventoryModel data = new ShopInventoryModel();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Update(data);
+            var result = (RedirectToRouteResult)controller.Delete(data);
             var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
 
             // Reset StudentBackend
@@ -387,8 +387,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
         }
-        #endregion UpdatePostRegion
-
-
+        #endregion DeletePostRegion
     }
 }
