@@ -51,10 +51,10 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
 
             // Act
-            ViewResult result = controller.StudentReport() as ViewResult;
+            var result = (RedirectToRouteResult)controller.StudentReport();
 
             // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
 
@@ -68,7 +68,6 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.StudentReport(""); 
 
             // Assert
-            //Assert.IsNull(result, TestContext.TestName);
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
