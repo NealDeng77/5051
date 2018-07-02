@@ -106,6 +106,23 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_SchoolDismissalSettings_Get_Update_Invalid_Id_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new SchoolDismissalSettingsController();
+            string id = null;
+
+            // Act
+            var result = (ViewResult)controller.Update(id);
+            var resultModel = (SchoolDismissalSettingsModel)result.Model;
+
+            var expect = SchoolDismissalSettingsBackend.Instance.GetDefault();
+
+            // Assert
+            Assert.AreEqual(expect.Id, resultModel.Id, TestContext.TestName);
+        }
         #endregion GetUpdateRegion
 
         #region PostUpdateRegion
