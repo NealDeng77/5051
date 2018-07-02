@@ -411,6 +411,7 @@
     <Content Include="Views\KioskSettings\Read.cshtml" />
     <Content Include="Views\KioskSettings\Update.cshtml" />
     <Content Include="Views\Kiosk\Login.cshtml" />
+    <Content Include="Views\Admin\_StudentReportTablePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
