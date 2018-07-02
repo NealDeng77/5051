@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
+using System;
 
 namespace _5051.Controllers
 {
@@ -42,9 +43,29 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult StudentReport(string id = null)
         {
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
-            return View();
+            DateTime dateStart = new DateTime();
+            DateTime dateEnd = new DateTime();
+
+            //to demo, generate a report in this range
+            dateStart = DateTime.Parse("6/1/2018");
+            dateEnd = DateTime.Parse("6/26/2018");
+
+            var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent, dateStart, dateEnd);
+            // Not possible for Null return,
+            //if (myReturn == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
+
+            return View(myReturn);
         }
+    }
 
         /// <summary>
         /// Attendance Editing
