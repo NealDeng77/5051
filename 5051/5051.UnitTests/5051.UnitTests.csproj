@@ -71,6 +71,7 @@
     <Compile Include="Models\Enums\CheckInStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\AttendanceStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\DataSourceDataSetEnumUnitTests.cs" />
+    <Compile Include="Models\Enums\ShopInventoryCategoryEnumUnitTests.cs" />
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnumUnitTests.cs" />
     <Compile Include="Models\Enums\DataSourceEnumUnitTests.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
