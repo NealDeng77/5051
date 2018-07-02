@@ -95,8 +95,10 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Create() as ViewResult;
-
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.AreNotEqual(null, resultShopInventoryModel.Id, TestContext.TestName);
@@ -109,7 +111,6 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopInventoryController controller = new ShopInventoryController();
-
             ShopInventoryModel data = new ShopInventoryModel();
 
             // Make ModelState Invalid
@@ -117,6 +118,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -133,6 +137,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller. Create(data);
 
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -147,8 +154,10 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
-
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
@@ -165,7 +174,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Create(data);
             var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
 
-            // Reset StudentBackend
+            // Reset ShopInventoryBackend
             ShopInventoryBackend.Instance.Reset();
 
             // Assert
@@ -184,6 +193,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Update() as ViewResult;
 
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(null, result.Model, TestContext.TestName);
         }
@@ -201,14 +213,12 @@ namespace _5051.Tests.Controllers
 
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
 
-            // Reset StudentBackend
+            // Reset ShopInventoryBackend
             ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
         }
-
-
         #endregion UpdateRegion
 
         #region UpdatePostRegion
@@ -217,7 +227,6 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopInventoryController controller = new ShopInventoryController();
-
             ShopInventoryModel data = new ShopInventoryModel();
 
             // Make ModelState Invalid
@@ -225,6 +234,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -241,6 +253,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Update(data);
 
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -255,8 +270,10 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
-
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
@@ -273,7 +290,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Update(data);
             var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
 
-            // Reset StudentBackend
+            // Reset ShopInventoryBackend
             ShopInventoryBackend.Instance.Reset();
 
             // Assert
@@ -292,6 +309,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Delete() as ViewResult;
 
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(null, result.Model, TestContext.TestName);
         }
@@ -306,16 +326,14 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
-
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
 
-            // Reset StudentBackend
+            // Reset ShopInventoryBackend
             ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultShopInventoryModel, TestContext.TestName);
         }
-
         #endregion DeleteRegion
 
         #region DeletePostRegion
@@ -324,7 +342,6 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopInventoryController controller = new ShopInventoryController();
-
             ShopInventoryModel data = new ShopInventoryModel();
 
             // Make ModelState Invalid
@@ -332,6 +349,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -348,6 +368,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Delete(data);
 
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -362,8 +385,10 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
-
             var resultShopInventoryModel = result.Model as ShopInventoryModel;
+
+            // Reset ShopInventoryBackend
+            ShopInventoryBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultShopInventoryModel.Description, TestContext.TestName);
@@ -380,7 +405,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Delete(data);
             var resultShopInventoryModel = ShopInventoryBackend.Instance.Create(data);
 
-            // Reset StudentBackend
+            // Reset ShopInventoryBackend
             ShopInventoryBackend.Instance.Reset();
 
             // Assert
