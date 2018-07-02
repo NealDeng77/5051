@@ -1,17 +1,17 @@
 ﻿namespace _5051.Models
 {
     /// <summary>
-    /// The Mock Status
+    /// The Type of Data running.
     /// </summary>
-    public enum DataSourceEnum
+    public enum DataSourceDataSetEnum
     {
         // Not specified
-        Unknown = 0,
+        Default = 0,
 
         // Mock Dataset
-        Mock = 1,
+        Demo = 1,
 
         // SQL Dataset
-        SQL = 2
+        UnitTest = 2
     }
 }

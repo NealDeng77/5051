@@ -231,6 +231,7 @@
     <Compile Include="Models\Enums\AttendanceStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
+    <Compile Include="Models\Enums\DataSourceDataSetEnum.cs" />
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnum.cs" />
     <Compile Include="Models\Enums\ShopInventoryCategoryEnum.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnum.cs" />
