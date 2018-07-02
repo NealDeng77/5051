@@ -93,7 +93,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_SchoolDismissalSettings_Get_Update_Invalid_Id_Shoudl_Return_Error_Page()
+        public void Controller_SchoolDismissalSettings_Get_Update_Invalid_Id_Should_Return_Error_Page()
         {
             // Arrange
             var controller = new SchoolDismissalSettingsController();
