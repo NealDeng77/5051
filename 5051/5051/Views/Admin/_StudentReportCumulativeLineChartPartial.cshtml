@@ -1,1 +1,58 @@
-﻿
+﻿@model _5051.Models.StudentReportViewModel
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<div class="row justify-content-lg-center">
+    <canvas id="accumulativeChart" style="width: 100%"></canvas>
+    <script>
+        var ctx = document.getElementById("accumulativeChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.Date.ToString("dd")).ToArray())],
+
+                datasets: [{
+                    label: 'Attended',
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                    ],
+                    data: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.TotalHours.TotalMinutes).ToArray())],
+
+                    borderWidth: 1
+                }, {
+                    label: 'Expected',
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    data: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.TotalHoursExpected.TotalMinutes).ToArray())],
+
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 24,
+                    text: 'Cumulative Attended Hours'
+                },
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: '# of Cummulative Hours'
+                        }
+                    }]
+                },
+            }
+        });
+
+    </script>
+</div>

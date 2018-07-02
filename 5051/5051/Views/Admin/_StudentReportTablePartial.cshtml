@@ -1,1 +1,41 @@
-﻿
+﻿@model _5051.Models.StudentReportViewModel
+<h3>All the data used to generate this report</h3>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>In</th>
+                <th>Out</th>
+                <th>Attended</th>
+                <th>Expected</th>
+                <th>Percentage Attended</th>
+                <th>Total Attended</th>
+                <th>Total Expected</th>
+                <th>AttendanceStatus</th>
+                <th>CheckInStatus</th>
+                <th>CheckOutStatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.AttendanceList)
+                {
+                    <tr>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.TimeIn.ToString("hh:mm")</td>
+                        <td>@item.TimeOut.ToString("hh:mm")</td>
+                        <td>@string.Format("{0:%h}h {0:%m}m", item.HoursAttended)</td>
+                        <td>@string.Format("{0:%h}h {0:%m}m", item.HoursExpected)</td>
+                        <td>@item.PercentAttended</td>
+                        <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHours)</td>
+                        <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHoursExpected)</td>
+                        <td>@item.AttendanceStatus.ToString()</td>
+                        <td>@item.CheckInStatus.ToString()</td>
+                        <td>@item.CheckOutStatus.ToString()</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

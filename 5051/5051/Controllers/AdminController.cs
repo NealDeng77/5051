@@ -65,7 +65,7 @@ namespace _5051.Controllers
 
             return View(myReturn);
         }
-    }
+    
 
         /// <summary>
         /// Attendance Editing
