@@ -412,6 +412,7 @@
     <Content Include="Views\KioskSettings\Update.cshtml" />
     <Content Include="Views\Kiosk\Login.cshtml" />
     <Content Include="Views\Admin\_StudentReportTablePartial.cshtml" />
+    <Content Include="Views\Admin\_StudentReportCalendarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
