@@ -69,6 +69,7 @@
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\CheckInStatusEnumUnitTests.cs" />
+    <Compile Include="Models\Enums\AttendanceStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryModelUnitTests.cs" />
