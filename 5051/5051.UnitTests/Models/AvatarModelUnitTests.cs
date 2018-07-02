@@ -66,6 +66,8 @@ namespace _5051.UnitTests.Models
 
         #endregion Instantiate
 
+        #region Update
+
         [TestMethod]
         public void Models_AvatarModel_Update_With_Invalid_Data_Should_Fail()
         {
@@ -104,8 +106,6 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
-
-        #region Update
 
         #endregion Update
     }
