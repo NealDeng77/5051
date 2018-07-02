@@ -413,6 +413,7 @@
     <Content Include="Views\Kiosk\Login.cshtml" />
     <Content Include="Views\Admin\_StudentReportTablePartial.cshtml" />
     <Content Include="Views\Admin\_StudentReportCalendarPartial.cshtml" />
+    <Content Include="Views\Admin\_StudentReportCumulativeLineChartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
