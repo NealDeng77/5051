@@ -57,15 +57,28 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Admin_Student_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            string id = StudentBackend.Instance.GetDefault().Id; 
+
+            // Act
+            ViewResult result = controller.StudentReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
         [TestMethod]
         public void Controller_Admin_Student_Report_Incorrect_Id_Should_Return_Error_Page()
         {
             // Arrange
             AdminController controller = new AdminController();
-
+            string id = "bogus"; 
             // Act
-            var result = (RedirectToRouteResult)controller.StudentReport(""); 
+            var result = (RedirectToRouteResult)controller.StudentReport(id); 
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
