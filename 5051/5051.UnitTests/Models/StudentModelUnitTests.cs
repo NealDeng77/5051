@@ -110,6 +110,7 @@ namespace _5051.UnitTests.Models
             test.Status = StudentStatusEnum.Hold;
             test.Tokens = 1000;
             test.ExperiencePoints = 1000;
+            test.EmotionCurrent = EmotionStatusEnum.Happy;
 
             test.AvatarId = "AvatarId";
             test.AvatarLevel = 10;
@@ -134,6 +135,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(test.Status, data.Status, "Status " + TestContext.TestName);
             Assert.AreEqual(test.Tokens, data.Tokens, "Tokens " + TestContext.TestName);
             Assert.AreEqual(test.ExperiencePoints, data.ExperiencePoints, "ExperiencePoints " + TestContext.TestName);
+            Assert.AreEqual(test.EmotionCurrent, data.EmotionCurrent, "EmotionCurrent " + TestContext.TestName);
             Assert.AreEqual(test.AvatarId, data.AvatarId, "AvatarId " + TestContext.TestName);
             Assert.AreEqual(test.AvatarLevel, data.AvatarLevel, "AvatarLevel " + TestContext.TestName);
             Assert.AreEqual(test.Attendance.Count, data.Attendance.Count, "Attendance " + TestContext.TestName);

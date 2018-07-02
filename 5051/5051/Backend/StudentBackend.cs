@@ -91,6 +91,25 @@ namespace _5051.Backend
             }
 
             var myReturn = DataSource.Read(id);
+
+            if (myReturn == null)
+            {
+                return null;
+            }
+
+            myReturn.EmotionCurrent = EmotionStatusEnum.Neutral;
+
+            if (myReturn.Attendance.Any())
+            {
+                // Set the current emotion, to the last check in status emotion
+                var temp = myReturn.Attendance.LastOrDefault(m => m.Status == StudentStatusEnum.In);
+
+                if (temp != null)
+                {
+                    myReturn.EmotionCurrent = temp.Emotion;
+                }
+            }
+
             return myReturn;
         }
 
@@ -168,7 +187,8 @@ namespace _5051.Backend
             var Temp = new AttendanceModel
             {
                 In = DateTime.UtcNow,
-                Status = data.Status
+                Status = data.Status,
+                Emotion = data.EmotionCurrent
             };
 
             data.Attendance.Add(Temp);

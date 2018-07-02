@@ -193,6 +193,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Buy(data);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
         }

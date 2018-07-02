@@ -133,7 +133,10 @@ namespace _5051.Tests.Controllers
             var data = new StudentDisplayViewModel(student);
 
             // Act
-            var result = (RedirectToRouteResult)controller.Login(data);        
+            var result = (RedirectToRouteResult)controller.Login(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
