@@ -4,11 +4,13 @@
     ViewBag.Title = "Reports";
 }
 
+<br />
 <h2>Reports</h2>
 
 <h3>Click on the Student to view their individual report</h3>
 <br />
 
+<div class="row">
 @{
     if (Model.StudentList == null || !Model.StudentList.Any())
     {
@@ -35,4 +37,5 @@
         }
     }
 }
+</div>
 
