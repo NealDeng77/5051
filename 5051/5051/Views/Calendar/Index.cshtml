@@ -9,13 +9,13 @@
 <br />
 <h5>Highlighted days are school days</h5>
 <h5>Early dismissal are blue</h5>
-<h4>Modified days are Green</h4>
+<h5>Modified days are Green</h5>
 <br />
 <h5>Early dismissal every Wendsday</h5>
 
 
-<h4>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h4>
-<h4>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h4>
+<h5>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h5>
+<h5>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h5>
 
 <br />
 <br />
@@ -117,11 +117,11 @@
                                     // Output this date
                                     <div>
                                         @{
-                                            var buttonClass = "btn btn-sm active btn-default";
+                                            var buttonClass = "btn btn-sm active btn-light";
 
                                             if (dayItem.SchoolDay == false)
                                             {
-                                                buttonClass = "btn btn-sm btn-default";
+                                                buttonClass = "btn btn-sm btn-outline-secondary";
                                             }
 
                                             else

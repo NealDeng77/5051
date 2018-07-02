@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <br />
+
             if (Model.SchoolDay)
             {
                 using (Html.BeginForm())
@@ -116,9 +116,9 @@
                 <br />
                 <br />
                 <div class="row">
-                    <div class="container text-center">
+                    <div class="col-sm-3 text-center">
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-6 text-left">
                         @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
                         @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
                         @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
