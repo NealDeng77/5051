@@ -73,6 +73,11 @@ namespace _5051.Models
         public string Password { get; set; }
 
         /// <summary>
+        /// The current emotion status of the student
+        /// </summary>
+        public EmotionStatusEnum EmotionCurrent { get; set; }
+
+        /// <summary>
         /// The inventory list for the student
         /// </summary>
         public List<ShopInventoryModel> Inventory { get; set; }
@@ -95,6 +100,7 @@ namespace _5051.Models
             Password = string.Empty;
             Inventory = new List<ShopInventoryModel>();
             Attendance = new List<AttendanceModel>();
+            EmotionCurrent = EmotionStatusEnum.Neutral;
         }
 
         /// <summary>
@@ -141,6 +147,7 @@ namespace _5051.Models
             Password = data.Password;
             Inventory = data.Inventory;
             Attendance = data.Attendance;
+            EmotionCurrent = data.EmotionCurrent;
         }
 
         /// <summary>
@@ -164,6 +171,7 @@ namespace _5051.Models
             Password = data.Password;
             Inventory = data.Inventory;
             Attendance = data.Attendance;
+            EmotionCurrent = data.EmotionCurrent;
 
             return true;
         }

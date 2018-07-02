@@ -220,6 +220,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Update(id);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
@@ -339,6 +342,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Delete(id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);

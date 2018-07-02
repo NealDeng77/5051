@@ -48,6 +48,11 @@ namespace _5051.Models
         /// </summary>
         public CheckOutStatusEnum CheckOutStatus { get; set; }
 
+        /// <summary>
+        /// The emotion state
+        /// </summary>
+        public EmotionStatusEnum Emotion { get; set; }
+
         public AttendanceModel()
         {
             AttendanceStatus = AttendanceStatusEnum.Present;
@@ -55,6 +60,7 @@ namespace _5051.Models
             Status = StudentStatusEnum.In;
             CheckInStatus = CheckInStatusEnum.ArriveOnTime;
             CheckOutStatus = CheckOutStatusEnum.Unknown;
+            Emotion = EmotionStatusEnum.Neutral;
         }
     }
 }

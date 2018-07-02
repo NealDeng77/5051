@@ -170,6 +170,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.ConfirmLogin(id) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -235,6 +238,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.ConfirmLogout(id) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
