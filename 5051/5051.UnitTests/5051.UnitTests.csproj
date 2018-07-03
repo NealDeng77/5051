@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="Models\SetPasswordViewModelUnitTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
