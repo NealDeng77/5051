@@ -24,11 +24,6 @@ namespace _5051.UnitTests.Models
             var expectCode = "Good Code";
 
             //act
-            var resultEmail = test.Email;
-            var resultPassword = test.Password;
-            var resultConfirmPassword = test.ConfirmPassword;
-            var resultCode = test.Code;
-
             test.Email = expectEmail;
             test.Password = expectPassword;
             test.ConfirmPassword = expectConfirmPassword;
@@ -40,11 +35,6 @@ namespace _5051.UnitTests.Models
             var setResultCode = test.Code;
 
             //assert
-            Assert.IsNull(resultEmail, TestContext.TestName);
-            Assert.IsNull(resultPassword, TestContext.TestName);
-            Assert.IsNull(resultConfirmPassword, TestContext.TestName);
-            Assert.IsNull(resultCode, TestContext.TestName);
-
             Assert.AreEqual(expectEmail, setResultEmail, TestContext.TestName);
             Assert.AreEqual(expectPassword, setResultPassword, TestContext.TestName);
             Assert.AreEqual(expectConfirmPassword, setResultConfirmPassword, TestContext.TestName);

@@ -24,10 +24,6 @@ namespace _5051.UnitTests.Models
             var expectConfirmPassword = expectPassword;
 
             //act
-            var resultEmail = test.Email;
-            var resultPassword = test.Password;
-            var resultConfirmPassword = test.ConfirmPassword;
-
             test.Email = expectEmail;
             test.Password = expectPassword;
             test.ConfirmPassword = expectConfirmPassword;
@@ -37,10 +33,6 @@ namespace _5051.UnitTests.Models
             var setResultConfirmPassword = test.ConfirmPassword;
 
             //assert
-            Assert.IsNull(resultEmail, TestContext.TestName);
-            Assert.IsNull(resultPassword, TestContext.TestName);
-            Assert.IsNull(resultConfirmPassword, TestContext.TestName);
-
             Assert.AreEqual(expectEmail, setResultEmail, TestContext.TestName);
             Assert.AreEqual(expectPassword, setResultPassword, TestContext.TestName);
             Assert.AreEqual(expectConfirmPassword, setResultConfirmPassword, TestContext.TestName);

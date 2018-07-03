@@ -23,9 +23,6 @@ namespace _5051.UnitTests.Models
             var expectConfirm = expectNew;
 
             //act
-            var resultNew = test.NewPassword;
-            var resultConfirm = test.ConfirmPassword;
-
             test.NewPassword = expectNew;
             test.ConfirmPassword = expectConfirm;
 
@@ -33,9 +30,6 @@ namespace _5051.UnitTests.Models
             var setResultConfirm = test.ConfirmPassword;
 
             //assert
-            Assert.IsNull(resultNew, TestContext.TestName);
-            Assert.IsNull(resultConfirm, TestContext.TestName);
-
             Assert.AreEqual(expectNew, setResultNew, TestContext.TestName);
             Assert.AreEqual(expectConfirm, setResultConfirm, TestContext.TestName);
         }

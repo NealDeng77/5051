@@ -22,12 +22,10 @@ namespace _5051.UnitTests.Models
             var expect = "1 916";
 
             //act
-            var result = test.Code;
             test.Code = expect;
             var setResult = test.Code;
 
             //assert
-            Assert.IsNull(result, TestContext.TestName);
             Assert.AreEqual(expect, setResult, TestContext.TestName);
         }
         #endregion code
@@ -41,12 +39,10 @@ namespace _5051.UnitTests.Models
             var expect = "742 8100";
 
             //act
-            var result = test.PhoneNumber;
             test.PhoneNumber = expect;
             var setResult = test.PhoneNumber;
 
             //assert
-            Assert.IsNull(result, TestContext.TestName);
             Assert.AreEqual(expect, setResult, TestContext.TestName);
         }
         #endregion PhoneNumber

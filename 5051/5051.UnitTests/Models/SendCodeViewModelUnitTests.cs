@@ -27,11 +27,6 @@ namespace _5051.UnitTests.Models
             var expectRememberme = true;
 
             //act
-            var resultSelectedProvider = test.SelectedProvider;
-            var resultProviders = test.Providers;
-            var resultReturnUrl = test.ReturnUrl;
-            var resultRememberme = test.RememberMe;
-
             test.SelectedProvider = expectSelectedProvider;
             test.Providers = expectProviders;
             test.ReturnUrl = expectReturnUrl;
@@ -43,11 +38,6 @@ namespace _5051.UnitTests.Models
             var setResultRememberMe = test.RememberMe;
 
             //assert
-            Assert.IsNull(resultSelectedProvider, TestContext.TestName);
-            Assert.IsNull(resultProviders, TestContext.TestName);
-            Assert.IsNull(resultReturnUrl, TestContext.TestName);
-            Assert.IsFalse(resultRememberme, TestContext.TestName);
-
             Assert.AreEqual(expectSelectedProvider, setResultSelectedProvider, TestContext.TestName);
             Assert.AreEqual(expectProviders, setResultProviders, TestContext.TestName);
             Assert.AreEqual(expectReturnUrl, setResultReurnUrl, TestContext.TestName);

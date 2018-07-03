@@ -22,13 +22,10 @@ namespace _5051.UnitTests.Models
             var expect = "911";
 
             //act
-            var result = test.Number;
             test.Number = expect;
             var setResult = test.Number;
 
             //assert
-            Assert.IsNull(result, TestContext.TestName);
-            Assert.IsNotNull(setResult, TestContext.TestName);
             Assert.AreEqual(expect, setResult, TestContext.TestName);
         }
 
