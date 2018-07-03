@@ -68,6 +68,7 @@
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
+    <Compile Include="Models\ConfigureTwoFactorViewModelUnitTests.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\CheckInStatusEnumUnitTests.cs" />
     <Compile Include="Models\Enums\AttendanceStatusEnumUnitTests.cs" />
