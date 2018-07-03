@@ -92,10 +92,13 @@
     <Compile Include="Models\StudentDisplayViewModelUnitTests.cs" />
     <Compile Include="Models\StudentViewModelUnitTests.cs" />
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
+    <Compile Include="Models\VerifyCodeViewModelUnitTests.cs" />
+    <Compile Include="Models\VerifyPhoneNumberViewModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="Models\SetPasswordViewModelUnitTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
