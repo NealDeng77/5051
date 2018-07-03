@@ -160,10 +160,11 @@ namespace _5051.Backend
         private void DataSetDemo()
         {
             DataSetClear();
-            Create(new StudentModel("Mike", null));
-            Create(new StudentModel("Doug", null));
+            Create(new StudentModel("Mike", null));  
+            Create(new StudentModel("Doug", null));  
             Create(new StudentModel("Jea", null));
             Create(new StudentModel("Sue", null));
+            Create(new StudentModel("Stan", null));
             //attendance test data
             var myStudent = Backend.StudentBackend.Instance.GetDefault();
 
