@@ -28,14 +28,10 @@ namespace _5051.UnitTests.Models
             test.Password = expectPassword;
             test.ConfirmPassword = expectConfirmPassword;
 
-            var setResultEmail = test.Email;
-            var setResultPassword = test.Password;
-            var setResultConfirmPassword = test.ConfirmPassword;
-
             //assert
-            Assert.AreEqual(expectEmail, setResultEmail, TestContext.TestName);
-            Assert.AreEqual(expectPassword, setResultPassword, TestContext.TestName);
-            Assert.AreEqual(expectConfirmPassword, setResultConfirmPassword, TestContext.TestName);
+            Assert.AreEqual(expectEmail, test.Email, TestContext.TestName);
+            Assert.AreEqual(expectPassword, test.Password, TestContext.TestName);
+            Assert.AreEqual(expectConfirmPassword, test.ConfirmPassword, TestContext.TestName);
         }
         #endregion Instantiate
     }

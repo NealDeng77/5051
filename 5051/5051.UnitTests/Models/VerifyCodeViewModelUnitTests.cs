@@ -32,18 +32,12 @@ namespace _5051.UnitTests.Models
             test.RememberBrowser = expectRememberBrower;
             test.RememberMe = expectRememberMe;
 
-            var setResultProvider = test.Provider;
-            var setResultCode = test.Code;
-            var setResultReturnUrl = test.ReturnUrl;
-            var setResultRememberBrowser = test.RememberBrowser;
-            var setResultRememberMe = test.RememberMe;
-
             //assert
-            Assert.AreEqual(expectProvider, setResultProvider, TestContext.TestName);
-            Assert.AreEqual(expectCode, setResultCode, TestContext.TestName);
-            Assert.AreEqual(expectReturnUrl, setResultReturnUrl, TestContext.TestName);
-            Assert.AreEqual(expectRememberBrower, setResultRememberBrowser, TestContext.TestName);
-            Assert.AreEqual(expectRememberMe, setResultRememberMe, TestContext.TestName);
+            Assert.AreEqual(expectProvider, test.Provider, TestContext.TestName);
+            Assert.AreEqual(expectCode, test.Code, TestContext.TestName);
+            Assert.AreEqual(expectReturnUrl, test.ReturnUrl, TestContext.TestName);
+            Assert.AreEqual(expectRememberBrower, test.RememberBrowser, TestContext.TestName);
+            Assert.AreEqual(expectRememberMe, test.RememberMe, TestContext.TestName);
         }
         #endregion Instantiate
 

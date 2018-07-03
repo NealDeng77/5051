@@ -23,10 +23,9 @@ namespace _5051.UnitTests.Models
 
             //act
             test.Code = expect;
-            var setResult = test.Code;
 
             //assert
-            Assert.AreEqual(expect, setResult, TestContext.TestName);
+            Assert.AreEqual(expect, test.Code, TestContext.TestName);
         }
         #endregion code
 
@@ -40,10 +39,9 @@ namespace _5051.UnitTests.Models
 
             //act
             test.PhoneNumber = expect;
-            var setResult = test.PhoneNumber;
 
             //assert
-            Assert.AreEqual(expect, setResult, TestContext.TestName);
+            Assert.AreEqual(expect, test.PhoneNumber, TestContext.TestName);
         }
         #endregion PhoneNumber
 

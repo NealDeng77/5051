@@ -23,10 +23,9 @@ namespace _5051.UnitTests.Models
 
             //act
             test.Number = expect;
-            var setResult = test.Number;
 
             //assert
-            Assert.AreEqual(expect, setResult, TestContext.TestName);
+            Assert.AreEqual(expect, test.Number, TestContext.TestName);
         }
 
         #endregion Instantiate

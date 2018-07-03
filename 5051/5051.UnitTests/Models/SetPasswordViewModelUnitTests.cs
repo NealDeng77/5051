@@ -26,12 +26,9 @@ namespace _5051.UnitTests.Models
             test.NewPassword = expectNew;
             test.ConfirmPassword = expectConfirm;
 
-            var setResultNew = test.NewPassword;
-            var setResultConfirm = test.ConfirmPassword;
-
             //assert
-            Assert.AreEqual(expectNew, setResultNew, TestContext.TestName);
-            Assert.AreEqual(expectConfirm, setResultConfirm, TestContext.TestName);
+            Assert.AreEqual(expectNew, test.NewPassword, TestContext.TestName);
+            Assert.AreEqual(expectConfirm, test.ConfirmPassword, TestContext.TestName);
         }
         #endregion Instantiate
     }

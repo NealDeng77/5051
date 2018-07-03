@@ -32,16 +32,11 @@ namespace _5051.UnitTests.Models
             test.ReturnUrl = expectReturnUrl;
             test.RememberMe = expectRememberme;
 
-            var setResultSelectedProvider = test.SelectedProvider;
-            var setResultProviders = test.Providers;
-            var setResultReurnUrl = test.ReturnUrl;
-            var setResultRememberMe = test.RememberMe;
-
             //assert
-            Assert.AreEqual(expectSelectedProvider, setResultSelectedProvider, TestContext.TestName);
-            Assert.AreEqual(expectProviders, setResultProviders, TestContext.TestName);
-            Assert.AreEqual(expectReturnUrl, setResultReurnUrl, TestContext.TestName);
-            Assert.AreEqual(expectRememberme, setResultRememberMe, TestContext.TestName);
+            Assert.AreEqual(expectSelectedProvider, test.SelectedProvider, TestContext.TestName);
+            Assert.AreEqual(expectProviders, test.Providers, TestContext.TestName);
+            Assert.AreEqual(expectReturnUrl, test.ReturnUrl, TestContext.TestName);
+            Assert.AreEqual(expectRememberme, test.RememberMe, TestContext.TestName);
         }
         #endregion Instantiate
     }

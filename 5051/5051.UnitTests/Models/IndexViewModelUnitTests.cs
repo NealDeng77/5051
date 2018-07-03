@@ -33,18 +33,12 @@ namespace _5051.UnitTests.Models
             test.TwoFactor = expectTwoFactor;
             test.BrowserRemembered = expectBrowserRemembered;
 
-            var setResultHasPassword = test.HasPassword;
-            var setResultLogins = test.Logins;
-            var setResultPhoneNumber = test.PhoneNumber;
-            var setResultTwoFactor = test.TwoFactor;
-            var setResultBrowserRemembered = test.BrowserRemembered;
-
             //assert
-            Assert.AreEqual(expectHasPassword, setResultHasPassword, TestContext.TestName);
-            Assert.AreEqual(expectLogins, setResultLogins, TestContext.TestName);
-            Assert.AreEqual(expectPhoneNumber, setResultPhoneNumber, TestContext.TestName);
-            Assert.AreEqual(expectTwoFactor, setResultTwoFactor, TestContext.TestName);
-            Assert.AreEqual(expectBrowserRemembered, setResultBrowserRemembered, TestContext.TestName);
+            Assert.AreEqual(expectHasPassword, test.HasPassword, TestContext.TestName);
+            Assert.AreEqual(expectLogins, test.Logins, TestContext.TestName);
+            Assert.AreEqual(expectPhoneNumber, test.PhoneNumber, TestContext.TestName);
+            Assert.AreEqual(expectTwoFactor, test.TwoFactor, TestContext.TestName);
+            Assert.AreEqual(expectBrowserRemembered, test.BrowserRemembered, TestContext.TestName);
         }
     }
 }
