@@ -231,13 +231,11 @@
 
         if (status == "LogIn") {
             $("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
-            $("#CenterStatus").attr("text", "LogIn");
-            $("#CenterStatus").attr("innerhtml", "LogIn");
-
+            $("#CenterStatus").html(status);
         }
         else {
             $("#CenterStatus").attr("href", "/kiosk/SetLogOut/" + Id);
-            $("#CenterStatus").attr("text", "LogOut");
+            $("#CenterStatus").html(status);
         }
     }
 </script>
