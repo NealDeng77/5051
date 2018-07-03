@@ -141,9 +141,9 @@
         else
         {
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
 
-                        <h2>Logged In</h2>
+                    <h2>Logged In</h2>
                     <div class="row">
                         @{
                             // List out the Logged IN Students, then the Logged Out students
@@ -152,37 +152,11 @@
                             {
                                 if (item.Status == _5051.Models.StudentStatusEnum.In)
                                 {
+                                    var srcData = "/Content/img/"+item.AvatarUri;
                                     <div class="col-sm-2 NoPadding">
                                         <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                            <a id="@item.Id" href="~/Kiosk/SetLogOut/@item.Id">
-                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                            </a>
-                                            <br />
-                                            <span class="text-center">
-                                                @item.Name
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                        </div>
-                </div>
-
-                <div class="col-sm-6">
-                    
-                        <h2>Logged Out</h2>
-                        <div class="row">
-                        @{
-                            // Logged Out first
-                            foreach (var item in Model.StudentList)
-                            {
-                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                {
-                                    <div class="col-sm-2 NoPadding">
-                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                            <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
-                                                <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                            <a id="@item.Id" >
+                                                <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id','LogIn')"/>
                                             </a>
                                             <br />
                                             <span class="text-center">
@@ -195,10 +169,76 @@
                         }
                     </div>
                 </div>
+
+
+                <div class="col-sm-4">
+                    <div style="background-color:white;height:100px">
+                        <img id="CenterAvatar" src="" class="AvatarSize1" />
+                        <br />
+                        <a id="CenterStatus" href=""><span id="CenterLabel"></span> </a><br />
+
+                    </div>
+                    @{ 
+                        // Put the center login box here
+                        // Have the box be just a blank box
+                        // Then when someone clicks a log in button
+                        // Update the picture in the box to be the avatar
+                        // And show a div that has a LogIn button
+
+                        // If it is for logout, then show a div for a logout button
+                        // Do that but having the javascript show or hide the div
+
+                        // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
+                        // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
+                    }
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <h2>Logged Out</h2>
+                        <div class="row">
+                            @{
+                                // Logged Out first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                    {
+                                        <div class="col-sm-2 NoPadding">
+                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                                <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
+                                                    <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
+                                                </a>
+                                                <br />
+                                                <span class="text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+
             </div>
+
+<script>
+    function UpdateCenter(path,Id,status) {
+        $("#CenterAvatar").attr("src", path);
+
+        if (status == "LogIn") {
+            $("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
+            $("#CenterStatus").attr("text", "LogIn");
+            $("#CenterStatus").attr("innerhtml", "LogIn");
+
+        }
+        else {
+            $("#CenterStatus").attr("href", "/kiosk/SetLogOut/" + Id);
+            $("#CenterStatus").attr("text", "LogOut");
         }
     }
-
-</div>
-
+</script>
 

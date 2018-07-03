@@ -10,6 +10,28 @@
     <link rel="icon" href="~/Content/img/avatar8.png">
 </head>
 
+@{
+    var background = "IncludeBackgroundImageHome";
+
+    var routeController = Url.RequestContext.RouteData.Values["controller"].ToString();
+
+    switch (routeController)
+    {
+
+        case "Kiosk":
+            background = "IncludeBackgroundImageSunset";
+            break;
+
+        case "Admin":
+            background = "IncludeBackgroundImageNight";
+            break;
+
+        default:
+            background = "IncludeBackgroundImageDay";
+            break;
+    }
+}
+
 <body>
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,27 +59,27 @@
         </div>
     </nav>
 
-    <div class="container body-content">
-        @RenderBody()
+    <div class="@background">
+        <div class="container body-content fill-height">
+            @RenderBody()
+        </div>
     </div>
 
-    <div class="container body-content">
-        <footer>
-            <div class="footer fixed-bottom">
-                <div class="FooterBar body-content">
-                    <div class="row">
-                        <div class="footer-copyright py-1">
-                            &nbsp;&nbsp;&copy;@DateTime.Now.Year - Avatar Attendance, all rights reserved &nbsp;&nbsp;
-                        </div>
-                        @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                        @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                        @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+    <footer>
+        <div class="footer fixed-bottom">
+            <div class="FooterBar body-content">
+                <div class="row">
+                    <div class="footer-copyright py-1">
+                        &nbsp;&nbsp;&copy;@DateTime.Now.Year - Avatar Attendance, all rights reserved &nbsp;&nbsp;
                     </div>
+                    @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
                 </div>
-
             </div>
-        </footer>
-    </div>
+
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

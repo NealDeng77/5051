@@ -144,3 +144,56 @@ textarea {
     height:450px; 
     min-width:380px
 }
+
+
+/*
+    New Styles for the Design
+*/
+
+.body,html{
+    height:100%;
+    margin:0;
+}
+
+.fill-height{
+    min-height:100%;
+    height:auto !important;
+    height:100%;
+}
+
+.IncludeBackgroundImageDay{
+    background-image:url("/content/img/BackgroundDayTime.png");
+    height:100%;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.IncludeBackgroundImageNight{
+    background-image: url("/content/img/BackgroundNitetime.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.IncludeBackgroundImageSunset {
+    background-image: url("/content/img/BackgroundSunset.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.FontName{
+
+}
+
+.FontSize1{
+    font-size:14px;
+}
+
+.FontColorBold{
+    font-weight:bold;
+}
