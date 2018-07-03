@@ -76,6 +76,7 @@
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnumUnitTests.cs" />
     <Compile Include="Models\Enums\DataSourceEnumUnitTests.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
+    <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryModelUnitTests.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModelUnitTests.cs" />
