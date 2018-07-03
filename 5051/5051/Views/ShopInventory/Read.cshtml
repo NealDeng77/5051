@@ -5,16 +5,17 @@
 }
 
 <div class="container">
-    <div class="row">
 
         @{
             if (Model == null)
             {
+                <br />
                 <p>No Shop Inventory</p>
             }
             else
             {
-                <div class="row">
+                
+                    <br />
                     <h2>Shop Inventory Item</h2>
                     <br />
                     <br />
@@ -91,8 +92,8 @@
                             @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
-                </div>
+
             }
         }
-    </div>
+
 </div>
