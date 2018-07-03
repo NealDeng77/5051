@@ -4,6 +4,7 @@
 
     if (Model == null || Model.Student == null || Model.ShopInventoryCategoryList == null || !Model.ShopInventoryCategoryList.Any())
     {
+        <br />
         <h2>No Data to show</h2>
     }
 
@@ -47,8 +48,9 @@
             }
         </ul>
 
+        
         <div class="tab-content">
-            <div class="row text-center">
+
                 @{
                     TabCount = 0;
                     foreach (var CurrentList in Model.ShopInventoryCategoryList)
@@ -65,13 +67,15 @@
                             ActiveTab = "active";
                         }
 
-                        <div id="@CurrentList.Category" class="tab-pane fade in @ActiveTab">
+                        <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
                             <br />
                             <h3>@CurrentList.Category</h3>
+
                             @{
                                 // If no items, the skip
                                 if (!CurrentList.ShopInventoryList.Any())
                                 {
+                                    <br />
                                     <div>No Items</div>
                                     continue;
                                 }
@@ -122,6 +126,6 @@
                                 }
                 }
             </div>
-        </div>
-                                }
-}
+
+            }
+            }
