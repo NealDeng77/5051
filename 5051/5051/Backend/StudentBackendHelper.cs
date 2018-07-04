@@ -4,7 +4,7 @@ using _5051.Models;
 namespace _5051.Backend
 {
     /// <summary>
-    /// System wide Global variables
+    /// StudentBackend helper functions
     /// </summary>
     public class StudentBackendHelper
     {
@@ -34,11 +34,7 @@ namespace _5051.Backend
                 return instance;
             }
         }
-        //public StudentBackendHelper()
-        //{
-        //    CreateStudent();
-        //    CreateStudent();
-        //}
+
         /// <summary>
         /// Create demo student
         /// </summary>
