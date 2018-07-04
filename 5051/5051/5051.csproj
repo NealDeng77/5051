@@ -203,6 +203,7 @@
     <Compile Include="Backend\ShopInventoryDataSourceMock.cs" />
     <Compile Include="Backend\ShopInventoryInterface.cs" />
     <Compile Include="Backend\DataSourceBackend.cs" />
+    <Compile Include="Backend\StudentBackendHelper.cs" />
     <Compile Include="Backend\StudentInterface.cs" />
     <Compile Include="Backend\StudentDataSourceMock.cs" />
     <Compile Include="Backend\StudentBackend.cs" />
