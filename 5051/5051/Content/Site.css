@@ -150,7 +150,7 @@ textarea {
     New Styles for the Design
 */
 
-.body,html{
+body,html{
     height:100%;
     margin:0;
 }
