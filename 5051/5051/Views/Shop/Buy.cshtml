@@ -70,57 +70,58 @@
                         <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
                             <br />
                             <h3>@CurrentList.Category</h3>
-
-                            @{
-                                // If no items, the skip
-                                if (!CurrentList.ShopInventoryList.Any())
-                                {
-                                    <br />
-                                    <div>No Items</div>
-                                    continue;
-                                }
-
-                                //AvatarViewModel outputAvatar = new AvatarViewModel();
-                                foreach (var item in CurrentList.ShopInventoryList)
-                                {
-                                    using (Html.BeginForm())
+                            <div class="row">
+                                @{
+                                    // If no items, the skip
+                                    if (!CurrentList.ShopInventoryList.Any())
                                     {
-                                        @Html.Hidden("StudentId", Model.Student.Id);
-                                        @Html.Hidden("ItemId", item.Id);
+                                        <br />
+                                        <div>No Items</div>
+                                        continue;
+                                    }
 
-                                        var picturURI = "/Content/shop/" + item.Uri;
-
-                                        disabledOn = "";
-                                        BoxHover = "BoxWithHighlightHover";
-                                        DisplayText = "";
-
-                                        // Check if the user owns the item, if so disable it.
-                                        var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
-                                        if (ItemAlreadyExists)
+                                    //AvatarViewModel outputAvatar = new AvatarViewModel();
+                                    foreach (var item in CurrentList.ShopInventoryList)
+                                    {
+                                        using (Html.BeginForm())
                                         {
-                                            // Already own it.
-                                            disabledOn = "disabled";
-                                            BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
-                                            DisplayText = "Purchaged";
+                                            @Html.Hidden("StudentId", Model.Student.Id);
+                                            @Html.Hidden("ItemId", item.Id);
 
-                                        }
+                                            var picturURI = "/Content/shop/" + item.Uri;
 
-                                        <div class="col-sm-2">
-                                            <div class="@BoxHover">
-                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
-                                                <br />
-                                                <span class="text-center">
-                                                    @item.Name
+                                            disabledOn = "";
+                                            BoxHover = "BoxWithHighlightHover";
+                                            DisplayText = "";
+
+                                            // Check if the user owns the item, if so disable it.
+                                            var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
+                                            if (ItemAlreadyExists)
+                                            {
+                                                // Already own it.
+                                                disabledOn = "disabled";
+                                                BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                                DisplayText = "Purchaged";
+
+                                            }
+
+                                            <div class="col-sm-2">
+                                                <div class="@BoxHover">
+                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
                                                     <br />
-                                                    @item.Tokens
-                                                    <br />
-                                                    @DisplayText
-                                                </span>
+                                                    <span class="text-center">
+                                                        @item.Name
+                                                        <br />
+                                                        @item.Tokens
+                                                        <br />
+                                                        @DisplayText
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
                                 }
-                            }
+                            </div>
                         </div>
 
                                 }
