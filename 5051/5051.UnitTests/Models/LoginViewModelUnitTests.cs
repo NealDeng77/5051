@@ -19,17 +19,17 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var test = new LoginViewModel();
-            var eexpectEmail = "test@gmail.com";
+            var expectEmail = "test@gmail.com";
             var expectPassword = "passWORD23!";
             var expectRememberMe = true;
 
             //act
-            test.Email = eexpectEmail;
+            test.Email = expectEmail;
             test.Password = expectPassword;
             test.RememberMe = expectRememberMe;
 
             //assert
-            Assert.AreEqual(eexpectEmail, test.Email, TestContext.TestName);
+            Assert.AreEqual(expectEmail, test.Email, TestContext.TestName);
             Assert.AreEqual(expectPassword, test.Password, TestContext.TestName);
             Assert.AreEqual(expectRememberMe, test.RememberMe, TestContext.TestName);
         }

@@ -19,13 +19,13 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var test = new ForgotViewModel();
-            var eexpectEmail = "test@gmail.com";
+            var expectEmail = "test@gmail.com";
 
             //act
-            test.Email = eexpectEmail;
+            test.Email = expectEmail;
 
             //assert
-            Assert.AreEqual(eexpectEmail, test.Email, TestContext.TestName);
+            Assert.AreEqual(expectEmail, test.Email, TestContext.TestName);
         }
         #endregion Instantiate
     }
