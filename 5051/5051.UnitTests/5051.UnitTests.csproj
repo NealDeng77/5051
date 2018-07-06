@@ -80,6 +80,7 @@
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnumUnitTests.cs" />
     <Compile Include="Models\Enums\DataSourceEnumUnitTests.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
+    <Compile Include="Models\ForgotPasswordViewModelUnitTests.cs" />
     <Compile Include="Models\ForgotViewModelUnitTests.cs" />
     <Compile Include="Models\IndexViewModelUnitTests.cs" />
     <Compile Include="Models\LoginViewModelUnitTests.cs" />
