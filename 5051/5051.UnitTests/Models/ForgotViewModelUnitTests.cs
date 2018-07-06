@@ -15,7 +15,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_LoginViewModel_Default_Instantiate_Should_Pass()
+        public void Models_ForgotViewModel_Default_Instantiate_Should_Pass()
         {
             //arrange
             var test = new ForgotViewModel();
