@@ -81,6 +81,7 @@
     <Compile Include="Models\Enums\DataSourceEnumUnitTests.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnumUnitTests.cs" />
     <Compile Include="Models\IndexViewModelUnitTests.cs" />
+    <Compile Include="Models\LoginViewModelUnitTests.cs" />
     <Compile Include="Models\ManageLoginsViewModelUnitTests.cs" />
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
