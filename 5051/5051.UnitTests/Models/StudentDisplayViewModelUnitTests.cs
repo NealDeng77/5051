@@ -90,6 +90,38 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Default_Instantiate_Get_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var result = new StudentDisplayViewModel();
+
+            //act
+            var expectUri = result.AvatarUri;
+            var expectAvatarName = result.AvatarName;
+            var expectAvatarDesc = result.AvatarDescription;
+            var expectLastDateTime = result.LastDateTime;
+
+            // Assert
+            Assert.AreEqual(expectUri, result.AvatarUri, TestContext.TestName);
+            Assert.AreEqual(expectAvatarName, result.AvatarName, TestContext.TestName);
+            Assert.AreEqual(expectAvatarDesc, result.AvatarDescription, TestContext.TestName);
+            Assert.AreEqual(expectLastDateTime, result.LastDateTime, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Default_Instantiate_Set_LastDateTime_Should_Pass()
+        {
+            // Arrange
+            var result = new StudentDisplayViewModel();
+            var expectLastDateTime = DateTime.UtcNow;
+
+            //act
+            result.LastDateTime = expectLastDateTime;
+
+            // Assert
+            Assert.AreEqual(expectLastDateTime, result.LastDateTime, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
