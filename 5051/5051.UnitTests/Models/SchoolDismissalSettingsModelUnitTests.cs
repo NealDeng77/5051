@@ -81,6 +81,19 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(data.DayLast, result.DayLast, "DayLast"+ TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_SchoolDismissalSettingsModel_Default_Instantiate_Get_ID_Should_Pass()
+        {
+            //arrange
+            var result = new SchoolDismissalSettingsModel();
+            var expectID = "anIDString";
+
+            // Act
+            result.Id = expectID;
+
+            // Assert
+            Assert.AreEqual(expectID, result.Id, TestContext.TestName);
+        }
         #endregion Instantiate
 
         #region Update
