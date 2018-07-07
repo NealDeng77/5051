@@ -25,6 +25,25 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_StudentReportViewModel_Default_Instantiate_Get_Set_Data_Should_Pass()
+        {
+            //arrange
+            var result = new StudentReportViewModel();
+            var expectStudent = new StudentModel();
+            var expectDateStart = new DateTime();
+            var expectDateEnd = DateTime.UtcNow;
+
+            // Act
+            result.Student = expectStudent;
+            result.DateStart = expectDateStart;
+            result.DateEnd = expectDateEnd;
+
+            // Assert
+            Assert.AreEqual(expectStudent, result.Student, TestContext.TestName);
+            Assert.AreEqual(expectDateStart, result.DateStart, TestContext.TestName);
+            Assert.AreEqual(expectDateEnd, result.DateEnd, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
