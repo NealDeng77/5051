@@ -10,29 +10,134 @@
         <br />
         <h2>Click on your Avatar to Check In or Out of Class</h2>
 
-
-    <div class="row">
-        <div class="col-sm-12">
-            <span id="FullDate" class="h2"></span>
+    <br />
+    <br />
+    <br />
+    @{
+        if (Model.StudentList == null || !Model.StudentList.Any())
+        {
             <br />
-            <canvas id="canvas" width="90" height="90" style="background-color:#333"></canvas>
+            <p>No Students in the System</p>
             <br />
-            <span id="FullTime" class="h2"></span>
-        </div>
-    </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-4">
 
-    <script>
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-        var radius = canvas.height / 2;
-        ctx.translate(radius, radius);
-        radius = radius * 0.90
+                    <h2>Logged In</h2>
+                    <br />
+                    <div class="row">
+                        @{
+                            // List out the Logged IN Students, then the Logged Out students
+                            // Logged IN first
+                            foreach (var item in Model.StudentList)
+                            {
+                                if (item.Status == _5051.Models.StudentStatusEnum.In)
+                                {
+                                    var srcData = "/Content/img/"+item.AvatarUri;
+                                    <div class="col-sm-2 NoPadding">
+                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                            <a id="@item.Id">
+                                                <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')"/>
+                                            </a>
+                                            <br />
+                                            <span class="text-center">
+                                                @item.Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                        <div class="col-sm-12 text-center">                          
+                            <span id="FullTime" class="h1"></span>
+                        </div>
+                    <br />
+                    <div style=" border-radius: 25px; background-color: #202021 !important; height: 400px; opacity: 0.85;">
+                        <div id="centerblock" style="display:none;">
+                            <div class="row">
+                                <div class="col"> </div>
+                                <div class="col text-center">
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <img id="CenterAvatar" style="border:solid; border-color:lightgray; border-radius:100px;" src="" class="AvatarSize2" />
+                                    <br />
+                                    <span id="CenterName" style="color:lightgray"></span>
+                                    <br />
+                                    <br />
+                                    <a id="CenterStatus" class="btn btn-light btn-block" style="border-radius:45px; font-size:20px;" href=""></a>
+                                </div>
+                                <div class="col"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{ 
+                        // Put the center login box here
+                        // Have the box be just a blank box
+                        // Then when someone clicks a log in button
+                        // Update the picture in the box to be the avatar
+                        // And show a div that has a LogIn button
+
+                        // If it is for logout, then show a div for a logout button
+                        // Do that but having the javascript show or hide the div
+
+                        // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
+                        // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
+                    }
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <h2>Logged Out</h2>
+                        <br />
+                        <div class="row">
+                            @{
+                                // Logged Out first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                    {
+                                        var srcData = "/Content/img/" + item.AvatarUri;
+                                        <div class="col-sm-2 NoPadding">
+                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">                                                
+                                                <a id="@item.Id">
+                                                    <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')"/>
+                                                </a>
+                                                <br />
+                                                <span class="text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+
+            </div>
+<script>
+        //var canvas = document.getElementById("canvas");
+        //var ctx = canvas.getContext("2d");
+        //var radius = canvas.height / 2;
+        //ctx.translate(radius, radius);
+        //radius = radius * 0.90
         setInterval(drawClock, 1000);
 
         function drawClock() {
-            drawFace(ctx, radius);
-            drawNumbers(ctx, radius);
-            drawTime(ctx, radius);
+            //drawFace(ctx, radius);
+            //drawNumbers(ctx, radius);
+            //drawTime(ctx, radius);
             drawDigital();
             //Output Text Time
         }
@@ -110,7 +215,8 @@
 
             var fullTime =
                 (('' + hour).length < 2 ? '0' : '') + hour + ' : ' +
-                (('' + minute).length < 2 ? '0' : '') + minute;
+                (('' + minute).length < 2 ? '0' : '') + minute + ' : ' +
+                (('' + second).length < 2 ? '0' : '') + second;
 
 
             $("#FullDate").text(fullDate);
@@ -128,114 +234,23 @@
             ctx.stroke();
             ctx.rotate(-pos);
         }
-    </script>
-
-    <br />
-    @{
-        if (Model.StudentList == null || !Model.StudentList.Any())
-        {
-            <br />
-            <p>No Students in the System</p>
-            <br />
-        }
-        else
-        {
-            <div class="row">
-                <div class="col-sm-4">
-
-                    <h2>Logged In</h2>
-                    <div class="row">
-                        @{
-                            // List out the Logged IN Students, then the Logged Out students
-                            // Logged IN first
-                            foreach (var item in Model.StudentList)
-                            {
-                                if (item.Status == _5051.Models.StudentStatusEnum.In)
-                                {
-                                    var srcData = "/Content/img/"+item.AvatarUri;
-                                    <div class="col-sm-2 NoPadding">
-                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                            <a id="@item.Id" >
-                                                <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id','LogIn')"/>
-                                            </a>
-                                            <br />
-                                            <span class="text-center">
-                                                @item.Name
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
-                </div>
-
-
-                <div class="col-sm-4">
-                    <div style="background-color:white;height:100px">
-                        <img id="CenterAvatar" src="" class="AvatarSize1" />
-                        <br />
-                        <a id="CenterStatus" href=""><span id="CenterLabel"></span> </a><br />
-
-                    </div>
-                    @{ 
-                        // Put the center login box here
-                        // Have the box be just a blank box
-                        // Then when someone clicks a log in button
-                        // Update the picture in the box to be the avatar
-                        // And show a div that has a LogIn button
-
-                        // If it is for logout, then show a div for a logout button
-                        // Do that but having the javascript show or hide the div
-
-                        // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
-                        // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
-                    }
-                    </div>
-
-                    <div class="col-sm-4">
-
-                        <h2>Logged Out</h2>
-                        <div class="row">
-                            @{
-                                // Logged Out first
-                                foreach (var item in Model.StudentList)
-                                {
-                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                    {
-                                        <div class="col-sm-2 NoPadding">
-                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                                <a id="@item.Id" href="~/Kiosk/SetLogIn/@item.Id">
-                                                    <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                                                </a>
-                                                <br />
-                                                <span class="text-center">
-                                                    @item.Name
-                                                </span>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                }
-                }
-
-            </div>
-
+</script>
 <script>
-    function UpdateCenter(path,Id,status) {
+    function UpdateCenter(path, Id, name, request) {
+        var current = document.getElementById("centerblock");
+        if (current.style.display == "none") {
+            current.style.display = "block";
+        }
         $("#CenterAvatar").attr("src", path);
+        $("#CenterName").html(name);
 
-        if (status == "LogIn") {
+        if (request == "Log In") {
             $("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
-            $("#CenterStatus").html(status);
+            $("#CenterStatus").html(request);
         }
         else {
             $("#CenterStatus").attr("href", "/kiosk/SetLogOut/" + Id);
-            $("#CenterStatus").html(status);
+            $("#CenterStatus").html(request);
         }
     }
 </script>
