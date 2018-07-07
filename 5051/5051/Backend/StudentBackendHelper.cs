@@ -9,36 +9,9 @@ namespace _5051.Backend
     public class StudentBackendHelper
     {
         /// <summary>
-        /// Make into a Singleton
-        /// </summary>
-        private static volatile StudentBackendHelper instance;
-        private static object syncRoot = new Object();
-
-        private StudentBackendHelper() { }
-
-        public static StudentBackendHelper Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (syncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new StudentBackendHelper();
-                        }
-                    }
-                }
-
-                return instance;
-            }
-        }
-
-        /// <summary>
         /// Create demo student
         /// </summary>
-        public void CreateStudent()
+        public static void CreateStudent()
         {
             StudentBackend.Instance.Create(new StudentModel("Mike", null));
             StudentBackend.Instance.Create(new StudentModel("Doug", null));
@@ -50,7 +23,7 @@ namespace _5051.Backend
         /// <summary>
         /// Create demo attendance
         /// </summary>
-        public void CreateAttendance()
+        public static void CreateAttendance()
         {
             DateTime dateStart = new DateTime();
             DateTime dateEnd = new DateTime();
@@ -87,7 +60,7 @@ namespace _5051.Backend
         /// <param name="index">The index of the student in studentBackend index</param>
         /// <param name="dateStart"></param>
         /// <param name="dateEnd"></param>
-        private void GenerateAttendance(int index, DateTime dateStart, DateTime dateEnd)
+        private static void GenerateAttendance(int index, DateTime dateStart, DateTime dateEnd)
         {
             var myStudent = StudentBackend.Instance.Index()[index];
 
@@ -219,7 +192,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private DateTime InGood(DateTime date, Random r)
+        private static DateTime InGood(DateTime date, Random r)
         {
             return date.AddMinutes(r.Next(480, 535)); // in 8:00am - 8:54am
         }
@@ -229,7 +202,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private DateTime InLate(DateTime date, Random r)
+        private static DateTime InLate(DateTime date, Random r)
         {
             return date.AddMinutes(r.Next(535, 600)); // in 8:55am - 10:00am
         }
@@ -239,7 +212,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private DateTime InVeryLate(DateTime date, Random r)
+        private static DateTime InVeryLate(DateTime date, Random r)
         {
             return date.AddMinutes(r.Next(600, 840)); // in 10:00am - 2:00pm
         }
@@ -249,7 +222,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private DateTime OutAuto(DateTime date, Random r)
+        private static DateTime OutAuto(DateTime date, Random r)
         {
             return date.AddMinutes(945); // out 15:45pm
         }
@@ -259,7 +232,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private DateTime OutEarly(DateTime date, Random r)
+        private static DateTime OutEarly(DateTime date, Random r)
         {
             return date.AddMinutes(r.Next(600, 900)); // out 10:00am - 3:00pm
         }
