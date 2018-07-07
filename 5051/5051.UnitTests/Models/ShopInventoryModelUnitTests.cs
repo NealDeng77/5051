@@ -44,6 +44,18 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect,result.Uri, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_ShopInventoryModel_Instantiate_Valid_Get_Catagory_Should_Pass()
+        {
+            // Arrange
+            var result = new ShopInventoryModel();
+
+            // Act
+            var expect = result.Category;
+
+            // Assert
+            Assert.AreEqual(expect, result.Category, TestContext.TestName);
+        }
         #endregion Instantiate
 
         #region Update
