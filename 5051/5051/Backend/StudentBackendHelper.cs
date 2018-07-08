@@ -6,7 +6,7 @@ namespace _5051.Backend
     /// <summary>
     /// StudentBackend helper functions
     /// </summary>
-    public class StudentBackendHelper
+    public static class StudentBackendHelper
     {
         /// <summary>
         /// Create demo student
