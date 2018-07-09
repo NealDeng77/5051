@@ -365,24 +365,22 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Report(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
+
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            DateTime dateStart = new DateTime();
-            DateTime dateEnd = new DateTime();
 
-            dateStart = DateTime.Parse("6/1/2018");
-            dateEnd = DateTime.Parse("6/26/2018");
+            var myReport = new StudentReportViewModel
+            {
+                StudentId = id,
+                Year = DateTime.UtcNow.Year,
+                Month = DateTime.UtcNow.Month
+            };
 
-            var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent,dateStart,dateEnd);
-            // Not possible for Null return,
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
+            var myReturn = ReportBackend.Instance.GenerateStudentReport(myReport);
 
             return View(myReturn);
         }

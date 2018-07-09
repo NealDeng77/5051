@@ -159,8 +159,8 @@ namespace _5051.Backend
         private void DataSetDemo()
         {
             DataSetClear();
-            StudentBackendHelper.CreateStudent();
-            StudentBackendHelper.CreateAttendance();     
+            StudentBackendHelper.CreateDemoStudent();
+            StudentBackendHelper.CreateDemoAttendance();     
         }
 
         /// <summary>

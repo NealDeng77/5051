@@ -8,13 +8,32 @@
     <h4>This is a student monthly report wireframe</h4>
     <br />
     <div>
-        Student: @Model.Student.Name<br />
-        From @Model.DateStart.ToShortDateString()<br />
-        To   @Model.DateEnd.ToShortDateString()<br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.StudentId)
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.Year)
+                    @Html.DropDownListFor(m => m.Year, new SelectList(new List<int> { 2017, 2018 }))
+                </div>
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.Month)
+                    @Html.TextBoxFor(m => m.Month)
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+
+        }
+
+
     </div>
 </div>
 <br />
-
+From @Model.DateStart.ToShortDateString()<br />
+            To   @Model.DateEnd.ToShortDateString()<br />
 @if (Model.AttendanceList.Count == 0)
 {
     <p>No Data of this Month</p>
@@ -22,7 +41,7 @@
 else
 {
     <div class="accordion" id="accordionExample">
-        
+
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
@@ -71,7 +90,7 @@ else
     </div>
 }
 
-<br/>
+<br />
 <br />
 <br />
 <br />

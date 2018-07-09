@@ -11,7 +11,7 @@ namespace _5051.Backend
         /// <summary>
         /// Create demo student
         /// </summary>
-        public static void CreateStudent()
+        public static void CreateDemoStudent()
         {
             StudentBackend.Instance.Create(new StudentModel("Mike", null));
             StudentBackend.Instance.Create(new StudentModel("Doug", null));
@@ -23,7 +23,7 @@ namespace _5051.Backend
         /// <summary>
         /// Create demo attendance
         /// </summary>
-        public static void CreateAttendance()
+        public static void CreateDemoAttendance()
         {
             DateTime dateStart = new DateTime();
             DateTime dateEnd = new DateTime();
@@ -97,7 +97,6 @@ namespace _5051.Backend
                         case 0: //Perfect
                             temp.In = InGood(currentDate, r);
                             temp.Out = OutAuto(currentDate, r);
-                            temp.Duration = temp.Out.Subtract(temp.In);
                             myStudent.Attendance.Add(temp);
                             break;
                         case 1: //Good
@@ -107,19 +106,16 @@ namespace _5051.Backend
                                     case 0:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -132,7 +128,6 @@ namespace _5051.Backend
                                     case 0:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
@@ -140,13 +135,11 @@ namespace _5051.Backend
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -159,19 +152,16 @@ namespace _5051.Backend
                                     case 0:
                                         temp.In = InVeryLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
                                         temp.In = InVeryLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
-                                        temp.Duration = temp.Out.Subtract(temp.In);
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:

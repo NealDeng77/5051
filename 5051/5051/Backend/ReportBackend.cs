@@ -40,73 +40,54 @@ namespace _5051.Backend
                 return instance;
             }
         }
-
         /// <summary>
-        ///  Generate the Report fo a Student
+        /// Generate the report for a Student
         /// </summary>
-        /// <param name="student"></param>
-        /// <param name="dateStart"></param>
-        /// <param name="dateEnd"></param>
-        /// <returns>The Student Report View Model</returns>
-        public StudentReportViewModel GenerateStudentReport(StudentModel student, DateTime dateStart, DateTime dateEnd)
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public StudentReportViewModel GenerateStudentReport(StudentReportViewModel report)
         {
-            // Hold the current report
-            StudentReportViewModel Report = new StudentReportViewModel();
-
-            // Confirm a student was passed in
-            if (student == null)
+            // Generate attendance records
+            if (GenerateAttendance(report) == false)
             {
                 return null;
             }
 
-            // Set the Student and date range
-            Report.Student = student;
-            Report.DateStart = dateStart;
-            Report.DateEnd = dateEnd;
-
-            // Call for the report to be generated
-            if (GenerateAttendance(Report) == false)
-            {
-                return null;
-            }
-
-            GenerateDateRange(Report);
-            GenerateHoursAttended(Report);
-            GenerateOther(Report);
-
-            return Report;
+            return report;
         }
 
         /// <summary>
         /// Walk the official school calendar and tally up what is expected
         /// </summary>
-        private bool GenerateAttendance(StudentReportViewModel Report)
+        private bool GenerateAttendance(StudentReportViewModel report)
         {
-            DateTime currentDate = new DateTime();
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            //set start date and end date
+            report.DateStart = new DateTime(report.Year, report.Month, 1);
+            report.DateEnd = new DateTime(report.Year, report.Month, DateTime.DaysInMonth(report.Year, report.Month));
 
-            // Don't go beyond today
-            if (Report.DateEnd.CompareTo(DateTime.UtcNow) > 0)
+            // Don't go beyond today, don't include today
+            if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
             {
-                Report.DateEnd = DateTime.UtcNow;
+                report.DateEnd = DateTime.UtcNow.Date.AddDays(-1);
             }
 
             // Reset the values to be 0, then add to them.
-            Report.Stats.AccumlatedTotalHoursExpected = TimeSpan.Zero;
-            Report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
+            report.Stats.AccumlatedTotalHoursExpected = TimeSpan.Zero;
+            report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
 
-            currentDate = Report.DateStart;
+            var currentDate = report.DateStart;
 
-            // Set current date to be 1 less, because will get added in the for loop
-            currentDate = currentDate.AddDays(-1);
-
-            while (currentDate.CompareTo(Report.DateEnd) < 0)
+            while (currentDate.CompareTo(report.DateEnd) < 0)
             {
-                // Look to the next day
-                currentDate = currentDate.AddDays(1);
 
-                var temp = new AttendanceReportViewModel();
-                temp.Date = currentDate;
+                var temp = new AttendanceReportViewModel
+                {
+                    Date = currentDate
+                };
 
+                //get today's school calendar model
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
                 // if the day is not a school day, set IsSchoolDay to false
@@ -118,63 +99,104 @@ namespace _5051.Backend
                 // if the day is a school day, perform calculations
                 else
                 {
-
-                    temp.HoursExpected = myToday.TimeDuration;
-
                     // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
-                    var myRange = Report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
-
-                    foreach (var item in myRange)
+                    // Todo: need to confirm: durations are accumulated, other stats are overwriten, i.e. only the last check in/out is effective
+                    var myRange = report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
+                    
+                    //if no attendance record on this day, set attendance status to absent
+                    if (!myRange.Any())
                     {
-                        var tempDuration = item.Duration;
-                        if (item.Status == StudentStatusEnum.In)
-                        {
-                            // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
-                            var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
-
-                            // If the person is still checked in, and the day is over, then check them out.
-                            if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
-                            {
-
-                                var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
-                                //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-                                item.Out = DateTime.Parse(myDate);
-                                item.Status = StudentStatusEnum.Out;
-                                item.Duration = item.Out.Subtract(item.In);
-
-                                // Log the student out as well.
-                                Report.Student.Status = StudentStatusEnum.Out;
-
-                                // Update the change for that item be rewriting the student record back to the datastore
-                                DataSourceBackend.Instance.StudentBackend.Update(Report.Student);
-                            }
-                            else
-                            {
-                                // If the person is still checked in, and it is today, use now and add up till then.
-                                tempDuration = DateTime.UtcNow.Subtract(item.In);
-                            }
-                        }
-                        temp.TimeIn = item.In;
-                        temp.TimeOut = item.Out;
-                        temp.HoursAttended += tempDuration;
-                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
-                        temp.AttendanceStatus = item.AttendanceStatus;
-                        temp.CheckInStatus = item.CheckInStatus;
-                        temp.CheckOutStatus = item.CheckOutStatus;
+                        temp.AttendanceStatus = AttendanceStatusEnum.AbsentUnexcused;
                     }
+                    else
+                    {
+                        foreach (var item in myRange)
+                        {
+                            var tempDuration = CalculateDurationAndInOutStatus(item, myToday, temp);
+                            if (item.Status == StudentStatusEnum.In)
+                            {
+                                // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
+                                var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
 
-                    Report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
-                    Report.Stats.AccumlatedTotalHours += temp.HoursAttended;
+                                // If the person is still checked in, and the day is over, then check them out.
+                                if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
+                                {
+
+                                    var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
+                                    //Add the current date of Item, with the end time for the default date, and return that back as a date time.
+                                    item.Out = DateTime.Parse(myDate);
+                                    item.Status = StudentStatusEnum.Out;
+
+                                    // Log the student out as well.
+                                    report.Student.Status = StudentStatusEnum.Out;
+
+                                    // Update the change for that item be rewriting the student record back to the datastore
+                                    DataSourceBackend.Instance.StudentBackend.Update(report.Student);
+                                }
+                                else
+                                {
+                                    // If the person is still checked in, and it is today, use now and add up till then.
+                                    tempDuration = DateTime.UtcNow.Subtract(item.In);
+                                }
+                            }
+
+                            temp.AttendanceStatus = AttendanceStatusEnum.Present;
+                            temp.HoursExpected = myToday.TimeDuration;
+                            temp.TimeIn = item.In;
+                            temp.TimeOut = item.Out;
+                            temp.HoursAttended += tempDuration;
+                            temp.Emotion = item.Emotion;
+                        }
+                    }
+                    
+                    temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
+                    report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
+                    report.Stats.AccumlatedTotalHours += temp.HoursAttended;
 
                     // Need to add the totals back to the temp, because the temp is new each iteration
-                    temp.TotalHoursExpected += Report.Stats.AccumlatedTotalHoursExpected;
-                    temp.TotalHours = Report.Stats.AccumlatedTotalHours;
+                    temp.TotalHoursExpected += report.Stats.AccumlatedTotalHoursExpected;
+                    temp.TotalHours = report.Stats.AccumlatedTotalHours;
                 }
 
-                Report.AttendanceList.Add(temp);
+                report.AttendanceList.Add(temp);
+                currentDate = currentDate.AddDays(1);
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Calculate the effective duration, in/out status of the given attendance record
+        /// </summary>
+        /// <param name="attendance"></param>
+        /// <param name="schoolDay"></param>
+        /// <returns></returns>
+        private TimeSpan CalculateDurationAndInOutStatus(AttendanceModel attendance, SchoolCalendarModel schoolDay, AttendanceReportViewModel attendanceReport)
+        {
+            var start = schoolDay.TimeStart;
+            var end = attendance.Out.TimeOfDay;
+
+            
+            if (attendance.In.TimeOfDay.CompareTo(schoolDay.TimeStart) > 0)
+            {
+                start = attendance.In.TimeOfDay;
+                attendanceReport.CheckInStatus = CheckInStatusEnum.ArriveLate;
+            }
+            else
+            {
+                attendanceReport.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
+            }
+            if (attendance.Out.TimeOfDay.CompareTo(schoolDay.TimeEnd) < 0)
+            {
+                end = attendance.Out.TimeOfDay;
+                attendanceReport.CheckOutStatus = CheckOutStatusEnum.DoneEarly;
+            }
+            else
+            {
+                attendanceReport.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
+            }
+
+            return end.Subtract(start);
         }
 
         /// <summary>
@@ -182,31 +204,31 @@ namespace _5051.Backend
         /// </summary>
         private void GenerateDateRange(StudentReportViewModel Report)
         {
-            var accumulativeHoursAttended = new TimeSpan();
-            var accumulativeHoursExpected = new TimeSpan();
+            //var accumulativeHoursAttended = new TimeSpan();
+            //var accumulativeHoursExpected = new TimeSpan();
 
-            accumulativeHoursAttended = TimeSpan.Zero;
-            accumulativeHoursExpected = TimeSpan.Zero;
+            //accumulativeHoursAttended = TimeSpan.Zero;
+            //accumulativeHoursExpected = TimeSpan.Zero;
 
-            // Pull out just the date range between Start and End
-            var myData = Report.AttendanceList.Where(m => m.Date.CompareTo(Report.DateStart.AddDays(-1)) > 0 && m.Date.CompareTo(Report.DateEnd.AddDays(1)) < 1).ToList();
+            //// Pull out just the date range between Start and End
+            //var myData = Report.AttendanceList.Where(m => m.Date.CompareTo(Report.DateStart.AddDays(-1)) > 0 && m.Date.CompareTo(Report.DateEnd.AddDays(1)) < 1).ToList();
 
-            // Tally up the actual hours
-            foreach (var item in myData)
-            {
-                accumulativeHoursAttended += item.HoursAttended;
-                accumulativeHoursExpected += item.HoursExpected;
+            //// Tally up the actual hours
+            //foreach (var item in myData)
+            //{
+            //    accumulativeHoursAttended += item.HoursAttended;
+            //    accumulativeHoursExpected += item.HoursExpected;
 
-                // Need to reset the values to reflect the date range
-                item.TotalHours = accumulativeHoursAttended;
-                item.TotalHoursExpected = accumulativeHoursExpected;
-            }
+            //    // Need to reset the values to reflect the date range
+            //    item.TotalHours = accumulativeHoursAttended;
+            //    item.TotalHoursExpected = accumulativeHoursExpected;
+            //}
 
-            //Trim the AttendanceList down to be just the MyData list
-            Report.AttendanceList = myData;
+            ////Trim the AttendanceList down to be just the MyData list
+            //Report.AttendanceList = myData;
 
-            Report.Stats.AccumlatedTotalHours = accumulativeHoursAttended;
-            Report.Stats.AccumlatedTotalHoursExpected = accumulativeHoursExpected;
+            //Report.Stats.AccumlatedTotalHours = accumulativeHoursAttended;
+            //Report.Stats.AccumlatedTotalHoursExpected = accumulativeHoursExpected;
         }
 
         private void GenerateHoursAttended(StudentReportViewModel Report)
@@ -241,55 +263,55 @@ namespace _5051.Backend
 
         private void GenerateOther(StudentReportViewModel Report)
         {
-            if (Report.AttendanceList.Count != 0 && !Report.AttendanceList.Any())
-            {
-                foreach (var item in Report.AttendanceList)
-                {
-                    // Count up the Data Totals for Excused, Present, Unexcused
-                    switch (item.AttendanceStatus)
-                    {
-                        case AttendanceStatusEnum.AbsentExcused:
-                            Report.Stats.DaysAbsentExcused++;
-                            break;
-                        case AttendanceStatusEnum.AbsentUnexcused:
-                            Report.Stats.DaysAbsentUnexcused++;
-                            break;
+            //if (Report.AttendanceList.Count != 0 && !Report.AttendanceList.Any())
+            //{
+            //    foreach (var item in Report.AttendanceList)
+            //    {
+            //        // Count up the Data Totals for Excused, Present, Unexcused
+            //        switch (item.AttendanceStatus)
+            //        {
+            //            case AttendanceStatusEnum.AbsentExcused:
+            //                Report.Stats.DaysAbsentExcused++;
+            //                break;
+            //            case AttendanceStatusEnum.AbsentUnexcused:
+            //                Report.Stats.DaysAbsentUnexcused++;
+            //                break;
 
-                        case AttendanceStatusEnum.Present:
-                            Report.Stats.DaysPresent++;
-                            break;
-                    }
+            //            case AttendanceStatusEnum.Present:
+            //                Report.Stats.DaysPresent++;
+            //                break;
+            //        }
 
-                    if (item.CheckInStatus == CheckInStatusEnum.ArriveLate)
-                    {
-                        Report.Stats.DaysLateStayed++;
-                        Report.Stats.DaysLate++;
-                    }
-                    if (item.CheckOutStatus == CheckOutStatusEnum.DoneAuto)
-                    {
-                        Report.Stats.DaysLateLeft++;
-                        Report.Stats.DaysLeftEarly++;
-                    }
-                    if (item.CheckOutStatus == CheckOutStatusEnum.DoneEarly)
-                    {
-                        Report.Stats.DaysOnTimeLeft++;
-                        Report.Stats.DaysOnTime++;
-                    }
-                }
+            //        if (item.CheckInStatus == CheckInStatusEnum.ArriveLate)
+            //        {
+            //            Report.Stats.DaysLateStayed++;
+            //            Report.Stats.DaysLate++;
+            //        }
+            //        if (item.CheckOutStatus == CheckOutStatusEnum.DoneAuto)
+            //        {
+            //            Report.Stats.DaysLateLeft++;
+            //            Report.Stats.DaysLeftEarly++;
+            //        }
+            //        if (item.CheckOutStatus == CheckOutStatusEnum.DoneEarly)
+            //        {
+            //            Report.Stats.DaysOnTimeLeft++;
+            //            Report.Stats.DaysOnTime++;
+            //        }
+            //    }
 
-                Report.Stats.DaysPresent = Report.Student.Attendance.Count - Report.Stats.DaysAbsentExcused - Report.Stats.DaysAbsentUnexcused;
+            //    Report.Stats.DaysPresent = Report.Student.Attendance.Count - Report.Stats.DaysAbsentExcused - Report.Stats.DaysAbsentUnexcused;
 
-                Report.Stats.DaysOnTime = Report.Stats.DaysPresent - Report.Stats.DaysLate;
-                Report.Stats.DaysStayed = Report.Stats.DaysPresent - Report.Stats.DaysLeftEarly;
+            //    Report.Stats.DaysOnTime = Report.Stats.DaysPresent - Report.Stats.DaysLate;
+            //    Report.Stats.DaysStayed = Report.Stats.DaysPresent - Report.Stats.DaysLeftEarly;
 
-                Report.Stats.TotalHoursAttended = Report.Stats.AccumlatedTotalHours.TotalDays;
-                Report.Stats.TotalHoursMissing = Report.Stats.AccumlatedTotalHoursExpected.Subtract(Report.Stats.AccumlatedTotalHours).TotalDays;
+            //    Report.Stats.TotalHoursAttended = Report.Stats.AccumlatedTotalHours.TotalDays;
+            //    Report.Stats.TotalHoursMissing = Report.Stats.AccumlatedTotalHoursExpected.Subtract(Report.Stats.AccumlatedTotalHours).TotalDays;
 
-                Report.Stats.PercPresent = 100 * Report.Stats.DaysPresent / Report.Student.Attendance.Count;
-                Report.Stats.PercExcused = 100 * Report.Stats.DaysAbsentExcused / Report.Student.Attendance.Count;
-                Report.Stats.PercUnexcused = 100 * Report.Stats.DaysAbsentUnexcused / Report.Student.Attendance.Count;
-                Report.Stats.PercAttendedHours = (int)(100 * Report.Stats.TotalHoursAttended / (Report.Stats.TotalHoursMissing + Report.Stats.TotalHoursAttended));
-            }
+            //    Report.Stats.PercPresent = 100 * Report.Stats.DaysPresent / Report.Student.Attendance.Count;
+            //    Report.Stats.PercExcused = 100 * Report.Stats.DaysAbsentExcused / Report.Student.Attendance.Count;
+            //    Report.Stats.PercUnexcused = 100 * Report.Stats.DaysAbsentUnexcused / Report.Student.Attendance.Count;
+            //    Report.Stats.PercAttendedHours = (int)(100 * Report.Stats.TotalHoursAttended / (Report.Stats.TotalHoursMissing + Report.Stats.TotalHoursAttended));
+            //}
         }
     }
 }

@@ -43,29 +43,49 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult StudentReport(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
+
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            DateTime dateStart = new DateTime();
-            DateTime dateEnd = new DateTime();
 
-            //to demo, generate a report in this range
-            dateStart = DateTime.Parse("6/1/2018");
-            dateEnd = DateTime.Parse("6/26/2018");
+            var myReport = new StudentReportViewModel
+            {
+                StudentId = id,
+                Year = DateTime.UtcNow.Year,
+                Month = DateTime.UtcNow.Month
+            };
 
-            var myReturn = ReportBackend.Instance.GenerateStudentReport(myStudent, dateStart, dateEnd);
-            // Not possible for Null return,
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
+            var myReturn = ReportBackend.Instance.GenerateStudentReport(myReport);
 
             return View(myReturn);
         }
-    
+        /// <summary>
+        /// Generate report using the StudentReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult StudentReport([Bind(Include=
+            "StudentId,"+
+            "Year,"+
+            "Month,"+
+            "")] StudentReportViewModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateStudentReport(data);
+
+            return View(myReturn);
+        }
 
         /// <summary>
         /// Attendance Editing

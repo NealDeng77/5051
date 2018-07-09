@@ -220,7 +220,6 @@ namespace _5051.Backend
             // Add the new one it with the new data
             myTimeData.Out = DateTime.UtcNow;
             myTimeData.Status = data.Status;
-            myTimeData.Duration = myTimeData.Out.Subtract(myTimeData.In);
 
             data.Attendance.Add(myTimeData);
 
