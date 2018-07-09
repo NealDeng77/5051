@@ -68,5 +68,10 @@ namespace _5051.Models
         ///  The Status of the Checkout
         /// </summary>
         public CheckOutStatusEnum CheckOutStatus { get; set; }
+
+        /// <summary>
+        ///  The emotion state
+        /// </summary>
+        public EmotionStatusEnum Emotion { get; set; }
     }
 }
