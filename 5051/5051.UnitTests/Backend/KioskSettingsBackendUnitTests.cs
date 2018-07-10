@@ -110,24 +110,6 @@ namespace _5051.UnitTests.Models
         }
         #endregion update
 
-        //#region GetDefault
-        //[TestMethod]
-        //public void Backend_KioskSettingsBackend_GetDefault_Should_Pass()
-        //{
-        //    //arrange
-        //    var backend = KioskSettingsBackend.Instance;
-
-        //    //act
-        //    var result = backend.GetDefault();
-
-        //    //reset
-        //    backend.Reset();
-
-        //    //assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
-        //#endregion GetDefault
-
         #region SetDataSource
         [TestMethod]
         public void Backend_KioskSettingsBackend_SetDataSource_Valid_Enum_Should_Pass()
