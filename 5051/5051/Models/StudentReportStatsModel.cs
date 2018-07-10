@@ -8,34 +8,72 @@ namespace _5051.Models
     public class StudentReportStatsModel
     {
         /// <summary>
+        /// The number of school days
+        /// </summary>
+        public int NumOfSchoolDays { get; set; }
+        /// <summary>
         /// The single value for the total hours from school start till now attended
         /// </summary>
-        public TimeSpan AccumlatedTotalHours { get; set; }
+        public TimeSpan AccumlatedTotalHours { get; set; } = TimeSpan.Zero;
 
         /// <summary>
         /// The single value for the total hours from school start till now expected to attend
         /// </summary>
-        public TimeSpan AccumlatedTotalHoursExpected { get; set; }
+        public TimeSpan AccumlatedTotalHoursExpected { get; set; } = TimeSpan.Zero;
 
-
+        /// <summary>
+        /// The number of days present
+        /// </summary>
         public int DaysPresent { get; set; }
+
+        /// <summary>
+        /// The number of days AbsentExcused
+        /// </summary>
         public int DaysAbsentExcused { get; set; }
+
+        /// <summary>
+        /// The number of days AbsentUnexcused
+        /// </summary>
         public int DaysAbsentUnexcused { get; set; }
 
-        public double TotalHoursAttended { get; set; }
-        public double TotalHoursMissing { get; set; }
-
+        /// <summary>
+        /// The number of days on time
+        /// </summary>
         public int DaysOnTime { get; set; }
+
+        /// <summary>
+        /// The number of days late
+        /// </summary>
         public int DaysLate { get; set; }
-        public int DaysStayed { get; set; }
-        public int DaysLeftEarly { get; set; }
-        public int DaysOnTimeStayed { get; set; }
-        public int DaysOnTimeLeft { get; set; }
-        public int DaysLateStayed { get; set; }
-        public int DaysLateLeft { get; set; }
+
+        /// <summary>
+        /// The number of days check out auto
+        /// </summary>
+        public int DaysOutAuto { get; set; }
+
+        /// <summary>
+        /// The number of days check out early
+        /// </summary>
+        public int DaysOutEarly { get; set; }
+
+        /// <summary>
+        /// The percentage of days present: DaysPresent/NumOfSchoolDays
+        /// </summary>
         public int PercPresent { get; set; }
+
+        /// <summary>
+        /// The percentage of attended hours: AccumlatedTotalHours/AccumlatedTotalHoursExpected
+        /// </summary>
         public int PercAttendedHours { get; set; }
+
+        /// <summary>
+        /// The percentage of days AbsentExcused: DaysAbsentExcused/NumOfSchoolDays
+        /// </summary>
         public int PercExcused { get; set; }
+
+        /// <summary>
+        /// The percentage of days AbsentUnexcused: DaysAbsentExcused/NumOfSchoolDays
+        /// </summary>
         public int PercUnexcused { get; set; }
     }
 }

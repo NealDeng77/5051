@@ -73,10 +73,6 @@ namespace _5051.Backend
                 report.DateEnd = DateTime.UtcNow.Date.AddDays(-1);
             }
 
-            // Reset the values to be 0, then add to them.
-            report.Stats.AccumlatedTotalHoursExpected = TimeSpan.Zero;
-            report.Stats.AccumlatedTotalHours = TimeSpan.Zero;
-
             var currentDate = report.DateStart;
 
             while (currentDate.CompareTo(report.DateEnd) < 0)
@@ -107,12 +103,15 @@ namespace _5051.Backend
                     if (!myRange.Any())
                     {
                         temp.AttendanceStatus = AttendanceStatusEnum.AbsentUnexcused;
+                        temp.HoursExpected = myToday.TimeDuration;
+                        report.Stats.DaysAbsentUnexcused++;
                     }
                     else
                     {
                         foreach (var item in myRange)
                         {
                             var tempDuration = CalculateDurationAndInOutStatus(item, myToday, temp);
+
                             if (item.Status == StudentStatusEnum.In)
                             {
                                 // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
@@ -146,10 +145,15 @@ namespace _5051.Backend
                             temp.TimeOut = item.Out;
                             temp.HoursAttended += tempDuration;
                             temp.Emotion = item.Emotion;
+
+                            CalculateDaysInOutStatus(temp, report.Stats);
                         }
+                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
+                        
                     }
-                    
-                    temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
+
+                    report.Stats.NumOfSchoolDays++;
+
                     report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
                     report.Stats.AccumlatedTotalHours += temp.HoursAttended;
 
@@ -162,7 +166,35 @@ namespace _5051.Backend
                 currentDate = currentDate.AddDays(1);
             }
 
+            if (report.Stats.NumOfSchoolDays > 0)
+            {
+                report.Stats.PercPresent = report.Stats.DaysPresent * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercAttendedHours =
+                    (int)(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
+                report.Stats.PercExcused = report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercUnexcused = report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays;
+            }
+
             return true;
+        }
+
+        private void CalculateDaysInOutStatus(AttendanceReportViewModel temp, StudentReportStatsModel stats)
+        {
+            stats.DaysPresent++;
+
+            if (temp.CheckInStatus == CheckInStatusEnum.ArriveOnTime)
+            {
+                stats.DaysOnTime++;
+            }
+
+            stats.DaysLate = stats.DaysPresent - stats.DaysOnTime;
+
+            if (temp.CheckOutStatus == CheckOutStatusEnum.DoneAuto)
+            {
+                stats.DaysOutAuto++;        
+            }
+
+            stats.DaysOutEarly = stats.DaysPresent - stats.DaysOutAuto;
         }
 
         /// <summary>
@@ -174,9 +206,10 @@ namespace _5051.Backend
         private TimeSpan CalculateDurationAndInOutStatus(AttendanceModel attendance, SchoolCalendarModel schoolDay, AttendanceReportViewModel attendanceReport)
         {
             var start = schoolDay.TimeStart;
-            var end = attendance.Out.TimeOfDay;
+            var end = schoolDay.TimeEnd;
 
-            
+
+
             if (attendance.In.TimeOfDay.CompareTo(schoolDay.TimeStart) > 0)
             {
                 start = attendance.In.TimeOfDay;
