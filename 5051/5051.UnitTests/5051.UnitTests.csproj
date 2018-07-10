@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Backend\AvatarBackendUnitTests.cs" />
     <Compile Include="Backend\DataSourceBackendUnitTests.cs" />
+    <Compile Include="Backend\KioskSettingsBackendUnitTests.cs" />
     <Compile Include="Backend\ShopInventoryDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarDataSourceMockUnitTests.cs" />
