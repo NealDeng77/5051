@@ -80,6 +80,7 @@ namespace _5051.Backend
                 // if the day is a school day, perform calculations
                 else
                 {
+                    temp.HoursExpected = myToday.TimeDuration;
                     // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
                     // Todo: need to confirm: durations are accumulated, other stats are overwriten, i.e. only the last check in/out is effective
                     var myRange = report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
@@ -136,11 +137,10 @@ namespace _5051.Backend
                         }
 
                         //calculations for present records
-                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
+                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes );
 
                     }
-                    //calculations for both absent and present records
-                    temp.HoursExpected = myToday.TimeDuration;
+                    //calculations for both absent and present records                    
                     report.Stats.NumOfSchoolDays++;
 
                     report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
