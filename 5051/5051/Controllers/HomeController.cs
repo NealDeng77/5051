@@ -100,5 +100,14 @@ namespace _5051.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// User Guide
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Guide()
+        {
+            return View();
+        }
     }
 }
