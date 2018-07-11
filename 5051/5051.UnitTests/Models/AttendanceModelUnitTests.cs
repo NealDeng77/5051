@@ -45,10 +45,6 @@ namespace _5051.UnitTests.Models
             result.In = expectIn;
             result.Out = expectOut;
             result.Status = expectStatus;
-            result.Duration = expectDuration;
-            result.AttendanceStatus = expectAttendanceStatus;
-            result.CheckInStatus = expectCheckInstatus;
-            result.CheckOutStatus = expectCheckOutstatus;
             result.Emotion = expectEmotion;
 
             // Assert
@@ -56,10 +52,6 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectIn, result.In, TestContext.TestName);
             Assert.AreEqual(expectOut, result.Out, TestContext.TestName);
             Assert.AreEqual(expectStatus, result.Status, TestContext.TestName);
-            Assert.AreEqual(expectDuration, result.Duration, TestContext.TestName);
-            Assert.AreEqual(expectAttendanceStatus, result.AttendanceStatus, TestContext.TestName);
-            Assert.AreEqual(expectCheckInstatus, result.CheckInStatus, TestContext.TestName);
-            Assert.AreEqual(expectCheckOutstatus, result.CheckOutStatus, TestContext.TestName);
             Assert.AreEqual(expectEmotion, result.Emotion, TestContext.TestName);
         }
         #endregion Instantiate
