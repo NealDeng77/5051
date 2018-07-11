@@ -60,7 +60,7 @@ namespace _5051.Controllers
         /// Help/Example page for Shop
         /// </summary>
         /// <returns></returns>
-        public ActionResult ShopExample ()
+        public ActionResult ShopExample()
         {
             return View();
         }
@@ -88,6 +88,24 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult AvatarExample()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Frequently Asked Questions
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// User Guide
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Guide()
         {
             return View();
         }
