@@ -6,26 +6,29 @@
 <div class="text-center">
     <br />
     <h4>@Model.Student.Name's Monthly Report</h4>
-    <h5>@Model.DateStart.ToString("M") to @Model.DateEnd.ToString("M")</h5>
+    <h5>@Model.DateStart.ToString("M") to @Model.DateEnd.ToString("M") @Model.Year</h5>
     <div>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.StudentId)
-            <div class="row">
+        <div class="row w-100">
 
-                <div class="col-sm-3 text-right">
-                    @*Todo replace hardcoded years*@
-                    @Html.DropDownListFor(m => m.Month, new SelectList(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }), new { @class = "form-control" })
-                </div>
-                <div class="col-sm-3 text-right">
-                    @*Todo replace hardcoded years*@
-                    @Html.DropDownListFor(m => m.Year, new SelectList(new List<int> { 2017, 2018 }), new { @class = "form-control" })
-                </div>
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </div>
+            <div class="col-sm-3 text-right">
+                @*Todo replace hardcoded years*@
+                @Html.DropDownListFor(m => m.Month, new SelectList(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }), new { @class = "form-control" })
             </div>
+            <div class="col-sm-3 text-right">
+                @*Todo replace hardcoded years*@
+                @Html.DropDownListFor(m => m.Year, new SelectList(new List<int> { 2017, 2018 }), new { @class = "form-control" })
+            </div>
+            <div class="mr-auto">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+            <div class="btn btn-primary">
+                Download
+            </div>
+        </div>
 
 
         }
@@ -41,7 +44,6 @@
 }
 else
 {
-
     <div class="accordion" id="accordionExample">
 
         <div class="card">
