@@ -75,5 +75,15 @@ namespace _5051.Models
         /// The percentage of days AbsentUnexcused: DaysAbsentExcused/NumOfSchoolDays
         /// </summary>
         public int PercUnexcused { get; set; }
+
+        /// <summary>
+        /// The percentage of days in late: DaysLate/NumOfSchoolDays
+        /// </summary>
+        public int PercInLate { get; set; }
+
+        /// <summary>
+        /// The percentage of days out early: DaysOutEarly/NumOfSchoolDays
+        /// </summary>
+        public int PercOutEarly { get; set; }
     }
 }

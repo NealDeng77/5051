@@ -98,7 +98,7 @@ namespace _5051.Backend
                     // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
                     // Todo: need to confirm: durations are accumulated, other stats are overwriten, i.e. only the last check in/out is effective
                     var myRange = report.Student.Attendance.Where(m => m.In.DayOfYear == currentDate.DayOfYear).ToList();
-                    
+
                     //if no attendance record on this day, set attendance status to absent
                     if (!myRange.Any())
                     {
@@ -149,7 +149,7 @@ namespace _5051.Backend
                             CalculateDaysInOutStatus(temp, report.Stats);
                         }
                         temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes / temp.HoursExpected.TotalMinutes * 100);
-                        
+
                     }
 
                     report.Stats.NumOfSchoolDays++;
@@ -173,6 +173,8 @@ namespace _5051.Backend
                     (int)(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
                 report.Stats.PercExcused = report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays;
                 report.Stats.PercUnexcused = report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.NumOfSchoolDays;
             }
 
             return true;
@@ -191,7 +193,7 @@ namespace _5051.Backend
 
             if (temp.CheckOutStatus == CheckOutStatusEnum.DoneAuto)
             {
-                stats.DaysOutAuto++;        
+                stats.DaysOutAuto++;
             }
 
             stats.DaysOutEarly = stats.DaysPresent - stats.DaysOutAuto;
