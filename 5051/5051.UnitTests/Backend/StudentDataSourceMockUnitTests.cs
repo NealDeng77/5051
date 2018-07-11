@@ -34,5 +34,194 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion Instantiate
+
+        #region read
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Read_Invalid_ID_Null_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+
+            // Act
+            var result = backend.Read(null);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Read_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectStudent = studentBackend.GetDefault();
+
+            // Act
+            var result = backend.Read(expectStudent.Id);
+
+            // Assert
+            Assert.AreEqual(expectStudent, result, TestContext.TestName);
+        }
+        #endregion read
+
+        #region update
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Update_Invalid_Data_Null_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+
+            // Act
+            var result = backend.Update(null);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Update_Invalid_Data_Student_Does_Not_Exist_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var expectStudent = new StudentModel();
+
+            // Act
+            var result = backend.Update(expectStudent);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Update_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectStudent = studentBackend.GetDefault();
+            var expectId = "GoodID";
+            var expectName = "Billy";
+            var expectAvatarID = "GoodAvatarID";
+            var expectAvatarLevel = 7;
+            var expectExperiencePoints = 100;
+            var expectTokens = 100;
+            var expectStatus = _5051.Models.StudentStatusEnum.Out;
+            var expectPassword = "passWORD23!";
+            var expectEmotionCurrent = _5051.Models.EmotionStatusEnum.Happy;
+
+            // Act
+            expectStudent.Id = expectId;
+            expectStudent.Name = expectName;
+            expectStudent.AvatarId = expectAvatarID;
+            expectStudent.AvatarLevel = expectAvatarLevel;
+            expectStudent.ExperiencePoints = expectExperiencePoints;
+            expectStudent.Tokens = expectTokens;
+            expectStudent.Status = expectStatus;
+            expectStudent.Password = expectPassword;
+            expectStudent.EmotionCurrent = expectEmotionCurrent;
+
+            var resultUpdate = backend.Update(expectStudent);
+
+            //reset
+            backend.Reset();
+            studentBackend.Reset();
+
+            // Assert
+            Assert.AreEqual(expectStudent, resultUpdate, TestContext.TestName);
+            Assert.AreEqual(expectId, resultUpdate.Id, TestContext.TestName);
+            Assert.AreEqual(expectName, resultUpdate.Name, TestContext.TestName);
+            Assert.AreEqual(expectAvatarID, resultUpdate.AvatarId, TestContext.TestName);
+            Assert.AreEqual(expectAvatarLevel, resultUpdate.AvatarLevel, TestContext.TestName);
+            Assert.AreEqual(expectExperiencePoints, resultUpdate.ExperiencePoints, TestContext.TestName);
+            Assert.AreEqual(expectTokens, resultUpdate.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectStatus, resultUpdate.Status, TestContext.TestName);
+            Assert.AreEqual(expectPassword, resultUpdate.Password, TestContext.TestName);
+            Assert.AreEqual(expectEmotionCurrent, resultUpdate.EmotionCurrent, TestContext.TestName);
+        }
+        #endregion update
+
+        #region delete
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Delete_Invalid_ID_Null_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var expect = false;
+
+            // Act
+            var result = backend.Delete(null);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_Delete_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectStudent = studentBackend.GetDefault();
+            var expect = true;
+
+            // Act
+            var result = backend.Delete(expectStudent.Id);
+
+            //reset
+            backend.Reset();
+            studentBackend.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion delete
+
+        #region DataSet
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_LoadDataSet_Valid_Enum_Demo_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.Demo;
+
+            // Act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentDataSourceMock_LoadDataSet_Valid_Enum_UnitTest_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentDataSourceMock.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+
+            // Act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DataSet
     }
 }
