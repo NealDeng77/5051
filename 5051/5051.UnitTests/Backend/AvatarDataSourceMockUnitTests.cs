@@ -52,6 +52,25 @@ namespace _5051.UnitTests.Models
             //assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Delete_With_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var testModel = new AvatarModel();
+            var createResult = backend.Create(testModel);
+            var expect = true;
+
+            //act
+            var result = backend.Delete(testModel.Id);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
         #endregion delete
 
         #region update
@@ -89,6 +108,46 @@ namespace _5051.UnitTests.Models
             //assert
             Assert.IsNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Update_With_Valid_Data_Should_Pass()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var data = new AvatarModel();
+            var createResult = backend.Create(data);
+            var expectId = "AGoodId";
+            var expectName = "A good Name";
+            var expectDescription = "A good descritpion";
+            var expectUri = "A good uri";
+            var expectLevel = 7;
+
+            //act
+            data.Id = expectId;
+            data.Name = expectName;
+            data.Description = expectDescription;
+            data.Uri = expectUri;
+            data.Level = expectLevel;
+
+            var updateResult = backend.Update(data);
+
+            var idResult = data.Id;
+            var nameResult = data.Name;
+            var descriptionResult = data.Description;
+            var uriResult = data.Uri;
+            var levelResult = data.Level;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(updateResult, TestContext.TestName);
+            Assert.AreEqual(expectId, idResult, TestContext.TestName);
+            Assert.AreEqual(expectName, nameResult, TestContext.TestName);
+            Assert.AreEqual(expectDescription, descriptionResult, TestContext.TestName);
+            Assert.AreEqual(expectUri, uriResult, TestContext.TestName);
+            Assert.AreEqual(expectLevel, levelResult, TestContext.TestName);
+        }
         #endregion update
 
         #region read
@@ -104,6 +163,59 @@ namespace _5051.UnitTests.Models
             //assert
             Assert.IsNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_Read_With_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var testAvatarModel = AvatarBackend.Instance;
+            var testID = testAvatarModel.GetFirstAvatarId();
+
+            //act
+            var result = backend.Read(testID);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
         #endregion read
+
+        #region DataSet
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_DataSet_Demo_Data_Should_Pass()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.Demo;
+
+            //act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_AvatarDataSourceMock_DataSet_UnitTest_Data_Should_Pass()
+        {
+            //arrange
+            var backend = AvatarDataSourceMock.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+
+            //act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DataSet
     }
 }

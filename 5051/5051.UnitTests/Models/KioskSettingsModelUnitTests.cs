@@ -28,6 +28,56 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(result.Password, new KioskSettingsModel().Password, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_KioskSettings_Instantiate_Get_ID_Should_Pass()
+        {
+            // Arrange
+            var myModelNew = new KioskSettingsModel();
+            var expectId = "GoodId1";
+
+            // Act
+            myModelNew.Id = expectId;
+
+            // Assert
+            Assert.AreEqual(expectId, myModelNew.Id, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_KioskSettings_Instantiate_With_Data_Should_Pass()
+        {
+            // Arrange
+            var myModelNew = new KioskSettingsModel();
+
+            // Set values to test
+            myModelNew.Password = "bogus";
+            myModelNew.Id = "test";
+            var expect = myModelNew.Password;
+
+            // Act
+            var myModel = new KioskSettingsModel(myModelNew);
+            var result = myModel.Password;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_KioskSettings_Instantiate_With_Data_Null_Should_Fail()
+        {
+            // Null does nothing.
+
+            // Arrange
+            var myTemp = new KioskSettingsModel();
+            myTemp.SetDefault();
+            var expect = myTemp.Password;
+
+            // Act
+            var myModel = new KioskSettingsModel(null);
+            var result = myModel.Password;
+
+            // Assert
+            Assert.AreEqual(null, result, TestContext.TestName);
+        }
         #endregion Instantiate
 
         #region SetDefault
@@ -91,42 +141,5 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
         #endregion Update
-
-        [TestMethod]
-        public void Models_KioskSettings_Instantiate_With_Data_Should_Pass()
-        {
-            // Arrange
-            var myModelNew = new KioskSettingsModel();
-
-            // Set values to test
-            myModelNew.Password = "bogus";
-            myModelNew.Id = "test";
-            var expect = myModelNew.Password;
-
-            // Act
-            var myModel = new KioskSettingsModel(myModelNew);
-            var result = myModel.Password;
-
-            // Assert
-            Assert.AreEqual(expect, result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Models_KioskSettings_Instantiate_With_Data_Null_Should_Fail()
-        {
-            // Null does nothing.
-
-            // Arrange
-            var myTemp = new KioskSettingsModel();
-            myTemp.SetDefault();
-            var expect = myTemp.Password;
-
-            // Act
-            var myModel = new KioskSettingsModel(null);
-            var result = myModel.Password;
-
-            // Assert
-            Assert.AreEqual(null, result, TestContext.TestName);
-        }
     }
 }

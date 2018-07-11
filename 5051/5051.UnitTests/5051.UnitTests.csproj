@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backend\AvatarBackendUnitTests.cs" />
+    <Compile Include="Backend\DataSourceBackendUnitTests.cs" />
+    <Compile Include="Backend\KioskSettingsBackendUnitTests.cs" />
     <Compile Include="Backend\ShopInventoryDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarDataSourceMockUnitTests.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
+    <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
+    <Compile Include="Models\StudentAvatarModelUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryModelUnitTests.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModelUnitTests.cs" />
@@ -99,6 +103,7 @@
     <Compile Include="Models\SchoolCalendarModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryListViewModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
+    <Compile Include="Models\StudentReportStatsModelUnitTests.cs" />
     <Compile Include="Models\StudentReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceModelUnitTests.cs" />
     <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
