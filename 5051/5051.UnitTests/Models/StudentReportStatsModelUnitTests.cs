@@ -19,6 +19,7 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var test = new StudentReportStatsModel();
+            var expectNumOfSchoolDays = 100;
             var expectAccumulatedTotalHours = TimeSpan.MinValue;
             var expectAccumulatedTotalHoursExpected = TimeSpan.MaxValue;
             var expectDaysPresent = 1;
@@ -28,6 +29,8 @@ namespace _5051.UnitTests.Models
             var expectTotalHoursMissing = 5;
             var expectDaysOnTime = 6;
             var expectDaysLate = 7;
+            var expectDaysOutsAuto = 7;
+            var expectDaysOutEarly = 3;
             var expectDaysStayed = 8;
             var expectDaysLeftEarly = 9;
             var expectDaysOnTimeStayed = 10;
@@ -38,8 +41,12 @@ namespace _5051.UnitTests.Models
             var expectPercAttendedHours = 100 * expectTotalHoursAttended / (expectTotalHoursAttended + expectTotalHoursMissing);
             var expectPercExcused = 100 * expectDaysAbsentExcused / (expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused);
             var expectPercUnexcused = 100 * expectDaysAbsentUnexcused / (expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused);
+            var expectPercInLate = expectDaysLate * 100 / expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused;
+            var expectPercOutEarly = expectDaysOutEarly * 100 / expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused;
+
 
             //act
+            test.NumOfSchoolDays = expectNumOfSchoolDays;
             test.AccumlatedTotalHours = expectAccumulatedTotalHours;
             test.AccumlatedTotalHoursExpected = expectAccumulatedTotalHoursExpected;
             test.DaysPresent = expectDaysPresent;
@@ -47,12 +54,17 @@ namespace _5051.UnitTests.Models
             test.DaysAbsentUnexcused = expectDaysAbsentUnexcused;
             test.DaysOnTime = expectDaysOnTime;
             test.DaysLate = expectDaysLate;
+            test.DaysOutAuto = expectDaysOutsAuto;
+            test.DaysOutEarly = expectDaysOutEarly;
             test.PercPresent = expectPercPresent;
             test.PercAttendedHours = expectPercAttendedHours;
             test.PercExcused = expectPercExcused;
             test.PercUnexcused = expectPercUnexcused;
+            test.PercInLate = expectPercInLate;
+            test.PercOutEarly = expectPercOutEarly;
 
             //assert
+            Assert.AreEqual(expectNumOfSchoolDays, test.NumOfSchoolDays, TestContext.TestName);
             Assert.AreEqual(expectAccumulatedTotalHours, test.AccumlatedTotalHours, TestContext.TestName);
             Assert.AreEqual(expectAccumulatedTotalHoursExpected, test.AccumlatedTotalHoursExpected, TestContext.TestName);
             Assert.AreEqual(expectDaysPresent, test.DaysPresent, TestContext.TestName);
@@ -60,10 +72,14 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectDaysAbsentUnexcused, test.DaysAbsentUnexcused, TestContext.TestName);
             Assert.AreEqual(expectDaysOnTime, test.DaysOnTime, TestContext.TestName);
             Assert.AreEqual(expectDaysLate, test.DaysLate, TestContext.TestName);
+            Assert.AreEqual(expectDaysOutsAuto, test.DaysOutAuto, TestContext.TestName);
+            Assert.AreEqual(expectDaysOutEarly, test.DaysOutEarly, TestContext.TestName);
             Assert.AreEqual(expectPercPresent, test.PercPresent, TestContext.TestName);
             Assert.AreEqual(expectPercAttendedHours, test.PercAttendedHours, TestContext.TestName);
             Assert.AreEqual(expectPercExcused, test.PercExcused, TestContext.TestName);
             Assert.AreEqual(expectPercUnexcused, test.PercUnexcused, TestContext.TestName);
+            Assert.AreEqual(expectPercInLate, test.PercInLate, TestContext.TestName);
+            Assert.AreEqual(expectPercOutEarly, test.PercOutEarly, TestContext.TestName);
         }
         #endregion Instantiate
     }

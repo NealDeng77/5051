@@ -183,5 +183,39 @@ namespace _5051.Tests.Controllers
 
         #endregion AvatarRegion
 
+        #region FAQRegion
+
+        [TestMethod]
+        public void Controller_Home_FAQ_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.FAQ() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion FAQRegion
+
+        #region GuideRegion
+
+        [TestMethod]
+        public void Controller_Home_Guide_Default_Should_Pass()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Guide() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion GuideRegion
+
     }
 }
