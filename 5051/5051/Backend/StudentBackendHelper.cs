@@ -87,7 +87,7 @@ namespace _5051.Backend
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
                 // if the day is a school day
-                if (myToday != null && myToday.SchoolDay == true)
+                if (myToday != null && myToday.SchoolDay)
                 {
                     //generate a random number 0-4 inclusive, use this to randomly generate 5 scenarios
                     int rn = r.Next(0, 5);
@@ -106,16 +106,19 @@ namespace _5051.Backend
                                     case 0:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Happy;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Sad;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -128,6 +131,7 @@ namespace _5051.Backend
                                     case 0:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Happy;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
@@ -135,11 +139,13 @@ namespace _5051.Backend
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -151,20 +157,21 @@ namespace _5051.Backend
                                 {
                                     case 0:
                                         temp.In = InVeryLate(currentDate, r);
-                                        temp.Out = OutEarly(currentDate, r);
+                                        temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
-                                        temp.In = InVeryLate(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
+                                        temp.In = InLate(currentDate, r);
+                                        temp.Out = OutEarly(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.VerySad;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Sad;
                                         myStudent.Attendance.Add(temp);
-                                        break;
-                                    default:
                                         break;
                                 }
                             }
