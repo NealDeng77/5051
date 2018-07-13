@@ -183,6 +183,7 @@ namespace _5051.Backend
             var start = schoolDay.TimeStart;
             var end = schoolDay.TimeEnd;
 
+            //trim the effective start time to actual arrive time only if the student is late
             if (attendance.In.TimeOfDay.CompareTo(schoolDay.TimeStart) > 0)
             {
                 start = attendance.In.TimeOfDay;
@@ -192,6 +193,7 @@ namespace _5051.Backend
             {
                 attendanceReport.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
             }
+            //trim the effective end time to actual out time only if the student leave early
             if (attendance.Out.TimeOfDay.CompareTo(schoolDay.TimeEnd) < 0)
             {
                 end = attendance.Out.TimeOfDay;
