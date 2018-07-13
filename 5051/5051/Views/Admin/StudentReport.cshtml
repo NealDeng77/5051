@@ -69,3 +69,105 @@ else
 }
 
 
+
+
+@*<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["calendar"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn({ type: 'date', id: 'Date' });
+            dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+            var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())];
+            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalMinutes).ToArray())];
+
+            var year;
+            var month;
+            var date;
+            var i = 0;
+            while (i < dates.length) {
+                year = dates[i];
+                i++;
+                month = dates[i];
+                i++;
+                date = dates[i];
+                i++;
+                dataTable.addRow([new Date(year, month, date), values[i/3]]);
+            }
+
+
+            var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+            var options = {
+                title: "Attendance",
+                height: 350,
+            };
+
+            chart.draw(dataTable, options);
+        }
+    </script>
+
+    <div id="calendar_basic" style="width: 1000px; height: 350px;"></div>*@
+
+@*<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['timeline']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var container = document.getElementById('timeline');
+            var chart = new google.visualization.Timeline(container);
+            var dataTable = new google.visualization.DataTable();
+
+            dataTable.addColumn({ type: 'string', id: 'Date' });
+            dataTable.addColumn({ type: 'date', id: 'Start' });
+            dataTable.addColumn({ type: 'date', id: 'End' });
+            var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())];
+            var starts = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TimeIn.ToString("HH,mm,ss")).ToArray())];
+            var ends = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TimeOut.ToString("HH,mm,ss")).ToArray())];
+
+            var hourIn;
+            var hourOut;
+            var minIn;
+            var minOut;
+            var secIn;
+            var secOut;
+            var i = 0;
+            while (i < starts.length) {
+                hourIn = starts[i];
+                hourOut = ends[i];
+                i++;
+                minIn = starts[i];
+                minOut = ends[i];
+                i++;
+                secIn = starts[i];
+                secOut = ends[i];
+                i++;
+                dataTable.addRow([dates[i / 3].toString(), new Date(0, 0, 0, hourIn, minIn, secIn), new Date(0, 0, 0, hourOut, minOut, secOut)]);
+            }
+
+            //dataTable.addRows([
+            //    [ 'Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
+            //    [ 'Adams',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
+            //    [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]]);
+
+            chart.draw(dataTable);
+        }
+    </script>
+</head>
+<body>
+<div id="timeline" style="height: 180px;"></div>
+</body>
+</html>*@
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br />

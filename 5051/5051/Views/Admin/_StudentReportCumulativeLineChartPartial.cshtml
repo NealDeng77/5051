@@ -1,58 +1,40 @@
 ﻿@model _5051.Models.StudentReportViewModel
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-<div class="row justify-content-lg-center">
-    <canvas id="accumulativeChart" style="width: 100%"></canvas>
-    <script>
-        var ctx = document.getElementById("accumulativeChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.Date.ToString("dd")).ToArray())],
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
-                datasets: [{
-                    label: 'Attended',
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.5)',
-                    ],
-                    data: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.TotalHours.TotalMinutes).ToArray())],
+    function drawChart() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'Actual');
+        data.addColumn('number', 'Ideal');
+        var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("dd")).ToArray())];
+        var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalHours).ToArray())];
+        var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalHours).ToArray())];
+        for (i = 0; i < dates.length; i++) {
+            data.addRow([dates[i].toString(), values[i], expected[i]]);
+        }
 
-                    borderWidth: 1
-                }, {
-                    label: 'Expected',
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                    data: [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay == true).ToList().Select(m => m.TotalHoursExpected.TotalMinutes).ToArray())],
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            //{ calc: "stringify",
+            //    sourceColumn: 1,
+            //    type: "string",
+            //    role: "annotation" },
+            2]);
+        var options = {
+            title: 'Cumulative Hours Attended ',
+            width: 1100,
+            height: 700
 
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    fontSize: 24,
-                    text: 'Cumulative Attended Hours'
-                },
-                responsive: false,
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Date'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '# of Cummulative Hours'
-                        }
-                    }]
-                },
-            }
-        });
+        };
 
-    </script>
-</div>
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(view, options);
+    }
+</script>
+
+<div id="curve_chart"></div>
