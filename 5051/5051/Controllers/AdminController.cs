@@ -37,7 +37,7 @@ namespace _5051.Controllers
 
         // GET: Report
         /// <summary>
-        /// Returns an individual report for a student
+        /// Returns an individual monthly report for a student
         /// </summary>
         /// <param name="id">Student ID to generate Report for</param>
         /// <returns>Report data</returns>
@@ -58,7 +58,7 @@ namespace _5051.Controllers
                 Month = DateTime.UtcNow.Month
             };
 
-            var myReturn = ReportBackend.Instance.GenerateStudentReport(myReport);
+            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
             return View(myReturn);
         }
@@ -82,7 +82,33 @@ namespace _5051.Controllers
             }
 
             //generate the report
-            var myReturn = ReportBackend.Instance.GenerateStudentReport(data);
+            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: Report
+        /// <summary>
+        /// Returns an individual overall report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult StudentOverallReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new StudentReportViewModel
+            {
+                StudentId = id,
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateOverallReport(myReport);
 
             return View(myReturn);
         }

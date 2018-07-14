@@ -39,11 +39,11 @@ namespace _5051.Backend
             }
         }
         /// <summary>
-        /// Generate the report for the model passed in
+        /// Generate monthly report
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
-        public StudentReportViewModel GenerateStudentReport(StudentReportViewModel report)
+        public StudentReportViewModel GenerateMonthlyReport(StudentReportViewModel report)
         {
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
@@ -52,6 +52,38 @@ namespace _5051.Backend
             report.DateStart = new DateTime(report.Year, report.Month, 1);
             report.DateEnd = new DateTime(report.Year, report.Month, DateTime.DaysInMonth(report.Year, report.Month));
 
+
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+        /// <summary>
+        /// Generate overall report
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public StudentReportViewModel GenerateOverallReport(StudentReportViewModel report)
+        {
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+
+            //set start date and end date
+            report.DateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            report.DateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+
+
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+
+        /// <summary>
+        /// Generate the report from the start date to the end date
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        private StudentReportViewModel GenerateReportFromStartToEnd(StudentReportViewModel report)
+        {
             // Don't go beyond today, don't include today
             if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
             {
@@ -128,7 +160,7 @@ namespace _5051.Backend
                                 }
                             }
 
-                            temp.AttendanceStatus = AttendanceStatusEnum.Present;                            
+                            temp.AttendanceStatus = AttendanceStatusEnum.Present;
                             temp.TimeIn = item.In;
                             temp.TimeOut = item.Out;
                             temp.HoursAttended += tempDuration;
@@ -137,7 +169,7 @@ namespace _5051.Backend
                         }
 
                         //calculations for present records
-                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes );
+                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);
 
                     }
                     //calculations for both absent and present records                    
@@ -168,8 +200,6 @@ namespace _5051.Backend
 
             return report;
         }
-
-
 
         /// <summary>
         /// Calculate the effective duration, in/out status of the given attendance record

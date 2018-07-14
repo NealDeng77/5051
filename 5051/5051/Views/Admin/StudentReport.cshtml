@@ -7,6 +7,15 @@
     <br />
     <h4>@Model.Student.Name's Monthly Report</h4>
     <h5>@Model.DateStart.ToString("M") to @Model.DateEnd.ToString("M") @Model.Year</h5>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            @Html.ActionLink("Monthly", "StudentReport", "Admin", new { id = Model.StudentId}, new { @class = "nav-link active" }) 
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Overall", "StudentOverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link" })
+        </li>
+    </ul>
+    <br/>
     <div>
         @using (Html.BeginForm())
         {

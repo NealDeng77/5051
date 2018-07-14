@@ -97,6 +97,7 @@ namespace _5051.Backend
                         case 0: //Perfect
                             temp.In = InGood(currentDate, r);
                             temp.Out = OutAuto(currentDate, r);
+                            temp.Emotion = (EmotionStatusEnum)(rn+1);
                             myStudent.Attendance.Add(temp);
                             break;
                         case 1: //Good

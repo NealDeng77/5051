@@ -1,0 +1,116 @@
+﻿@model _5051.Models.StudentReportViewModel
+
+@{
+    ViewBag.Title = "StudentOverallReport";
+}
+
+<div class="text-center">
+    <br />
+    <h4>@Model.Student.Name's Overall Report</h4>
+    <h5>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h5>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            @Html.ActionLink("Monthly", "StudentReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link " })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Overall", "StudentOverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active" })
+        </li>
+    </ul>
+    <br />
+</div>
+<div class="card">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["calendar"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn({ type: 'date', id: 'Date' });
+            dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+            var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())];
+            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours).ToArray())];
+
+            var year;
+            var month;
+            var date;
+            var i = 0;
+            while (i < dates.length) {
+                year = dates[i];
+                i++;
+                month = dates[i] - 1;
+                i++;
+                date = dates[i];
+                i++;
+                dataTable.addRow([new Date(year, month, date), values[i/3-1]]);
+            }
+
+
+            var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+            var options = {
+                title: "Attendance",
+                height: 350,
+                colorAxis: {
+                    minValue: 0,
+                    maxValue: 6.9
+                }
+
+            };
+
+            chart.draw(dataTable, options);
+        }
+    </script>
+
+    <div id="calendar_basic" style="width: 1000px; height: 350px; margin: 100px"></div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr class="thead">
+                <th>Attendance Status</th>
+                <th>Days</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Present</td>
+                <td>@Model.Stats.DaysPresent</td>
+                <td>@Model.Stats.PercPresent%</td>
+            </tr>
+            <tr>
+                <td>Absent Unexcused</td>
+                <td>@Model.Stats.DaysAbsentUnexcused</td>
+                <td>@Model.Stats.PercUnexcused%</td>
+            </tr>
+            <tr>
+                <td>Absent Excused</td>
+                <td>@Model.Stats.DaysAbsentExcused</td>
+                <td>@Model.Stats.PercExcused%</td>
+            </tr>
+            <tr>
+                <td>In Late</td>
+                <td>@Model.Stats.DaysLate</td>
+                <td>@Model.Stats.PercInLate%</td>
+            </tr>
+            <tr>
+                <td>Out Early</td>
+                <td>@Model.Stats.DaysOutEarly</td>
+                <td>@Model.Stats.PercOutEarly%</td>
+            </tr>
+            <tr>
+                <td>Total Days</td>
+                <td>@Model.Stats.NumOfSchoolDays</td>
+                <td>100%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<br/>
+<br />
+<br />
+<br />
+<br />

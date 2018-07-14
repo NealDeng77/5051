@@ -14,18 +14,11 @@
         var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalHours).ToArray())];
         var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalHours).ToArray())];
         for (i = 0; i < dates.length; i++) {
-            data.addRow([dates[i].toString(), values[i], expected[i]]);
+            data.addRow([dates[i].toString(), expected[i], values[i] ]);
         }
 
-        var view = new google.visualization.DataView(data);
-        view.setColumns([0, 1,
-            //{ calc: "stringify",
-            //    sourceColumn: 1,
-            //    type: "string",
-            //    role: "annotation" },
-            2]);
         var options = {
-            title: 'Cumulative Hours Attended ',
+            title: 'Cumulative Hours Attended in @Model.DateStart.ToString("MMM")',
             width: 1100,
             height: 700
 
@@ -33,7 +26,7 @@
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(view, options);
+        chart.draw(data, options);
     }
 </script>
 

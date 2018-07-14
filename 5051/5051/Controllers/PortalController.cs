@@ -380,7 +380,7 @@ namespace _5051.Controllers
                 Month = DateTime.UtcNow.Month
             };
 
-            var myReturn = ReportBackend.Instance.GenerateStudentReport(myReport);
+            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
             return View(myReturn);
         }
