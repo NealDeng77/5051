@@ -163,15 +163,15 @@ body,html{
 }
 
 .IncludeBackgroundImageDay{
-    background-image:url("/content/img/BackgroundDayTime.png");
+    background-image:url("/content/img/BackgroundDayTime_min.png");
     height:100%;
     background-position:center;
     background-repeat:no-repeat;
     background-size:cover;
 }
 
-.IncludeBackgroundImageNight{
-    background-image: url("/content/img/BackgroundNitetime.png");
+.IncludeBackgroundImageNight {
+    background-image: url("/content/img/BackgroundNitetime_min.png");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -180,7 +180,7 @@ body,html{
 
 
 .IncludeBackgroundImageSunset {
-    background-image: url("/content/img/BackgroundSunset.png");
+    background-image: url("/content/img/BackgroundSunset_min.png");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;

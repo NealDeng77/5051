@@ -274,8 +274,11 @@
     <Content Include="Content\img\avatar9.png" />
     <Content Include="Content\img\AvatarLevel.png" />
     <Content Include="Content\img\BackgroundDaytime.png" />
+    <Content Include="Content\img\BackgroundDaytime_min.png" />
     <Content Include="Content\img\BackgroundNitetime.png" />
+    <Content Include="Content\img\BackgroundNitetime_min.png" />
     <Content Include="Content\img\BackgroundSunset.png" />
+    <Content Include="Content\img\BackgroundSunset_min.png" />
     <Content Include="Content\img\CalendarEditIcon.png" />
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\CheckMark.png" />
