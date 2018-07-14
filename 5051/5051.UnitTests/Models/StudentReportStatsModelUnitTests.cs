@@ -31,12 +31,6 @@ namespace _5051.UnitTests.Models
             var expectDaysLate = 7;
             var expectDaysOutsAuto = 7;
             var expectDaysOutEarly = 3;
-            var expectDaysStayed = 8;
-            var expectDaysLeftEarly = 9;
-            var expectDaysOnTimeStayed = 10;
-            var expectDaysOnTimeLeft = 11;
-            var expectDaysLateStayed = 12;
-            var expectDaysLateLeft = 13;
             var expectPercPresent = 100 * expectDaysPresent / (expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused);
             var expectPercAttendedHours = 100 * expectTotalHoursAttended / (expectTotalHoursAttended + expectTotalHoursMissing);
             var expectPercExcused = 100 * expectDaysAbsentExcused / (expectDaysPresent + expectDaysAbsentExcused + expectDaysAbsentUnexcused);

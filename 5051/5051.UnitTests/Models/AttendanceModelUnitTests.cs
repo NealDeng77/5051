@@ -35,9 +35,6 @@ namespace _5051.UnitTests.Models
             var expectOut = DateTime.UtcNow;
             var expectStatus = _5051.Models.StudentStatusEnum.In;
             var expectDuration = TimeSpan.Zero;
-            var expectAttendanceStatus = _5051.Models.Enums.AttendanceStatusEnum.Unknown;
-            var expectCheckInstatus = _5051.Models.Enums.CheckInStatusEnum.Unknown;
-            var expectCheckOutstatus = _5051.Models.Enums.CheckOutStatusEnum.Unknown;
             var expectEmotion = _5051.Models.EmotionStatusEnum.Neutral;
 
             // Act
