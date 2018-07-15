@@ -69,6 +69,7 @@
     <Compile Include="Backend\ShopInventoryDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\StudentBackendHelperUnitTests.cs" />
     <Compile Include="Backend\StudentBackendUnitTests.cs" />
     <Compile Include="Backend\StudentDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
