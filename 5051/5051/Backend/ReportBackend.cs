@@ -194,8 +194,8 @@ namespace _5051.Backend
                     (int)(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
                 report.Stats.PercExcused = report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays;
                 report.Stats.PercUnexcused = report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays;
-                report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.NumOfSchoolDays;
-                report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.DaysPresent;
+                report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent;
             }
 
             return report;
