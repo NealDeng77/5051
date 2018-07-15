@@ -59,6 +59,7 @@
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\ReportBackendUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarBackendUnitTests.cs" />
     <Compile Include="Backend\ShopInventoryBackendUnitTests.cs" />
     <Compile Include="Backend\AvatarBackendUnitTests.cs" />
