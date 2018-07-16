@@ -187,15 +187,53 @@ body,html{
     background-size: cover;
 }
 
-.FontName{
-
+.FontName {
+    font-family: Sans-Serif;
 }
 
-.FontSize1{
-    font-size:14px;
+.FontStyleBlockH1 {
+    font-family: Sans-Serif;
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    word-spacing: 6px;
+    margin: 0px auto;
+    position: relative;
 }
 
-.FontColorBold{
-    font-weight:bold;
+.FontColor1 {
+    color: white;
+}
+
+.FontColorBold {
+    color: white;
+    font-weight: bold;
+}
+
+div.block1 {
+    border-radius: 25px;
+    background-color: #202021 !important;
+    height: 400px;
+    width: 600px;
+    opacity: 0.85;
+    margin: 0 auto;
+}
+
+.btn1 {
+    border-radius: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.input1 {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 45px;
+    max-width: 100%;
+    padding-left : 15px;
 }
 
