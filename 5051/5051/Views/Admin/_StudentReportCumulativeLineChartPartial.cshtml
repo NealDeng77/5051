@@ -14,7 +14,7 @@
         var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalHours).ToArray())];
         var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalHours).ToArray())];
         for (i = 0; i < dates.length; i++) {
-            data.addRow([dates[i].toString(), expected[i], values[i] ]);
+            data.addRow([dates[i].toString(), values[i], expected[i]]);
         }
 
         var options = {
