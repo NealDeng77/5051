@@ -15,7 +15,7 @@ namespace _5051.UnitTests.Models
         public TestContext TestContext { get; set; }
 
         [TestMethod]
-        public void Backend_ReportBackend_GenerateOVerallReport_Valid_Report_Should_Pass()
+        public void Backend_ReportBackend_GenerateOverallReport_Valid_Report_Should_Pass()
         {
             //arrange
             var reportBackend = ReportBackend.Instance;
@@ -37,16 +37,14 @@ namespace _5051.UnitTests.Models
             var result = reportBackend.GenerateOverallReport(testReport);
 
             //reset
-            //reportBackend.Reset();
             studentBackend.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-
         [TestMethod]
-        public void Backend_ReportBackend_GenerateMonthlyReport_Valid_Report_Pass()
+        public void Backend_ReportBackend_GenerateMonthlyReport_Valid_Report_Should_Pass()
         {
             //arrange
             var reportBackend = ReportBackend.Instance;
@@ -71,6 +69,63 @@ namespace _5051.UnitTests.Models
 
             //reset
             //reportBackend.Reset();
+            studentBackend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_ReportBackend_CalculateDurationInOutStatus_Valid_Report_CheckOut_DoneAuto_Should_Pass()
+        {
+            //arrange
+            var reportBackend = ReportBackend.Instance;
+            var testReport = new StudentReportViewModel();
+            var studentBackend = StudentBackend.Instance;
+            var testStudent = studentBackend.GetDefault();
+            testReport.Student = testStudent;
+            testReport.StudentId = testStudent.Id;
+            var testStudentAttendance1 = new AttendanceModel();
+            testStudentAttendance1.In = new DateTime(2018, 1, 15);
+            testStudentAttendance1.Out = new DateTime(2018, 1, 15, 23, 59, 59);
+            testStudent.Attendance.Add(testStudentAttendance1);
+            testReport.Stats.DaysPresent = 1;
+            testReport.DateEnd = DateTime.UtcNow;
+            testReport.Year = DateTime.UtcNow.Year;
+            testReport.Month = DateTime.UtcNow.Month;
+
+            //act
+            var result = reportBackend. GenerateOverallReport(testReport);
+
+            //reset
+            studentBackend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_ReportBackend_CalculateDurationInOutStatus_Valid_Report_CheckIn_Late_Should_Pass()
+        {
+            //arrange
+            var reportBackend = ReportBackend.Instance;
+            var testReport = new StudentReportViewModel();
+            var studentBackend = StudentBackend.Instance;
+            var testStudent = studentBackend.GetDefault();
+            testReport.Student = testStudent;
+            testReport.StudentId = testStudent.Id;
+            var testStudentAttendance1 = new AttendanceModel();
+            testStudentAttendance1.In = new DateTime(2018, 1, 15, 12, 0, 0);
+            testStudent.Attendance.Add(testStudentAttendance1);
+            testReport.Stats.DaysPresent = 1;
+            testReport.DateEnd = DateTime.UtcNow;
+            testReport.Year = DateTime.UtcNow.Year;
+            testReport.Month = DateTime.UtcNow.Month;
+
+            //act
+            var result = reportBackend.GenerateOverallReport(testReport);
+
+            //reset
             studentBackend.Reset();
 
             //assert
