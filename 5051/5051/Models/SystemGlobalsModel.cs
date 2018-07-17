@@ -37,5 +37,8 @@ namespace _5051.Models
         // The Enum to use for the current data source
         // Default to Mock
         public DataSourceEnum DataSourceValue = DataSourceEnum.Mock;
+
+        //The current date
+        public DateTime CurrentDate = DateTime.MinValue;
     }
 }

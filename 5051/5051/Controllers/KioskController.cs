@@ -32,12 +32,17 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            //Reset all Student Status to "Out"
             //TOdo: refactor this to backend
-            foreach (var item in myDataList)
+            if (SystemGlobalsModel.Instance.CurrentDate.ToShortDateString() != DateTime.UtcNow.ToShortDateString())
             {
-                item.Status = StudentStatusEnum.Out;
+                //Reset all Student Status to "Out"
+                foreach (var item in myDataList)
+                {
+                    item.Status = StudentStatusEnum.Out;
+                }
+                SystemGlobalsModel.Instance.CurrentDate = DateTime.UtcNow;
             }
+
 
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);       
