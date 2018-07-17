@@ -76,6 +76,30 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
+        public void Backend_ReportBackend_GenerateMonthlyReport_Month_Is_Out_Of_School_Calendar_Range_Should_Pass()
+        {
+            //arrange
+            var reportBackend = ReportBackend.Instance;
+            var testReport = new StudentReportViewModel();
+            var studentBackend = StudentBackend.Instance;
+            var testStudent = studentBackend.GetDefault();
+            testReport.Student = testStudent;
+            testReport.StudentId = testStudent.Id;
+            testReport.Year = 2010;
+            testReport.Month = 6;
+
+            //act
+            var result = reportBackend.GenerateMonthlyReport(testReport);
+
+            //reset
+            //reportBackend.Reset();
+            studentBackend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_ReportBackend_CalculateDurationInOutStatus_Valid_Report_CheckOut_DoneAuto_Should_Pass()
         {
             //arrange
