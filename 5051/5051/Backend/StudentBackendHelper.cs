@@ -86,7 +86,7 @@ namespace _5051.Backend
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
                 // if the day is a school day
-                if (myToday != null && myToday.SchoolDay)
+                if (myToday.SchoolDay)
                 {
                     //generate a random number 0-4 inclusive, use this to randomly generate 5 scenarios
                     int rn = r.Next(0, 5);
