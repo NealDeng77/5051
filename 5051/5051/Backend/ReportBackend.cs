@@ -165,9 +165,9 @@ namespace _5051.Backend
                             temp.TimeOut = item.Out;
                             temp.HoursAttended += tempDuration;
                             temp.Emotion = item.Emotion;
-                            CalculateDaysInOutStats(temp, report.Stats);
+                            
                         }
-
+                        CalculateDaysInOutStats(temp, report.Stats);
                         //calculations for present records
                         temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);
 
