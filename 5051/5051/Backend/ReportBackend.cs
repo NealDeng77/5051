@@ -87,7 +87,7 @@ namespace _5051.Backend
             // Don't go beyond today, don't include today
             if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
             {
-                report.DateEnd = DateTime.UtcNow.Date.AddDays(-1);
+                report.DateEnd = DateTime.UtcNow.Date.AddDays(1);
             }
 
             var currentDate = report.DateStart;
@@ -194,8 +194,11 @@ namespace _5051.Backend
                     (int)(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
                 report.Stats.PercExcused = report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays;
                 report.Stats.PercUnexcused = report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays;
-                report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.DaysPresent;
-                report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent;
+                if (report.Stats.DaysPresent > 0)
+                {
+                    report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.DaysPresent;
+                    report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent;
+                }
             }
 
             return report;
