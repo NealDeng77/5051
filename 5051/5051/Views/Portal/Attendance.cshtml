@@ -45,12 +45,9 @@
                                 </div>
                                 <div class="col-sm-6">
                                     Out<br />
-                                    @{
-                                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                        {
-                                            @item.Out.ToShortTimeString()<br />
-                                        }
-                                    }
+
+                                    @item.Out.ToShortTimeString()<br />
+
                                 </div>
                             </div>
 
@@ -58,26 +55,26 @@
                                 <div class="col">
                                     <h4>@item.Emotion</h4>
                                 </div>
-                                
+
                             </div>
                             @*<div class="row">
-                                <br />
-                                Duration<br />
-                                @{
-                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                    {
-                                        <span>
-                                            @item.Duration.Hours Hours<br />
-                                            @item.Duration.Minutes Minutes<br />
-                                        </span>
+                                    <br />
+                                    Duration<br />
+                                    @{
+                                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                        {
+                                            <span>
+                                                @item.Duration.Hours Hours<br />
+                                                @item.Duration.Minutes Minutes<br />
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <br />
+                                            <br />
+                                        }
                                     }
-                                    else
-                                    {
-                                        <br />
-                                        <br />
-                                    }
-                                }
-                            </div>*@
+                                </div>*@
                         </div>
                     </div>
                 }

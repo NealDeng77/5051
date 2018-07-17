@@ -133,32 +133,32 @@ namespace _5051.Backend
                             //calculate effective duration
                             var tempDuration = CalculateDurationAndInOutStatus(item, myToday, temp);
 
-                            if (item.Status == StudentStatusEnum.In)
-                            {
-                                // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
-                                var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
+                            //if (item.Status == StudentStatusEnum.In)
+                            //{
+                            //    // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
+                            //    var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
 
-                                // If the person is still checked in, and the day is over, then check them out.
-                                if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
-                                {
+                            //    // If the person is still checked in, and the day is over, then check them out.
+                            //    if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
+                            //    {
 
-                                    var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
-                                    //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-                                    item.Out = DateTime.Parse(myDate);
-                                    item.Status = StudentStatusEnum.Out;
+                            //        var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
+                            //        //Add the current date of Item, with the end time for the default date, and return that back as a date time.
+                            //        item.Out = DateTime.Parse(myDate);
+                            //        item.Status = StudentStatusEnum.Out;
 
-                                    // Log the student out as well.
-                                    report.Student.Status = StudentStatusEnum.Out;
+                            //        // Log the student out as well.
+                            //        report.Student.Status = StudentStatusEnum.Out;
 
-                                    // Update the change for that item be rewriting the student record back to the datastore
-                                    DataSourceBackend.Instance.StudentBackend.Update(report.Student);
-                                }
-                                else
-                                {
-                                    // If the person is still checked in, and it is today, use now and add up till then.
-                                    tempDuration = DateTime.UtcNow.Subtract(item.In);
-                                }
-                            }
+                            //        // Update the change for that item be rewriting the student record back to the datastore
+                            //        DataSourceBackend.Instance.StudentBackend.Update(report.Student);
+                            //    }
+                            //    else
+                            //    {
+                            //        // If the person is still checked in, and it is today, use now and add up till then.
+                            //        tempDuration = DateTime.UtcNow.Subtract(item.In);
+                            //    }
+                            //}
 
                             temp.AttendanceStatus = AttendanceStatusEnum.Present;
                             temp.TimeIn = item.In;

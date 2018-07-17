@@ -26,7 +26,7 @@ namespace _5051.Models
         /// <summary>
         /// Status of the transaction (in, out, hold)
         /// </summary>
-        public StudentStatusEnum Status { get; set; }
+        //public StudentStatusEnum Status { get; set; }  //removed this property for now because I don't see it useful
 
         /// <summary>
         /// The emotion state
@@ -36,7 +36,7 @@ namespace _5051.Models
         public AttendanceModel()
         {
             In = DateTime.UtcNow;
-            Status = StudentStatusEnum.In;
+            //Status = StudentStatusEnum.In;
             Emotion = EmotionStatusEnum.Neutral;
         }
     }

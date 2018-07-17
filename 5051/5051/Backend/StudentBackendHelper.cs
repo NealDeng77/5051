@@ -65,7 +65,7 @@ namespace _5051.Backend
             var myStudent = StudentBackend.Instance.Index()[index];
 
             // Set current date to be 1 less than the start day, because will get added in the for loop
-            DateTime currentDate = dateStart.AddDays(-1);
+            DateTime currentDate = dateStart;
 
             //To generate random numbers, since seed is fixed, the numbers generated will be same in every run
             Random r = new Random(0);
@@ -73,14 +73,13 @@ namespace _5051.Backend
             while (currentDate.CompareTo(dateEnd) < 0)
             {
 
-                // Look to the next day
-                currentDate = currentDate.AddDays(1);
+
 
                 // Create an attendance model for this student
                 var temp = new AttendanceModel
                 {
                     StudentId = myStudent.Id,
-                    Status = StudentStatusEnum.Out
+                    //Status = StudentStatusEnum.Out
                 };
 
                 // Get the school day info for current date
@@ -180,7 +179,11 @@ namespace _5051.Backend
                         case 4: //None
                             break;
                     }
+
                 }
+
+                // Look to the next day
+                currentDate = currentDate.AddDays(1);
             }
         }
 

@@ -31,8 +31,16 @@ namespace _5051.Controllers
                 // Send to Error Page
                 return RedirectToAction("Error", "Home");
             }
+
+            //Reset all Student Status to "Out"
+            //TOdo: refactor this to backend
+            foreach (var item in myDataList)
+            {
+                item.Status = StudentStatusEnum.Out;
+            }
+
             var StudentViewModel = new StudentViewModel(myDataList);
-            return View(StudentViewModel);
+            return View(StudentViewModel);       
         }
 
         // GET: Kiosk/SetLogout/5

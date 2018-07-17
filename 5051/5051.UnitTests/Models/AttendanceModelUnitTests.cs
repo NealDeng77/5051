@@ -33,7 +33,7 @@ namespace _5051.UnitTests.Models
             var expectStudentId = "GoodID1";
             var expectIn = DateTime.UtcNow;
             var expectOut = DateTime.UtcNow;
-            var expectStatus = _5051.Models.StudentStatusEnum.In;
+            //var expectStatus = _5051.Models.StudentStatusEnum.In;
             var expectDuration = TimeSpan.Zero;
             var expectEmotion = _5051.Models.EmotionStatusEnum.Neutral;
 
@@ -41,14 +41,14 @@ namespace _5051.UnitTests.Models
             result.StudentId = expectStudentId;
             result.In = expectIn;
             result.Out = expectOut;
-            result.Status = expectStatus;
+            //result.Status = expectStatus;
             result.Emotion = expectEmotion;
 
             // Assert
             Assert.AreEqual(expectStudentId, result.StudentId, TestContext.TestName);
             Assert.AreEqual(expectIn, result.In, TestContext.TestName);
             Assert.AreEqual(expectOut, result.Out, TestContext.TestName);
-            Assert.AreEqual(expectStatus, result.Status, TestContext.TestName);
+            //Assert.AreEqual(expectStatus, result.Status, TestContext.TestName);
             Assert.AreEqual(expectEmotion, result.Emotion, TestContext.TestName);
         }
         #endregion Instantiate

@@ -99,10 +99,11 @@ namespace _5051.Backend
 
             myReturn.EmotionCurrent = EmotionStatusEnum.Neutral;
 
+            //Todo: refactor this to a different location
             if (myReturn.Attendance.Any())
             {
                 // Set the current emotion, to the last check in status emotion
-                var temp = myReturn.Attendance.LastOrDefault(m => m.Status == StudentStatusEnum.In);
+                var temp = myReturn.Attendance.LastOrDefault(/*m => m.Status == StudentStatusEnum.In*/);
 
                 if (temp != null)
                 {
@@ -183,15 +184,20 @@ namespace _5051.Backend
 
             data.Status = StudentStatusEnum.In;
 
-            // Update the Attendance Log, to track when the student logged out.
-            var Temp = new AttendanceModel
+            // Update the Attendance Log
+            var temp = new AttendanceModel
             {
                 In = DateTime.UtcNow,
-                Status = data.Status,
                 Emotion = data.EmotionCurrent
             };
 
-            data.Attendance.Add(Temp);
+            //Set the time out to be default time out. If the student checks out himself, just update the time out.
+            var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(temp.In);
+            var myDate = temp.In.ToShortDateString() + " " + myItemDefault.TimeEnd;
+            //Add the current date of Item, with the end time for the default date, and return that back as a date time.
+            temp.Out = DateTime.Parse(myDate);
+
+            data.Attendance.Add(temp);
 
         }
 
@@ -214,14 +220,11 @@ namespace _5051.Backend
                 return;
             }
 
-            // Remove the old item from the list
-            data.Attendance.Remove(myTimeData);
 
             // Add the new one it with the new data
             myTimeData.Out = DateTime.UtcNow;
-            myTimeData.Status = data.Status;
+            //myTimeData.Status = data.Status;
 
-            data.Attendance.Add(myTimeData);
 
         }
 

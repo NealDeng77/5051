@@ -102,7 +102,7 @@ namespace _5051.Models
             }
 
             DayFirst = DateTime.Parse("09/01/"+Year.ToString());
-            DayLast =  DateTime.Parse("06/30/"+(Year+1).ToString()); 
+            DayLast =  DateTime.Parse("06/30/"+(Year+2).ToString()); 
         }
 
         /// <summary>
