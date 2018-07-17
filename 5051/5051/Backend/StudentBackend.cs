@@ -279,6 +279,22 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// If date has changed, reset all students' status to out.
+        /// </summary>
+        public void ResetAllStatus()
+        {
+            if (SystemGlobalsModel.Instance.CurrentDate.ToShortDateString() != DateTime.UtcNow.ToShortDateString())
+            {
+                //Reset all Student Status to "Out"
+                foreach (var item in Index())
+                {
+                    item.Status = StudentStatusEnum.Out;
+                }
+                SystemGlobalsModel.Instance.CurrentDate = DateTime.UtcNow;
+            }
+        }
+
+        /// <summary>
         /// Helper function that resets the DataSource, and rereads it.
         /// </summary>
         public void Reset()
