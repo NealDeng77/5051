@@ -236,8 +236,16 @@ namespace _5051.Backend
             {
                 attendanceReport.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
             }
+            var duration = end.Subtract(start);
 
-            return end.Subtract(start);
+            //If time-in is later than time out, just return 0
+            //Todo: prevent it from happening in kiosk
+            if (duration < TimeSpan.Zero)
+            {
+                return TimeSpan.Zero;
+            }
+
+            return duration;
         }
 
         /// <summary>
