@@ -85,6 +85,68 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
+        public void Controller_Admin_Student_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            StudentReportViewModel data = null;
+            
+            // Act
+            var result = (RedirectToRouteResult)controller.StudentReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Student_Report_Post_Data_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            StudentReportViewModel data = new StudentReportViewModel
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                Year = 2017,
+                Month = 10
+            };
+
+            // Act
+            var result = controller.StudentReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Overall_Report_Id_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            var result = controller.StudentOverallReport(id);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Overall_ReportId_Is_Not_Valid_Should_Return_Error_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            string id = "abc";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.StudentOverallReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+
+        [TestMethod]
         public void Controller_Admin_Attendance_Default_Should_Pass()
         {
             // Arrange
