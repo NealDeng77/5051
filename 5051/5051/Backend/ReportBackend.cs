@@ -189,15 +189,15 @@ namespace _5051.Backend
             //if there is at least one school days in this report, calculate the following stats
             if (report.Stats.NumOfSchoolDays > 0)
             {
-                report.Stats.PercPresent = report.Stats.DaysPresent * 100 / report.Stats.NumOfSchoolDays;
+                report.Stats.PercPresent = (int)Math.Round((double)report.Stats.DaysPresent * 100 / report.Stats.NumOfSchoolDays);
                 report.Stats.PercAttendedHours =
-                    (int)(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
-                report.Stats.PercExcused = report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays;
-                report.Stats.PercUnexcused = report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays;
+                    (int)Math.Round(report.Stats.AccumlatedTotalHours.TotalHours * 100 / report.Stats.AccumlatedTotalHoursExpected.TotalHours);
+                report.Stats.PercExcused = (int)Math.Round((double)report.Stats.DaysAbsentExcused * 100 / report.Stats.NumOfSchoolDays);
+                report.Stats.PercUnexcused = (int)Math.Round((double)report.Stats.DaysAbsentUnexcused * 100 / report.Stats.NumOfSchoolDays);
                 if (report.Stats.DaysPresent > 0)
                 {
-                    report.Stats.PercInLate = report.Stats.DaysLate * 100 / report.Stats.DaysPresent;
-                    report.Stats.PercOutEarly = report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent;
+                    report.Stats.PercInLate = (int)Math.Round((double)report.Stats.DaysLate * 100 / report.Stats.DaysPresent);
+                    report.Stats.PercOutEarly = (int)Math.Round((double)report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent);
                 }
             }
 
