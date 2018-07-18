@@ -70,6 +70,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -105,6 +106,7 @@
     <Compile Include="Backend\StudentDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\AvatarDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\UTCConversionsBackendUnitTests.cs" />
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />

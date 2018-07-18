@@ -210,6 +210,7 @@
     <Compile Include="Backend\AvatarBackend.cs" />
     <Compile Include="Backend\AvatarDataSourceMock.cs" />
     <Compile Include="Backend\AvatarInterface.cs" />
+    <Compile Include="Backend\UTCConversionsBackend.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
