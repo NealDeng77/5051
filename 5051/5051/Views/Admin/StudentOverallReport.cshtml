@@ -19,16 +19,63 @@
     <hr>
 </div>
 <div class="card" style="padding: 30px">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Attendance Status</th>
+            <th>Days</th>
+            <th>Percentage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Present</td>
+            <td>@Model.Stats.DaysPresent</td>
+            <td>@Model.Stats.PercPresent%</td>
+        </tr>
+        <tr>
+            <td>Absent Unexcused</td>
+            <td>@Model.Stats.DaysAbsentUnexcused</td>
+            <td>@Model.Stats.PercUnexcused%</td>
+        </tr>
+        <tr>
+            <td>Absent Excused</td>
+            <td>@Model.Stats.DaysAbsentExcused</td>
+            <td>@Model.Stats.PercExcused%</td>
+        </tr>
+        <tr>
+            <td>In Late</td>
+            <td>@Model.Stats.DaysLate</td>
+            <td>@Model.Stats.PercInLate%</td>
+        </tr>
+        <tr>
+            <td>Out Early</td>
+            <td>@Model.Stats.DaysOutEarly</td>
+            <td>@Model.Stats.PercOutEarly%</td>
+        </tr>
+        <tr>
+            <td>Total Days</td>
+            <td>@Model.Stats.NumOfSchoolDays</td>
+            <td>100%</td>
+        </tr>
+        </tbody>
+    </table>
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load("current", { packages: ["calendar"] });
         google.charts.setOnLoadCallback(drawChart);
+
         function drawChart() {
             var dataTable = new google.visualization.DataTable();
             dataTable.addColumn({ type: 'date', id: 'Date' });
             dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
-            var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())];
-            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours.ToString("0.##")).ToArray())];
+            var dates = [
+                @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
+            ];
+            var values = [
+                @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours.ToString("0.##")).ToArray())
+            ];
 
             var year;
             var month;
@@ -41,7 +88,7 @@
                 i++;
                 date = dates[i];
                 i++;
-                dataTable.addRow([new Date(year, month, date), values[i/3-1]]);
+                dataTable.addRow([new Date(year, month, date), values[i / 3 - 1]]);
             }
 
 
@@ -65,47 +112,7 @@
 
 
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Attendance Status</th>
-                <th>Days</th>
-                <th>Percentage</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Present</td>
-                <td>@Model.Stats.DaysPresent</td>
-                <td>@Model.Stats.PercPresent%</td>
-            </tr>
-            <tr>
-                <td>Absent Unexcused</td>
-                <td>@Model.Stats.DaysAbsentUnexcused</td>
-                <td>@Model.Stats.PercUnexcused%</td>
-            </tr>
-            <tr>
-                <td>Absent Excused</td>
-                <td>@Model.Stats.DaysAbsentExcused</td>
-                <td>@Model.Stats.PercExcused%</td>
-            </tr>
-            <tr>
-                <td>In Late</td>
-                <td>@Model.Stats.DaysLate</td>
-                <td>@Model.Stats.PercInLate%</td>
-            </tr>
-            <tr>
-                <td>Out Early</td>
-                <td>@Model.Stats.DaysOutEarly</td>
-                <td>@Model.Stats.PercOutEarly%</td>
-            </tr>
-            <tr>
-                <td>Total Days</td>
-                <td>@Model.Stats.NumOfSchoolDays</td>
-                <td>100%</td>
-            </tr>
-        </tbody>
-    </table>
+
 </div>
 
 
