@@ -258,8 +258,13 @@ namespace _5051.Controllers
         /// <param name="id">Student Id</param>
         /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult House(string id = null)
+        public ActionResult Visit(string id = null)
         {
+            // Get the list of other students' shop
+            // it will show the name of the student's shop and its owner 
+
+            // then, once students click on the specific student's shop
+            // he/she can go visiting it
             var myStudent = Backend.StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
