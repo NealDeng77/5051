@@ -68,7 +68,7 @@ namespace _5051.Backend
         public static DateTime FromClientTime(this DateTime dt)
         {
 
-            dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            //dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 
             // read the value from session
             var timeOffSet = HttpContext.Current.Session["timezoneoffset"];
@@ -80,6 +80,7 @@ namespace _5051.Backend
             }
             else
             {
+                dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
                 timeOffSet = HttpContext.Current.Session["timezoneoffset"];
             }
 
