@@ -37,11 +37,11 @@
                 {
                     <div class="col-sm-2" style="border:solid 1px; margin-right:5px">
                         <div class="BoxWithHighlightHover">
-                            @item.In.ToShortDateString()<br />
+                            @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortDateString()<br />
                             <div class="row">
                                 <div class="col-sm-6">
                                     In<br />
-                                    @item.In.ToShortTimeString()<br />
+                                    @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortTimeString()<br />
                                 </div>
                                 <div class="col-sm-6">
                                     Out<br />

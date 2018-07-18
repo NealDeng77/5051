@@ -9,7 +9,7 @@ namespace _5051.Controllers
     /// <summary>
     /// Home Controller is the default controller
     /// </summary>
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         /// <summary>
         /// The Home page for the site

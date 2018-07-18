@@ -237,3 +237,11 @@ div.block1 {
     padding-left : 15px;
 }
 
+
+.btn-light {
+}
+    .btn-light:hover, .btn-light:focus, .btn-light:active, .btn-light.active {
+        background-color: slategray;
+    }
+
+

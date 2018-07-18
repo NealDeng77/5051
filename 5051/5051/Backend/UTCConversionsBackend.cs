@@ -68,21 +68,18 @@ namespace _5051.Backend
         public static DateTime FromClientTime(this DateTime dt)
         {
 
-            //dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+            dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 
             // read the value from session
-            //var timeOffSet = HttpContext.Current.Session["timezoneoffset"];
-            object timeOffSet;
+            var timeOffSet = HttpContext.Current.Session["timezoneoffset"];
 
             // if there is no offset in session return the datetime in server timezone
-            //if (timeOffSet == null)
-            if (HttpContext.Current == null || HttpContext.Current.Session == null)
+            if (timeOffSet == null)
             {
                 return dt.ToUniversalTime();
             }
             else
             {
-                dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
                 timeOffSet = HttpContext.Current.Session["timezoneoffset"];
             }
 

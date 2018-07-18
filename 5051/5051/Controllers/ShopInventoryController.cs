@@ -7,7 +7,7 @@ namespace _5051.Controllers
     /// <summary>
     /// ShopInventory Contoller manages the ShopInventory web pages including how to make new ones, change them, and delete them
     /// </summary>
-    public class ShopInventoryController : Controller
+    public class ShopInventoryController : BaseController
     {
         // A ViewModel used for the ShopInventory that contains the ShopInventoryList
         private ShopInventoryViewModel ShopInventoryViewModel = new ShopInventoryViewModel();

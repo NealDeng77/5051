@@ -8,7 +8,7 @@ namespace _5051.Controllers
     /// <summary>
     /// Controller for the Admin section of the website
     /// </summary>
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         // A ViewModel used for the Student that contains the StudentList
         private StudentViewModel StudentViewModel = new StudentViewModel();

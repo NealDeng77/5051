@@ -8,7 +8,7 @@ namespace _5051.Controllers
     /// <summary>
     /// The Kiosk that will run in the classroom
     /// </summary>
-    public class KioskController : Controller
+    public class KioskController : BaseController
     {
         // A ViewModel used for the Student that contains the StudentList
         private StudentViewModel StudentViewModel = new StudentViewModel();

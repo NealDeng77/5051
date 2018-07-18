@@ -9,7 +9,7 @@ using _5051.Backend;
 
 namespace _5051.Controllers
 {
-    public class PortalController : Controller
+    public class PortalController : BaseController
     {
         /// <summary>
         /// The list of all the active students in the class, so they can Roster

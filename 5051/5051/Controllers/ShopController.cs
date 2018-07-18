@@ -8,7 +8,7 @@ using _5051.Backend;
 
 namespace _5051.Controllers
 {
-    public class ShopController : Controller
+    public class ShopController : BaseController
     {
         private ShopInventoryViewModel ShopInventoryViewModel = new ShopInventoryViewModel();
 
