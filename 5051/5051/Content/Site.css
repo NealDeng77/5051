@@ -255,4 +255,7 @@ div.block1 {
         background-color: slategray;
     }
 
+.clockbox {
+    min-height: 50px;
+}
 
