@@ -28,7 +28,7 @@
             dataTable.addColumn({ type: 'date', id: 'Date' });
             dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
             var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())];
-            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours).ToArray())];
+            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours.ToString("0.##")).ToArray())];
 
             var year;
             var month;
