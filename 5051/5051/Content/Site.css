@@ -162,12 +162,20 @@ body,html{
     height:100%;
 }
 
+.IncludeBackgroundColorDay {
+    background-color: rgb(125,185,211);
+}
+
 .IncludeBackgroundImageDay{
     background-image:url("/content/img/BackgroundDayTime_min.png");
     height:100%;
     background-position:center;
     background-repeat:no-repeat;
     background-size:cover;
+}
+
+.IncludeBackgroundColorNight {
+    background-color: rgb(10,22,43);
 }
 
 .IncludeBackgroundImageNight {
@@ -178,6 +186,9 @@ body,html{
     background-size: cover;
 }
 
+.IncludeBackgroundColorSunset {
+    background-color: rgb(94,75,99);
+}
 
 .IncludeBackgroundImageSunset {
     background-image: url("/content/img/BackgroundSunset_min.png");
