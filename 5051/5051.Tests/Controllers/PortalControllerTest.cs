@@ -413,39 +413,39 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region HouseRegion
+        #region VisitRegion
         [TestMethod]
-        public void Controller_Portal_House_IDIsNull_Should_Return_RosterPage()
+        public void Controller_Portal_Visit_IDIsNull_Should_Return_RosterPage()
         {
-            // Arrange
-            PortalController controller = new PortalController();
-            string id = null;
+            //// Arrange
+            //PortalController controller = new PortalController();
+            //string id = null;
 
-            // Act
-            var result = (RedirectToRouteResult)controller.House(id);
+            //// Act
+            //var result = (RedirectToRouteResult)controller.House(id);
 
-            // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            //// Assert
+            //Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
         
         [TestMethod]
-        public void Controller_Portal_House_IDValid_Should_Pass()
+        public void Controller_Portal_Visit_IDValid_Should_Pass()
         {
-            // Arrange
-            PortalController controller = new PortalController();
-            StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            //// Arrange
+            //PortalController controller = new PortalController();
+            //StudentModel data = new StudentModel();
+            //string id = Backend.StudentBackend.Instance.Create(data).Id;
 
-            // Act
-            ViewResult result = controller.House(id) as ViewResult;
+            //// Act
+            //ViewResult result = controller.House(id) as ViewResult;
 
-            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+            //var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
-            // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            //// Reset StudentBackend
+            //StudentBackend.Instance.Reset();
 
-            // Assert
-            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+            //// Assert
+            //Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
         #endregion
 

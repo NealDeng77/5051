@@ -16,6 +16,7 @@
 
 @{
     var background = "IncludeBackgroundImageHome";
+    var backgroundColor = "IncludeBackgroundColorHome";
 
     var routeController = Url.RequestContext.RouteData.Values["controller"].ToString();
 
@@ -24,19 +25,24 @@
 
         case "Kiosk":
             background = "IncludeBackgroundImageSunset";
+            backgroundColor = "IncludeBackgroundColorSunset";
+
             break;
 
         case "Admin":
             background = "IncludeBackgroundImageNight";
+            backgroundColor = "IncludeBackgroundColorNight";
             break;
 
         default:
             background = "IncludeBackgroundImageDay";
+            backgroundColor = "IncludeBackgroundColorDay";
+
             break;
     }
 }
 
-<body>
+<body class="@backgroundColor">
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
