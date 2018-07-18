@@ -4,7 +4,7 @@ using _5051.Backend;
 
 namespace _5051.Controllers
 {
-    public class StudentController : Controller
+    public class StudentController : BaseController
     {
         // A ViewModel used for the Student that contains the StudentList
         private StudentViewModel StudentViewModel = new StudentViewModel();

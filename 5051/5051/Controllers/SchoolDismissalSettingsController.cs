@@ -8,7 +8,7 @@ namespace _5051.Controllers
     /// School Dismissal Settings defaults to a single record.  So no Create or Delete, just Read, and Update
     /// </summary>
 
-    public class SchoolDismissalSettingsController : Controller
+    public class SchoolDismissalSettingsController : BaseController
     {
         // The Backend Data source
         private SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;

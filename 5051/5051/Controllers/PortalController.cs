@@ -9,7 +9,7 @@ using _5051.Backend;
 
 namespace _5051.Controllers
 {
-    public class PortalController : Controller
+    public class PortalController : BaseController
     {
         /// <summary>
         /// The list of all the active students in the class, so they can Roster
@@ -383,22 +383,6 @@ namespace _5051.Controllers
             var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
             return View(myReturn);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (HttpContext.Request.Cookies.AllKeys.Contains("timezoneoffset"))
-            {
-                if (HttpContext != null &&
-                    HttpContext.Request != null &&
-                   HttpContext.Request.Cookies["timezoneoffset"] != null &&
-                    !string.IsNullOrEmpty(HttpContext.Request.Cookies["timezoneoffset"].Value))
-                {
-                    Session["timezoneoffset"] =
-                        HttpContext.Request.Cookies["timezoneoffset"].Value;
-                }
-            }
-            base.OnActionExecuting(filterContext);
         }
     }
 }

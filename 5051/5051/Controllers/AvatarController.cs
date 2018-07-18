@@ -8,7 +8,7 @@ namespace _5051.Controllers
     /// <summary>
     /// Avatar Contoller manages the avatar web pages including how to make new ones, change them, and delete them
     /// </summary>
-    public class AvatarController : Controller
+    public class AvatarController : BaseController
     {
         // A ViewModel used for the Avatar that contains the AvatarList
         private AvatarViewModel avatarViewModel = new AvatarViewModel();

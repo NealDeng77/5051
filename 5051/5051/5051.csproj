@@ -213,6 +213,7 @@
     <Compile Include="Backend\UTCConversionsBackend.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
     <Compile Include="Controllers\ShopInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -483,6 +484,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
