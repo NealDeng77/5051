@@ -70,36 +70,20 @@ namespace _5051.UnitTests.Models
         public TestContext TestContext { get; set; }
 
         #region FromClientTime
-        //[TestMethod]
-        //public void Backend_UTCConversionsBackend_FromClientTime_Valid_Date_HttpContext_Is_Null_Should_Pass()
-        //{
-        //    //arrange
-        //    var inputLocalDateTime = DateTime.Now;
-        //    var expectDateTime = DateTime.Now.ToUniversalTime();
+        [TestMethod]
+        public void Backend_UTCConversionsBackend_FromClientTime_Valid_Date_TimeOffSet_Is_Null_Should_Pass()
+        {
+            //arrange
+            var inputLocalDateTime = DateTime.Now;
+            var expectDateTime = DateTime.Now.ToUniversalTime();
 
-        //    //act
-        //    var result = _5051.Backend.UTCConversionsBackend.FromClientTime(inputLocalDateTime);
+            //act
+            var result = _5051.Backend.UTCConversionsBackend.FromClientTime(inputLocalDateTime);
 
-        //    //assert
-        //    Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
-        //    Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
-        //}
-
-        //[TestMethod]
-        //public void Backend_UTCConversionsBackend_FromClientTime_Valid_Date_HttpContext_Is_Not_Null_Should_Pass()
-        //{
-        //    //arrange
-            
-        //    var inputLocalDateTime = DateTime.Now;
-        //    var expectDateTime = DateTime.Now.ToUniversalTime();
-
-        //    //act
-        //    var result = _5051.Backend.UTCConversionsBackend.FromClientTime(inputLocalDateTime);
-
-        //    //assert
-        //    Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
-        //    Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
-        //}
+            //assert
+            Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
+            Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
+        }
 
         #endregion
 
@@ -119,21 +103,38 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Backend_UTCConvensionsBackend_ToClientTime_Valid_Date_UTC_Should_Pass()
-        //{
-        //    //arrange
-        //    var inputDateTime = DateTime.UtcNow;
-        //    inputDateTime = DateTime.SpecifyKind(inputDateTime, DateTimeKind.Unspecified);
-        //    var expectDateTime = DateTime.Now;
+        [TestMethod]
+        public void Backend_UTCConvensionsBackend_ToClientTime_Valid_Date_UTC_timeOffSet_Is_Null_Should_Pass()
+        {
+            //arrange
+            var inputDateTime = DateTime.Now;
+            inputDateTime = DateTime.SpecifyKind(inputDateTime, DateTimeKind.Unspecified);
+            var expectDateTime = DateTime.UtcNow;
 
-        //    //act
-        //    var result = UTCConversionsBackend.ToClientTime(inputDateTime);
+            //act
+            var result = UTCConversionsBackend.ToClientTime(inputDateTime);
 
-        //    //assert
-        //    Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
-        //    Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
-        //}
+            //assert
+            Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
+            Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_UTCConvensionsBackend_ToClientTime_Valid_Date_UTC_HttpContext_Current_Is_Null_Should_Pass()
+        {
+            //arrange
+            var inputDateTime = DateTime.Now;
+            inputDateTime = DateTime.SpecifyKind(inputDateTime, DateTimeKind.Unspecified);
+            var expectDateTime = DateTime.UtcNow;
+            HttpContext.Current = null;
+
+            //act
+            var result = UTCConversionsBackend.ToClientTime(inputDateTime);
+
+            //assert
+            Assert.AreEqual(expectDateTime.Minute, result.Minute, TestContext.TestName);
+            Assert.AreEqual(expectDateTime.Hour, result.Hour, TestContext.TestName);
+        }
         #endregion
 
 
