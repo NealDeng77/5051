@@ -215,7 +215,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
-    <Compile Include="Controllers\ShopInventoryController.cs" />
+    <Compile Include="Controllers\FactoryInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
