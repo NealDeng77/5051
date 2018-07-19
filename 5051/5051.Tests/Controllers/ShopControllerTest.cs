@@ -80,9 +80,9 @@ namespace _5051.Tests.Controllers
         #endregion IndexRegion
 
 
-        #region BuyRegion
+        #region FactoryRegion
         [TestMethod]
-        public void Controller_Shop_Buy_Default_Should_Pass()
+        public void Controller_Shop_Factory_Default_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -96,7 +96,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Post_ModelIsInvalid_Should_Pass()
+        public void Controller_Shop_Factory_Post_ModelIsInvalid_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -113,7 +113,7 @@ namespace _5051.Tests.Controllers
         }
         
         [TestMethod]
-        public void Controller_Shop_Buy_Get_myDataIsNull_ShouldReturnErrorPage()
+        public void Controller_Shop_Factory_Get_myDataIsNull_ShouldReturnErrorPage()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -132,7 +132,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Invalid_Null_Should_Fail()
+        public void Controller_Shop_Factory_Data_Invalid_Null_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -148,7 +148,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Invalid_StudentID_Null_Should_Fail()
+        public void Controller_Shop_Factory_Data_Invalid_StudentID_Null_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -160,11 +160,11 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Invalid_ItemId_Null_Should_Fail()
+        public void Controller_Shop_Factory_Data_Invalid_ItemId_Null_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -177,11 +177,11 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Invalid_StudentId_Bogus_Should_Fail()
+        public void Controller_Shop_Factory_Data_Invalid_StudentId_Bogus_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -197,11 +197,11 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Invalid_ItemId_Bogus_Should_Fail()
+        public void Controller_Shop_Factory_Data_Invalid_ItemId_Bogus_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -214,11 +214,11 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_Valid_Should_Pass()
+        public void Controller_Shop_Factory_Data_Valid_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -252,7 +252,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_InValid_Tokens_Not_Enough_Should_Fail()
+        public void Controller_Shop_Factory_Data_InValid_Tokens_Not_Enough_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -284,14 +284,14 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
             Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
         }
 
 
         [TestMethod]
-        public void Controller_Shop_Buy_Data_InValid_Item_Already_Exists_Should_Fail()
+        public void Controller_Shop_Factory_Data_InValid_Item_Already_Exists_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
@@ -328,11 +328,11 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
             Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
         }
-        #endregion BuyRegion
+        #endregion FactoryRegion
 
         #region DiscountsRegion
 
