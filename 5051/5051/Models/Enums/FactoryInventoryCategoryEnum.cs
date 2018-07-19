@@ -12,9 +12,6 @@ namespace _5051.Models
         // ice cream.
         IceCream = 1,
 
-        // decorations.
-        Decorations = 2,
-
         // TV, Radio etc.
         Entertainment = 2,
 
