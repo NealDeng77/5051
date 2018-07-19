@@ -89,7 +89,7 @@ namespace _5051.Tests.Controllers
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
-            ViewResult result = controller.Buy(id) as ViewResult;
+            ViewResult result = controller.Factory(id) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -106,7 +106,7 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             // Act
-            ViewResult result = controller.Buy(data) as ViewResult;
+            ViewResult result = controller.Factory(data) as ViewResult;
 
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
@@ -124,7 +124,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(id);
+            var result = (RedirectToRouteResult)controller.Factory(id);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -141,7 +141,7 @@ namespace _5051.Tests.Controllers
             data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -157,7 +157,7 @@ namespace _5051.Tests.Controllers
             data.StudentId = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
             Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
@@ -174,7 +174,7 @@ namespace _5051.Tests.Controllers
             data.ItemId = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
             Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
@@ -191,7 +191,7 @@ namespace _5051.Tests.Controllers
             data.ItemId = "itemID";
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -211,7 +211,7 @@ namespace _5051.Tests.Controllers
             data.ItemId = "bogus";
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             // Assert
             Assert.AreEqual("Buy", result.RouteValues["action"], TestContext.TestName);
@@ -241,7 +241,7 @@ namespace _5051.Tests.Controllers
             var expect = myStudent.Tokens - myInventory.Tokens;
 
             // Act
-            ViewResult result = controller.Buy(data) as ViewResult;
+            ViewResult result = controller.Factory(data) as ViewResult;
 
             var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
@@ -277,7 +277,7 @@ namespace _5051.Tests.Controllers
             var expectCount = myStudent.Inventory.Count();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
@@ -312,7 +312,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             // Buy it one time, this puts the item in the student inventory
-            var myPurchage1 = (RedirectToRouteResult)controller.Buy(data);
+            var myPurchage1 = (RedirectToRouteResult)controller.Factory(data);
 
             // No purchage, so tokens stay the same
             var expect = myStudent.Tokens;
@@ -321,7 +321,7 @@ namespace _5051.Tests.Controllers
             // Act
 
             // Trying to buy the second time will fail
-            var result = (RedirectToRouteResult)controller.Buy(data);
+            var result = (RedirectToRouteResult)controller.Factory(data);
 
             var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
