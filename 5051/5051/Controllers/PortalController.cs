@@ -265,20 +265,21 @@ namespace _5051.Controllers
 
             // then, once students click on the specific student's shop
             // he/she can go visiting it
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
-            if (myStudent == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
 
-            var myReturn = new StudentDisplayViewModel(myStudent);
-            // Not possible for Null return, 
-            //if (myReturn == null)
+            //var myStudent = Backend.StudentBackend.Instance.Read(id);
+            //if (myStudent == null)
             //{
             //    return RedirectToAction("Error", "Home");
             //}
 
-            return View(myReturn);
+            //var myReturn = new StudentDisplayViewModel(myStudent);
+            //// Not possible for Null return, 
+            ////if (myReturn == null)
+            ////{
+            ////    return RedirectToAction("Error", "Home");
+            ////}
+
+            return View();
         }
 
         /// <summary>
