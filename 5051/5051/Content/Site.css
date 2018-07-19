@@ -70,6 +70,7 @@ textarea {
 .AvatarSize1 {
     width: 75px;
     height: 75px;
+    padding:10px;
 }
 
 .AvatarSize2{

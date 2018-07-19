@@ -9,11 +9,19 @@ namespace _5051.Models
         // Not classified
         Unknown = 0,
 
-        // ice cream.
-        IceCream = 1,
+        // Instruments etc.
+        Music = 1,
 
-        // decorations.
-        Decorations = 2,
+        // TV, Radio etc.
+        Entertainment = 2,
 
+        // food
+        Food = 5,
+
+        // Furniture
+        Furniture = 6,
+
+        // Decorations
+        Decoration = 7,
     }
 }
