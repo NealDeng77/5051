@@ -151,28 +151,28 @@ textarea {
     New Styles for the Design
 */
 
-body,html{
-    height:100%;
-    width:100%;
-    margin:0;
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
-.fill-height{
-    min-height:100%;
-    height:auto !important;
-    height:100%;
+.fill-height {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
 }
 
 .IncludeBackgroundColorDay {
     background-color: rgb(125,185,211);
 }
 
-.IncludeBackgroundImageDay{
-    background-image:url("/content/img/BackgroundDayTime_min.png");
-    height:100%;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:cover;
+.IncludeBackgroundImageDay {
+    background-image: url("/content/img/BackgroundDayTime_min.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .IncludeBackgroundColorNight {
@@ -222,21 +222,19 @@ body,html{
     font-weight: bold;
 }
 
-div.block1 {
-    border-radius: 25px;
-    background-color: #202021 !important;
-    height: 400px;
-    width: 600px;
-    opacity: 0.85;
-    margin: 0 auto;
-}
-
 .btn1 {
     border-radius: 45px;
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
 }
+
+.btn-light {
+}
+
+    .btn-light:hover, .btn-light:focus, .btn-light:active, .btn-light.active {
+        background-color: slategray;
+    }
 
 .input1 {
     width: 100%;
@@ -246,17 +244,38 @@ div.block1 {
     box-sizing: border-box;
     border-radius: 45px;
     max-width: 100%;
-    padding-left : 15px;
+    padding-left: 15px;
 }
 
-
-.btn-light {
+div.block1 {
+    border-radius: 25px;
+    background-color: #202021 !important;
+    height: 400px;
+    width: 600px;
+    opacity: 0.85;
+    margin: 0 auto;
 }
-    .btn-light:hover, .btn-light:focus, .btn-light:active, .btn-light.active {
-        background-color: slategray;
-    }
 
 .clockbox {
     min-height: 50px;
+}
+
+/*
+    /Kiosk/Index page
+*/
+
+div.BlockKioskLogin {
+    border-radius: 25px;
+    background-color: #202021 !important;
+    height: 400px;
+    width: 350px;
+    opacity: 0.85;
+    margin: 0 auto;
+}
+
+.CenterAvatarStyle {
+    border: solid;
+    border-color: white;
+    border-radius: 100px;
 }
 
