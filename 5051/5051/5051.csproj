@@ -290,6 +290,11 @@
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\CheckMark.png" />
     <Content Include="Content\img\EditPicture.png" />
+    <Content Include="Content\img\Emotion1.png" />
+    <Content Include="Content\img\Emotion2.png" />
+    <Content Include="Content\img\Emotion3.png" />
+    <Content Include="Content\img\Emotion4.png" />
+    <Content Include="Content\img\Emotion5.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
     <Content Include="Content\img\PortalAvatars.png" />
