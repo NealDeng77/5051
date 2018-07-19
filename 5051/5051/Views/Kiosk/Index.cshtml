@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Kiosk";
+    var TempTime = DateTime.Now.ToString("HH : mm : ss");
+    
 }
 
 
@@ -56,7 +58,7 @@
 
                 <div class="col-sm-4">
                         <div class="col-sm-12 text-center clockbox">                          
-                            <span id="FullTime" class="h1"></span>
+                            <span id="FullTime" class="h1">@TempTime</span>
                         </div>
                     <br />
                     <div style=" border-radius: 25px; background-color: #202021 !important; height: 400px; opacity: 0.85;">
