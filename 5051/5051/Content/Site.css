@@ -247,7 +247,11 @@ body, html {
     padding-left: 15px;
 }
 
-div.block1 {
+/*
+    /Portal/Login page
+*/
+
+div.BlockStudentLogin {
     border-radius: 25px;
     background-color: #202021 !important;
     height: 400px;
@@ -256,12 +260,18 @@ div.block1 {
     margin: 0 auto;
 }
 
+.LockStyle {
+    color: white;
+    padding-top: 1px;
+    font-size: 38px;
+}
+
 
 /*
     /Kiosk/Index page
 */
 
-div.BlockKioskLogin {
+div.BlockKioskIndex {
     border-radius: 25px;
     background-color: #202021 !important;
     height: 400px;
