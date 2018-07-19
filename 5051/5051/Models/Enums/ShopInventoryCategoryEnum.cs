@@ -14,5 +14,14 @@ namespace _5051.Models
 
         // TV, Radio etc.
         Entertainment = 2,
+
+        // food
+        Food = 5,
+
+        // Furniture
+        Furniture = 6,
+
+        // Decorations
+        Decoration = 7,
     }
 }

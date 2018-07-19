@@ -159,6 +159,19 @@ namespace _5051.Backend
             Create(new ShopInventoryModel("television.png", "Television", "I love lucy again?", ShopInventoryCategoryEnum.Entertainment,10));
             Create(new ShopInventoryModel("headphone.png", "Headphone", "Just relazing", ShopInventoryCategoryEnum.Entertainment,10));
             Create(new ShopInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", ShopInventoryCategoryEnum.Entertainment,10));
+
+            Create(new ShopInventoryModel("GChocolate.png", "Chocolate Gallon", "Chocolate Ice Cream", ShopInventoryCategoryEnum.Food, 10));
+            Create(new ShopInventoryModel("GCoffee.png", "Coffee Gallon", "Coffee Ice Cream", ShopInventoryCategoryEnum.Food, 10));
+            Create(new ShopInventoryModel("GCookiedough.png", "Cookie Dough Gallon", "Cookie Dough Ice Cream", ShopInventoryCategoryEnum.Food, 10));
+            Create(new ShopInventoryModel("GMintChip.png", "Mint Chip Gallon", "Mint Chip Ice Cream", ShopInventoryCategoryEnum.Food, 10));
+            Create(new ShopInventoryModel("GSherbert.png", "Sherbert Gallon", "Sherbert", ShopInventoryCategoryEnum.Food, 10));
+            Create(new ShopInventoryModel("GStrawberry.png", "Strawberry Gallon", "Strawberry Ice Cream", ShopInventoryCategoryEnum.Food, 10));
+
+            Create(new ShopInventoryModel("FBarstool.png", "Barstool", "Barstool", ShopInventoryCategoryEnum.Furniture, 10));
+            Create(new ShopInventoryModel("FBench.png", "Bench", "Bench", ShopInventoryCategoryEnum.Furniture, 10));
+            Create(new ShopInventoryModel("FCounter.png", "Counter", "Counter", ShopInventoryCategoryEnum.Furniture, 10));
+            Create(new ShopInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", ShopInventoryCategoryEnum.Furniture, 10));
+            Create(new ShopInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", ShopInventoryCategoryEnum.Furniture, 10));
         }
 
         /// <summary>
