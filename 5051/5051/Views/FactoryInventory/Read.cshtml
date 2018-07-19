@@ -1,4 +1,4 @@
-﻿@model _5051.Models.ShopInventoryModel
+﻿@model _5051.Models.FactoryInventoryModel
 
 @{
     ViewBag.Title = "Read";
@@ -10,13 +10,13 @@
             if (Model == null)
             {
                 <br />
-                <p>No Shop Inventory</p>
+                <p>No Factory Inventory</p>
             }
             else
             {
                 
                     <br />
-                    <h2>Shop Inventory Item</h2>
+                    <h2>Factory Inventory Item</h2>
                     <br />
                     <br />
 
@@ -24,7 +24,7 @@
                         <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-4">
-                            <img src="~/Content/shop/@Model.Uri" class="ShopInventorySize1" />
+                            <img src="~/Content/shop/@Model.Uri" class="FactoryInventorySize1" />
                             <br />
                             <span>
                                 @Model.Name

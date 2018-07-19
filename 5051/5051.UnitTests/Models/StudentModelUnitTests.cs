@@ -118,7 +118,7 @@ namespace _5051.UnitTests.Models
             var tempAttendance = new AttendanceModel();
             test.Attendance.Add(tempAttendance);
 
-            var tempInventory = new ShopInventoryModel();
+            var tempInventory = new FactoryInventoryModel();
             test.Inventory.Add(tempInventory);
 
             // Act

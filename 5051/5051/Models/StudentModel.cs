@@ -80,7 +80,7 @@ namespace _5051.Models
         /// <summary>
         /// The inventory list for the student
         /// </summary>
-        public List<ShopInventoryModel> Inventory { get; set; }
+        public List<FactoryInventoryModel> Inventory { get; set; }
 
         /// <summary>
         /// The Attendance list for the student
@@ -98,7 +98,7 @@ namespace _5051.Models
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
             Password = string.Empty;
-            Inventory = new List<ShopInventoryModel>();
+            Inventory = new List<FactoryInventoryModel>();
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
         }

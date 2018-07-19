@@ -225,7 +225,7 @@ namespace _5051.Tests.Controllers
 
             var data = new ShopBuyViewModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -233,10 +233,10 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
 
             myInventory.Tokens = 10;
-            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             var expect = myStudent.Tokens - myInventory.Tokens;
 
@@ -259,7 +259,7 @@ namespace _5051.Tests.Controllers
 
             var data = new ShopBuyViewModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -267,10 +267,10 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
 
             myInventory.Tokens = 100;
-            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             // No purchage, so tokens stay the same
             var expect = myStudent.Tokens;
@@ -298,7 +298,7 @@ namespace _5051.Tests.Controllers
 
             var data = new ShopBuyViewModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.ShopInventoryBackend.GetFirstShopInventoryId();
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -306,10 +306,10 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
 
             myInventory.Tokens = 10;
-            DataSourceBackend.Instance.ShopInventoryBackend.Update(myInventory);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             // Buy it one time, this puts the item in the student inventory
             var myPurchage1 = (RedirectToRouteResult)controller.Buy(data);

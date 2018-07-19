@@ -10,10 +10,10 @@ namespace _5051.Controllers
 {
     public class ShopController : BaseController
     {
-        private ShopInventoryViewModel ShopInventoryViewModel = new ShopInventoryViewModel();
+        private FactoryInventoryViewModel FactoryInventoryViewModel = new FactoryInventoryViewModel();
 
         // The Backend Data source
-        private ShopInventoryBackend ShopInventoryBackend = ShopInventoryBackend.Instance;
+        private FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
 
         /// <summary>
         /// Index to the Shop
@@ -36,10 +36,10 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Buy
-        public ActionResult Buy(string id = null)
+        public ActionResult Factory(string id = null)
         {
-            // Load the list of data into the ShopInventoryList
-            var myData = new SelectedShopInventoryForStudentViewModel();
+            // Load the list of data into the FactoryInventoryList
+            var myData = new SelectedFactoryInventoryForStudentViewModel();
 
             // Get the Student
             var myStudent = StudentBackend.Instance.Read(id);
@@ -50,27 +50,27 @@ namespace _5051.Controllers
             myData.Student = myStudent;
 
             // Get the Inventory
-            var InventoryList = ShopInventoryBackend.Index();
+            var InventoryList = FactoryInventoryBackend.Index();
 
             // Sort the Inventory into List per Category
             // Load the ones
-            foreach (var item in Enum.GetValues(typeof(ShopInventoryCategoryEnum)))
+            foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
             {
-                var temp = new ShopInventoryViewModel();
-                temp.Category = (ShopInventoryCategoryEnum)item;
-                temp.ShopInventoryList = InventoryList.Where(m => m.Category == (ShopInventoryCategoryEnum)item).ToList();
+                var temp = new FactoryInventoryViewModel();
+                temp.Category = (FactoryInventoryCategoryEnum)item;
+                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
 
-                if (temp.ShopInventoryList.Any())
+                if (temp.FactoryInventoryList.Any())
                 {
                     // todo, tag the ones that are already owned
-                    myData.ShopInventoryCategoryList.Add(temp);
+                    myData.FactoryInventoryCategoryList.Add(temp);
                 }
             }
 
             return View(myData);
         }
         [HttpPost]
-        public ActionResult Buy([Bind(Include=
+        public ActionResult Factory([Bind(Include=
                                         "StudentId,"+
                                         "ItemId,"+
                                         "")] ShopBuyViewModel data)
@@ -78,7 +78,7 @@ namespace _5051.Controllers
             if (!ModelState.IsValid)
             {
                 // Send back for edit, with Error Message
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             if (data == null)
@@ -90,13 +90,13 @@ namespace _5051.Controllers
             if (string.IsNullOrEmpty(data.StudentId))
             {
                 // Send back for Edit
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             if (string.IsNullOrEmpty(data.ItemId))
             {
                 // Send back for Edit
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             // Get Student
@@ -104,15 +104,15 @@ namespace _5051.Controllers
             if (myStudent == null)
             {
                 // Send back for Edit
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             // Get Item
-            var myItem = DataSourceBackend.Instance.ShopInventoryBackend.Read(data.ItemId);
+            var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
             if (myItem == null)
             {
                 // Send back for Edit
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             // Check the Student Token amount, If not enough, return error
@@ -120,7 +120,7 @@ namespace _5051.Controllers
             {
                 // Not enough money...
                 // Send back for Edit
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             // Check to see if the student already has the item.  If so, don't buy again, only 1 item per student
@@ -128,7 +128,7 @@ namespace _5051.Controllers
             if (ItemAlreadyExists)
             {
                 // Already own it.
-                return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
             // Time to buy !
@@ -143,7 +143,7 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            return RedirectToAction("Buy", "Shop", new { id = data.StudentId });
+            return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
         }
 
         /// <summary>

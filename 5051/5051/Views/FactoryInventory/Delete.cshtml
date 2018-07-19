@@ -1,4 +1,4 @@
-﻿@model _5051.Models.ShopInventoryModel
+﻿@model _5051.Models.FactoryInventoryModel
 
 @{
     ViewBag.Title = "Delete";
@@ -11,14 +11,14 @@
             if (Model == null)
             {
                 <br />
-                <p>No ShopInventory</p>
+                <p>No FactoryInventory</p>
             }
 
             else
             {
                 <div class="">
                     <br />
-                    <h2>Delete ShopInventory</h2>
+                    <h2>Delete FactoryInventory</h2>
                     <br />
                     <br />
 
@@ -26,7 +26,7 @@
                         <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-4">
-                            <img src="~/Content/shop/@Model.Uri" class="ShopInventorySize1" />
+                            <img src="~/Content/shop/@Model.Uri" class="FactoryInventorySize1" />
                             <br />
                             <span>
                                 @Model.Name

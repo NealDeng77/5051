@@ -1,8 +1,8 @@
-﻿@model _5051.Models.SelectedShopInventoryForStudentViewModel
+﻿@model _5051.Models.SelectedFactoryInventoryForStudentViewModel
 @{
-    ViewBag.Title = "Shop Inventory";
+    ViewBag.Title = "Factory Inventory";
 
-    if (Model == null || Model.Student == null || Model.ShopInventoryCategoryList == null || !Model.ShopInventoryCategoryList.Any())
+    if (Model == null || Model.Student == null || Model.FactoryInventoryCategoryList == null || !Model.FactoryInventoryCategoryList.Any())
     {
         <br />
         <h2>No Data to show</h2>
@@ -28,7 +28,7 @@
         <ul class="nav nav-tabs">
             @{
                 TabCount = 0;
-                foreach (var CurrentList in Model.ShopInventoryCategoryList)
+                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
                 {
                     ActiveTab = "";
 
@@ -53,7 +53,7 @@
 
                 @{
                     TabCount = 0;
-                    foreach (var CurrentList in Model.ShopInventoryCategoryList)
+                    foreach (var CurrentList in Model.FactoryInventoryCategoryList)
                     {
                         ActiveTab = "";
                         if (CurrentList == null)
@@ -73,7 +73,7 @@
                             <div class="row">
                                 @{
                                     // If no items, the skip
-                                    if (!CurrentList.ShopInventoryList.Any())
+                                    if (!CurrentList.FactoryInventoryList.Any())
                                     {
                                         <br />
                                         <div>No Items</div>
@@ -81,7 +81,7 @@
                                     }
 
                                     //AvatarViewModel outputAvatar = new AvatarViewModel();
-                                    foreach (var item in CurrentList.ShopInventoryList)
+                                    foreach (var item in CurrentList.FactoryInventoryList)
                                     {
                                         using (Html.BeginForm())
                                         {

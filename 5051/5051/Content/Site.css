@@ -117,20 +117,20 @@ textarea {
     width: 2%;
 }
 
-.ShopInventoryBox {
+.FactoryInventoryBox {
 }
 
-    .ShopInventoryBox:hover {
+    .FactoryInventoryBox:hover {
         opacity: 0.3;
         filter: alpha(opacity=30);
     }
 
-.ShopInventorySize1 {
+.FactoryInventorySize1 {
     width: 75px;
     height: 75px;
 }
 
-.ShopInventorySize2 {
+.FactoryInventorySize2 {
     width: 150px;
     height: 150px;
 }

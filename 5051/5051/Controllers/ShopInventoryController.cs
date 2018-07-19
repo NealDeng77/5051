@@ -5,57 +5,57 @@ using _5051.Backend;
 namespace _5051.Controllers
 {
     /// <summary>
-    /// ShopInventory Contoller manages the ShopInventory web pages including how to make new ones, change them, and delete them
+    /// FactoryInventory Contoller manages the FactoryInventory web pages including how to make new ones, change them, and delete them
     /// </summary>
-    public class ShopInventoryController : BaseController
+    public class FactoryInventoryController : BaseController
     {
-        // A ViewModel used for the ShopInventory that contains the ShopInventoryList
-        private ShopInventoryViewModel ShopInventoryViewModel = new ShopInventoryViewModel();
+        // A ViewModel used for the FactoryInventory that contains the FactoryInventoryList
+        private FactoryInventoryViewModel FactoryInventoryViewModel = new FactoryInventoryViewModel();
 
         // The Backend Data source
-        private ShopInventoryBackend ShopInventoryBackend = ShopInventoryBackend.Instance;
+        private FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
 
-        // GET: ShopInventory
+        // GET: FactoryInventory
         /// <summary>
-        /// Index, the page that shows all the ShopInventorys
+        /// Index, the page that shows all the FactoryInventorys
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            // Load the list of data into the ShopInventoryList
-            ShopInventoryViewModel.ShopInventoryList = ShopInventoryBackend.Index();
-            return View(ShopInventoryViewModel);
+            // Load the list of data into the FactoryInventoryList
+            FactoryInventoryViewModel.FactoryInventoryList = FactoryInventoryBackend.Index();
+            return View(FactoryInventoryViewModel);
         }
 
         /// <summary>
-        /// Read information on a single ShopInventory
+        /// Read information on a single FactoryInventory
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        // GET: ShopInventory/Details/5
+        // GET: FactoryInventory/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = ShopInventoryBackend.Read(id);
+            var myData = FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
         /// <summary>
-        /// This opens up the make a new ShopInventory screen
+        /// This opens up the make a new FactoryInventory screen
         /// </summary>
         /// <returns></returns>
-        // GET: ShopInventory/Create
+        // GET: FactoryInventory/Create
         public ActionResult Create()
         {
-            var myData = new ShopInventoryModel();
+            var myData = new FactoryInventoryModel();
             return View(myData);
         }
 
         /// <summary>
-        /// Make a new ShopInventory sent in by the create ShopInventory screen
+        /// Make a new FactoryInventory sent in by the create FactoryInventory screen
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>
-        // POST: ShopInventory/Create
+        // POST: FactoryInventory/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include=
@@ -65,7 +65,7 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "Tokens,"+
                                         "Category,"+
-                                        "")] ShopInventoryModel data)
+                                        "")] FactoryInventoryModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -85,29 +85,29 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            ShopInventoryBackend.Create(data);
+            FactoryInventoryBackend.Create(data);
 
             return RedirectToAction("Index");
         }
 
         /// <summary>
-        /// This will show the details of the ShopInventory to update
+        /// This will show the details of the FactoryInventory to update
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        // GET: ShopInventory/Edit/5
+        // GET: FactoryInventory/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = ShopInventoryBackend.Read(id);
+            var myData = FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
         /// <summary>
-        /// This updates the ShopInventory based on the information posted from the udpate page
+        /// This updates the FactoryInventory based on the information posted from the udpate page
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        // POST: ShopInventory/Update/5
+        // POST: FactoryInventory/Update/5
         [HttpPost]
         public ActionResult Update([Bind(Include=
                                         "Id,"+
@@ -116,7 +116,7 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "Tokens,"+
                                         "Category,"+
-                                        "")] ShopInventoryModel data)
+                                        "")] FactoryInventoryModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -136,29 +136,29 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            ShopInventoryBackend.Update(data);
+            FactoryInventoryBackend.Update(data);
 
             return RedirectToAction("Index");
         }
 
         /// <summary>
-        /// This shows the ShopInventory info to be deleted
+        /// This shows the FactoryInventory info to be deleted
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        // GET: ShopInventory/Delete/5
+        // GET: FactoryInventory/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myData = ShopInventoryBackend.Read(id);
+            var myData = FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
         /// <summary>
-        /// This deletes the ShopInventory sent up as a post from the ShopInventory delete page
+        /// This deletes the FactoryInventory sent up as a post from the FactoryInventory delete page
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        // POST: ShopInventory/Delete/5
+        // POST: FactoryInventory/Delete/5
         [HttpPost]
         public ActionResult Delete([Bind(Include=
                                         "Id,"+
@@ -167,7 +167,7 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "Tokens,"+
                                         "Category,"+
-                                        "")] ShopInventoryModel data)
+                                        "")] FactoryInventoryModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -187,7 +187,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            ShopInventoryBackend.Delete(data.Id);
+            FactoryInventoryBackend.Delete(data.Id);
 
             return RedirectToAction("Index");
         }

@@ -1,33 +1,33 @@
-﻿@model _5051.Models.ShopInventoryViewModel
+﻿@model _5051.Models.FactoryInventoryViewModel
 
 @{
-    ViewBag.Title = "Edit Shop Inventory";
+    ViewBag.Title = "Edit Factory Inventory";
 }
 
 
 <div class="container">
     <br />
-    <h2>Click on an Shop Inventory Item to Edit</h2>
+    <h2>Click on an Factory Inventory Item to Edit</h2>
     <br />
     <br />
 
     <div class="row text-center">
 
         @{
-            if (Model.ShopInventoryList == null || !Model.ShopInventoryList.Any())
+            if (Model.FactoryInventoryList == null || !Model.FactoryInventoryList.Any())
             {
                 <br />
-                <p>No Shop Inventory Items in the System</p>
+                <p>No Factory Inventory Items in the System</p>
                 <br />
             }
             else
             {
-                foreach (var item in Model.ShopInventoryList)
+                foreach (var item in Model.FactoryInventoryList)
                 {
                     <div class="col-sm-2">
-                        <div class="ShopInventoryBox">
-                            <a id="@item.Id" href="~/ShopInventory/Read/@item.Id">
-                                <img src="~/Content/shop/@item.Uri" class="ShopInventorySize1" />
+                        <div class="FactoryInventoryBox">
+                            <a id="@item.Id" href="~/FactoryInventory/Read/@item.Id">
+                                <img src="~/Content/shop/@item.Uri" class="FactoryInventorySize1" />
                             </a>
                             <br />
                             <span>

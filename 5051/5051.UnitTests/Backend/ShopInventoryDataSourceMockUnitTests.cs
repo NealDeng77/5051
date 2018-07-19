@@ -10,16 +10,16 @@ using _5051.Backend;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopInventoryDataSourceMockUnitTests
+    public class FactoryInventoryDataSourceMockUnitTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopInventoryDataSourceMock_Default_Instantiate_Should_Pass()
+        public void Models_FactoryInventoryDataSourceMock_Default_Instantiate_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
 
             //var expect = backend;
 
@@ -37,10 +37,10 @@ namespace _5051.UnitTests.Models
 
         #region read
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Read_Invalid_ID_Null_Should_Fail()
+        public void Backend_FactoryInventoryDataSourceMock_Read_Invalid_ID_Null_Should_Fail()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
 
             // Act
             var result = backend.Read(null);
@@ -50,12 +50,12 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Read_Valid_ID_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_Read_Valid_ID_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
-            var shopBackend = ShopInventoryBackend.Instance;
-            var expectShopItem = shopBackend.GetFirstShopInventoryId();
+            var backend = FactoryInventoryDataSourceMock.Instance;
+            var shopBackend = FactoryInventoryBackend.Instance;
+            var expectShopItem = shopBackend.GetFirstFactoryInventoryId();
 
             // Act
             var result = backend.Read(expectShopItem);
@@ -67,10 +67,10 @@ namespace _5051.UnitTests.Models
 
         #region update
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Update_Invalid_Data_Null_Should_Fail()
+        public void Backend_FactoryInventoryDataSourceMock_Update_Invalid_Data_Null_Should_Fail()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
 
             // Act
             var result = backend.Update(null);
@@ -83,11 +83,11 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Update_Invalid_Data_Shop_Item_Does_Not_Exist_Should_Fail()
+        public void Backend_FactoryInventoryDataSourceMock_Update_Invalid_Data_Shop_Item_Does_Not_Exist_Should_Fail()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
-            var expectShopModel = new ShopInventoryModel();
+            var backend = FactoryInventoryDataSourceMock.Instance;
+            var expectShopModel = new FactoryInventoryModel();
 
             // Act
             var result = backend.Update(expectShopModel);
@@ -100,18 +100,18 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Update_Valid_Data_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_Update_Valid_Data_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
-            var shopBackend = ShopInventoryBackend.Instance;
-            var expectShopItemId = shopBackend.GetFirstShopInventoryId();
+            var backend = FactoryInventoryDataSourceMock.Instance;
+            var shopBackend = FactoryInventoryBackend.Instance;
+            var expectShopItemId = shopBackend.GetFirstFactoryInventoryId();
             var expectShopModel = backend.Read(expectShopItemId);
             var expectId = "GoodID";
             var expectUri = "GoodUri";
             var expectName = "Shop Item";
             var expectDescription = "A good description of the item";
-            var expectCatagory = _5051.Models.ShopInventoryCategoryEnum.Entertainment;
+            var expectCatagory = _5051.Models.FactoryInventoryCategoryEnum.Entertainment;
             var expectTokens = 1000;
 
             // Act
@@ -141,10 +141,10 @@ namespace _5051.UnitTests.Models
 
         #region delete
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Delete_Invalid_ID_Null_Should_Fail()
+        public void Backend_FactoryInventoryDataSourceMock_Delete_Invalid_ID_Null_Should_Fail()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
             var expect = false;
 
             // Act
@@ -158,12 +158,12 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_Delete_Valid_ID_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_Delete_Valid_ID_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
-            var shopBackend = ShopInventoryBackend.Instance;
-            var expectShopItem = shopBackend.GetFirstShopInventoryId();
+            var backend = FactoryInventoryDataSourceMock.Instance;
+            var shopBackend = FactoryInventoryBackend.Instance;
+            var expectShopItem = shopBackend.GetFirstFactoryInventoryId();
             var expect = true;
 
             // Act
@@ -180,10 +180,10 @@ namespace _5051.UnitTests.Models
 
         #region DataSet
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_LoadDataSet_Valid_Enum_Demo_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_LoadDataSet_Valid_Enum_Demo_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
             var expectEnum = _5051.Models.DataSourceDataSetEnum.Demo;
 
             // Act
@@ -198,10 +198,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryDataSourceMock_LoadDataSet_Valid_Enum_UnitTest_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_LoadDataSet_Valid_Enum_UnitTest_Should_Pass()
         {
             // Arrange
-            var backend = ShopInventoryDataSourceMock.Instance;
+            var backend = FactoryInventoryDataSourceMock.Instance;
             var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
 
             // Act

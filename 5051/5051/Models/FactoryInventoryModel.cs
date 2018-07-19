@@ -9,11 +9,11 @@ using System.Web.Mvc;
 namespace _5051.Models
 {
     /// <summary>
-    /// ShopInventorys for the system
+    /// FactoryInventorys for the system
     /// </summary>
-    public class ShopInventoryModel
+    public class FactoryInventoryModel
     {
-        [Display(Name = "Id", Description = "ShopInventory Id")]
+        [Display(Name = "Id", Description = "FactoryInventory Id")]
         [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
 
@@ -21,17 +21,17 @@ namespace _5051.Models
         [Required(ErrorMessage = "Picture is required")]
         public string Uri { get; set; }
 
-        [Display(Name = "Name", Description = "ShopInventory Name")]
-        [Required(ErrorMessage = "ShopInventory Name is required")]
+        [Display(Name = "Name", Description = "FactoryInventory Name")]
+        [Required(ErrorMessage = "FactoryInventory Name is required")]
         public string Name { get; set; }
 
-        [Display(Name = "Description", Description = "ShopInventory Description")]
-        [Required(ErrorMessage = "ShopInventory Description is required")]
+        [Display(Name = "Description", Description = "FactoryInventory Description")]
+        [Required(ErrorMessage = "FactoryInventory Description is required")]
         public string Description { get; set; }
 
-        [Display(Name = "Category", Description = "ShopInventory Category")]
+        [Display(Name = "Category", Description = "FactoryInventory Category")]
         [Required(ErrorMessage = "Category is required")]
-        public ShopInventoryCategoryEnum Category{ get; set; }
+        public FactoryInventoryCategoryEnum Category { get; set; }
 
         [Display(Name = "Tokens", Description = "Cost in Tokens")]
         [Required(ErrorMessage = "Tokens is required")]
@@ -48,20 +48,20 @@ namespace _5051.Models
         }
 
         /// <summary>
-        /// New ShopInventory
+        /// New FactoryInventory
         /// </summary>
-        public ShopInventoryModel()
+        public FactoryInventoryModel()
         {
             Initialize();
         }
 
         /// <summary>
-        /// Make an ShopInventory from values passed in
+        /// Make an FactoryInventory from values passed in
         /// </summary>
         /// <param name="uri">The Picture path</param>
-        /// <param name="name">ShopInventory Name</param>
-        /// <param name="description">ShopInventory Description</param>
-        public ShopInventoryModel(string uri, string name, string description, ShopInventoryCategoryEnum category, int tokens)
+        /// <param name="name">FactoryInventory Name</param>
+        /// <param name="description">FactoryInventory Description</param>
+        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens)
         {
             Initialize();
 
@@ -73,11 +73,11 @@ namespace _5051.Models
         }
 
         /// <summary>
-        /// Used to Update ShopInventory Before doing a data save
+        /// Used to Update FactoryInventory Before doing a data save
         /// Updates everything except for the ID
         /// </summary>
         /// <param name="data">Data to update</param>
-        public void Update(ShopInventoryModel data)
+        public void Update(FactoryInventoryModel data)
         {
             if (data == null)
             {

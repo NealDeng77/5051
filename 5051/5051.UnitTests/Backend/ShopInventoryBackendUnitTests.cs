@@ -4,17 +4,17 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopInventoryBackendUnitTests
+    public class FactoryInventoryBackendUnitTests
     {
         public TestContext TestContext { get; set; }
 
         #region delete
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Delete_Valid_Data_Should_Pass()
+        public void Backend_FactoryInventoryBackend_Delete_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
-            var data = new ShopInventoryModel();
+            var test = Backend.FactoryInventoryBackend.Instance;
+            var data = new FactoryInventoryModel();
             var createResult = test.Create(data);
             var expect = true;
 
@@ -29,10 +29,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_ShopInventoryBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Models_FactoryInventoryBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
             var expect = false;
 
             //act
@@ -46,80 +46,80 @@ namespace _5051.UnitTests.Models
         }
         #endregion delete
 
-        #region GetShopInventoryListItem
+        #region GetFactoryInventoryListItem
         [TestMethod]
-        public void Backend_ShopInventoryBackend_GetShopInventoryListItem_ID_Null_Should_Pass()
+        public void Backend_FactoryInventoryBackend_GetFactoryInventoryListItem_ID_Null_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
             //act
-            var result = test.GetShopInventoryListItem(null);
+            var result = test.GetFactoryInventoryListItem(null);
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
-        #endregion GetShopInventoryListItem
+        #endregion GetFactoryInventoryListItem
 
-        #region GetShopInventoryUri
+        #region GetFactoryInventoryUri
         [TestMethod]
-        public void Backend_ShopInventoryBackend_GetShopInventoryUri_Valid_Data_Should_Pass()
+        public void Backend_FactoryInventoryBackend_GetFactoryInventoryUri_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
-            var testID = test.GetFirstShopInventoryId();
+            var test = Backend.FactoryInventoryBackend.Instance;
+            var testID = test.GetFirstFactoryInventoryId();
 
             //act
-            var result = test.GetShopInventoryUri(testID);
+            var result = test.GetFactoryInventoryUri(testID);
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryBackend_GetShopInventoryUri_Invalid_Data_Null_Should_Fail()
+        public void Backend_FactoryInventoryBackend_GetFactoryInventoryUri_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
             //act
-            var result = test.GetShopInventoryUri(null);
+            var result = test.GetFactoryInventoryUri(null);
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryBackend_GetShopInventoryUri_Invalid_ID_Should_Fail()
+        public void Backend_FactoryInventoryBackend_GetFactoryInventoryUri_Invalid_ID_Should_Fail()
         {
             //arrange
-            var data = new ShopInventoryModel();
-            var test = Backend.ShopInventoryBackend.Instance;
+            var data = new FactoryInventoryModel();
+            var test = Backend.FactoryInventoryBackend.Instance;
             data.Id = "bogus";
 
             //act
-            var result = test.GetShopInventoryUri(data.Id);
+            var result = test.GetFactoryInventoryUri(data.Id);
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
         }
-        #endregion GetShopInventoryUri
+        #endregion GetFactoryInventoryUri
 
         #region update
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Update_Valid_Data_Should_Pass()
+        public void Backend_FactoryInventoryBackend_Update_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
-            var data = new ShopInventoryModel();
+            var data = new FactoryInventoryModel();
             var createResult = test.Create(data);
 
             data.Name = "GoodTestName";
             data.Description = "Good Test Description";
             data.Uri = "GoodTestUri";
             data.Tokens = 100;
-            data.Category = ShopInventoryCategoryEnum.Music;
+            data.Category = FactoryInventoryCategoryEnum.Music;
 
             var expect = data;
 
@@ -141,10 +141,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_ShopInventoryBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Models_FactoryInventoryBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Update(null);
@@ -159,10 +159,10 @@ namespace _5051.UnitTests.Models
 
         #region index
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Index_Valid_Should_Pass()
+        public void Backend_FactoryInventoryBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Index();
@@ -174,10 +174,10 @@ namespace _5051.UnitTests.Models
 
         #region read
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Read_Invalid_ID_Null_Should_Fail()
+        public void Backend_FactoryInventoryBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Read(null);
@@ -187,11 +187,11 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Read_Valid_ID_Should_Pass()
+        public void Backend_FactoryInventoryBackend_Read_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
-            var testID = test.GetFirstShopInventoryId();
+            var test = Backend.FactoryInventoryBackend.Instance;
+            var testID = test.GetFirstFactoryInventoryId();
 
             //act
             var result = test.Read(testID);
@@ -203,11 +203,11 @@ namespace _5051.UnitTests.Models
 
         #region create
         [TestMethod]
-        public void Backend_ShopInventoryBackend_Create_Valid_Data_Should_Pass()
+        public void Backend_FactoryInventoryBackend_Create_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
-            var data = new ShopInventoryModel();
+            var test = Backend.FactoryInventoryBackend.Instance;
+            var data = new FactoryInventoryModel();
 
             //act
             var result = test.Create(data);
@@ -223,10 +223,10 @@ namespace _5051.UnitTests.Models
 
         #region SetDataSourceDataSet
         [TestMethod]
-        public void Backend_ShopInventoryBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
+        public void Backend_FactoryInventoryBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
             //arrange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
             var testDataSourceBackend = Backend.DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;
 
@@ -240,10 +240,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_ShopInventoryBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
+        public void Backend_FactoryInventoryBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
         {
             //arange
-            var test = Backend.ShopInventoryBackend.Instance;
+            var test = Backend.FactoryInventoryBackend.Instance;
             var testDataSourceBackend = Backend.DataSourceBackend.Instance;
             var SQLEnum = DataSourceEnum.SQL;
 

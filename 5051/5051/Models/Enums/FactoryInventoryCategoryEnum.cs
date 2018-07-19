@@ -4,15 +4,16 @@ namespace _5051.Models
     /// <summary>
     /// Shop Inventory Item Categories
     /// </summary>
-    public enum ShopInventoryCategoryEnum
+    public enum FactoryInventoryCategoryEnum
     {
         // Not classified
         Unknown = 0,
 
-        // Instruments etc.
-        Music = 1,
+        // ice cream.
+        IceCream = 1,
 
-        // TV, Radio etc.
-        Entertainment = 2,
+        // decorations.
+        Decorations = 2,
+
     }
 }

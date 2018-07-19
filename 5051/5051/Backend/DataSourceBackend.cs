@@ -13,7 +13,7 @@ namespace _5051.Backend
         /// </summary>
         public AvatarBackend AvatarBackend = AvatarBackend.Instance;
         public StudentBackend StudentBackend = StudentBackend.Instance;
-        public ShopInventoryBackend ShopInventoryBackend = ShopInventoryBackend.Instance;
+        public FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
         public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
         public SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
         public KioskSettingsBackend KioskSettingsBackend = KioskSettingsBackend.Instance;
@@ -29,7 +29,7 @@ namespace _5051.Backend
             // Avatar must be before Student, because Student needs the default avatarID
             AvatarBackend = AvatarBackend.Instance;
             StudentBackend = StudentBackend.Instance;
-            ShopInventoryBackend = ShopInventoryBackend.Instance;
+            FactoryInventoryBackend = FactoryInventoryBackend.Instance;
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
             SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
             KioskSettingsBackend = KioskSettingsBackend.Instance;
@@ -62,7 +62,7 @@ namespace _5051.Backend
             KioskSettingsBackend.Reset();
             SchoolCalendarBackend.Reset();
             SchoolDismissalSettingsBackend.Reset();
-            ShopInventoryBackend.Reset();
+            FactoryInventoryBackend.Reset();
 
             AvatarBackend.Reset();
             StudentBackend.Reset();
@@ -77,7 +77,7 @@ namespace _5051.Backend
             SchoolDismissalSettingsBackend.SetDataSource(dataSourceEnum);
             SchoolCalendarBackend.SetDataSource(dataSourceEnum);
 
-            ShopInventoryBackend.SetDataSource(dataSourceEnum);
+            FactoryInventoryBackend.SetDataSource(dataSourceEnum);
 
             // Avatar must be reset before Student, because Student needs the default avatarID
             AvatarBackend.SetDataSource(dataSourceEnum);
@@ -93,7 +93,7 @@ namespace _5051.Backend
             KioskSettingsBackend.SetDataSourceDataSet(SetEnum);
             SchoolDismissalSettingsBackend.SetDataSourceDataSet(SetEnum);
             SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
-            ShopInventoryBackend.SetDataSourceDataSet(SetEnum);
+            FactoryInventoryBackend.SetDataSourceDataSet(SetEnum);
 
             // Avatar must be reset before Student, because Student needs the default avatarID
             AvatarBackend.SetDataSourceDataSet(SetEnum);

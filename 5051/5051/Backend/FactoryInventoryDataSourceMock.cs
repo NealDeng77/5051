@@ -7,19 +7,19 @@ using _5051.Models;
 namespace _5051.Backend
 {
     /// <summary>
-    /// Backend Mock DataSource for ShopInventorys, to manage them
+    /// Backend Mock DataSource for FactoryInventorys, to manage them
     /// </summary>
-    public class ShopInventoryDataSourceMock : IShopInventoryInterface
+    public class FactoryInventoryDataSourceMock : IFactoryInventoryInterface
     {
         /// <summary>
         /// Make into a Singleton
         /// </summary>
-        private static volatile ShopInventoryDataSourceMock instance;
+        private static volatile FactoryInventoryDataSourceMock instance;
         private static object syncRoot = new Object();
 
-        private ShopInventoryDataSourceMock() { }
+        private FactoryInventoryDataSourceMock() { }
 
-        public static ShopInventoryDataSourceMock Instance
+        public static FactoryInventoryDataSourceMock Instance
         {
             get
             {
@@ -29,7 +29,7 @@ namespace _5051.Backend
                     {
                         if (instance == null)
                         {
-                            instance = new ShopInventoryDataSourceMock();
+                            instance = new FactoryInventoryDataSourceMock();
                             instance.Initialize();
                         }
                     }
@@ -40,18 +40,18 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// The ShopInventory List
+        /// The FactoryInventory List
         /// </summary>
-        private List<ShopInventoryModel> ShopInventoryList = new List<ShopInventoryModel>();
+        private List<FactoryInventoryModel> FactoryInventoryList = new List<FactoryInventoryModel>();
 
         /// <summary>
-        /// Makes a new ShopInventory
+        /// Makes a new FactoryInventory
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>ShopInventory Passed In</returns>
-        public ShopInventoryModel Create(ShopInventoryModel data)
+        /// <returns>FactoryInventory Passed In</returns>
+        public FactoryInventoryModel Create(FactoryInventoryModel data)
         {
-            ShopInventoryList.Add(data);
+            FactoryInventoryList.Add(data);
             return data;
         }
 
@@ -60,14 +60,14 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Null or valid data</returns>
-        public ShopInventoryModel Read(string id)
+        public FactoryInventoryModel Read(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return null;
             }
 
-            var myReturn = ShopInventoryList.Find(n => n.Id == id);
+            var myReturn = FactoryInventoryList.Find(n => n.Id == id);
             return myReturn;
         }
 
@@ -76,13 +76,13 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Null or updated data</returns>
-        public ShopInventoryModel Update(ShopInventoryModel data)
+        public FactoryInventoryModel Update(FactoryInventoryModel data)
         {
             if (data == null)
             {
                 return null;
             }
-            var myReturn = ShopInventoryList.Find(n => n.Id == data.Id);
+            var myReturn = FactoryInventoryList.Find(n => n.Id == data.Id);
             if (myReturn == null)
             {
                 return null;
@@ -105,18 +105,18 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = ShopInventoryList.Find(n => n.Id == Id);
-            var myReturn = ShopInventoryList.Remove(myData);
+            var myData = FactoryInventoryList.Find(n => n.Id == Id);
+            var myReturn = FactoryInventoryList.Remove(myData);
             return myReturn;
         }
 
         /// <summary>
         /// Return the full dataset
         /// </summary>
-        /// <returns>List of ShopInventorys</returns>
-        public List<ShopInventoryModel> Index()
+        /// <returns>List of FactoryInventorys</returns>
+        public List<FactoryInventoryModel> Index()
         {
-            return ShopInventoryList;
+            return FactoryInventoryList;
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetClear()
         {
-            ShopInventoryList.Clear();
+            FactoryInventoryList.Clear();
         }
 
         /// <summary>
@@ -149,16 +149,16 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            Create(new ShopInventoryModel("guitar.png", "Guitar", "6 strings and all",ShopInventoryCategoryEnum.Music,10 ));
-            Create(new ShopInventoryModel("saxophone.png", "Saxophone", "Smooth Sounds", ShopInventoryCategoryEnum.Music,10));
-            Create(new ShopInventoryModel("trumpet.png", "Trumpet", "Love the Horn", ShopInventoryCategoryEnum.Music,10));
-            Create(new ShopInventoryModel("violin.png", "Violin", "Sweet Melody", ShopInventoryCategoryEnum.Music,10));
+            Create(new FactoryInventoryModel("guitar.png", "Guitar", "6 strings and all", FactoryInventoryCategoryEnum.IceCream,10 ));
+            Create(new FactoryInventoryModel("saxophone.png", "Saxophone", "Smooth Sounds", FactoryInventoryCategoryEnum.IceCream,10));
+            Create(new FactoryInventoryModel("trumpet.png", "Trumpet", "Love the Horn", FactoryInventoryCategoryEnum.IceCream,10));
+            Create(new FactoryInventoryModel("violin.png", "Violin", "Sweet Melody", FactoryInventoryCategoryEnum.IceCream,10));
 
-            Create(new ShopInventoryModel("radio.png", "Radio", "Play some Tunes", ShopInventoryCategoryEnum.Entertainment,10));
-            Create(new ShopInventoryModel("telephone.png", "Telephone", "Talking with my buds", ShopInventoryCategoryEnum.Entertainment,10));
-            Create(new ShopInventoryModel("television.png", "Television", "I love lucy again?", ShopInventoryCategoryEnum.Entertainment,10));
-            Create(new ShopInventoryModel("headphone.png", "Headphone", "Just relazing", ShopInventoryCategoryEnum.Entertainment,10));
-            Create(new ShopInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", ShopInventoryCategoryEnum.Entertainment,10));
+            Create(new FactoryInventoryModel("radio.png", "Radio", "Play some Tunes", FactoryInventoryCategoryEnum.Decorations,10));
+            Create(new FactoryInventoryModel("telephone.png", "Telephone", "Talking with my buds", FactoryInventoryCategoryEnum.Decorations,10));
+            Create(new FactoryInventoryModel("television.png", "Television", "I love lucy again?", FactoryInventoryCategoryEnum.Decorations,10));
+            Create(new FactoryInventoryModel("headphone.png", "Headphone", "Just relazing", FactoryInventoryCategoryEnum.Decorations,10));
+            Create(new FactoryInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", FactoryInventoryCategoryEnum.Decorations,10));
         }
 
         /// <summary>

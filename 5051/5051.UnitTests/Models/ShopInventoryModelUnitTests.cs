@@ -9,46 +9,46 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopInventoryModelUnitTests
+    public class FactoryInventoryModelUnitTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopInventoryModel_Default_Instantiate_Should_Pass()
+        public void Models_FactoryInventoryModel_Default_Instantiate_Should_Pass()
         {
 
             // Act
-            var result = new ShopInventoryModel();
+            var result = new FactoryInventoryModel();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Models_ShopInventoryModel_Instantiate_Valid_Should_Pass()
+        public void Models_FactoryInventoryModel_Instantiate_Valid_Should_Pass()
         {
             // Arrange
             var uri = "uri";
             var name = "name";
             var description = "description";
-            ShopInventoryCategoryEnum category = ShopInventoryCategoryEnum.Music;
+            FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Music;
             int tokens = 10;
 
             var expect = uri;
 
             // Act
-            var result = new ShopInventoryModel(uri, name, description,category,tokens);
+            var result = new FactoryInventoryModel(uri, name, description,category,tokens);
 
             // Assert
             Assert.AreEqual(expect,result.Uri, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Models_ShopInventoryModel_Instantiate_Valid_Get_Catagory_Should_Pass()
+        public void Models_FactoryInventoryModel_Instantiate_Valid_Get_Catagory_Should_Pass()
         {
             // Arrange
-            var result = new ShopInventoryModel();
+            var result = new FactoryInventoryModel();
 
             // Act
             var expect = result.Category;
@@ -60,15 +60,15 @@ namespace _5051.UnitTests.Models
 
         #region Update
         [TestMethod]
-        public void Models_ShopInventoryModel_Update_With_Valid_Data_Should_Pass()
+        public void Models_FactoryInventoryModel_Update_With_Valid_Data_Should_Pass()
         {
             // Arrange
             var expect = "test";
 
-            var data = new ShopInventoryModel();
+            var data = new FactoryInventoryModel();
             data.Uri = "bogus";
 
-            var test = new ShopInventoryModel();
+            var test = new FactoryInventoryModel();
             test.Uri = "test";
 
             // Act
@@ -80,13 +80,13 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_ShopInventoryModel_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Models_FactoryInventoryModel_Update_With_Invalid_Data_Null_Should_Fail()
         {
             // Arrange
 
             var expect = "test";
 
-            var data = new ShopInventoryModel();
+            var data = new FactoryInventoryModel();
             data.Id = "test";
 
             // Act

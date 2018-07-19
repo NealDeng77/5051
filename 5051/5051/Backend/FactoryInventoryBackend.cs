@@ -8,19 +8,19 @@ using System.Web.Mvc;
 namespace _5051.Backend
 {
     /// <summary>
-    /// ShopInventory Backend handles the business logic and data for ShopInventorys
+    /// FactoryInventory Backend handles the business logic and data for FactoryInventorys
     /// </summary>
-    public class ShopInventoryBackend
+    public class FactoryInventoryBackend
     {
         /// <summary>
         /// Make into a Singleton
         /// </summary>
-        private static volatile ShopInventoryBackend instance;
+        private static volatile FactoryInventoryBackend instance;
         private static object syncRoot = new Object();
 
-        private ShopInventoryBackend() { }
+        private FactoryInventoryBackend() { }
 
-        public static ShopInventoryBackend Instance
+        public static FactoryInventoryBackend Instance
         {
             get
             {
@@ -30,7 +30,7 @@ namespace _5051.Backend
                     {
                         if (instance == null)
                         {
-                            instance = new ShopInventoryBackend();
+                            instance = new FactoryInventoryBackend();
                             SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
                         }
                     }
@@ -41,7 +41,7 @@ namespace _5051.Backend
         }
 
         // Get the Datasource to use
-        private static IShopInventoryInterface DataSource;
+        private static IFactoryInventoryInterface DataSource;
 
         /// <summary>
         /// Sets the Datasource to be Mock or SQL
@@ -56,15 +56,15 @@ namespace _5051.Backend
             }
 
             // Default is to use the Mock
-            DataSource =  ShopInventoryDataSourceMock.Instance;
+            DataSource = FactoryInventoryDataSourceMock.Instance;
         }
-        
+
         /// <summary>
-        /// Makes a new ShopInventory
+        /// Makes a new FactoryInventory
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>ShopInventory Passed In</returns>
-        public ShopInventoryModel Create(ShopInventoryModel data)
+        /// <returns>FactoryInventory Passed In</returns>
+        public FactoryInventoryModel Create(FactoryInventoryModel data)
         {
             DataSource.Create(data);
             return data;
@@ -75,7 +75,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Null or valid data</returns>
-        public ShopInventoryModel Read(string id)
+        public FactoryInventoryModel Read(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -91,7 +91,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Null or updated data</returns>
-        public ShopInventoryModel Update(ShopInventoryModel data)
+        public FactoryInventoryModel Update(FactoryInventoryModel data)
         {
             if (data == null)
             {
@@ -122,18 +122,18 @@ namespace _5051.Backend
         /// <summary>
         /// Return the full dataset
         /// </summary>
-        /// <returns>List of ShopInventorys</returns>
-        public List<ShopInventoryModel> Index()
+        /// <returns>List of FactoryInventorys</returns>
+        public List<FactoryInventoryModel> Index()
         {
             var myData = DataSource.Index();
             return myData;
         }
 
         /// <summary>
-        /// Helper that returns the First ShopInventory ID in the list, this will be used for creating new ShopInventorys if no ShopInventoryID is specified
+        /// Helper that returns the First FactoryInventory ID in the list, this will be used for creating new FactoryInventorys if no FactoryInventoryID is specified
         /// </summary>
-        /// <returns>Null, or ShopInventory ID of the first ShopInventory in the list.</returns>
-        public string GetFirstShopInventoryId()
+        /// <returns>Null, or FactoryInventory ID of the first FactoryInventory in the list.</returns>
+        public string GetFirstFactoryInventoryId()
         {
             string myReturn = null;
 
@@ -147,11 +147,11 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Helper function that returns the ShopInventory Image URI
+        /// Helper function that returns the FactoryInventory Image URI
         /// </summary>
-        /// <param name="data">The ShopInventoryId to look up</param>
-        /// <returns>null, or the ShopInventory image URI</returns>
-        public string GetShopInventoryUri(string data)
+        /// <param name="data">The FactoryInventoryId to look up</param>
+        /// <returns>null, or the FactoryInventory image URI</returns>
+        public string GetFactoryInventoryUri(string data)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -174,7 +174,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id">optional paramater, of the Item that is currently selected</param>
         /// <returns>List of SelectListItems as a SelectList</returns>
-        public List<SelectListItem> GetShopInventoryListItem(string id=null)
+        public List<SelectListItem> GetFactoryInventoryListItem(string id=null)
         {
             var myDataList = DataSource.Index();
 
@@ -196,7 +196,7 @@ namespace _5051.Backend
         /// <param name="SetEnum"></param>
         public static void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
         {
-            ShopInventoryDataSourceMock.Instance.LoadDataSet(SetEnum);
+            FactoryInventoryDataSourceMock.Instance.LoadDataSet(SetEnum);
         }
 
         /// <summary>
