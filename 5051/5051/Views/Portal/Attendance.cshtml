@@ -1,4 +1,5 @@
-﻿@model _5051.Models.StudentDisplayViewModel
+﻿@using _5051.Models
+@model _5051.Models.StudentDisplayViewModel
 
 @{
 
@@ -43,12 +44,14 @@
                                     In<br />
                                     @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortTimeString()<br />
                                 </div>
-                                <div class="col-sm-6">
-                                    Out<br />
+                                @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
+                                {
+                                    <div class="col-sm-6">
+                                        Out<br />
 
-                                    @item.Out.ToShortTimeString()<br />
-
-                                </div>
+                                        @item.Out.ToShortTimeString()<br />
+                                    </div>
+                                }
                             </div>
 
                             <div class="row text-center">
