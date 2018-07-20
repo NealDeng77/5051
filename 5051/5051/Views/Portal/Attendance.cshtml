@@ -1,5 +1,4 @@
-﻿@using _5051.Models
-@model _5051.Models.StudentDisplayViewModel
+﻿@model _5051.Models.StudentDisplayViewModel
 
 @{
 
@@ -34,9 +33,8 @@
         <div class="row text-center">
 
             @{
-                for (int i = 0; i < Model.Attendance.Count - 1; i++)
+                foreach (var item in Model.Attendance)
                 {
-                    var item = Model.Attendance[i];
                     <div class="col-sm-2" style="border:solid 1px; margin-right:5px">
                         <div class="BoxWithHighlightHover">
                             @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortDateString()<br />
@@ -60,76 +58,28 @@
 
                             </div>
                             @*<div class="row">
-                            <br />
-                            Duration<br />
-                            @{
-                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                {
-                                    <span>
-                                        @item.Duration.Hours Hours<br />
-                                        @item.Duration.Minutes Minutes<br />
-                                    </span>
-                                }
-                                else
-                                {
                                     <br />
-                                    <br />
-                                }
-                            }
-                        </div>*@
+                                    Duration<br />
+                                    @{
+                                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                        {
+                                            <span>
+                                                @item.Duration.Hours Hours<br />
+                                                @item.Duration.Minutes Minutes<br />
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <br />
+                                            <br />
+                                        }
+                                    }
+                                </div>*@
                         </div>
                     </div>
                 }
             }
-            @{
-                var last = Model.Attendance.Last();
-                <div class="col-sm-2" style="border:solid 1px; margin-right:5px">
-                    <div class="BoxWithHighlightHover">
-                        @_5051.Backend.UTCConversionsBackend.ToClientTime(last.In).ToShortDateString()<br />
-                        <div class="row">
-                            <div class="col-sm-6">
-                                In<br />
-                                @_5051.Backend.UTCConversionsBackend.ToClientTime(last.In).ToShortTimeString()<br />
-                            </div>
-                            @if (@Model.Status == StudentStatusEnum.Out)
-                            {
-                                <div class="col-sm-6">
-                                    Out<br />
 
-                                    @last.Out.ToShortTimeString()<br />
-
-                                </div>
-                            }
-
-                        </div>
-
-                        <div class="row text-center">
-                            <div class="col">
-                                <h4>@last.Emotion</h4>
-                            </div>
-
-                        </div>
-                        @*<div class="row">
-                        <br />
-                        Duration<br />
-                        @{
-                            if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                            {
-                                <span>
-                                    @item.Duration.Hours Hours<br />
-                                    @item.Duration.Minutes Minutes<br />
-                                </span>
-                            }
-                            else
-                            {
-                                <br />
-                                <br />
-                            }
-                        }
-                    </div>*@
-                    </div>
-                </div>
-            }
         </div>
     </div>
 </div>
