@@ -10,7 +10,7 @@
     <br />
     <br />
 
-    <div class="row text-center">
+    <div class="row text-center" id="studentsListContainer">
 
             @{
                 if (Model.StudentList == null || !Model.StudentList.Any())
@@ -24,7 +24,7 @@
                     foreach (var item in Model.StudentList)
                     {
                         <div class="col-sm-2">
-                            <div class="BoxWithHighlightHover">
+                            <div class="BoxWithHighlightHover" id="studentContainer">
                                 <a id="@item.Id" href="~/Student/Read/@item.Id">
                                     <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
                                 </a>

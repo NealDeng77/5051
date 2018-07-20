@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
-        <div class="block1">
+        <div class="BlockStudentLogin">
             <br />
             <div class="row">
                 <p class="FontStyleBlockH1">Student Login</p>
@@ -22,6 +22,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-4 text-center">
+                    <br />
                     <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize1" />
                     <br />
                     <span class="text-center FontColor1">
@@ -47,7 +48,7 @@
 
                 <div class="row">
                     <div class="col-sm-2 text-right">
-                        <i class="fa fa-lock" aria-hidden="true" style="color:white; padding-top:1px; font-size:38px;"></i>
+                        <i class="fa fa-lock LockStyle" aria-hidden="true"></i>
                     </div>
                     <div class="col-sm-8">
                         @Html.PasswordFor(m => m.Password, new { @class = "input1" })
@@ -63,7 +64,7 @@
                         @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn1 btn-light btn-block" })
                     </div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Login" class="btn btn1 btn-light btn-block ">
+                        <input type="submit" value="Login" class="btn btn1 btn-light btn-block">
                     </div>
                 </div>
             }
