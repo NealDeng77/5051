@@ -166,6 +166,39 @@ namespace _5051.Controllers
             return View();
         }
 
-        
+        /// <summary>
+        /// store items of the shop
+        /// </summary>
+        /// <returns></returns>
+        // GET: Inventory
+        public ActionResult Inventory()
+        {
+            // To do
+            return View();
+        }
+
+
+        /// <summary>
+        /// Edit shop detail
+        /// </summary>
+        /// <returns></returns>
+        // GET: Edit
+        public ActionResult Edit()
+        {
+            // To do
+            return View();
+        }
+
+        /// <summary>
+        /// Shows the ice cream flavor preference of celebrities 
+        /// </summary>
+        /// <returns></returns>
+        // GET: Poster
+        public ActionResult CelebrityPoster()
+        {
+            // To do
+            return View();
+        }
+
     }
 }
