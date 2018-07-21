@@ -14,9 +14,6 @@ namespace _5051UITests.Views.Portal
         private string _Action = "Login";
         private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
 
-        private string ErrorController = "Portal";
-        private string ErrorView = "Roster";
-
         [TestMethod]
         public void Portal_Login_NavigateToPage_Valid_Should_Pass()
         {
@@ -28,7 +25,7 @@ namespace _5051UITests.Views.Portal
         {
             AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorController, ErrorView);
+            ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
         }
     }
 }

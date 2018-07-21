@@ -14,9 +14,6 @@ namespace _5051UITests.Views.Portal
         private string _Action = "Avatar";
         private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
 
-        private string ErrorController = "Home";
-        private string ErrorView = "Error";
-
         [TestMethod]
         public void Portal_Avatar_NavigateToPage_Valid_Should_Pass()
         {
@@ -28,7 +25,7 @@ namespace _5051UITests.Views.Portal
         {
             AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorController, ErrorView);
+            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
         }
     }
 }

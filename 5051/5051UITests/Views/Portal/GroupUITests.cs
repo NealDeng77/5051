@@ -13,7 +13,6 @@ namespace _5051UITests.Views.Portal
         private string _Controller = "Portal";
         private string _Action = "Group";
 
-
         [TestMethod]
         public void Portal_Group_NavigateToPage_Valid_Should_Pass()
         {
