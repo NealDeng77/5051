@@ -592,7 +592,7 @@ namespace _5051.Tests.Controllers
 
         #region ReportRegion
         [TestMethod]
-        public void Controller_Portal_Report_IDIsNull_Should_Return_RosterPage()
+        public void Controller_Portal_Report_IDIsNull_Should_Return_Error_Page()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -606,7 +606,7 @@ namespace _5051.Tests.Controllers
         }           
 
         [TestMethod]
-        public void Controller_Portal_Report_IDValid_should_Return_ErrorPage()
+        public void Controller_Portal_Report_ID_Is_Valid_should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
@@ -614,15 +614,13 @@ namespace _5051.Tests.Controllers
             string id = Backend.StudentBackend.Instance.Create(data).Id;
 
             // Act
-            var result = controller.Report(id) as ViewResult;
-
-            var resultStudentReportViewModel = result.Model as StudentReportViewModel;
+            var result = controller.Report(id) as RedirectResult;
 
             // Reset StudentBackend
             StudentBackend.Instance.Reset();
 
             // Assert
-            Assert.IsNotNull(resultStudentReportViewModel, TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion
     }
