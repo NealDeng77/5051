@@ -111,7 +111,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
-        public SchoolYearReportViewModel GenerateOverallReport(SchoolYearReportViewModel report)
+        public BaseReportViewModel GenerateOverallReport(BaseReportViewModel report)
         {
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);

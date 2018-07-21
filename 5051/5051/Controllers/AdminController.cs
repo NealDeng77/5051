@@ -101,7 +101,7 @@ namespace _5051.Controllers
             }
 
 
-            var myReport = new SchoolYearReportViewModel()
+            var myReport = new BaseReportViewModel()
             {
                 StudentId = id,
             };
