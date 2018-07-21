@@ -18,13 +18,13 @@ namespace _5051UITests.Views.Portal
         private string ErrorView = "Roster";
 
         [TestMethod]
-        public void Portal_Settings_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Attendance_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
-        public void Portal_Settings_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
+        public void Portal_Attendance_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
             AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
 
