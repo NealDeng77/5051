@@ -51,11 +51,10 @@ namespace _5051.Controllers
             }
 
 
-            var myReport = new StudentReportViewModel
+            var myReport = new MonthlyReportViewModel()
             {
                 StudentId = id,
-                Year = DateTime.UtcNow.Year,
-                Month = DateTime.UtcNow.Month
+                SelectedMonthId = 1
             };
 
             var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
