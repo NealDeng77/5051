@@ -5,18 +5,20 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using static _5051UITests.Extensions;
 
-namespace _5051UITests.Views.Home
+namespace _5051UITests.Views.Portal
 {
     [TestClass]
-    public class AboutUITests
+    public class VisitUITTests
     {
-        private string _Controller = "Home";
-        private string _Action = "About";
+        private string _Controller = "Portal";
+        private string _Action = "Visit";
 
         [TestMethod]
-        public void Home_About_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Visit_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
         }
+
+
     }
 }

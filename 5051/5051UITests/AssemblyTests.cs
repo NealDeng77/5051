@@ -16,11 +16,18 @@ namespace _5051UITests
         public static IWebDriver CurrentDriver = new ChromeDriver(Extensions.ChromeDriverLocation);
         public static ChromeOptions Options = new ChromeOptions();
 
+        private const string HomePageController = "Home";
+        private const string HomePageView = "Index";
+
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext context)
         {
             //set implicit wait for driver
             CurrentDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Extensions.WaitTime);
+
+            //navigate to the baseURL and validate it was landed on
+            CurrentDriver.Navigate().GoToUrl(Extensions.BaseUrl);
+            Extensions.ValidatePageTransition(CurrentDriver, HomePageController, HomePageView);
         }
 
         [AssemblyCleanup]
