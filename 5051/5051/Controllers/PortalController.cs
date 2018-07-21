@@ -388,7 +388,7 @@ namespace _5051.Controllers
 
             //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
-            return RedirectToAction("MonthlyReport", "Admin", id);
+            return RedirectToAction("MonthlyReport", "Admin", new{id});
         }
     }
 }
