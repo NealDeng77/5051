@@ -3,6 +3,8 @@ using System.Linq;
 
 using _5051.Models.Enums;
 using _5051.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace _5051.Backend
 {
@@ -48,11 +50,58 @@ namespace _5051.Backend
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
 
-            //set start date and end date
-            report.DateStart = new DateTime(report.Year, report.Month, 1);
-            report.DateEnd = new DateTime(report.Year, report.Month, DateTime.DaysInMonth(report.Year, report.Month));
+            //
+            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+            //todo: convert this to kiosk timezone here
+            var dayNow = DateTime.UtcNow;
+
+            //The first valid month for the dropdown
+            var monthFirst = new DateTime(dayFirst.Year, dayFirst.Month, 1);
+            //The last valid month for the dropdown
+            var monthLast = new DateTime(dayLast.Year, dayLast.Month, 1);
+            //The month of today
+            var monthNow = new DateTime(dayNow.Year, dayNow.Month, 1);
+
+            //do not go beyond the month of today
+            if (monthLast > monthNow)
+            {
+                monthLast = monthNow;
+            }
+
+            //Set the current month (loop variable) to the last valid month
+            var currentMonth = monthLast;
+
+            //initialize the dropdownlist
+            report.Months = new List<SelectListItem>();
+
+            // the month id
+            int monthId = 1;
+
+            //loop backwards in time so that the month select list items are in time reversed order
+            while (currentMonth >= monthFirst)
+            {
+                //make a list item for the current month
+                var month = new SelectListItem { Value = "" + monthId, Text = currentMonth.ToString("MMMM yyyy") };
+
+                //add to the select list
+                report.Months.Add(month);
+
+                //if current month is the selected month, set the start date and end date for this report
+                if (monthId == report.SelectedMonthId)
+                {
+                    //set start date and end date
+                    report.DateStart = new DateTime(currentMonth.Year, currentMonth.Month, 1);
+                    report.DateEnd = new DateTime(currentMonth.Year, currentMonth.Month, DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month));
+                }
+
+                monthId++;
+                currentMonth = currentMonth.AddMonths(-1);
+
+            }
 
 
+            //Generate report for this month
             GenerateReportFromStartToEnd(report);
 
             return report;
@@ -200,8 +249,6 @@ namespace _5051.Backend
                     report.Stats.PercOutEarly = (int)Math.Round((double)report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent);
                 }
             }
-
-            return report;
         }
 
         /// <summary>
