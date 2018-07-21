@@ -18,13 +18,13 @@ namespace _5051UITests
         private string ErrorView = "Error";
 
         [TestMethod]
-        public void Portal_Visit_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Settings_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
-        public void Portal_Visit_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
+        public void Portal_Settings_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
             AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
 

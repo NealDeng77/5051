@@ -14,7 +14,7 @@ namespace _5051UITests
         private string _Action = "Roster";
 
         [TestMethod]
-        public void Portal_Visit_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Roster_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
         }
