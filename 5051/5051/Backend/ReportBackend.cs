@@ -43,7 +43,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
-        public StudentReportViewModel GenerateMonthlyReport(StudentReportViewModel report)
+        public MonthlyReportViewModel GenerateMonthlyReport(MonthlyReportViewModel report)
         {
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
@@ -62,7 +62,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
-        public StudentReportViewModel GenerateOverallReport(StudentReportViewModel report)
+        public SchoolYearReportViewModel GenerateOverallReport(SchoolYearReportViewModel report)
         {
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
@@ -82,7 +82,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
-        private StudentReportViewModel GenerateReportFromStartToEnd(StudentReportViewModel report)
+        private void GenerateReportFromStartToEnd(BaseReportViewModel report)
         {
             // Don't go beyond today, don't include today
             if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
