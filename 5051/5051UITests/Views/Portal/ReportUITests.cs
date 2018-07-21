@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using static _5051UITests.Extensions;
 
-namespace _5051UITests
+namespace _5051UITests.Views.Portal
 {
     [TestClass]
     public class ReportUITests
