@@ -15,7 +15,7 @@ namespace _5051UITests.Views.Portal
 
 
         [TestMethod]
-        public void Portal_Report_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Group_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
         }
