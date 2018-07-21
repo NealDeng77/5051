@@ -9,7 +9,7 @@ namespace _5051.Models
     /// <summary>
     /// Monthly report view model, for generating monthly report view
     /// </summary>
-    public class MonthlyReportViewModel
+    public class MonthlyReportViewModel : BaseReportViewModel
     {
         /// <summary>
         /// Contains a select list for month selection dropdown
