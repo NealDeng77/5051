@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace _5051.Models
 {
     /// <summary>
-    /// The Full set of Reports for a single Student
+    /// The base report view model, all types of report view models(weekly, monthly, semester, school year) inherit this class
     /// </summary>
-    public class StudentReportViewModel
+    public class BaseReportViewModel
     {
         /// <summary>
         /// The Student id

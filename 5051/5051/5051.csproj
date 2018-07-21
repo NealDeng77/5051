@@ -251,7 +251,7 @@
     <Compile Include="Models\StudentAvatarModel.cs" />
     <Compile Include="Models\StudentDisplayViewModel.cs" />
     <Compile Include="Models\StudentReportStatsModel.cs" />
-    <Compile Include="Models\StudentReportViewModel.cs" />
+    <Compile Include="Models\BaseReportViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AvatarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
