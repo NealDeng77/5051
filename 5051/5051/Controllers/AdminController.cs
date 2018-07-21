@@ -69,9 +69,8 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult StudentReport([Bind(Include=
             "StudentId,"+
-            "Year,"+
-            "Month,"+
-            "")] StudentReportViewModel data)
+            "SelectedMonthId"+
+            "")] MonthlyReportViewModel data)
         {
 
             if (data == null)
@@ -102,7 +101,7 @@ namespace _5051.Controllers
             }
 
 
-            var myReport = new StudentReportViewModel
+            var myReport = new SchoolYearReportViewModel()
             {
                 StudentId = id,
             };
