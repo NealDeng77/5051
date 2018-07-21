@@ -371,24 +371,24 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Report(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            //var myStudent = StudentBackend.Instance.Read(id);
 
-            if (myStudent == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
+            //if (myStudent == null)
+            //{
+            //    return RedirectToAction("Error", "Home");
+            //}
 
 
-            var myReport = new StudentReportViewModel
-            {
-                StudentId = id,
-                Year = DateTime.UtcNow.Year,
-                Month = DateTime.UtcNow.Month
-            };
+            //var myReport = new StudentReportViewModel
+            //{
+            //    StudentId = id,
+            //    Year = DateTime.UtcNow.Year,
+            //    Month = DateTime.UtcNow.Month
+            //};
 
-            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
+            //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
-            return View(myReturn);
+            return RedirectToAction("MonthlyReport", "Admin", id);
         }
     }
 }

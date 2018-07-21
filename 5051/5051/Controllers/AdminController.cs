@@ -67,7 +67,7 @@ namespace _5051.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult StudentReport([Bind(Include=
+        public ActionResult MonthlyReport([Bind(Include=
             "StudentId,"+
             "SelectedMonthId"+
             "")] MonthlyReportViewModel data)
