@@ -113,6 +113,85 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.FallFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.FallFirstClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.FallLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.FallLastClassDay, new { htmlAttributes = new { @Value = @Model.FallLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.FallLastClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.WinterFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.WinterFirstClassDay, new { htmlAttributes = new { @Value = @Model.WinterFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.WinterFirstClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.WinterLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.WinterLastClassDay, new { htmlAttributes = new { @Value = @Model.WinterLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.WinterLastClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SpringFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SpringFirstClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SpringLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SpringLastClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SummerFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SummerFirstClassDay, new { htmlAttributes = new { @Value = @Model.SummerFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SummerFirstClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SummerLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SummerLastClassDay, new { htmlAttributes = new { @Value = @Model.SummerLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SummerLastClassDay)
+                            </div>
+                        </div>
                         <br />
                         <br />
 
