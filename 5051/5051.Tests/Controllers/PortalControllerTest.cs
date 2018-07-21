@@ -591,36 +591,21 @@ namespace _5051.Tests.Controllers
         #endregion
 
         #region ReportRegion
-        [TestMethod]
-        public void Controller_Portal_Report_IDIsNull_Should_Return_Error_Page()
-        {
-            // Arrange
-            PortalController controller = new PortalController();
-            string id = null;
-
-            // Act
-            var result = (RedirectToRouteResult)controller.Report(id);
-
-            // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-        }           
+        
 
         [TestMethod]
-        public void Controller_Portal_Report_ID_Is_Valid_should_Pass()
+        public void Controller_Portal_Report_Default_should_Pass()
         {
             // Arrange
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            string id = Backend.StudentBackend.Instance.GetDefault().Id;
 
             // Act
-            var result = controller.Report(id) as RedirectResult;
-
-            // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            var result = controller.Report(id) as RedirectToRouteResult;
 
             // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
         }
         #endregion
     }
