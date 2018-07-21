@@ -14,16 +14,6 @@ namespace _5051.Models
         public string StudentId { get; set; }
 
         /// <summary>
-        /// The year
-        /// </summary>
-        public int Year { get; set; }
-
-        /// <summary>
-        /// The month
-        /// </summary>
-        public int Month { get; set; }
-
-        /// <summary>
         /// The Student record
         /// </summary>
         public StudentModel Student { get; set; }
