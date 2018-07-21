@@ -28,6 +28,11 @@ namespace _5051UITests
             //navigate to the baseURL and validate it was landed on
             CurrentDriver.Navigate().GoToUrl(Extensions.BaseUrl);
             Extensions.ValidatePageTransition(CurrentDriver, HomePageController, HomePageView);
+
+            //set the demo data as the data source
+            Extensions.NavigateToPage(CurrentDriver, "Admin", "Settings");
+            CurrentDriver.FindElement(By.Id("Demo")).Click();
+            Extensions.ValidatePageTransition(CurrentDriver, "Admin", "Index");
         }
 
         [AssemblyCleanup]
