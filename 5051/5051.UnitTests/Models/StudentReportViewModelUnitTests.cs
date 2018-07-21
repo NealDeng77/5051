@@ -19,7 +19,7 @@ namespace _5051.UnitTests.Models
         {
 
             // Act
-            var result = new StudentReportViewModel();
+            var result = new MonthlyReportViewModel();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -29,26 +29,20 @@ namespace _5051.UnitTests.Models
         public void Models_StudentReportViewModel_Default_Instantiate_Get_Set_Data_Should_Pass()
         {
             //arrange
-            var result = new StudentReportViewModel();
+            var result = new MonthlyReportViewModel();
             var expectStudentId = "GoodStudentID";
-            var expectYear = 2018;
-            var expectMonth = 4;
             var expectStudent = new StudentModel();
             var expectDateStart = new DateTime();
             var expectDateEnd = DateTime.UtcNow;
 
             // Act
             result.StudentId = expectStudentId;
-            result.Year = expectYear;
-            result.Month = expectMonth;
             result.Student = expectStudent;
             result.DateStart = expectDateStart;
             result.DateEnd = expectDateEnd;
 
             // Assert
             Assert.AreEqual(expectStudentId, result.StudentId, TestContext.TestName);
-            Assert.AreEqual(expectYear, result.Year, TestContext.TestName);
-            Assert.AreEqual(expectMonth, result.Month, TestContext.TestName);
             Assert.AreEqual(expectStudent, result.Student, TestContext.TestName);
             Assert.AreEqual(expectDateStart, result.DateStart, TestContext.TestName);
             Assert.AreEqual(expectDateEnd, result.DateEnd, TestContext.TestName);
