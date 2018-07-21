@@ -1,4 +1,4 @@
-﻿@model _5051.Models.StudentReportViewModel
+﻿@model _5051.Models.BaseReportViewModel
 
 @{
     ViewBag.Title = "StudentOverallReport";
@@ -10,10 +10,10 @@
     <h5>@Model.DateStart.ToString("MMMM dd yyyy") to @Model.DateEnd.ToString("MMMM dd yyyy")</h5>
     <ul class="nav nav-pills">
         <li class="nav-item">
-            @Html.ActionLink("Monthly", "StudentReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+            @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
         </li>
         <li class="nav-item">
-            @Html.ActionLink("Overall", "StudentOverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active" })
+            @Html.ActionLink("Overall", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active" })
         </li>
     </ul>
     <hr>
