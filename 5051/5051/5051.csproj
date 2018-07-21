@@ -475,7 +475,7 @@
     <Content Include="Views\Admin\Report.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Admin\Attendance.cshtml" />
-    <Content Include="Views\Admin\StudentReport.cshtml" />
+    <Content Include="Views\Admin\MonthlyReport.cshtml" />
     <Content Include="Views\Home\AvatarExample.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />

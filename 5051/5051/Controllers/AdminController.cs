@@ -41,7 +41,7 @@ namespace _5051.Controllers
         /// </summary>
         /// <param name="id">Student ID to generate Report for</param>
         /// <returns>Report data</returns>
-        public ActionResult StudentReport(string id = null)
+        public ActionResult MonthlyReport(string id = null)
         {
             var myStudent = StudentBackend.Instance.Read(id);
 
