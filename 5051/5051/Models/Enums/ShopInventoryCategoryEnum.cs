@@ -2,9 +2,9 @@
 namespace _5051.Models
 {
     /// <summary>
-    /// Factory Inventory Item Categories
+    /// Shop Inventory Item Categories
     /// </summary>
-    public enum FactoryInventoryCategoryEnum
+    public enum ShopInventoryCategoryEnum
     {
         // Not classified
         Unknown = 0,
