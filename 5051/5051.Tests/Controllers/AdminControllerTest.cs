@@ -45,73 +45,72 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Student_Report_DeFault_Should_Pass()
+        public void Controller_Admin_Monthly_Report_DeFault_Should_Return_ErrorPage()
         {
             // Arrange
             AdminController controller = new AdminController();
 
             // Act
-            var result = (RedirectToRouteResult)controller.StudentReport();
+            var result = (RedirectToRouteResult)controller.MonthlyReport();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Admin_Student_Report_Valid_Id_Should_Pass()
+        public void Controller_Admin_Monthly_Report_Valid_Id_Should_Pass()
         {
             // Arrange
             AdminController controller = new AdminController();
             string id = StudentBackend.Instance.GetDefault().Id; 
 
             // Act
-            ViewResult result = controller.StudentReport(id) as ViewResult;
+            ViewResult result = controller.MonthlyReport(id) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Admin_Student_Report_Incorrect_Id_Should_Return_Error_Page()
+        public void Controller_Admin_Monthly_Report_Incorrect_Id_Should_Return_Error_Page()
         {
             // Arrange
             AdminController controller = new AdminController();
             string id = "bogus"; 
             // Act
-            var result = (RedirectToRouteResult)controller.StudentReport(id); 
+            var result = (RedirectToRouteResult)controller.MonthlyReport(id); 
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Admin_Student_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        public void Controller_Admin_Monthly_Report_Post_Data_Is_Null_Should_Return_Error_Page()
         {
             // Arrange
             AdminController controller = new AdminController();
-            StudentReportViewModel data = null;
+            MonthlyReportViewModel data = null;
             
             // Act
-            var result = (RedirectToRouteResult)controller.StudentReport(data);
+            var result = (RedirectToRouteResult)controller.MonthlyReport(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Admin_Student_Report_Post_Data_Is_Valid_Should_Pass()
+        public void Controller_Admin_Monthly_Report_Post_Data_Is_Valid_Should_Pass()
         {
             // Arrange
             AdminController controller = new AdminController();
-            StudentReportViewModel data = new StudentReportViewModel
+            MonthlyReportViewModel data = new MonthlyReportViewModel()
             {
                 StudentId = StudentBackend.Instance.GetDefault().Id,
-                Year = 2017,
-                Month = 10
+                SelectedMonthId = 2
             };
 
             // Act
-            var result = controller.StudentReport(data);
+            var result = controller.MonthlyReport(data);
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -125,7 +124,7 @@ namespace _5051.Tests.Controllers
             string id = StudentBackend.Instance.GetDefault().Id;
 
             // Act
-            var result = controller.StudentOverallReport(id);
+            var result = controller.OverallReport(id);
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -139,7 +138,7 @@ namespace _5051.Tests.Controllers
             string id = "abc";
 
             // Act
-            var result = (RedirectToRouteResult)controller.StudentOverallReport(id);
+            var result = (RedirectToRouteResult)controller.OverallReport(id);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
