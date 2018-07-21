@@ -65,6 +65,7 @@
     <Compile Include="UIMap.cs" />
     <Compile Include="Views\Home\AboutUITests.cs" />
     <Compile Include="Views\Home\IndexUITests.cs" />
+    <Compile Include="Views\Portal\LoginUITests.cs" />
     <Compile Include="Views\Portal\ReportUITests.cs" />
     <Compile Include="Views\Portal\RosterUITests.cs" />
     <Compile Include="Views\Portal\SettingsUITests.cs" />
