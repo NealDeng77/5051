@@ -38,6 +38,11 @@ textarea {
     height: 100px;
 }
 
+.darkTransparentBox {
+    background-color: rgba(0, 0, 0, 0.3);  
+    border-radius: 20px;
+}
+
 .PortalBox{
     width:200px;
     height:200px;
