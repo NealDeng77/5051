@@ -8,20 +8,20 @@ using static _5051UITests.Extensions;
 namespace _5051UITests.Views.Student
 {
     [TestClass]
-    public class UpdateUITests
+    public class DeleteUITests
     {
         private string _Controller = "Student";
-        private string _Action = "Update";
+        private string _Action = "Delete";
         private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
 
         [TestMethod]
-        public void Student_Update_NavigateToPage_Valid_Should_Pass()
+        public void Student_Delete_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
-        public void Student_Update_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
+        public void Student_Delete_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
             AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
 
