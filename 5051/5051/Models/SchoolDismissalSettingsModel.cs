@@ -53,13 +53,6 @@ namespace _5051.Models
         [Display(Name = "Fall Last Class Day", Description = "Fall Last Class Day")]
         public DateTime FallLastClassDay { get; set; }
 
-        // Winter First Class Day
-        [Display(Name = "Winter First Class Day", Description = "Winter First Class Day")]
-        public DateTime WinterFirstClassDay { get; set; }
-
-        // Fall Last Class Day
-        [Display(Name = "Winter Last Class Day", Description = "Winter Last Class Day")]
-        public DateTime WinterLastClassDay { get; set; }
 
         // Spring First Class Day
         [Display(Name = "Spring First Class Day", Description = "Spring First Class Day")]
@@ -69,13 +62,6 @@ namespace _5051.Models
         [Display(Name = "Spring Last Class Day", Description = "Spring Last Class Day")]
         public DateTime SpringLastClassDay { get; set; }
 
-        // Summer First Class Day
-        [Display(Name = "Summer First Class Day", Description = "Summer First Class Day")]
-        public DateTime SummerFirstClassDay { get; set; }
-
-        // Summer Last Class Day
-        [Display(Name = "Summer Last Class Day", Description = "Summer Last Class Day")]
-        public DateTime SummerLastClassDay { get; set; }
 
         public SchoolDismissalSettingsModel()
         {
@@ -139,16 +125,10 @@ namespace _5051.Models
             //The following specifies the start and end date of quarters
             //These dates are used to generate school calendar and partition report date range
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
-            FallLastClassDay = DateTime.Parse("12/1/" + Year);
+            FallLastClassDay = DateTime.Parse("01/31/" + (Year + 1));
 
-            WinterFirstClassDay = DateTime.Parse("01/08/" + (Year + 1));
-            WinterLastClassDay = DateTime.Parse("03/19/" + (Year + 1));
-
-            SpringFirstClassDay = DateTime.Parse("04/03/" + (Year + 1));
-            SpringLastClassDay = DateTime.Parse("06/11/" + (Year + 1));
-
-            SummerFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
-            SummerLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
+            SpringFirstClassDay = DateTime.Parse("02/01/" + (Year + 1));
+            SpringLastClassDay = DateTime.Parse("08/31/" + (Year + 1));
         }
 
         /// <summary>
