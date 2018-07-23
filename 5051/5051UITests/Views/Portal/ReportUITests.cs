@@ -17,7 +17,11 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Report_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            //NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //portal/report/id redirects to admin/monthlyreport/id, so must manually validate page transition
+            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + "/" + _Controller + "/" + _Action + "/" + _DataFirstStudentID);
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "MonthlyReport", _DataFirstStudentID);
         }
 
         [TestMethod]
