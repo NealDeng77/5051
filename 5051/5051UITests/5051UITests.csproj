@@ -74,6 +74,7 @@
     <Compile Include="Views\Portal\RosterUITests.cs" />
     <Compile Include="Views\Portal\SettingsUITests.cs" />
     <Compile Include="Views\Portal\VisitUITTests.cs" />
+    <Compile Include="Views\Shared\_Layout.cs" />
     <Compile Include="Views\Student\DeleteUITests.cs" />
     <Compile Include="Views\Student\UpdateUITests.cs" />
     <Compile Include="Views\Student\ReadUITests.cs" />
