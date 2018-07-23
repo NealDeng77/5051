@@ -189,6 +189,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\GameInterface.cs" />
+    <Compile Include="Backend\GameDataSourceMock.cs" />
+    <Compile Include="Backend\GameBackend.cs" />
     <Compile Include="Backend\KioskSettingsInterface.cs" />
     <Compile Include="Backend\KioskSettingsBackend.cs" />
     <Compile Include="Backend\KioskSettingsDataSourceMock.cs" />
@@ -231,6 +234,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\GameViewModel.cs" />
+    <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\Enums\AttendanceStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
