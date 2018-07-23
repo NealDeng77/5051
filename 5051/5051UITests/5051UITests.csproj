@@ -63,6 +63,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs" />
+    <Compile Include="Views\GameSettings\ReadUITests.cs" />
+    <Compile Include="Views\GameSettings\UpdateUITests.cs" />
     <Compile Include="Views\Home\AboutUITests.cs" />
     <Compile Include="Views\Home\IndexUITests.cs" />
     <Compile Include="Views\Portal\AttendanceUITests.cs" />

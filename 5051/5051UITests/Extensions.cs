@@ -18,11 +18,21 @@ namespace _5051UITests
 
         public const int WaitTime = 10;
 
-
         public const string PortalControllerName = "Portal";
         public const string RosterViewName = "Roster";
         public const string ErrorControllerName = "Home";
         public const string ErrorViewName = "Error";
+
+        /// <summary>
+        /// Validates that the controller / action / data page the driver is on 
+        /// is the expected page
+        /// </summary>
+        public static bool ClickActionById(IWebDriver driver, string elementId)
+        {
+            var element = driver.FindElement(By.Id(elementId));
+            element.Click();
+            return true;
+        }
 
         /// <summary>
         /// Validates that the controller / action / data page the driver is on 
