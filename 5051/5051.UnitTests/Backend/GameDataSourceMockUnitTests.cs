@@ -114,39 +114,29 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
+
+            var expectRunDate = DateTime.Parse("01/23/2018");
+            var expectEnabled = true;
+            var expectIterationNumber = 123;
+
             var data = new GameModel();
-            var createResult = backend.Create(data);
-            var expectId = "AGoodId";
-            var expectName = "A good Name";
-            var expectDescription = "A good descritpion";
-            var expectUri = "A good uri";
-            var expectLevel = 7;
+            backend.Create(data);
+
+            data.RunDate = expectRunDate;
+            data.Enabled = expectEnabled;
+            data.IterationNumber = expectIterationNumber;
 
             //act
-            data.Id = expectId;
-            data.Name = expectName;
-            data.Description = expectDescription;
-            data.Uri = expectUri;
-            data.Level = expectLevel;
-
-            var updateResult = backend.Update(data);
-
-            var idResult = data.Id;
-            var nameResult = data.Name;
-            var descriptionResult = data.Description;
-            var uriResult = data.Uri;
-            var levelResult = data.Level;
+            var result = backend.Update(data);
 
             //reset
             backend.Reset();
 
             //assert
-            Assert.IsNotNull(updateResult, TestContext.TestName);
-            Assert.AreEqual(expectId, idResult, TestContext.TestName);
-            Assert.AreEqual(expectName, nameResult, TestContext.TestName);
-            Assert.AreEqual(expectDescription, descriptionResult, TestContext.TestName);
-            Assert.AreEqual(expectUri, uriResult, TestContext.TestName);
-            Assert.AreEqual(expectLevel, levelResult, TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(expectRunDate, result.RunDate, "Run Date " + TestContext.TestName);
+            Assert.AreEqual(expectEnabled, result.Enabled, "Enabled " + TestContext.TestName);
+            Assert.AreEqual(expectIterationNumber, result.IterationNumber, "Iteration Number " + TestContext.TestName);
         }
         #endregion update
 

@@ -52,100 +52,36 @@ namespace _5051.UnitTests.Models
         }
         #endregion delete
 
-        #region GetGameListItem
-        [TestMethod]
-        public void Backend_GameBackend_GetGameListItem_ID_Null_Should_Pass()
-        {
-            //arrange
-            var test = Backend.GameBackend.Instance;
-
-            //act
-            var result = test.GetGameListItem(null);
-
-            //assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
-        #endregion GetGameListItem
-
-        #region GetGameUri
-        [TestMethod]
-        public void Backend_GameBackend_GetGameUri_Valid_Data_Should_Pass()
-        {
-            //arrange
-            var test = Backend.GameBackend.Instance;
-            var testID = test.GetFirstGameId();
-
-            //act
-            var result = test.GetGameUri(testID);
-
-            //assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Backend_GameBackend_GetGameUri_Invalid_Data_Null_Should_Fail()
-        {
-            //arrange
-            var test = Backend.GameBackend.Instance;
-
-            //act
-            var result = test.GetGameUri(null);
-
-            //assert
-            Assert.IsNull(result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Backend_GameBackend_GetGameUri_Invalid_ID_Should_Fail()
-        {
-            //arrange
-            var data = new GameModel();
-            var test = Backend.GameBackend.Instance;
-            data.Id = "bogus";
-
-            //act
-            var result = test.GetGameUri(data.Id);
-
-            //assert
-            Assert.IsNull(result, TestContext.TestName);
-        }
-        #endregion GetGameUri
-
         #region update
         [TestMethod]
         public void Backend_GameBackend_Update_Valid_Data_Should_Pass()
         {
             //arrange
+            var expectRunDate = DateTime.Parse("01/23/2018");
+            var expectEnabled = true;
+            var expectIterationNumber = 123;
+
             var test = Backend.GameBackend.Instance;
             var data = new GameModel();
-            var createResult = test.Create(data);
-            var expectName = "GoodTestName";
-            var expectDesc = "Good Test Description";
-            var expectUri = "GoodTestUri";
-            var expectLevel = 7;
 
+            test.Create(data);
+
+            data.RunDate = expectRunDate;
+            data.Enabled = expectEnabled;
+            data.IterationNumber = expectIterationNumber;
 
             //act
-            data.Name = expectName;
-            data.Description = expectDesc;
-            data.Level = expectLevel;
-            data.Uri = expectUri;
             var updateResult = test.Update(data);
-            var updateAfterRead = test.Read(data.Id);
-            var nameResult = updateAfterRead.Name;
-            var descResult = updateAfterRead.Description;
-            var uriResult = updateAfterRead.Uri;
-            var levelResult = updateAfterRead.Level;
+            var result = test.Read(data.Id);
 
             //reset
             test.Reset();
 
             //assert
-            Assert.IsNotNull(updateResult, TestContext.TestName);
-            Assert.AreEqual(expectName, nameResult, TestContext.TestName);
-            Assert.AreEqual(expectDesc, descResult, TestContext.TestName);
-            Assert.AreEqual(expectUri, uriResult, TestContext.TestName);
-            Assert.AreEqual(expectLevel, levelResult, TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(expectRunDate, result.RunDate, "Run Date "+ TestContext.TestName);
+            Assert.AreEqual(expectEnabled, result.Enabled, "Enabled " + TestContext.TestName);
+            Assert.AreEqual(expectIterationNumber, result.IterationNumber, "Iteration Number "+TestContext.TestName);
         }
 
         [TestMethod]

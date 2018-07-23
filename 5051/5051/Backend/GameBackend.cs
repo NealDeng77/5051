@@ -147,50 +147,6 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Helper function that returns the Game Image URI
-        /// </summary>
-        /// <param name="data">The GameId to look up</param>
-        /// <returns>null, or the Game image URI</returns>
-        public string GetGameUri(string data)
-        {
-            if (string.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-
-            string myReturn = null;
-
-            var myData = DataSource.Read(data);
-            if (myData != null)
-            {
-                myReturn = myData.Uri;
-            }
-
-            return myReturn;
-        }
-
-        /// <summary>
-        /// Helper that gets the list of Items, and converst them to a SelectList, so they can show in a Drop Down List box
-        /// </summary>
-        /// <param name="id">optional paramater, of the Item that is currently selected</param>
-        /// <returns>List of SelectListItems as a SelectList</returns>
-        public List<SelectListItem> GetGameListItem(string id=null)
-        {
-            var myDataList = DataSource.Index();
-
-            //var myReturn = new SelectList(myDataList);
-
-            var myReturn = myDataList.Select(a => new SelectListItem
-            {
-                Text = a.Name,
-                Value = a.Id,
-                Selected = (a.Id == id),
-            }).ToList();
-
-            return myReturn;
-        }
-        
-        /// <summary>
         /// Switch the data set between Demo, Default and Unit Test
         /// </summary>
         /// <param name="SetEnum"></param>

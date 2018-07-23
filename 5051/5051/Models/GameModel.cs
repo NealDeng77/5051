@@ -14,24 +14,17 @@ namespace _5051.Models
     public class GameModel
     {
         [Display(Name = "Id", Description = "Game Id")]
-        [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
 
-        [Display(Name = "Uri", Description = "Picture to Show")]
-        [Required(ErrorMessage = "Picture is required")]
-        public string Uri { get; set; }
+        [Display(Name = "Date", Description = "Date and Time Iteration Ran")]
+        public DateTime RunDate { get; set; }
 
-        [Display(Name = "Name", Description = "Game Name")]
-        [Required(ErrorMessage = "Game Name is required")]
-        public string Name { get; set; }
+        [Display(Name = "Iteration", Description = "Iteration Number")]
+        public int IterationNumber { get; set; }
 
-        [Display(Name = "Description", Description = "Game Description")]
-        [Required(ErrorMessage = "Game Description is required")]
-        public string Description { get; set; }
+        [Display(Name = "Enabled", Description = "Enable Game")]
+        public bool Enabled { get; set; }
 
-        [Display(Name = "Level", Description = "Game Level")]
-        [Required(ErrorMessage = "Game Level is required")]
-        public int Level { get; set; }
 
         /// <summary>
         /// Create the default values
@@ -39,7 +32,8 @@ namespace _5051.Models
         public void Initialize()
         {
             Id = Guid.NewGuid().ToString();
-            Level = 1;
+            IterationNumber = 0;
+            Enabled = true;
         }
 
         /// <summary>
@@ -50,20 +44,14 @@ namespace _5051.Models
             Initialize();
         }
 
+
         /// <summary>
-        /// Make an Game from values passed in
+        /// New Game, with data passed in
         /// </summary>
-        /// <param name="uri">The Picture path</param>
-        /// <param name="name">Game Name</param>
-        /// <param name="description">Game Description</param>
-        public GameModel(string uri, string name, string description, int level)
+        public GameModel(GameModel data)
         {
             Initialize();
-
-            Uri = uri;
-            Name = name;
-            Description = description;
-            Level = level;
+            Update(data);
         }
 
         /// <summary>
@@ -78,10 +66,9 @@ namespace _5051.Models
                 return;
             }
 
-            Uri = data.Uri;
-            Name = data.Name;
-            Description = data.Description;
-            Level = data.Level;
+            IterationNumber = data.IterationNumber;
+            RunDate = data.RunDate;
+            Enabled = data.Enabled;
         }
     }
 }
