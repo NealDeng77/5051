@@ -160,10 +160,10 @@ namespace _5051.UnitTests.Models
             //arrange
             var backend = GameDataSourceMock.Instance;
             var testGameModel = GameBackend.Instance;
-            var testID = testGameModel.GetFirstGameId();
+            var testID = testGameModel.GetDefault();
 
             //act
-            var result = backend.Read(testID);
+            var result = backend.Read(testID.Id);
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);

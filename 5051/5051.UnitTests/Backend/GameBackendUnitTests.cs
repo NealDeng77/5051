@@ -135,10 +135,10 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var test = Backend.GameBackend.Instance;
-            var testID = test.GetFirstGameId();
+            var testID = test.GetDefault();
 
             //act
-            var result = test.Read(testID);
+            var result = test.Read(testID.Id);
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);

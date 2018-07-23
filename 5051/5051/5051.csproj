@@ -217,6 +217,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GameSettingsController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
     <Compile Include="Controllers\FactoryInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />

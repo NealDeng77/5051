@@ -130,19 +130,12 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Helper that returns the First Game ID in the list, this will be used for creating new Games if no GameID is specified
+        /// Returns the First record
         /// </summary>
-        /// <returns>Null, or Game ID of the first Game in the list.</returns>
-        public string GetFirstGameId()
+        /// <returns>Null or valid data</returns>
+        public GameModel GetDefault()
         {
-            string myReturn = null;
-
-            var myData = DataSource.Index().ToList().FirstOrDefault();
-            if (myData != null)
-            {
-                myReturn = myData.Id;
-            }
-
+            var myReturn = DataSource.Index().First();
             return myReturn;
         }
 
