@@ -523,6 +523,8 @@
     <Content Include="Views\Shop\Inventory.cshtml" />
     <Content Include="Views\Shop\Edit.cshtml" />
     <Content Include="Views\Shop\CelebrityPoster.cshtml" />
+    <Content Include="Views\GameSettings\Read.cshtml" />
+    <Content Include="Views\GameSettings\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
