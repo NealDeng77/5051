@@ -34,6 +34,26 @@ namespace _5051.Controllers
                 });
             }
 
+            if (data == null)
+            {
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
             var DataResult = GameBackend.Simulation();
 
             return Json(new

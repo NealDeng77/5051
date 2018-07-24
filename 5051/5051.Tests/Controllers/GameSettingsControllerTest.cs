@@ -90,6 +90,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (ViewResult)controller.Update(id);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -188,6 +191,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Update(GameModel);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
