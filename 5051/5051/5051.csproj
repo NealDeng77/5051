@@ -480,7 +480,7 @@
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Views\Portal\Settings.cshtml" />
     <Content Include="Views\Portal\Report.cshtml" />
-    <Content Include="Views\Portal\Visit.cshtml" />
+    <Content Include="Views\Shop\Visit.cshtml" />
     <Content Include="Views\Portal\Avatar.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Portal\Group.cshtml" />
@@ -531,6 +531,7 @@
     <Content Include="Views\GameSettings\Read.cshtml" />
     <Content Include="Views\GameSettings\Update.cshtml" />
     <Content Include="Scripts\tsconfig.json" />
+    <Content Include="Views\Shop\VisitShop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
