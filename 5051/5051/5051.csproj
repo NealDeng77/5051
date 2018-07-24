@@ -531,7 +531,6 @@
     <Content Include="Views\GameSettings\Read.cshtml" />
     <Content Include="Views\GameSettings\Update.cshtml" />
     <Content Include="Scripts\tsconfig.json" />
-    <Content Include="Views\Admin\WeeklyReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
