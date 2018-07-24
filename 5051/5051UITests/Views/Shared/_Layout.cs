@@ -18,23 +18,23 @@ namespace _5051UITests.Views.Shared
             //validate the correct page was landed on
             //return to original page
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("AvatarAttendanceLinkNavBar")).Click();
+            ClickActionById("AvatarAttendanceLinkNavBar");
             ValidatePageTransition("Home", "Index");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("HomeLinkNavBar")).Click();
+            ClickActionById("HomeLinkNavBar");
             ValidatePageTransition("Home", "Index");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("StudentLinkNavBar")).Click();
+            ClickActionById("StudentLinkNavBar");
             ValidatePageTransition(PortalControllerName, RosterViewName);
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("AdminLinkNavBar")).Click();
+            ClickActionById("AdminLinkNavBar");
             ValidatePageTransition("Admin", "Index");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("KioskModeLinkNavBar")).Click();
+            ClickActionById("KioskModeLinkNavBar");
             ValidatePageTransition("Kiosk", "Login");
             NavigateToPage(originalController, originalAction, originalData);
         }
@@ -45,23 +45,23 @@ namespace _5051UITests.Views.Shared
             //validate the correct page was landed on
             //return to original page
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("AboutLinkFooter")).Click();
+            ClickActionById("AboutLinkFooter");
             ValidatePageTransition("Home", "About");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("PrivacyPolicyLinkFooter")).Click();
+            ClickActionById("PrivacyPolicyLinkFooter");
             ValidatePageTransition("Home", "Privacy");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("ContactLinkFooter")).Click();
+            ClickActionById("ContactLinkFooter");
             ValidatePageTransition("Home", "Contact");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("FAQLinkFooter")).Click();
+            ClickActionById("FAQLinkFooter");
             ValidatePageTransition("Home", "FAQ");
             NavigateToPage(originalController, originalAction, originalData);
 
-            AssemblyTests.CurrentDriver.FindElement(By.Id("UserGuideLinkFooter")).Click();
+            ClickActionById("UserGuideLinkFooter");
             ValidatePageTransition("Home", "Guide");
             NavigateToPage(originalController, originalAction, originalData);
         }

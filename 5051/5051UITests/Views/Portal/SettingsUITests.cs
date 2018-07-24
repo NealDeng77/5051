@@ -44,9 +44,8 @@ namespace _5051UITests.Views.Portal
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
 
             //the update button
-            AssemblyTests.CurrentDriver.FindElement(By.Id("updateSubmitButton")).Click();
+            ClickActionById("updateSubmitButton");
             ValidatePageTransition(_Controller, "Index", _DataFirstStudentID);
-
         }
     }
 }
