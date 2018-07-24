@@ -24,6 +24,16 @@ namespace _5051UITests
         public const string ErrorViewName = "Error";
 
         /// <summary>
+        /// Validates that the id exists on the page
+        /// returns the number of instances of the id
+        /// </summary>
+        public static int ValidateIdExists(string elementId)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElements(By.Id(elementId));
+            return element.Count;
+        }
+
+        /// <summary>
         /// Validates that the controller / action / data page the driver is on 
         /// is the expected page
         /// </summary>
