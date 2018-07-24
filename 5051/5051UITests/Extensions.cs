@@ -103,12 +103,12 @@ namespace _5051UITests
         /// Validates that the controller / action / data page the driver is on 
         /// is the expected page
         /// </summary>
-        public static bool ValidatePageTransition(IWebDriver driver, string controller, string action, string data = null)
+        public static bool ValidatePageTransition(string controller, string action, string data = null)
         {
-            driver.FindElement(By.Id("Page-Done"));
-            driver.FindElement(By.Id("Area--Done"));
-            driver.FindElement(By.Id("Controller-" + controller + "-Done"));
-            driver.FindElement(By.Id("View-" + action + "-Done"));
+            AssemblyTests.CurrentDriver.FindElement(By.Id("Page-Done"));
+            AssemblyTests.CurrentDriver.FindElement(By.Id("Area--Done"));
+            AssemblyTests.CurrentDriver.FindElement(By.Id("Controller-" + controller + "-Done"));
+            AssemblyTests.CurrentDriver.FindElement(By.Id("View-" + action + "-Done"));
 
             return true;
         }
@@ -117,17 +117,17 @@ namespace _5051UITests
         /// Navigates to the driver to the given controller / action / data page 
         /// and validates that the page was landed on
         /// </summary>
-        public static bool NavigateToPage(IWebDriver driver, string controller, string action, string data = null)
+        public static bool NavigateToPage(string controller, string action, string data = null)
         {
             //navigate to the desired page
-            driver.Navigate().GoToUrl(Extensions.BaseUrl + "/" + controller + "/" + action + "/" + data);
+            AssemblyTests.CurrentDriver.Navigate().GoToUrl(Extensions.BaseUrl + "/" + controller + "/" + action + "/" + data);
 
             // Wait for Naviation to complete.
-            var wait = new WebDriverWait(driver, TimeSpan.Parse("5000"));
+            var wait = new WebDriverWait(AssemblyTests.CurrentDriver, TimeSpan.Parse("5000"));
             wait.Until(drv => drv.FindElement(By.Id("Page-Done")));
 
             //check that page is the right page
-            ValidatePageTransition(driver, controller, action);
+            ValidatePageTransition(controller, action);
 
             return true;
         }
@@ -155,7 +155,7 @@ namespace _5051UITests
             //the original page
             var beforeURL = driver.Url;
 
-            NavigateToPage(driver, "Student", "Index");
+            NavigateToPage("Student", "Index");
             var studentBoxes = driver.FindElements(By.Id("studentContainer"));
             var firstElementBox = studentBoxes.FirstOrDefault();
             var resultA = firstElementBox.FindElements(By.TagName("a"));
@@ -173,8 +173,8 @@ namespace _5051UITests
             var firstStudentID = testurl6;
 
             //these two lines confirm that the ID is correct
-            NavigateToPage(driver, "Student", "Index");
-            NavigateToPage(driver, "student", "read", firstStudentID);
+            NavigateToPage("Student", "Index");
+            NavigateToPage("student", "read", firstStudentID);
 
             //return to the original page
             driver.Navigate().GoToUrl(beforeURL);
@@ -188,12 +188,12 @@ namespace _5051UITests
             var beforeURL = driver.Url;
             List<string> listOfStudentIDs = new List<string>();
 
-            NavigateToPage(driver, "Student", "Index");
+            NavigateToPage("Student", "Index");
             var studentBoxes = driver.FindElements(By.Id("studentContainer"));
 
             for (int i = 0; i < studentBoxes.Count; i++)
             {
-                NavigateToPage(driver, "Student", "Index");
+                NavigateToPage("Student", "Index");
                 var box = driver.FindElements(By.Id("studentContainer"));
 
                 var elementBox = box[i];

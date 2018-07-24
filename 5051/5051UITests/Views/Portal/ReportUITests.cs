@@ -21,7 +21,7 @@ namespace _5051UITests.Views.Portal
 
             //portal/report/id redirects to admin/monthlyreport/id, so must manually validate page transition
             NavigateToPageNoValidation(_Controller, _Action, _DataFirstStudentID);
-            ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "MonthlyReport", _DataFirstStudentID);
+            ValidatePageTransition("Admin", "MonthlyReport", _DataFirstStudentID);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace _5051UITests.Views.Portal
         {
             NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
 
     }
