@@ -23,7 +23,7 @@ namespace _5051UITests.Views.Student
         [TestMethod]
         public void Student_Update_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
         }

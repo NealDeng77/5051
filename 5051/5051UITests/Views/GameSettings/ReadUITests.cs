@@ -22,7 +22,7 @@ namespace _5051UITests.Views.GameSettings
         [TestMethod]
         public void GameSettings_Read_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action + "/Bogus");
+            NavigateToPageNoValidation(_Controller, _Action, "bogus");
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
         }

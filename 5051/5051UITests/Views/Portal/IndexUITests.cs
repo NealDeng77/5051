@@ -23,7 +23,7 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Index_NavigateToPage_Invalid_No_ID_Should_See_Roster_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
         }

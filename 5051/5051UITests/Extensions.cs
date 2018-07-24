@@ -133,6 +133,21 @@ namespace _5051UITests
         }
 
         /// <summary>
+        /// Navigates to the driver to the given controller / action / data page 
+        /// does not have any validation built into it
+        /// </summary>
+        public static bool NavigateToPageNoValidation(string controller, string action, string data = null)
+        {
+            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + "/" + controller + "/" + action + "/" + data);
+
+            // Wait for Naviation to complete.
+            var wait = new WebDriverWait(AssemblyTests.CurrentDriver, TimeSpan.Parse("5000"));
+            wait.Until(drv => drv.FindElement(By.Id("Page-Done")));
+
+            return true;
+        }
+
+        /// <summary>
         /// Returns the ID of the first displayed Student
         /// </summary>
         public static string GetFirstStudentID(IWebDriver driver)
