@@ -1,0 +1,100 @@
+﻿using System.Web.Mvc;
+using _5051.Models;
+using _5051.Backend;
+
+namespace _5051.Controllers
+{
+    /// <summary>
+    /// Controller for the Game Engine
+    /// </summary>
+
+    public class GameController : BaseController
+    {
+        // The Backend Data source
+        private GameBackend GameBackend = GameBackend.Instance;
+
+        /// <summary>
+        /// This updates the Game based on the information posted from the udpate page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Simulation([Bind(Include=
+                                        "Id," +
+                                        "")] GameModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
+            if (data == null)
+            {
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
+            var DataResult = GameBackend.Simulation();
+
+            return Json(new
+            {
+                Error = false,
+                Msg = "OK",
+                data = DataResult.ToString(),
+            });
+        }
+
+        /// <summary>
+        /// This updates the Game based on the information posted from the udpate page
+        /// And Returns the results for the student passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Student results as json package</returns>
+        [HttpPost]
+        public ActionResult GetResults([Bind(Include=
+                                        "Id," +
+                                        "")] StudentModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return Json(new
+                {
+                    Error = true,
+                    Msg = "Invalid State",
+                    data = string.Empty,
+                });
+            }
+
+            var DataResult = GameBackend.Simulation();
+            var result = GameBackend.GetResult(data.Id);
+
+            return Json(new
+            {
+                Error = false,
+                Msg = "OK",
+                data = DataResult.ToString(),
+            });
+        }
+    }
+}

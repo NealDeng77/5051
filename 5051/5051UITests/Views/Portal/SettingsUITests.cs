@@ -23,10 +23,30 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Settings_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
         }
 
+        [TestMethod]
+        public void Portal_Settings_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+        }
+
+        [TestMethod]
+        public void Portal_Settings_Click_All_On_Page_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //the update button
+            AssemblyTests.CurrentDriver.FindElement(By.Id("updateSubmitButton")).Click();
+            ValidatePageTransition(AssemblyTests.CurrentDriver, _Controller, "Index", _DataFirstStudentID);
+
+        }
     }
 }

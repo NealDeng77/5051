@@ -63,6 +63,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs" />
+    <Compile Include="Views\GameSettings\ReadUITests.cs" />
+    <Compile Include="Views\GameSettings\UpdateUITests.cs" />
     <Compile Include="Views\Home\AboutUITests.cs" />
     <Compile Include="Views\Home\IndexUITests.cs" />
     <Compile Include="Views\Portal\AttendanceUITests.cs" />
@@ -74,6 +76,11 @@
     <Compile Include="Views\Portal\RosterUITests.cs" />
     <Compile Include="Views\Portal\SettingsUITests.cs" />
     <Compile Include="Views\Portal\VisitUITTests.cs" />
+    <Compile Include="Views\Shared\_Layout.cs" />
+    <Compile Include="Views\Student\DeleteUITests.cs" />
+    <Compile Include="Views\Student\UpdateUITests.cs" />
+    <Compile Include="Views\Student\ReadUITests.cs" />
+    <Compile Include="Views\Student\IndexUITests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

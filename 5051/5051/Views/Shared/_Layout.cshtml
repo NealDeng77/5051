@@ -26,8 +26,13 @@
         case "Kiosk":
             background = "IncludeBackgroundImageSunset";
             backgroundColor = "IncludeBackgroundColorSunset";
-
             break;
+
+        // For now, have Portal be the Image date
+        //case "Portal":
+          //  background = "IncludeBackgroundImageSunset";
+            //backgroundColor = "IncludeBackgroundColorSunset";
+            //break;
 
         case "Admin":
             background = "IncludeBackgroundImageNight";
@@ -49,20 +54,20 @@
             <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
         </button>
-        @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link", id = "KioskModeLinkNavBar" })
                 </li>
             </ul>
             @Html.Partial("_LoginPartial")
@@ -82,11 +87,11 @@
                     <div class="footer-copyright py-1">
                         &nbsp;&nbsp;&copy;@DateTime.Now.Year - Avatar Attendance, all rights reserved &nbsp;&nbsp;
                     </div>
-                    @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("FAQ's", "FAQ", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
-                    @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink" })
+                    @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "AboutLinkFooter" })
+                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "PrivacyPolicyLinkFooter" })
+                    @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "ContactLinkFooter" })
+                    @Html.ActionLink("FAQ's", "FAQ", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "FAQLinkFooter" })
+                    @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "UserGuideLinkFooter" })
                 </div>
             </div>
 

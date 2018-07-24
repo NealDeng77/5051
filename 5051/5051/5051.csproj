@@ -189,6 +189,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\GameInterface.cs" />
+    <Compile Include="Backend\GameDataSourceMock.cs" />
+    <Compile Include="Backend\GameBackend.cs" />
     <Compile Include="Backend\KioskSettingsInterface.cs" />
     <Compile Include="Backend\KioskSettingsBackend.cs" />
     <Compile Include="Backend\KioskSettingsDataSourceMock.cs" />
@@ -214,6 +217,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GameSettingsController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
     <Compile Include="Controllers\FactoryInventoryController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -231,6 +236,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\GameViewModel.cs" />
+    <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\Enums\AttendanceStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnum.cs" />
     <Compile Include="Models\Enums\CheckInStatusEnum.cs" />
@@ -238,6 +245,7 @@
     <Compile Include="Models\Enums\SchoolCalendarDismissalEnum.cs" />
     <Compile Include="Models\Enums\FactoryInventoryCategoryEnum.cs" />
     <Compile Include="Models\Enums\EmotionStatusEnum.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\MonthlyReportViewModel.cs" />
     <Compile Include="Models\SchoolCalendarViewModel.cs" />
     <Compile Include="Models\SchoolCalendarModel.cs" />
@@ -299,6 +307,8 @@
     <Content Include="Content\img\Emotion5.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
+    <Content Include="Content\img\icecream-display.png" />
+    <Content Include="Content\img\icecream-shop.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -314,6 +324,7 @@
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
+    <Content Include="Content\img\shop-inside.png" />
     <Content Include="Content\img\StoreExample.jpg" />
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
@@ -513,6 +524,8 @@
     <Content Include="Views\Shop\Inventory.cshtml" />
     <Content Include="Views\Shop\Edit.cshtml" />
     <Content Include="Views\Shop\CelebrityPoster.cshtml" />
+    <Content Include="Views\GameSettings\Read.cshtml" />
+    <Content Include="Views\GameSettings\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

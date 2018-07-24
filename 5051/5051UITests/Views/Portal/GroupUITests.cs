@@ -18,5 +18,15 @@ namespace _5051UITests.Views.Portal
         {
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
         }
+
+        [TestMethod]
+        public void Portal_Group_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+        }
     }
 }

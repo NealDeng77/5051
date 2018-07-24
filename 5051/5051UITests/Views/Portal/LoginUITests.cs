@@ -23,9 +23,36 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Login_NavigateToPage_Invalid_No_ID_Should_See_Roster_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
+        }
+
+        [TestMethod]
+        public void Portal_Login_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+        }
+
+        [TestMethod]
+        public void Portal_Login_Click_All_On_Page_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //cancel link
+            ClickActionById("cancelLoginButton");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Roster");
+
+            //login link
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            //anylogin info would be put here if there was any AKA username/password
+            ClickActionById("loginButton");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Index", _DataFirstStudentID);
+
         }
     }
 }

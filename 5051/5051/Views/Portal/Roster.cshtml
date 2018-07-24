@@ -3,7 +3,9 @@
     ViewBag.Title = "Roster";
 }
 <br />
-<h2>Click on your Avatar to Login</h2>
+<div class="text-center bg-transparent pt-5">
+    <h1>Click on your Avatar to Login</h1>
+</div>
 
 <br />
 <br />
@@ -14,7 +16,7 @@
         foreach (var item in Model.StudentList)
         {
             <div class="col-sm-2">
-                <div class="BoxWithHighlightHover text-center">
+                <div class="BoxWithHighlightHover text-center darkTransparentBox">
                     <a id="@item.Id" href="~/Portal/Login/@item.Id">
                         <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
                     </a>

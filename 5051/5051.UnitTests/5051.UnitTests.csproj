@@ -92,6 +92,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\GameDataSourceMockUnitTests.cs" />
+    <Compile Include="Backend\GameBackendUnitTests.cs" />
     <Compile Include="Backend\ReportBackendUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarBackendUnitTests.cs" />
     <Compile Include="Backend\FactoryInventoryBackendUnitTests.cs" />
@@ -112,6 +114,8 @@
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
+    <Compile Include="Models\GameViewModelUnitTests.cs" />
+    <Compile Include="Models\GameModelUnitTests.cs" />
     <Compile Include="Models\ChangePasswordViewModelUnitTests.cs" />
     <Compile Include="Models\ConfigureTwoFactorViewModelUnitTests.cs" />
     <Compile Include="Models\Enums\CheckOutStatusEnumUnitTests.cs" />
