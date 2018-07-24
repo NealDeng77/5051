@@ -34,7 +34,7 @@ namespace _5051UITests.Views.Portal
         {
             NavigateToPage(_Controller, _Action);
 
-            var listOFStudentIds = GetAllStudentIDs(AssemblyTests.CurrentDriver);
+            var listOFStudentIds = AssemblyTests.listOfStudentIDs;
 
             foreach (var item in listOFStudentIds)
             {

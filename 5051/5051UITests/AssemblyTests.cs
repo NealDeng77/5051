@@ -16,6 +16,9 @@ namespace _5051UITests
         public static IWebDriver CurrentDriver = new ChromeDriver(Extensions.ChromeDriverLocation);
         public static ChromeOptions Options = new ChromeOptions();
 
+        public static string firstStudentID;
+        public static List<string> listOfStudentIDs;
+
         private const string HomePageController = "Home";
         private const string HomePageView = "Index";
 
@@ -33,6 +36,9 @@ namespace _5051UITests
             Extensions.NavigateToPage("Admin", "Settings");
             CurrentDriver.FindElement(By.Id("Demo")).Click();
             Extensions.ValidatePageTransition("Admin", "Index");
+
+            listOfStudentIDs = Extensions.GetAllStudentIDs(CurrentDriver);
+            firstStudentID = listOfStudentIDs.FirstOrDefault();
         }
 
         [AssemblyCleanup]

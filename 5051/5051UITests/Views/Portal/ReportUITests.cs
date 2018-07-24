@@ -12,7 +12,7 @@ namespace _5051UITests.Views.Portal
     {
         private string _Controller = "Portal";
         private string _Action = "Report";
-        private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
+        private string _DataFirstStudentID = AssemblyTests.firstStudentID;
 
         [TestMethod]
         public void Portal_Report_NavigateToPage_Valid_Should_Pass()
