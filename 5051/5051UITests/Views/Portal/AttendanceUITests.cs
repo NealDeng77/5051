@@ -17,7 +17,7 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Attendance_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
@@ -25,13 +25,13 @@ namespace _5051UITests.Views.Portal
         {
             NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
+            ValidatePageTransition(PortalControllerName, RosterViewName);
         }
 
         [TestMethod]
         public void Portal_Attendance_Click_All_Nav_Bar_And_Footer_Links()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
 
             Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
 

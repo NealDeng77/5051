@@ -19,24 +19,24 @@ namespace _5051UITests.Views.Shared
             //return to original page
 
             driver.FindElement(By.Id("AvatarAttendanceLinkNavBar")).Click();
-            ValidatePageTransition(driver, "Home", "Index");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "Index");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("HomeLinkNavBar")).Click();
-            ValidatePageTransition(driver, "Home", "Index");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "Index");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("StudentLinkNavBar")).Click();
-            ValidatePageTransition(driver, PortalControllerName, RosterViewName);
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition(PortalControllerName, RosterViewName);
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("AdminLinkNavBar")).Click();
-            ValidatePageTransition(driver, "Admin", "Index");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Admin", "Index");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("KioskModeLinkNavBar")).Click();
-            ValidatePageTransition(driver, "Kiosk", "Login");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Kiosk", "Login");
+            NavigateToPage(originalController, originalAction, originalData);
         }
 
         public static void Click_All_Footer_Links(IWebDriver driver, string originalController, string originalAction, string originalData = null)
@@ -46,24 +46,24 @@ namespace _5051UITests.Views.Shared
             //return to original page
 
             driver.FindElement(By.Id("AboutLinkFooter")).Click();
-            ValidatePageTransition(driver, "Home", "About");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "About");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("PrivacyPolicyLinkFooter")).Click();
-            ValidatePageTransition(driver, "Home", "Privacy");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "Privacy");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("ContactLinkFooter")).Click();
-            ValidatePageTransition(driver, "Home", "Contact");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "Contact");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("FAQLinkFooter")).Click();
-            ValidatePageTransition(driver, "Home", "FAQ");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "FAQ");
+            NavigateToPage(originalController, originalAction, originalData);
 
             driver.FindElement(By.Id("UserGuideLinkFooter")).Click();
-            ValidatePageTransition(driver, "Home", "Guide");
-            NavigateToPage(driver, originalController, originalAction, originalData);
+            ValidatePageTransition("Home", "Guide");
+            NavigateToPage(originalController, originalAction, originalData);
         }
 
 

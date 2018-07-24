@@ -16,7 +16,7 @@ namespace _5051UITests.Views.Home
         [TestMethod]
         public void Home_About_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+            NavigateToPage(_Controller, _Action);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace _5051UITests.Views.Student
         [TestMethod]
         public void Student_Read_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace _5051UITests.Views.Student
         {
             NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
 
 

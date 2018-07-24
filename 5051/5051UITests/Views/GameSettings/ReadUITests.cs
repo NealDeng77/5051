@@ -16,7 +16,7 @@ namespace _5051UITests.Views.GameSettings
         [TestMethod]
         public void GameSettings_Read_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+            NavigateToPage(_Controller, _Action);
         }
 
         [TestMethod]
@@ -24,20 +24,20 @@ namespace _5051UITests.Views.GameSettings
         {
             NavigateToPageNoValidation(_Controller, _Action, "bogus");
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
 
         [TestMethod]
         public void Game_Read_Back_Click_Should_Pass()
         {
             // Get the data for the record to update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
+            NavigateToPage(_Controller, "Read");
 
             // Click the Back Button
             ClickActionById("BackButton");
 
             // Vaidate back on Read page
-            ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "Settings");
+            ValidatePageTransition("Admin", "Settings");
         }
     }
 }

@@ -17,42 +17,42 @@ namespace _5051UITests.Views.GameSettings
         public void Game_Update_NavigateToPage_Valid_Should_Pass()
         {
             // Get the data for the record to update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
+            NavigateToPage(_Controller, "Read");
 
             var element = AssemblyTests.CurrentDriver.FindElement(By.Id("Id"));
             var elementval = element.GetAttribute("value");
 
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+            NavigateToPage(_Controller, _Action, elementval);
         }
 
         [TestMethod]
         public void Game_Update_Back_Click_Should_Pass()
         {
             // Get the data for the record to update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
+            NavigateToPage(_Controller, "Read");
 
             var element = AssemblyTests.CurrentDriver.FindElement(By.Id("Id"));
             var elementval = element.GetAttribute("value");
 
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+            NavigateToPage(_Controller, _Action, elementval);
 
             // Click the Back Button
             ClickActionById("BackButton");
 
             // Vaidate back on Read page
-            ValidatePageTransition(AssemblyTests.CurrentDriver, _Controller, "Read");
+            ValidatePageTransition(_Controller, "Read");
         }
 
         [TestMethod]
         public void Game_Update_Enabled_Click_Should_Pass()
         {
             // Get the data for the record to update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
+            NavigateToPage(_Controller, "Read");
 
             var element = AssemblyTests.CurrentDriver.FindElement(By.Id("Id"));
             var elementval = element.GetAttribute("value");
 
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+            NavigateToPage(_Controller, _Action, elementval);
 
             // Get the Value of Enabled
             var dataEnabledFirst = GetCheckedById("Enabled");
@@ -64,7 +64,7 @@ namespace _5051UITests.Views.GameSettings
             ClickActionById("Submit");
 
             // Go back to Update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+            NavigateToPage(_Controller, _Action, elementval);
 
             // Verify the State changed back
             // Get the Value of Enabled
@@ -79,7 +79,7 @@ namespace _5051UITests.Views.GameSettings
             ClickActionById("Submit");
 
             // Go back to Update
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+            NavigateToPage(_Controller, _Action, elementval);
 
             // Verify the State changed back
             var dataEnabledThird = GetCheckedById("Enabled");
@@ -92,7 +92,7 @@ namespace _5051UITests.Views.GameSettings
         {
             NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
     }
 }
