@@ -34,7 +34,7 @@ namespace _5051UITests.Views.GameSettings
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
 
             // Click the Back Button
-            ClickActionById(AssemblyTests.CurrentDriver, "BackButton");
+            ClickActionById("BackButton");
 
             // Vaidate back on Read page
             ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "Settings");

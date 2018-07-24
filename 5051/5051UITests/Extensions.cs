@@ -27,10 +27,35 @@ namespace _5051UITests
         /// Validates that the controller / action / data page the driver is on 
         /// is the expected page
         /// </summary>
-        public static bool ClickActionById(IWebDriver driver, string elementId)
+        public static bool ClickActionById(string elementId)
         {
-            var element = driver.FindElement(By.Id(elementId));
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
             element.Click();
+            return true;
+        }
+
+        /// <summary>
+        /// Returns the element value based on the ID
+        /// </summary>
+        public static string GetValueById(string elementId)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
+            var data = element.GetAttribute("value");
+            return data.ToString();
+        }
+
+        /// <summary>
+        /// Returns if the element has a checked attrigute (checkbox)
+        /// </summary>
+        public static bool GetCheckedById(string elementId)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
+            var data = element.GetAttribute("checked");
+            if (data == null)
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -54,9 +79,12 @@ namespace _5051UITests
         /// </summary>
         public static bool NavigateToPage(IWebDriver driver, string controller, string action, string data = null)
         {
-
             //navigate to the desired page
             driver.Navigate().GoToUrl(Extensions.BaseUrl + "/" + controller + "/" + action + "/" + data);
+
+            // Wait for Naviation to complete.
+            var wait = new WebDriverWait(driver, TimeSpan.Parse("5000"));
+            wait.Until(drv => drv.FindElement(By.Id("Page-Done")));
 
             //check that page is the right page
             ValidatePageTransition(driver, controller, action);

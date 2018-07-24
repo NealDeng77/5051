@@ -37,10 +37,54 @@ namespace _5051UITests.Views.GameSettings
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
 
             // Click the Back Button
-            ClickActionById(AssemblyTests.CurrentDriver, "BackButton");
+            ClickActionById("BackButton");
 
             // Vaidate back on Read page
             ValidatePageTransition(AssemblyTests.CurrentDriver, _Controller, "Read");
+        }
+
+        [TestMethod]
+        public void Game_Update_Enabled_Click_Should_Pass()
+        {
+            // Get the data for the record to update
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, "Read");
+
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id("Id"));
+            var elementval = element.GetAttribute("value");
+
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+
+            // Get the Value of Enabled
+            var dataEnabledFirst = GetCheckedById("Enabled");
+
+            // Change the state
+            ClickActionById("Enabled");
+
+            // Save
+            ClickActionById("Submit");
+
+            // Go back to Update
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+
+            // Verify the State changed back
+            // Get the Value of Enabled
+            var dataEnabledSecond = GetCheckedById("Enabled");
+
+            Assert.AreNotEqual(dataEnabledFirst, dataEnabledSecond);
+
+            // Set it Back
+            ClickActionById("Enabled");
+
+            // Save
+            ClickActionById("Submit");
+
+            // Go back to Update
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, elementval);
+
+            // Verify the State changed back
+            var dataEnabledThird = GetCheckedById("Enabled");
+
+            Assert.AreEqual(dataEnabledFirst, dataEnabledThird);
         }
 
         [TestMethod]
