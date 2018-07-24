@@ -137,6 +137,7 @@
     <Compile Include="Models\ManageLoginsViewModelUnitTests.cs" />
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
+    <Compile Include="Models\SemesterReportViewModelTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
     <Compile Include="Models\StudentAvatarModelUnitTests.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
     <Compile Include="Models\VerifyCodeViewModelUnitTests.cs" />
     <Compile Include="Models\VerifyPhoneNumberViewModelUnitTests.cs" />
+    <Compile Include="Models\WeeklyReportViewModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
