@@ -28,5 +28,25 @@ namespace _5051UITests.Views.Portal
             ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
         }
 
+        [TestMethod]
+        public void Portal_Settings_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+        }
+
+        [TestMethod]
+        public void Portal_Settings_Click_All_On_Page_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //the update button
+            AssemblyTests.CurrentDriver.FindElement(By.Id("updateSubmitButton")).Click();
+            ValidatePageTransition(AssemblyTests.CurrentDriver, _Controller, "Index", _DataFirstStudentID);
+
+        }
     }
 }
