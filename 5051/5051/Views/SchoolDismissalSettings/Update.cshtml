@@ -112,7 +112,45 @@
                                 @Html.ValidationMessageFor(m => m.DayLast)
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.FallFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.FallFirstClassDay)
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.FallLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.FallLastClassDay, new { htmlAttributes = new { @Value = @Model.FallLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.FallLastClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SpringFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringFirstClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SpringFirstClassDay)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.SpringLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringLastClassDay.ToShortDateString() } })
+                                @Html.ValidationMessageFor(m => m.SpringLastClassDay)
+                            </div>
+                        </div>
                         <br />
                         <br />
 
