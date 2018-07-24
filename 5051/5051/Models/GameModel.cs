@@ -20,10 +20,10 @@ namespace _5051.Models
         [Display(Name = "Date", Description = "Date and Time Iteration Ran")]
         public DateTime RunDate { get; set; }
 
-        [Display(Name = "TimeIteration", Description = "How long between iterations")]
+        [Display(Name = "Time Iteration", Description = "How long between iterations")]
         public TimeSpan TimeIteration { get; set; }
 
-        [Display(Name = "RefreshRate", Description = "How often the student's game refreshes")]
+        [Display(Name = "Refresh Rate", Description = "How often the student's game refreshes")]
         public TimeSpan RefreshRate { get; set; }
 
         [Display(Name = "Iteration", Description = "Iteration Number")]

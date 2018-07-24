@@ -65,7 +65,8 @@ namespace _5051.Controllers
         public ActionResult Update([Bind(Include=
                                         "Id," +
                                         "Enabled," +
-
+                                        "RefreshRate,"+
+                                        "TimeIteration,"+
                                         "")] GameModel data)
         {
             if (!ModelState.IsValid)
