@@ -27,5 +27,15 @@ namespace _5051UITests.Views.Portal
 
             ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
         }
+
+        [TestMethod]
+        public void Portal_Attendance_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+        }
     }
 }
