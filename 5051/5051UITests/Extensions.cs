@@ -64,6 +64,12 @@ namespace _5051UITests
             return element.Count;
         }
 
+        public static IWebElement GetElementById(string elementId)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
+            return element;
+        }
+
         /// <summary>
         /// Finds and clicks the object on a page based on the ID of the object
         /// </summary>
