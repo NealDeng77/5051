@@ -24,6 +24,37 @@ namespace _5051UITests
         public const string ErrorViewName = "Error";
 
         /// <summary>
+        /// Creates and executes javascript to scroll to a position on the page
+        /// </summary>
+        public static void ScrollTo(int xPosition = 0, int yPosition = 0)
+        {
+            var js = String.Format("window.scrollTo({0}, {1})", xPosition, yPosition);
+            ((IJavaScriptExecutor)AssemblyTests.CurrentDriver).ExecuteScript(js);
+        }
+
+        /// <summary>
+        /// scrolls into the view the given element by the input id
+        /// returns the element found
+        /// </summary>
+        public static IWebElement ScrollToViewById(string IdToFind)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(IdToFind));
+            ScrollToView(element);
+            return element;
+        }
+
+        /// <summary>
+        /// Scrolls into view the given element
+        /// </summary>
+        public static void ScrollToView(IWebElement element)
+        {
+            if (element.Location.Y > 200)
+            {
+                ScrollTo(0, element.Location.Y - 100); // Make sure element is in the view but below the top navigation pane
+            }
+        }
+
+        /// <summary>
         /// Validates that the id exists on the page
         /// returns the number of instances of the id
         /// </summary>
@@ -34,12 +65,11 @@ namespace _5051UITests
         }
 
         /// <summary>
-        /// Validates that the controller / action / data page the driver is on 
-        /// is the expected page
+        /// Finds and clicks the object on a page based on the ID of the object
         /// </summary>
         public static bool ClickActionById(string elementId)
         {
-            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
+            var element = ScrollToViewById(elementId);
             element.Click();
             return true;
         }
