@@ -203,6 +203,78 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
+        public void Controller_Admin_Semester_Report_DeFault_Should_Return_ErrorPage()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.SemesterReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Incorrect_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            string id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            SemesterReportViewModel data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Post_Data_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var data = new SemesterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedSemesterId = 2
+            };
+
+            // Act
+            var result = controller.SemesterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Controller_Admin_Overall_ReportId_Is_Not_Valid_Should_Return_Error_Page()
         {
             // Arrange
