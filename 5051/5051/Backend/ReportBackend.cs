@@ -87,7 +87,7 @@ namespace _5051.Backend
                 var currentWeekFriday = currentWeek.AddDays(4);
 
                 //make a list item for the current week
-                var week = new SelectListItem { Value = "" + weekId, Text = "Week of " + currentWeek.ToShortDateString() + " to " + currentWeekFriday.ToShortDateString() };
+                var week = new SelectListItem { Value = "" + weekId, Text = "" + currentWeek.ToShortDateString() + " to " + currentWeekFriday.ToShortDateString() };
 
                 //add to the select list
                 report.Weeks.Add(week);
