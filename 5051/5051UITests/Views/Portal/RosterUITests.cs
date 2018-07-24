@@ -24,9 +24,9 @@ namespace _5051UITests.Views.Portal
         {
             NavigateToPage(_Controller, _Action);
 
-            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+            Shared._Layout.Click_All_Nav_Bar_Links(_Controller, _Action);
 
-            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+            Shared._Layout.Click_All_Footer_Links(_Controller, _Action);
         }
 
         [TestMethod]
