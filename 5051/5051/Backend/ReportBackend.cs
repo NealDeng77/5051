@@ -40,6 +40,81 @@ namespace _5051.Backend
                 return instance;
             }
         }
+
+        #region GenerateWeeklyReportRegion
+        /// <summary>
+        /// Generate Weekly report
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public WeeklyReportViewModel GenerateWeeklyReport(WeeklyReportViewModel report)
+        {
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+
+            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+            //todo: convert this to kiosk timezone here
+            var dayNow = DateTime.UtcNow;
+
+            //The first valid week(Monday's date) for the dropdown
+            var FirstWeek = dayFirst.AddDays(DayOfWeek.Monday - dayFirst.DayOfWeek);
+            //The last valid month for the dropdown
+            var LastWeek = dayLast.AddDays(DayOfWeek.Monday - dayLast.DayOfWeek);
+            //The month of today
+            var WeekNow = dayNow.AddDays(DayOfWeek.Monday - dayNow.DayOfWeek);
+
+            //do not go beyond the week of today
+            if (LastWeek > WeekNow)
+            {
+                LastWeek = WeekNow;
+            }
+
+            //Set the current week (loop variable) to the last valid week
+            var currentWeek = LastWeek;
+
+
+            //initialize the dropdownlist
+            report.Weeks = new List<SelectListItem>();
+
+            // the week id
+            int weekId = 1;
+
+            //loop backwards in time so that the week select list items are in time reversed order
+            while (currentWeek >= FirstWeek)
+            {
+                //the friday's date of the current week
+                var currentWeekFriday = currentWeek.AddDays(4);
+
+                //make a list item for the current week
+                var week = new SelectListItem { Value = "" + weekId, Text = "Week of " + currentWeek.ToShortDateString() + " to " + currentWeekFriday.ToShortDateString() };
+
+                //add to the select list
+                report.Weeks.Add(week);
+
+                //if current week is the selected month, set the start date and end date for this report
+                if (weekId == report.SelectedWeekId)
+                {
+                    //set start date and end date
+                    report.DateStart = currentWeek;
+                    report.DateEnd = currentWeekFriday;
+                }
+
+                weekId++;
+                currentWeek = currentWeek.AddDays(-7);
+
+            }
+
+
+            //Generate report for this month
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+
+
+        #endregion
+        #region GenerateMonthlyReportRegion
         /// <summary>
         /// Generate monthly report
         /// </summary>
@@ -106,6 +181,8 @@ namespace _5051.Backend
 
             return report;
         }
+        #endregion
+
         /// <summary>
         /// Generate overall report
         /// </summary>
