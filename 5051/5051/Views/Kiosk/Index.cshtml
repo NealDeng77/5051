@@ -68,12 +68,25 @@
                                 <div class="col text-center">
                                     <br />
                                     <br />
-                                    <br />
                                     <img id="CenterAvatar" src="" class="AvatarSize2 CenterAvatarStyle" />
                                     <br />
                                     <span id="CenterName" class="FontColor1"></span>
                                     <br />
                                     <br />
+                                    <div class="row">
+                                        @{
+                                            // list emotion icons
+                                            foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                            {
+                                                var srcData = "/Content/img/Emotion" + emotion + ".png";
+
+                                                <div class="BoxWithHighlightHover">
+                                                    <img src="@srcData" class="EmotionSize" />
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
                                     <br />
                                     <br />
                                     <a id="CenterStatus" class="btn btn1 btn-light btn-block" href=""></a>
