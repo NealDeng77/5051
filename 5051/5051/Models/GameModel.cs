@@ -23,6 +23,9 @@ namespace _5051.Models
         [Display(Name = "TimeIteration", Description = "How long between iterations")]
         public TimeSpan TimeIteration { get; set; }
 
+        [Display(Name = "RefreshRate", Description = "How often the student's game refreshes")]
+        public TimeSpan RefreshRate { get; set; }
+
         [Display(Name = "Iteration", Description = "Iteration Number")]
         public int IterationNumber { get; set; }
 
@@ -40,6 +43,7 @@ namespace _5051.Models
             Enabled = true;
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
             RunDate = DateTime.UtcNow;
+            RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
         }
 
         /// <summary>
@@ -75,6 +79,7 @@ namespace _5051.Models
             RunDate = data.RunDate;
             Enabled = data.Enabled;
             TimeIteration = data.TimeIteration;
+            RefreshRate = data.RefreshRate;
         }
     }
 }
