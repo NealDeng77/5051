@@ -2,40 +2,54 @@
 @{
     ViewBag.Title = "Login";
 }
-<br />
-<h2>Enter the Kiosk Password</h2>
-
-<br />
-<br />
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Id)
-
-    <div class="row">
-        <div class="col-sm-3 text-right">
-            @Html.DisplayNameFor(m => m.Password)
-        </div>
-        <div class="col-sm-2">
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-
-            @{
-                //todo Remove the hint, just here during early development
-                <span>Hint: 123</span>
-            }
-        </div>
-    </div>
-
+<div class="text-center">
     <br />
     <br />
-    <div class="row">
-        <div class="col-sm-3 text-right">
-        </div>
-        <div class="col-sm-4">
-            @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
-            <input type="submit" value="Login" class="btn btn-primary">
-        </div>
+    <br />
+    <h1>Enter the Kiosk Password</h1>
+    <br />
+    <br />
+</div>
+
+<div class="row text-center">
+    <div class="col-sm-4">
     </div>
-}
+    <div class="col-sm-4 text-center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.Password)
+                </div>
+                <div class="col-sm-3">
+                    
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+
+                    @{
+                        //todo Remove the hint, just here during early development
+                        <span>Hint: 123</span>
+                    }
+                    
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                </div>
+                <div class="col-sm-6 text-left">
+                    
+                    @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
+                    <input type="submit" value="Login" class="btn btn-primary">
+                    
+                </div>
+            </div>
+        }
+    </div>
+    
+</div>
