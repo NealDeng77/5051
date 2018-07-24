@@ -55,7 +55,7 @@ namespace _5051UITests.Views.Portal
 
             //visit link
             ClickActionById("visitLinkPortalIndex");
-            ValidatePageTransition("Portal", "Visit", _DataFirstStudentID);
+            ValidatePageTransition("Shop", "Visit", _DataFirstStudentID);
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
 
             //shop link
