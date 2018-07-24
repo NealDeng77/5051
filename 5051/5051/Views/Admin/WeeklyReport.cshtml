@@ -1,0 +1,50 @@
+﻿@model _5051.Models.WeeklyReportViewModel
+@{
+    ViewBag.Title = "Weekly Reports";
+}
+
+<div class="text-center text-light">
+    <br />
+    <h4>@Model.Student.Name's Weekly Report</h4>
+    <h5>Week of @Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h5>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-light" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("SchoolYear", "SchoolYearReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Overall", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+        </li>
+    </ul>
+    <hr>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.StudentId)
+            <div class="row w-100">
+
+                <div class="col-sm-3 text-right mr-auto">
+                    @Html.DropDownListFor(m => m.SelectedWeekId, Model.Weeks, new { onchange = "this.form.submit();", @class = "form-control" })
+                </div>
+
+                <div class="btn btn-primary">
+                    Download
+                </div>
+            </div>
+
+
+        }
+
+
+    </div>
+</div>
+<br />
