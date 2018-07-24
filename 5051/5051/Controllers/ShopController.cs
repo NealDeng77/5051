@@ -200,5 +200,46 @@ namespace _5051.Controllers
             return View();
         }
 
+        /// <summary>
+        ///  List of Shops to Visit
+        /// </summary>
+        /// <returns>List of Students that you can visit</returns>
+        public ActionResult Visit()
+        {
+            // Get the list of other students' shop
+            // it will show the name of the student's shop and its owner 
+
+            // then, once students click on the specific student's shop
+            // he/she can go visiting it
+
+            // TODO
+            // Make a List of the Student IDs for now.  Update this to a Shop Datastructure
+            var data = StudentBackend.Instance.Index();
+            return View(data);
+        }
+
+        /// <summary>
+        ///  The Shop of the Student passed in
+        /// </summary>
+        /// <param name="id">Student Id</param>
+        /// <returns>Shop of the student passed in</returns>
+        public ActionResult VisitShop(string id = null)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //Todo, return the shop information for the student.
+            var data = myStudent;
+
+            return View(data);
+        }
     }
 }

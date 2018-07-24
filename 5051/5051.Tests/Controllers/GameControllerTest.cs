@@ -40,7 +40,7 @@ namespace _5051.Tests.Controllers
 
         #region PostSimulationRegion
         [TestMethod]
-        public void Controller_Game_Post_Simulation_Invalid_Model_Should_Send_Back_For_Edit()
+        public void Controller_Game_Post_Simulation_Invalid_Model_Should_Return_Error()
         {
             // Arrange
             var controller = new GameController();
@@ -123,6 +123,52 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("0", dataVal, TestContext.TestName);
         }
         #endregion PostSimulationRegion
+
+        #region GetResults
+        [TestMethod]
+        public void Controller_Game_Post_GetResults_Invalid_Model_Should_Return_Error()
+        {
+            // Arrange
+            var controller = new GameController();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Act
+            var result = (JsonResult)controller.GetResults(data);
+            var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
+            var dataVal = dataResult.GetValue(result.Data, null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(true, dataVal, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Game_Post_GetResults_Valid_Model_Should_Pass()
+        {
+            // Arrange
+            var controller = new GameController();
+
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Act
+            var result = (JsonResult)controller.GetResults(data);
+            var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
+            var dataVal = dataResult.GetValue(result.Data, null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(false, dataVal, TestContext.TestName);
+        }
+        #endregion GetResults
+
     }
 }
 
