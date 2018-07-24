@@ -166,5 +166,43 @@ namespace _5051UITests
 
             return firstStudentID;
         }
+
+        public static List<string> GetAllStudentIDs(IWebDriver driver)
+        {
+            //the original page
+            var beforeURL = driver.Url;
+            List<string> listOfStudentIDs = new List<string>();
+
+            NavigateToPage(driver, "Student", "Index");
+            var studentBoxes = driver.FindElements(By.Id("studentContainer"));
+
+            for (int i = 0; i < studentBoxes.Count; i++)
+            {
+                NavigateToPage(driver, "Student", "Index");
+                var box = driver.FindElements(By.Id("studentContainer"));
+
+                var elementBox = box[i];
+                var resultA = elementBox.FindElements(By.TagName("a"));
+
+                resultA.FirstOrDefault().Click();
+
+                var pageURL = driver.Url;
+                var testurl1 = pageURL.TrimStart(BaseUrl.ToCharArray());
+                var testurl2 = testurl1.TrimStart('/');
+                var testurl3 = testurl2.TrimStart("Student".ToCharArray());
+                var testurl4 = testurl3.TrimStart('/');
+                var testurl5 = testurl4.TrimStart("Read".ToCharArray());
+                var testurl6 = testurl5.TrimStart('/');
+                var studentID = testurl6;
+
+
+                listOfStudentIDs.Add(studentID);
+            }
+
+            //return to the original page
+            driver.Navigate().GoToUrl(beforeURL);
+
+            return listOfStudentIDs;
+        }
     }
 }
