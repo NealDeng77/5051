@@ -28,5 +28,51 @@ namespace _5051UITests.Views.Portal
             ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
         }
 
+        [TestMethod]
+        public void Portal_Index_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+        }
+
+        [TestMethod]
+        public void Portal_Index_Click_All_On_Page_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //reports link
+            ClickActionById("reportsLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "MonthlyReport", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //attendance link
+            ClickActionById("attendanceLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Attendance", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //visit link
+            ClickActionById("visitLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Visit", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //shop link
+            ClickActionById("shopLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Shop", "Index", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //customize link
+            ClickActionById("settingsLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Settings", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+            //avatar link
+            ClickActionById("avatarLinkPortalIndex");
+            ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Avatar", _DataFirstStudentID);
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+
+        }
     }
 }
