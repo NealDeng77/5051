@@ -12,7 +12,7 @@ namespace _5051UITests.Views.Student
     {
         private string _Controller = "Student";
         private string _Action = "Delete";
-        private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
+        private string _DataFirstStudentID = AssemblyTests.firstStudentID;
 
         [TestMethod]
         public void Student_Delete_NavigateToPage_Valid_Should_Pass()
