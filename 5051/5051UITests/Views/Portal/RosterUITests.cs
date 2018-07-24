@@ -19,5 +19,29 @@ namespace _5051UITests.Views.Portal
             NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
         }
 
+        [TestMethod]
+        public void Portal_Roster_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+
+            Shared._Layout.Click_All_Footer_Links(AssemblyTests.CurrentDriver, _Controller, _Action);
+        }
+
+        [TestMethod]
+        public void Portal_Roster_Click_All_On_Page_Links()
+        {
+            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+
+            var listOFStudentIds = GetAllStudentIDs(AssemblyTests.CurrentDriver);
+
+            foreach (var item in listOFStudentIds)
+            {
+                ClickActionById(item);
+                ValidatePageTransition(AssemblyTests.CurrentDriver, "Portal", "Login");
+                NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+            }
+        }
     }
 }
