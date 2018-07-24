@@ -151,6 +151,10 @@ namespace _5051.Models
             EndLate = data.EndLate;
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
+            FallFirstClassDay = data.FallFirstClassDay;
+            FallLastClassDay = data.FallLastClassDay;
+            SpringFirstClassDay = data.SpringFirstClassDay;
+            SpringLastClassDay = data.SpringLastClassDay;
         }
     }
 }

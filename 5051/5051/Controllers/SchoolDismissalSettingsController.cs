@@ -81,7 +81,10 @@ namespace _5051.Controllers
                                         "EndLate," +
                                         "DayFirst," +
                                         "DayLast," +
-
+                                        "FallFirstClassDay," +
+                                        "FallLastClassDay," +
+                                        "SpringFirstClassDay," +
+                                        "SpringLastClassDay," +
                                         "")] SchoolDismissalSettingsModel data)
         {
             if (!ModelState.IsValid)
