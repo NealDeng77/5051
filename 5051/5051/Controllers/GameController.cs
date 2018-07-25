@@ -19,7 +19,7 @@ namespace _5051.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Simulation([Bind(Include=
+        public ActionResult GetIterationNumber([Bind(Include=
                                         "Id," +
                                         "")] GameModel data)
         {
@@ -61,6 +61,24 @@ namespace _5051.Controllers
                 Error = false,
                 Msg = "OK",
                 Data = DataResult.ToString(),
+            });
+        }
+
+        /// <summary>
+        /// This updates the Game based on the information posted from the udpate page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetRefreshRate()
+        {
+            var data = DataSourceBackend.Instance.GameBackend.GetDefault();
+
+            return Json(new
+            {
+                Error = false,
+                Msg = "OK",
+                Data = data.RefreshRate.Milliseconds,
             });
         }
 

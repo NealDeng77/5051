@@ -21,7 +21,7 @@ var ServerIterationNumber = 0;
 // The Student Id is stored in the Dom, need to fetch it on page load
 var StudentId = $("#StudentId").val();
 // Refresh rate is the rate to refresh the game in miliseconds
-var RefreshRate = 1000;
+var ServerRefreshRate = 1000;
 // Game Update Timmer fires every RefeshRate
 var GameUpdateTimer;
 /*
@@ -39,9 +39,9 @@ function DataLoadIterationNumber(data) {
     return IterationNumber;
 }
 // Does a fetch to the server, and returns the Iteration Number
-function GetSimulationIteration() {
+function GetIterationNumber() {
     return __awaiter(this, void 0, void 0, function* () {
-        $.ajax("/Game/Simulation", {
+        $.ajax("/Game/GetIterationNumber", {
             cache: false,
             dataType: 'json',
             type: 'POST',
@@ -51,7 +51,7 @@ function GetSimulationIteration() {
             }
         })
             .fail(function () {
-            console.log("IterationNumber error");
+            console.log("Error Get Iteration Number");
         });
     });
 }
@@ -66,7 +66,7 @@ function DataLoadGameResults(data) {
 }
 // Does a fetch to the server, and returns the Iteration Number
 function GetGameResults() {
-    $.ajax("/Game/Results/" + StudentId, {
+    $.ajax("/Game/GetResults/" + StudentId, {
         cache: false,
         dataType: 'json',
         type: 'POST',
@@ -86,14 +86,42 @@ function GetGameResults() {
 // Get the Refresh rate for the page
 // Returns the number of miliseconds to refresh
 function GetRefreshRate() {
-    // Set the Global Refresh rate
-    RefreshRate = 1000;
+    return __awaiter(this, void 0, void 0, function* () {
+        // Set the Global Refresh rate
+        yield GetGameRefreshRate();
+    });
+}
+// Parses the Data Structure and returns the Iteration Number
+function DataLoadRefreshRate(data) {
+    console.log("Data load: " +
+        " Error: " + data.Error +
+        " Msg: " + data.Msg +
+        " Data: " + data.Data);
+    var rate = data.Data;
+    return rate;
+}
+// Does a fetch to the server, and returns the Iteration Number
+function GetGameRefreshRate() {
+    return __awaiter(this, void 0, void 0, function* () {
+        $.ajax("/Game/GetRefreshRate/", {
+            cache: false,
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                ServerRefreshRate = DataLoadRefreshRate(data);
+            }
+        })
+            .fail(function () {
+            console.log("Error Get Refresh Rate");
+            return;
+        });
+    });
 }
 // Refresh the Game
 function RefreshGame() {
     return __awaiter(this, void 0, void 0, function* () {
         // Force a call to Simulation
-        yield GetSimulationIteration();
+        yield GetIterationNumber();
         // Check if Game Version > current version, if so do update sequence
         if (ServerIterationNumber > CurrentIterationNumber) {
             // Get New Data
@@ -104,15 +132,6 @@ function RefreshGame() {
             CurrentIterationNumber = ServerIterationNumber;
         }
     });
-}
-// Refresh Game display
-function RefreshGameDisplay() {
-    // Use the current data structure
-    // For all the elements in the Game, make a call and refresh them
-    // Show Iteration Number (debugging)
-    $("#IterationNumber").text(CurrentIterationNumber);
-    // Show Game Data
-    $("#GameData").text("Game Data Goes Here");
 }
 /*
  * Application Starts Here
@@ -135,5 +154,24 @@ GetRefreshRate();
 // Make Timmer to call refresh
 setInterval(function () {
     RefreshGame();
-}, RefreshRate);
+}, ServerRefreshRate);
+/*
+ *
+ *
+ *
+ * Game Layout Starts Here
+ *
+ *
+ *
+ *
+ */
+// Refresh Game display
+function RefreshGameDisplay() {
+    // Use the current data structure
+    // For all the elements in the Game, make a call and refresh them
+    // Show Iteration Number (debugging)
+    $("#IterationNumber").text(CurrentIterationNumber);
+    // Show Game Data
+    $("#GameData").text("Game Data Goes Here");
+}
 //# sourceMappingURL=game.js.map

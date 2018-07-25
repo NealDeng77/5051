@@ -38,9 +38,9 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
-        #region PostSimulationRegion
+        #region PostGetIterationNumberRegion
         [TestMethod]
-        public void Controller_Game_Post_Simulation_Invalid_Model_Should_Return_Error()
+        public void Controller_Game_Post_GetIterationNumber_Invalid_Model_Should_Return_Error()
         {
             // Arrange
             var controller = new GameController();
@@ -51,7 +51,7 @@ namespace _5051.Tests.Controllers
             var data = DataSourceBackend.Instance.GameBackend.GetDefault();
 
             // Act
-            var result = (JsonResult)controller.Simulation(data);
+            var result = (JsonResult)controller.GetIterationNumber(data);
             var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = dataResult.GetValue(result.Data, null);
 
@@ -63,13 +63,13 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Game_Post_Simulation_Null_Data_Should_Return_Error()
+        public void Controller_Game_Post_GetIterationNumber_Null_Data_Should_Return_Error()
         {
             // Arrange
             var controller = new GameController();
 
             // Act
-            var result = (JsonResult)controller.Simulation((GameModel)null);
+            var result = (JsonResult)controller.GetIterationNumber((GameModel)null);
             var data = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = data.GetValue(result.Data, null);
 
@@ -81,7 +81,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Game_Post_Simulation_Null_Id_Should_Return_Error()
+        public void Controller_Game_Post_GetIterationNumber_Null_Id_Should_Return_Error()
         {
             // Arrange
             var controller = new GameController();
@@ -91,7 +91,7 @@ namespace _5051.Tests.Controllers
             data.Id = string.Empty;
 
             // Act
-            var result = (JsonResult)controller.Simulation(data);
+            var result = (JsonResult)controller.GetIterationNumber(data);
             var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = dataResult.GetValue(result.Data, null);
 
@@ -103,7 +103,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Game_Post_Simulation_Default_Should_Return_Json_Zero_Iterations()
+        public void Controller_Game_Post_GetIterationNumber_Default_Should_Return_Json_Zero_Iterations()
         {
             // Arrange
             var controller = new GameController();
@@ -112,8 +112,8 @@ namespace _5051.Tests.Controllers
             var data = DataSourceBackend.Instance.GameBackend.GetDefault();
 
             // Act
-            var result = (JsonResult)controller.Simulation(data);
-            var dataResult = result.Data.GetType().GetProperty("data", BindingFlags.Instance | BindingFlags.Public);
+            var result = (JsonResult)controller.GetIterationNumber(data);
+            var dataResult = result.Data.GetType().GetProperty("Data", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = dataResult.GetValue(result.Data, null);
 
             // Reset
@@ -122,7 +122,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("0", dataVal, TestContext.TestName);
         }
-        #endregion PostSimulationRegion
+        #endregion PostGetIterationNumberRegion
 
         #region GetResults
         [TestMethod]
@@ -169,6 +169,27 @@ namespace _5051.Tests.Controllers
         }
         #endregion GetResults
 
+        #region GetRefreshRate
+        [TestMethod]
+        public void Controller_Game_Post_GetRefreshRate_Valid_Model_Should_Pass()
+        {
+            // Arrange
+            var controller = new GameController();
+
+            var data = DataSourceBackend.Instance.GameBackend.GetDefault();
+
+            // Act
+            var result = (JsonResult)controller.GetRefreshRate();
+            var dataResult = result.Data.GetType().GetProperty("Data", BindingFlags.Instance | BindingFlags.Public);
+            var dataVal = dataResult.GetValue(result.Data, null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(data.RefreshRate.Milliseconds, dataVal, TestContext.TestName);
+        }
+        #endregion GetRefreshRate
     }
 }
 

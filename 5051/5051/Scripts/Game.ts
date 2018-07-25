@@ -18,7 +18,7 @@ var ServerIterationNumber = 0;
 var StudentId = $("#StudentId").val();
 
 // Refresh rate is the rate to refresh the game in miliseconds
-var RefreshRate = 1000;
+var ServerRefreshRate = 1000;
 
 // Game Update Timmer fires every RefeshRate
 var GameUpdateTimer;
@@ -29,8 +29,8 @@ var GameUpdateTimer;
  * 
  */
 
-// The Data structor for the Simulator Data set
-interface IJsonDataSimulatorHeader {
+// The Data structor for the IterationNumber Data set
+interface IJsonDataIterationNumberHeader{
     Error: string[];
     Msg: string[];
     Data: number;
@@ -48,6 +48,13 @@ interface IJsonDataResultHeader {
     Data: iJsonDataResult;
 }
 
+// The Data structor for the Result Data set Header
+interface IJsonDataRefreshRateHeader {
+    Error: string[];
+    Msg: string[];
+    Data: number;
+}
+
 /* 
  * 
  * Data Functions
@@ -55,7 +62,7 @@ interface IJsonDataResultHeader {
  */
 
 // Parses the Data Structure and returns the Iteration Number
-function DataLoadIterationNumber(data: IJsonDataSimulatorHeader): number {
+function DataLoadIterationNumber(data: IJsonDataIterationNumberHeader): number {
     console.log ("Data load: " +
         " Error: " + data.Error +
         " Msg: " + data.Msg +
@@ -66,24 +73,24 @@ function DataLoadIterationNumber(data: IJsonDataSimulatorHeader): number {
 }
 
 // Does a fetch to the server, and returns the Iteration Number
-async function GetSimulationIteration() {
-    $.ajax("/Game/Simulation",
+async function GetIterationNumber() {
+    $.ajax("/Game/GetIterationNumber",
         {
             cache: false,
             dataType: 'json',
             type: 'POST',
             success: function (data: any) {
                 // Update the Global Server Iteration Number
-                ServerIterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+                ServerIterationNumber = DataLoadIterationNumber(<IJsonDataIterationNumberHeader>data);
             }
         })
         .fail(function () {
-            console.log("IterationNumber error");
+            console.log("Error Get Iteration Number");
         });
 }
 
 // Parses the Data Structure and returns the Iteration Number
-function DataLoadGameResults(data: IJsonDataSimulatorHeader): number {
+function DataLoadGameResults(data: IJsonDataIterationNumberHeader): number {
     console.log("Data load: " +
         " Error: " + data.Error +
         " Msg: " + data.Msg +
@@ -95,7 +102,7 @@ function DataLoadGameResults(data: IJsonDataSimulatorHeader): number {
 
 // Does a fetch to the server, and returns the Iteration Number
 function GetGameResults(): number {
-    $.ajax("/Game/Results/"+StudentId,
+    $.ajax("/Game/GetResults/"+StudentId,
         {
             cache: false,
             dataType: 'json',
@@ -103,7 +110,7 @@ function GetGameResults(): number {
             async: false,
             success: function (data: any) {
                 // console.log(data);
-                var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+                var IterationNumber = DataLoadIterationNumber(<IJsonDataIterationNumberHeader>data);
                 return IterationNumber;
             }
         })
@@ -117,17 +124,44 @@ function GetGameResults(): number {
 
 // Get the Refresh rate for the page
 // Returns the number of miliseconds to refresh
-function GetRefreshRate(){
-
+async function GetRefreshRate(){
     // Set the Global Refresh rate
-    RefreshRate = 1000;
+    await GetGameRefreshRate();
+}
+
+// Parses the Data Structure and returns the Iteration Number
+function DataLoadRefreshRate(data: IJsonDataRefreshRateHeader): number {
+    console.log("Data load: " +
+        " Error: " + data.Error +
+        " Msg: " + data.Msg +
+        " Data: " + data.Data);
+
+    var rate = data.Data;
+    return rate;
+}
+
+// Does a fetch to the server, and returns the Iteration Number
+async function GetGameRefreshRate(){
+    $.ajax("/Game/GetRefreshRate/",
+        {
+            cache: false,
+            dataType: 'json',
+            type: 'POST',
+            success: function (data: any) {
+                ServerRefreshRate = DataLoadRefreshRate(<IJsonDataRefreshRateHeader>data);
+            }
+        })
+        .fail(function () {
+            console.log("Error Get Refresh Rate");
+            return;
+        });
 }
 
 // Refresh the Game
 async function RefreshGame() {
 
     // Force a call to Simulation
-    await GetSimulationIteration();
+    await GetIterationNumber();
 
     // Check if Game Version > current version, if so do update sequence
     if (ServerIterationNumber> CurrentIterationNumber) {
@@ -141,19 +175,6 @@ async function RefreshGame() {
         // Update Iteration Number
         CurrentIterationNumber = ServerIterationNumber;
     }
-}
-
-// Refresh Game display
-function RefreshGameDisplay() {
-    // Use the current data structure
-
-    // For all the elements in the Game, make a call and refresh them
-
-    // Show Iteration Number (debugging)
-    $("#IterationNumber").text(CurrentIterationNumber);
-
-    // Show Game Data
-    $("#GameData").text("Game Data Goes Here");
 }
 
 /*
@@ -179,4 +200,29 @@ GetRefreshRate();
 // Make Timmer to call refresh
 setInterval(function () {
     RefreshGame();
-}, RefreshRate);
+}, ServerRefreshRate);
+
+
+/*
+ *
+ *
+ * 
+ * Game Layout Starts Here
+ * 
+ * 
+ * 
+ * 
+ */
+
+// Refresh Game display
+function RefreshGameDisplay() {
+    // Use the current data structure
+
+    // For all the elements in the Game, make a call and refresh them
+
+    // Show Iteration Number (debugging)
+    $("#IterationNumber").text(CurrentIterationNumber);
+
+    // Show Game Data
+    $("#GameData").text("Game Data Goes Here");
+}
