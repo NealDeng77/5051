@@ -65,6 +65,16 @@ namespace _5051UITests
         }
 
         /// <summary>
+        /// Finds and returns the element using the given id
+        /// Can be treated as a void return as well
+        /// </summary>
+        public static IWebElement GetElementById(string elementId)
+        {
+            var element = AssemblyTests.CurrentDriver.FindElement(By.Id(elementId));
+            return element;
+        }
+
+        /// <summary>
         /// Finds and clicks the object on a page based on the ID of the object
         /// </summary>
         public static bool ClickActionById(string elementId)

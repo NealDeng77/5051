@@ -47,5 +47,60 @@ namespace _5051UITests.Views.Portal
             ClickActionById("updateSubmitButton");
             ValidatePageTransition(_Controller, "Index", _DataFirstStudentID);
         }
+
+        [TestMethod]
+        public void Portal_Settings_Check_That_All_Info_Is_Displayed()
+        {
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //avatar
+            GetElementById("currentAvatarImg");
+            //name under avatar
+            GetElementById("currentNameDisplayed");
+            //Avatar level and value
+            GetElementById("avatarLevelName");
+            GetElementById("avatarLevelValue");
+            //tokens and value
+            GetElementById("tokensName");
+            GetElementById("tokensValue");
+            //xp and value
+            GetElementById("xpName");
+            GetElementById("xpValue");
+            //current status and value
+            GetElementById("currentStatusName");
+            GetElementById("currentStatusValue");
+            //name and text box with the value
+            GetElementById("nameName");
+            GetElementById("nameValue");
+        }
+
+        [TestMethod]
+        public void Portal_Settings_Check_That_Update_Name_Works()
+        {
+            var expectWelcomeMessageName = "newNameForYou";
+            var expectOriginalName = "Mike";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //get the input box
+            var element = GetElementById("Name");
+
+            //type a new name and submit
+            element.Clear();
+            element.SendKeys(expectWelcomeMessageName);
+            ClickActionById("updateSubmitButton");
+
+            //assert that new name is displayed (should be on the portal/index page)
+            var indexElement = GetElementById("welcomeMessageStudentName");
+
+            Assert.AreEqual(expectWelcomeMessageName, indexElement.Text);
+
+            //return name to original
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+            var elementAfter = GetElementById("Name");
+            elementAfter.Clear();
+            elementAfter.SendKeys(expectOriginalName);
+            ClickActionById("updateSubmitButton");
+        }
     }
 }

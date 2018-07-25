@@ -8,18 +8,18 @@
 <h2>Welcome to your Student Portal</h2>
 <br />
 
-<h3>
+<h3 id="welcomeMessage">
     <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="AvatarSize0" />
-    @Model.Name, good to see you back.
+    <span id="welcomeMessageStudentName">@Model.Name</span>, good to see you back.
 </h3>
 
 <br />
-<h4>You are now at Level @Model.AvatarLevel with a total of @Model.ExperiencePoints Experience Points</h4>
-<h4>You have @Model.Tokens Tokens in the Bank</h4>
+<h4>You are now at Level <span id="levelValue">@Model.AvatarLevel</span> with a total of <span id="xpValue">@Model.ExperiencePoints</span> Experience Points</h4>
+<h4>You have <span id="tokensValue">@Model.Tokens</span> Tokens in the Bank</h4>
 
 @{
     <br />
-    <h4>Current Status is @Model.Status</h4>
+    <h4>Current Status is <span id="statusValue">@Model.Status</span></h4>
     if (Model.Attendance == null || !Model.Attendance.Any())
     {
         //skip
@@ -28,10 +28,10 @@
         var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
         if (LastLoginIn != null)
         {
-            <h4>You last logged in at: @LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</h4>
+            <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
         }
 
-        <h4>Emotion State: @Model.EmotionCurrent</h4>
+        <h4>Emotion State: <span id="currentEmotionValue">@Model.EmotionCurrent</span></h4>
     }
 }
 

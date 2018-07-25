@@ -72,5 +72,46 @@ namespace _5051UITests.Views.Portal
             result = ValidateIdExists(avatarID0);
             Assert.AreEqual(numAvatarIdsOnIndexPage, result);
         }
+
+        [TestMethod]
+        public void Portal_Avatar_Check_All_Avatars_Are_Displayed()
+        {
+            var expectNumAvatars = 10;
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            var avatarObjects = AssemblyTests.CurrentDriver.FindElements(By.Id("AvatarId"));
+
+            Assert.AreEqual(expectNumAvatars, avatarObjects.Count);
+        }
+
+        [TestMethod]
+        public void Portal_Avatar_Check_That_Displayed_Level_Is_Correct()
+        {
+            var expectedStatement = "You can change to any avatar at or below Level 1";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            var result = GetElementById("remindOfLevel");
+
+            Assert.AreEqual(expectedStatement, result.Text);
+        }
+
+        [TestMethod]
+        public void Portal_Avatar_Check_That_Current_Avatar_Is_Correct()
+        {
+            var expectName = "Police";
+            var expectLevel = "Level 1";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            var nameResult = GetElementById("currentAvatarName");
+            var levelResult = GetElementById("currentAvatarLevel");
+            var imgResult = GetElementById("currentAvatarImg");
+
+            Assert.AreEqual(expectName, nameResult.Text);
+            Assert.AreEqual(expectLevel, levelResult.Text);
+            Assert.IsNotNull(imgResult);
+        }
     }
 }

@@ -52,7 +52,24 @@ namespace _5051UITests.Views.Portal
             //anylogin info would be put here if there was any AKA username/password
             ClickActionById("loginButton");
             ValidatePageTransition("Portal", "Index", _DataFirstStudentID);
+        }
 
+        [TestMethod]
+        public void Portal_Login_Check_All_Info_Is_Displayed()
+        {
+            var expectStudentName = "Mike";
+            var expectPassword = "";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //avatar picture
+            GetElementById("currentAvatarImg");
+            //student name
+            var resultName = GetElementById("currentStudentName");
+            Assert.AreEqual(expectStudentName, resultName.Text);
+            //password box (should be blank)
+            var resultPassword = GetElementById("Password");
+            Assert.AreEqual(expectPassword, resultPassword.Text);
         }
     }
 }
