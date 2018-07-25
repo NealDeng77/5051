@@ -72,7 +72,47 @@ namespace _5051UITests.Views.Portal
             ClickActionById("avatarLinkPortalIndex");
             ValidatePageTransition("Portal", "Avatar", _DataFirstStudentID);
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+        }
 
+        [TestMethod]
+        public void Portal_Index_Check_All_Info_Displayed()
+        {
+            var expectWelcomeMessageStudentName = "Mike";
+            var expectLevel = "1";
+            var expectXp = "0";
+            var expectTokens = "10";
+            var expectStatus = "Out";
+            var expectEmotion = "Neutral";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //student name
+            var welcomeMessageName = GetElementById("welcomeMessageStudentName");
+            Assert.AreEqual(expectWelcomeMessageStudentName, welcomeMessageName.Text);
+
+            //level
+            var resultLevel = GetElementById("levelValue");
+            Assert.AreEqual(expectLevel, resultLevel.Text);
+
+            //xp
+            var resultXP = GetElementById("xpValue");
+            Assert.AreEqual(expectXp, resultXP.Text);
+
+            //tokens
+            var resultTokens = GetElementById("tokensValue");
+            Assert.AreEqual(expectTokens, resultTokens.Text);
+
+            //current status
+            var resultStatus = GetElementById("statusValue");
+            Assert.AreEqual(expectStatus, resultStatus.Text);
+
+            //last login (available because the demo data exists)
+            var resultLastLogin = GetElementById("lastLoginValue");
+            Assert.IsNotNull(resultLastLogin.Text);
+
+            //emotion state
+            var resultEmotion = GetElementById("currentEmotionValue");
+            Assert.AreEqual(expectEmotion, resultEmotion.Text);
         }
     }
 }
