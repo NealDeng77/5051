@@ -18,55 +18,55 @@
 <canvas id="myCanvas" width="1000" height="800" onclick="switchView()"></canvas>
 
 <script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
 
-        var inside = false;
+    var inside = false;
 
-        window.onload = function () {
+    window.onload = function () {
+        drawInside();
+        var img = document.getElementById("shop");
+        ctx.drawImage(img, 0, 0, 900, 600);
+    }
+
+    function switchView() {
+        //ctx.clearRect(0, 0, 900, 600);
+        var img;
+        if (inside == false) {
+            ctx.clearRect(0, 0, 900, 600);
             drawInside();
-            var img = document.getElementById("shop");
+            inside = true;
+        } else {
+            img = document.getElementById("shop");
             ctx.drawImage(img, 0, 0, 900, 600);
+            inside = false;
         }
 
-        function switchView() {
-            //ctx.clearRect(0, 0, 900, 600);
-            var img;
-            if (inside == false) {
-                ctx.clearRect(0, 0, 900, 600);
-                drawInside();
-                inside = true;
+    }
+
+    function drawInside() {
+        img = document.getElementById("inside");
+        ctx.drawImage(img, 65, 0, 755, 600);
+        img = document.getElementById("display");
+        ctx.drawImage(img, 150, 340, 315, 200);
+
+        var colors = ["blue", "pink", "yellow", "orange", "brown", "red", "white"];
+        var empty = [1, 0, 0, 0, 0, 1, 0];
+
+        for (var i = 0; i < colors.length; i++) {
+            var xPosition = 171 + (i * 40);
+
+            if (empty[i] == 1) {
+                ctx.fillStyle = "black";
+                ctx.font = "55px Arial";
+                ctx.fillText("X", xPosition, 455, 30);
             } else {
-                img = document.getElementById("shop");
-                ctx.drawImage(img, 0, 0, 900, 600);
-                inside = false;
+                ctx.fillStyle = colors[i];
+                ctx.fillRect(xPosition, 415, 30, 40);
             }
-
         }
 
-        function drawInside() {
-            img = document.getElementById("inside");
-            ctx.drawImage(img, 65, 0, 755, 600);
-            img = document.getElementById("display");
-            ctx.drawImage(img, 150, 340, 315, 200);
-
-            var colors = ["blue", "pink", "yellow", "orange", "brown", "red", "white"];
-            var empty = [1, 0, 0, 0, 0, 1, 0];
-
-            for (var i = 0; i < colors.length; i++) {
-                var xPosition = 171 + (i * 40);
-
-                if (empty[i] == 1) {
-                    ctx.fillStyle = "black";
-                    ctx.font = "55px Arial";
-                    ctx.fillText("X", xPosition, 455, 30);
-                } else {
-                    ctx.fillStyle = colors[i];
-                    ctx.fillRect(xPosition, 415, 30, 40);
-                }
-            }
-
-        }
+    }
 
 </script>
 
@@ -103,5 +103,15 @@
 
 <br />
 <br />
+
+<div class="row">
+    <div id="message"></div>
+    <div>
+        <span id="compiler">Typescript</span><br />
+        <span id="framework">ASP</span>
+        <br />
+        <br />
+    </div>
+</div>
 
 <script src="~/Scripts/Game.js"></script>
