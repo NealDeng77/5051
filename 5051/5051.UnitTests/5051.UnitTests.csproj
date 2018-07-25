@@ -135,6 +135,7 @@
     <Compile Include="Models\IndexViewModelUnitTests.cs" />
     <Compile Include="Models\LoginViewModelUnitTests.cs" />
     <Compile Include="Models\ManageLoginsViewModelUnitTests.cs" />
+    <Compile Include="Models\QuarterReportViewModelUnitTests.cs" />
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
     <Compile Include="Models\SemesterReportViewModelTests.cs" />
