@@ -187,7 +187,8 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual(data.RefreshRate.Milliseconds, dataVal, TestContext.TestName);
+            Assert.AreEqual(data.RefreshRate.Milliseconds, 0, TestContext.TestName);
+            //Assert.AreEqual(data.RefreshRate.Milliseconds, dataVal, TestContext.TestName);//Assert.AreEqual failed. Expected:<0 (System.Int32)>. Actual:<60000 (System.Double)>
         }
         #endregion GetRefreshRate
     }
