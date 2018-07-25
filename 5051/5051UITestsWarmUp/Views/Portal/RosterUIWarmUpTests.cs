@@ -5,16 +5,16 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using static _5051UITestsWarmUp.Extensions;
 
-namespace _5051UITestsWarmUp.Views.Home
+namespace _5051UITestsWarmUp.Views.Portal
 {
     [TestClass]
-    public class AboutUITests
+    public class RosterUITests
     {
-        private string _Controller = "Home";
-        private string _Action = "About";
+        private string _Controller = "Portal";
+        private string _Action = "Roster";
 
         [TestMethod]
-        public void Home_About_NavigateToPage_Valid_Should_Pass()
+        public void Portal_Roster_NavigateToPage_Valid_Should_Pass()
         {
             NavigateToPage(_Controller, _Action);
         }
