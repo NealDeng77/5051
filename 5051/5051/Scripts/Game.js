@@ -24,6 +24,8 @@ var StudentId = $("#StudentId").val();
 var ServerRefreshRate = 1000;
 // Game Update Timmer fires every RefeshRate
 var GameUpdateTimer;
+// The Global Data for the Current ShopData
+let ShopData;
 /*
  *
  * Data Functions
@@ -120,6 +122,15 @@ function RefreshGame() {
         }
     });
 }
+// Set the Default on Boot to draw, before the rest draws if no data exists
+function SetDefaultShopData() {
+    ShopData.Topper = "ShopTopper0.png";
+    ShopData.Menu = "ShopMenu0.png";
+    ShopData.Rims = "ShopRims0.png";
+    ShopData.Sign = "ShipSign0.png";
+    ShopData.Truck = "ShopTruck0.png";
+    ShopData.Tail = "ShopTail0.png";
+}
 /*
  * Application Starts Here
  *
@@ -165,8 +176,12 @@ function RefreshGameDisplay() {
     $("#IterationNumber").text(CurrentIterationNumber);
     // Show Game Data
     $("#GameData").text("Game Data Goes Here");
-    let ShopSkin = "IceCreamShop.png";
     // Refesh Shop Skin
-    $("#shop").attr("src", BaseContentURL + ShopSkin);
+    $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
+    $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
+    $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
+    $("#Rims").attr("src", BaseContentURL + ShopData.Rims);
+    $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
+    $("#Tail").attr("src", BaseContentURL + ShopData.Tail);
 }
 //# sourceMappingURL=game.js.map
