@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using static _5051UITests.Extensions;
+using static _5051UITestsWarmUp.Extensions;
 
 namespace _5051UITests.Views.Home
 {

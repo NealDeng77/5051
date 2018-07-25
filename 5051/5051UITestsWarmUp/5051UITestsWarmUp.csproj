@@ -56,7 +56,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyTests.cs" />
     <Compile Include="CodedUITest1.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs" />
     <Compile Include="Views\Home\AboutUIWarmUpTests.cs" />
