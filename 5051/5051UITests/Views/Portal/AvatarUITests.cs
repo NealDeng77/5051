@@ -97,7 +97,6 @@ namespace _5051UITests.Views.Portal
             Assert.AreEqual(expectedStatement, result.Text);
         }
 
-        //check that current avatar is displayed with info
         [TestMethod]
         public void Portal_Avatar_Check_That_Current_Avatar_Is_Correct()
         {
