@@ -206,7 +206,7 @@ function SetDefaultShopData() {
  * Update Display for new Data
  * 
  */
-
+SetDefaultShopData();
 // Call for Refresh Game to get the Initial State
 RefreshGame();
 

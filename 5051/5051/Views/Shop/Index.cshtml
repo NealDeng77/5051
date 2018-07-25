@@ -9,66 +9,52 @@
 
 <br />
 
-@*<img src="~/Content/img/StoreExample.jpg" />*@
+<div id="ImageBox">
 
-<img id="shop" width="1000" height="800" src="" alt="shop">
-<img id="inside" width="1000" height="800" src="~/Content/shop/IceCreamShopInside.png" alt="inside" style="display:none">
-<img id="display" width="1000" height="800" src="~/Content/shop/IceCreamDisplay.png" alt="display" style="display:none">
+    <div id="TopperBox">
+        <img id="Topper" width="1000" height="800" src="" alt="Topper">
+    </div>
 
-@*<canvas id="myCanvas" width="1000" height="800" onclick="switchView()"></canvas>*@
+    <div id="SignBox">
+        <img id="Sign" width="1000" height="800" src="" alt="Sign">
+    </div>
 
-@*<script>
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
+    <div id="TruckBox">
+        <img id="Truck" width="1000" height="800" src="" alt="Truck">
+    </div>
 
-    var inside = false;
+    <div id="MenuBox">
+        <img id="Menu" width="1000" height="800" src="" alt="Menu">
+    </div>
 
-    window.onload = function () {
-        drawInside();
-        var img = document.getElementById("shop");
-        ctx.drawImage(img, 0, 0, 900, 600);
+    <div id="RimsBox">
+        <img id="Rims" width="1000" height="800" src="" alt="Rims">
+    </div>
+
+    <div id="TailBox">
+        <img id="Tail" width="1000" height="800" src="" alt="Tail">
+    </div>
+
+</div>
+
+<br />
+<br />
+
+<style>
+
+    #ImageBox {
+        width: 1000px;
+        height: 1000px;
     }
 
-    function switchView() {
-        //ctx.clearRect(0, 0, 900, 600);
-        var img;
-        if (inside == false) {
-            ctx.clearRect(0, 0, 900, 600);
-            drawInside();
-            inside = true;
-        } else {
-            img = document.getElementById("shop");
-            ctx.drawImage(img, 0, 0, 900, 600);
-            inside = false;
-        }
-
+    #TopperBox {
     }
 
-    function drawInside() {
-        img = document.getElementById("inside");
-        ctx.drawImage(img, 65, 0, 755, 600);
-        img = document.getElementById("display");
-        ctx.drawImage(img, 150, 340, 315, 200);
-
-        var colors = ["blue", "pink", "yellow", "orange", "brown", "red", "white"];
-        var empty = [1, 0, 0, 0, 0, 1, 0];
-
-        for (var i = 0; i < colors.length; i++) {
-            var xPosition = 171 + (i * 40);
-
-            if (empty[i] == 1) {
-                ctx.fillStyle = "black";
-                ctx.font = "55px Arial";
-                ctx.fillText("X", xPosition, 455, 30);
-            } else {
-                ctx.fillStyle = colors[i];
-                ctx.fillRect(xPosition, 415, 30, 40);
-            }
-        }
-
+    #TruckBox {
+        padding-top: 500px;
+        padding-left: 200px;
     }
-
-</script>*@
+</style>
 
 <br />
 <br />
