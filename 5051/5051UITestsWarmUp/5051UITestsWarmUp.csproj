@@ -64,6 +64,21 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Avatar\" />
+    <Folder Include="Views\Calendar\" />
+    <Folder Include="Views\FactoryInventory\" />
+    <Folder Include="Views\GameSettings\" />
+    <Folder Include="Views\KioskSettings\" />
+    <Folder Include="Views\Kiosk\" />
+    <Folder Include="Views\Manage\" />
+    <Folder Include="Views\Portal\" />
+    <Folder Include="Views\SchoolDismissalSettings\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Shop\" />
+    <Folder Include="Views\Student\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
