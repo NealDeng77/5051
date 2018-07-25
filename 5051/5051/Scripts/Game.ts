@@ -9,7 +9,10 @@
 // Track the Current Iteration.  
 // Use the Iteraction Number to determine, if new data refresh is needed, a change in number means yes, refresh data
 // Start at -1, so first time run, always feteches data.
-var CurrentIteration = -1;
+var CurrentIterationNumber = -1;
+
+// Hold the Server's Iteration
+var ServerIterationNumber = 0;
 
 // The Student Id is stored in the Dom, need to fetch it on page load
 var StudentId = $("#StudentId").val();
@@ -63,19 +66,20 @@ function DataLoadIterationNumber(data: IJsonDataSimulatorHeader): number {
 }
 
 // Does a fetch to the server, and returns the Iteration Number
-function GetSimulationIteration(): number {
+async function GetSimulationIteration() {
     $.ajax("/Game/Simulation",
         {
             cache: false,
             dataType: 'json',
-            type: 'POST'
+            type: 'POST',
+            success: function (data: any) {
+                // Update the Global Server Iteration Number
+                ServerIterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+            }
         })
-        .done(function (data: any) {
-            // console.log(data);
-            var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
-            return IterationNumber;
+        .fail(function () {
+            console.log("IterationNumber error");
         });
-    return 0;
 }
 
 // Parses the Data Structure and returns the Iteration Number
@@ -95,31 +99,38 @@ function GetGameResults(): number {
         {
             cache: false,
             dataType: 'json',
-            type: 'POST'
+            type: 'POST',
+            async: false,
+            success: function (data: any) {
+                // console.log(data);
+                var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+                return IterationNumber;
+            }
         })
-        .done(function (data: any) {
-            // console.log(data);
-            var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
-            return IterationNumber;
+        .fail(function () {
+            console.log("Results error");
+            return 0;
         });
+
     return 0;
 }
 
 // Get the Refresh rate for the page
 // Returns the number of miliseconds to refresh
-function GetRefreshRate(): number{
+function GetRefreshRate(){
 
-    return 1000;
+    // Set the Global Refresh rate
+    RefreshRate = 1000;
 }
 
 // Refresh the Game
-function RefreshGame() {
+async function RefreshGame() {
 
     // Force a call to Simulation
-    var NewIteration = GetSimulationIteration();
+    await GetSimulationIteration();
 
     // Check if Game Version > current version, if so do update sequence
-    if (NewIteration > CurrentIteration) {
+    if (ServerIterationNumber> CurrentIterationNumber) {
 
         // Get New Data
         GetGameResults();
@@ -128,7 +139,7 @@ function RefreshGame() {
         RefreshGameDisplay();
 
         // Update Iteration Number
-        CurrentIteration = NewIteration;
+        CurrentIterationNumber = ServerIterationNumber;
     }
 }
 
@@ -158,8 +169,9 @@ function RefreshGameDisplay() {
  */
 
 // Get Refresh Rate
-RefreshRate = GetRefreshRate();
+GetRefreshRate();
 
 // Make Timmer to call refresh
-this.GameUpdateTimer = setTimeout(() => RefreshGame(), RefreshRate);
-
+setInterval(function () {
+    RefreshGame();
+}, RefreshRate);

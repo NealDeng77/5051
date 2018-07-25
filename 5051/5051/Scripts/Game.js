@@ -1,4 +1,12 @@
 /// <reference path ="../scripts/jquery/index.d.ts"/>
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 /*
  *
  * Global Variables
@@ -7,7 +15,9 @@
 // Track the Current Iteration.  
 // Use the Iteraction Number to determine, if new data refresh is needed, a change in number means yes, refresh data
 // Start at -1, so first time run, always feteches data.
-var CurrentIteration = -1;
+var CurrentIterationNumber = -1;
+// Hold the Server's Iteration
+var ServerIterationNumber = 0;
 // The Student Id is stored in the Dom, need to fetch it on page load
 var StudentId = $("#StudentId").val();
 // Refresh rate is the rate to refresh the game in miliseconds
@@ -30,17 +40,20 @@ function DataLoadIterationNumber(data) {
 }
 // Does a fetch to the server, and returns the Iteration Number
 function GetSimulationIteration() {
-    $.ajax("/Game/Simulation", {
-        cache: false,
-        dataType: 'json',
-        type: 'POST'
-    })
-        .done(function (data) {
-        // console.log(data);
-        var IterationNumber = DataLoadIterationNumber(data);
-        return IterationNumber;
+    return __awaiter(this, void 0, void 0, function* () {
+        $.ajax("/Game/Simulation", {
+            cache: false,
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                // Update the Global Server Iteration Number
+                ServerIterationNumber = DataLoadIterationNumber(data);
+            }
+        })
+            .fail(function () {
+            console.log("IterationNumber error");
+        });
     });
-    return 0;
 }
 // Parses the Data Structure and returns the Iteration Number
 function DataLoadGameResults(data) {
@@ -56,33 +69,41 @@ function GetGameResults() {
     $.ajax("/Game/Results/" + StudentId, {
         cache: false,
         dataType: 'json',
-        type: 'POST'
+        type: 'POST',
+        async: false,
+        success: function (data) {
+            // console.log(data);
+            var IterationNumber = DataLoadIterationNumber(data);
+            return IterationNumber;
+        }
     })
-        .done(function (data) {
-        // console.log(data);
-        var IterationNumber = DataLoadIterationNumber(data);
-        return IterationNumber;
+        .fail(function () {
+        console.log("Results error");
+        return 0;
     });
     return 0;
 }
 // Get the Refresh rate for the page
 // Returns the number of miliseconds to refresh
 function GetRefreshRate() {
-    return 1000;
+    // Set the Global Refresh rate
+    RefreshRate = 1000;
 }
 // Refresh the Game
 function RefreshGame() {
-    // Force a call to Simulation
-    var NewIteration = GetSimulationIteration();
-    // Check if Game Version > current version, if so do update sequence
-    if (NewIteration > CurrentIteration) {
-        // Get New Data
-        GetGameResults();
-        // Refresh Game Display
-        RefreshGameDisplay();
-        // Update Iteration Number
-        CurrentIteration = NewIteration;
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        // Force a call to Simulation
+        yield GetSimulationIteration();
+        // Check if Game Version > current version, if so do update sequence
+        if (ServerIterationNumber > CurrentIterationNumber) {
+            // Get New Data
+            GetGameResults();
+            // Refresh Game Display
+            RefreshGameDisplay();
+            // Update Iteration Number
+            CurrentIterationNumber = ServerIterationNumber;
+        }
+    });
 }
 // Refresh Game display
 function RefreshGameDisplay() {
@@ -106,7 +127,9 @@ function RefreshGameDisplay() {
  *
  */
 // Get Refresh Rate
-RefreshRate = GetRefreshRate();
+GetRefreshRate();
 // Make Timmer to call refresh
-this.GameUpdateTimer = setTimeout(() => RefreshGame(), RefreshRate);
+setInterval(function () {
+    RefreshGame();
+}, RefreshRate);
 //# sourceMappingURL=game.js.map
