@@ -247,6 +247,7 @@
     <Compile Include="Models\Enums\EmotionStatusEnum.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\MonthlyReportViewModel.cs" />
+    <Compile Include="Models\QuarterReportViewModel.cs" />
     <Compile Include="Models\SchoolCalendarViewModel.cs" />
     <Compile Include="Models\SchoolCalendarModel.cs" />
     <Compile Include="Models\KioskSettingsModel.cs" />
