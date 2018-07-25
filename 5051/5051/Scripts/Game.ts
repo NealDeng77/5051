@@ -1,61 +1,165 @@
 ﻿/// <reference path ="../scripts/jquery/index.d.ts"/>
 
-function sayHello() {
+/*
+ * 
+ * Global Variables
+ * 
+ */
 
-    var com = document.getElementById("compiler");
-    var att = com.attributes;
-    var val = att.length; 
+// Track the Current Iteration.  
+// Use the Iteraction Number to determine, if new data refresh is needed, a change in number means yes, refresh data
+// Start at -1, so first time run, always feteches data.
+var CurrentIteration = -1;
 
-    const compiler = "abc"; //(document.getElementById("compiler").attributes;
-    const framework = "xyz"; // (document.getElementById("framework") as HTMLInputElement).value;
-    return `Hello from ${compiler} and ${framework}!`;
-}
+// The Student Id is stored in the Dom, need to fetch it on page load
+var StudentId = $("#StudentId").val();
 
-//let myUrl = URL.parse("http://www.typescriptlang.org");
+// Refresh rate is the rate to refresh the game in miliseconds
+var RefreshRate = 1000;
 
-interface IJsonDataSimulator {
+// Game Update Timmer fires every RefeshRate
+var GameUpdateTimer;
+
+/* 
+ * 
+ * Data Structures 
+ * 
+ */
+
+// The Data structor for the Simulator Data set
+interface IJsonDataSimulatorHeader {
     Error: string[];
     Msg: string[];
-    data: number;
+    Data: number;
 }
 
-function DataLoad(data: IJsonDataSimulator) {
-    alert("Data load: " +
+// The result data
+interface iJsonDataResult {
+    Name: string[];
+}
+
+// The Data structor for the Result Data set Header
+interface IJsonDataResultHeader {
+    Error: string[];
+    Msg: string[];
+    Data: iJsonDataResult;
+}
+
+/* 
+ * 
+ * Data Functions
+ * 
+ */
+
+// Parses the Data Structure and returns the Iteration Number
+function DataLoadIterationNumber(data: IJsonDataSimulatorHeader): number {
+    console.log ("Data load: " +
         " Error: " + data.Error +
         " Msg: " + data.Msg +
-        " Data: " +data.data);
+        " Data: " + data.Data);
+
+    var IterationNumber = data.Data;
+    return IterationNumber;
 }
 
-class Greeter {
-    greeting: string;
-    constructor(message: string) {
-        this.greeting = message;
+// Does a fetch to the server, and returns the Iteration Number
+function GetSimulationIteration(): number {
+    $.ajax("/Game/Simulation",
+        {
+            cache: false,
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function (data: any) {
+            // console.log(data);
+            var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+            return IterationNumber;
+        });
+    return 0;
+}
+
+// Parses the Data Structure and returns the Iteration Number
+function DataLoadGameResults(data: IJsonDataSimulatorHeader): number {
+    console.log("Data load: " +
+        " Error: " + data.Error +
+        " Msg: " + data.Msg +
+        " Data: " + data.Data);
+
+    var IterationNumber = data.Data;
+    return IterationNumber;
+}
+
+// Does a fetch to the server, and returns the Iteration Number
+function GetGameResults(): number {
+    $.ajax("/Game/Results/"+StudentId,
+        {
+            cache: false,
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function (data: any) {
+            // console.log(data);
+            var IterationNumber = DataLoadIterationNumber(<IJsonDataSimulatorHeader>data);
+            return IterationNumber;
+        });
+    return 0;
+}
+
+// Get the Refresh rate for the page
+// Returns the number of miliseconds to refresh
+function GetRefreshRate(): number{
+
+    return 1000;
+}
+
+// Refresh the Game
+function RefreshGame() {
+
+    // Force a call to Simulation
+    var NewIteration = GetSimulationIteration();
+
+    // Check if Game Version > current version, if so do update sequence
+    if (NewIteration > CurrentIteration) {
+
+        // Get New Data
+        GetGameResults();
+
+        // Refresh Game Display
+        RefreshGameDisplay();
+
+        // Update Iteration Number
+        CurrentIteration = NewIteration;
     }
-    greet() {
-        return "Hello, " + this.greeting;
-    }
 }
 
-let greeter = new Greeter("world");
+// Refresh Game display
+function RefreshGameDisplay() {
+    // Use the current data structure
 
-let button = document.createElement('button');
-button.textContent = "Say Hello";
-button.onclick = function() {
-    alert(greeter.greet());
+    // For all the elements in the Game, make a call and refresh them
+
 }
 
-document.body.appendChild(button);
+/*
+ * Application Starts Here
+ * 
+ * Load the Page
+ * Initialize the Game
+ * Do a fetch to the server to get IterationNumber, Refresh Rate
+ * 
+ * Set Refresh Rate on a Timmer
+ * 
+ * At the refresh go to the server and check for Iteration
+ * 
+ * If Current Iteration < Server Iteration Number, then refetch Data
+ * 
+ * Update Display for new Data
+ * 
+ */
 
-//alert("123");
-//let Mike = sayHello();
+// Get Refresh Rate
+RefreshRate = GetRefreshRate();
 
-$.ajax("/Game/Simulation",
-    {
-        cache: false,
-        dataType: 'json',
-        type: 'POST'
-    })
-    .done(function (data: any) {
-        console.log(data);
-        DataLoad(<IJsonDataSimulator>data);
-    });
+// Make Timmer to call refresh
+this.GameUpdateTimer = setTimeout(() => RefreshGame(), RefreshRate);
+

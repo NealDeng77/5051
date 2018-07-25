@@ -114,4 +114,14 @@
     </div>
 </div>
 
-<script src="~/Scripts/Game.js"></script>
+@{
+    // Game Engine Code block
+
+    // Put the Student ID into the Dom, so the Game engine can find it
+<div>
+    @Html.Hidden("StudentId", Model.Id);
+</div>
+
+    <script src="~/Scripts/Game.js"></script>
+}
+

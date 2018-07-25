@@ -30,7 +30,7 @@ namespace _5051.Controllers
                 {
                     Error = true,
                     Msg = "Invalid State",
-                    data = string.Empty,
+                    Data = string.Empty,
                 });
             }
 
@@ -40,7 +40,7 @@ namespace _5051.Controllers
                 {
                     Error = true,
                     Msg = "Invalid State",
-                    data = string.Empty,
+                    Data = string.Empty,
                 });
             }
 
@@ -50,7 +50,7 @@ namespace _5051.Controllers
                 {
                     Error = true,
                     Msg = "Invalid State",
-                    data = string.Empty,
+                    Data = string.Empty,
                 });
             }
 
@@ -60,7 +60,7 @@ namespace _5051.Controllers
             {
                 Error = false,
                 Msg = "OK",
-                data = DataResult.ToString(),
+                Data = DataResult.ToString(),
             });
         }
 
@@ -82,7 +82,7 @@ namespace _5051.Controllers
                 {
                     Error = true,
                     Msg = "Invalid State",
-                    data = string.Empty,
+                    Data = string.Empty,
                 });
             }
 
@@ -93,7 +93,7 @@ namespace _5051.Controllers
             {
                 Error = false,
                 Msg = "OK",
-                data = DataResult.ToString(),
+                Data = DataResult.ToString(),
             });
         }
     }
