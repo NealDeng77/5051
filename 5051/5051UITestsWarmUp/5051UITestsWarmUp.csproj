@@ -72,7 +72,6 @@
     <Folder Include="Views\GameSettings\" />
     <Folder Include="Views\KioskSettings\" />
     <Folder Include="Views\Kiosk\" />
-    <Folder Include="Views\Manage\" />
     <Folder Include="Views\Portal\" />
     <Folder Include="Views\SchoolDismissalSettings\" />
     <Folder Include="Views\Shared\" />
