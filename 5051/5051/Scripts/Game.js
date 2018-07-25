@@ -136,6 +136,9 @@ function RefreshGame() {
  * Update Display for new Data
  *
  */
+// Call for Refresh Game to get the Initial State
+RefreshGame();
+// Then start looping to refresh every RefreshRate Iteration
 // Get Refresh Rate
 GetRefreshRate();
 console.log(ServerRefreshRate);
@@ -155,11 +158,15 @@ setInterval(function () {
  */
 // Refresh Game display
 function RefreshGameDisplay() {
+    var BaseContentURL = "/Content/shop/";
     // Use the current data structure
     // For all the elements in the Game, make a call and refresh them
     // Show Iteration Number (debugging)
     $("#IterationNumber").text(CurrentIterationNumber);
     // Show Game Data
     $("#GameData").text("Game Data Goes Here");
+    let ShopSkin = "IceCreamShop.png";
+    // Refesh Shop Skin
+    $("#shop").attr("src", BaseContentURL + ShopSkin);
 }
 //# sourceMappingURL=game.js.map
