@@ -104,23 +104,27 @@
 <br />
 <br />
 
-<div class="row">
-    <div id="message"></div>
-    <div>
-        <span id="compiler">Typescript</span><br />
-        <span id="framework">ASP</span>
-        <br />
-        <br />
-    </div>
-</div>
-
 @{
     // Game Engine Code block
 
     // Put the Student ID into the Dom, so the Game engine can find it
-<div>
-    @Html.Hidden("StudentId", Model.Id);
-</div>
+    <div>
+        @Html.Hidden("StudentId", Model.Id)
+    </div>
+
+    // Show the Current Iteration Number
+    <div class="row">
+        <span>Iteration Number:</span><span id="IterationNumber"></span>
+    </div>
+
+    // Show the Current Refresh Data
+    <div class="row">
+        <span>Game Data:</span><span id="GameData"></span>
+    </div>
+
+    <br />
+    <br />
+    <br />
 
     <script src="~/Scripts/Game.js"></script>
 }

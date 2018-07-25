@@ -109,6 +109,10 @@ function RefreshGame() {
 function RefreshGameDisplay() {
     // Use the current data structure
     // For all the elements in the Game, make a call and refresh them
+    // Show Iteration Number (debugging)
+    $("#IterationNumber").text(CurrentIterationNumber);
+    // Show Game Data
+    $("#GameData").text("Game Data Goes Here");
 }
 /*
  * Application Starts Here
