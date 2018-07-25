@@ -12,7 +12,8 @@ namespace _5051UITestsWarmUp
     public class Extensions
     {
         public const string LocalUrl = "http://localhost:59052";
-        public const string BaseUrl = LocalUrl;
+        public const string LiveUrl = "http://5051.azurewebsites.net/";
+        public const string BaseUrl = LiveUrl;
 
         public static string ChromeDriverLocation = "../../ChromeDriver";
 
