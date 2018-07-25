@@ -18,6 +18,9 @@
             @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
         </li>
         <li class="nav-item">
+            @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
+        </li>
+        <li class="nav-item">
             @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
         </li>
     </ul>
@@ -40,8 +43,6 @@
 
 
         }
-
-
     </div>
 </div>
 <br />
