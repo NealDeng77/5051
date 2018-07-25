@@ -109,7 +109,7 @@ namespace _5051UITests.Views.Portal
             var levelResult = GetElementById("currentAvatarLevel");
             var imgResult = GetElementById("currentAvatarImg");
 
-            Assert.AreEqual(true, nameResult.Text.Contains(expectName));
+            Assert.AreEqual(expectName, nameResult.Text);
             Assert.AreEqual(expectLevel, levelResult.Text);
             Assert.IsNotNull(imgResult);
         }

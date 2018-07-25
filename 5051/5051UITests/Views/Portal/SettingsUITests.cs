@@ -77,7 +77,7 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Settings_Check_That_Update_Name_Works()
         {
-            var expectWelcomeMessage = "newNameForYou, good to see you back.";
+            var expectWelcomeMessageName = "newNameForYou";
             var expectOriginalName = "Mike";
 
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
@@ -87,13 +87,13 @@ namespace _5051UITests.Views.Portal
 
             //type a new name and submit
             element.Clear();
-            element.SendKeys("newNameForYou");
+            element.SendKeys(expectWelcomeMessageName);
             ClickActionById("updateSubmitButton");
 
             //assert that new name is displayed (should be on the portal/index page)
-            var indexElement = GetElementById("welcomeMessage");
+            var indexElement = GetElementById("welcomeMessageStudentName");
 
-            Assert.AreEqual(expectWelcomeMessage, indexElement.Text);
+            Assert.AreEqual(expectWelcomeMessageName, indexElement.Text);
 
             //return name to original
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);

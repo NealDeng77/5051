@@ -15,8 +15,8 @@
         <div class="col-sm-2 text-center">
             <img src="~/Content/img/@Model.SelectedAvatar.Uri" id="currentAvatarImg" class="AvatarSize1" />
             <br />
-            <div class="text-center" id="currentAvatarName">
-                @Html.DisplayFor(m => m.SelectedAvatar.Name)
+            <div class="text-center">
+                <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
                 <br />
                 <span id="currentAvatarLevel">
                     @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
