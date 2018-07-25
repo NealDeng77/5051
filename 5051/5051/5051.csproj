@@ -310,8 +310,8 @@
     <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
-    <Content Include="Content\img\icecream-display.png" />
-    <Content Include="Content\img\icecream-shop.png" />
+    <Content Include="Content\shop\IceCreamDisplay.png" />
+    <Content Include="Content\shop\IceCreamShop.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -327,7 +327,7 @@
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
-    <Content Include="Content\img\shop-inside.png" />
+    <Content Include="Content\shop\IceCreamShopInside.png" />
     <Content Include="Content\img\StoreExample.jpg" />
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
