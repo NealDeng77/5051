@@ -37,5 +37,26 @@ namespace _5051UITests.Views.Portal
 
             Shared._Layout.Click_All_Footer_Links(_Controller, _Action, _DataFirstStudentID);
         }
+
+        [TestMethod]
+        public void Portal_Attendance_Check_That_All_Info_Is_Displayed()
+        {
+            var expectStatus = "Out";
+            var expectEmotion = "Neutral";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //current status
+            var resultStatus = GetElementById("statusValue");
+            Assert.AreEqual(expectStatus, resultStatus.Text);
+
+            //last login
+            var resultLastLogin = GetElementById("lastLoginValue");
+            Assert.IsNotNull(resultLastLogin.Text);
+
+            //emotion state
+            var resultEmotion = GetElementById("emotionStateValue");
+            Assert.AreEqual(expectEmotion, resultEmotion.Text);
+        }
     }
 }
