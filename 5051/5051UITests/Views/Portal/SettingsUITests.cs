@@ -78,6 +78,7 @@ namespace _5051UITests.Views.Portal
         public void Portal_Settings_Check_That_Update_Name_Works()
         {
             var expectWelcomeMessage = "newNameForYou, good to see you back.";
+            var expectOriginalName = "Mike";
 
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
 
@@ -93,6 +94,13 @@ namespace _5051UITests.Views.Portal
             var indexElement = GetElementById("welcomeMessage");
 
             Assert.AreEqual(expectWelcomeMessage, indexElement.Text);
+
+            //return name to original
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+            var elementAfter = GetElementById("Name");
+            elementAfter.Clear();
+            elementAfter.SendKeys(expectOriginalName);
+            ClickActionById("updateSubmitButton");
         }
     }
 }
