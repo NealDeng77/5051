@@ -30,9 +30,9 @@
 
         // For now, have Portal be the Image date
         //case "Portal":
-          //  background = "IncludeBackgroundImageSunset";
-            //backgroundColor = "IncludeBackgroundColorSunset";
-            //break;
+        //  background = "IncludeBackgroundImageSunset";
+        //backgroundColor = "IncludeBackgroundColorSunset";
+        //break;
 
         case "Admin":
             background = "IncludeBackgroundImageNight";
@@ -45,6 +45,8 @@
 
             break;
     }
+
+
 }
 
 <body class="@backgroundColor">
@@ -57,18 +59,46 @@
         @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link", id = "KioskModeLinkNavBar" })
-                </li>
+
+                @{
+                    switch (routeController)
+                    {
+                        case "Home":
+                            @*<li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                    </li>*@
+                            <li class="nav-item">
+                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link", id = "KioskModeLinkNavBar" })
+                            </li>
+                            break;
+
+                        case "Kiosk":
+                            break;
+
+                        case "Admin":
+                            <li class="nav-item">
+                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            break;
+
+                        default:
+                            <li class="nav-item">
+                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+
+                            break;
+                    }
+                }
+
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
@@ -98,7 +128,7 @@
         </div>
     </footer>
 
-   
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
