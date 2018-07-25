@@ -78,7 +78,7 @@ namespace _5051.Controllers
             {
                 Error = false,
                 Msg = "OK",
-                Data = data.RefreshRate.Milliseconds,
+                Data = data.RefreshRate.TotalMilliseconds,
             });
         }
 

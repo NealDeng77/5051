@@ -31,10 +31,6 @@ var GameUpdateTimer;
  */
 // Parses the Data Structure and returns the Iteration Number
 function DataLoadIterationNumber(data) {
-    console.log("Data load: " +
-        " Error: " + data.Error +
-        " Msg: " + data.Msg +
-        " Data: " + data.Data);
     var IterationNumber = data.Data;
     return IterationNumber;
 }
@@ -57,10 +53,6 @@ function GetIterationNumber() {
 }
 // Parses the Data Structure and returns the Iteration Number
 function DataLoadGameResults(data) {
-    console.log("Data load: " +
-        " Error: " + data.Error +
-        " Msg: " + data.Msg +
-        " Data: " + data.Data);
     var IterationNumber = data.Data;
     return IterationNumber;
 }
@@ -78,7 +70,7 @@ function GetGameResults() {
         }
     })
         .fail(function () {
-        console.log("Results error");
+        console.log("Error GetResults");
         return 0;
     });
     return 0;
@@ -86,34 +78,29 @@ function GetGameResults() {
 // Get the Refresh rate for the page
 // Returns the number of miliseconds to refresh
 function GetRefreshRate() {
-    return __awaiter(this, void 0, void 0, function* () {
-        // Set the Global Refresh rate
-        yield GetGameRefreshRate();
-    });
+    // Set the Global Refresh rate
+    GetGameRefreshRate();
+    let abc = 123;
 }
 // Parses the Data Structure and returns the Iteration Number
 function DataLoadRefreshRate(data) {
-    console.log("Data load: " +
-        " Error: " + data.Error +
-        " Msg: " + data.Msg +
-        " Data: " + data.Data);
     var rate = data.Data;
     return rate;
 }
 // Does a fetch to the server, and returns the Iteration Number
 function GetGameRefreshRate() {
     return __awaiter(this, void 0, void 0, function* () {
-        $.ajax("/Game/GetRefreshRate/", {
+        yield $.ajax("/Game/GetRefreshRate/", {
             cache: false,
             dataType: 'json',
             type: 'POST',
+            async: false,
             success: function (data) {
                 ServerRefreshRate = DataLoadRefreshRate(data);
             }
         })
             .fail(function () {
             console.log("Error Get Refresh Rate");
-            return;
         });
     });
 }
@@ -151,6 +138,7 @@ function RefreshGame() {
  */
 // Get Refresh Rate
 GetRefreshRate();
+console.log(ServerRefreshRate);
 // Make Timmer to call refresh
 setInterval(function () {
     RefreshGame();
