@@ -151,7 +151,7 @@
     <Compile Include="Models\ShopInventoryListViewModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
     <Compile Include="Models\StudentReportStatsModelUnitTests.cs" />
-    <Compile Include="Models\StudentReportViewModelUnitTests.cs" />
+    <Compile Include="Models\MonthlyReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceModelUnitTests.cs" />
     <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
     <Compile Include="Models\AvatarModelUnitTests.cs" />
