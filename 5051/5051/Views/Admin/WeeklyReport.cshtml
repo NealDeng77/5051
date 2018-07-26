@@ -1,48 +1,306 @@
-﻿@model _5051.Models.WeeklyReportViewModel
+﻿@using _5051.Models
+@using _5051.Models.Enums
+@model _5051.Models.WeeklyReportViewModel
 @{
     ViewBag.Title = "Weekly Reports";
 }
+<div class="bg-white" style="padding: 30px">
+    <div class="text-center">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item mr-auto">
+                @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link" })
+            </li>
+            @using (Html.BeginForm())
+            {
 
-<div class="text-center text-light">
-    <br />
-    <h4>@Model.Student.Name's Weekly Report</h4>
-    <h5>Week of @Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h5>
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-    </ul>
-    <hr>
-    <div>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.StudentId)
-            <div class="row w-100">
-
-                <div class="col-sm-3 text-right mr-auto">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.StudentId)
+                <li class="col">
                     @Html.DropDownListFor(m => m.SelectedWeekId, Model.Weeks, new { onchange = "this.form.submit();", @class = "form-control" })
-                </div>
+                </li>
+            }
+        </ul>
+        <hr>
+        <div class="row">
 
-                <div class="btn btn-primary">
-                    Download
+            <div class="col">
+                <h4>@Model.Student.Name's Weekly Report</h4>
+                <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
+            </div>
+        </div>
+
+
+
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <strong>@Model.Student.Name</strong> attended <strong>@Model.Stats.AccumlatedTotalHours.TotalMinutes</strong> minutes out of
+                    <strong>@Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes</strong> minutes of school time this week.
+                    <br />
+                    Percentage of attended school time is:
+
+
+                    <h1>@Model.Stats.PercAttendedHours%.</h1>
                 </div>
             </div>
+        </div>
+        <div class="col-8">
+            <div class="card">
+
+                <table class="table">
 
 
-        }
+
+                    <tbody>
+                        <tr>
+                            <td>Present</td>
+                            <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercPresent%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Unexcused</td>
+                            <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercUnexcused%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Excused</td>
+                            <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercExcused%</td>
+                        </tr>
+                        <tr>
+                            <td>In Late</td>
+                            <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercInLate%</td>
+                        </tr>
+                        <tr>
+                            <td>Out Early</td>
+                            <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercOutEarly%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
+    <br />
+    <div class="col-12">
+        <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
+
+            <tr class="text-center">
+                <th class="text-center">Mon</th>
+                <th class="text-center">Tue</th>
+                <th class="text-center">Wed</th>
+                <th class="text-center">Thu</th>
+                <th class="text-center">Fri</th>
+            </tr>
+            <tr>
+                @foreach (var item in Model.AttendanceList)
+                {
+                    <td class="p-3">
+                        @if (!item.IsSchoolDay)
+                        {
+                            <div>No School</div>
+                        }
+                        else
+                        {
+                            <div class="CalendarCell text-center">
+                                <div>
+                                    @switch (item.Emotion)
+                                    {
+                                        case EmotionStatusEnum.VeryHappy:
+                                            <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                            break;
+                                        case EmotionStatusEnum.Happy:
+                                            <img src="/Content/img/EmotionHappy.png" height="30" />
+                                            break;
+                                        case EmotionStatusEnum.Neutral:
+                                            <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                            break;
+                                        case EmotionStatusEnum.Sad:
+                                            <img src="/Content/img/EmotionSad.png" height="30" />
+                                            break;
+                                        case EmotionStatusEnum.VerySad:
+                                            <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                            break;
+                                    }
+                                    @item.Date.ToString("MM/dd")
+                                </div>
+
+                                @if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
+                                {
+                                    <div class="row" style="height: 100px">
+                                        <div class="col align-self-center">
+                                            <h6>Absent Excused</h6>
+                                        </div>
+                                    </div>
+                                }
+                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
+                                {
+                                    <div class="row" style="height: 100px">
+                                        <div class="col align-self-center">
+                                            <h6>Absent Unexcused</h6>
+                                        </div>
+                                    </div>
+                                }
+                                else if (item.PercentAttended < 100)
+                                {
+                                    <div class="row" style="height: 100px">
+                                        <div class="col align-self-center">
+                                            <div>@item.PercentAttended%</div>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div>
+                                                @item.HoursAttended.TotalMinutes / @item.HoursExpected.TotalMinutes minutes
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            In<br />
+                                            @item.TimeIn.ToString("h:mm tt")<br />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            Out<br />
+                                            @item.TimeOut.ToString("h:mm tt")<br />
+                                        </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="row" style="height: 100px">
+                                        <div class="col align-self-center">
+                                            <img src="~/Content/img/CheckMark.png" style="height: 80px" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            In<br />
+                                            @item.TimeIn.ToString("h:mm tt")<br />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            Out<br />
+                                            @item.TimeOut.ToString("h:mm tt")<br />
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+
+
+
+                        }
+                    </td>
+                }
+            </tr>
+
+        </table>
+        @*<div class="card-group">
+                <div class="card">
+                    <div class="card-header">Mo</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.AttendanceList[0].AttendanceStatus</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Tu</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.AttendanceList[1].AttendanceStatus</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">We</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.AttendanceList[2].AttendanceStatus</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Th</div>
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Fr</div>
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+
 </div>
-<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>In</th>
+            <th>Out</th>
+            <th>Attended</th>
+            <th>Expected</th>
+            <th>Perc Attended</th>
+            <th>Total Attended</th>
+            <th>Total Expected</th>
+            <th>Attendance</th>
+            <th>CheckIn</th>
+            <th>CheckOut</th>
+            <th>Emotion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.AttendanceList)
+            {
+                if (item.IsSchoolDay)
+                {
+                    <tr>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.TimeIn.ToString("hh:mm")</td>
+                        <td>@item.TimeOut.ToString("hh:mm")</td>
+                        <td>@string.Format("{0:%h}h {0:%m}m", item.HoursAttended)</td>
+                        <td>@string.Format("{0:%h}h {0:%m}m", item.HoursExpected)</td>
+                        <td>@item.PercentAttended</td>
+                        <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHours)</td>
+                        <td>@string.Format("{0:%d}d {0:%h}h {0:%m}m", item.TotalHoursExpected)</td>
+                        <td>@item.AttendanceStatus.ToString()</td>
+                        <td>@item.CheckInStatus.ToString()</td>
+                        <td>@item.CheckOutStatus.ToString()</td>
+                        <td>@item.Emotion.ToString()</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
