@@ -9,30 +9,30 @@
 
 <br />
 
-<div id="ImageBox">
+<div class="ImageBox">
 
-    <div id="TopperBox">
-        <img id="Topper" width="1000" height="800" src="" alt="Topper">
+    <div class="TopperBox">
+        <img class="TopperItem" id="Topper" width="1000" height="800" src="" alt="Topper">
     </div>
 
-    <div id="SignBox">
-        <img id="Sign" width="1000" height="800" src="" alt="Sign">
+    <div class="SignBox">
+        <img class="SignItem" id="Sign" width="1000" height="800" src="" alt="Sign">
     </div>
 
-    <div id="TruckBox">
-        <img id="Truck" width="1000" height="800" src="" alt="Truck">
+    <div class="TruckBox">
+        <img class="TruckItem" id="Truck" width="1000" height="800" src="" alt="Truck">
     </div>
 
-    <div id="MenuBox">
-        <img id="Menu" width="1000" height="800" src="" alt="Menu">
+    <div class="MenuBox">
+        <img class="MenuItem" id="Menu" width="1000" height="800" src="" alt="Menu">
     </div>
 
-    <div id="RimsBox">
-        <img id="Rims" width="1000" height="800" src="" alt="Rims">
+    <div class="WheelsBox">
+        <img class="WheelsItem" id="Wheels" width="1000" height="800" src="" alt="Wheels">
     </div>
 
-    <div id="TailBox">
-        <img id="Tail" width="1000" height="800" src="" alt="Tail">
+    <div class="TrailerBox">
+        <img class="TrailerItem" id="Trailer" width="1000" height="800" src="" alt="Trailer">
     </div>
 
 </div>
@@ -42,19 +42,84 @@
 
 <style>
 
-    #ImageBox {
+    .ImageBox {
+        position: relative;
         width: 1000px;
         height: 1000px;
     }
 
-    #TopperBox {
+    .TopperBox {
+        position: absolute;
+        padding-left: 500px;
+        z-index: 1;
     }
 
-    #TruckBox {
-        padding-top: 500px;
-        padding-left: 200px;
+    .TruckBox {
+        position: absolute;
+        padding-top: 100px;
+        z-index: 2;
+    }
+
+    .MenuBox {
+        position: absolute;
+        padding-top: 190px;
+        padding-left: 750px;
+        z-index: 3;
+    }
+
+    .SignBox {
+        position: absolute;
+        padding-top: 600px;
+        padding-left: 400px;
+        z-index: 5;
+    }
+
+    .WheelsBox {
+        position: absolute;
+        padding-top: 490px;
+        padding-left: 40px;
+        z-index: 4;
+    }
+
+    .TrailerBox {
+        position: absolute;
+        padding-top: 330px;
+        padding-left: 990px;
+        z-index: 2;
+    }
+
+
+    .TopperItem {
+        width: 100px;
+        height: 100px;
+    }
+
+    .TruckItem {
+        width: auto;
+        height: auto;
+    }
+
+    .MenuItem {
+        width: 135px;
+        height: 175px;
+    }
+
+    .SignItem {
+        width: 100px;
+        height: 100px;
+    }
+
+    .WheelsItem {
+        width: 1400px;
+        height: 175px;
+    }
+
+    .TrailerItem {
+        width: 500px;
+        height: 250px;
     }
 </style>
+
 
 <br />
 <br />
