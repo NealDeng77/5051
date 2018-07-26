@@ -49,10 +49,10 @@ interface iJsonDataResult {
     Name: string;
     Truck: string;
     Topper: string;
-    Tail: string;
+    Trailer: string;
     Sign: string;
     Menu: string;
-    Rims: string;
+    Wheels: string;
     Inventory: iJsonDataInventory[];
 }
 
@@ -180,12 +180,12 @@ async function RefreshGame() {
 // Set the Default on Boot to draw, before the rest draws if no data exists
 function SetDefaultShopData() {
 
-    ShopData.Topper = "ShopTopper0.png";
-    ShopData.Menu = "ShopMenu0.png";
-    ShopData.Rims = "ShopRims0.png";
-    ShopData.Sign = "ShipSign0.png";
-    ShopData.Truck = "ShopTruck0.png";
-    ShopData.Tail = "ShopTail0.png";
+    ShopData.Topper = "Topper1.png";
+    ShopData.Menu = "Menu1.png";
+    ShopData.Wheels = "Wheels1.png";
+    ShopData.Sign = "Sign1.png";
+    ShopData.Truck = "Truck1.png";
+    ShopData.Trailer = "Trailer.png";
 }
 
 /*
@@ -248,7 +248,7 @@ function RefreshGameDisplay() {
     $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
     $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
     $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
-    $("#Rims").attr("src", BaseContentURL + ShopData.Rims);
+    $("#Rims").attr("src", BaseContentURL + ShopData.Wheels);
     $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
-    $("#Tail").attr("src", BaseContentURL + ShopData.Tail);
+    $("#Tail").attr("src", BaseContentURL + ShopData.Trailer);
 }

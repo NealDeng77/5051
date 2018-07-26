@@ -311,6 +311,7 @@
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
     <Content Include="Content\shop\IceCreamDisplay.png" />
+    <Content Include="Content\shop\Menu1.png" />
     <Content Include="Content\shop\ShopTail0.png" />
     <Content Include="Content\shop\ShopSign0.png" />
     <Content Include="Content\shop\ShopRims0.png" />
@@ -366,10 +367,15 @@
     <Content Include="Content\shop\Plant.png" />
     <Content Include="Content\shop\radio.png" />
     <Content Include="Content\shop\saxophone.png" />
+    <Content Include="Content\shop\Sign1.png" />
     <Content Include="Content\shop\telephone.png" />
     <Content Include="Content\shop\television.png" />
+    <Content Include="Content\shop\Topper1.png" />
+    <Content Include="Content\shop\Trailer1.png" />
+    <Content Include="Content\shop\Truck1.png" />
     <Content Include="Content\shop\trumpet.png" />
     <Content Include="Content\shop\violin.png" />
+    <Content Include="Content\shop\Wheels1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-regular-400.svg" />
     <Content Include="Global.asax" />
