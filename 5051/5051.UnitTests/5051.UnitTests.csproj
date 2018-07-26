@@ -138,6 +138,7 @@
     <Compile Include="Models\QuarterReportViewModelUnitTests.cs" />
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
+    <Compile Include="Models\SchoolYearReportViewModelUnitTests.cs" />
     <Compile Include="Models\SemesterReportViewModelTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
