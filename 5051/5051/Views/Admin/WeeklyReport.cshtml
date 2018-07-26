@@ -45,83 +45,83 @@
 
     </div>
     <br />
+    @if (Model.Stats.NumOfSchoolDays == 0)
+    {
+        <h5 class="text-light">No Data of this Week</h5>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
 
-    <div class="row">
-        <div class="col-4">
-            <div class="card h-100">
-                <div class="card-body">
-
-                    <strong>@Model.Student.Name</strong> attended <strong>@Model.Stats.AccumlatedTotalHours.TotalMinutes</strong> minutes out of
-                    <strong>@Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes</strong> minutes of school time this week.
-                    <br />
-                    Percentage of attended school time is:
+                        <strong>@Model.Student.Name</strong> attended <strong>@Model.Stats.AccumlatedTotalHours.TotalMinutes</strong> minutes out of
+                        <strong>@Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes</strong> minutes of school time this week.
+                        <br />
+                        Percentage of attended school time is:
 
 
-                    <h1>@Model.Stats.PercAttendedHours%.</h1>
+                        <h1>@Model.Stats.PercAttendedHours%.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+
+                    <table class="table">
+
+
+
+                        <tbody>
+                            <tr>
+                                <td>Present</td>
+                                <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercPresent%</td>
+                            </tr>
+                            <tr>
+                                <td>Absent Unexcused</td>
+                                <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercUnexcused%</td>
+                            </tr>
+                            <tr>
+                                <td>Absent Excused</td>
+                                <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercExcused%</td>
+                            </tr>
+                            <tr>
+                                <td>In Late</td>
+                                <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                                <td>@Model.Stats.PercInLate%</td>
+                            </tr>
+                            <tr>
+                                <td>Out Early</td>
+                                <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                                <td>@Model.Stats.PercOutEarly%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
-        <div class="col-8">
-            <div class="card">
+        <br />
+        <div class="col-12">
+            <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
 
-                <table class="table">
+                <tr class="text-center">
+                    <th class="text-center">Mon</th>
+                    <th class="text-center">Tue</th>
+                    <th class="text-center">Wed</th>
+                    <th class="text-center">Thu</th>
+                    <th class="text-center">Fri</th>
+                </tr>
+                <tr>
+                    @foreach (var item in Model.AttendanceList)
+                    {
+                        <td class="p-3">
 
-
-
-                    <tbody>
-                        <tr>
-                            <td>Present</td>
-                            <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercPresent%</td>
-                        </tr>
-                        <tr>
-                            <td>Absent Unexcused</td>
-                            <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercUnexcused%</td>
-                        </tr>
-                        <tr>
-                            <td>Absent Excused</td>
-                            <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercExcused%</td>
-                        </tr>
-                        <tr>
-                            <td>In Late</td>
-                            <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                            <td>@Model.Stats.PercInLate%</td>
-                        </tr>
-                        <tr>
-                            <td>Out Early</td>
-                            <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                            <td>@Model.Stats.PercOutEarly%</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="col-12">
-        <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
-
-            <tr class="text-center">
-                <th class="text-center">Mon</th>
-                <th class="text-center">Tue</th>
-                <th class="text-center">Wed</th>
-                <th class="text-center">Thu</th>
-                <th class="text-center">Fri</th>
-            </tr>
-            <tr>
-                @foreach (var item in Model.AttendanceList)
-                {
-                    <td class="p-3">
-                        @if (!item.IsSchoolDay)
-                        {
-                            <div>No School</div>
-                        }
-                        else
-                        {
-                            <div class="CalendarCell text-center">
+                            <div class="text-center">
                                 <div>
                                     @switch (item.Emotion)
                                     {
@@ -144,7 +144,15 @@
                                     @item.Date.ToString("MM/dd")
                                 </div>
 
-                                @if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
+                                @if (!item.IsSchoolDay)
+                                {
+                                    <div class="row" style="height: 100px">
+                                        <div class="col align-self-center">
+                                            <h6>No School</h6>
+                                        </div>
+                                    </div>
+                                }
+                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
                                 {
                                     <div class="row" style="height: 100px">
                                         <div class="col align-self-center">
@@ -211,12 +219,15 @@
 
 
 
-                        }
-                    </td>
-                }
-            </tr>
 
-        </table>
-    </div>
+                        </td>
+                    }
+                </tr>
 
+            </table>
+        </div>
+
+
+
+    }
 </div>
