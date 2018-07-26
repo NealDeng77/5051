@@ -1,0 +1,27 @@
+﻿@model List<_5051.Models.StudentModel>
+@{
+    // Temporary using the Student Model, until the list of Student Shops can be sent down
+    ViewBag.Title = "Visit";
+}
+<br />
+<h2>Please pick one shop to visit</h2>
+
+<br />
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-sm-4 text-center">
+                <div class="PortalBox">
+                    <a href="~/Shop/VisitShop/@item.Id" id="@item.Id">
+                        <img src="~/Content/img/PortalHouse.png" alt="Reports" class="PortalImage" />
+                    </a>
+                    <br />
+                    <span class="text-center FontColor1">
+                        @item.Name
+                    </span>
+                </div>
+            </div>
+        }
+    }
+</div>

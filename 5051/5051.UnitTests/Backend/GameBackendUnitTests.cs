@@ -200,5 +200,99 @@ namespace _5051.UnitTests.Models
             //asset
         }
         #endregion SetDataSourceDataSet
+
+        #region GetResults
+
+        [TestMethod]
+        public void Backend_GameBackend_GetResults_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+
+            //act
+            var result = test.GetResult("test");
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion GetResults
+
+        #region Simulation
+        [TestMethod]
+        public void Backend_GameBackend_Simulation_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+
+            //act
+            var result = test.Simulation();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_Simulation_RunDate_UTCNow_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_Simulation_RunDate_UTCNow_Add_1_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow.AddTicks(1);
+            test.Update(data);
+
+            var expect = test.GetDefault().IterationNumber;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_Simulation_RunDate_UTCNow_Minus_1_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow.AddMinutes(-10); // Move it back 10 minutes in time
+            test.Update(data);
+
+            var expect = test.GetDefault().IterationNumber;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreNotEqual(expect, result, TestContext.TestName);
+        }
+
+        #endregion Simulation
     }
 }

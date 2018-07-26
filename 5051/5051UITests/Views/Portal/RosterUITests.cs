@@ -16,8 +16,32 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Roster_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+            NavigateToPage(_Controller, _Action);
         }
 
+        [TestMethod]
+        public void Portal_Roster_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(_Controller, _Action);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(_Controller, _Action);
+
+            Shared._Layout.Click_All_Footer_Links(_Controller, _Action);
+        }
+
+        [TestMethod]
+        public void Portal_Roster_Click_All_On_Page_Links()
+        {
+            NavigateToPage(_Controller, _Action);
+
+            var listOFStudentIds = AssemblyTests.listOfStudentIDs;
+
+            foreach (var item in listOFStudentIds)
+            {
+                ClickActionById(item);
+                ValidatePageTransition("Portal", "Login");
+                NavigateToPage(_Controller, _Action);
+            }
+        }
     }
 }

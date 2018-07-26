@@ -12,20 +12,20 @@ namespace _5051UITests.Views.Student
     {
         private string _Controller = "Student";
         private string _Action = "Read";
-        private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
+        private string _DataFirstStudentID = AssemblyTests.firstStudentID;
 
         [TestMethod]
         public void Student_Read_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
         public void Student_Read_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
 
 

@@ -217,6 +217,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameSettingsController.cs" />
     <Compile Include="Controllers\KioskSettingsController.cs" />
     <Compile Include="Controllers\FactoryInventoryController.cs" />
@@ -246,11 +247,15 @@
     <Compile Include="Models\Enums\EmotionStatusEnum.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\MonthlyReportViewModel.cs" />
+    <Compile Include="Models\QuarterReportViewModel.cs" />
     <Compile Include="Models\SchoolCalendarViewModel.cs" />
     <Compile Include="Models\SchoolCalendarModel.cs" />
     <Compile Include="Models\KioskSettingsModel.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
     <Compile Include="Models\SchoolYearReportViewModel.cs" />
+    <Compile Include="Models\SemesterReportViewModel.cs" />
+    <Compile Include="Models\ShopTruckViewModel.cs" />
+    <Compile Include="Models\ShopTruckModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\FactoryInventoryViewModel.cs" />
     <Compile Include="Models\FactoryInventoryModel.cs" />
@@ -267,6 +272,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\SystemGlobalsModel.cs" />
+    <Compile Include="Models\WeeklyReportViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -299,15 +305,23 @@
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\CheckMark.png" />
     <Content Include="Content\img\EditPicture.png" />
-    <Content Include="Content\img\Emotion1.png" />
-    <Content Include="Content\img\Emotion2.png" />
-    <Content Include="Content\img\Emotion3.png" />
-    <Content Include="Content\img\Emotion4.png" />
-    <Content Include="Content\img\Emotion5.png" />
+    <Content Include="Content\img\EmotionVeryHappy.png" />
+    <Content Include="Content\img\EmotionHappy.png" />
+    <Content Include="Content\img\EmotionNeutral.png" />
+    <Content Include="Content\img\EmotionSad.png" />
+    <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
-    <Content Include="Content\img\icecream-display.png" />
-    <Content Include="Content\img\icecream-shop.png" />
+    <Content Include="Content\shop\IceCreamDisplay.png" />
+    <Content Include="Content\shop\Menu0.png" />
+    <Content Include="Content\shop\Menu1.png" />
+    <Content Include="Content\shop\ShopTail0.png" />
+    <Content Include="Content\shop\ShopSign0.png" />
+    <Content Include="Content\shop\ShopRims0.png" />
+    <Content Include="Content\shop\ShopMenu0.png" />
+    <Content Include="Content\shop\ShopTopper0.png" />
+    <Content Include="Content\shop\ShopTruck0.png" />
+    <Content Include="Content\shop\IceCreamShop.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -323,7 +337,7 @@
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
-    <Content Include="Content\img\shop-inside.png" />
+    <Content Include="Content\shop\IceCreamShopInside.png" />
     <Content Include="Content\img\StoreExample.jpg" />
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
@@ -356,10 +370,20 @@
     <Content Include="Content\shop\Plant.png" />
     <Content Include="Content\shop\radio.png" />
     <Content Include="Content\shop\saxophone.png" />
+    <Content Include="Content\shop\Sign0.png" />
+    <Content Include="Content\shop\Sign1.png" />
     <Content Include="Content\shop\telephone.png" />
     <Content Include="Content\shop\television.png" />
+    <Content Include="Content\shop\Topper0.png" />
+    <Content Include="Content\shop\Topper1.png" />
+    <Content Include="Content\shop\Trailer0.png" />
+    <Content Include="Content\shop\Trailer1.png" />
+    <Content Include="Content\shop\Truck0.png" />
+    <Content Include="Content\shop\Truck1.png" />
     <Content Include="Content\shop\trumpet.png" />
     <Content Include="Content\shop\violin.png" />
+    <Content Include="Content\shop\Wheels0.png" />
+    <Content Include="Content\shop\Wheels1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-regular-400.svg" />
     <Content Include="Global.asax" />
@@ -381,6 +405,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\5051 - Web Deploy.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -396,6 +421,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\gulpfile.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -475,7 +501,7 @@
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Views\Portal\Settings.cshtml" />
     <Content Include="Views\Portal\Report.cshtml" />
-    <Content Include="Views\Portal\Visit.cshtml" />
+    <Content Include="Views\Shop\Visit.cshtml" />
     <Content Include="Views\Portal\Avatar.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Portal\Group.cshtml" />
@@ -525,6 +551,10 @@
     <Content Include="Views\Shop\CelebrityPoster.cshtml" />
     <Content Include="Views\GameSettings\Read.cshtml" />
     <Content Include="Views\GameSettings\Update.cshtml" />
+    <Content Include="Scripts\tsconfig.json" />
+    <Content Include="Views\Shop\VisitShop.cshtml" />
+    <Content Include="Views\Admin\WeeklyReport.cshtml" />
+    <Content Include="Views\Admin\SemesterReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -537,6 +567,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\Game.ts" />
+    <TypeScriptCompile Include="Scripts\jquery\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

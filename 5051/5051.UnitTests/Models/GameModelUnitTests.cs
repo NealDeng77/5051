@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using System.Globalization;
 
 namespace _5051.UnitTests.Models
 {
@@ -61,6 +62,30 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_GameModel_Update_With_Valid_Data_Null_Should_Pass()
+        {
+            // Arrange
+            var expect = new GameModel();
+            expect.Id = "Id";
+            expect.Enabled = false;
+            expect.IterationNumber = 1000;
+            expect.RefreshRate = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 hr 1 minute
+            expect.RunDate = DateTime.Parse("01/23/2018");
+            expect.TimeIteration = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 hr 1 minute
+
+            var result  = new GameModel();
+
+            // Act
+            result.Update(expect);
+
+            // Assert
+            Assert.AreEqual(expect.Enabled, result.Enabled, "Enabled " + TestContext.TestName);
+            Assert.AreEqual(expect.IterationNumber, result.IterationNumber, "IterationNumber " + TestContext.TestName);
+            Assert.AreEqual(expect.RefreshRate, result.RefreshRate, "RefreshRate " + TestContext.TestName);
+            Assert.AreEqual(expect.RunDate, result.RunDate, "RunDate" + TestContext.TestName);
+            Assert.AreEqual(expect.TimeIteration, result.TimeIteration, "TimeIteration" + TestContext.TestName);
+        }
         #endregion Update
     }
 }

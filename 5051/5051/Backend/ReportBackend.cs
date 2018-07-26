@@ -40,6 +40,81 @@ namespace _5051.Backend
                 return instance;
             }
         }
+
+        #region GenerateWeeklyReportRegion
+        /// <summary>
+        /// Generate Weekly report
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public WeeklyReportViewModel GenerateWeeklyReport(WeeklyReportViewModel report)
+        {
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+
+            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+            //todo: convert this to kiosk timezone here
+            var dayNow = DateTime.UtcNow.Date;
+
+            //The first valid week(Monday's date) for the dropdown
+            var FirstWeek = dayFirst.AddDays(DayOfWeek.Monday - dayFirst.DayOfWeek);
+            //The last valid month for the dropdown
+            var LastWeek = dayLast.AddDays(DayOfWeek.Monday - dayLast.DayOfWeek);
+            //The month of today
+            var WeekNow = dayNow.AddDays(DayOfWeek.Monday - dayNow.DayOfWeek);
+
+            //do not go beyond the week of today
+            if (LastWeek > WeekNow)
+            {
+                LastWeek = WeekNow;
+            }
+
+            //Set the current week (loop variable) to the last valid week
+            var currentWeek = LastWeek;
+
+
+            //initialize the dropdownlist
+            report.Weeks = new List<SelectListItem>();
+
+            // the week id
+            int weekId = 1;
+
+            //loop backwards in time so that the week select list items are in time reversed order
+            while (currentWeek >= FirstWeek)
+            {
+                //the friday's date of the current week
+                var currentWeekFriday = currentWeek.AddDays(4);
+
+                //make a list item for the current week
+                var week = new SelectListItem { Value = "" + weekId, Text = "" + currentWeek.ToShortDateString() + " to " + currentWeekFriday.ToShortDateString() };
+
+                //add to the select list
+                report.Weeks.Add(week);
+
+                //if current week is the selected month, set the start date and end date for this report
+                if (weekId == report.SelectedWeekId)
+                {
+                    //set start date and end date
+                    report.DateStart = currentWeek;
+                    report.DateEnd = currentWeekFriday;
+                }
+
+                weekId++;
+                currentWeek = currentWeek.AddDays(-7);
+
+            }
+
+
+            //Generate report for this month
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+
+
+        #endregion
+        #region GenerateMonthlyReportRegion
         /// <summary>
         /// Generate monthly report
         /// </summary>
@@ -54,7 +129,7 @@ namespace _5051.Backend
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
             //todo: convert this to kiosk timezone here
-            var dayNow = DateTime.UtcNow;
+            var dayNow = DateTime.UtcNow.Date;
 
             //The first valid month for the dropdown
             var monthFirst = new DateTime(dayFirst.Year, dayFirst.Month, 1);
@@ -91,7 +166,7 @@ namespace _5051.Backend
                 if (monthId == report.SelectedMonthId)
                 {
                     //set start date and end date
-                    report.DateStart = new DateTime(currentMonth.Year, currentMonth.Month, 1);
+                    report.DateStart = currentMonth;
                     report.DateEnd = new DateTime(currentMonth.Year, currentMonth.Month, DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month));
                 }
 
@@ -106,6 +181,54 @@ namespace _5051.Backend
 
             return report;
         }
+        #endregion
+        #region GenerateSemesterReportRegion
+        
+        /// <summary>
+        /// Generate Weekly report
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public SemesterReportViewModel GenerateSemesterReport(SemesterReportViewModel report)
+        {
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+
+            report.Semesters = new List<SelectListItem>();
+
+            //todo: remove hardcoding
+            //make a list item for the current month
+            var fall = new SelectListItem { Value = "2", Text = "Fall Semester 2017" };
+
+            //add to the select list
+            report.Semesters.Add(fall);
+
+            if (report.SelectedSemesterId == 2)
+            {
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
+            }
+
+            //make a list item for the current month
+            var spring = new SelectListItem { Value = "1", Text = "Spring Semester 2018" };
+
+            //add to the select list
+            report.Semesters.Add(spring);
+
+            if (report.SelectedSemesterId == 1)
+            {
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringLastClassDay;
+            }
+
+            //Generate report for this month
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+
+
+        #endregion
         /// <summary>
         /// Generate overall report
         /// </summary>
@@ -133,15 +256,15 @@ namespace _5051.Backend
         /// <returns></returns>
         private void GenerateReportFromStartToEnd(BaseReportViewModel report)
         {
-            // Don't go beyond today, don't include today
-            if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
+            // Don't go beyond today
+            if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) > 0)
             {
-                report.DateEnd = DateTime.UtcNow.Date.AddDays(1);
+                report.DateEnd = DateTime.UtcNow.Date;
             }
 
             var currentDate = report.DateStart;
 
-            while (currentDate.CompareTo(report.DateEnd) < 0)
+            while (currentDate.CompareTo(report.DateEnd) <= 0)
             {
                 //create a new AttendanceReportViewmodel for each day
                 var temp = new AttendanceReportViewModel

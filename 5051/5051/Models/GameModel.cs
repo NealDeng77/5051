@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace _5051.Models
 {
@@ -18,6 +19,12 @@ namespace _5051.Models
 
         [Display(Name = "Date", Description = "Date and Time Iteration Ran")]
         public DateTime RunDate { get; set; }
+
+        [Display(Name = "Time Iteration", Description = "How long between iterations")]
+        public TimeSpan TimeIteration { get; set; }
+
+        [Display(Name = "Refresh Rate", Description = "How often the student's game refreshes")]
+        public TimeSpan RefreshRate { get; set; }
 
         [Display(Name = "Iteration", Description = "Iteration Number")]
         public int IterationNumber { get; set; }
@@ -34,6 +41,9 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
             IterationNumber = 0;
             Enabled = true;
+            TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
+            RunDate = DateTime.UtcNow;
+            RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
         }
 
         /// <summary>
@@ -43,7 +53,6 @@ namespace _5051.Models
         {
             Initialize();
         }
-
 
         /// <summary>
         /// New Game, with data passed in
@@ -69,6 +78,8 @@ namespace _5051.Models
             IterationNumber = data.IterationNumber;
             RunDate = data.RunDate;
             Enabled = data.Enabled;
+            TimeIteration = data.TimeIteration;
+            RefreshRate = data.RefreshRate;
         }
     }
 }

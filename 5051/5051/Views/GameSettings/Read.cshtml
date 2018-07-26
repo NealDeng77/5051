@@ -16,29 +16,49 @@
             }
             else
             {
-                    <br />
-                    <br />
+                <br />
+                <br />
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Enabled)
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.Enabled)
-                        </div>
+                @Html.HiddenFor(m => m.Id);
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.Enabled)
                     </div>
-
-                    <br />
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                        </div>
+                    <div class="col-sm-4">
+                        @Html.DisplayFor(m => m.Enabled)
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.RefreshRate)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.DisplayFor(m => m.RefreshRate)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.TimeIteration)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.DisplayFor(m => m.TimeIteration)
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success", id = "BackButton" })
+                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
             }
         }
     </div>

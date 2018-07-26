@@ -8,17 +8,17 @@
 <div class="container">
     <br />
     <h2>My Avatar</h2>
-    <h4>
+    <h4 id="remindOfLevel">
         You can change to any avatar at or below Level @Html.DisplayFor(m => m.Student.AvatarLevel)
     </h4>
     <div class="col-sm-10 col-sm-offset-1">
         <div class="col-sm-2 text-center">
-            <img src="~/Content/img/@Model.SelectedAvatar.Uri" class="AvatarSize1" />
+            <img src="~/Content/img/@Model.SelectedAvatar.Uri" id="currentAvatarImg" class="AvatarSize1" />
             <br />
             <div class="text-center">
-                @Html.DisplayFor(m => m.SelectedAvatar.Name)
+                <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
                 <br />
-                <span>
+                <span id="currentAvatarLevel">
                     @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
                 </span>
                 <br />
@@ -78,7 +78,7 @@
 
                                             <div class="col-sm-2 text-center">
                                                 <div class="@BoxHover">
-                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" class="AvatarSize1" @disabledOn />
+                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@outputAvatar.Name" id="@outputAvatar.Id" class="AvatarSize1" @disabledOn />
                                                     <br />
                                                     <span class="text-center">
                                                         @outputAvatar.Name

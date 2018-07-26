@@ -154,31 +154,18 @@ namespace _5051.Backend
             DateTime dateStart = new DateTime();
             DateTime dateEnd = new DateTime();
 
-            var mySetting = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
-            dateStart = mySetting.DayFirst;
-            dateEnd = mySetting.DayLast;
+            dateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
+            dateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+
             currentDate = dateStart;
 
             // For every day from the start of the school year, until the end of the school year or now...
             while (currentDate.CompareTo(dateEnd) < 0)
             {
-
                 var temp = new SchoolCalendarModel(currentDate);
-                //Set Schoolday to false for the days during break between consecutive quarters
-                if (currentDate < mySetting.FallFirstClassDay ||
-                    currentDate > mySetting.FallLastClassDay &&
-                    currentDate < mySetting.WinterFirstClassDay ||
-                    currentDate > mySetting.WinterLastClassDay &&
-                    currentDate < mySetting.SpringFirstClassDay ||
-                    currentDate > mySetting.SpringLastClassDay &&
-                    currentDate < mySetting.SummerFirstClassDay ||
-                    currentDate > mySetting.SummerLastClassDay)
-                {
-                    temp.SchoolDay = false;
-                }
+
                 //Add the new date to the list of dates
                 Create(temp);
-
 
                 currentDate = currentDate.AddDays(1);
             }

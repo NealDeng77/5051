@@ -172,6 +172,14 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("FCounter.png", "Counter", "Counter", FactoryInventoryCategoryEnum.Furniture, 10));
             Create(new FactoryInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", FactoryInventoryCategoryEnum.Furniture, 10));
             Create(new FactoryInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", FactoryInventoryCategoryEnum.Furniture, 10));
+
+            Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Truck1.png", "Slick Truck", "Slick Truck", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Menu1.png", "Slick Menu", "Slick Menu", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Truck, 10));
+            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Truck, 10));
         }
 
         /// <summary>

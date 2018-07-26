@@ -16,7 +16,17 @@ namespace _5051UITests.Views.Portal
         [TestMethod]
         public void Portal_Group_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action);
+            NavigateToPage(_Controller, _Action);
+        }
+
+        [TestMethod]
+        public void Portal_Group_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(_Controller, _Action);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(_Controller, _Action);
+
+            Shared._Layout.Click_All_Footer_Links(_Controller, _Action);
         }
     }
 }

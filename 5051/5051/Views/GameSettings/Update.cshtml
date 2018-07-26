@@ -36,6 +36,26 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.RefreshRate)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.RefreshRate)
+                                @Html.ValidationMessageFor(m => m.RefreshRate)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-right">
+                                @Html.DisplayNameFor(m => m.TimeIteration)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(m => m.TimeIteration)
+                                @Html.ValidationMessageFor(m => m.TimeIteration)
+                            </div>
+                        </div>
+
                         <br />
                         <br />
 
@@ -43,10 +63,10 @@
                             <div class="col-sm-3 text-right">
                             </div>
                             <div class="col-sm-4">
-                                @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Back", "Read", new { Controller = "GameSettings" }, new { @class = "btn btn-success", id = "BackButton" })
                             </div>
                             <div class="col-sm-4">
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="Update" class="btn btn-primary" id="Submit">
                             </div>
                         </div>
                     }

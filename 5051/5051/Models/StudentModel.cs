@@ -83,6 +83,11 @@ namespace _5051.Models
         public List<FactoryInventoryModel> Inventory { get; set; }
 
         /// <summary>
+        /// The Truck settigns for the Student
+        /// </summary>
+        public ShopTruckModel Truck { get; set; }
+
+        /// <summary>
         /// The Attendance list for the student
         /// </summary>
         public List<AttendanceModel> Attendance { get; set; }
@@ -172,6 +177,7 @@ namespace _5051.Models
             Inventory = data.Inventory;
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
+            Truck = data.Truck;
 
             return true;
         }

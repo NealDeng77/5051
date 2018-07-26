@@ -18,6 +18,8 @@ namespace _5051.Backend
         private static volatile GameBackend instance;
         private static object syncRoot = new Object();
 
+        private static object Lock = new Object();
+
         private GameBackend() { }
 
         public static GameBackend Instance
@@ -56,9 +58,9 @@ namespace _5051.Backend
             }
 
             // Default is to use the Mock
-            DataSource =  GameDataSourceMock.Instance;
+            DataSource = GameDataSourceMock.Instance;
         }
-        
+
         /// <summary>
         /// Makes a new Game
         /// </summary>
@@ -154,6 +156,69 @@ namespace _5051.Backend
         public void Reset()
         {
             DataSource.Reset();
+        }
+
+        /// <summary>
+        /// Run the Simulation
+        /// Returns the number of Iterations the simulator ran
+        /// </summary>
+        public int Simulation()
+        {
+            // Run for each time between now and the last time ran
+            var timeNow = DateTime.UtcNow;
+
+            // Get Time last Ran
+            var currentData = GetDefault();
+
+            // Get the current delta, and see if anyting is needed
+            var shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
+            if (shouldRun >= 0)
+            {
+                return currentData.IterationNumber;
+            }
+
+            lock (Lock)
+            {
+                do
+                {
+                    // If time lapsed in > time Threshold, then Run Simulaton for one Cycle
+                    shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
+                    if (shouldRun < 0)
+                    {
+                        // Run Iteration
+                        RunIteration();
+
+                        // Increment the RunDate
+                        currentData.RunDate = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks);
+                        currentData.IterationNumber++;
+                        Update(currentData);
+                    }
+                }
+                while (shouldRun < 0);
+            }
+
+            // Until Simulation Time = Current Time
+            return currentData.IterationNumber;
+        }
+
+        /// <summary>
+        /// Simulation Results
+        /// </summary>
+        public string GetResult(string id = null)
+        {
+            // Get the Store results for this student
+            // Return the Student Results
+
+            return "hi";
+        }
+
+        /// <summary>
+        /// Run a Single Iteration of the Game
+        /// </summary>
+        public void RunIteration()
+        {
+            // Run a single iteration
+            return;
         }
     }
 }

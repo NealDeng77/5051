@@ -12,20 +12,51 @@ namespace _5051UITests.Views.Portal
     {
         private string _Controller = "Portal";
         private string _Action = "Attendance";
-        private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
+        private string _DataFirstStudentID = AssemblyTests.firstStudentID;
 
         [TestMethod]
         public void Portal_Attendance_NavigateToPage_Valid_Should_Pass()
         {
-            NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
         }
 
         [TestMethod]
         public void Portal_Attendance_NavigateToPage_Invalid_No_ID_Should_See_Roster_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, PortalControllerName, RosterViewName);
+            ValidatePageTransition(PortalControllerName, RosterViewName);
+        }
+
+        [TestMethod]
+        public void Portal_Attendance_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(_Controller, _Action, _DataFirstStudentID);
+
+            Shared._Layout.Click_All_Footer_Links(_Controller, _Action, _DataFirstStudentID);
+        }
+
+        [TestMethod]
+        public void Portal_Attendance_Check_That_All_Info_Is_Displayed()
+        {
+            var expectStatus = "Out";
+            var expectEmotion = "Neutral";
+
+            NavigateToPage(_Controller, _Action, _DataFirstStudentID);
+
+            //current status
+            var resultStatus = GetElementById("statusValue");
+            Assert.AreEqual(expectStatus, resultStatus.Text);
+
+            //last login
+            var resultLastLogin = GetElementById("lastLoginValue");
+            Assert.IsNotNull(resultLastLogin.Text);
+
+            //emotion state
+            var resultEmotion = GetElementById("emotionStateValue");
+            Assert.AreEqual(expectEmotion, resultEmotion.Text);
         }
     }
 }

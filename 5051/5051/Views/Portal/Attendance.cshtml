@@ -11,7 +11,7 @@
 
 @{
     <br />
-    <h4>Current Status is @Model.Status</h4>
+    <h4>Current Status is <span id="statusValue">@Model.Status</span></h4>
     if (Model.Attendance == null || !Model.Attendance.Any())
     {
         //skip
@@ -20,10 +20,10 @@
         var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
         if (LastLoginIn != null)
         {
-            <h4>You last logged in at: @LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</h4>
+            <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
         }
 
-        <h4>Emotion State: @Model.EmotionCurrent</h4>
+        <h4>Emotion State: <span id="emotionStateValue">@Model.EmotionCurrent</span></h4>
     }
 }
 <hr />
@@ -34,7 +34,7 @@
             foreach (var item in Model.Attendance)
             {
                 <div class="col-sm-4 col-md-2">
-                    <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 10px">
+                    <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
                         @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortDateString()<br />
                         <div class="row">
                             <div class="col-sm-6">

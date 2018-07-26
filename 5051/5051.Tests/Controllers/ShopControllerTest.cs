@@ -367,5 +367,113 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion SpecialsRegion
+
+        #region VisitRegion
+        [TestMethod]
+        public void Controller_Shop_Visit_Valid_Should_Return_List()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var expect = Backend.StudentBackend.Instance.Index();
+
+            //// Act
+            var resultCall = controller.Visit() as ViewResult;
+            var result = (List<StudentModel>)resultCall.Model;
+
+            //// Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion VisitRegion
+
+        #region VisitShopRegion
+        [TestMethod]
+        public void Controller_Shop_VisitShop_Invalid_Null_Id_Should_Return_RosterPage()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            string id = null;
+
+            //// Act
+            var result = (RedirectToRouteResult)controller.VisitShop(id);
+
+            //// Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Invalid_ID_Should_Fail()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            string id = "bogus";
+
+            //// Act
+            var result = (RedirectToRouteResult)controller.VisitShop(id);
+
+            //// Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Valid_Id_Should_Pass()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            var data = Backend.StudentBackend.Instance.GetDefault();
+            var expect = data.Name;
+
+            //// Act
+            var resultCall = controller.VisitShop(data.Id) as ViewResult;
+            var result = (StudentModel)resultCall.Model;
+
+            //// Assert
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
+        }
+        #endregion VisitShop
+
+        #region CelebrityPoster
+        [TestMethod]
+        public void Controller_Shop_CelebrityPoster_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            // Act
+            ViewResult result = controller.CelebrityPoster() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion CelebrityPoster
+
+        #region Edit
+        [TestMethod]
+        public void Controller_Shop_Edit_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            // Act
+            ViewResult result = controller.Edit() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion Edit
+
+        #region Inventory
+        [TestMethod]
+        public void Controller_Shop_Inventory_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            // Act
+            ViewResult result = controller.Inventory() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion Inventory
     }
 }

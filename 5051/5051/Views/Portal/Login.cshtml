@@ -23,9 +23,9 @@
                 </div>
                 <div class="col-sm-4 text-center">
                     <br />
-                    <img src="~/Content/img/@Model.AvatarUri" class="AvatarSize1" />
+                    <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
                     <br />
-                    <span class="text-center FontColor1">
+                    <span class="text-center FontColor1" id="currentStudentName">
                         @Model.Name
                         <br />
                         <br />
@@ -61,10 +61,10 @@
                     <div class="col-sm-2 text-right">
                     </div>
                     <div class="col-sm-4">
-                        @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn1 btn-light btn-block" })
+                        @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn1 btn-light btn-block", id = "cancelLoginButton" })
                     </div>
                     <div class="col-sm-4">
-                        <input type="submit" value="Login" class="btn btn1 btn-light btn-block">
+                        <input type="submit" value="Login" id = "loginButton" class="btn btn1 btn-light btn-block">
                     </div>
                 </div>
             }

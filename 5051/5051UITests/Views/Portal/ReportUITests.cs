@@ -12,7 +12,7 @@ namespace _5051UITests.Views.Portal
     {
         private string _Controller = "Portal";
         private string _Action = "Report";
-        private string _DataFirstStudentID = GetFirstStudentID(AssemblyTests.CurrentDriver);
+        private string _DataFirstStudentID = AssemblyTests.firstStudentID;
 
         [TestMethod]
         public void Portal_Report_NavigateToPage_Valid_Should_Pass()
@@ -20,16 +20,16 @@ namespace _5051UITests.Views.Portal
             //NavigateToPage(AssemblyTests.CurrentDriver, _Controller, _Action, _DataFirstStudentID);
 
             //portal/report/id redirects to admin/monthlyreport/id, so must manually validate page transition
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + "/" + _Controller + "/" + _Action + "/" + _DataFirstStudentID);
-            ValidatePageTransition(AssemblyTests.CurrentDriver, "Admin", "MonthlyReport", _DataFirstStudentID);
+            NavigateToPageNoValidation(_Controller, _Action, _DataFirstStudentID);
+            ValidatePageTransition("Admin", "MonthlyReport", _DataFirstStudentID);
         }
 
         [TestMethod]
         public void Portal_Report_NavigateToPage_Invalid_No_ID_Should_See_Error_Page()
         {
-            AssemblyTests.CurrentDriver.Navigate().GoToUrl(BaseUrl + '/' + _Controller + '/' + _Action);
+            NavigateToPageNoValidation(_Controller, _Action);
 
-            ValidatePageTransition(AssemblyTests.CurrentDriver, ErrorControllerName, ErrorViewName);
+            ValidatePageTransition(ErrorControllerName, ErrorViewName);
         }
 
     }

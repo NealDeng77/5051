@@ -135,9 +135,14 @@
     <Compile Include="Models\IndexViewModelUnitTests.cs" />
     <Compile Include="Models\LoginViewModelUnitTests.cs" />
     <Compile Include="Models\ManageLoginsViewModelUnitTests.cs" />
+    <Compile Include="Models\QuarterReportViewModelUnitTests.cs" />
     <Compile Include="Models\RegisterViewModelUnitTests.cs" />
     <Compile Include="Models\ResetPasswordViewModelUnitTests.cs" />
+    <Compile Include="Models\SchoolYearReportViewModelUnitTests.cs" />
+    <Compile Include="Models\SemesterReportViewModelTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
+    <Compile Include="Models\ShopTruckModelUnitTests.cs" />
+    <Compile Include="Models\ShopTruckViewModelUnitTests.cs" />
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
     <Compile Include="Models\StudentAvatarModelUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
@@ -149,7 +154,7 @@
     <Compile Include="Models\ShopInventoryListViewModelUnitTests.cs" />
     <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
     <Compile Include="Models\StudentReportStatsModelUnitTests.cs" />
-    <Compile Include="Models\StudentReportViewModelUnitTests.cs" />
+    <Compile Include="Models\MonthlyReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceModelUnitTests.cs" />
     <Compile Include="Models\KioskSettingsModelUnitTests.cs" />
     <Compile Include="Models\AvatarModelUnitTests.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
     <Compile Include="Models\VerifyCodeViewModelUnitTests.cs" />
     <Compile Include="Models\VerifyPhoneNumberViewModelUnitTests.cs" />
+    <Compile Include="Models\WeeklyReportViewModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

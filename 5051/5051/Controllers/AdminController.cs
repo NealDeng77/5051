@@ -35,6 +35,57 @@ namespace _5051.Controllers
             return View(StudentViewModel);
         }
 
+        // GET: WeeklyReport
+        /// <summary>
+        /// Returns an individual weekly report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult WeeklyReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new WeeklyReportViewModel()
+            {
+                StudentId = id,
+                SelectedWeekId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateWeeklyReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the WeeklyReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult WeeklyReport([Bind(Include=
+            "StudentId,"+
+            "SelectedWeekId"+
+            "")] WeeklyReportViewModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateWeeklyReport(data);
+
+            return View(myReturn);
+        }
+
         // GET: Report
         /// <summary>
         /// Returns an individual monthly report for a student
@@ -81,6 +132,56 @@ namespace _5051.Controllers
 
             //generate the report
             var myReturn = ReportBackend.Instance.GenerateMonthlyReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: SemesterReport
+        /// <summary>
+        /// Returns an individual semester report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult SemesterReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new SemesterReportViewModel()
+            {
+                StudentId = id,
+                SelectedSemesterId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateSemesterReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the SemesterReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SemesterReport([Bind(Include=
+            "StudentId,"+
+            "SelectedSemesterId"+
+            "")] SemesterReportViewModel data)
+        {
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateSemesterReport(data);
 
             return View(myReturn);
         }

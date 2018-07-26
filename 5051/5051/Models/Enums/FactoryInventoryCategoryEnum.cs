@@ -23,5 +23,8 @@ namespace _5051.Models
 
         // Decorations
         Decoration = 7,
+
+        // Truck
+        Truck = 8,
     }
 }
