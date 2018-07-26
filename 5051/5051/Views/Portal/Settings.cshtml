@@ -8,7 +8,7 @@
     <h2>You Can Update Your Settings</h2>
 </div>
 
-<div style="max-width: 600px; margin: 0 auto; padding: 10px;" class="darkTransparentBox">
+<div style="max-width: 600px; margin: 0 auto; padding: 30px;" class="darkTransparentBox">
     <div class="container">
 
 
@@ -72,18 +72,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                       
-                    </div>
-
-                    
-
-                    <br />
-                    <hr />
-                    <br />
-
+                    </div>                 
+                    <hr />                 
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
@@ -96,25 +86,25 @@
                         @Html.HiddenFor(m => m.AvatarUri)
                         @Html.HiddenFor(m => m.ExperiencePoints)
                         @Html.HiddenFor(m => m.Password)
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right" id="nameName">
-                                @Html.DisplayNameFor(m => m.Name)
-                            </div>
-                            <div class="col-sm-2" id="nameValue">
-                                @Html.EditorFor(m => m.Name)
-                                @Html.ValidationMessageFor(m => m.Name)
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right" id="nameName">
+                            @Html.DisplayNameFor(m => m.Name)
                         </div>
+                        <div class="col-sm-6" id="nameValue">
+                            @Html.EditorFor(m => m.Name)
+                            @Html.ValidationMessageFor(m => m.Name)
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="submit" value="Update" class="btn btn-primary" id="updateSubmitButton">
+                        </div>
+                    </div>
 
                         <br />
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
                             </div>
-                            <div class="col-sm-4">
-                                <input type="submit" value="Update" class="btn btn-primary" id="updateSubmitButton">
-                            </div>
+                            
                         </div>
 
                     }
