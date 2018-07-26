@@ -6,7 +6,8 @@
     "target": "es6"
   },
   "files": [
-    "./game.ts"
+    "./game.ts",
+    "./people.ts"
   ],
   "compileOnSave": true
 }
