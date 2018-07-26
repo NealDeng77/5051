@@ -254,6 +254,8 @@
     <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
     <Compile Include="Models\SchoolYearReportViewModel.cs" />
     <Compile Include="Models\SemesterReportViewModel.cs" />
+    <Compile Include="Models\ShopTruckViewModel.cs" />
+    <Compile Include="Models\ShopTruckModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\FactoryInventoryViewModel.cs" />
     <Compile Include="Models\FactoryInventoryModel.cs" />
