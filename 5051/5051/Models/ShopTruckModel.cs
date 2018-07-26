@@ -24,6 +24,6 @@ namespace _5051.Models
         public string Sign { get; set; }
 
         // The Inventory ID for the Wheels
-        public string Truck{ get; set; }
+        public string Truck { get; set; }
     }
 }

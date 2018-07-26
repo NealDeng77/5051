@@ -31,12 +31,42 @@ namespace _5051.Models
         // Make a new view model based on the current data set
         public ShopTruckViewModel(ShopTruckModel data)
         {
-            Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Wheels);
-            Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Topper);
-            Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Trailer);
-            Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Menu);
-            Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Sign);
-            Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Truck);
+            Wheels = "Wheels0.png";
+            Topper = "Topper0.png";
+            Trailer = "Trailer0.png";
+            Menu = "Menu0.png";
+            Sign = "Sign0.png";
+            Truck = "Truck0.png";
+
+            if (data.Wheels != null)
+            { 
+                Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Wheels);
+            }
+
+            if (data.Topper != null)
+            {
+                Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Topper);
+            }
+
+            if (data.Trailer != null)
+            {
+                Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Trailer);
+            }
+
+            if (data.Menu != null)
+            {
+                Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Menu);
+            }
+
+            if (data.Sign != null)
+            {
+                Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Sign);
+            }
+
+            if (data.Truck != null)
+            {
+                Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Truck);
+            }
         }
     }
 }
