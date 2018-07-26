@@ -24,7 +24,7 @@ var ServerRefreshRate = 1000;
 var GameUpdateTimer;
 
 // The Global Data for the Current ShopData
-let ShopData: iJsonDataResult;
+var ShopData = <iJsonDataResult>{};
 
 /* 
  * 
@@ -132,8 +132,6 @@ function GetGameResults(): number {
 function GetRefreshRate() {
     // Set the Global Refresh rate
     GetGameRefreshRate();
-
-    let abc = 123;
 }
 
 // Parses the Data Structure and returns the Iteration Number
@@ -206,7 +204,10 @@ function SetDefaultShopData() {
  * Update Display for new Data
  * 
  */
+
+// Set the Default Data for before the data loads from the server
 SetDefaultShopData();
+
 // Call for Refresh Game to get the Initial State
 RefreshGame();
 
@@ -221,14 +222,9 @@ setInterval(function () {
    RefreshGame();
 }, ServerRefreshRate);
 
-
 /*
  *
- *
- * 
  * Game Layout Starts Here
- * 
- * 
  * 
  * 
  */
