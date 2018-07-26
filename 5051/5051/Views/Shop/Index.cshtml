@@ -37,54 +37,52 @@
 
 </div>
 
-<br />
-<br />
 
 <style>
 
     .ImageBox {
         position: relative;
         width: 1000px;
-        height: 1000px;
+        height: 500px;
     }
 
     .TopperBox {
         position: absolute;
-        padding-left: 350px;
+        padding-left: 460px;
         z-index: 2;
     }
 
     .TruckBox {
         position: absolute;
-        padding-top: 75px;
+        padding-top: 78px;
+        padding-left: 110px;
         z-index: 1;
     }
 
     .MenuBox {
         position: absolute;
-        padding-top: 100px;
-        padding-left: 550px;
+        padding-top: 103px;
+        padding-left: 660px;
         z-index: 3;
     }
 
     .SignBox {
         position: absolute;
-        padding-top: 360px;
-        padding-left: 240px;
+        padding-top: 368px;
         z-index: 5;
     }
 
     .WheelsBox {
         position: absolute;
-        padding-top: 355px;
-        padding-left: 40px;
+        padding-top: 358px;
+        padding-left: 150px;
         z-index: 4;
     }
 
     .TrailerBox {
         position: absolute;
-        padding-top: 260px;
-        padding-left: 755px;
+        padding-top: 268px;
+        padding-left: 865px;
         z-index: 2;
     }
 
@@ -121,39 +119,17 @@
 </style>
 
 
-<br />
-<br />
-
-
-
-
-@Html.ActionLink("Discounts", "Discounts", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-<br />
-<br />
-@Html.ActionLink("Special Items", "Specials", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-<br />
-<br />
 @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-<br />
-<br />
+&nbsp;&nbsp;
+@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-@Html.ActionLink("Shop Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+&nbsp;&nbsp;
+@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-<br />
-<br />
-
+&nbsp;&nbsp;
 @Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-<br />
-<br />
-
-@Html.ActionLink("Edit Shop", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-<br />
-<br />
 
 @{
     // Game Engine Code block
