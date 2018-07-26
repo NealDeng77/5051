@@ -85,7 +85,7 @@ namespace _5051.Models
         /// <summary>
         /// The Truck settigns for the Student
         /// </summary>
-        public ShopTruckViewModel Truck { get; set; }
+        public ShopTruckModel Truck { get; set; }
 
         /// <summary>
         /// The Attendance list for the student
@@ -177,6 +177,7 @@ namespace _5051.Models
             Inventory = data.Inventory;
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
+            Truck = data.Truck;
 
             return true;
         }
