@@ -9,7 +9,7 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    class SchoolYearReportViewModelUnitTests
+    public class SchoolYearReportViewModelUnitTests
     {
 
         public TestContext TestContext { get; set; }
