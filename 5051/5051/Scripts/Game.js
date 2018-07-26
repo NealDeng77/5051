@@ -177,8 +177,8 @@ function RefreshGameDisplay() {
     $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
     $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
     $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
-    $("#Rims").attr("src", BaseContentURL + ShopData.Wheels);
+    $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
     $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
-    $("#Tail").attr("src", BaseContentURL + ShopData.Trailer);
+    $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
 }
 //# sourceMappingURL=game.js.map
