@@ -121,6 +121,8 @@ namespace _5051.UnitTests.Models
             var tempInventory = new FactoryInventoryModel();
             test.Inventory.Add(tempInventory);
 
+            test.Truck = new ShopTruckModel();
+
             // Act
             data.Update(test);
 
@@ -140,6 +142,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(test.AvatarLevel, data.AvatarLevel, "AvatarLevel " + TestContext.TestName);
             Assert.AreEqual(test.Attendance.Count, data.Attendance.Count, "Attendance " + TestContext.TestName);
             Assert.AreEqual(test.Inventory.Count, data.Inventory.Count, "Inventory " + TestContext.TestName);
+            Assert.IsNotNull(data.Truck, "Inventory " + TestContext.TestName);
         }
 
         [TestMethod]

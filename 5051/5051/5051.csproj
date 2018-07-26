@@ -254,6 +254,8 @@
     <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
     <Compile Include="Models\SchoolYearReportViewModel.cs" />
     <Compile Include="Models\SemesterReportViewModel.cs" />
+    <Compile Include="Models\ShopTruckViewModel.cs" />
+    <Compile Include="Models\ShopTruckModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
     <Compile Include="Models\FactoryInventoryViewModel.cs" />
     <Compile Include="Models\FactoryInventoryModel.cs" />
@@ -310,8 +312,16 @@
     <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
-    <Content Include="Content\img\icecream-display.png" />
-    <Content Include="Content\img\icecream-shop.png" />
+    <Content Include="Content\shop\IceCreamDisplay.png" />
+    <Content Include="Content\shop\Menu0.png" />
+    <Content Include="Content\shop\Menu1.png" />
+    <Content Include="Content\shop\ShopTail0.png" />
+    <Content Include="Content\shop\ShopSign0.png" />
+    <Content Include="Content\shop\ShopRims0.png" />
+    <Content Include="Content\shop\ShopMenu0.png" />
+    <Content Include="Content\shop\ShopTopper0.png" />
+    <Content Include="Content\shop\ShopTruck0.png" />
+    <Content Include="Content\shop\IceCreamShop.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
@@ -327,7 +337,7 @@
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
-    <Content Include="Content\img\shop-inside.png" />
+    <Content Include="Content\shop\IceCreamShopInside.png" />
     <Content Include="Content\img\StoreExample.jpg" />
     <Content Include="Content\img\StudentExample.png" />
     <Content Include="Content\img\StudentProfile.png" />
@@ -360,10 +370,20 @@
     <Content Include="Content\shop\Plant.png" />
     <Content Include="Content\shop\radio.png" />
     <Content Include="Content\shop\saxophone.png" />
+    <Content Include="Content\shop\Sign0.png" />
+    <Content Include="Content\shop\Sign1.png" />
     <Content Include="Content\shop\telephone.png" />
     <Content Include="Content\shop\television.png" />
+    <Content Include="Content\shop\Topper0.png" />
+    <Content Include="Content\shop\Topper1.png" />
+    <Content Include="Content\shop\Trailer0.png" />
+    <Content Include="Content\shop\Trailer1.png" />
+    <Content Include="Content\shop\Truck0.png" />
+    <Content Include="Content\shop\Truck1.png" />
     <Content Include="Content\shop\trumpet.png" />
     <Content Include="Content\shop\violin.png" />
+    <Content Include="Content\shop\Wheels0.png" />
+    <Content Include="Content\shop\Wheels1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-regular-400.svg" />
     <Content Include="Global.asax" />
@@ -548,6 +568,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
     <TypeScriptCompile Include="Scripts\Game.ts" />
+    <TypeScriptCompile Include="Scripts\jquery\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

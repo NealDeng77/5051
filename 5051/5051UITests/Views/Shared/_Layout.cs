@@ -22,21 +22,40 @@ namespace _5051UITests.Views.Shared
             ValidatePageTransition("Home", "Index");
             NavigateToPage(originalController, originalAction, originalData);
 
-            ClickActionById("HomeLinkNavBar");
-            ValidatePageTransition("Home", "Index");
-            NavigateToPage(originalController, originalAction, originalData);
+            if (originalController == "Home")
+            {
+                ClickActionById("StudentLinkNavBar");
+                ValidatePageTransition(PortalControllerName, RosterViewName);
+                NavigateToPage(originalController, originalAction, originalData);
 
-            ClickActionById("StudentLinkNavBar");
-            ValidatePageTransition(PortalControllerName, RosterViewName);
-            NavigateToPage(originalController, originalAction, originalData);
+                ClickActionById("AdminLinkNavBar");
+                ValidatePageTransition("Admin", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
 
-            ClickActionById("AdminLinkNavBar");
-            ValidatePageTransition("Admin", "Index");
-            NavigateToPage(originalController, originalAction, originalData);
+                ClickActionById("KioskModeLinkNavBar");
+                ValidatePageTransition("Kiosk", "Login");
+                NavigateToPage(originalController, originalAction, originalData);
+            }
+            else if(originalController == "Admin")
+            {
+                ClickActionById("AdminLinkNavBar");
+                ValidatePageTransition("Admin", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+            }
+            else if(originalController == "Kiosk")
+            {
 
-            ClickActionById("KioskModeLinkNavBar");
-            ValidatePageTransition("Kiosk", "Login");
-            NavigateToPage(originalController, originalAction, originalData);
+            }
+            else
+            {
+                ClickActionById("StudentLinkNavBar");
+                ValidatePageTransition(PortalControllerName, RosterViewName);
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("AdminLinkNavBar");
+                ValidatePageTransition("Admin", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+            }
         }
 
         public static void Click_All_Footer_Links(string originalController, string originalAction, string originalData = null)

@@ -9,66 +9,117 @@
 
 <br />
 
-@*<img src="~/Content/img/StoreExample.jpg" />*@
+<div class="ImageBox">
 
-<img id="shop" width="1000" height="800" src="~/Content/img/icecream-shop.png" alt="shop" style="display:none">
-<img id="inside" width="1000" height="800" src="~/Content/img/shop-inside.png" alt="inside" style="display:none">
-<img id="display" width="1000" height="800" src="~/Content/img/icecream-display.png" alt="display" style="display:none">
+    <div class="TopperBox">
+        <img class="TopperItem" id="Topper" width="1000" height="800" src="" alt="Topper">
+    </div>
 
-<canvas id="myCanvas" width="1000" height="800" onclick="switchView()"></canvas>
+    <div class="SignBox">
+        <img class="SignItem" id="Sign" width="1000" height="800" src="" alt="Sign">
+    </div>
 
-<script>
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+    <div class="TruckBox">
+        <img class="TruckItem" id="Truck" width="1000" height="800" src="" alt="Truck">
+    </div>
 
-        var inside = false;
+    <div class="MenuBox">
+        <img class="MenuItem" id="Menu" width="1000" height="800" src="" alt="Menu">
+    </div>
 
-        window.onload = function () {
-            drawInside();
-            var img = document.getElementById("shop");
-            ctx.drawImage(img, 0, 0, 900, 600);
-        }
+    <div class="WheelsBox">
+        <img class="WheelsItem" id="Wheels" width="1000" height="800" src="" alt="Wheels">
+    </div>
 
-        function switchView() {
-            //ctx.clearRect(0, 0, 900, 600);
-            var img;
-            if (inside == false) {
-                ctx.clearRect(0, 0, 900, 600);
-                drawInside();
-                inside = true;
-            } else {
-                img = document.getElementById("shop");
-                ctx.drawImage(img, 0, 0, 900, 600);
-                inside = false;
-            }
+    <div class="TrailerBox">
+        <img class="TrailerItem" id="Trailer" width="1000" height="800" src="" alt="Trailer">
+    </div>
 
-        }
+</div>
 
-        function drawInside() {
-            img = document.getElementById("inside");
-            ctx.drawImage(img, 65, 0, 755, 600);
-            img = document.getElementById("display");
-            ctx.drawImage(img, 150, 340, 315, 200);
+<br />
+<br />
 
-            var colors = ["blue", "pink", "yellow", "orange", "brown", "red", "white"];
-            var empty = [1, 0, 0, 0, 0, 1, 0];
+<style>
 
-            for (var i = 0; i < colors.length; i++) {
-                var xPosition = 171 + (i * 40);
+    .ImageBox {
+        position: relative;
+        width: 1000px;
+        height: 1000px;
+    }
 
-                if (empty[i] == 1) {
-                    ctx.fillStyle = "black";
-                    ctx.font = "55px Arial";
-                    ctx.fillText("X", xPosition, 455, 30);
-                } else {
-                    ctx.fillStyle = colors[i];
-                    ctx.fillRect(xPosition, 415, 30, 40);
-                }
-            }
+    .TopperBox {
+        position: absolute;
+        padding-left: 500px;
+        z-index: 1;
+    }
 
-        }
+    .TruckBox {
+        position: absolute;
+        padding-top: 100px;
+        z-index: 2;
+    }
 
-</script>
+    .MenuBox {
+        position: absolute;
+        padding-top: 190px;
+        padding-left: 750px;
+        z-index: 3;
+    }
+
+    .SignBox {
+        position: absolute;
+        padding-top: 600px;
+        padding-left: 400px;
+        z-index: 5;
+    }
+
+    .WheelsBox {
+        position: absolute;
+        padding-top: 490px;
+        padding-left: 40px;
+        z-index: 4;
+    }
+
+    .TrailerBox {
+        position: absolute;
+        padding-top: 330px;
+        padding-left: 990px;
+        z-index: 2;
+    }
+
+
+    .TopperItem {
+        width: 100px;
+        height: 100px;
+    }
+
+    .TruckItem {
+        width: auto;
+        height: auto;
+    }
+
+    .MenuItem {
+        width: 135px;
+        height: 175px;
+    }
+
+    .SignItem {
+        width: 100px;
+        height: 100px;
+    }
+
+    .WheelsItem {
+        width: 1400px;
+        height: 175px;
+    }
+
+    .TrailerItem {
+        width: 500px;
+        height: 250px;
+    }
+</style>
+
 
 <br />
 <br />
@@ -104,4 +155,27 @@
 <br />
 <br />
 
-<script src="~/Scripts/Game.js"></script>
+@{
+    // Game Engine Code block
+
+    // Put the Student ID into the Dom, so the Game engine can find it
+    <div>
+        @Html.Hidden("StudentId", Model.Id)
+    </div>
+
+    // Show the Current Iteration Number
+    <div class="row">
+        <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+    </div>
+
+    // Show the Current Refresh Data
+    <div class="row">
+        <span>Game Data:&nbsp;</span><span id="GameData"></span>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <script src="~/Scripts/Game.js"></script>
+}
