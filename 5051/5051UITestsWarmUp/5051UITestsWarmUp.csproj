@@ -60,6 +60,14 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Home\AboutUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\AttendanceUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\AvatarUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\GroupUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\IndexUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\LoginUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\ReportUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\RosterUIWarmUpTests.cs" />
+    <Compile Include="Views\Portal\SettingsUIWarmUpTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -72,7 +80,6 @@
     <Folder Include="Views\GameSettings\" />
     <Folder Include="Views\KioskSettings\" />
     <Folder Include="Views\Kiosk\" />
-    <Folder Include="Views\Portal\" />
     <Folder Include="Views\SchoolDismissalSettings\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\Shop\" />
