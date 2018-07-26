@@ -23,9 +23,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-2">
+                        <div class="col-lg-4 text-right">
                             <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
                             <br />
                             <span id="currentNameDisplayed">
@@ -35,43 +33,52 @@
                                 <br />
                             </span>
                         </div>
+                        <div class="col-lg-8">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="avatarLevelName">
+                                        @Html.DisplayNameFor(m => m.AvatarLevel)
+                                    </div>
+                                    <div class="col-sm-6" id="avatarLevelValue">
+                                        @Html.DisplayFor(m => m.AvatarLevel)
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="tokensName">
+                                        @Html.DisplayNameFor(m => m.Tokens)
+                                    </div>
+                                    <div class="col-sm-6" id="tokensValue">
+                                        @Html.DisplayFor(m => m.Tokens)
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="xpName">
+                                        @Html.DisplayNameFor(m => m.ExperiencePoints)
+                                    </div>
+                                    <div class="col-sm-6" id="xpValue">
+                                        @Html.DisplayFor(m => m.ExperiencePoints)
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="currentStatusName">
+                                        @Html.DisplayNameFor(m => m.Status)
+                                    </div>
+                                    <div class="col-sm-6" id="currentStatusValue">
+                                        @Html.DisplayFor(x => x.Status)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3 text-right" id="avatarLevelName">
-                            @Html.DisplayNameFor(m => m.AvatarLevel)
-                        </div>
-                        <div class="col-sm-2" id="avatarLevelValue">
-                            @Html.DisplayFor(m => m.AvatarLevel)
-                        </div>
+                       
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="tokensName">
-                            @Html.DisplayNameFor(m => m.Tokens)
-                        </div>
-                        <div class="col-sm-2" id="tokensValue">
-                            @Html.DisplayFor(m => m.Tokens)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="xpName">
-                            @Html.DisplayNameFor(m => m.ExperiencePoints)
-                        </div>
-                        <div class="col-sm-2" id="xpValue">
-                            @Html.DisplayFor(m => m.ExperiencePoints)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="currentStatusName">
-                            @Html.DisplayNameFor(m => m.Status)
-                        </div>
-                        <div class="col-sm-2" id="currentStatusValue">
-                            @Html.DisplayFor(x => x.Status)
-                        </div>
-                    </div>
+                    
 
                     <br />
                     <hr />
