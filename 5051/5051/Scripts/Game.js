@@ -123,12 +123,12 @@ function RefreshGame() {
 }
 // Set the Default on Boot to draw, before the rest draws if no data exists
 function SetDefaultShopData() {
-    ShopData.Topper = "Topper1.png";
-    ShopData.Menu = "Menu1.png";
-    ShopData.Wheels = "Wheels1.png";
-    ShopData.Sign = "Sign1.png";
-    ShopData.Truck = "Truck1.png";
-    ShopData.Trailer = "Trailer1.png";
+    ShopData.Topper = "Topper0.png";
+    ShopData.Menu = "Menu0.png";
+    ShopData.Wheels = "Wheels0.png";
+    ShopData.Sign = "Sign0.png";
+    ShopData.Truck = "Truck0.png";
+    ShopData.Trailer = "Trailer0.png";
 }
 /*
  * Application Starts Here
