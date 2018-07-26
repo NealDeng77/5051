@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Kiosk";
     var TempTime = DateTime.Now.ToString("HH : mm : ss");
-    
+
 }
 
 
@@ -39,7 +39,7 @@
                             {
                                 if (item.Status == _5051.Models.StudentStatusEnum.In)
                                 {
-                                    var srcData = "/Content/img/"+item.AvatarUri;
+                                    var srcData = "/Content/img/" + item.AvatarUri;
                                     <div class="col-sm-2 NoPadding">
                                         <div class="AvatarOuterBox BoxWithHighlightHover text-center">
                                             <a id="@item.Id">
@@ -75,7 +75,7 @@
                                     <span id="CenterName" class="FontColor1"></span>
                                     <br />
                                     <br />
-                                    <div class="row">
+                                    <div class="row text-center">
                                         @{
                                             // list emotion icons
                                             foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
@@ -83,15 +83,45 @@
                                                 var srcData = "/Content/img/Emotion" + emotion + ".png";
 
                                                 <div class="BoxWithHighlightHover">
-                                                    <img src="@srcData" class="EmotionSize" />
+                                                    <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
                                                 </div>
 
                                             }
                                         }
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <a id="CenterStatus" class="btn btn1 btn-light btn-block" href=""></a>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        @{
+                                            // Hide or Show the Div based on Login or Logout
+                                            // Login Div goes here
+                                            <div id="LoginBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                "KioskLogin", "Kiosk",
+                                                FormMethod.Post,
+                                                new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
+
+                                                    <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
+                                                }
+                                            </div>
+
+                                            // Logout Div goes here
+                                            <div id="LogoutBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                "KioskLogout", "Kiosk",
+                                                FormMethod.Post,
+                                                new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
+
+                                                    <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
+                                                }
+                                            </div>
+                                        }
+
+                                    </div>                                                                   
                                 </div>
                                 <div class="col"> </div>
                             </div>
@@ -263,14 +293,30 @@
         $("#CenterAvatar").attr("src", path);
         $("#CenterName").html(name);
 
+        $("#StudentLogInId").attr("Value", Id);
+        $("#StudentLogOutId").attr("Value", Id);
+        var loginBoxStatus = document.getElementById("LoginBox");
+        var logoutBoxStatus = document.getElementById("LogoutBox");
         if (request == "Log In") {
-            $("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
-            $("#CenterStatus").html(request);
+            logoutBoxStatus.style.display = "none"; 
+            loginBoxStatus.style.display = "block";
+            //$("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
+            //$("#CenterStatus").html(request);
         }
         else {
-            $("#CenterStatus").attr("href", "/kiosk/SetLogOut/" + Id);
-            $("#CenterStatus").html(request);
+            loginBoxStatus.style.display = "none";
+            logoutBoxStatus.style.display = "block";
+            //$("#CenterStatus").attr("href", "/kiosk/SetLogOut/" + Id);
+            //$("#CenterStatus").html(request);
         }
     }
 </script>
 
+<script>
+    function UpdateEmotionCurrent(UserEmotionId) {
+        $("#EmotionCurrentId").attr("Value", UserEmotionId);
+
+        $("#StudentLoginButton").attr("Disabled", false);
+
+    }
+</script>
