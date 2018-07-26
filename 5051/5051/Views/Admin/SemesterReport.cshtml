@@ -1,52 +1,124 @@
-﻿@model _5051.Models.SemesterReportViewModel
+﻿@using _5051.Models
+@using _5051.Models.Enums
+@model _5051.Models.SemesterReportViewModel
 @{
-    ViewBag.Title = "Semester Reports";
+    ViewBag.Title = "Semester Report";
 }
+<script>
+    function printContent(el) {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.print();
+        document.body.innerHTML = restorepage;
+    }
+</script>
 
-<div class="text-center text-light">
-    <br />
-    <h4>@Model.Student.Name's Semester Report</h4>
-    <h5>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h5>
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-        <li class="nav-item">
-            @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-light" })
-        </li>
-    </ul>
-    <hr>
-    <div>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.StudentId)
-            <div class="row w-100">
+<br />
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-white" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
+    </li>
+    <li class="nav-item mr-auto">
+        @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
+    </li>
+    @using (Html.BeginForm())
+    {
 
-                <div class="col-sm-3 text-right mr-auto">
-                    @*Todo replace hardcoded years*@
-                    @Html.DropDownListFor(m => m.SelectedSemesterId, Model.Semesters, new { onchange = "this.form.submit();", @class = "form-control" })
-                </div>
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.StudentId)
+        <li class="nav-item">
+            @Html.DropDownListFor(m => m.SelectedSemesterId, Model.Semesters, new { onchange = "this.form.submit();", @class = "form-control" })
+        </li>
+    }
+    <li class="nav-item ml-5">
+        <div href="#" class="nav-link text-white btn-primary" onclick="printContent('div1')">Print Report</div>
+    </li>
+</ul>
+<br />
+<div id="div1" class="bg-white" style="padding: 30px">
+    <div class="text-center">
+        <div class="row">
 
-                <div class="btn btn-primary">
-                    Download
-                </div>
+            <div class="col">
+                <h4>@Model.Student.Name's Semester Report</h4>
+                <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
             </div>
+        </div>
 
-
-        }
 
 
     </div>
-</div>
-<br />
+    <br />
+    @if (Model.Stats.NumOfSchoolDays == 0)
+    {
+        <h5 class="text-light">No Data of this semester</h5>
+    }
+    else
+    {
 
+        <div class="row">
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+
+                        <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
+                        <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this semester.
+                        <br />
+                        Percentage of attended school time is:
+
+
+                        <h1>@Model.Stats.PercAttendedHours%.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+
+                    <table class="table">
+
+
+
+                        <tbody>
+                            <tr>
+                                <td>Present</td>
+                                <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercPresent%</td>
+                            </tr>
+                            <tr>
+                                <td>Absent Unexcused</td>
+                                <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercUnexcused%</td>
+                            </tr>
+                            <tr>
+                                <td>Absent Excused</td>
+                                <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                                <td>@Model.Stats.PercExcused%</td>
+                            </tr>
+                            <tr>
+                                <td>In Late</td>
+                                <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                                <td>@Model.Stats.PercInLate%</td>
+                            </tr>
+                            <tr>
+                                <td>Out Early</td>
+                                <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                                <td>@Model.Stats.PercOutEarly%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
