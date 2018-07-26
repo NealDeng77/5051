@@ -83,6 +83,11 @@ namespace _5051.Models
         public List<FactoryInventoryModel> Inventory { get; set; }
 
         /// <summary>
+        /// The Truck settigns for the Student
+        /// </summary>
+        public ShopTruckViewModel Truck { get; set; }
+
+        /// <summary>
         /// The Attendance list for the student
         /// </summary>
         public List<AttendanceModel> Attendance { get; set; }
