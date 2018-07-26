@@ -55,7 +55,7 @@ namespace _5051.Backend
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
             //todo: convert this to kiosk timezone here
-            var dayNow = DateTime.UtcNow;
+            var dayNow = DateTime.UtcNow.Date;
 
             //The first valid week(Monday's date) for the dropdown
             var FirstWeek = dayFirst.AddDays(DayOfWeek.Monday - dayFirst.DayOfWeek);
@@ -129,7 +129,7 @@ namespace _5051.Backend
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
             //todo: convert this to kiosk timezone here
-            var dayNow = DateTime.UtcNow;
+            var dayNow = DateTime.UtcNow.Date;
 
             //The first valid month for the dropdown
             var monthFirst = new DateTime(dayFirst.Year, dayFirst.Month, 1);
@@ -166,7 +166,7 @@ namespace _5051.Backend
                 if (monthId == report.SelectedMonthId)
                 {
                     //set start date and end date
-                    report.DateStart = new DateTime(currentMonth.Year, currentMonth.Month, 1);
+                    report.DateStart = currentMonth;
                     report.DateEnd = new DateTime(currentMonth.Year, currentMonth.Month, DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month));
                 }
 
@@ -256,15 +256,15 @@ namespace _5051.Backend
         /// <returns></returns>
         private void GenerateReportFromStartToEnd(BaseReportViewModel report)
         {
-            // Don't go beyond today, don't include today
-            if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) >= 0)
+            // Don't go beyond today
+            if (report.DateEnd.CompareTo(DateTime.UtcNow.Date) > 0)
             {
-                report.DateEnd = DateTime.UtcNow.Date.AddDays(1);
+                report.DateEnd = DateTime.UtcNow.Date;
             }
 
             var currentDate = report.DateStart;
 
-            while (currentDate.CompareTo(report.DateEnd) < 0)
+            while (currentDate.CompareTo(report.DateEnd) <= 0)
             {
                 //create a new AttendanceReportViewmodel for each day
                 var temp = new AttendanceReportViewModel
