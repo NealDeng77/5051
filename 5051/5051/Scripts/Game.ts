@@ -185,7 +185,7 @@ function SetDefaultShopData() {
     ShopData.Wheels = "Wheels1.png";
     ShopData.Sign = "Sign1.png";
     ShopData.Truck = "Truck1.png";
-    ShopData.Trailer = "Trailer.png";
+    ShopData.Trailer = "Trailer1.png";
 }
 
 /*
