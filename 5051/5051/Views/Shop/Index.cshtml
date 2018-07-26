@@ -37,8 +37,6 @@
 
 </div>
 
-<br />
-<br />
 
 <style>
 
@@ -121,27 +119,17 @@
 </style>
 
 
-<br />
-<br />
-
-
-
-
-@Html.ActionLink("Discounts", "Discounts", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-&nbsp;&nbsp;
-@Html.ActionLink("Special Items", "Specials", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
 @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 &nbsp;&nbsp;
-@Html.ActionLink("Shop Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 &nbsp;&nbsp;
 @Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-&nbsp;&nbsp;
-@Html.ActionLink("Edit Shop", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 @{
     // Game Engine Code block
