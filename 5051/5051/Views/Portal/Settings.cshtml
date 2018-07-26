@@ -4,11 +4,12 @@
     ViewBag.Title = "My Settings";
 }
 <br />
-<h2>You Can Update Your Settings</h2>
+<div class="text-center bg-transparent pt-5">
+    <h2>You Can Update Your Settings</h2>
+</div>
 
-
-
-<div class="container">
+<div style="max-width: 600px; margin: 0 auto; padding: 30px;" class="darkTransparentBox">
+    <div class="container">
 
 
         @{
@@ -19,11 +20,10 @@
 
             else
             {
+
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-2">
+                        <div class="col-lg-4 text-right">
                             <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
                             <br />
                             <span id="currentNameDisplayed">
@@ -33,48 +33,47 @@
                                 <br />
                             </span>
                         </div>
-                    </div>
+                        <div class="col-lg-8">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="avatarLevelName">
+                                        @Html.DisplayNameFor(m => m.AvatarLevel)
+                                    </div>
+                                    <div class="col-sm-6" id="avatarLevelValue">
+                                        @Html.DisplayFor(m => m.AvatarLevel)
+                                    </div>
+                                </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="avatarLevelName">
-                            @Html.DisplayNameFor(m => m.AvatarLevel)
-                        </div>
-                        <div class="col-sm-2" id="avatarLevelValue">
-                            @Html.DisplayFor(m => m.AvatarLevel)
-                        </div>
-                    </div>
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="tokensName">
+                                        @Html.DisplayNameFor(m => m.Tokens)
+                                    </div>
+                                    <div class="col-sm-6" id="tokensValue">
+                                        @Html.DisplayFor(m => m.Tokens)
+                                    </div>
+                                </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="tokensName">
-                            @Html.DisplayNameFor(m => m.Tokens)
-                        </div>
-                        <div class="col-sm-2" id="tokensValue">
-                            @Html.DisplayFor(m => m.Tokens)
-                        </div>
-                    </div>
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="xpName">
+                                        @Html.DisplayNameFor(m => m.ExperiencePoints)
+                                    </div>
+                                    <div class="col-sm-6" id="xpValue">
+                                        @Html.DisplayFor(m => m.ExperiencePoints)
+                                    </div>
+                                </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="xpName">
-                            @Html.DisplayNameFor(m => m.ExperiencePoints)
+                                <div class="row">
+                                    <div class="col-sm-6 text-right" id="currentStatusName">
+                                        @Html.DisplayNameFor(m => m.Status)
+                                    </div>
+                                    <div class="col-sm-6" id="currentStatusValue">
+                                        @Html.DisplayFor(x => x.Status)
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-2" id="xpValue">
-                            @Html.DisplayFor(m => m.ExperiencePoints)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right" id="currentStatusName">
-                            @Html.DisplayNameFor(m => m.Status)
-                        </div>
-                        <div class="col-sm-2" id="currentStatusValue">
-                            @Html.DisplayFor(x => x.Status)
-                        </div>
-                    </div>
-
-                    <br />
-                    <hr />
-                    <br />
-
+                    </div>                 
+                    <hr />                 
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
@@ -87,25 +86,25 @@
                         @Html.HiddenFor(m => m.AvatarUri)
                         @Html.HiddenFor(m => m.ExperiencePoints)
                         @Html.HiddenFor(m => m.Password)
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right" id="nameName">
-                                @Html.DisplayNameFor(m => m.Name)
-                            </div>
-                            <div class="col-sm-2" id="nameValue">
-                                @Html.EditorFor(m => m.Name)
-                                @Html.ValidationMessageFor(m => m.Name)
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right" id="nameName">
+                            @Html.DisplayNameFor(m => m.Name)
                         </div>
+                        <div class="col-sm-6" id="nameValue">
+                            @Html.EditorFor(m => m.Name)
+                            @Html.ValidationMessageFor(m => m.Name)
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="submit" value="Update" class="btn btn-primary" id="updateSubmitButton">
+                        </div>
+                    </div>
 
                         <br />
                         <br />
                         <div class="row">
                             <div class="col-sm-3 text-right">
                             </div>
-                            <div class="col-sm-4">
-                                <input type="submit" value="Update" class="btn btn-primary" id="updateSubmitButton">
-                            </div>
+                            
                         </div>
 
                     }
@@ -113,7 +112,8 @@
             }
         }
 
-</div>
+    </div>
+    </div>
 
 
 
