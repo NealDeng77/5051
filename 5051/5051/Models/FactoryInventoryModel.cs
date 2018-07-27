@@ -37,6 +37,11 @@ namespace _5051.Models
         [Required(ErrorMessage = "Tokens is required")]
         public int Tokens { get; set; }
 
+        [Display(Name = "Quantities", Description = "FactoryInventory Quantities")]
+        [Required(ErrorMessage = "Quantities is required")]
+        public int Quantities { get; set; }
+
+
 
         /// <summary>
         /// Create the default values
@@ -45,6 +50,7 @@ namespace _5051.Models
         {
             Id = Guid.NewGuid().ToString();
             Tokens = 1;
+            Quantities = 10;
         }
 
         /// <summary>
@@ -61,7 +67,7 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">FactoryInventory Name</param>
         /// <param name="description">FactoryInventory Description</param>
-        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens)
+        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities)
         {
             Initialize();
 
@@ -70,6 +76,7 @@ namespace _5051.Models
             Description = description;
             Category = category;
             Tokens = tokens;
+            Quantities = quantities;
         }
 
         /// <summary>
@@ -88,6 +95,7 @@ namespace _5051.Models
             Name = data.Name;
             Description = data.Description;
             Tokens = data.Tokens;
+            Quantities = data.Quantities;
         }
     }
 }
