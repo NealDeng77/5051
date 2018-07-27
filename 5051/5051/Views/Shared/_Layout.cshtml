@@ -28,16 +28,21 @@
             backgroundColor = "IncludeBackgroundColorSunset";
             break;
 
-        // For now, have Portal be the Image date
-        //case "Portal":
-        //  background = "IncludeBackgroundImageSunset";
-        //backgroundColor = "IncludeBackgroundColorSunset";
-        //break;
+        //For now, have Portal be the Image date
+        case "Portal":
+            background = "IncludeBackgroundImageSunset";
+            backgroundColor = "IncludeBackgroundColorSunset";
+            break;
 
         case "Admin":
             background = "IncludeBackgroundImageNight";
             backgroundColor = "IncludeBackgroundColorNight";
             break;
+
+        //case "Student":
+        //    background = "IncludeBackgroundImageNight";
+        //    backgroundColor = "IncludeBackgroundColorNight";
+        //    break;
 
         default:
             background = "IncludeBackgroundImageDay";
@@ -68,13 +73,13 @@
                         @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                     </li>*@
                             <li class="nav-item">
-                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link", id = "KioskModeLinkNavBar" })
+                                @Html.ActionLink("Kiosk Mode", "Login", "Kiosk", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                             </li>
                             break;
 
@@ -82,15 +87,36 @@
                             break;
 
                         case "Admin":
-                            @*<li class="nav-item">
+                            <li class="nav-item">
                                 @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                            </li>*@
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Reports", "Report", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Students", "Index", "Student", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Calendar", "Index", "Calendar", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Avatars", "Index", "Avatar", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Settings", "Settings", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Inventory", "Index", "FactoryInventory", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                            </li>
                             break;
 
-                        case "Student":
-                            @*<li class="nav-item">
+                        case "Portal":
+                            <li class="nav-item">
                                 @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
-                            </li>*@
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Shop", "Visit", "Shop", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
                             break;
 
                         default:
