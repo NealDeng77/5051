@@ -46,20 +46,20 @@ namespace _5051.Models
         public DateTime DayLast { get; set; }
 
         // Fall First Class Day
-        [Display(Name = "Fall First Class Day", Description = "Fall First Class Day")]
+        [Display(Name = "Fall Semester First Class Day", Description = "Fall Semester First Class Day")]
         public DateTime FallFirstClassDay { get; set; }
 
         // Fall Last Class Day
-        [Display(Name = "Fall Last Class Day", Description = "Fall Last Class Day")]
+        [Display(Name = "Fall Semester Last Class Day", Description = "Fall Semester Last Class Day")]
         public DateTime FallLastClassDay { get; set; }
 
 
         // Spring First Class Day
-        [Display(Name = "Spring First Class Day", Description = "Spring First Class Day")]
+        [Display(Name = "Spring Semester First Class Day", Description = "Spring Semester First Class Day")]
         public DateTime SpringFirstClassDay { get; set; }
 
         // Spring Last Class Day
-        [Display(Name = "Spring Last Class Day", Description = "Spring Last Class Day")]
+        [Display(Name = "Spring Semester Last Class Day", Description = "Spring Semester Last Class Day")]
         public DateTime SpringLastClassDay { get; set; }
 
         // Fall Quarter First Class Day
