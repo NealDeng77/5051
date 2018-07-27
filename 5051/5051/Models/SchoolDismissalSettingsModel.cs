@@ -155,13 +155,25 @@ namespace _5051.Models
             DayFirst = DateTime.Parse("09/01/" + Year);
             DayLast = DateTime.Parse("08/31/" + (Year + 1));
 
-            //The following specifies the start and end date of quarters
-            //These dates are used to generate school calendar and partition report date range
+            //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
             FallLastClassDay = DateTime.Parse("01/31/" + (Year + 1));
 
             SpringFirstClassDay = DateTime.Parse("02/01/" + (Year + 1));
             SpringLastClassDay = DateTime.Parse("08/31/" + (Year + 1));
+
+            //The following specifies the start and end date of quarters
+            FallQuarterFirstClassDay = DateTime.Parse("09/20/" + Year);
+            FallQuarterLastClassDay = DateTime.Parse("12/1/" + Year);
+
+            WinterQuarterFirstClassDay = DateTime.Parse("01/08/" + (Year + 1));
+            WinterQuarterLastClassDay = DateTime.Parse("03/19/" + (Year + 1));
+
+            SpringQuarterFirstClassDay= DateTime.Parse("04/03/" + (Year + 1));
+            SpringQuarterLastClassDay = DateTime.Parse("06/11/" + (Year + 1));
+
+            SummerQuarterFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
+            SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
         }
 
         /// <summary>
