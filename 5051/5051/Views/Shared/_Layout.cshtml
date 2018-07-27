@@ -82,18 +82,24 @@
                             break;
 
                         case "Admin":
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                            </li>
+                            </li>*@
+                            break;
+
+                        case "Student":
+                            @*<li class="nav-item">
+                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>*@
                             break;
 
                         default:
-                            <li class="nav-item">
-                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                            </li>
+                            @*<li class="nav-item">
+                        @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                    </li>*@
 
                             break;
                     }
