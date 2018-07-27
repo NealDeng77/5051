@@ -46,21 +46,54 @@ namespace _5051.Models
         public DateTime DayLast { get; set; }
 
         // Fall First Class Day
-        [Display(Name = "Fall First Class Day", Description = "Fall First Class Day")]
+        [Display(Name = "Fall Semester First Class Day", Description = "Fall Semester First Class Day")]
         public DateTime FallFirstClassDay { get; set; }
 
         // Fall Last Class Day
-        [Display(Name = "Fall Last Class Day", Description = "Fall Last Class Day")]
+        [Display(Name = "Fall Semester Last Class Day", Description = "Fall Semester Last Class Day")]
         public DateTime FallLastClassDay { get; set; }
 
 
         // Spring First Class Day
-        [Display(Name = "Spring First Class Day", Description = "Spring First Class Day")]
+        [Display(Name = "Spring Semester First Class Day", Description = "Spring Semester First Class Day")]
         public DateTime SpringFirstClassDay { get; set; }
 
         // Spring Last Class Day
-        [Display(Name = "Spring Last Class Day", Description = "Spring Last Class Day")]
+        [Display(Name = "Spring Semester Last Class Day", Description = "Spring Semester Last Class Day")]
         public DateTime SpringLastClassDay { get; set; }
+
+        // Fall Quarter First Class Day
+        [Display(Name = "Fall Quarter First Class Day", Description = "Fall Quarter First Class Day")]
+        public DateTime FallQuarterFirstClassDay { get; set; }
+
+        // Fall Quarter Last Class Day
+        [Display(Name = "Fall Quarter Last Class Day", Description = "Fall Quarter Last Class Day")]
+        public DateTime FallQuarterLastClassDay { get; set; }
+
+        // Winter Quarter First Class Day
+        [Display(Name = "Winter Quarter First Class Day", Description = "Winter Quarter First Class Day")]
+        public DateTime WinterQuarterFirstClassDay { get; set; }
+
+        // Winter Quarter Last Class Day
+        [Display(Name = "Winter Quarter Last Class Day", Description = "Winter Quarter Last Class Day")]
+        public DateTime WinterQuarterLastClassDay { get; set; }
+
+
+        // Spring Quarter First Class Day
+        [Display(Name = "Spring Quarter First Class Day", Description = "Spring Quarter First Class Day")]
+        public DateTime SpringQuarterFirstClassDay { get; set; }
+
+        // Spring Quarter Last Class Day
+        [Display(Name = "Spring Quarter Last Class Day", Description = "Spring Quarter Last Class Day")]
+        public DateTime SpringQuarterLastClassDay { get; set; }
+
+        // Summer Quarter First Class Day
+        [Display(Name = "Summer Quarter First Class Day", Description = "Summer Quarter First Class Day")]
+        public DateTime SummerQuarterFirstClassDay { get; set; }
+
+        // Summer Quarter Last Class Day
+        [Display(Name = "Summer Quarter Last Class Day", Description = "Summer Quarter Last Class Day")]
+        public DateTime SummerQuarterLastClassDay { get; set; }
 
 
         public SchoolDismissalSettingsModel()
@@ -122,13 +155,25 @@ namespace _5051.Models
             DayFirst = DateTime.Parse("09/01/" + Year);
             DayLast = DateTime.Parse("08/31/" + (Year + 1));
 
-            //The following specifies the start and end date of quarters
-            //These dates are used to generate school calendar and partition report date range
+            //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
             FallLastClassDay = DateTime.Parse("01/31/" + (Year + 1));
 
             SpringFirstClassDay = DateTime.Parse("02/01/" + (Year + 1));
             SpringLastClassDay = DateTime.Parse("08/31/" + (Year + 1));
+
+            //The following specifies the start and end date of quarters
+            FallQuarterFirstClassDay = DateTime.Parse("09/20/" + Year);
+            FallQuarterLastClassDay = DateTime.Parse("12/1/" + Year);
+
+            WinterQuarterFirstClassDay = DateTime.Parse("01/08/" + (Year + 1));
+            WinterQuarterLastClassDay = DateTime.Parse("03/19/" + (Year + 1));
+
+            SpringQuarterFirstClassDay= DateTime.Parse("04/03/" + (Year + 1));
+            SpringQuarterLastClassDay = DateTime.Parse("06/11/" + (Year + 1));
+
+            SummerQuarterFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
+            SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
         }
 
         /// <summary>
@@ -155,6 +200,14 @@ namespace _5051.Models
             FallLastClassDay = data.FallLastClassDay;
             SpringFirstClassDay = data.SpringFirstClassDay;
             SpringLastClassDay = data.SpringLastClassDay;
+            FallQuarterFirstClassDay = data.FallQuarterFirstClassDay;
+            FallQuarterLastClassDay = data.FallQuarterLastClassDay;
+            WinterQuarterFirstClassDay = data.WinterQuarterFirstClassDay;
+            WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
+            SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
+            SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
         }
     }
 }

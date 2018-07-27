@@ -8,7 +8,8 @@ using _5051.Models;
 
 namespace _5051.UnitTests.Models
 {
-    class SemesterReportViewModelTests
+    [TestClass]
+    public class SemesterReportViewModelTests
     {
         public TestContext TestContext { get; set; }
 

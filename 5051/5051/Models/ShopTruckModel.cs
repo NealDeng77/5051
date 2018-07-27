@@ -25,5 +25,9 @@ namespace _5051.Models
 
         // The Inventory ID for the Wheels
         public string Truck { get; set; }
+
+        // The StudentID for this truck, used to simplify the models
+        public string StudentId { get; set; }
+
     }
 }

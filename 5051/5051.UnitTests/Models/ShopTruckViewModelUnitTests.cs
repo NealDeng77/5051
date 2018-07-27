@@ -25,6 +25,7 @@ namespace _5051.UnitTests.Models
             // Check the URI to see if it converted over correctly
 
             var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+
             var ShopTruck = new ShopTruckModel();
             var ItemId = InventoryList.FirstOrDefault().Id;
 
@@ -34,6 +35,7 @@ namespace _5051.UnitTests.Models
             ShopTruck.Trailer= ItemId;
             ShopTruck.Menu= ItemId;
             ShopTruck.Sign= ItemId;
+            ShopTruck.StudentId = "testdata";
 
             var expect = InventoryList.FirstOrDefault().Uri;
 
@@ -50,6 +52,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect, result.Trailer, "Trailer " + TestContext.TestName);
             Assert.AreEqual(expect, result.Menu, "Menu " + TestContext.TestName);
             Assert.AreEqual(expect, result.Sign, "Sign " + TestContext.TestName);
+            Assert.AreEqual("testdata", result.StudentId, "StudentId " + TestContext.TestName);
         }
 
         [TestMethod]

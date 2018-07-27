@@ -1,6 +1,6 @@
-﻿@model _5051.Models.SchoolYearReportViewModel
+﻿@model _5051.Models.QuarterReportViewModel
 @{
-    ViewBag.Title = "School Year Report";
+    ViewBag.Title = "Quarter Report";
 }
 <script>
     function printContent(el) {
@@ -24,11 +24,20 @@
         @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
     </li>
     <li class="nav-item">
-        @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
+        @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-white" })
     </li>
     <li class="nav-item mr-auto">
-        @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-white" })
+        @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
     </li>
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.StudentId)
+        <li class="nav-item">
+            @Html.DropDownListFor(m => m.SelectedQuarterId, Model.Quarters, new { onchange = "this.form.submit();", @class = "form-control" })
+        </li>
+    }
     <li class="nav-item ml-5">
         <div href="#" class="nav-link text-white btn-primary" onclick="printContent('div1')">Print Report</div>
     </li>
@@ -39,7 +48,7 @@
         <div class="row">
 
             <div class="col">
-                <h4>@Model.Student.Name's School Year Report</h4>
+                <h4>@Model.Student.Name's Quarter Report</h4>
                 <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
             </div>
         </div>
@@ -50,7 +59,7 @@
     <br />
     @if (Model.Stats.NumOfSchoolDays == 0)
     {
-        <h5 class="text-light">No Data of this school year</h5>
+        <h5 class="text-light">No Data of this semester</h5>
     }
     else
     {
@@ -61,7 +70,7 @@
                     <div class="card-body">
 
                         <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                        <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this school year.
+                        <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
                         <br />
                         Percentage of attended school time is:
 
@@ -109,59 +118,6 @@
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load("current", { packages: ["calendar"] });
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-                var dataTable = new google.visualization.DataTable();
-                dataTable.addColumn({ type: 'date'});
-                dataTable.addColumn({ type: 'number'});
-                var dates = [
-                    @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
-                ];
-                var values = [
-                    @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.HoursAttended.TotalHours.ToString("0.##")).ToArray())
-                ];
-
-                var year;
-                var month;
-                var date;
-                var i = 0;
-                while (i < dates.length) {
-                    year = dates[i];
-                    i++;
-                    month = dates[i] - 1;
-                    i++;
-                    date = dates[i];
-                    i++;
-                    dataTable.addRow([new Date(year, month, date), values[i / 3 - 1]]);
-                }
-
-
-                var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
-
-                var options = {
-                    title: "School Year Calendar",
-                    height: 350,
-                    colorAxis: {
-                        minValue: 0,
-                        maxValue: 6.9
-                    },
-                   
-
-                };
-
-                chart.draw(dataTable, options);
-            }
-        </script>
-        <br />
-        <div class="card w-100 p-3">
-            <br/>
-            <div id="calendar_basic"></div>
-        </div>
         <br />
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -196,7 +152,7 @@
                 }
 
                 var options = {
-                    title: 'Cumulative Attended School Time In This School Year',
+                    title: 'Cumulative Attended School Time In This Quarter',
                     height: 600,
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
@@ -217,10 +173,4 @@
         </div>
     }
 </div>
-
-<br/>
-
-
-
-
-
+<br />

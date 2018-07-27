@@ -18,7 +18,6 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Models_ShopTruck_Default_Instantiate_Get_Set_Should_Pass()
         {
-
             // Arange
 
             // Act

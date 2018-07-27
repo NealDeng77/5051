@@ -85,6 +85,14 @@ namespace _5051.Controllers
                                         "FallLastClassDay," +
                                         "SpringFirstClassDay," +
                                         "SpringLastClassDay," +
+                                        "FallQuarterFirstClassDay," +
+                                        "FallQuarterLastClassDay," +
+                                        "WinterQuarterFirstClassDay," +
+                                        "WinterQuarterLastClassDay," +
+                                        "SpringQuarterFirstClassDay," +
+                                        "SpringQuarterLastClassDay," +
+                                        "SummerQuarterFirstClassDay," +
+                                        "SummerQuarterLastClassDay," +
                                         "")] SchoolDismissalSettingsModel data)
         {
             if (!ModelState.IsValid)

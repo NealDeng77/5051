@@ -557,6 +557,7 @@
     <Content Include="Views\Shop\VisitShop.cshtml" />
     <Content Include="Views\Admin\WeeklyReport.cshtml" />
     <Content Include="Views\Admin\SemesterReport.cshtml" />
+    <Content Include="Views\Admin\QuarterReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

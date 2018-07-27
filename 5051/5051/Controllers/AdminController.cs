@@ -186,6 +186,56 @@ namespace _5051.Controllers
             return View(myReturn);
         }
 
+        // GET: QuarterReport
+        /// <summary>
+        /// Returns an individual quarter report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult QuarterReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new QuarterReportViewModel()
+            {
+                StudentId = id,
+                SelectedQuarterId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateQuarterReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the QuarterReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult QuarterReport([Bind(Include=
+            "StudentId,"+
+            "SelectedQuarterId"+
+            "")] QuarterReportViewModel data)
+        {
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateQuarterReport(data);
+
+            return View(myReturn);
+        }
+
         // GET: Report
         /// <summary>
         /// Returns an individual overall report for a student

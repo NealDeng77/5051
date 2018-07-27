@@ -10,160 +10,241 @@
     <br />
     <h2>School Dismissal Settings</h2>
     <br />
-        @{
-            if (Model == null)
-            {
-                <p>No Data</p>
-            }
-            else
-            {
-                <div class="container">
-
-                    <br />
-                    <br />
-
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m => m.Id)
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.StartNormal)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.StartNormal)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.StartEarly)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.StartEarly)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.StartLate)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.StartLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.StartLate)
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.EndNormal)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.EndNormal)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.EndEarly)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.EndEarly)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.EndLate)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.EndLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes) } })
-                                @Html.ValidationMessageFor(m => m.EndLate)
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.DayFirst)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.DayFirst, new { htmlAttributes = new { @Value = DayFirst } })
-                                @Html.ValidationMessageFor(m => m.DayFirst)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.DayLast)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.DayLast, new { htmlAttributes = new { @Value = DayLast } })
-                                @Html.ValidationMessageFor(m => m.DayLast)
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.FallFirstClassDay)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.FallFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallFirstClassDay.ToShortDateString() } })
-                                @Html.ValidationMessageFor(m => m.FallFirstClassDay)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.FallLastClassDay)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.FallLastClassDay, new { htmlAttributes = new { @Value = @Model.FallLastClassDay.ToShortDateString() } })
-                                @Html.ValidationMessageFor(m => m.FallLastClassDay)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.SpringFirstClassDay)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.SpringFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringFirstClassDay.ToShortDateString() } })
-                                @Html.ValidationMessageFor(m => m.SpringFirstClassDay)
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                                @Html.DisplayNameFor(m => m.SpringLastClassDay)
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.EditorFor(m => m.SpringLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringLastClassDay.ToShortDateString() } })
-                                @Html.ValidationMessageFor(m => m.SpringLastClassDay)
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-
-                        <div class="row">
-                            <div class="col-sm-3 text-right">
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.ActionLink("Back", "Read", new { id = Model.Id }, new { @class = "btn btn-success" })
-                                <input type="submit" value="Update" class="btn btn-primary">
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
+    @{
+        if (Model == null)
+        {
+            <p>No Data</p>
         }
+        else
+        {
+            <div class="container">
+
+                <br />
+                <br />
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.StartNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.StartNormal)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.StartEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.StartEarly)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.StartLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.StartLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.StartLate)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndNormal)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.EndNormal, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.EndNormal)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndEarly)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.EndEarly, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.EndEarly)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EndLate)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.EndLate, new { htmlAttributes = new { @Value = string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes) } })
+                            @Html.ValidationMessageFor(m => m.EndLate)
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.DayFirst)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.DayFirst, new { htmlAttributes = new { @Value = DayFirst } })
+                            @Html.ValidationMessageFor(m => m.DayFirst)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.DayLast)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.DayLast, new { htmlAttributes = new { @Value = DayLast } })
+                            @Html.ValidationMessageFor(m => m.DayLast)
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.FallFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.FallFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.FallLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.FallLastClassDay, new { htmlAttributes = new { @Value = @Model.FallLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.FallLastClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SpringFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SpringFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SpringLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SpringLastClassDay)
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.FallQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallQuarterFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.FallQuarterFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.FallQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.FallQuarterLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.FallQuarterLastClassDay)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.WinterQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.WinterQuarterFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.WinterQuarterFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.WinterQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.WinterQuarterLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.WinterQuarterLastClassDay)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SpringQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringQuarterFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SpringQuarterFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SpringQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringQuarterLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SpringQuarterLastClassDay)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SummerQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.SummerQuarterFirstClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SummerQuarterFirstClassDay)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.SummerQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.SummerQuarterLastClassDay.ToShortDateString() } })
+                            @Html.ValidationMessageFor(m => m.SummerQuarterLastClassDay)
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.ActionLink("Back", "Read", new { id = Model.Id }, new { @class = "btn btn-success" })
+                            <input type="submit" value="Update" class="btn btn-primary">
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        }
+    }
 </div>
+<br/>
+<br /><br /><br />
