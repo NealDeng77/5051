@@ -197,19 +197,6 @@ namespace _5051.Backend
             report.Semesters = new List<SelectListItem>();
 
             //todo: remove hardcoding
-            //make a list item for the current month
-            var fall = new SelectListItem { Value = "2", Text = "Fall Semester 2017" };
-
-            //add to the select list
-            report.Semesters.Add(fall);
-
-            if (report.SelectedSemesterId == 2)
-            {
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
-            }
-
-            //make a list item for the current month
             var spring = new SelectListItem { Value = "1", Text = "Spring Semester 2018" };
 
             //add to the select list
@@ -221,7 +208,20 @@ namespace _5051.Backend
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringLastClassDay;
             }
 
-            //Generate report for this month
+            var fall = new SelectListItem { Value = "2", Text = "Fall Semester 2017" };
+
+            //add to the select list
+            report.Semesters.Add(fall);
+
+            if (report.SelectedSemesterId == 2)
+            {
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
+            }
+
+ 
+
+            //Generate report for this semester
             GenerateReportFromStartToEnd(report);
 
             return report;
@@ -229,6 +229,51 @@ namespace _5051.Backend
 
 
         #endregion
+        #region GenerateQuarterReportRegion
+        /// <summary>
+        /// Generate Weekly report
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public QuarterReportViewModel GenerateQuarterReport(QuarterReportViewModel report)
+        {
+            //set student
+            report.Student = StudentBackend.Instance.Read(report.StudentId);
+
+            report.Semesters = new List<SelectListItem>();
+
+            //todo: remove hardcoding
+            var spring = new SelectListItem { Value = "1", Text = "Spring Semester 2018" };
+
+            //add to the select list
+            report.Semesters.Add(spring);
+
+            if (report.SelectedSemesterId == 1)
+            {
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringLastClassDay;
+            }
+
+            var fall = new SelectListItem { Value = "2", Text = "Fall Semester 2017" };
+
+            //add to the select list
+            report.Semesters.Add(fall);
+
+            if (report.SelectedSemesterId == 2)
+            {
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
+            }
+
+
+
+            //Generate report for this semester
+            GenerateReportFromStartToEnd(report);
+
+            return report;
+        }
+        #endregion
+
         /// <summary>
         /// Generate overall report
         /// </summary>
