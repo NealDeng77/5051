@@ -200,6 +200,14 @@ namespace _5051.Models
             FallLastClassDay = data.FallLastClassDay;
             SpringFirstClassDay = data.SpringFirstClassDay;
             SpringLastClassDay = data.SpringLastClassDay;
+            FallQuarterFirstClassDay = data.FallQuarterFirstClassDay;
+            FallQuarterLastClassDay = data.FallQuarterLastClassDay;
+            WinterQuarterFirstClassDay = data.WinterQuarterFirstClassDay;
+            WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
+            SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
+            SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
         }
     }
 }
