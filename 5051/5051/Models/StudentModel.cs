@@ -106,6 +106,8 @@ namespace _5051.Models
             Inventory = new List<FactoryInventoryModel>();
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
+            Truck = new ShopTruckModel();
+            Truck.StudentId = Id;
         }
 
         /// <summary>
@@ -153,6 +155,7 @@ namespace _5051.Models
             Inventory = data.Inventory;
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
+            Truck = data.Truck;
         }
 
         /// <summary>

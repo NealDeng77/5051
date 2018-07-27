@@ -28,6 +28,9 @@ namespace _5051.Models
         // The Inventory ID for the Wheels
         public string Truck{ get; set; }
 
+        // The StudentID for this truck, used to simplify the models
+        public string StudentId { get; set; }
+
         // Make a new view model based on the current data set
         public ShopTruckViewModel(ShopTruckModel data)
         {
@@ -37,6 +40,8 @@ namespace _5051.Models
             Menu = "Menu0.png";
             Sign = "Sign0.png";
             Truck = "Truck0.png";
+
+            StudentId = data.StudentId;
 
             if (data.Wheels != null)
             { 

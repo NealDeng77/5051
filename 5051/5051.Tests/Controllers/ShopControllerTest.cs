@@ -448,16 +448,75 @@ namespace _5051.Tests.Controllers
 
         #region Edit
         [TestMethod]
-        public void Controller_Shop_Edit_Default_Should_Pass()
+        public void Controller_Shop_Edit_Invalid_No_StudentID_Should_Fail()
         {
             // Arrange
             ShopController controller = new ShopController();
 
             // Act
-            ViewResult result = controller.Edit() as ViewResult;
+            var result = controller.Edit() as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Invalid_Null_StudentID_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            // Act
+            var result = controller.Edit(null) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Invalid_StudentID_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            // Act
+            var result = controller.Edit("bogus") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Valid_StudentID_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Act
+            var result = controller.Edit(data.Id) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Valid_Truck_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            data.Truck = null;
+
+            // Act
+            var result = controller.Edit(data.Id) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
         #endregion Edit
 

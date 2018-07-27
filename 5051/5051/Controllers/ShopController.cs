@@ -179,14 +179,35 @@ namespace _5051.Controllers
 
 
         /// <summary>
-        /// Edit shop detail
+        /// Edit The Shop Details
         /// </summary>
         /// <returns></returns>
-        // GET: Edit
-        public ActionResult Edit()
+        public ActionResult Edit(string id=null)
         {
-            // To do
-            return View();
+            // Allow Editing of the Shop details including
+            // Shop Name
+            // Truck Items
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var studentdata = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (studentdata == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (studentdata.Truck == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var data = new ShopTruckViewModel(studentdata.Truck);
+
+            //Return Truck Data
+            return View(data);
         }
 
         /// <summary>
