@@ -9,7 +9,7 @@ namespace _5051.Models
     /// <summary>
     /// Quarter report view model, for generating quarter report view
     /// </summary>
-    public class QuarterReportViewModel
+    public class QuarterReportViewModel: BaseReportViewModel
     {
         /// <summary>
         /// Contains a select list for semester selection dropdown
