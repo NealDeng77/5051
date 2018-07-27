@@ -117,8 +117,8 @@
 
             function drawChart() {
                 var dataTable = new google.visualization.DataTable();
-                dataTable.addColumn({ type: 'date', id: 'Date' });
-                dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+                dataTable.addColumn({ type: 'date'});
+                dataTable.addColumn({ type: 'number'});
                 var dates = [
                     @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
                 ];
@@ -168,14 +168,27 @@
             function drawChart() {
                 // Create the data table.
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Date');
+                data.addColumn('date', 'Date');
                 data.addColumn('number', 'Actual');
                 data.addColumn('number', 'Ideal');
-                var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("dd")).ToArray())];
+                var dates = [
+                    @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
+                ];
                 var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalMinutes.ToString("0.##")).ToArray())];
                 var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalMinutes.ToString("0.##")).ToArray())];
-                for (i = 0; i < dates.length; i++) {
-                    data.addRow([dates[i].toString(), values[i], expected[i]]);
+
+                var year;
+                var month;
+                var date;
+                var i = 0;
+                while (i < dates.length) {
+                    year = dates[i];
+                    i++;
+                    month = dates[i] - 1;
+                    i++;
+                    date = dates[i];
+                    i++;
+                    data.addRow([new Date(year, month, date), values[i / 3 - 1], expected[i / 3 - 1]]);
                 }
 
                 var options = {
