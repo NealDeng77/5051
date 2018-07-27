@@ -62,6 +62,39 @@ namespace _5051.Models
         [Display(Name = "Spring Last Class Day", Description = "Spring Last Class Day")]
         public DateTime SpringLastClassDay { get; set; }
 
+        // Fall Quarter First Class Day
+        [Display(Name = "Fall Quarter First Class Day", Description = "Fall Quarter First Class Day")]
+        public DateTime FallQuarterFirstClassDay { get; set; }
+
+        // Fall Quarter Last Class Day
+        [Display(Name = "Fall Quarter Last Class Day", Description = "Fall Quarter Last Class Day")]
+        public DateTime FallQuarterLastClassDay { get; set; }
+
+        // Winter Quarter First Class Day
+        [Display(Name = "Winter Quarter First Class Day", Description = "Winter Quarter First Class Day")]
+        public DateTime WinterQuarterFirstClassDay { get; set; }
+
+        // Winter Quarter Last Class Day
+        [Display(Name = "Winter Quarter Last Class Day", Description = "Winter Quarter Last Class Day")]
+        public DateTime WinterQuarterLastClassDay { get; set; }
+
+
+        // Spring Quarter First Class Day
+        [Display(Name = "Spring Quarter First Class Day", Description = "Spring Quarter First Class Day")]
+        public DateTime SpringQuarterFirstClassDay { get; set; }
+
+        // Spring Quarter Last Class Day
+        [Display(Name = "Spring Quarter Last Class Day", Description = "Spring Quarter Last Class Day")]
+        public DateTime SpringQuarterLastClassDay { get; set; }
+
+        // Summer Quarter First Class Day
+        [Display(Name = "Summer Quarter First Class Day", Description = "Summer Quarter First Class Day")]
+        public DateTime SummerQuarterFirstClassDay { get; set; }
+
+        // Summer Quarter Last Class Day
+        [Display(Name = "Summer Quarter Last Class Day", Description = "Summer Quarter Last Class Day")]
+        public DateTime SummerQuarterLastClassDay { get; set; }
+
 
         public SchoolDismissalSettingsModel()
         {
