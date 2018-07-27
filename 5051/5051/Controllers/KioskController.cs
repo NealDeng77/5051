@@ -57,6 +57,41 @@ namespace _5051.Controllers
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
         }
 
+
+        /// <summary>
+        /// student login with emotion status on Kiosk lndex page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        // POST: Kiosk/KioskLogin
+        [HttpPost]
+        public ActionResult KioskLogin([Bind(Include=
+                                        "Id,"+
+                                        "EmotionCurrent,"+
+                                        "")] StudentModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            // perform student log in and update data
+
+            //StudentBackend.SetLogIn(data);
+            StudentBackend.ToggleStatusById(data.Id);
+
+            return RedirectToAction("ConfirmLogin", "Kiosk", new { id=data.Id });
+        }
+
+
         // GET: Kiosk/SetLogout/5
         /// <summary>
         /// Manages the logout action, toggles the state
@@ -72,6 +107,35 @@ namespace _5051.Controllers
 
             StudentBackend.ToggleStatusById(id);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
+        }
+
+        /// <summary>
+        /// student logout with emotion status on Kiosk lndex page
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        // POST: Kiosk/KioskLogin
+        [HttpPost]
+        public ActionResult KioskLogout([Bind(Include=
+                                        "Id,"+
+                                        "")] StudentModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            // perform student log in and update data
+            StudentBackend.ToggleStatusById(data.Id);
+            return RedirectToAction("ConfirmLogout", "Kiosk", new { id = data.Id });
         }
 
         /// <summary>

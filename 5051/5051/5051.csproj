@@ -315,6 +315,8 @@
     <Content Include="Content\shop\IceCreamDisplay.png" />
     <Content Include="Content\shop\Menu0.png" />
     <Content Include="Content\shop\Menu1.png" />
+    <Content Include="Content\shop\Person1.png" />
+    <Content Include="Content\shop\placeholder.png" />
     <Content Include="Content\shop\ShopTail0.png" />
     <Content Include="Content\shop\ShopSign0.png" />
     <Content Include="Content\shop\ShopRims0.png" />
@@ -569,6 +571,7 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
     <TypeScriptCompile Include="Scripts\Game.ts" />
     <TypeScriptCompile Include="Scripts\jquery\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\people.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
