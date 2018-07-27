@@ -158,10 +158,48 @@
         </script>
         <br />
         <div class="card w-100 p-5" id="calendar_basic"></div>
+        <br />
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'Actual');
+                data.addColumn('number', 'Ideal');
+                var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("dd")).ToArray())];
+                var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalMinutes.ToString("0.##")).ToArray())];
+                var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalMinutes.ToString("0.##")).ToArray())];
+                for (i = 0; i < dates.length; i++) {
+                    data.addRow([dates[i].toString(), values[i], expected[i]]);
+                }
+
+                var options = {
+                    title: 'Cumulative Attended School Time in this Semester',
+                    height: 500,
+                    chartArea: { width: "85%", height: "70%" },
+                    legend: 'top',
+                    vAxis: { title: "Attended School Time (Minutes)" },
+                    hAxis: {
+                        title: "Date"
+                    }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                chart.draw(data, options);
+            }
+        </script>
+
+        <div class="card w-100" id="curve_chart"></div>
     }
 </div>
 
-
+<br/>
 
 
 
