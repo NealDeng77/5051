@@ -123,6 +123,14 @@ namespace _5051.Controllers
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
+            // Check the Item amount, If not enough, return error
+            if (myItem.Tokens < 1)
+            {
+                // Not enough money...
+                // Send back for Edit
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
+            }
+
             // Check to see if the student already has the item.  If so, don't buy again, only 1 item per student
             var ItemAlreadyExists = myStudent.Inventory.Exists(m => m.Id == myItem.Id);
             if (ItemAlreadyExists)
@@ -135,6 +143,9 @@ namespace _5051.Controllers
 
             // Reduce the Student Tokens by Item Price
             myStudent.Tokens -= myItem.Tokens;
+
+            // Reduce the quantities of Item
+            myItem.Quantities -= 1;
 
             // Add Item to Student Inventory
             // TODO:  Mike, add inventory to Students...
@@ -171,22 +182,121 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Inventory
-        public ActionResult Inventory()
+        public ActionResult Inventory(string id = null)
         {
-            // To do
-            return View();
+            // Get the Student
+            var myStudent = StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = new FactoryInventoryViewModel();
+            // get list
+            myData.FactoryInventoryList = myStudent.Inventory;
+            
+            return View(myData);
+        }
+        [HttpPost]
+        public ActionResult Inventory([Bind(Include=
+                                        "StudentId,"+
+                                        "ItemId,"+
+                                        "")] ShopBuyViewModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.ItemId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Student
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            if (myStudent == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Item
+            var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+            if (myItem == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            // Check the Student Item amount, If not enough, return error
+            if (myItem.Quantities < 1)
+            {
+                // Not enough amount
+                // Send back for Edit
+                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+            }
+
+            // Time to select !
+
+            // Reduce the quantities of Item
+            myItem.Quantities -= 1;
+
+            // Remove Item from Student Inventory
+            // TODO:  Mike, decrease inventory to Students...
+            myStudent.Inventory.Remove(myItem);
+
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
         }
 
 
         /// <summary>
-        /// Edit shop detail
+        /// Edit The Shop Details
         /// </summary>
         /// <returns></returns>
-        // GET: Edit
-        public ActionResult Edit()
+        public ActionResult Edit(string id=null)
         {
-            // To do
-            return View();
+            // Allow Editing of the Shop details including
+            // Shop Name
+            // Truck Items
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var studentdata = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (studentdata == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (studentdata.Truck == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var data = new ShopTruckViewModel(studentdata.Truck);
+
+            //Return Truck Data
+            return View(data);
         }
 
         /// <summary>
