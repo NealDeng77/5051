@@ -118,7 +118,6 @@
                         @Model.FallLastClassDay.ToShortDateString()
                     </div>
                 </div>
-                <br />
                 <div class="row">
                     <div class="col-sm-3 text-right">
                         @Html.DisplayNameFor(m => m.SpringFirstClassDay)
@@ -137,14 +136,82 @@
                     </div>
                 </div>
                 <br />
-                <br />
+                
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.FallQuarterFirstClassDay.ToShortDateString()
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.FallQuarterLastClassDay.ToShortDateString()
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.WinterQuarterFirstClassDay.ToShortDateString()
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.WinterQuarterLastClassDay.ToShortDateString()
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.SpringQuarterFirstClassDay.ToShortDateString()
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.SpringQuarterLastClassDay.ToShortDateString()
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.SummerQuarterFirstClassDay.ToShortDateString()
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
+                    </div>
+                    <div class="col-sm-4">
+                        @Model.SummerQuarterLastClassDay.ToShortDateString()
+                    </div>
+                </div>
+                <br/>
                 <div class="row">
                     <div class="col-sm-3 text-right">
                     </div>
                     <div class="col-sm-4">
-                        @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Back", "Index", new {id = Model.Id, Controller = "Calendar"}, new {@class = "btn btn-success"})
+                        @Html.ActionLink("Update", "Update", new {id = Model.Id}, new {@class = "btn btn-primary"})
                     </div>
                 </div>
             </div>
