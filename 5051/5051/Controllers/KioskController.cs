@@ -40,6 +40,9 @@ namespace _5051.Controllers
             return View(StudentViewModel);       
         }
 
+
+        /*
+         * 
         // GET: Kiosk/SetLogout/5
         /// <summary>
         /// Manages the Login action, toggles the state
@@ -56,6 +59,8 @@ namespace _5051.Controllers
             StudentBackend.ToggleStatusById(id);
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
         }
+        *
+        */
 
 
         /// <summary>
@@ -86,12 +91,13 @@ namespace _5051.Controllers
             // perform student log in and update data
 
             //StudentBackend.SetLogIn(data);
-            StudentBackend.ToggleStatusById(data.Id);
+            StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
 
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id=data.Id });
         }
 
-
+        /*
+         * 
         // GET: Kiosk/SetLogout/5
         /// <summary>
         /// Manages the logout action, toggles the state
@@ -107,7 +113,9 @@ namespace _5051.Controllers
 
             StudentBackend.ToggleStatusById(id);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
-        }
+        }   
+        *
+        */
 
         /// <summary>
         /// student logout with emotion status on Kiosk lndex page

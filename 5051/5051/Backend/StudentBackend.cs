@@ -229,6 +229,27 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Use the ID to toggle the emotion and status 
+        /// </summary>
+        /// <param name="id">Id of the student</param>
+        public void ToggleEmotionStatusById(string id, EmotionStatusEnum emotion)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return;
+            }
+
+            var myData = DataSource.Read(id);
+            if (myData == null)
+            {
+                return;
+            }
+
+            myData.EmotionCurrent = emotion;
+            ToggleStatus(myData);
+        }
+
+        /// <summary>
         /// Use the ID to toggle the status
         /// </summary>
         /// <param name="id">Id of the student</param>
