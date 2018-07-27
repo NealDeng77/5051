@@ -88,7 +88,7 @@
 
                         case "Admin":
                             <li class="nav-item">
-                                @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                                @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Reports", "Report", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
@@ -112,10 +112,25 @@
 
                         case "Portal":
                             <li class="nav-item">
-                                @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                                @Html.ActionLink("Dashboard", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Shop", "Visit", "Shop", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                                @Html.ActionLink("Reports", "MonthlyReport", "Admin", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Attendance", "Attendance", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Visit", "Visit", "Shop", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Store", "Index", "Shop", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Settings", "Settings", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Avatar", "Avatar", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
                             </li>
                             break;
 
