@@ -75,10 +75,14 @@ textarea {
 .AvatarSize1 {
     width: 75px;
     height: 75px;
-    padding:10px;
 }
 
-.AvatarSize2{
+.AvatarSize2 {
+    width: 90px;
+    height: 90px;
+}
+
+.AvatarSize3{
     width: 150px;
     height: 150px;
 }
@@ -294,6 +298,11 @@ div.BlockKioskIndex {
     border: solid;
     border-color: white;
     border-radius: 100px;
+}
+
+.AvatarBlock {
+    padding: 30px;
+
 }
 
 .EmotionSize {
