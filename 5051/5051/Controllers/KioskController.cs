@@ -89,8 +89,6 @@ namespace _5051.Controllers
             }
 
             // perform student log in and update data
-
-            //StudentBackend.SetLogIn(data);
             StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
 
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id=data.Id });
@@ -141,7 +139,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
-            // perform student log in and update data
+            // perform student log out and update data
             StudentBackend.ToggleStatusById(data.Id);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id = data.Id });
         }

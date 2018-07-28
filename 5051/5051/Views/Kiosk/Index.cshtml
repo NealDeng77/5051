@@ -40,10 +40,10 @@
                                 if (item.Status == _5051.Models.StudentStatusEnum.In)
                                 {
                                     var srcData = "/Content/img/" + item.AvatarUri;
-                                    <div class="col-sm-2 NoPadding">
+                                    <div class="col-sm-4 AvatarBlock">
                                         <div class="AvatarOuterBox BoxWithHighlightHover text-center">
                                             <a id="@item.Id">
-                                                <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')"/>
+                                                <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')"/>
                                             </a>
                                             <br />
                                             <span class="text-center">
@@ -70,7 +70,7 @@
                                 <div class="col text-center">
                                     <br />
                                     <br />
-                                    <img id="CenterAvatar" src="" class="AvatarSize2 CenterAvatarStyle" />
+                                    <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
                                     <br />
                                     <span id="CenterName" class="FontColor1"></span>
                                     <br />
@@ -154,10 +154,10 @@
                                     if (item.Status == _5051.Models.StudentStatusEnum.Out)
                                     {
                                         var srcData = "/Content/img/" + item.AvatarUri;
-                                        <div class="col-sm-2 NoPadding">
+                                        <div class="col-sm-4 AvatarBlock">
                                             <div class="AvatarOuterBox BoxWithHighlightHover text-center">                                                
                                                 <a id="@item.Id">
-                                                    <img src="@srcData" class="AvatarSize1" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')"/>
+                                                    <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')"/>
                                                 </a>
                                                 <br />
                                                 <span class="text-center">

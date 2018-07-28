@@ -74,22 +74,45 @@ namespace _5051.Tests.Controllers
         }
         #endregion IndexRegion
 
-        #region SetLoginRegion
+        #region KioskLoginRegion
         [TestMethod]
-        public void Controller_Kiosk_SetLogin_Valid_Id_Should_Pass()
+        public void Controller_Kiosk_KioskLogin_Valid_Data_Should_Pass()
         {
             // Arrange
             DataSourceBackend.Instance.Reset();
 
             var controller = new KioskController();
 
-            // Get the first Studnet Id from the DataSource
-            string id = StudentBackend.Instance.GetDefault().Id;
+            // Get the first Studnet from the DataSource
+            var data = StudentBackend.Instance.GetDefault();
+            var id = StudentBackend.Instance.GetDefault().Id;            
+            
+            // Act
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);            
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert            
+            Assert.AreEqual("ConfirmLogin", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_KioskLogin_Valid_Data_Should_Update_Status()
+        {
+            // Arrange
+            DataSourceBackend.Instance.Reset();
+
+            var controller = new KioskController();
+
+            // Get the first Studnet from the DataSource
+            var data = StudentBackend.Instance.GetDefault();
+            var id = StudentBackend.Instance.GetDefault().Id;
 
             // Act
-            var result = (RedirectToRouteResult)controller.SetLogin(id);
-
-            // check status change after SetLogin
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+            
+            // check status change after KioskLogin
             var resultStatus = StudentBackend.Instance.Read(id).Status;
 
             // Reset
@@ -97,18 +120,61 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual(StudentStatusEnum.In, resultStatus, TestContext.TestName);
-            Assert.AreEqual("ConfirmLogin", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Kiosk_SetLogin_Null_Or_Empty_Id_Should_Return_Error_Page()
+        public void Controller_Kiosk_KioskLogin_Valid_Data_Should_Update_Emotion()
+        {
+            // Arrange
+            DataSourceBackend.Instance.Reset();
+
+            var controller = new KioskController();
+
+            // Get the first Studnet from the DataSource
+            var data = StudentBackend.Instance.GetDefault();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+            
+            // check status change after SetLogin
+            var resultStatus = StudentBackend.Instance.Read(id).EmotionCurrent;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(EmotionStatusEnum.Neutral, resultStatus, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_KioskLogin_Null_Or_Empty_Data_Should_Return_Error_Page()
         {
             // Arrange
             var controller = new KioskController();
-            string id = null;
+            StudentModel data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.SetLogin(id);
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_KioskLogin_Null_Or_Empty_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskController();
+
+            // Create StudentModel instance
+            StudentModel data = new StudentModel();
+
+            // Set student Id to null
+            data.Id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -117,42 +183,86 @@ namespace _5051.Tests.Controllers
 
         #region SetLogoutRegion
         [TestMethod]
-        public void Controller_Kiosk_SetLogout_Valid_Id_Should_Pass()
+        public void Controller_Kiosk_KioskLogout_Valid_Data_Should_Pass()
         {
             // Arrange
             DataSourceBackend.Instance.Reset();
 
             var controller = new KioskController();
 
-            // Get the first Student Id from the DataSource
-            string id = StudentBackend.Instance.GetDefault().Id;
+            // Get the first Studnet from the DataSource
+            var data = StudentBackend.Instance.GetDefault();
+            var id = StudentBackend.Instance.GetDefault().Id;
 
             // Login, so logout can happen
-            controller.SetLogin(id);
+            controller.KioskLogin(data);
 
             // Act
-            var result = (RedirectToRouteResult)controller.SetLogout(id);
+            var result = (RedirectToRouteResult)controller.KioskLogout(data);
 
-            // check status change after SetLogout
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert            
+            Assert.AreEqual("ConfirmLogout", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_KioskLogout_Valid_Data_Should_Update_Status()
+        {
+            // Arrange
+            DataSourceBackend.Instance.Reset();
+
+            var controller = new KioskController();
+
+            // Get the first Studnet from the DataSource
+            var data = StudentBackend.Instance.GetDefault();
+            var id = StudentBackend.Instance.GetDefault().Id;
+
+            // Login, so logout can happen
+            controller.KioskLogin(data);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.KioskLogout(data);
+
+            // check status change after KioskLogout
             var resultStatus = StudentBackend.Instance.Read(id).Status;
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("ConfirmLogout", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual(StudentStatusEnum.Out, resultStatus, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Kiosk_SetLogout_Null_Or_Empty_Id_Should_Return_Error_Page()
+        public void Controller_Kiosk_KioskLogout_Null_Or_Empty_Data_Should_Return_Error_Page()
         {
             // Arrange
             var controller = new KioskController();
-            string id = null;
+            StudentModel data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.SetLogout(id);
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_KioskLogout_Null_Or_Empty_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new KioskController();
+
+            // Create StudentModel instance
+            StudentModel data = new StudentModel();
+
+            // Set student Id to null
+            data.Id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.KioskLogin(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
