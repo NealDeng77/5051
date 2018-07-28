@@ -192,13 +192,16 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
+            myData.Student = myStudent;
 
-           
+            var InventoryList = myStudent.Inventory;
+
+
             foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
             {
                 var temp = new FactoryInventoryViewModel();
                 temp.Category = (FactoryInventoryCategoryEnum)item;
-                temp.FactoryInventoryList = myStudent.Inventory.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
 
                 if (temp.FactoryInventoryList.Any())
                 {
@@ -255,8 +258,8 @@ namespace _5051.Controllers
                 return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
             }
 
-            // Add Item to Student Inventory
-            // TODO:  Mike, add inventory to Students...
+            // Reduce Item to Student Inventory
+            // TODO:  Mike, remove inventory to Students...
             myStudent.Inventory.Remove(myItem);
 
             // Update Student
