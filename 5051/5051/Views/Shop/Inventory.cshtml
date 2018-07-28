@@ -71,7 +71,7 @@
                             <h3>@CurrentList.Category</h3>
                             <div class="row">
                                 @{
-                                     //If no items, the skip
+                                     //If no items, then skip
                                     if (!CurrentList.FactoryInventoryList.Any())
                                     {
                                         <br />
@@ -93,16 +93,16 @@
                                             BoxHover = "BoxWithHighlightHover";
                                             DisplayText = "";
 
-                                            // Check if the user owns the item, if so disable it.
-                                            var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
-                                            if (ItemAlreadyExists)
-                                            {
-                                                // Already own it.
-                                                disabledOn = "disabled";
-                                                BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
-                                                DisplayText = "Purchaged";
+                                            //// Check if the user owns the item, if so disable it.
+                                            //var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
+                                            //if (ItemAlreadyExists)
+                                            //{
+                                            //    // Already own it.
+                                            //    disabledOn = "disabled";
+                                            //    BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                            //    DisplayText = "Purchaged";
 
-                                            }
+                                            //}
 
                                             <div class="col-sm-2">
                                                 <div class="@BoxHover">
