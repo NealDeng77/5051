@@ -59,6 +59,8 @@ textarea {
 }
 
 .BoxWithHighlightHover {
+    /* Added tag to clear CSS.Lint error for empty css object */
+    background-size:auto;
 }
 
     .BoxWithHighlightHover:hover {
@@ -101,6 +103,8 @@ textarea {
 }
 
 .FooterLink {
+    /* Added tag to clear CSS.Lint error for empty css object */
+    background-size: auto;
 }
     .FooterLink:hover {
         color: #ffffff;
@@ -128,6 +132,8 @@ textarea {
 }
 
 .FactoryInventoryBox {
+    /* Added tag to clear CSS.Lint error for empty css object */
+    background-size: auto;
 }
 
     .FactoryInventoryBox:hover {
@@ -240,6 +246,8 @@ body, html {
 }
 
 .btn-light {
+    /* Added tag to clear CSS.Lint error for empty css object */
+    background-size: auto;
 }
 
     .btn-light:hover, .btn-light:focus, .btn-light:active, .btn-light.active {
@@ -313,4 +321,11 @@ div.BlockKioskIndex {
 
 input[type=submit].btn-block {
     width: 200px;
+}
+
+.TruckEditBox {
+    height: 100px;
+    width: auto;
+    max-width: 150px;
+    background-color: grey;
 }

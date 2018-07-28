@@ -1,8 +1,8 @@
-﻿@model _5051.Models.FactoryInventoryViewModel
+﻿@model _5051.Models.SelectedFactoryInventoryForStudentViewModel
 @{
     ViewBag.Title = "Inventory";
 
-    if (Model == null || Model.FactoryInventoryList == null || !Model.FactoryInventoryList.Any())
+    if (Model == null || Model.Student == null || Model.FactoryInventoryCategoryList == null || !Model.FactoryInventoryCategoryList.Any())
     {
         <br />
         <h2>There is nothing in your Inventory</h2>
@@ -27,7 +27,7 @@
         <ul class="nav nav-tabs">
             @{
                 TabCount = 0;
-                foreach (var CurrentList in Model.FactoryInventoryList)
+                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
                 {
                     ActiveTab = "";
 
@@ -48,11 +48,11 @@
         </ul>
 
 
-        @*<div class="tab-content">
+        <div class="tab-content">
 
                 @{
                     TabCount = 0;
-                    foreach (var CurrentList in Model.FactoryInventoryList)
+                    foreach (var CurrentList in Model.FactoryInventoryCategoryList)
                     {
                         ActiveTab = "";
                         if (CurrentList == null)
@@ -71,7 +71,7 @@
                             <h3>@CurrentList.Category</h3>
                             <div class="row">
                                 @{
-                                    // If no items, the skip
+                                     //If no items, the skip
                                     if (!CurrentList.FactoryInventoryList.Any())
                                     {
                                         <br />
@@ -111,8 +111,6 @@
                                                     <span class="text-center">
                                                         @item.Name
                                                         <br />
-                                                        @item.Quantities
-                                                        <br />
                                                         @DisplayText
                                                     </span>
                                                 </div>
@@ -125,7 +123,7 @@
 
                     }
             }
-        </div>*@
+        </div>
 
     }
 }

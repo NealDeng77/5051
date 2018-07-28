@@ -43,6 +43,7 @@ namespace _5051.Models
 
 
 
+
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -95,7 +96,7 @@ namespace _5051.Models
             Name = data.Name;
             Description = data.Description;
             Tokens = data.Tokens;
-            Quantities = data.Quantities;
+            Quantities = data.Quantities;           
         }
     }
 }
