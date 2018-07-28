@@ -184,6 +184,8 @@ namespace _5051.Controllers
         // GET: Inventory
         public ActionResult Inventory(string id = null)
         {
+            var myData = new SelectedFactoryInventoryForStudentViewModel();
+
             // Get the Student
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
@@ -191,10 +193,20 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myData = new FactoryInventoryViewModel();
-            // get list
-            myData.FactoryInventoryList = myStudent.Inventory;
-            
+           
+            foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
+            {
+                var temp = new FactoryInventoryViewModel();
+                temp.Category = (FactoryInventoryCategoryEnum)item;
+                temp.FactoryInventoryList = myStudent.Inventory.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+
+                if (temp.FactoryInventoryList.Any())
+                {
+                    // todo, tag the ones that are already owned
+                    myData.FactoryInventoryCategoryList.Add(temp);
+                }
+
+            }
             return View(myData);
         }
         [HttpPost]
@@ -243,27 +255,15 @@ namespace _5051.Controllers
                 return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
             }
 
-            // Check the Student Item amount, If not enough, return error
-            if (myItem.Quantities < 1)
-            {
-                // Not enough amount
-                // Send back for Edit
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            // Time to select !
-
-            // Reduce the quantities of Item
-            myItem.Quantities -= 1;
-
-            // Remove Item from Student Inventory
-            // TODO:  Mike, decrease inventory to Students...
+            // Add Item to Student Inventory
+            // TODO:  Mike, add inventory to Students...
             myStudent.Inventory.Remove(myItem);
 
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
+
         }
 
 
