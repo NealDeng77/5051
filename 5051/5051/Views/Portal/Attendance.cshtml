@@ -20,93 +20,94 @@
         var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
         if (LastLoginIn != null)
         {
-            <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
+            <h4>You last logged in at: <span id="lastLoginValue">@_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortDateString() @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortTimeString()</span></h4>
         }
 
         <h4>Emotion State: <span id="emotionStateValue">@Model.EmotionCurrent</span></h4>
     }
 }
 <hr />
-<div class="row text-center">
-    <div class="row text-center">
+<div class="row w-100 text-center">
 
-        @{
-            foreach (var item in Model.Attendance)
-            {
-                <div class="col-sm-4 col-md-2">
-                    <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
-                        @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortDateString()<br />
-                        <div class="row">
+    @{
+        foreach (var item in Model.Attendance)
+        {
+            <div class="col-sm-4 col-md-2">
+                <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
+                    @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.In).ToShortDateString()<br />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            In<br />
+                            @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.In).ToShortTimeString()<br />
+                        </div>
+                        @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
+                        {
                             <div class="col-sm-6">
-                                In<br />
-                                @_5051.Backend.UTCConversionsBackend.ToClientTime(item.In).ToShortTimeString()<br />
+                                Out<br />
+
+                                @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.Out).ToShortTimeString()<br />
                             </div>
-                            @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
-                            {
-                                <div class="col-sm-6">
-                                    Out<br />
-
-                                    @item.Out.ToShortTimeString()<br />
-                                </div>
-                            }
-                        </div>
-
-                        <div class="row text-center">
-                            <div class="col">
-                                @switch (@item.Emotion)
-                                {
-                                    case EmotionStatusEnum.VeryHappy:
-                                        <div class="badge badge-success w-75">
-                                            Very Happy
-                                        </div>
-                                        break;
-                                    case EmotionStatusEnum.Happy:
-                                        <div class="badge badge-warning w-75">
-                                             Happy
-                                        </div>
-                                        break;
-                                    case EmotionStatusEnum.Neutral:
-                                        <div class="badge badge-info w-75">
-                                            Neutral
-</div>
-                                        break;
-                                    case EmotionStatusEnum.Sad:
-                                        <div class="badge badge-secondary w-75">
-                                            Sad
-</div>
-                                        break;
-                                    case EmotionStatusEnum.VerySad:
-                                        <div class="badge badge-dark w-75">
-                                            Very Sad
-</div>
-                                        break;
-                                }
-
-                            </div>
-                        </div>
-                        @*<div class="row">
-                                <br />
-                                Duration<br />
-                                @{
-                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                    {
-                                        <span>
-                                            @item.Duration.Hours Hours<br />
-                                            @item.Duration.Minutes Minutes<br />
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <br />
-                                        <br />
-                                    }
-                                }
-                            </div>*@
+                        }
                     </div>
-                </div>
-            }
-        }
 
-    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            @switch (@item.Emotion)
+                            {
+                                case EmotionStatusEnum.VeryHappy:
+                                    <div class="badge badge-success w-75">
+                                        Very Happy
+                                    </div>
+                                    break;
+                                case EmotionStatusEnum.Happy:
+                                    <div class="badge badge-warning w-75">
+                                        Happy
+                                    </div>
+                                    break;
+                                case EmotionStatusEnum.Neutral:
+                                    <div class="badge badge-info w-75">
+                                        Neutral
+                                    </div>
+                                    break;
+                                case EmotionStatusEnum.Sad:
+                                    <div class="badge badge-secondary w-75">
+                                        Sad
+                                    </div>
+                                    break;
+                                case EmotionStatusEnum.VerySad:
+                                    <div class="badge badge-dark w-75">
+                                        Very Sad
+                                    </div>
+                                    break;
+                            }
+
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <br />
+                            Duration<br />
+                            @{
+                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                {
+                                    <span>
+                                        @item.Duration.Hours Hours<br />
+                                        @item.Duration.Minutes Minutes<br />
+                                    </span>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <br />
+                                }
+                            }
+                        </div>*@
+                </div>
+            </div>
+        }
+    }
+
 </div>
 
+
+
+<br /><br /><br />
