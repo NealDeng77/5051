@@ -15,6 +15,41 @@ namespace _5051.UnitTests.Models
         public TestContext TestContext { get; set; }
 
         #region Instantiate
+
+        [TestMethod]
+        public void Models_ShopTruckViewModel_Default_Instantiate_Get_Set_Should_Pass()
+        {
+            //arrange
+            // Get inventory Item
+            // Add it to a Truck Model
+            // Convert the Truck Model to a Truck View Model
+            // Check the URI to see if it converted over correctly
+
+            var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+
+            var ShopTruck = new ShopTruckModel();
+            var ItemId = InventoryList.FirstOrDefault().Id;
+
+            ShopTruck.Truck = ItemId;
+            ShopTruck.Wheels = ItemId;
+            ShopTruck.Topper = ItemId;
+            ShopTruck.Trailer = ItemId;
+            ShopTruck.Menu = ItemId;
+            ShopTruck.Sign = ItemId;
+            ShopTruck.StudentId = "testdata";
+
+            var expect = InventoryList.FirstOrDefault().Uri;
+
+            // Act
+            var result = new ShopTruckViewModel(ShopTruck);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("testdata", result.StudentId, "StudentId " + TestContext.TestName);
+        }
+
         //[TestMethod]
         //public void Models_ShopTruckViewModel_Default_Instantiate_Get_Set_Should_Pass()
         //{
