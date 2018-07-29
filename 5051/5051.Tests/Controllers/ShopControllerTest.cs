@@ -581,7 +581,7 @@ namespace _5051.Tests.Controllers
             data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Factory(data);
+            var result = (RedirectToRouteResult)controller.Inventory(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
