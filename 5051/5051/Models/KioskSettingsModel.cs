@@ -17,6 +17,10 @@ namespace _5051.Models
         [Display(Name = "Password", Description = "Kiosk Password")]
         public string Password { get; set; }
 
+        // The time zone of kiosk
+        [Display(Name = "Kiosk Time Zone", Description = "Kiosk Time Zone")]
+        public string TimeZone { get; set; }
+
         public KioskSettingsModel()
         {
             Initialize();
