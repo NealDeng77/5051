@@ -58,11 +58,11 @@ namespace _5051.Backend
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
 
             //The first valid week(Monday's date) for the dropdown
-            var FirstWeek = dayFirst.AddDays(DayOfWeek.Monday - dayFirst.DayOfWeek);
+            var FirstWeek = dayFirst.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //added this mod operation to make sure it's the previous monday not the next monday
             //The last valid month for the dropdown
-            var LastWeek = dayLast.AddDays(DayOfWeek.Monday - dayLast.DayOfWeek);
+            var LastWeek = dayLast.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7));
             //The month of today
-            var WeekNow = dayNow.AddDays(DayOfWeek.Monday - dayNow.DayOfWeek);
+            var WeekNow = dayNow.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //if today is sunday, dayNow.DayOfWeek - DayOfWeek.Monday = -1
 
             //do not go beyond the week of today
             if (LastWeek > WeekNow)
