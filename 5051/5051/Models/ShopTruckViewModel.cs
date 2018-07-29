@@ -10,23 +10,13 @@ namespace _5051.Models
     // The URI for the Images for the Truck
     public class ShopTruckViewModel
     {
-        // The Inventory ID for the Wheels
-        public string Wheels { get; set; }
-
-        // The Inventory ID for the Wheels
-        public string Topper { get; set; }
-
-        // The Inventory ID for the Wheels
-        public string Trailer { get; set; }
-
-        // The Inventory ID for the Wheels
-        public string Menu { get; set; }
-
-        // The Inventory ID for the Wheels
-        public string Sign { get; set; }
-
-        // The Inventory ID for the Wheels
-        public string Truck{ get; set; }
+        // Positions, with current item.
+        public ShopTruckItemViewModel TruckItem;
+        public ShopTruckItemViewModel WheelsItem;
+        public ShopTruckItemViewModel TopperItem;
+        public ShopTruckItemViewModel TrailerItem;
+        public ShopTruckItemViewModel MenuItem;
+        public ShopTruckItemViewModel SignItem;
 
         // The StudentID for this truck, used to simplify the models
         public string StudentId { get; set; }
@@ -34,44 +24,15 @@ namespace _5051.Models
         // Make a new view model based on the current data set
         public ShopTruckViewModel(ShopTruckModel data)
         {
-            Wheels = "Wheels0.png";
-            Topper = "Topper0.png";
-            Trailer = "Trailer0.png";
-            Menu = "Menu0.png";
-            Sign = "Sign0.png";
-            Truck = "Truck0.png";
-
             StudentId = data.StudentId;
 
-            if (data.Wheels != null)
-            { 
-                Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Wheels);
-            }
-
-            if (data.Topper != null)
-            {
-                Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Topper);
-            }
-
-            if (data.Trailer != null)
-            {
-                Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Trailer);
-            }
-
-            if (data.Menu != null)
-            {
-                Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Menu);
-            }
-
-            if (data.Sign != null)
-            {
-                Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Sign);
-            }
-
-            if (data.Truck != null)
-            {
-                Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(data.Truck);
-            }
+            // Load the data set for each type
+            TruckItem = new ShopTruckItemViewModel(StudentId, data.Truck);
+            WheelsItem = new ShopTruckItemViewModel(StudentId, data.Wheels);
+            TopperItem = new ShopTruckItemViewModel(StudentId, data.Topper);
+            TrailerItem = new ShopTruckItemViewModel(StudentId, data.Trailer);
+            MenuItem = new ShopTruckItemViewModel(StudentId, data.Menu);
+            SignItem = new ShopTruckItemViewModel(StudentId, data.Sign);
         }
     }
 }

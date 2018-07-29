@@ -5,101 +5,111 @@
     ViewBag.Title = "Student Portal";
 }
 <br />
-<h2>Welcome to your Student Portal</h2>
-<br />
+<div class="text-center bg-transparent pt-5">
+    <h2>Welcome to your Student Portal</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <br />
 
-<h3 id="welcomeMessage">
-    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="AvatarSize0" />
-    <span id="welcomeMessageStudentName">@Model.Name</span>, good to see you back.
-</h3>
+            <h3 id="welcomeMessage">
+                <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="AvatarSize0" />
+                <span id="welcomeMessageStudentName">@Model.Name</span>, good to see you back.
+            </h3>
+        </div>
+        <div class="col-lg-4">
+            <br />
+            <h4>You are now at Level <span id="levelValue">@Model.AvatarLevel</span> with a total of <span id="xpValue">@Model.ExperiencePoints</span> Experience Points</h4>
+            <h4>You have <span id="tokensValue">@Model.Tokens</span> Tokens in the Bank</h4>
+        </div>
+        <div class="col-lg-4">
+            @{
+                <br />
+                <h4>Current Status is <span id="statusValue">@Model.Status</span></h4>
+                if (Model.Attendance == null || !Model.Attendance.Any())
+                {
+                    //skip
+                }
+                {
+                    var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
+                    if (LastLoginIn != null)
+                    {
+                        <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
+                    }
 
-<br />
-<h4>You are now at Level <span id="levelValue">@Model.AvatarLevel</span> with a total of <span id="xpValue">@Model.ExperiencePoints</span> Experience Points</h4>
-<h4>You have <span id="tokensValue">@Model.Tokens</span> Tokens in the Bank</h4>
-
-@{
-    <br />
-    <h4>Current Status is <span id="statusValue">@Model.Status</span></h4>
-    if (Model.Attendance == null || !Model.Attendance.Any())
-    {
-        //skip
-    }
-    {
-        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
-        if (LastLoginIn != null)
-        {
-            <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
-        }
-
-        <h4>Emotion State: <span id="currentEmotionValue">@Model.EmotionCurrent</span></h4>
-    }
-}
-
-<br />
-<hr />
-<div class="row text-center">
-    <div class="col-sm-12">
+                    <h4>Emotion State: <span id="currentEmotionValue">@Model.EmotionCurrent</span></h4>
+                }
+            }
+        </div>
+        <br />
+    </div>
+        <hr />
         <div class="row text-center">
+            <div class="col-sm-12">
+                <div class="row text-center">
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Portal/Report/@Model.Id" id="reportsLinkPortalIndex">
-                        <img src="~/Content/img/PortalReport.jpg" alt="Reports" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Reports</span>
-                </div>
-            </div>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Portal/Report/@Model.Id" id="reportsLinkPortalIndex">
+                                <img src="~/Content/img/PortalReport.jpg" alt="Reports" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Reports</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Portal/Attendance/@Model.Id" id="attendanceLinkPortalIndex">
-                        <img src="~/Content/img/CalendarEditIcon.png" alt="Reports" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Attendance</span>
-                </div>
-            </div>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Portal/Attendance/@Model.Id" id="attendanceLinkPortalIndex">
+                                <img src="~/Content/img/CalendarEditIcon.png" alt="Reports" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Attendance</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Shop/Visit" id="visitLinkPortalIndex">
-                        <img src="~/Content/img/PortalHouse.png" alt="Visit" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Visit</span>
-                </div>
-            </div>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Shop/Visit" id="visitLinkPortalIndex">
+                                <img src="~/Content/img/PortalHouse.png" alt="Visit" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Visit</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
-                        <img src="~/Content/img/PortalStore.png" alt="Store" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Store</span>
-                </div>
-            </div>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
+                                <img src="~/Content/img/PortalStore.png" alt="Store" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Store</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Portal/Settings/@Model.Id" id="settingsLinkPortalIndex">
-                        <img src="~/Content/img/@Model.AvatarUri" alt="Customize" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Customize</span>
-                </div>
-            </div>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Portal/Settings/@Model.Id" id="settingsLinkPortalIndex">
+                                <img src="~/Content/img/@Model.AvatarUri" alt="Customize" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Customize</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <div class="PortalBox">
-                    <a href="~/Portal/Avatar/@Model.Id" id="avatarLinkPortalIndex">
-                        <img src="~/Content/img/PortalAvatars.png" alt="Choose Avatars" class="PortalImage" />
-                    </a>
-                    <br />
-                    <span>Avatars</span>
+                    <div class="col-sm-4">
+                        <div class="PortalBox">
+                            <a href="~/Portal/Avatar/@Model.Id" id="avatarLinkPortalIndex">
+                                <img src="~/Content/img/PortalAvatars.png" alt="Choose Avatars" class="PortalImage" />
+                            </a>
+                            <br />
+                            <span>Avatars</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-</div>

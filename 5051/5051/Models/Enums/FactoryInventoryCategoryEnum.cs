@@ -24,7 +24,12 @@ namespace _5051.Models
         // Decorations
         Decoration = 7,
 
-        // Truck
-        Truck = 8,
+        // Truck Inventory Items
+        Truck = 10,
+        Wheels = 11,
+        Topper = 12,
+        Sign = 13,
+        Trailer = 14,
+        Menu = 15
     }
 }

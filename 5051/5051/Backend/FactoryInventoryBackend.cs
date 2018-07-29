@@ -206,5 +206,17 @@ namespace _5051.Backend
         {
             DataSource.Reset();
         }
+
+        /// <summary>
+        /// Return the First item in the List for the Given Category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public FactoryInventoryModel GetDefault(FactoryInventoryCategoryEnum category)
+        {
+            var data = Index().Where(m => m.Category == category).FirstOrDefault();
+
+            return data;
+        }
     }
 }

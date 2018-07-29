@@ -256,5 +256,21 @@ namespace _5051.UnitTests.Models
             //asset
         }
         #endregion SetDataSourceDataSet
+
+        #region GetDefault
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend_GetDefault_Valid_Should_Pass()
+        {
+            //arrange
+            var test = Backend.FactoryInventoryBackend.Instance;
+
+            //act
+            var result = test.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion GetDefault
     }
 }
