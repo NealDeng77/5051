@@ -275,7 +275,7 @@ namespace _5051.Backend
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterLastClassDay;
             }
 
-            var fall = new SelectListItem { Value = "4", Text = "Fall quarter 2018" };
+            var fall = new SelectListItem { Value = "4", Text = "Fall quarter 2017" };
 
             //add to the select list
             report.Quarters.Add(fall);
