@@ -564,7 +564,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Factory(id);
+            var result = (RedirectToRouteResult)controller.Inventory(id);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
