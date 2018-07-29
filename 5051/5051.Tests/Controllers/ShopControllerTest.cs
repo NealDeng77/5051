@@ -651,10 +651,10 @@ namespace _5051.Tests.Controllers
             data.ItemId = "bogus";
 
             // Act
-            var result = (RedirectToRouteResult)controller.Factory(data);
+            var result = (RedirectToRouteResult)controller.Inventory(data);
 
             // Assert
-            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
