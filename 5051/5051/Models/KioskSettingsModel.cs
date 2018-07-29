@@ -57,6 +57,7 @@ namespace _5051.Models
 
             Password = data.Password;
             SelectedTimeZoneId = data.SelectedTimeZoneId;
+            TzCollection = data.TzCollection;
             //reload the time zone using the given id
             TimeZone = TzCollection[SelectedTimeZoneId];
         }
@@ -110,7 +111,6 @@ namespace _5051.Models
             }
 
             Password = data.Password;
-            TimeZone = data.TimeZone;
             SelectedTimeZoneId = data.SelectedTimeZoneId;
             //load the time zone using seleted id
             TimeZone = TzCollection[SelectedTimeZoneId];
