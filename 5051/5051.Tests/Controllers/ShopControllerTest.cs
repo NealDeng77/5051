@@ -681,76 +681,36 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-
             var data = new ShopBuyViewModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
             data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+            var Item = new FactoryInventoryModel();
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
-            // this puts the item in the student inventory
-            //myStudent.Inventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
-
+            // Get the Inventory
+            myStudent.Inventory = InventoryList;
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            var expect = myStudent.Tokens;
+            // select item, remove the item from the student inventory
+            var mySelect = (RedirectToRouteResult)controller.Inventory(data);
 
+            // remove the data
+            Item.Id = data.ItemId;
+            InventoryList.Remove(Item);
+            var expect = InventoryList;
 
             // Act
-            ViewResult result = controller.Factory(data) as ViewResult;
-
+            ViewResult result = controller.Inventory(data) as ViewResult;
             var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expect, myStudent2.Inventory, TestContext.TestName);
         }
 
-
-        [TestMethod]
-        public void Controller_Shop_Inventory_Data_InValid_Item_Already_Exists_Should_Fail()
-        {
-            // Arrange
-            ShopController controller = new ShopController();
-
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
-
-            // Get the Student Record and Add some Tokens to it.
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            myStudent.Tokens = 1000;
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
-
-            // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
-
-            myInventory.Tokens = 10;
-            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
-
-            // Buy it one time, this puts the item in the student inventory
-            var myPurchage1 = (RedirectToRouteResult)controller.Factory(data);
-
-            // No purchage, so tokens stay the same
-            var expect = myStudent.Tokens;
-            var expectCount = myStudent.Inventory.Count();
-
-            // Act
-
-            // Trying to buy the second time will fail
-            var result = (RedirectToRouteResult)controller.Factory(data);
-
-            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
-            Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
-        }
         #endregion Inventory
     }
 }
