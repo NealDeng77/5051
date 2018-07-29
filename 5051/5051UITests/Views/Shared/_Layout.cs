@@ -36,25 +36,73 @@ namespace _5051UITests.Views.Shared
                 ValidatePageTransition("Kiosk", "Login");
                 NavigateToPage(originalController, originalAction, originalData);
             }
+            else if (originalController == "Kiosk")
+            {
+
+            }
             else if(originalController == "Admin")
             {
                 ClickActionById("AdminLinkNavBar");
                 ValidatePageTransition("Admin", "Index");
                 NavigateToPage(originalController, originalAction, originalData);
-            }
-            else if(originalController == "Kiosk")
-            {
 
+                ClickActionById("AdminReportLinkNavBar");
+                ValidatePageTransition("Admin", "Report");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("StudentLinkNavbar");
+                ValidatePageTransition("Student", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("CalendarLinkNavBar");
+                ValidatePageTransition("Calendar", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("AvatarLinkNavBar");
+                ValidatePageTransition("Avatar", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("AdminSettingsLinkNavBar");
+                ValidatePageTransition("Admin", "Settings");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("FactoryInventoryLinkNavBar");
+                ValidatePageTransition("Calendar", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
             }
-            else
+            else if(originalController == "Portal")
             {
-                ClickActionById("StudentLinkNavBar");
+                ClickActionById("PortalRosterLinkNavBar");
                 ValidatePageTransition(PortalControllerName, RosterViewName);
                 NavigateToPage(originalController, originalAction, originalData);
 
-                ClickActionById("AdminLinkNavBar");
-                ValidatePageTransition("Admin", "Index");
+                ClickActionById("AdminMonthlyReportLinkNavBar");
+                ValidatePageTransition("Admin", "MonthlyReport");
                 NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("AttendancePortalLinkLinkNavBar");
+                ValidatePageTransition("Portal", "Attendance");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("ShopVisitlinkNavBar");
+                ValidatePageTransition("Shop", "Visit");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("ShopLinkNavBar");
+                ValidatePageTransition("Shop", "Index");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("PortalSettingsLinkNavBar");
+                ValidatePageTransition("Portal", "Settings");
+                NavigateToPage(originalController, originalAction, originalData);
+
+                ClickActionById("PortalAvatarLinkNavBar");
+                ValidatePageTransition("Portal", "Avatar");
+                NavigateToPage(originalController, originalAction, originalData);
+            }
+            else
+            {
+
             }
         }
 
