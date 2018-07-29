@@ -91,5 +91,29 @@ namespace _5051.Backend
 
             return dt;
         }
+
+        /// <summary>
+        /// Convert from Utc to Kiosk time zone
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime UtcToKioskTime(DateTime dt)
+        {
+            var kioskTimeZone = KioskSettingsBackend.Instance.GetDefault().TimeZone;
+            var result = TimeZoneInfo.ConvertTimeFromUtc(dt, kioskTimeZone);
+            return result;
+        }
+
+        /// <summary>
+        /// Convert from Kiosk time zone to Utc
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime KioskTimeToUtc(DateTime dt)
+        {
+            var kioskTimeZone = KioskSettingsBackend.Instance.GetDefault().TimeZone;
+            var result = TimeZoneInfo.ConvertTimeToUtc(dt, kioskTimeZone);
+            return result;
+        }
     }
 }
