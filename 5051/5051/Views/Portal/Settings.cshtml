@@ -7,6 +7,7 @@
 <div class="text-center bg-transparent pt-5">
     <h2>You Can Update Your Settings</h2>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-6 offset-lg-3 darkTransparentBox">
@@ -20,10 +21,11 @@
                     else
                     {
 
-                        <div class="container">
+                        <div class="container"> 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="container" align="center">
+                                    <div class="container text-center">
+                                        <br />
                                         <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
                                         <br />
                                         <span id="currentNameDisplayed">
@@ -38,9 +40,11 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-sm-6 text-right" id="avatarLevelName">
+                                                <br />
                                                 @Html.DisplayNameFor(m => m.AvatarLevel)
                                             </div>
                                             <div class="col-sm-6" id="avatarLevelValue">
+                                                <br />
                                                 @Html.DisplayFor(m => m.AvatarLevel)
                                             </div>
                                         </div>
