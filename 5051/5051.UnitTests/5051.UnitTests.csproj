@@ -142,6 +142,7 @@
     <Compile Include="Models\SemesterReportViewModelTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckModelUnitTests.cs" />
+    <Compile Include="Models\ShopTruckItemViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckViewModelUnitTests.cs" />
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
     <Compile Include="Models\StudentAvatarModelUnitTests.cs" />
