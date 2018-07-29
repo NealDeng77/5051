@@ -110,6 +110,8 @@
     <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\AvatarDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\UTCConversionsBackendUnitTests.cs" />
+    <Compile Include="Misc\FilterConfigUnitTests.cs" />
+    <Compile Include="Misc\RouteConfigUnitTests.cs" />
     <Compile Include="Misc\BundleConfigUnitTests.cs" />
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
