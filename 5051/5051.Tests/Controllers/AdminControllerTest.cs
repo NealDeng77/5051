@@ -99,7 +99,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Weekly_Report_Post_Data_Is_Valid_Should_Pass()
+        public void Controller_Admin_Semester_Report_Post_Selected_ID_Is_2_Should_Pass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -317,7 +317,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Admin_Quarter_Report_Post_Data_Is_Valid_Should_Pass()
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_2_Should_Pass()
         {
             // Arrange
             AdminController controller = new AdminController();
@@ -325,6 +325,42 @@ namespace _5051.Tests.Controllers
             {
                 StudentId = StudentBackend.Instance.GetDefault().Id,
                 SelectedQuarterId = 2
+            };
+
+            // Act
+            var result = controller.QuarterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_3_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var data = new QuarterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedQuarterId = 3
+            };
+
+            // Act
+            var result = controller.QuarterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_4_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var data = new QuarterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedQuarterId = 4
             };
 
             // Act
