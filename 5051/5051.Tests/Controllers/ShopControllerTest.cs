@@ -536,6 +536,25 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
+        public void Controller_Shop_Inventory_ItemIsNotNull_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var student = new StudentModel();
+            var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+            student.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            student.Inventory = InventoryList;
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            ViewResult result = controller.Inventory(student.Id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Controller_Shop_Inventory_Post_ModelIsInvalid_Should_Pass()
         {
             // Arrange
@@ -667,18 +686,16 @@ namespace _5051.Tests.Controllers
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
             data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
 
-            // Get the Student Record and Add some Tokens to it.
+            // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            myStudent.Tokens = 1000;
+
+            // this puts the item in the student inventory
+            //myStudent.Inventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+            var expect = myStudent.Tokens;
 
-            myInventory.Tokens = 10;
-            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
-
-            var expect = myStudent.Tokens - myInventory.Tokens;
 
             // Act
             ViewResult result = controller.Factory(data) as ViewResult;
@@ -689,44 +706,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Shop_Inventory_Data_InValid_Tokens_Not_Enough_Should_Fail()
-        {
-            // Arrange
-            ShopController controller = new ShopController();
-
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
-
-            // Get the Student Record and Add some Tokens to it.
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            myStudent.Tokens = 10;
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
-
-            // Get the Item Record and Set the Token Value
-            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
-
-            myInventory.Tokens = 100;
-            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
-
-            // No purchage, so tokens stay the same
-            var expect = myStudent.Tokens;
-            var expectCount = myStudent.Inventory.Count();
-
-            // Act
-            var result = (RedirectToRouteResult)controller.Factory(data);
-
-            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
-            Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
         }
 
 
