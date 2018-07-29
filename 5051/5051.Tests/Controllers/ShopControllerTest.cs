@@ -546,7 +546,7 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             // Act
-            ViewResult result = controller.Factory(data) as ViewResult;
+            ViewResult result = controller.Inventory(data) as ViewResult;
 
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
