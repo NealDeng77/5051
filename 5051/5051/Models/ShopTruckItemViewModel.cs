@@ -65,7 +65,7 @@ namespace _5051.Models
 
             var InventoryListData = StudentData.Inventory.Where(m => m.Category == InventoryData.Category).ToList();
 
-            if (InventoryListData == null)
+            if (InventoryListData.Count == 0)
             {
                 return;
             }
