@@ -116,7 +116,7 @@ namespace _5051.Controllers
             var myReturn = new StudentDisplayViewModel(myStudent);
 
             //Set the last log in time and emotion status img uri
-            if (myReturn.Attendance != null && myReturn.Attendance.Any())
+            if (myReturn.Attendance.Any())
             {
                 myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
                 switch (myReturn.EmotionCurrent)
