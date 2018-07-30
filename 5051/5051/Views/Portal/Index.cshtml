@@ -29,7 +29,7 @@
             @{
                 <br />
                 <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
-                if (Model.Attendance == null || !Model.Attendance.Any())
+                if (!Model.Attendance.Any())
                 {
                     //skip
                 }else
