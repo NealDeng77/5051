@@ -107,7 +107,6 @@ namespace _5051.Models
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
-            Truck.StudentId = Id;
         }
 
         /// <summary>
