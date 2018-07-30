@@ -289,6 +289,43 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Factory_Data_InValid_Tokens_Less_Than_One_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 0;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 0;
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
+
+            // No purchage, so tokens stay the same
+            var expect = myStudent.Tokens;
+            var expectCount = myStudent.Inventory.Count();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Factory(data);
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Factory", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectCount, myStudent2.Inventory.Count(), TestContext.TestName);
+        }
 
         [TestMethod]
         public void Controller_Shop_Factory_Data_InValid_Item_Already_Exists_Should_Fail()
