@@ -18,6 +18,6 @@
         /// <summary>
         /// Iteratoin Number
         /// </summary>
-        public int IterationNumber { get; set; }
+        public int IterationNumber;
     }
 }
