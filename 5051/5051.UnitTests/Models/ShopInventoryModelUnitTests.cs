@@ -34,11 +34,12 @@ namespace _5051.UnitTests.Models
             var description = "description";
             FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Music;
             int tokens = 10;
-            int quantities = 10; 
+            int quantities = 10;
+            bool isLimitSupply = true;
             var expect = uri;
 
             // Act
-            var result = new FactoryInventoryModel(uri, name, description,category,tokens,quantities);
+            var result = new FactoryInventoryModel(uri, name, description,category,tokens,quantities, isLimitSupply);
 
             // Assert
             Assert.AreEqual(expect,result.Uri, TestContext.TestName);
