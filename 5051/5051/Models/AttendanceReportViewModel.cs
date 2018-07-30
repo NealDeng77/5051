@@ -6,10 +6,13 @@ using _5051.Models.Enums;
 
 namespace _5051.Models
 {
+    /// <summary>
+    /// View model for an individual day on a report. Contains info about the date, is school day or not, time in and out, and other stats for generating the report
+    /// </summary>
     public class AttendanceReportViewModel
     {
         /// <summary>
-        /// The Date
+        /// The Date, in kiosk time zone
         /// </summary>
         public DateTime Date { get; set; }
 
@@ -19,12 +22,12 @@ namespace _5051.Models
         public bool IsSchoolDay { get; set; } = true;
 
         /// <summary>
-        /// Check-in time
+        /// Check-in time, in kiosk time zone
         /// </summary>
         public DateTime TimeIn { get; set; }
 
         /// <summary>
-        /// Check-out time
+        /// Check-out time, in kiosk time zone
         /// </summary>
         public DateTime TimeOut { get; set; }
 
