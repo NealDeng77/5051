@@ -42,6 +42,7 @@ namespace _5051.Models
         public int Quantities { get; set; }
 
 
+        public bool IsLimitSupply { get; set; }
 
 
         /// <summary>
@@ -52,6 +53,7 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
             Tokens = 1;
             Quantities = 10;
+            IsLimitSupply = true;
         }
 
         /// <summary>
@@ -78,16 +80,22 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">FactoryInventory Name</param>
         /// <param name="description">FactoryInventory Description</param>
-        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities)
+        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities, bool isLimitSupply)
         {
             Initialize();
 
+            IsLimitSupply = isLimitSupply;
+            Quantities = quantities;
+            if (!IsLimitSupply)
+            {
+                Quantities = 10000;
+            }
             Uri = uri;
             Name = name;
             Description = description;
             Category = category;
             Tokens = tokens;
-            Quantities = quantities;
+                     
         }
 
         /// <summary>
@@ -108,6 +116,7 @@ namespace _5051.Models
             Tokens = data.Tokens;
             Quantities = data.Quantities;
             Category = data.Category;
+            IsLimitSupply = data.IsLimitSupply;
         }
     }
 }
