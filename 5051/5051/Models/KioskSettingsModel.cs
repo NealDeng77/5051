@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace _5051.Models
 {
     /// <summary>
-    /// Setting model for the kiosk password for login
+    /// Setting model for the kiosk password for login and kiosk time zone
     /// The Amin should be allowed to change these
     /// Save as defaults to the Database
     /// </summary>
@@ -16,7 +16,7 @@ namespace _5051.Models
         // Used to access the settings instance, even if there is just one
         public string Id { get; set; }
 
-        // The Normal Start time.  8:55am
+        // The password for logging in 
         [Display(Name = "Password", Description = "Kiosk Password")]
         public string Password { get; set; }
 
@@ -37,7 +37,7 @@ namespace _5051.Models
         /// <summary>
         /// The collection of system time zones
         /// </summary>
-        public ReadOnlyCollection<TimeZoneInfo> TzCollection { get; set; }
+        private ReadOnlyCollection<TimeZoneInfo> TzCollection { get; set; }
 
         public KioskSettingsModel()
         {
