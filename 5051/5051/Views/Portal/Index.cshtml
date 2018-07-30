@@ -32,11 +32,20 @@
                 if (Model.Attendance == null || !Model.Attendance.Any())
                 {
                     //skip
-                }else
+                }
                 {
-                    <h4>You last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
+                    var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
+                    if (LastLoginIn != null)
+                    {
+                        <h4>You last logged in at: <span id="lastLoginValue">@_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortDateString() @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortTimeString()</span></h4>
+                    }
 
-                    <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
+                    <h4>Emotion State: <span id="currentEmotionValue">@Model.EmotionCurrent</span></h4>
+                    <img src="~/Content/img/EmotionVeryHappy.png" alt="Emotion happy icon" class="AvatarSize0" />
+                    <img src="~/Content/img/EmotionHappy.png" alt="Emotion happy icon" class="AvatarSize0" />
+                    <img src="~/Content/img/EmotionNeutral.png" alt="Emotion happy icon" class="AvatarSize0" />
+                    <img src="~/Content/img/EmotionSad.png" alt="Emotion happy icon" class="AvatarSize0" />
+                    <img src="~/Content/img/EmotionVerySad.png" alt="Emotion happy icon" class="AvatarSize0" />
                 }
             }
         </div>
