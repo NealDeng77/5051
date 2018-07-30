@@ -25,24 +25,24 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Models_FactoryInventoryModel_Instantiate_Valid_Should_Pass()
-        {
-            // Arrange
-            var uri = "uri";
-            var name = "name";
-            var description = "description";
-            FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Music;
-            int tokens = 10;
-            int quantities = 10; 
-            var expect = uri;
+        //[TestMethod]
+        //public void Models_FactoryInventoryModel_Instantiate_Valid_Should_Pass()
+        //{
+        //    // Arrange
+        //    var uri = "uri";
+        //    var name = "name";
+        //    var description = "description";
+        //    FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Music;
+        //    int tokens = 10;
+        //    int quantities = 10; 
+        //    var expect = uri;
 
-            // Act
-            var result = new FactoryInventoryModel(uri, name, description,category,tokens,quantities);
+        //    // Act
+        //    var result = new FactoryInventoryModel(uri, name, description,category,tokens,quantities);
 
-            // Assert
-            Assert.AreEqual(expect,result.Uri, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expect,result.Uri, TestContext.TestName);
+        //}
 
         [TestMethod]
         public void Models_FactoryInventoryModel_Instantiate_Valid_Get_Catagory_Should_Pass()
