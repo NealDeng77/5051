@@ -4,7 +4,7 @@ using _5051.Models.Enums;
 namespace _5051.Models
 {
     /// <summary>
-    /// Data to Track Attendance, In and Out are in UTC
+    /// Data to Track Attendance. Contains info about who the student it, when he checked in and out, what his emotion status was. In and Out are in UTC
     /// </summary>
     public class AttendanceModel
     {
