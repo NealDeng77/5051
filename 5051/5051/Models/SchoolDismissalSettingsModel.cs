@@ -121,6 +121,20 @@ namespace _5051.Models
             EndLate = data.EndLate;
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
+
+            FallFirstClassDay = data.FallFirstClassDay;
+            FallLastClassDay = data.FallLastClassDay;
+            SpringFirstClassDay = data.SpringFirstClassDay;
+            SpringLastClassDay = data.SpringLastClassDay;
+            FallQuarterFirstClassDay = data.FallQuarterFirstClassDay;
+            FallQuarterLastClassDay = data.FallQuarterLastClassDay;
+            WinterQuarterFirstClassDay = data.WinterQuarterFirstClassDay;
+            WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
+            SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
+            SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+
         }
 
         /// <summary>
