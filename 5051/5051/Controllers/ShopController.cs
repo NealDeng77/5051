@@ -296,7 +296,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var data = new ShopTruckViewModel(studentdata.Truck);
+            var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
 
             //Return Truck Data
             return View(data);

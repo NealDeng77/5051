@@ -20,19 +20,5 @@ namespace _5051.Models
 
         // The StudentID for this truck, used to simplify the models
         public string StudentId { get; set; }
-
-        // Make a new view model based on the current data set
-        public ShopTruckViewModel(ShopTruckModel data)
-        {
-            StudentId = data.StudentId;
-
-            // Load the data set for each type
-            TruckItem = new ShopTruckItemViewModel(StudentId, data.Truck);
-            WheelsItem = new ShopTruckItemViewModel(StudentId, data.Wheels);
-            TopperItem = new ShopTruckItemViewModel(StudentId, data.Topper);
-            TrailerItem = new ShopTruckItemViewModel(StudentId, data.Trailer);
-            MenuItem = new ShopTruckItemViewModel(StudentId, data.Menu);
-            SignItem = new ShopTruckItemViewModel(StudentId, data.Sign);
-        }
     }
 }
