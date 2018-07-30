@@ -195,7 +195,7 @@ namespace _5051.Backend
             var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(temp.In);
             var myDate = temp.In.ToShortDateString() + " " + myItemDefault.TimeEnd;
             //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-            temp.Out = DateTime.Parse(myDate);
+            temp.Out = UTCConversionsBackend.KioskTimeToUtc(DateTime.Parse(myDate));
 
             data.Attendance.Add(temp);
 
