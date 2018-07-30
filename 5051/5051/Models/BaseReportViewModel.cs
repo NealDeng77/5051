@@ -5,6 +5,7 @@ namespace _5051.Models
 {
     /// <summary>
     /// The base report view model, all types of report view models(weekly, monthly, semester, school year) inherit this class
+    /// Contains info about who the student is, start date and end date, a list of view models of individual day's attendance, and overall stats of the report.
     /// </summary>
     public class BaseReportViewModel
     {
@@ -19,12 +20,12 @@ namespace _5051.Models
         public StudentModel Student { get; set; }
 
         /// <summary>
-        /// Date Start passed in for the filter for the report
+        /// Date Start 
         /// </summary>
         public DateTime DateStart { get; set; }
 
         /// <summary>
-        /// Date end passed in for the filter for the report
+        /// Date end 
         /// </summary>
         public DateTime DateEnd { get; set; }
 
