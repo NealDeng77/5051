@@ -427,3 +427,8 @@ input[type=submit].btn-block {
     width: 100px;
     height: auto;
 }
+
+.ScoreBoard {
+    position: absolute;
+    z-index: 6;
+}
