@@ -365,6 +365,136 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Portal_Attendance_ID_Valid_Attendance_Not_Null_Or_Empty_Emotion_Is_VeryHappy_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = StudentBackend.Instance.GetDefault();
+            data.Attendance = new List<AttendanceModel>();
+            var myAttendance = new AttendanceModel()
+            {
+                StudentId = data.Id,
+                In = DateTime.UtcNow,
+                Emotion = EmotionStatusEnum.VeryHappy
+            };
+            data.Attendance.Add(myAttendance);
+            // Act
+            ViewResult result = controller.Attendance(data.Id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Attendance_ID_Valid_Attendance_Not_Null_Or_Empty_Emotion_Is_Happy_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = StudentBackend.Instance.GetDefault();
+            data.Attendance = new List<AttendanceModel>();
+            var myAttendance = new AttendanceModel()
+            {
+                StudentId = data.Id,
+                In = DateTime.UtcNow,
+                Emotion = EmotionStatusEnum.Happy
+            };
+            data.Attendance.Add(myAttendance);
+            // Act
+            ViewResult result = controller.Attendance(data.Id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Attendance_ID_Valid_Attendance_Not_Null_Or_Empty_Emotion_Is_Neutral_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = StudentBackend.Instance.GetDefault();
+            data.Attendance = new List<AttendanceModel>();
+            var myAttendance = new AttendanceModel()
+            {
+                StudentId = data.Id,
+                In = DateTime.UtcNow,
+                Emotion = EmotionStatusEnum.Neutral
+            };
+            data.Attendance.Add(myAttendance);
+            // Act
+            ViewResult result = controller.Attendance(data.Id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Attendance_ID_Valid_Attendance_Not_Null_Or_Empty_Emotion_Is_Sad_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = StudentBackend.Instance.GetDefault();
+            data.Attendance = new List<AttendanceModel>();
+            var myAttendance = new AttendanceModel()
+            {
+                StudentId = data.Id,
+                In = DateTime.UtcNow,
+                Emotion = EmotionStatusEnum.Sad
+            };
+            data.Attendance.Add(myAttendance);
+            // Act
+            ViewResult result = controller.Attendance(data.Id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Attendance_ID_Valid_Attendance_Not_Null_Or_Empty_Emotion_Is_VerySad_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel data = StudentBackend.Instance.GetDefault();
+            data.Attendance = new List<AttendanceModel>();
+            var myAttendance = new AttendanceModel()
+            {
+                StudentId = data.Id,
+                In = DateTime.UtcNow,
+                Emotion = EmotionStatusEnum.VerySad
+            };
+            data.Attendance.Add(myAttendance);
+            // Act
+            ViewResult result = controller.Attendance(data.Id) as ViewResult;
+
+            var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
+        }
         #endregion
 
         #region AvatarPostRegion
