@@ -43,15 +43,14 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_KioskSettings_Instantiate_Get_SelectedTimeZoneId_Should_Pass()
+        public void Models_KioskSettings_Instantiate_Get_Default_Time_Zone_Should_Pass()
         {
             // Arrange
             var myModelNew = new KioskSettingsModel();
-            var expectedSelectedId = 5;
-
+            var expectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
 
             // Assert
-            Assert.AreEqual(expectedSelectedId, myModelNew.SelectedTimeZoneId, TestContext.TestName);
+            Assert.AreEqual(expectedTimeZone, myModelNew.TimeZone, TestContext.TestName);
         }
 
         [TestMethod]
