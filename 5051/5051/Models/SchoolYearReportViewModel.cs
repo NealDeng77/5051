@@ -10,5 +10,6 @@ namespace _5051.Models
     /// </summary>
     public class SchoolYearReportViewModel : BaseReportViewModel
     {
+        //todo: add a drop down list for year selection if there is more than one school year
     }
 }
