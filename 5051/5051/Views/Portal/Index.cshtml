@@ -37,7 +37,7 @@
                     var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
                     if (LastLoginIn != null)
                     {
-                        <h4>You last logged in at: <span id="lastLoginValue">@LastLoginIn.In.ToShortDateString() @LastLoginIn.In.ToShortTimeString()</span></h4>
+                        <h4>You last logged in at: <span id="lastLoginValue">>@_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortDateString() @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortTimeString()</span></h4>
                     }
 
                     <h4>Emotion State: <span id="currentEmotionValue">@Model.EmotionCurrent</span></h4>
