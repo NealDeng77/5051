@@ -1,5 +1,4 @@
-﻿
-namespace _5051.Models
+﻿namespace _5051.Models
 {
     /// <summary>
     /// View Model for the GameResult Views to have the list of GameResults
