@@ -46,6 +46,9 @@ function GetIterationNumber() {
             success: function (data) {
                 // Update the Global Server Iteration Number
                 ServerIterationNumber = DataLoadIterationNumber(data);
+            },
+            error: function (data) {
+                alert("Fail GetIterationNumber");
             }
         })
             .fail(function () {
@@ -55,25 +58,37 @@ function GetIterationNumber() {
 }
 // Parses the Data Structure and returns the Iteration Number
 function DataLoadGameResults(data) {
-    var IterationNumber = data.Data;
-    return IterationNumber;
+    var result = data.Data;
+    ShopData.Topper = result.Topper;
+    ShopData.Menu = result.Menu;
+    ShopData.Wheels = result.Wheels;
+    ShopData.Sign = result.Sign;
+    ShopData.Truck = result.Truck;
+    ShopData.Trailer = result.Trailer;
+    ServerIterationNumber = result.IterationNumber;
 }
 // Does a fetch to the server, and returns the Iteration Number
 function GetGameResults() {
-    $.ajax("/Game/GetResults/" + StudentId, {
+    var data = { "Id": StudentId.toString() };
+    $.ajax({
+        url: "/Game/GetResults/",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json',
         type: 'POST',
         async: false,
         success: function (data) {
-            // console.log(data);
-            var IterationNumber = DataLoadIterationNumber(data);
-            return IterationNumber;
+            DataLoadGameResults(data);
+            return;
+        },
+        error: function (data) {
+            alert("Fail GetResults");
         }
     })
         .fail(function () {
         console.log("Error GetResults");
-        return 0;
+        return;
     });
     return 0;
 }
@@ -98,6 +113,9 @@ function GetGameRefreshRate() {
             async: false,
             success: function (data) {
                 ServerRefreshRate = DataLoadRefreshRate(data);
+            },
+            error: function (data) {
+                alert("Fail GetRefreshRate");
             }
         })
             .fail(function () {
@@ -112,14 +130,17 @@ function RefreshGame() {
         yield GetIterationNumber();
         // Check if Game Version > current version, if so do update sequence
         if (ServerIterationNumber > CurrentIterationNumber) {
-            // Get New Data
-            GetGameResults();
-            // Refresh Game Display
-            RefreshGameDisplay();
-            // Update Iteration Number
-            CurrentIterationNumber = ServerIterationNumber;
+            UpdateGame();
         }
     });
+}
+function UpdateGame() {
+    // Get New Data
+    GetGameResults();
+    // Refresh Game Display
+    RefreshGameDisplay();
+    // Update Iteration Number
+    CurrentIterationNumber = ServerIterationNumber;
 }
 // Set the Default on Boot to draw, before the rest draws if no data exists
 function SetDefaultShopData() {
@@ -149,7 +170,7 @@ function SetDefaultShopData() {
 // Set the Default Data for before the data loads from the server
 SetDefaultShopData();
 // Call for Refresh Game to get the Initial State
-RefreshGame();
+UpdateGame();
 // Then start looping to refresh every RefreshRate Iteration
 // Get Refresh Rate
 GetRefreshRate();

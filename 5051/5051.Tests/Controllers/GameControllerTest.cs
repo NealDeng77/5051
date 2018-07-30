@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
- 
+
 using _5051;
 using _5051.Controllers;
 using _5051.Backend;
@@ -135,9 +135,11 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var studentData = new StudentInputModel();
+            studentData.Id = data.Id;
 
             // Act
-            var result = (JsonResult)controller.GetResults(data);
+            var result = (JsonResult)controller.GetResults(studentData);
             var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = dataResult.GetValue(result.Data, null);
 
@@ -155,9 +157,11 @@ namespace _5051.Tests.Controllers
             var controller = new GameController();
 
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var studentData = new StudentInputModel();
+            studentData.Id = data.Id;
 
             // Act
-            var result = (JsonResult)controller.GetResults(data);
+            var result = (JsonResult)controller.GetResults(studentData);
             var dataResult = result.Data.GetType().GetProperty("Error", BindingFlags.Instance | BindingFlags.Public);
             var dataVal = dataResult.GetValue(result.Data, null);
 
