@@ -114,6 +114,7 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
+
             //Check the item quantity
             if (myItem.Quantities < 1)
             {
@@ -217,6 +218,7 @@ namespace _5051.Controllers
             }
             return View(myData);
         }
+
         [HttpPost]
         public ActionResult Inventory([Bind(Include=
                                         "StudentId,"+
@@ -273,8 +275,6 @@ namespace _5051.Controllers
             return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
 
         }
-
-
         /// <summary>
         /// Edit The Shop Details
         /// </summary>
@@ -305,6 +305,90 @@ namespace _5051.Controllers
 
             //Return Truck Data
             return View(data);
+        }
+
+        /// <summary>
+        /// Update the Current Inventory Slot to use tha Item passed up.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit([Bind(Include=
+                                        "StudentId,"+
+                                        "ItemId,"+
+                                        "Position,"+
+                                        "")] ShopTruckInputModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (data == null)
+            {
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.ItemId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Student
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            if (myStudent == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Item
+            var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+            if (myItem == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            switch (data.Position)
+            {
+                case FactoryInventoryCategoryEnum.Truck:
+                    myStudent.Truck.Truck = myItem.Id;
+                    break;
+
+                case FactoryInventoryCategoryEnum.Topper:
+                    myStudent.Truck.Topper = myItem.Id;
+                    break;
+
+                case FactoryInventoryCategoryEnum.Menu:
+                    myStudent.Truck.Menu = myItem.Id;
+                    break;
+
+                case FactoryInventoryCategoryEnum.Sign:
+                    myStudent.Truck.Sign = myItem.Id;
+                    break;
+
+                case FactoryInventoryCategoryEnum.Wheels:
+                    myStudent.Truck.Wheels = myItem.Id;
+                    break;
+
+                case FactoryInventoryCategoryEnum.Trailer:
+                    myStudent.Truck.Trailer = myItem.Id;
+                    break;
+            }
+
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            return RedirectToAction("Index", "Shop", new { id = data.StudentId });
         }
 
         /// <summary>

@@ -540,7 +540,7 @@ namespace _5051.Tests.Controllers
             ShopController controller = new ShopController();
 
             // Act
-            var result = controller.Edit(null) as RedirectToRouteResult;
+            var result = controller.Edit((string)null) as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
