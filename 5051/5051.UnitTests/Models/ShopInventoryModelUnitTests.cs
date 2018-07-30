@@ -56,6 +56,37 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(expect, result.Category, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_FactoryInventoryModel_Instantiate_With_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var expectUri = "uri";
+            var expectDescription = "Description";
+            var expectTokens = 1000;
+            var expectQuantities = 2000;
+            var expectCategory = FactoryInventoryCategoryEnum.Topper;
+
+            var test = new FactoryInventoryModel();
+            test.Uri = expectUri;
+            test.Description = expectDescription;
+            test.Tokens = expectTokens;
+            test.Quantities = expectQuantities;
+            test.Category = expectCategory;
+
+            // Act
+            var data = new FactoryInventoryModel(test);
+
+            var result = data;
+
+            // Assert
+            Assert.AreEqual(expectUri, result.Uri, "Uri " + TestContext.TestName);
+            Assert.AreEqual(expectDescription, result.Description, "Description " + TestContext.TestName);
+            Assert.AreEqual(expectTokens, result.Tokens, "Tokens " + TestContext.TestName);
+            Assert.AreEqual(expectQuantities, result.Quantities, "Quantities " + TestContext.TestName);
+            Assert.AreEqual(expectCategory, result.Category, "Category " + TestContext.TestName);
+        }
+
         #endregion Instantiate
 
         #region Update
@@ -63,20 +94,31 @@ namespace _5051.UnitTests.Models
         public void Models_FactoryInventoryModel_Update_With_Valid_Data_Should_Pass()
         {
             // Arrange
-            var expect = "test";
+            var expectUri = "uri";
+            var expectDescription = "Description";
+            var expectTokens = 1000;
+            var expectQuantities = 2000;
+            var expectCategory = FactoryInventoryCategoryEnum.Topper;
 
             var data = new FactoryInventoryModel();
-            data.Uri = "bogus";
 
             var test = new FactoryInventoryModel();
-            test.Uri = "test";
+            test.Uri = expectUri;
+            test.Description = expectDescription;
+            test.Tokens = expectTokens;
+            test.Quantities = expectQuantities;
+            test.Category = expectCategory;
 
             // Act
             data.Update(test);
-            var result = data.Uri;
+            var result = data;
 
             // Assert
-            Assert.AreEqual(expect, result, TestContext.TestName);
+            Assert.AreEqual(expectUri, result.Uri, "Uri "+TestContext.TestName);
+            Assert.AreEqual(expectDescription, result.Description, "Description " + TestContext.TestName);
+            Assert.AreEqual(expectTokens, result.Tokens, "Tokens " + TestContext.TestName);
+            Assert.AreEqual(expectQuantities, result.Quantities, "Quantities " + TestContext.TestName);
+            Assert.AreEqual(expectCategory, result.Category, "Category " + TestContext.TestName);
         }
 
         [TestMethod]

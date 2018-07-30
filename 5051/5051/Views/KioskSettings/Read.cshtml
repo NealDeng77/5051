@@ -16,29 +16,37 @@
             }
             else
             {
-                    <br />
-                    <br />
+                <br />
+                <br />
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.Password)
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.DisplayFor(m => m.Password)
-                        </div>
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.Password)
                     </div>
-
-                    <br />
-                    <br />
-
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                        </div>
+                    <div class="col-sm-4">
+                        @Html.DisplayFor(m => m.Password)
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.TimeZone)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.DisplayFor(m => m.TimeZone.DisplayName)
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ActionLink("Back", "Settings", new { id = Model.Id, Controller = "Admin" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
             }
         }
     </div>

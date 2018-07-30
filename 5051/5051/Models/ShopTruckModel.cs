@@ -26,8 +26,21 @@ namespace _5051.Models
         // The Inventory ID for the Wheels
         public string Truck { get; set; }
 
-        // The StudentID for this truck, used to simplify the models
-        public string StudentId { get; set; }
+        public ShopTruckModel()
+        {
+            // New Models, set default data
 
+            Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;
+
+            Wheels = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Wheels).Id;
+
+            Topper = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Topper).Id;
+
+            Trailer = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Trailer).Id;
+
+            Sign = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Sign).Id;
+
+            Menu = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Menu).Id;
+        }
     }
 }

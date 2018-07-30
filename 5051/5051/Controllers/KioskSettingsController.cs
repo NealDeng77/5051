@@ -65,7 +65,7 @@ namespace _5051.Controllers
         public ActionResult Update([Bind(Include=
                                         "Id," +
                                         "Password," +
-
+                                        "SelectedTimeZoneId" +
                                         "")] KioskSettingsModel data)
         {
             if (!ModelState.IsValid)

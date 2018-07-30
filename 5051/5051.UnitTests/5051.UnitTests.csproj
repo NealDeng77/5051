@@ -110,6 +110,10 @@
     <Compile Include="Backend\KioskSettingsDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\AvatarDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\UTCConversionsBackendUnitTests.cs" />
+    <Compile Include="Misc\FilterConfigUnitTests.cs" />
+    <Compile Include="Misc\EmailServiceUnitTests.cs" />
+    <Compile Include="Misc\SmsServiceUnitTests.cs" />
+    <Compile Include="Misc\RouteConfigUnitTests.cs" />
     <Compile Include="Misc\BundleConfigUnitTests.cs" />
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -142,6 +146,7 @@
     <Compile Include="Models\SemesterReportViewModelTests.cs" />
     <Compile Include="Models\SendCodeViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckModelUnitTests.cs" />
+    <Compile Include="Models\ShopTruckItemViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckViewModelUnitTests.cs" />
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
     <Compile Include="Models\StudentAvatarModelUnitTests.cs" />

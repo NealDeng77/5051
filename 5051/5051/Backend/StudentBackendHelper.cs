@@ -195,7 +195,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private static DateTime InGood(DateTime date, Random r)
         {
-            return date.AddMinutes(r.Next(480, 535)); // in 8:00am - 8:54am
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(r.Next(480, 535))); // in 8:00am - 8:54am
         }
         /// <summary>
         /// Check-in time is late, return a random time between 8:55am - 10:00am
@@ -205,7 +205,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private static DateTime InLate(DateTime date, Random r)
         {
-            return date.AddMinutes(r.Next(535, 600)); // in 8:55am - 10:00am
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(r.Next(535, 600))); // in 8:55am - 10:00am
         }
         /// <summary>
         /// Check-in time is very late, return a random time between 10:00am - 2:00pm
@@ -215,7 +215,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private static DateTime InVeryLate(DateTime date, Random r)
         {
-            return date.AddMinutes(r.Next(600, 840)); // in 10:00am - 2:00pm
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(r.Next(600, 840))); // in 10:00am - 2:00pm
         }
         /// <summary>
         /// Check-out time is auto, return 15:45pm
@@ -225,7 +225,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private static DateTime OutAuto(DateTime date, Random r)
         {
-            return date.AddMinutes(945); // out 15:45pm
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(945)); // out 15:45pm
         }
         /// <summary>
         /// Check-out time is early, return a random time between 10:00am - 3:00pm
@@ -235,7 +235,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private static DateTime OutEarly(DateTime date, Random r)
         {
-            return date.AddMinutes(r.Next(600, 900)); // out 10:00am - 3:00pm
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(r.Next(600, 900))); // out 10:00am - 3:00pm
         }
     }
 }

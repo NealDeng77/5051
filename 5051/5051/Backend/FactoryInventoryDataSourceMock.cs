@@ -173,13 +173,19 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", FactoryInventoryCategoryEnum.Furniture, 10, 10));
             Create(new FactoryInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", FactoryInventoryCategoryEnum.Furniture, 10, 10));
 
-            Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Truck, 10, 10));
-            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Truck, 10, 10));
+            Create(new FactoryInventoryModel("Wheels1.png", "No Wheel", "No Wheels", FactoryInventoryCategoryEnum.Wheels, 1, 1));
+            Create(new FactoryInventoryModel("Trailer1.png", "No Trailer", "No Trailer", FactoryInventoryCategoryEnum.Trailer, 1, 1));
+            Create(new FactoryInventoryModel("Truck1.png", "No Truck", "No Truck", FactoryInventoryCategoryEnum.Truck, 1, 1));
+            Create(new FactoryInventoryModel("Menu1.png", "No Menu", "No Menu", FactoryInventoryCategoryEnum.Menu, 1, 1));
+            Create(new FactoryInventoryModel("Topper1.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1));
+            Create(new FactoryInventoryModel("Sign1.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1));
+
+            Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10));
+            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10));
             Create(new FactoryInventoryModel("Truck1.png", "Slick Truck", "Slick Truck", FactoryInventoryCategoryEnum.Truck, 10, 10));
-            Create(new FactoryInventoryModel("Menu1.png", "Slick Menu", "Slick Menu", FactoryInventoryCategoryEnum.Truck, 10, 10));
-            Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Truck, 10, 10));
-            Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Truck, 10, 10));
-            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Truck, 10, 10));
+            Create(new FactoryInventoryModel("Menu1.png", "Slick Menu", "Slick Menu", FactoryInventoryCategoryEnum.Menu, 10, 10));
+            Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Topper, 10, 10));
+            Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Sign, 10, 10));
         }
 
         /// <summary>

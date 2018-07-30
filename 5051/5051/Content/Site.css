@@ -43,6 +43,11 @@ textarea {
     border-radius: 20px;
 }
 
+.lightTransparentBox {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+}
+
 .PortalBox{
     width:200px;
     height:200px;
@@ -328,4 +333,97 @@ input[type=submit].btn-block {
     width: auto;
     max-width: 150px;
     background-color: grey;
+}
+
+/*
+    /Shop/Index page
+*/
+
+.ImageBox {
+    position: relative;
+    width: 1650px;
+    height: 550px;
+}
+
+.TopperBox {
+    position: absolute;
+    left: 460px;
+    z-index: 2;
+}
+
+.TruckBox {
+    position: absolute;
+    top: 480px;
+    left: 190px;
+    z-index: 1;
+}
+
+.MenuBox {
+    position: absolute;
+    top: 475px;
+    left: 925px;
+    z-index: 3;
+}
+
+.SignBox {
+    position: absolute;
+    top: 830px;
+    left:0px;
+    z-index: 5;
+}
+
+.WheelsBox {
+    position: absolute;
+    top: 875px;
+    left: 240px;
+    z-index: 4;
+}
+
+.TrailerBox {
+    position: absolute;
+    top: 730px;
+    left: 1200px;
+    z-index: 2;
+}
+
+.PeopleBox {
+    position: absolute;
+    top: 220px;
+    left: -400px;
+    z-index: 10;
+}
+
+.TopperItem {
+    width: 591px;
+    height: 463px;
+}
+
+.TruckItem {
+    width: 1142px;
+    height: 464px;
+}
+
+.MenuItem {
+    width: 173px;
+    height: 279px;
+}
+
+.SignItem {
+    width: 198px;
+    height: 191px;
+}
+
+.WheelsItem {
+    width: 1374px;
+    height: 148px;
+}
+
+.TrailerItem {
+    width: 453px;
+    height: 220px;
+}
+
+.PeopleItem {
+    width: 100px;
+    height: auto;
 }

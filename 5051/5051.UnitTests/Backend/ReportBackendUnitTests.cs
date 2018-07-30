@@ -62,7 +62,7 @@ namespace _5051.UnitTests.Models
             testReport.Stats.DaysPresent = 2;
             testReport.DateEnd = DateTime.UtcNow;
 
-            
+
             //act
             var result = reportBackend.GenerateMonthlyReport(testReport);
 
@@ -86,14 +86,14 @@ namespace _5051.UnitTests.Models
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
             var testStudentAttendance1 = new AttendanceModel();
-            testStudentAttendance1.In = new DateTime(2018, 1, 15);
-            testStudentAttendance1.Out = new DateTime(2018, 1, 15, 23, 59, 59);
+            testStudentAttendance1.In = _5051.Backend.UTCConversionsBackend.KioskTimeToUtc(new DateTime(2018, 1, 15));
+            testStudentAttendance1.Out = _5051.Backend.UTCConversionsBackend.KioskTimeToUtc(new DateTime(2018, 1, 15, 23, 59, 59));
             testStudent.Attendance.Add(testStudentAttendance1);
             testReport.Stats.DaysPresent = 1;
             testReport.DateEnd = DateTime.UtcNow;
 
             //act
-            var result = reportBackend. GenerateOverallReport(testReport);
+            var result = reportBackend.GenerateOverallReport(testReport);
 
             //reset
             studentBackend.Reset();
@@ -101,6 +101,7 @@ namespace _5051.UnitTests.Models
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
 
         [TestMethod]
         public void Backend_ReportBackend_CalculateDurationInOutStatus_Valid_Report_CheckIn_Late_Should_Pass()
@@ -113,7 +114,7 @@ namespace _5051.UnitTests.Models
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
             var testStudentAttendance1 = new AttendanceModel();
-            testStudentAttendance1.In = new DateTime(2018, 1, 15, 12, 0, 0);
+            testStudentAttendance1.In = _5051.Backend.UTCConversionsBackend.KioskTimeToUtc( new DateTime(2018, 1, 15, 12, 0, 0)) ;
             testStudent.Attendance.Add(testStudentAttendance1);
             testReport.Stats.DaysPresent = 1;
             testReport.DateEnd = DateTime.UtcNow;

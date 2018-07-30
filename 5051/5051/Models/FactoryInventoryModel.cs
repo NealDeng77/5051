@@ -63,6 +63,16 @@ namespace _5051.Models
         }
 
         /// <summary>
+        /// Make a New Model, and Update it with data
+        /// </summary>
+        /// <param name="data"></param>
+        public FactoryInventoryModel(FactoryInventoryModel data)
+        {
+            Initialize();
+            Update(data);
+        }
+
+        /// <summary>
         /// Make an FactoryInventory from values passed in
         /// </summary>
         /// <param name="uri">The Picture path</param>
@@ -96,7 +106,8 @@ namespace _5051.Models
             Name = data.Name;
             Description = data.Description;
             Tokens = data.Tokens;
-            Quantities = data.Quantities;           
+            Quantities = data.Quantities;
+            Category = data.Category;
         }
     }
 }

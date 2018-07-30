@@ -174,7 +174,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id">optional paramater, of the Item that is currently selected</param>
         /// <returns>List of SelectListItems as a SelectList</returns>
-        public List<SelectListItem> GetFactoryInventoryListItem(string id=null)
+        public List<SelectListItem> GetFactoryInventoryListItem(string id = null)
         {
             var myDataList = DataSource.Index();
 
@@ -189,7 +189,7 @@ namespace _5051.Backend
 
             return myReturn;
         }
-        
+
         /// <summary>
         /// Switch the data set between Demo, Default and Unit Test
         /// </summary>
@@ -205,6 +205,94 @@ namespace _5051.Backend
         public void Reset()
         {
             DataSource.Reset();
+        }
+
+        /// <summary>
+        /// Return the First item in the List for the Given Category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public FactoryInventoryModel GetDefault(FactoryInventoryCategoryEnum category)
+        {
+            var data = Index().Where(m => m.Category == category).FirstOrDefault();
+
+            return data;
+        }
+
+        public ShopTruckViewModel GetShopTruckViewModel(StudentModel studentData)
+        {
+            var data = new ShopTruckViewModel();
+
+                data.StudentId = studentData.Id;
+
+                // Load the data set for each type
+                data.TruckItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Truck);
+                data.WheelsItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Wheels);
+                data.TopperItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Topper);
+                data.TrailerItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Trailer);
+                data.MenuItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Menu);
+                data.SignItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Sign);
+
+            return data;
+        }
+
+        /// <summary>
+        /// Build out the View used by Edit.
+        /// If anything is wrong, don't init the studentID.
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="InventoryId"></param>
+        /// <param name="defaultUri"></param>
+        public ShopTruckItemViewModel GetShopTruckItemViewModel(string studentId, string inventoryId)
+        {
+            /* 
+             * Pass in the inventory Id for the Item.
+             * 
+             * Retrieve the Id item
+             * 
+             * Put the returned Factory Item in the Item Slot
+             * 
+             * Get the Category
+             * 
+             * Get the StudentId Inventory
+             * 
+             * Find all the Items that match the Category
+             * 
+             * Add them to the Item List
+             * 
+             */
+
+            var data = new ShopTruckItemViewModel();
+
+            if (string.IsNullOrEmpty(studentId))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(inventoryId))
+            {
+                return null;
+            }
+
+            var InventoryData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(inventoryId);
+            if (InventoryData == null)
+            {
+                return null;
+            }
+
+            var StudentData = DataSourceBackend.Instance.StudentBackend.Read(studentId);
+            if (StudentData == null)
+            {
+                return null;
+            }
+
+            var InventoryListData = StudentData.Inventory.Where(m => m.Category == InventoryData.Category).ToList();
+
+            // Found the Item, and Found the Inventory List for the Item
+            data.Item = InventoryData;
+            data.ItemList = InventoryListData;
+
+            return data;
         }
     }
 }

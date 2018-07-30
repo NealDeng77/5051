@@ -204,12 +204,28 @@ namespace _5051.Backend
         /// <summary>
         /// Simulation Results
         /// </summary>
-        public string GetResult(string id = null)
+        public GameResultViewModel GetResult(string id = null)
         {
             // Get the Store results for this student
             // Return the Student Results
+            var result = new GameResultViewModel();
 
-            return "hi";
+            var StudentData = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (StudentData == null)
+            {
+                return result;
+            }
+
+            result.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Truck).Uri;
+            result.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Trailer).Uri;
+            result.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Wheels).Uri;
+            result.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Topper).Uri;
+            result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
+            result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
+
+            result.IterationNumber = GetDefault().IterationNumber;
+
+            return result;
         }
 
         /// <summary>

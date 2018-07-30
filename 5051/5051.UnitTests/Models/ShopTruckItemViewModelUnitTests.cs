@@ -10,25 +10,24 @@ using _5051.Backend;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopTruckViewModelUnitTests
+    public class ShopTruckItemViewModelUnitTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
-
         [TestMethod]
-        public void Models_ShopTruckViewModel_Default_Instantiate_Get_Set_Should_Pass()
+        public void Models_ShopTruckItemViewModel_Default_Instantiate_Should_Pass()
         {
             // Arrange
-            
+
             // Act
-            var result = new ShopTruckViewModel();
+            var result = new ShopTruckItemViewModel();
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.IsNotNull(result,TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         #endregion Instantiate

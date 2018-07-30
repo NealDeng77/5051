@@ -53,7 +53,7 @@ interface iJsonDataResult {
     Sign: string;
     Menu: string;
     Wheels: string;
-    Inventory: iJsonDataInventory[];
+    IterationNumber: number;
 }
 
 // The Data structor for the Result Data set Header
@@ -92,6 +92,9 @@ async function GetIterationNumber() {
             success: function (data: any) {
                 // Update the Global Server Iteration Number
                 ServerIterationNumber = DataLoadIterationNumber(<IJsonDataIterationNumberHeader>data);
+            },
+            error: function (data: any) {
+                alert("Fail GetIterationNumber");
             }
         })
         .fail(function () {
@@ -100,28 +103,43 @@ async function GetIterationNumber() {
 }
 
 // Parses the Data Structure and returns the Iteration Number
-function DataLoadGameResults(data: IJsonDataIterationNumberHeader): number {
-    var IterationNumber = data.Data;
-    return IterationNumber;
+function DataLoadGameResults(data: IJsonDataResultHeader) {
+
+    var result = <iJsonDataResult>data.Data;
+
+    ShopData.Topper = result.Topper;
+    ShopData.Menu = result.Menu;
+    ShopData.Wheels = result.Wheels;
+    ShopData.Sign = result.Sign;
+    ShopData.Truck = result.Truck;
+    ShopData.Trailer = result.Trailer;
+    ServerIterationNumber = result.IterationNumber;
 }
 
 // Does a fetch to the server, and returns the Iteration Number
-function GetGameResults(): number {
-    $.ajax("/Game/GetResults/" + StudentId,
+function GetGameResults(){
+
+    var data = { "Id": StudentId.toString() };
+    $.ajax(
         {
+            url: "/Game/GetResults/",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
             cache: false,
             dataType: 'json',
             type: 'POST',
             async: false,
             success: function (data: any) {
-                // console.log(data);
-                var IterationNumber = DataLoadIterationNumber(<IJsonDataIterationNumberHeader>data);
-                return IterationNumber;
+                DataLoadGameResults(<IJsonDataResultHeader>data);
+                return;
+            },
+            error: function (data: any) {
+                alert("Fail GetResults");
             }
         })
         .fail(function () {
             console.log("Error GetResults");
-            return 0;
+            return;
         });
 
     return 0;
@@ -150,6 +168,9 @@ async function GetGameRefreshRate() {
             async: false,
             success: function (data: any) {
                 ServerRefreshRate = DataLoadRefreshRate(<IJsonDataRefreshRateHeader>data);
+            },
+            error: function (data: any) {
+                alert("Fail GetRefreshRate");
             }
         })
         .fail(function () {
@@ -166,15 +187,19 @@ async function RefreshGame() {
     // Check if Game Version > current version, if so do update sequence
     if (ServerIterationNumber > CurrentIterationNumber) {
 
-        // Get New Data
-        GetGameResults();
-
-        // Refresh Game Display
-        RefreshGameDisplay();
-
-        // Update Iteration Number
-        CurrentIterationNumber = ServerIterationNumber;
+        UpdateGame();
     }
+}
+
+function UpdateGame() {
+    // Get New Data
+    GetGameResults();
+
+    // Refresh Game Display
+    RefreshGameDisplay();
+
+    // Update Iteration Number
+    CurrentIterationNumber = ServerIterationNumber;
 }
 
 // Set the Default on Boot to draw, before the rest draws if no data exists
@@ -209,7 +234,7 @@ function SetDefaultShopData() {
 SetDefaultShopData();
 
 // Call for Refresh Game to get the Initial State
-RefreshGame();
+UpdateGame();
 
 // Then start looping to refresh every RefreshRate Iteration
 

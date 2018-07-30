@@ -4,31 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using _5051.Models;
-using _5051.Backend;
+using System.Web.Optimization;
+using System.Web.Routing;
+using System.Web.Mvc;
 
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class ShopTruckViewModelUnitTests
+    public class FilterConfigUnitTests
     {
         public TestContext TestContext { get; set; }
 
         #region Instantiate
-
         [TestMethod]
-        public void Models_ShopTruckViewModel_Default_Instantiate_Get_Set_Should_Pass()
+        public void Models_FilterConfig_Default_Instantiate_Should_Pass()
         {
-            // Arrange
-            
-            // Act
-            var result = new ShopTruckViewModel();
+            //arrange
+            var data = new GlobalFilterCollection();
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+            // Act
+            FilterConfig.RegisterGlobalFilters(data);
 
             // Assert
-            Assert.IsNotNull(result,TestContext.TestName);
+            Assert.IsNotNull(data, TestContext.TestName);
         }
 
         #endregion Instantiate

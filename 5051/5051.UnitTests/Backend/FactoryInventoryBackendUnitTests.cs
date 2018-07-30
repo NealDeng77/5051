@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend_FactoryInventoryBackend_
 {
     [TestClass]
     public class FactoryInventoryBackendUnitTests
@@ -13,7 +14,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Delete_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             var data = new FactoryInventoryModel();
             var createResult = test.Create(data);
             var expect = true;
@@ -29,10 +30,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_FactoryInventoryBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_FactoryInventoryBackend__FactoryInventoryBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             var expect = false;
 
             //act
@@ -51,7 +52,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_GetFactoryInventoryListItem_ID_Null_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             //act
             var result = test.GetFactoryInventoryListItem(null);
@@ -66,7 +67,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_GetFactoryInventoryUri_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             var testID = test.GetFirstFactoryInventoryId();
 
             //act
@@ -80,7 +81,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_GetFactoryInventoryUri_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             //act
             var result = test.GetFactoryInventoryUri(null);
@@ -94,7 +95,7 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var data = new FactoryInventoryModel();
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             data.Id = "bogus";
 
             //act
@@ -110,7 +111,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Update_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             var data = new FactoryInventoryModel();
             var createResult = test.Create(data);
@@ -141,10 +142,10 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_FactoryInventoryBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Backend_FactoryInventoryBackend__FactoryInventoryBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Update(null);
@@ -162,7 +163,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Index();
@@ -177,7 +178,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
 
             //act
             var result = test.Read(null);
@@ -190,7 +191,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Read_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             var testID = test.GetFirstFactoryInventoryId();
 
             //act
@@ -206,7 +207,7 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_Create_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
             var data = new FactoryInventoryModel();
 
             //act
@@ -226,8 +227,8 @@ namespace _5051.UnitTests.Models
         public void Backend_FactoryInventoryBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
             //arrange
-            var test = Backend.FactoryInventoryBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;
 
             //act
@@ -240,11 +241,11 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_FactoryInventoryBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
+        public void Backend_FactoryInventoryBackend_SetDataSourceDatest_Uses_SQLData_Should_Pass()
         {
             //arange
-            var test = Backend.FactoryInventoryBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = FactoryInventoryBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var SQLEnum = DataSourceEnum.SQL;
 
             //act
@@ -256,5 +257,180 @@ namespace _5051.UnitTests.Models
             //asset
         }
         #endregion SetDataSourceDataSet
+
+        #region GetDefault
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend_GetDefault_Valid_Should_Pass()
+        {
+            //arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            //act
+            var result = test.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion GetDefault
+
+        #region GetShopTruckViewModel
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Invalid_StudentID_Null_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            // Act
+            var result = test.GetShopTruckItemViewModel(null, "bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Invalid_ItemId_Null_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            // Act
+            var result = test.GetShopTruckItemViewModel("bogus", null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Invalid_StudentID_Bogus_ItemId_Bogus_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            // Act
+            var result = test.GetShopTruckItemViewModel("bogus", "Bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Invalid_StudentID_Valid_ItemId__Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            // Act
+            var result = test.GetShopTruckItemViewModel("bogus", item.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Valid_StudentID_Bogus_ItemId_Bogus_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Act
+            var result = test.GetShopTruckItemViewModel(student.Id, "Bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Valid_StudentID_Valid_ItemId_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            // Act
+            var result = test.GetShopTruckItemViewModel(student.Id, item.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Invalid_Category_Empty_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            // Make a copy of the Item, and add it to Student Inventory and save student
+            var studentItem = new FactoryInventoryModel(item);
+            student.Inventory.Add(studentItem);
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            // Change inventory category to not match, and Save it
+            item.Category = FactoryInventoryCategoryEnum.Unknown;
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(item);
+
+            // Act
+            var result = test.GetShopTruckItemViewModel(student.Id, item.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend__GetShopTruckItemViewModel_Valid_Should_Fail()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            // Add item to Student Inventory and save student
+            student.Inventory.Add(item);
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            // Act
+            var result = test.GetShopTruckItemViewModel(student.Id, item.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion GetShopTruckViewModel
+
+        #region GetGetShopTruckItemViewModel
+        #endregion GetGetShopTruckItemViewModel
     }
 }
