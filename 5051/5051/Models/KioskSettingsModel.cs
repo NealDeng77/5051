@@ -80,7 +80,7 @@ namespace _5051.Models
             Password = "123";
 
             //set default id to 5, pst time zone
-            SelectedTimeZoneId = 5;
+            TimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
 
             //Initalize the drop down list
             TimeZones = new List<SelectListItem>();
@@ -94,8 +94,6 @@ namespace _5051.Models
                 TimeZones.Add(new SelectListItem { Value = "" + i, Text = TzCollection[i].DisplayName });
             }
 
-            //load the time zone using seleted id
-            TimeZone = TzCollection[SelectedTimeZoneId];
         }
 
         /// <summary>
