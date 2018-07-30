@@ -162,6 +162,48 @@ namespace _5051.Controllers
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
+
+            //Set the last log in time and emotion status img uri
+            if (myReturn.Attendance.Any())
+            {
+                myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
+                switch (myReturn.EmotionCurrent)
+                {
+                    case EmotionStatusEnum.VeryHappy:
+                        myReturn.EmotionImgUri = "EmotionVeryHappy.png";
+                        break;
+                    case EmotionStatusEnum.Happy:
+                        myReturn.EmotionImgUri = "EmotionHappy.png";
+                        break;
+                    case EmotionStatusEnum.Neutral:
+                        myReturn.EmotionImgUri = "EmotionNeutral.png";
+                        break;
+                    case EmotionStatusEnum.Sad:
+                        myReturn.EmotionImgUri = "EmotionSad.png";
+                        break;
+                    case EmotionStatusEnum.VerySad:
+                        myReturn.EmotionImgUri = "EmotionVerySad.png";
+                        break;
+                }
+            }
+
+            //Deep copy Attendance list and convert time zone
+            var myAttendanceModels = new List<AttendanceModel>();
+
+            foreach (var item in myReturn.Attendance)
+            {
+                var myAttendance = new AttendanceModel()
+                {
+                    //deep copy the AttendanceModel and convert time zone
+                    In = UTCConversionsBackend.UtcToKioskTime(item.In),
+                    Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
+                    Emotion = item.Emotion
+                };
+                myAttendanceModels.Add(myAttendance);
+            }
+
+            myReturn.Attendance = myAttendanceModels;
+
             // not possible to be null
             //if (myReturn == null)
             //{

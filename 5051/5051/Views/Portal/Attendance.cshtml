@@ -11,19 +11,15 @@
 
 @{
     <br />
-    <h4>Current Status is <span id="statusValue">@Model.Status</span></h4>
-    if (Model.Attendance == null || !Model.Attendance.Any())
+    <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
+    if (!Model.Attendance.Any())
     {
         //skip
-    }
+    }else
     {
-        var LastLoginIn = Model.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
-        if (LastLoginIn != null)
-        {
-            <h4>You last logged in at: <span id="lastLoginValue">@_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortDateString() @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(LastLoginIn.In).ToShortTimeString()</span></h4>
-        }
+        <h4>You last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
 
-        <h4>Emotion State: <span id="emotionStateValue">@Model.EmotionCurrent</span></h4>
+        <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
     }
 }
 <hr />
@@ -34,18 +30,18 @@
         {
             <div class="col-sm-4 col-md-2">
                 <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
-                    @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.In).ToShortDateString()<br />
+                    @item.In.ToShortDateString()<br />
                     <div class="row">
                         <div class="col-sm-6">
                             In<br />
-                            @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.In).ToShortTimeString()<br />
+                            @item.In.ToShortTimeString()<br />
                         </div>
                         @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
                         {
                             <div class="col-sm-6">
                                 Out<br />
 
-                                @_5051.Backend.UTCConversionsBackend.UtcToKioskTime(item.Out).ToShortTimeString()<br />
+                                @item.Out.ToShortTimeString()<br />
                             </div>
                         }
                     </div>
@@ -83,24 +79,6 @@
 
                         </div>
                     </div>
-                    @*<div class="row">
-                            <br />
-                            Duration<br />
-                            @{
-                                if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                                {
-                                    <span>
-                                        @item.Duration.Hours Hours<br />
-                                        @item.Duration.Minutes Minutes<br />
-                                    </span>
-                                }
-                                else
-                                {
-                                    <br />
-                                    <br />
-                                }
-                            }
-                        </div>*@
                 </div>
             </div>
         }
