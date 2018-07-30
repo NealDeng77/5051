@@ -4,7 +4,7 @@ using _5051.Models.Enums;
 namespace _5051.Models
 {
     /// <summary>
-    /// Data to Track Attendance
+    /// Data to Track Attendance, In and Out are in UTC
     /// </summary>
     public class AttendanceModel
     {
@@ -14,12 +14,12 @@ namespace _5051.Models
         public string StudentId { get; set; }
 
         /// <summary>
-        /// When Logged in
+        /// When Logged in, in utc
         /// </summary>
         public DateTime In { get; set; }
 
         /// <summary>
-        /// When Logged Out
+        /// When Logged Out, in utc
         /// </summary>
         public DateTime Out { get; set; }
 
@@ -32,6 +32,7 @@ namespace _5051.Models
         /// The emotion state
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
+
 
         public AttendanceModel()
         {
