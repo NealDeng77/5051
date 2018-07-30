@@ -33,12 +33,5 @@ namespace _5051.Models
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
 
-
-        public AttendanceModel()
-        {
-            In = DateTime.UtcNow;
-            //Status = StudentStatusEnum.In;
-            Emotion = EmotionStatusEnum.Neutral;
-        }
     }
 }
