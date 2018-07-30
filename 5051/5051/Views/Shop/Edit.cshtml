@@ -1,4 +1,6 @@
-﻿@model _5051.Models.ShopTruckViewModel
+﻿@using _5051.Models;
+@using _5051.Models.Enums;
+@model _5051.Models.ShopTruckViewModel
 @{
 
     ViewBag.Title = "Edit Truck";
@@ -23,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="">
-                            <img src="~/Content/shop/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                        <img src="~/Content/shop/@myPlace.Item.Uri" class="FactoryInventorySize1" />
                         <br />
                         <span>
                             @myPlace.Item.Name
@@ -40,7 +42,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -49,8 +51,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
-
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Truck);
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
 
@@ -103,7 +105,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -112,7 +114,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Trailer);
 
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
@@ -166,7 +169,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -175,7 +178,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Menu);
 
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
@@ -229,7 +233,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -238,7 +242,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Sign);
 
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
@@ -292,7 +297,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -301,7 +306,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Topper);
 
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
@@ -355,7 +361,7 @@
                 @{
                     if (myPlace.ItemList.Count < 1)
                     {
-                        <div>No Items to Select</div><br/><br/>
+                        <div>No Items to Select</div><br /><br />
                     }
 
                     foreach (var InventoryItem in myPlace.ItemList)
@@ -364,7 +370,8 @@
                         {
                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
                             @Html.Hidden("StudentId", Model.StudentId);
-                            @Html.Hidden("InventoryId", InventoryItem.Id);
+                            @Html.Hidden("ItemId", InventoryItem.Id);
+                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Wheels);
 
 
                             var picturURI = "/Content/shop/" + InventoryItem.Uri;
