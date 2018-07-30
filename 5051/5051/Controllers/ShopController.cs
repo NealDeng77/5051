@@ -114,6 +114,11 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
+            //Check the item quantity
+            if (myItem.Quantities < 1)
+            {
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
+            }
 
             // Check the Student Token amount, If not enough, return error
             if (myStudent.Tokens < myItem.Tokens)
