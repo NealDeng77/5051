@@ -103,10 +103,21 @@ namespace _5051.Models
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
             Password = string.Empty;
-            Inventory = new List<FactoryInventoryModel>();
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
+
+            // All Students get a default Truck Inventory
+            Inventory = new List<FactoryInventoryModel>
+            {
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck),
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Wheels),
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Topper),
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Trailer),
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Sign),
+                DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Menu)
+            };
+
         }
 
         /// <summary>

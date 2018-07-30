@@ -255,6 +255,7 @@
     <Compile Include="Models\SchoolDismissalSettingsModel.cs" />
     <Compile Include="Models\SchoolYearReportViewModel.cs" />
     <Compile Include="Models\SemesterReportViewModel.cs" />
+    <Compile Include="Models\ShopTruckInputModel.cs" />
     <Compile Include="Models\ShopTruckItemViewModel.cs" />
     <Compile Include="Models\ShopTruckViewModel.cs" />
     <Compile Include="Models\ShopTruckModel.cs" />
