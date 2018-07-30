@@ -40,6 +40,18 @@ namespace _5051.Models
         public DateTime LastDateTime { get; set; }
 
         /// <summary>
+        /// DateTime of last transaction recorded, used for login and logout
+        /// </summary>
+        [Display(Name = "Last Login", Description = "Last Login")]
+        public DateTime LastLogIn { get; set; }
+
+        /// <summary>
+        /// DateTime of last transaction recorded, used for login and logout
+        /// </summary>
+        [Display(Name = "Emotion Image URI", Description = "Emotion Image URI")]
+        public string EmotionImgUri { get; set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public StudentDisplayViewModel() { }
@@ -66,6 +78,7 @@ namespace _5051.Models
             Password = data.Password;
             Inventory = data.Inventory;
             Attendance = data.Attendance;
+            EmotionCurrent = data.EmotionCurrent;
 
             var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
             if (myDataAvatar == null)
