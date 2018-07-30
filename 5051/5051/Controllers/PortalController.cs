@@ -107,12 +107,37 @@ namespace _5051.Controllers
         public ActionResult Index(string id = null)
         {
             var myStudent = Backend.StudentBackend.Instance.Read(id);
+
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
+
+            //Set the last log in time and emotion status img uri
+            if (myReturn.Attendance != null && myReturn.Attendance.Any())
+            {
+                myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
+                switch (myReturn.EmotionCurrent)
+                {
+                    case EmotionStatusEnum.VeryHappy:
+                        myReturn.EmotionImgUri = "EmotionVeryHappy.png";
+                        break;
+                    case EmotionStatusEnum.Happy:
+                        myReturn.EmotionImgUri = "EmotionHappy.png";
+                        break;
+                    case EmotionStatusEnum.Neutral:
+                        myReturn.EmotionImgUri = "EmotionNeutral.png";
+                        break;
+                    case EmotionStatusEnum.Sad:
+                        myReturn.EmotionImgUri = "EmotionSad.png";
+                        break;
+                    case EmotionStatusEnum.VerySad:
+                        myReturn.EmotionImgUri = "EmotionVerySad.png";
+                        break;
+                }
+            }
             // Null not possible
             //if (myReturn == null)
             //{
