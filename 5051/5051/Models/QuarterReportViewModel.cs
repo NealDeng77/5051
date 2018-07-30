@@ -12,12 +12,12 @@ namespace _5051.Models
     public class QuarterReportViewModel: BaseReportViewModel
     {
         /// <summary>
-        /// Contains a select list for semester selection dropdown
+        /// Contains a select list for quarter selection dropdown
         /// </summary>
         public List<SelectListItem> Quarters { get; set; }
 
         /// <summary>
-        /// The selected semester's id for semester selection dropdown
+        /// The selected quarter's id for quarter selection dropdown
         /// </summary>
         public int SelectedQuarterId { get; set; }
     }
