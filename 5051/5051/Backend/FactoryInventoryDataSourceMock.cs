@@ -173,12 +173,12 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
             Create(new FactoryInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
 
-            Create(new FactoryInventoryModel("Wheels1.png", "No Wheel", "No Wheels", FactoryInventoryCategoryEnum.Wheels, 1, 1, false));
-            Create(new FactoryInventoryModel("Trailer1.png", "No Trailer", "No Trailer", FactoryInventoryCategoryEnum.Trailer, 1, 1, false));
-            Create(new FactoryInventoryModel("Truck1.png", "No Truck", "No Truck", FactoryInventoryCategoryEnum.Truck, 1, 1, false));
-            Create(new FactoryInventoryModel("Menu1.png", "No Menu", "No Menu", FactoryInventoryCategoryEnum.Menu, 1, 1, false));
-            Create(new FactoryInventoryModel("Topper1.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1, false));
-            Create(new FactoryInventoryModel("Sign1.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1, false));
+            Create(new FactoryInventoryModel("Wheels0.png", "No Wheel", "No Wheels", FactoryInventoryCategoryEnum.Wheels, 1, 1, false));
+            Create(new FactoryInventoryModel("Trailer0.png", "No Trailer", "No Trailer", FactoryInventoryCategoryEnum.Trailer, 1, 1, false));
+            Create(new FactoryInventoryModel("Truck0.png", "No Truck", "No Truck", FactoryInventoryCategoryEnum.Truck, 1, 1, false));
+            Create(new FactoryInventoryModel("Menu0.png", "No Menu", "No Menu", FactoryInventoryCategoryEnum.Menu, 1, 1, false));
+            Create(new FactoryInventoryModel("Topper0.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1, false));
+            Create(new FactoryInventoryModel("Sign0.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1, false));
 
             Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, true));
             Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, true));
