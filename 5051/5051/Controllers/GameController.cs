@@ -91,7 +91,7 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult GetResults([Bind(Include=
                                         "Id," +
-                                        "")] StudentModel data)
+                                        "")] StudentInputModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace _5051.Controllers
             {
                 Error = false,
                 Msg = "OK",
-                Data = DataResult.ToString(),
+                Data = result,
             });
         }
     }

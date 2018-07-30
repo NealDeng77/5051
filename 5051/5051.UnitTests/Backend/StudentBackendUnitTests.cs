@@ -238,6 +238,63 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
+        public void Backend_StudentBackend_ToggleEmotionStatusById_Invalid_ID_Null_Should_Fail()
+        {
+            //arrange
+            var backend = StudentBackend.Instance;
+            var emotion = EmotionStatusEnum.Neutral;
+
+            //act
+            backend.ToggleEmotionStatusById(null, emotion);
+            var result = backend;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_ToggleEmotionStatusById_Invalid_ID_Does_Not_Exist_Should_Fail()
+        {
+            //arrange
+            var backend = StudentBackend.Instance;
+            var testStudent = new StudentModel();
+            var emotion = EmotionStatusEnum.Neutral;
+
+            //act
+            backend.ToggleEmotionStatusById(testStudent.Id, emotion);
+            var result = backend;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_ToggleEmotionStatusById_Valid_Id_Should_Pass()
+        {
+            //arrange
+            var backend = StudentBackend.Instance;
+            var testStudent = backend.GetDefault();
+            testStudent.Status = StudentStatusEnum.Out;
+            var updateResult = backend.Update(testStudent);
+            var emotion = EmotionStatusEnum.Neutral;
+
+            var expectToggleStatus = StudentStatusEnum.In;
+            var expectToggleEmotion = EmotionStatusEnum.Neutral;
+                        
+            //act
+            backend.ToggleEmotionStatusById(testStudent.Id, emotion);
+            var toggleStatus = testStudent.Status;
+            var toggleEmotion = testStudent.EmotionCurrent;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.AreEqual(expectToggleStatus, toggleStatus, TestContext.TestName);
+            Assert.AreEqual(expectToggleEmotion, toggleEmotion, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_StudentBackend_ToggleStatus_Valid_Id_Case_Out_Should_Pass()
         {
             //arrange
@@ -295,6 +352,7 @@ namespace _5051.UnitTests.Models
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
         #endregion ToggleStatus
 
         #region SetLogin / Logout
