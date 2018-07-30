@@ -19,6 +19,6 @@ namespace _5051.Models
         public ShopTruckItemViewModel SignItem;
 
         // The StudentID for this truck, used to simplify the models
-        public string StudentId { get; set; }
+        public string StudentId;
     }
 }

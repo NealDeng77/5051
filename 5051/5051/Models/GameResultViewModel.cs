@@ -1,5 +1,4 @@
-﻿
-namespace _5051.Models
+﻿namespace _5051.Models
 {
     /// <summary>
     /// View Model for the GameResult Views to have the list of GameResults
@@ -19,6 +18,6 @@ namespace _5051.Models
         /// <summary>
         /// Iteratoin Number
         /// </summary>
-        public int IterationNumber { get; set; }
+        public int IterationNumber;
     }
 }
