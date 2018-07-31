@@ -83,19 +83,14 @@ namespace _5051.Models
         public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities, bool isLimitSupply)
         {
             Initialize();
-
-            IsLimitSupply = isLimitSupply;
-            Quantities = quantities;
-            if (!IsLimitSupply)
-            {
-                Quantities = 10000;
-            }
+         
             Uri = uri;
             Name = name;
             Description = description;
             Category = category;
             Tokens = tokens;
-                     
+            Quantities = quantities;
+            IsLimitSupply = isLimitSupply;
         }
 
         /// <summary>
