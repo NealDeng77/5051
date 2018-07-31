@@ -35,6 +35,15 @@ namespace _5051.Models
         [Display(Name = "Feed", Description = "Feed")]
         public List<String> Feed { get; set; }
 
+        [Display(Name = "CustomersTotal", Description = "Total Customers")]
+        public int CustomersTotal { get; set; }
+
+        [Display(Name = "Tokens", Description = "Tokens")]
+        public int Tokens { get; set; }
+
+        [Display(Name = "Experience", Description = "Experience")]
+        public int Experience { get; set; }
+
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -44,6 +53,9 @@ namespace _5051.Models
             IterationNumber = 0;
             Enabled = true;
             Feed = new List<String> { };
+            CustomersTotal = 0;
+            Tokens = 0;
+            Experience = 0;
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
             RunDate = DateTime.UtcNow;
             RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
@@ -79,6 +91,9 @@ namespace _5051.Models
             }
 
             Feed = data.Feed;
+            CustomersTotal = data.CustomersTotal;
+            Tokens = data.Tokens;
+            Experience = data.Experience;
             IterationNumber = data.IterationNumber;
             RunDate = data.RunDate;
             Enabled = data.Enabled;
