@@ -147,18 +147,22 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
+            StudentModel data;
 
-            var data = new StudentModel("Mike", null);
-            // Update Mike to have Tokens and Truck Parts
+            // Mike has Full Truck and Tokens
+            data = new StudentModel("Mike", null);
             data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
             data.Tokens = 1000;
-
             Create(data);
 
-            Create(new StudentModel("Doug", null));
+            // Doug has full truck, but no Tokens
+            data = new StudentModel("Doug", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
+            data.Tokens = 0;
+            Create(data);
+
             Create(new StudentModel("Jea", null));
             Create(new StudentModel("Sue", null));
-
 
         }
 
