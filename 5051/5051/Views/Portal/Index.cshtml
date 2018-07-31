@@ -14,22 +14,23 @@
                 <div class="container lightTransparentBox">
                     <div class="row justify-content-center">
                         <div class="row">
-                            <div class="col-lg-auto">
+                            <div class="col-lg-auto text-center">
                                 <br />
 
                                 <h3 id="welcomeMessage">
                                     <span id="welcomeMessageStudentName">@Model.Name</span><br />
-                                    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="AvatarSize0" />
+                                    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="AvatarSize2" />
 
                                 </h3>
                             </div>
                             <div class="col-lg-auto">
                                 <br />
-                                <h4>
+                                <br />
+                                <h5>
                                     Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
                                     <span id="xpValue">@Model.ExperiencePoints</span> XP
-                                </h4>
-                                <h4><span id="tokensValue">@Model.Tokens</span> Tokens</h4>
+                                </h5>
+                                <h5><span id="tokensValue">@Model.Tokens</span> Tokens</h5>
                             </div>
                             <div class="col-lg-auto">
                                 @{
@@ -41,9 +42,10 @@
                                     }
                                     else
                                     {
-                                        <h4>You last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
-
                                         <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
+                                        <h6>Last logged in:<br /> <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h6>
+
+
                                     }
                                 }
                             </div>
