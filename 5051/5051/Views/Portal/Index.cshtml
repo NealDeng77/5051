@@ -10,11 +10,11 @@
 </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-auto">
+            <div class="col-lg-auto col-md-auto">
                 <div class="container lightTransparentBox">
                     <div class="row justify-content-center">
-                        <div class="row">
-                            <div class="col-lg-auto text-center">
+                        <div class="row text-center">
+                            <div class="col-lg-auto col-md-auto text-center col-sm-6">
                                 <br />
 
                                 <h3 id="welcomeMessage">
@@ -23,7 +23,7 @@
 
                                 </h3>
                             </div>
-                            <div class="col-lg-auto">
+                            <div class="col-lg-auto col-md-auto col-sm-6"">
                                 <br />
                                 <br />
                                 <h5>
@@ -32,7 +32,7 @@
                                 </h5>
                                 <h5><span id="tokensValue">@Model.Tokens</span> Tokens</h5>
                             </div>
-                            <div class="col-lg-auto">
+                            <div class="col-lg-auto col-md-auto">
                                 @{
                                     <br />
                                     <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
@@ -57,7 +57,7 @@
 
                         <div class="row text-center">
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Portal/Report/@Model.Id" id="reportsLinkPortalIndex">
                                     <img src="~/Content/img/PortalViewReports.png" alt="Reports" class="AvatarSize2" />
@@ -67,7 +67,7 @@
 
                             </div>
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Portal/Attendance/@Model.Id" id="attendanceLinkPortalIndex">
                                     <img src="~/Content/img/PortalViewAttendance.png" alt="Reports" class="AvatarSize2" />
@@ -77,7 +77,7 @@
 
                             </div>
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Shop/Visit" id="visitLinkPortalIndex">
                                     <img src="~/Content/img/PortalVisitHome.png" alt="Visit" class="AvatarSize2" />
@@ -87,7 +87,7 @@
 
                             </div>
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
                                     <img src="~/Content/img/PortalViewShop.png" alt="Store" class="AvatarSize2" />
@@ -97,7 +97,7 @@
 
                             </div>
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Portal/Settings/@Model.Id" id="settingsLinkPortalIndex">
                                     <img src="~/Content/img/@Model.AvatarUri" alt="Customize" class="AvatarSize2" />
@@ -107,7 +107,7 @@
 
                             </div>
 
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-md-2">
 
                                 <a href="~/Portal/Avatar/@Model.Id" id="avatarLinkPortalIndex">
                                     <img src="~/Content/img/PortalCustomizeAvatar.png" alt="Choose Avatars" class="AvatarSize2" />
