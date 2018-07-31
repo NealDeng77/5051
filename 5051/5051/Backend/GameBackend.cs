@@ -225,6 +225,10 @@ namespace _5051.Backend
 
             result.IterationNumber = GetDefault().IterationNumber;
 
+            result.CustomersTotal = GetDefault().CustomersTotal;
+            result.Tokens = GetDefault().Tokens;
+            result.Experience = GetDefault().Experience;
+
             return result;
         }
 
