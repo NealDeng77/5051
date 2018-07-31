@@ -243,7 +243,7 @@ namespace _5051.Tests.Controllers
             StudentModel data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+            var result = (RedirectToRouteResult)controller.KioskLogout(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -262,7 +262,7 @@ namespace _5051.Tests.Controllers
             data.Id = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller.KioskLogin(data);
+            var result = (RedirectToRouteResult)controller.KioskLogout(data);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
