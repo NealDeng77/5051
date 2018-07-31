@@ -54,6 +54,7 @@ interface iJsonDataResult {
     Menu: string;
     Wheels: string;
     IterationNumber: number;
+    isClosed: boolean;
 }
 
 // The Data structor for the Result Data set Header
@@ -117,7 +118,7 @@ function DataLoadGameResults(data: IJsonDataResultHeader) {
 }
 
 // Does a fetch to the server, and returns the Iteration Number
-function GetGameResults(){
+function GetGameResults() {
 
     var data = { "Id": StudentId.toString() };
     $.ajax(
@@ -244,7 +245,7 @@ console.log(ServerRefreshRate);
 
 // Make Timmer to call refresh
 setInterval(function () {
-   RefreshGame();
+    RefreshGame();
 }, ServerRefreshRate);
 
 /*
@@ -257,7 +258,7 @@ setInterval(function () {
 // Refresh Game display
 function RefreshGameDisplay() {
 
-    var BaseContentURL = "/Content/shop/"; 
+    var BaseContentURL = "/Content/shop/";
 
     // Use the current data structure
 
@@ -276,4 +277,22 @@ function RefreshGameDisplay() {
     $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
     $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
     $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
+
+    if (ShopData.Truck != "Truck0.png") {
+
+        // If The Truck is showing, then show the inside and the Worker
+        $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
+
+        // If the Truck is Showing, check to see if it is open for business or not
+        // If not, hang the Close Sign
+        if (ShopData.isClosed)
+        {
+            $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
+        }
+    }
+
+
+
 }
+
+

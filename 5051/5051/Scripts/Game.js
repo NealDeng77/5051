@@ -201,5 +201,14 @@ function RefreshGameDisplay() {
     $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
     $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
     $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
+    if (ShopData.Truck != "Truck0.png") {
+        // If The Truck is showing, then show the inside and the Worker
+        $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
+        // If the Truck is Showing, check to see if it is open for business or not
+        // If not, hang the Close Sign
+        if (ShopData.isClosed) {
+            $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
+        }
+    }
 }
 //# sourceMappingURL=game.js.map
