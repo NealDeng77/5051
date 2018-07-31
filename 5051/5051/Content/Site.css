@@ -374,23 +374,30 @@ input[type=submit].btn-block {
     z-index: 10;
 }
 
-.TruckInside {
+.TruckClosedSignBox {
     position: absolute;
-    top: 580px;
-    left: 507px;
+    top: 660px;
+    left: 360px;
+    z-index: 15;
+}
+
+.TruckInsideBox {
+    position: absolute;
+    top: 505px;
+    left: 580px;
     z-index: 5;
 }
 
 .MenuBox {
     position: absolute;
-    top: 475px;
+    top: 575px;
     left: 925px;
     z-index: 15;
 }
 
 .SignBox {
     position: absolute;
-    top: 830px;
+    top: 825px;
     left:0px;
     z-index: 15;
 }
@@ -445,9 +452,19 @@ input[type=submit].btn-block {
     height: 279px;
 }
 
+.TruckInsideItem {
+    width: 394px;
+    height: 192px;
+}
+
 .SignItem {
     width: 198px;
     height: 191px;
+}
+
+.TruckClosedSignItem {
+    width: 129px;
+    height: 126px;
 }
 
 .WheelsItem {
