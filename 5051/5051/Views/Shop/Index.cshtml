@@ -5,23 +5,19 @@
 <br />
 <h2>Welcome to the Store</h2>
 
-<h3>Spend your Tokens on items at the store</h3>
-
 <br />
 
-<div class="ScoreBoard">
-
-    <h4>
-        Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
-        <span id="xpValue">@Model.ExperiencePoints</span> XP
-    </h4>
-    <h4><span id="numCustomers">@Model.Tokens</span> Tokens</h4> <br />
-
-    <h4>Customers 10</h4>
-
-</div>
-
 <div class="ImageBox" id="ImageBox">
+
+    <div class="ScoreBoardBox">
+        <span>
+            Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
+            <span id="xpValue">@Model.ExperiencePoints</span> XP
+        </span>
+        <span id="numCustomers">@Model.Tokens</span> Tokens<br />
+
+        <span>Customers 10</span>
+    </div>
 
     <div class="TopperBox">
         <img class="TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">

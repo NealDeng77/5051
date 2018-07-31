@@ -392,10 +392,12 @@
     <Content Include="Content\shop\Trailer1.png" />
     <Content Include="Content\shop\Truck0.png" />
     <Content Include="Content\shop\Truck1.png" />
+    <Content Include="Content\shop\TruckInside.png" />
     <Content Include="Content\shop\trumpet.png" />
     <Content Include="Content\shop\violin.png" />
     <Content Include="Content\shop\Wheels0.png" />
     <Content Include="Content\shop\Wheels1.png" />
+    <Content Include="Content\shop\Worker1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-regular-400.svg" />
     <Content Include="Global.asax" />
