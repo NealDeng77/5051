@@ -107,6 +107,8 @@ namespace _5051.Controllers
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
+            
+
             // Get Item
             var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
             if (myItem == null)
@@ -115,16 +117,18 @@ namespace _5051.Controllers
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
-            //Check the item quantity
-            if (myItem.Quantities < 1)
-            {
-                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
-            }
-
             // Check the Student Token amount, If not enough, return error
             if (myStudent.Tokens < myItem.Tokens)
             {
                 // Not enough money...
+                // Send back for Edit
+                return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
+            }
+
+            // check the quantities of item
+            if (myItem.Quantities < 1)
+            {
+                // Not enough quantity...
                 // Send back for Edit
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
@@ -145,13 +149,16 @@ namespace _5051.Controllers
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
 
-            // Time to buy !
-
             // Reduce the Student Tokens by Item Price
             myStudent.Tokens -= myItem.Tokens;
 
-            // Reduce the quantities of Item
-            myItem.Quantities -= 1;
+            // Time to buy !
+            // Check if the item is limited or not
+            if (myItem.IsLimitSupply == true)
+            {
+                // Reduce the quantities of Item
+                myItem.Quantities -= 1;
+            }                           
 
             // Add Item to Student Inventory
             // TODO:  Mike, add inventory to Students...

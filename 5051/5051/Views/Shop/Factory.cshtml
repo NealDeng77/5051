@@ -114,9 +114,11 @@
                                                         <br />
                                                             <div>Tokens: </div>@item.Tokens
                                                         <br />
-                                                            <div>Quantites: </div>@item.Quantities
-                                                        <br />
-                                                        @DisplayText
+                                                            <span>@{if (@item.IsLimitSupply)
+                                                                {<span>Quantities: @item.Quantities</span>}
+                                                                }
+                                                        </span>
+                                                        <br />@DisplayText
                                                     </span>
                                                 </div>
                                             </div>

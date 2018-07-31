@@ -180,12 +180,12 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("Topper1.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1, false));
             Create(new FactoryInventoryModel("Sign1.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1, false));
 
-            Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, true));
-            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, true));
-            Create(new FactoryInventoryModel("Truck1.png", "Slick Truck", "Slick Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, true));
-            Create(new FactoryInventoryModel("Menu1.png", "Slick Menu", "Slick Menu", FactoryInventoryCategoryEnum.Menu, 10, 10, true));
-            Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Topper, 10, 10, true));
-            Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Sign, 10, 10, true));
+            Create(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, false));
+            Create(new FactoryInventoryModel("Trailer1.png", "Slick Trailer", "Slick Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false));
+            Create(new FactoryInventoryModel("Truck1.png", "Slick Truck", "Slick Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false));
+            Create(new FactoryInventoryModel("Menu1.png", "Slick Menu", "Slick Menu", FactoryInventoryCategoryEnum.Menu, 10, 10, false));
+            Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Topper, 10, 10, false));
+            Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Sign, 10, 10, false));
         }
 
         /// <summary>
