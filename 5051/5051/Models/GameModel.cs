@@ -32,6 +32,8 @@ namespace _5051.Models
         [Display(Name = "Enabled", Description = "Enable Game")]
         public bool Enabled { get; set; }
 
+        [Display(Name = "Feed", Description = "Feed")]
+        public List<String> Feed { get; set; }
 
         /// <summary>
         /// Create the default values
@@ -41,6 +43,7 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
             IterationNumber = 0;
             Enabled = true;
+            Feed = new List<String> { };
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
             RunDate = DateTime.UtcNow;
             RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
@@ -75,6 +78,7 @@ namespace _5051.Models
                 return;
             }
 
+            Feed = data.Feed;
             IterationNumber = data.IterationNumber;
             RunDate = data.RunDate;
             Enabled = data.Enabled;
