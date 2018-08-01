@@ -151,6 +151,17 @@
     <div class="@background">
         <div class="container body-content fill-height">
             @RenderBody()
+
+            @{
+                // Adding padding at the bottom of the page, needed to make sure buttons can be reached when in phone mode
+                <div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+
+            }
         </div>
     </div>
 
@@ -176,14 +187,6 @@
     @RenderSection("scripts", required: false)
 
     @{
-        // Adding padding at the bottom of the page, needed to make sure buttons can be reached when in phone mode
-        <div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
         // Adding Tags to the page for UI Automation to use
         var myAreaID = "Area-" + ViewContext.RouteData.DataTokens["area"] + "-Done";
         var myControllerID = "Controller-" + ViewContext.Controller.ValueProvider.GetValue("controller").RawValue + "-Done";
