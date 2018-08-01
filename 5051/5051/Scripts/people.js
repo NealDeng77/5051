@@ -102,23 +102,29 @@ function MoveWorker() {
         }
         else {
             AnimationCount++;
-            ResetObject(Worker, WorkerBoxTop, WorkerBoxLeft);
+            //ResetObject(Worker, WorkerBoxTop, WorkerBoxRight);
             var WorkerPosition = Worker.position();
             var options = { 'duration': Duration };
             var StartPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxRight };
             var MidPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxMid };
+            var EndPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxLeft };
+            // Move worker back
+            MoveObject(Worker, StartPosition, MidPosition, EndPosition, options);
+            var StartPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxLeft };
+            var MidPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxMid };
             var EndPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxRight };
             MoveObject(Worker, StartPosition, MidPosition, EndPosition, options);
-            ResetObject(Worker, WorkerBoxTop, WorkerBoxLeft);
+            //ResetObject(Worker, WorkerBoxTop, WorkerBoxRight);
         }
     }
 }
 function ResetObject(el, top, left) {
+    el.fadeOut("fast");
+    el.fadeIn("slow");
     el.css({ 'top': top });
     el.css({ 'left': left });
 }
 function MoveObject(el, StartPosition, MidPosition, EndPosition, options) {
-    el.fadeIn("slow");
     // Animate to the Truck Window
     var currentPos = el.position();
     el.css({
@@ -137,6 +143,5 @@ function MoveObject(el, StartPosition, MidPosition, EndPosition, options) {
         top: currentPos.top,
         left: currentPos.left
     }).animate(EndPosition, options);
-    el.fadeOut("slow");
 }
 //# sourceMappingURL=people.js.map
