@@ -20,6 +20,8 @@
         /// </summary>
         public int IterationNumber;
 
+        public bool isClosed;
+
         public int CustomersTotal;
         public int Tokens;
         public int Experience;

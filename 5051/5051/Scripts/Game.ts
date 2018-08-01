@@ -52,6 +52,8 @@ interface iJsonDataInventory {
 
 // The result data
 interface iJsonDataResult {
+    IterationNumber: number;
+
     Name: string;
     Truck: string;
     Topper: string;
@@ -59,8 +61,12 @@ interface iJsonDataResult {
     Sign: string;
     Menu: string;
     Wheels: string;
-    IterationNumber: number;
+
     isClosed: boolean;
+
+    CustomersTotal: number;
+    Tokens: number;
+    Experience: number;
 }
 
 // The Data structor for the Result Data set Header
@@ -114,13 +120,20 @@ function DataLoadGameResults(data: IJsonDataResultHeader) {
 
     var result = <iJsonDataResult>data.Data;
 
+    ServerIterationNumber = result.IterationNumber;
+
     ShopData.Topper = result.Topper;
     ShopData.Menu = result.Menu;
     ShopData.Wheels = result.Wheels;
     ShopData.Sign = result.Sign;
     ShopData.Truck = result.Truck;
     ShopData.Trailer = result.Trailer;
-    ServerIterationNumber = result.IterationNumber;
+
+    ShopData.isClosed = result.isClosed;
+
+    ShopData.Tokens = result.Tokens;
+    ShopData.Experience = result.Experience;
+    ShopData.CustomersTotal = result.CustomersTotal;
 }
 
 // Does a fetch to the server, and returns the Iteration Number
@@ -271,6 +284,19 @@ function RefreshGameDisplay() {
     // Show Iteration Number (debugging)
     $("#IterationNumber").text(CurrentIterationNumber);
 
+    // Update Data
+    $("#ExperienceValue").text(ShopData.Experience);
+    $("#CustomersValue").text(ShopData.CustomersTotal);
+    $("#TokensValue").text(ShopData.Tokens);
+
+    // Show the Status of the Store
+    var storeStatus = "Open for Business";
+
+    if (ShopData.isClosed) {
+        storeStatus = "Closed, Rent is due";
+    }
+    $("#StoreStatus").text(storeStatus);
+
     // Show Game Data
     $("#GameData").text("Game Data Goes Here");
 
@@ -316,5 +342,3 @@ function DrawEmptyTruckItems() {
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
 }
-
-

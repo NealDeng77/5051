@@ -226,9 +226,19 @@ namespace _5051.Backend
 
             result.IterationNumber = GetDefault().IterationNumber;
 
-            result.CustomersTotal = GetDefault().CustomersTotal;
-            result.Tokens = GetDefault().Tokens;
-            result.Experience = GetDefault().Experience;
+            // TODO: Add CustomersTotal to the Truck Record on Student...
+            result.CustomersTotal = 1; //StudentData.Truck.CustomersTotal;
+
+            result.Tokens = StudentData.Tokens;
+            result.Experience = StudentData.ExperiencePoints;
+
+            // Todo: Add isClosed to the Truck record on Student ...
+            result.isClosed = false;
+
+            if (StudentData.Tokens < 1)
+            {
+                result.isClosed = true;
+            }
 
             return result;
         }
