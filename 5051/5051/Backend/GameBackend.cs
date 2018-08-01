@@ -248,7 +248,9 @@ namespace _5051.Backend
 
         public void CalculateStudentIteration(StudentModel student)
         {
-            return;
+            student.Tokens -= 1;
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(student);
         }
     }
 }

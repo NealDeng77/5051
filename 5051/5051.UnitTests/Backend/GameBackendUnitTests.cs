@@ -327,9 +327,32 @@ namespace _5051.UnitTests.Models
             
             // assert
         }
-
-
-
         #endregion RunIteration
+
+        #region CalculateStudentIteration
+        [TestMethod]
+        public void Backend_GameBackend_CalculateStudentIteration_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(data);
+
+
+            // act
+            var expect = student.Tokens - 1;
+
+            test.CalculateStudentIteration(student);
+            var myTokens = student.Tokens;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // assert 
+            Assert.AreEqual(expect, myTokens, TestContext.TestName);
+
+        }
+
+        #endregion CalculateStudentIteration
     }
 }
