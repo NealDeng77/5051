@@ -377,15 +377,16 @@ namespace _5051.UnitTests.Models
             var test = Backend.GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow;
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
 
             //act
-            var result = test.Simulation();
+            test.PayRentPerDay(student);
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             //assert
-            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
