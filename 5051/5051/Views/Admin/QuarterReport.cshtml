@@ -63,61 +63,53 @@
     }
     else
     {
-
-        <div class="row">
-            <div class="col-4">
-                <div class="card h-100">
-                    <div class="card-body">
-
-                        <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                        <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
-                        <br />
-                        Percentage of attended school time is:
-
-
-                        <h1>@Model.Stats.PercAttendedHours%.</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="card">
-
-                    <table class="table">
-
-
-
-                        <tbody>
-                            <tr>
-                                <td>Present</td>
-                                <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercPresent%</td>
-                            </tr>
-                            <tr>
-                                <td>Absent Unexcused</td>
-                                <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercUnexcused%</td>
-                            </tr>
-                            <tr>
-                                <td>Absent Excused</td>
-                                <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercExcused%</td>
-                            </tr>
-                            <tr>
-                                <td>In Late</td>
-                                <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                                <td>@Model.Stats.PercInLate%</td>
-                            </tr>
-                            <tr>
-                                <td>Out Early</td>
-                                <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                                <td>@Model.Stats.PercOutEarly%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
+        <div class="chartWithMarkerOverlay">
+            <div class="card w-100" id="curve_chart"></div>
+            <div class="overlay-text">
+                <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
+                <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
+                <br />
+                Percentage of attended school time is:
+                <h1>@Model.Stats.PercAttendedHours%.</h1>
             </div>
         </div>
+        <br />
+        <div class="card w-100">
+            <table class="table">
+
+
+
+                <tbody>
+                    <tr>
+                        <td>Present</td>
+                        <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercPresent%</td>
+                    </tr>
+                    <tr>
+                        <td>Absent Unexcused</td>
+                        <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercUnexcused%</td>
+                    </tr>
+                    <tr>
+                        <td>Absent Excused</td>
+                        <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercExcused%</td>
+                    </tr>
+                    <tr>
+                        <td>In Late</td>
+                        <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                        <td>@Model.Stats.PercInLate%</td>
+                    </tr>
+                    <tr>
+                        <td>Out Early</td>
+                        <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                        <td>@Model.Stats.PercOutEarly%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
         <br />
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -152,13 +144,18 @@
                 }
 
                 var options = {
-                    title: 'Cumulative Attended School Time In This Quarter',
-                    height: 600,
+                    height: 700,
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
-                    vAxis: { title: "Attended School Time (Minutes)" },
+                    vAxis: {
+                        title: "Cumulative Attended School Time (Minutes)", gridlines: {
+                            color: 'transparent'
+                        }
+                    },
                     hAxis: {
-                        title: "Date"
+                        title: "Date", gridlines: {
+                            color: 'transparent'
+                        }
                     }
                 };
 
