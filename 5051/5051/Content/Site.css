@@ -351,7 +351,7 @@ input[type=submit].btn-block {
 .ImageBox {
     position: relative;
     width: 1000px;
-    height: 800px;
+    height: 730px;
     /*margin-left: -180px;*/
     /*Move image to the Left so it fits better*/
 }
