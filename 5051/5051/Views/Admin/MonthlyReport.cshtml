@@ -46,7 +46,7 @@
 </ul>
 <br />
 <div id="div1" class="bg-white p-5">
-    <div class="text-center">    
+    <div class="text-center">
         <div class="row">
 
             <div class="col">
@@ -65,236 +65,229 @@
     }
     else
     {
-
-        <div class="row">
-            <div class="col-4">
-                <div class="card h-100">
-                    <div class="card-body">
-
-                        <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                        <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this month.
-                        <br />
-                        Percentage of attended school time is:
-
-
-                        <h1>@Model.Stats.PercAttendedHours%.</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="card">
-
-                    <table class="table">
-
-
-
-                        <tbody>
-                            <tr>
-                                <td>Present</td>
-                                <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercPresent%</td>
-                            </tr>
-                            <tr>
-                                <td>Absent Unexcused</td>
-                                <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercUnexcused%</td>
-                            </tr>
-                            <tr>
-                                <td>Absent Excused</td>
-                                <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                                <td>@Model.Stats.PercExcused%</td>
-                            </tr>
-                            <tr>
-                                <td>In Late</td>
-                                <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                                <td>@Model.Stats.PercInLate%</td>
-                            </tr>
-                            <tr>
-                                <td>Out Early</td>
-                                <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                                <td>@Model.Stats.PercOutEarly%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
+        <div class="chartWithMarkerOverlay">
+            <div class="card w-100" id="curve_chart"></div>
+            <div class="overlay-text">
+                <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
+                <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this month.
+                <br />
+                Percentage of attended school time is:
+                <h1>@Model.Stats.PercAttendedHours%.</h1>
             </div>
         </div>
-
         <br />
-        <div class="col-12 p-0">
-            <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
-                <thead>
-                    <tr class="text-center">
-                        <th class="text-center">Mon</th>
-                        <th class="text-center">Tue</th>
-                        <th class="text-center">Wed</th>
-                        <th class="text-center">Thu</th>
-                        <th class="text-center">Fri</th>
-                    </tr>
-                </thead>
+        <div class="card w-100">
+
+            <table class="table">
+
+
+
                 <tbody>
-                    @{
-                        int ColumnSpaceCount = 0;
-                        var ColumnSpace = "<td/>";
-                        foreach (var item in Model.AttendanceList)
-                        {
-                            if (item.Date.DayOfWeek == DayOfWeek.Saturday || item.Date.DayOfWeek == DayOfWeek.Sunday)
-                            {
-                                continue;
-                            }
-                            var newRow = "<td>";
-                            var endRow = "</td>";
-
-                            if (item.Date.DayOfWeek == DayOfWeek.Monday)
-                            {
-                                newRow = "<tr><td>";
-                            }
-
-                            if (item.Date.DayOfWeek == DayOfWeek.Friday)
-                            {
-                                endRow = "</td></tr>";
-                            }
-
-                            @Html.Raw(newRow)
-
-                            if (item.Date.Day == 1)
-                            {
-                                // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
-                                // Don't include the column to show, so just the previous columns
-                                DayOfWeek today = item.Date.DayOfWeek;
-                                switch (today)
-                                {
-                                    case DayOfWeek.Monday:
-                                        //nothing
-                                        ColumnSpaceCount = 0;
-                                        break;
-
-                                    case DayOfWeek.Tuesday:
-                                        ColumnSpaceCount = 1;
-                                        break;
-
-                                    case DayOfWeek.Wednesday:
-                                        ColumnSpaceCount = 2;
-                                        break;
-
-                                    case DayOfWeek.Thursday:
-                                        ColumnSpaceCount = 3;
-                                        break;
-
-                                    case DayOfWeek.Friday:
-                                        ColumnSpaceCount = 4;
-                                        break;
-                                }
-                                for (var i = 0; i < ColumnSpaceCount; i++)
-                                {
-                                    @Html.Raw(ColumnSpace)
-                                }
-                            }
-
-                            // Output this date
-                            <div class="text-center">
-                                <div>
-                                    @switch (item.Emotion)
-                                    {
-                                        case EmotionStatusEnum.VeryHappy:
-                                            <img src="/Content/img/EmotionVeryHappy.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Happy:
-                                            <img src="/Content/img/EmotionHappy.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Neutral:
-                                            <img src="/Content/img/EmotionNeutral.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Sad:
-                                            <img src="/Content/img/EmotionSad.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.VerySad:
-                                            <img src="/Content/img/EmotionVerySad.png" height="30" />
-                                            break;
-                                    }
-                                    @item.Date.ToString("MM/dd")
-                                </div>
-
-                                @if (!item.IsSchoolDay)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>No School</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>Absent Excused</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>Absent Unexcused</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.PercentAttended < 100)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <div>@item.PercentAttended%</div>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div>
-                                                @Convert.ToInt32(item.HoursAttended.TotalMinutes) / @Convert.ToInt32(item.HoursExpected.TotalMinutes) minutes
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            In<br />
-                                            @item.TimeIn.ToString("h:mm tt")<br />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            Out<br />
-                                            @item.TimeOut.ToString("h:mm tt")<br />
-                                        </div>
-                                    </div>
-
-                                }
-                                else
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <img src="~/Content/img/CheckMark.png" style="height: 80px" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            In<br />
-                                            @item.TimeIn.ToString("h:mm tt")<br />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            Out<br />
-                                            @item.TimeOut.ToString("h:mm tt")<br />
-                                        </div>
-                                    </div>
-
-                                }
-                            </div>
-                            @Html.Raw(endRow)
-                        }
-                    }
+                    <tr>
+                        <td>Present</td>
+                        <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercPresent%</td>
+                    </tr>
+                    <tr>
+                        <td>Absent Unexcused</td>
+                        <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercUnexcused%</td>
+                    </tr>
+                    <tr>
+                        <td>Absent Excused</td>
+                        <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                        <td>@Model.Stats.PercExcused%</td>
+                    </tr>
+                    <tr>
+                        <td>In Late</td>
+                        <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                        <td>@Model.Stats.PercInLate%</td>
+                    </tr>
+                    <tr>
+                        <td>Out Early</td>
+                        <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                        <td>@Model.Stats.PercOutEarly%</td>
+                    </tr>
                 </tbody>
             </table>
 
+        </div>
 
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <div class="col-12 p-0">
+            <div>
+                <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="text-center">Mon</th>
+                            <th class="text-center">Tue</th>
+                            <th class="text-center">Wed</th>
+                            <th class="text-center">Thu</th>
+                            <th class="text-center">Fri</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int ColumnSpaceCount = 0;
+                            var ColumnSpace = "<td/>";
+                            foreach (var item in Model.AttendanceList)
+                            {
+                                if (item.Date.DayOfWeek == DayOfWeek.Saturday || item.Date.DayOfWeek == DayOfWeek.Sunday)
+                                {
+                                    continue;
+                                }
+                                var newRow = "<td>";
+                                var endRow = "</td>";
+
+                                if (item.Date.DayOfWeek == DayOfWeek.Monday)
+                                {
+                                    newRow = "<tr><td>";
+                                }
+
+                                if (item.Date.DayOfWeek == DayOfWeek.Friday)
+                                {
+                                    endRow = "</td></tr>";
+                                }
+
+                                @Html.Raw(newRow)
+
+                                if (item.Date.Day == 1)
+                                {
+                                    // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
+                                    // Don't include the column to show, so just the previous columns
+                                    DayOfWeek today = item.Date.DayOfWeek;
+                                    switch (today)
+                                    {
+                                        case DayOfWeek.Monday:
+                                            //nothing
+                                            ColumnSpaceCount = 0;
+                                            break;
+
+                                        case DayOfWeek.Tuesday:
+                                            ColumnSpaceCount = 1;
+                                            break;
+
+                                        case DayOfWeek.Wednesday:
+                                            ColumnSpaceCount = 2;
+                                            break;
+
+                                        case DayOfWeek.Thursday:
+                                            ColumnSpaceCount = 3;
+                                            break;
+
+                                        case DayOfWeek.Friday:
+                                            ColumnSpaceCount = 4;
+                                            break;
+                                    }
+                                    for (var i = 0; i < ColumnSpaceCount; i++)
+                                    {
+                                        @Html.Raw(ColumnSpace)
+                                    }
+                                }
+
+                                // Output this date
+                                <div class="text-center">
+                                    <div>
+                                        @switch (item.Emotion)
+                                        {
+                                            case EmotionStatusEnum.VeryHappy:
+                                                <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Happy:
+                                                <img src="/Content/img/EmotionHappy.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Neutral:
+                                                <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Sad:
+                                                <img src="/Content/img/EmotionSad.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.VerySad:
+                                                <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                                break;
+                                        }
+                                        @item.Date.ToString("MM/dd")
+                                    </div>
+
+                                    @if (!item.IsSchoolDay)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>No School</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>Absent Excused</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>Absent Unexcused</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.PercentAttended < 100)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <div>@item.PercentAttended%</div>
+                                                <div class="progress" style="height: 5px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div>
+                                                    @Convert.ToInt32(item.HoursAttended.TotalMinutes) / @Convert.ToInt32(item.HoursExpected.TotalMinutes) minutes
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                In<br />
+                                                @item.TimeIn.ToString("h:mm tt")<br />
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                Out<br />
+                                                @item.TimeOut.ToString("h:mm tt")<br />
+                                            </div>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <img src="~/Content/img/CheckMark.png" style="height: 80px" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                In<br />
+                                                @item.TimeIn.ToString("h:mm tt")<br />
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                Out<br />
+                                                @item.TimeOut.ToString("h:mm tt")<br />
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+                                @Html.Raw(endRow)
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
         </div>
         <br />
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -316,11 +309,13 @@
                 }
 
                 var options = {
-                    title: 'Cumulative Attended School Time in @Model.DateStart.ToString("MMM")',
                     height: 700,
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
-                    vAxis: { title: "Attended School Time (Minutes)" },
+                    vAxis: {
+                        title: "Cumulative Attended School Time (Minutes)", gridlines: {
+                            color: 'transparent'
+                        }},
                     hAxis: {
                         title: "Date"
                     }
