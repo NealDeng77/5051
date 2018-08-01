@@ -7,6 +7,16 @@ var ImageBoxLeft = ImageBoxPosition.left;
 var ImageBoxTop = ImageBoxPosition.top;
 var ImageBoxWidth = ImageBox.width();
 var ImageBoxHeight = ImageBox.height();
+var MinDuration = 1500;
+var MaxDuration = 5000;
+var IterationIntervalMin = 1;
+var IterationIntervalMax = 10;
+var AnimateionCountMax = 1;
+var MinAnimationCount = 1;
+var MaxAnimationCount = 10;
+var AnimationInterval = 1000;
+var MinAnimationInterval = 1000;
+var MaxAnimationInterval = 10000;
 // Cause Animation to Happen
 MoveShopper();
 // Animate the Shop Worker
@@ -29,21 +39,24 @@ function MoveShopper() {
     // TODO:  In the future make it random...
     var ShopperItem = $("#PeopleItem");
     ShopperItem.attr("src", BaseContentURL + "People1.png");
-    // Choose how long it will take to Cross the Screen.
-    var Duration = 3000;
-    // Choose ending position
     // Set the Timmer for Animation Checks
     var AnimationCount = 0;
-    var id = setInterval(frame, 1000);
+    AnimateionCountMax = GetRandomInt(MinAnimationCount, MaxAnimationCount);
+    AnimationInterval = GetRandomInt(MinAnimationInterval, MaxAnimationInterval);
+    var id = setInterval(frame, AnimationInterval);
     function frame() {
-        if (AnimationCount > 0) {
+        if (AnimationCount > AnimateionCountMax) {
             clearInterval(id);
+            AnimateionCountMax = GetRandomInt(MinAnimationCount, MaxAnimationCount);
+            AnimationInterval = GetRandomInt(MinAnimationInterval, MaxAnimationInterval);
+            id = setInterval(frame, AnimationInterval);
         }
         else {
             AnimationCount++;
             ResetObject(Shopper, StartPositionTop, StartPositionLeft);
             var ShopperPosition = Shopper.position();
             var props = { 'top': EndPositionTop, 'left': EndPositionLeft };
+            var Duration = GetRandomInt(MinDuration, MaxDuration);
             var options = { 'duration': Duration };
             MoveShopper(Shopper, props, options);
             ResetObject(Shopper, StartPositionTop, StartPositionLeft);
@@ -104,6 +117,7 @@ function MoveWorker() {
             AnimationCount++;
             //ResetObject(Worker, WorkerBoxTop, WorkerBoxRight);
             var WorkerPosition = Worker.position();
+            var Duration = GetRandomInt(MinDuration, MaxDuration);
             var options = { 'duration': Duration };
             var StartPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxRight };
             var MidPosition = { 'top': WorkerBoxTop, 'left': WorkerBoxMid };
@@ -141,5 +155,14 @@ function MoveObject(el, StartPosition, MidPosition, EndPosition, options) {
         top: currentPos.top,
         left: currentPos.left
     }).animate(EndPosition, options);
+}
+/**
+ * generate a random integer between min and max
+ * @param {Number} min
+ * @param {Number} max
+ * @return {Number} random generated integer
+ */
+function GetRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 //# sourceMappingURL=people.js.map
