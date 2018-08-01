@@ -134,6 +134,8 @@ function DataLoadGameResults(data: IJsonDataResultHeader) {
     ShopData.Tokens = result.Tokens;
     ShopData.Experience = result.Experience;
     ShopData.CustomersTotal = result.CustomersTotal;
+
+    console.log(data.Data);
 }
 
 // Does a fetch to the server, and returns the Iteration Number
@@ -260,7 +262,6 @@ UpdateGame();
 
 // Get Refresh Rate
 GetRefreshRate();
-console.log(ServerRefreshRate);
 
 // Make Timmer to call refresh
 setInterval(function () {
