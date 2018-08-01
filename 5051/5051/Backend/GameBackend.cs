@@ -253,7 +253,11 @@ namespace _5051.Backend
             {
                 // calculate student iteration
                 CalculateStudentIteration(student);
+
+                // Update Student
+                DataSourceBackend.Instance.StudentBackend.Update(student);
             }
+            
         }
 
         public void CalculateStudentIteration(StudentModel student)
@@ -320,36 +324,31 @@ namespace _5051.Backend
                 }
                 while (shouldPay < 0);
             }
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(student);
+            
             return;
         }
 
         public void ClosedTruck(StudentModel student)
         {
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(student);
+            
             return;
         }
 
         public void CustomerPassBy(StudentModel student)
         {
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(student);
+           
             return;
         }
 
         public void CustomerPurchase(StudentModel student)
         {
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(student);
+            
             return;
         }
 
         public void DataChangeAfterPurchase(StudentModel student)
         {
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(student);
+            
             return;
         }
     }
