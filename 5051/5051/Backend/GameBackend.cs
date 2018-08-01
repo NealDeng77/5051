@@ -174,6 +174,7 @@ namespace _5051.Backend
             var shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
             if (shouldRun >= 0)
             {
+                // the number of iteration that the simulator has run
                 return currentData.IterationNumber;
             }
 
@@ -238,6 +239,15 @@ namespace _5051.Backend
         public void RunIteration()
         {
             // Run a single iteration
+            foreach (var student in StudentBackend.Instance.Index())
+            {
+                // calculate student iteration
+                CalculateStudentIteration(student);
+            }
+        }
+
+        public void CalculateStudentIteration(StudentModel student)
+        {
             return;
         }
     }
