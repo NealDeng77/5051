@@ -219,3 +219,4 @@ function MoveObject(el: any, StartPosition: any, MidPosition: any, EndPosition: 
 function GetRandomInt(min:number, max:number){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
