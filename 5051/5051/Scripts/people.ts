@@ -37,7 +37,7 @@ function MoveShopper() {
     // Put an image on the Shopper
     // TODO:  In the future make it random...
     var ShopperItem = $("#PeopleItem");
-    ShopperItem.attr("src", BaseContentURL + "Worker1.png");
+    ShopperItem.attr("src", BaseContentURL + "People1.png");
 
     // Choose how long it will take to Cross the Screen.
     var Duration = 3000;

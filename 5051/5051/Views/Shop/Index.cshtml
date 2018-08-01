@@ -22,16 +22,38 @@
 <br />
 
 <div class="ImageBox" id="ImageBox">
+    @{
+        // StudentId needs to be in the Dom
+        <div>
+            @Html.Hidden("StudentId", Model.Id)
+        </div>
 
-    <div class="ScoreBoardBox">
-        <span>
-            Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
-            <span id="xpValue">@Model.ExperiencePoints</span> XP
-        </span>
-        <span id="tokensValue">@Model.Tokens</span> Tokens<br />
+        <div class="ScoreBoardBox">
+            <div class="row">
+                Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
+            </div>
 
-        <span>Customers 10</span>
-    </div>
+            <div class="row">
+                <span id="xpValue">@Model.ExperiencePoints</span>&nbsp; XP
+            </div>
+
+            <div class="row">
+                <span id="tokensValue">@Model.Tokens</span>&nbsp; Tokens
+            </div>
+
+            <div class="row">
+                <span>Customers</span>&nbsp;<span>10</span>
+            </div>
+
+            <div class="row">
+                <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+            </div>
+
+            <div class="row">
+                <span>Game Data:&nbsp;</span><span id="GameData"></span>
+            </div>
+        </div>
+    }
 
     <div class="TopperBox">
         <img class="TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
@@ -74,24 +96,5 @@
     </div>
 </div>
 
-@{
-    // Game Engine Code block
-
-    // Put the Student ID into the Dom, so the Game engine can find it
-    <div>
-        @Html.Hidden("StudentId", Model.Id)
-    </div>
-
-    // Show the Current Iteration Number
-    <div class="row">
-        <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-    </div>
-
-    // Show the Current Refresh Data
-    <div class="row">
-        <span>Game Data:&nbsp;</span><span id="GameData"></span>
-    </div>
-
-    <script src="~/Scripts/Game.js"></script>
-    <script src="~/Scripts/People.js"></script>
-}
+<script src="~/Scripts/Game.js"></script>
+<script src="~/Scripts/People.js"></script>
