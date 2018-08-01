@@ -26,6 +26,12 @@ var GameUpdateTimer;
 // The Global Data for the Current ShopData
 var ShopData = <iJsonDataResult>{};
 
+// The global path to the Shop Folder for Images
+var BaseContentURL = "/Content/shop/";
+
+// Empty Item
+var EmptyItem = "placeholder.png";
+
 /* 
  * 
  * Data Structures 
@@ -54,6 +60,7 @@ interface iJsonDataResult {
     Menu: string;
     Wheels: string;
     IterationNumber: number;
+    isClosed: boolean;
 }
 
 // The Data structor for the Result Data set Header
@@ -117,7 +124,7 @@ function DataLoadGameResults(data: IJsonDataResultHeader) {
 }
 
 // Does a fetch to the server, and returns the Iteration Number
-function GetGameResults(){
+function GetGameResults() {
 
     var data = { "Id": StudentId.toString() };
     $.ajax(
@@ -204,12 +211,11 @@ function UpdateGame() {
 
 // Set the Default on Boot to draw, before the rest draws if no data exists
 function SetDefaultShopData() {
-
+    ShopData.Truck = "Truck0.png";
     ShopData.Topper = "Topper0.png";
     ShopData.Menu = "Menu0.png";
     ShopData.Wheels = "Wheels0.png";
     ShopData.Sign = "Sign0.png";
-    ShopData.Truck = "Truck0.png";
     ShopData.Trailer = "Trailer0.png";
 }
 
@@ -232,6 +238,7 @@ function SetDefaultShopData() {
 
 // Set the Default Data for before the data loads from the server
 SetDefaultShopData();
+DrawEmptyTruckItems();
 
 // Call for Refresh Game to get the Initial State
 UpdateGame();
@@ -244,7 +251,7 @@ console.log(ServerRefreshRate);
 
 // Make Timmer to call refresh
 setInterval(function () {
-   RefreshGame();
+    RefreshGame();
 }, ServerRefreshRate);
 
 /*
@@ -257,8 +264,6 @@ setInterval(function () {
 // Refresh Game display
 function RefreshGameDisplay() {
 
-    var BaseContentURL = "/Content/shop/"; 
-
     // Use the current data structure
 
     // For all the elements in the Game, make a call and refresh them
@@ -269,11 +274,47 @@ function RefreshGameDisplay() {
     // Show Game Data
     $("#GameData").text("Game Data Goes Here");
 
-    // Refesh Shop Skin
-    $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
-    $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
-    $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
-    $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
-    $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
-    $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
+    // Refesh Truck
+    // If the Truck is Empty, remove all items
+    if (ShopData.Truck != "Truck0.png") {
+
+        $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
+        $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
+        $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
+        $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
+        $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
+        $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
+
+        // If The Truck is showing, then show the inside and the Worker
+        $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
+
+        // Worker
+        // TODO:  Have the Worker be the Student's Avater...
+        $("#Worker").attr("src", BaseContentURL + "Worker1.png");
+
+        // If the Truck is Showing, check to see if it is open for business or not
+        // If not, hang the Close Sign
+        if (ShopData.isClosed) {
+            $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
+            $("#Worker").attr("src", BaseContentURL + EmptyItem);
+        }
+    }
+    else {
+        // If the Truck is Empty, then just draw the default empty state
+        DrawEmptyTruckItems();
+    }
 }
+
+function DrawEmptyTruckItems() {
+    $("#Truck").attr("src", BaseContentURL + EmptyItem);
+    $("#Topper").attr("src", BaseContentURL + EmptyItem);
+    $("#Menu").attr("src", BaseContentURL + EmptyItem);
+    $("#Wheels").attr("src", BaseContentURL + EmptyItem);
+    $("#Sign").attr("src", BaseContentURL + EmptyItem);
+    $("#Trailer").attr("src", BaseContentURL + EmptyItem);
+    $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
+    $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
+    $("#Worker").attr("src", BaseContentURL + EmptyItem);
+}
+
+

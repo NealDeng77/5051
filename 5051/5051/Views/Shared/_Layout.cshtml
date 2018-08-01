@@ -70,8 +70,8 @@
                     {
                         case "Home":
                             @*<li class="nav-item">
-                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                    </li>*@
+                                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                                </li>*@
                             <li class="nav-item">
                                 @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
                             </li>
@@ -136,11 +136,11 @@
 
                         default:
                             @*<li class="nav-item">
-                        @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                    </li>*@
+                                    @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                                </li>*@
 
                             break;
                     }
@@ -175,19 +175,27 @@
         </div>
     </footer>
 
-
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     @{
+        // Adding padding at the bottom of the page, needed to make sure buttons can be reached when in phone mode
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        // Adding Tags to the page for UI Automation to use
         var myAreaID = "Area-" + ViewContext.RouteData.DataTokens["area"] + "-Done";
         var myControllerID = "Controller-" + ViewContext.Controller.ValueProvider.GetValue("controller").RawValue + "-Done";
         var myActionID = "View-" + ViewContext.RouteData.Values["action"] + "-Done";
-    }
 
-    <div id="Page-Done"></div>
-    <div id="@myAreaID"></div>
-    <div id="@myControllerID"></div>
-    <div id="@myActionID"></div>
+        <div id="Page-Done"></div>
+        <div id="@myAreaID"></div>
+        <div id="@myControllerID"></div>
+        <div id="@myActionID"></div>
+    }
 </body>
 </html>

@@ -19,5 +19,9 @@
         /// Iteratoin Number
         /// </summary>
         public int IterationNumber;
+
+        public int CustomersTotal;
+        public int Tokens;
+        public int Experience;
     }
 }

@@ -294,5 +294,65 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion Simulation
+
+        #region RunIteration
+        [TestMethod]
+        public void Backend_GameBackend_RunIteration_Student_Is_Null_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+
+            // act
+            test.RunIteration();
+
+            // assert
+            
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_RunIteration_Student_Is_Not_Null_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data1 = new StudentModel();
+            var data2 = new StudentModel();
+            var student1 = Backend.StudentBackend.Instance.Create(data1);
+            var student2 = Backend.StudentBackend.Instance.Create(data2);
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // act
+            test.RunIteration();
+            
+            // assert
+        }
+        #endregion RunIteration
+
+        #region CalculateStudentIteration
+        [TestMethod]
+        public void Backend_GameBackend_CalculateStudentIteration_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(data);
+
+
+            // act
+            var expect = student.Tokens - 1;
+
+            test.CalculateStudentIteration(student);
+            var myTokens = student.Tokens;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // assert 
+            Assert.AreEqual(expect, myTokens, TestContext.TestName);
+
+        }
+
+        #endregion CalculateStudentIteration
     }
 }

@@ -322,10 +322,11 @@
     <Content Include="Content\img\PortalViewReports.png" />
     <Content Include="Content\img\PortalViewShop.png" />
     <Content Include="Content\img\PortalVisitHome.png" />
+    <Content Include="Content\shop\ClosedSign.png" />
     <Content Include="Content\shop\IceCreamDisplay.png" />
     <Content Include="Content\shop\Menu0.png" />
     <Content Include="Content\shop\Menu1.png" />
-    <Content Include="Content\shop\Person1.png" />
+    <Content Include="Content\shop\People1.png" />
     <Content Include="Content\shop\placeholder.png" />
     <Content Include="Content\shop\ShopTail0.png" />
     <Content Include="Content\shop\ShopSign0.png" />

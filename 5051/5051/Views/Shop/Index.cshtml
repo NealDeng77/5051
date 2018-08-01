@@ -3,21 +3,57 @@
     ViewBag.Title = "Shop";
 }
 <br />
+
 <h2>Welcome to the Store</h2>
 
 <br />
 
+@Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+<br />
+
 <div class="ImageBox" id="ImageBox">
+    @{
+        // StudentId needs to be in the Dom
+        <div>
+            @Html.Hidden("StudentId", Model.Id)
+        </div>
 
-    <div class="ScoreBoardBox">
-        <span>
-            Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
-            <span id="xpValue">@Model.ExperiencePoints</span> XP
-        </span>
-        <span id="tokensValue">@Model.Tokens</span> Tokens<br />
+        <div class="ScoreBoardBox">
+            <div class="row">
+                Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
+            </div>
 
-        <span>Customers 10</span>
-    </div>
+            <div class="row">
+                <span id="xpValue">@Model.ExperiencePoints</span>&nbsp; XP
+            </div>
+
+            <div class="row">
+                <span id="tokensValue">@Model.Tokens</span>&nbsp; Tokens
+            </div>
+
+            <div class="row">
+                <span>Customers</span>&nbsp;<span>10</span>
+            </div>
+
+            <div class="row">
+                <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+            </div>
+
+            <div class="row">
+                <span>Game Data:&nbsp;</span><span id="GameData"></span>
+            </div>
+        </div>
+    }
 
     <div class="TopperBox">
         <img class="TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
@@ -43,47 +79,25 @@
         <img class="TrailerItem" id="Trailer" src="~/Content/shop/placeholder.png" alt="Trailer">
     </div>
 
+    <div class="TruckClosedSignBox">
+        <img class="TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/placeholder.png" alt="Trailer">
+    </div>
+
+    <div class="TruckInsideBox">
+        <img class="TruckInsideItem" id="TruckInside" src="~/Content/shop/placeholder.png" alt="Trailer">
+    </div>
+
     <div class="PeopleBox" id="PeopleBox">
         <img class="PeopleItem" id="PeopleItem" src="~/Content/shop/placeholder.png" alt="Shopper">
     </div>
 
+    <div class="WorkerBox" id="WorkerBox">
+        <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
+    </div>
+
+    <div class="WorkerBoxLeft" id="WorkerBoxLeft"></div>
+    <div class="WorkerBoxRight" id="WorkerBoxRight"></div>
 </div>
 
-
-@Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-
-@{
-    // Game Engine Code block
-
-    // Put the Student ID into the Dom, so the Game engine can find it
-    <div>
-        @Html.Hidden("StudentId", Model.Id)
-    </div>
-
-    // Show the Current Iteration Number
-    <div class="row">
-        <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-    </div>
-
-    // Show the Current Refresh Data
-    <div class="row">
-        <span>Game Data:&nbsp;</span><span id="GameData"></span>
-    </div>
-
-    <br />
-    <br />
-    <br />
-
-    <script src="~/Scripts/Game.js"></script>
-    <script src="~/Scripts/People.js"></script>
-}
+<script src="~/Scripts/Game.js"></script>
+<script src="~/Scripts/People.js"></script>

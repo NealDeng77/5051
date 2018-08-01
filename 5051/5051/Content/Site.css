@@ -99,6 +99,15 @@ textarea {
     height: 50px;
 }
 
+.PortalIconBox {
+    padding-top: 10px;
+}
+
+.PortalIcon {
+    width: 112px;
+    height: 112px;
+}
+
 .FooterBar{
     background-color:black;
 }
@@ -349,7 +358,7 @@ input[type=submit].btn-block {
 .ScoreBoardBox {
     position: absolute;
     top:0px;
-    left:0px;
+    left:50px;
     z-index: 50;
 }
 
@@ -374,23 +383,30 @@ input[type=submit].btn-block {
     z-index: 10;
 }
 
-.TruckInside {
+.TruckClosedSignBox {
     position: absolute;
-    top: 580px;
-    left: 507px;
+    top: 660px;
+    left: 360px;
+    z-index: 15;
+}
+
+.TruckInsideBox {
+    position: absolute;
+    top: 505px;
+    left: 580px;
     z-index: 5;
 }
 
 .MenuBox {
     position: absolute;
-    top: 475px;
+    top: 575px;
     left: 925px;
     z-index: 15;
 }
 
 .SignBox {
     position: absolute;
-    top: 830px;
+    top: 825px;
     left:0px;
     z-index: 15;
 }
@@ -411,21 +427,29 @@ input[type=submit].btn-block {
 
 .WorkerBoxLeft {
     position: absolute;
-    top: 580px;
+    top: 590px;
     left: 507px;
+    width:453px;
     z-index: 8;
 }
 
 .WorkerBoxRight {
     position: absolute;
     top: 600px;
-    left: 900px;
+    left: 960px;
+    z-index: 8;
+}
+
+.WorkerBox {
+    position: absolute;
+    top: 590px;
+    left: 960px;
     z-index: 8;
 }
 
 .PeopleBox {
     position: absolute;
-    top: 220px;
+    top: 700px;
     left: -400px;
     z-index: 100;
 }
@@ -445,9 +469,19 @@ input[type=submit].btn-block {
     height: 279px;
 }
 
+.TruckInsideItem {
+    width: 394px;
+    height: 192px;
+}
+
 .SignItem {
     width: 198px;
     height: 191px;
+}
+
+.TruckClosedSignItem {
+    width: 129px;
+    height: 126px;
 }
 
 .WheelsItem {
@@ -461,6 +495,11 @@ input[type=submit].btn-block {
 }
 
 .PeopleItem {
+    width: 100px;
+    height: auto;
+}
+
+.WorkerItem {
     width: 100px;
     height: auto;
 }
