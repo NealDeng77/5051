@@ -3,7 +3,21 @@
     ViewBag.Title = "Shop";
 }
 <br />
+
 <h2>Welcome to the Store</h2>
+
+<br />
+
+@Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+&nbsp;&nbsp;
+@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
 <br />
 
@@ -57,19 +71,6 @@
 
 </div>
 
-
-@Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-&nbsp;&nbsp;
-@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-
 @{
     // Game Engine Code block
 
@@ -87,10 +88,6 @@
     <div class="row">
         <span>Game Data:&nbsp;</span><span id="GameData"></span>
     </div>
-
-    <br />
-    <br />
-    <br />
 
     <script src="~/Scripts/Game.js"></script>
     <script src="~/Scripts/People.js"></script>

@@ -441,7 +441,7 @@ input[type=submit].btn-block {
 
 .PeopleBox {
     position: absolute;
-    top: 220px;
+    top: 700px;
     left: -400px;
     z-index: 100;
 }

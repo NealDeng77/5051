@@ -11,7 +11,11 @@ var ImageBoxTop = ImageBoxPosition.top;
 var ImageBoxWidth = ImageBox.width();
 var ImageBoxHeight = ImageBox.height();
 
-var TruckPositionTop = 220;
+var PeopleBox = $("#PeopleBox");
+var PeopleBoxPosition = PeopleBox.position();
+var PeopleBoxTop = PeopleBoxPosition.top;
+
+var TruckPositionTop = PeopleBoxTop;
 var StartPositionLeft = -400;
 var EndPositionLeft = ImageBoxWidth;
 console.log(EndPositionLeft);
@@ -33,7 +37,7 @@ function MoveShopper() {
     // Put an image on the Shopper
     // TODO:  In the future make it random...
     var ShopperItem = $("#PeopleItem");
-    ShopperItem.attr("src", BaseContentURL + "Person1.png");
+    ShopperItem.attr("src", BaseContentURL + "Worker1.png");
 
     // Choose how long it will take to Cross the Screen.
     var Duration = 3000;
