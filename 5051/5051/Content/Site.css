@@ -99,6 +99,15 @@ textarea {
     height: 50px;
 }
 
+.PortalIconBox {
+    padding-top: 10px;
+}
+
+.PortalIcon {
+    width: 112px;
+    height: 112px;
+}
+
 .FooterBar{
     background-color:black;
 }
