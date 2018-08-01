@@ -161,14 +161,8 @@ function MoveWorker() {
 }
 
 function ResetObject(el: any, top: number, left: number) {
-    el.fadeOut("fast");
-
-    el.fadeIn("slow");
-
     el.css({ 'top': top });
     el.css({ 'left': left });
-
-
 }
 
 function MoveObject(el: any, StartPosition: any, MidPosition: any, EndPosition: any, options: any) {
