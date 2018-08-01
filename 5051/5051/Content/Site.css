@@ -351,7 +351,7 @@ input[type=submit].btn-block {
 .ImageBox {
     position: relative;
     width: 1000px;
-    height:540px;
+    height: 550px;
     /*margin-left: -180px;*/
     /*Move image to the Left so it fits better*/
 }
@@ -366,7 +366,7 @@ input[type=submit].btn-block {
 .BackgroundBox {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: -100px;
     z-index: 1;
 }
 
@@ -456,8 +456,8 @@ input[type=submit].btn-block {
 }
 
 .BackgroundItem {
-    width: 235px;
-    height: 146px;
+    width: 1300px;
+    height: 536px;
 }
 
 .TopperItem {

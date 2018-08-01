@@ -342,4 +342,5 @@ function DrawEmptyTruckItems() {
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
+    $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
 }
