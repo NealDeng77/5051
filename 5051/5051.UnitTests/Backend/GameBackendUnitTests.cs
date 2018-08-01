@@ -294,5 +294,23 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion Simulation
+
+        #region RunIteration
+        [TestMethod]
+        public void Backend_GameBackend_RunIteration_Student_Is_Null_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+
+            // act
+            test.RunIteration();
+
+            // assert
+            
+        }
+
+
+
+        #endregion RunIteration
     }
 }
