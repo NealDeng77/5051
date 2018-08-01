@@ -328,6 +328,7 @@
     <Content Include="Content\shop\IceCreamDisplay.png" />
     <Content Include="Content\shop\Menu0.png" />
     <Content Include="Content\shop\Menu1.png" />
+    <Content Include="Content\shop\Menu2.png" />
     <Content Include="Content\shop\People1.png" />
     <Content Include="Content\shop\placeholder.png" />
     <Content Include="Content\shop\ShopTail0.png" />
@@ -387,6 +388,7 @@
     <Content Include="Content\shop\saxophone.png" />
     <Content Include="Content\shop\Sign0.png" />
     <Content Include="Content\shop\Sign1.png" />
+    <Content Include="Content\shop\Sign2.png" />
     <Content Include="Content\shop\telephone.png" />
     <Content Include="Content\shop\television.png" />
     <Content Include="Content\shop\Topper0.png" />
