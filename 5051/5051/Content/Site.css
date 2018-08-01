@@ -351,7 +351,7 @@ input[type=submit].btn-block {
 .ImageBox {
     position: relative;
     width: 1000px;
-    height: 730px;
+    height:540px;
     /*margin-left: -180px;*/
     /*Move image to the Left so it fits better*/
 }
@@ -359,7 +359,7 @@ input[type=submit].btn-block {
 .ScoreBoardBox {
     position: absolute;
     top:0px;
-    left:150px;
+    left:10px;
     z-index: 50;
 }
 
@@ -379,56 +379,56 @@ input[type=submit].btn-block {
 
 .TruckBox {
     position: absolute;
-    top: 340px;
+    top: 150px;
     left: 138px;
     z-index: 10;
 }
 
 .TruckClosedSignBox {
     position: absolute;
-    top: 467px;
+    top: 277px;
     left: 252px;
     z-index: 15;
 }
 
 .TruckInsideBox {
     position: absolute;
-    top: 400px;
-    left: 360px;
+    top: 215px;
+    left: 355px;
     z-index: 5;
 }
 
 .MenuBox {
     position: absolute;
-    top: 407px;
+    top: 217px;
     left: 655px;
     z-index: 15;
 }
 
 .SignBox {
     position: absolute;
-    top: 586px;
+    top: 396px;
     left:0px;
     z-index: 15;
 }
 
 .WheelsBox {
     position: absolute;
-    top: 617px;
+    top: 427px;
     left: 170px;
     z-index: 15;
 }
 
 .TrailerBox {
     position: absolute;
-    top: 516px;
+    top: 326px;
     left: 846px;
     z-index: 15;
 }
 
 .WorkerBoxLeft {
     position: absolute;
-    top: 430px;
+    top: 240px;
     left: 400px;
     width:280px;
     z-index: 8;
@@ -436,28 +436,28 @@ input[type=submit].btn-block {
 
 .WorkerBoxRight {
     position: absolute;
-    top: 430px;
+    top: 240px;
     left: 655px;
     z-index: 8;
 }
 
 .WorkerBox {
     position: absolute;
-    top: 430px;
+    top: 240px;
     left: 655px;
     z-index: 8;
 }
 
 .PeopleBox {
     position: absolute;
-    top: 500px;
+    top: 310px;
     left: -50px;
     z-index: 100;
 }
 
 .TopperItem {
-    width: 414px;
-    height: 325px;
+    width: 235px;
+    height: 146px;
 }
 
 .TruckItem {
@@ -471,7 +471,7 @@ input[type=submit].btn-block {
 }
 
 .TruckInsideItem {
-    width: 280px;
+    width: 285px;
     height: 140px;
 }
 
