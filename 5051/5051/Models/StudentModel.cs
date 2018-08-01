@@ -72,6 +72,8 @@ namespace _5051.Models
         [PasswordPropertyText]
         public string Password { get; set; }
 
+        
+
         /// <summary>
         /// The current emotion status of the student
         /// </summary>

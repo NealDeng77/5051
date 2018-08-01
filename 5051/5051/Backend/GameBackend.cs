@@ -258,16 +258,25 @@ namespace _5051.Backend
 
         public void CalculateStudentIteration(StudentModel student)
         {
-            // pay rent once per day
-            PayRentPerDay(student);
-            // closed the truck once the token less than 1
-            ClosedTruck(student);
-            // customer arrives
-            CustomerPassBy(student);
-            // did customer buy something when they pass by
-            CustomerPurchase(student);
-            // data change if customer did purchase
-            DataChangeAfterPurchase(student);           
+            // check if it is necessary to do the iteration 
+            if (student.Tokens > 0)
+            {
+                // pay rent once per day
+                PayRentPerDay(student);
+                // closed the truck once the token less than 1
+                ClosedTruck(student);
+                // customer arrives
+                CustomerPassBy(student);
+                // did customer buy something when they pass by
+                CustomerPurchase(student);
+                // data change if customer did purchase
+                DataChangeAfterPurchase(student);
+            }
+            else
+            {
+                // quit iteration calculation
+            }
+                   
         }
 
         public void PayRentPerDay(StudentModel student)
@@ -275,16 +284,41 @@ namespace _5051.Backend
             // Run for each time between now and the last time ran
             var timeNow = DateTime.UtcNow;
 
-            
-            // Get Time last Pay
+            // Get Time last Ran
             var currentData = GetDefault();
 
-            // Get the current delta, and see if student need to pay rent
+            // Get the current delta, and see if student need to pay for the rent
             var shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
-            if (shouldPay < 0)
+            if (shouldPay >= 0)
             {
-                // student need to pay the rent
-                student.Tokens -= 1;
+                // means they have paied for the rent today
+            }
+
+            lock (Lock)
+            {
+                do
+                {
+                    // If time lapsed in > time Threshold, then pay for the rent
+                    shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
+                    if (shouldPay < 0)
+                    {
+                        if(student.Tokens > 0)
+                        {
+                            // the tokens of the rent is 1
+                            student.Tokens -= 1;
+                        }
+                        else
+                        {
+                            // stop the iteration
+                            shouldPay = 0;
+                        }
+                        
+                        // Increment the RunDate
+                        currentData.RunDate = currentData.RunDate.AddHours(24);
+                        Update(currentData);
+                    }
+                }
+                while (shouldPay < 0);
             }
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(student);
