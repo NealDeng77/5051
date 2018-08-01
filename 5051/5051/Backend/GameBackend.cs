@@ -258,9 +258,51 @@ namespace _5051.Backend
 
         public void CalculateStudentIteration(StudentModel student)
         {
-            student.Tokens -= 1;
+            // pay rent once per day
+            PayRentPerDay(student);
+            // closed the truck once the token less than 1
+            ClosedTruck(student);
+            // customer arrives
+            CustomerPassBy(student);
+            // did customer buy something when they pass by
+            CustomerPurchase(student);
+            // data change if customer did purchase
+            DataChangeAfterPurchase(student);           
+        }
+
+        public void PayRentPerDay(StudentModel student)
+        {
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(student);
+            return;
+        }
+
+        public void ClosedTruck(StudentModel student)
+        {
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+            return;
+        }
+
+        public void CustomerPassBy(StudentModel student)
+        {
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+            return;
+        }
+
+        public void CustomerPurchase(StudentModel student)
+        {
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+            return;
+        }
+
+        public void DataChangeAfterPurchase(StudentModel student)
+        {
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+            return;
         }
     }
 }
