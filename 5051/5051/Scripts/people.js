@@ -103,15 +103,17 @@ function MoveWorker() {
     // TODO:  In the future make it the Avatar of the Student...
     var WorkerItem = $("#WorkerItem");
     WorkerItem.attr("src", BaseContentURL + "Worker1.png");
-    // Choose how long it will take to Cross the Screen.
-    var Duration = 2000;
-    // Choose ending position
     // Set the Timmer for Animation Checks
     var AnimationCount = 0;
-    var id = setInterval(frame, 1000);
+    AnimateionCountMax = GetRandomInt(MinAnimationCount, MaxAnimationCount);
+    AnimationInterval = GetRandomInt(MinAnimationInterval, MaxAnimationInterval);
+    var id = setInterval(frame, AnimationInterval);
     function frame() {
-        if (AnimationCount > 10) {
+        if (AnimationCount > AnimateionCountMax) {
             clearInterval(id);
+            AnimateionCountMax = GetRandomInt(MinAnimationCount, MaxAnimationCount);
+            AnimationInterval = GetRandomInt(MinAnimationInterval, MaxAnimationInterval);
+            id = setInterval(frame, AnimationInterval);
         }
         else {
             AnimationCount++;
