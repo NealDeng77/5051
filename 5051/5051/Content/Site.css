@@ -439,6 +439,13 @@ input[type=submit].btn-block {
     z-index: 8;
 }
 
+.WorkerBox {
+    position: absolute;
+    top: 585px;
+    left: 450px;
+    z-index: 8;
+}
+
 .PeopleBox {
     position: absolute;
     top: 700px;
@@ -487,6 +494,11 @@ input[type=submit].btn-block {
 }
 
 .PeopleItem {
+    width: 100px;
+    height: auto;
+}
+
+.WorkerItem {
     width: 100px;
     height: auto;
 }

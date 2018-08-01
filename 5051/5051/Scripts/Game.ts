@@ -29,6 +29,9 @@ var ShopData = <iJsonDataResult>{};
 // The global path to the Shop Folder for Images
 var BaseContentURL = "/Content/shop/";
 
+// Empty Item
+var EmptyItem = "placeholder.png";
+
 /* 
  * 
  * Data Structures 
@@ -282,14 +285,18 @@ function RefreshGameDisplay() {
         $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
         $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
 
-
         // If The Truck is showing, then show the inside and the Worker
         $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
+
+        // Worker
+        // TODO:  Have the Worker be the Student's Avater...
+        $("#Worker").attr("src", BaseContentURL + "Worker1.png");
 
         // If the Truck is Showing, check to see if it is open for business or not
         // If not, hang the Close Sign
         if (ShopData.isClosed) {
             $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
+            $("#Worker").attr("src", BaseContentURL + EmptyItem);
         }
     }
     else {
@@ -299,8 +306,6 @@ function RefreshGameDisplay() {
 }
 
 function DrawEmptyTruckItems() {
-    var EmptyItem = "placeholder.png";
-
     $("#Truck").attr("src", BaseContentURL + EmptyItem);
     $("#Topper").attr("src", BaseContentURL + EmptyItem);
     $("#Menu").attr("src", BaseContentURL + EmptyItem);
@@ -309,6 +314,7 @@ function DrawEmptyTruckItems() {
     $("#Trailer").attr("src", BaseContentURL + EmptyItem);
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
+    $("#Worker").attr("src", BaseContentURL + EmptyItem);
 }
 
 
