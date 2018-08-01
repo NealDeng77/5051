@@ -161,9 +161,23 @@ namespace _5051.Backend
             data.Tokens = 0;
             Create(data);
 
-            Create(new StudentModel("Jea", null));
-            Create(new StudentModel("Sue", null));
+            // Jea has No truck, and Tokens
+            data = new StudentModel("Jea", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
+            data.Tokens = 1000;
+            Create(data);
 
+            // Jea has No truck, and No Tokens
+            data = new StudentModel("Sue", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
+            data.Tokens = 0;
+            Create(data);
+
+            // Mike has Full Truck and 1 Token
+            data = new StudentModel("Stan", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
+            data.Tokens = 1;
+            Create(data);
         }
 
         /// <summary>

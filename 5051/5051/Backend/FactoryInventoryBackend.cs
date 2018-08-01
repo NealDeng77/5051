@@ -284,6 +284,52 @@ namespace _5051.Backend
             return studentData;
         }
 
+        /// <summary>
+        /// Updates the student Model
+        /// Adds the Inventory Item to the Model
+        /// Adds the Item to the Truck Slot
+        /// Returns for all slots
+        ///  UseEmpty when calling for a default truck that is visible
+        ///  Good for demostration or testing
+        /// </summary>
+        /// <returns></returns>
+        public StudentModel GetDefaultEmptyTruck(StudentModel studentData)
+        {
+            FactoryInventoryModel Item;
+
+            //Truck
+            Item = GetDefault(FactoryInventoryCategoryEnum.Truck);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Truck = Item.Id;
+
+            //Wheels
+            Item = GetDefault(FactoryInventoryCategoryEnum.Wheels);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Wheels = Item.Id;
+
+            // Topper
+            Item = GetDefault(FactoryInventoryCategoryEnum.Topper);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Topper = Item.Id;
+
+            // Menu
+            Item = GetDefault(FactoryInventoryCategoryEnum.Menu);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Menu = Item.Id;
+
+            // Sign
+            Item = GetDefault(FactoryInventoryCategoryEnum.Sign);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Sign = Item.Id;
+
+            // Trialer
+            Item = GetDefault(FactoryInventoryCategoryEnum.Trailer);
+            studentData.Inventory.Add(Item);
+            studentData.Truck.Trailer = Item.Id;
+
+            return studentData;
+        }
+
         public ShopTruckViewModel GetShopTruckViewModel(StudentModel studentData)
         {
             var data = new ShopTruckViewModel();
