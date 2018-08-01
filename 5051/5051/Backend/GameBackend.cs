@@ -272,6 +272,20 @@ namespace _5051.Backend
 
         public void PayRentPerDay(StudentModel student)
         {
+            // Run for each time between now and the last time ran
+            var timeNow = DateTime.UtcNow;
+
+            
+            // Get Time last Pay
+            var currentData = GetDefault();
+
+            // Get the current delta, and see if student need to pay rent
+            var shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
+            if (shouldPay < 0)
+            {
+                // student need to pay the rent
+                student.Tokens -= 1;
+            }
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(student);
             return;
