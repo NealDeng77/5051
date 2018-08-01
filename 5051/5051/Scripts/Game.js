@@ -225,7 +225,7 @@ function RefreshGameDisplay() {
         $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
         // Worker
         // TODO:  Have the Worker be the Student's Avater...
-        $("#Worker").attr("src", BaseContentURL + "Worker1.png");
+        $("#Worker").attr("src", BaseContentURL + "AvatarHalf1.png");
         // If the Truck is Showing, check to see if it is open for business or not
         // If not, hang the Close Sign
         if (ShopData.isClosed) {

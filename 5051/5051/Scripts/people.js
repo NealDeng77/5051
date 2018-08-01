@@ -38,7 +38,7 @@ function MoveShopper() {
     // Put an image on the Shopper
     // TODO:  In the future make it random...
     var ShopperItem = $("#PeopleItem");
-    ShopperItem.attr("src", BaseContentURL + "People1.png");
+    ShopperItem.attr("src", BaseContentURL + "AvatarFull1.png");
     // Set the Timmer for Animation Checks
     var AnimationCount = 0;
     AnimateionCountMax = GetRandomInt(MinAnimationCount, MaxAnimationCount);
