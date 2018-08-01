@@ -44,6 +44,8 @@ namespace _5051.Models
         [Display(Name = "Experience", Description = "Experience")]
         public int Experience { get; set; }
 
+        public bool IsPayForRent { get; set; }
+
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -56,6 +58,7 @@ namespace _5051.Models
             CustomersTotal = 0;
             Tokens = 0;
             Experience = 0;
+            IsPayForRent = false;
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
             RunDate = DateTime.UtcNow;
             RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
@@ -99,6 +102,7 @@ namespace _5051.Models
             Enabled = data.Enabled;
             TimeIteration = data.TimeIteration;
             RefreshRate = data.RefreshRate;
+            IsPayForRent = data.IsPayForRent;
         }
     }
 }
