@@ -149,16 +149,17 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            Create(new FactoryInventoryModel("guitar.png", "Guitar", "6 strings and all", FactoryInventoryCategoryEnum.Music, 10, 10, true ));
-            Create(new FactoryInventoryModel("saxophone.png", "Saxophone", "Smooth Sounds", FactoryInventoryCategoryEnum.Music, 10, 10, true));
-            Create(new FactoryInventoryModel("trumpet.png", "Trumpet", "Love the Horn", FactoryInventoryCategoryEnum.Music, 10, 10, true));
-            Create(new FactoryInventoryModel("violin.png", "Violin", "Sweet Melody", FactoryInventoryCategoryEnum.Music, 10, 10, true));
 
-            Create(new FactoryInventoryModel("radio.png", "Radio", "Play some Tunes", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
-            Create(new FactoryInventoryModel("telephone.png", "Telephone", "Talking with my buds", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
-            Create(new FactoryInventoryModel("television.png", "Television", "I love lucy again?", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
-            Create(new FactoryInventoryModel("headphone.png", "Headphone", "Just relazing", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
-            Create(new FactoryInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
+            //Create(new FactoryInventoryModel("guitar.png", "Guitar", "6 strings and all", FactoryInventoryCategoryEnum.Music, 10, 10, true ));
+            //Create(new FactoryInventoryModel("saxophone.png", "Saxophone", "Smooth Sounds", FactoryInventoryCategoryEnum.Music, 10, 10, true));
+            //Create(new FactoryInventoryModel("trumpet.png", "Trumpet", "Love the Horn", FactoryInventoryCategoryEnum.Music, 10, 10, true));
+            //Create(new FactoryInventoryModel("violin.png", "Violin", "Sweet Melody", FactoryInventoryCategoryEnum.Music, 10, 10, true));
+
+            //Create(new FactoryInventoryModel("radio.png", "Radio", "Play some Tunes", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
+            //Create(new FactoryInventoryModel("telephone.png", "Telephone", "Talking with my buds", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
+            //Create(new FactoryInventoryModel("television.png", "Television", "I love lucy again?", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
+            //Create(new FactoryInventoryModel("headphone.png", "Headphone", "Just relazing", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
+            //Create(new FactoryInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
 
             Create(new FactoryInventoryModel("GChocolate.png", "Chocolate Gallon", "Chocolate Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
             Create(new FactoryInventoryModel("GCoffee.png", "Coffee Gallon", "Coffee Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
@@ -167,11 +168,11 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("GSherbert.png", "Sherbert Gallon", "Sherbert", FactoryInventoryCategoryEnum.Food, 10, 10, true));
             Create(new FactoryInventoryModel("GStrawberry.png", "Strawberry Gallon", "Strawberry Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
 
-            Create(new FactoryInventoryModel("FBarstool.png", "Barstool", "Barstool", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
-            Create(new FactoryInventoryModel("FBench.png", "Bench", "Bench", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
-            Create(new FactoryInventoryModel("FCounter.png", "Counter", "Counter", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
-            Create(new FactoryInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
-            Create(new FactoryInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
+            //Create(new FactoryInventoryModel("FBarstool.png", "Barstool", "Barstool", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
+            //Create(new FactoryInventoryModel("FBench.png", "Bench", "Bench", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
+            //Create(new FactoryInventoryModel("FCounter.png", "Counter", "Counter", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
+            //Create(new FactoryInventoryModel("FHangingfern.png", "Hanging Fern", "Hanging Fern Plant", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
+            //Create(new FactoryInventoryModel("FOttomantable.png", "Ottoman Table", "Ottoman Table", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
 
             Create(new FactoryInventoryModel("Wheels0.png", "No Wheel", "No Wheels", FactoryInventoryCategoryEnum.Wheels, 1, 1, false));
             Create(new FactoryInventoryModel("Trailer0.png", "No Trailer", "No Trailer", FactoryInventoryCategoryEnum.Trailer, 1, 1, false));
