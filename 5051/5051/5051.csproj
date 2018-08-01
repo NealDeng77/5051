@@ -324,6 +324,7 @@
     <Content Include="Content\img\PortalVisitHome.png" />
     <Content Include="Content\shop\AvatarFull1.png" />
     <Content Include="Content\shop\AvatarHalf1.png" />
+    <Content Include="Content\shop\Background1.png" />
     <Content Include="Content\shop\ClosedSign.png" />
     <Content Include="Content\shop\IceCreamDisplay.png" />
     <Content Include="Content\shop\Menu0.png" />

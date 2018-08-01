@@ -455,6 +455,11 @@ input[type=submit].btn-block {
     z-index: 100;
 }
 
+.BackgroundItem {
+    width: 235px;
+    height: 146px;
+}
+
 .TopperItem {
     width: 235px;
     height: 146px;
