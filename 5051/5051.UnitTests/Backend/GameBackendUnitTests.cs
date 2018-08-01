@@ -339,20 +339,105 @@ namespace _5051.UnitTests.Models
             var student = Backend.StudentBackend.Instance.Create(data);
 
 
-            // act
-            var expect = student.Tokens - 1;
+            // act         
 
-            test.CalculateStudentIteration(student);
-            var myTokens = student.Tokens;
+            test.CalculateStudentIteration(student);          
 
             // Reset StudentBackend
             StudentBackend.Instance.Reset();
 
-            // assert 
-            Assert.AreEqual(expect, myTokens, TestContext.TestName);
-
+            // assert         
         }
 
         #endregion CalculateStudentIteration
+
+        #region PayRentPerDay
+        [TestMethod]
+        public void Backend_GameBackend_PayRentPerDay_Valid_ID_Should_Pass()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
+
+            //act
+            test.PayRentPerDay(student);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Add_1_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow.AddTicks(1);
+            test.Update(data);
+
+            var expect = test.GetDefault().IterationNumber;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Minus_1_Should_Skip()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow.AddMinutes(-10); // Move it back 10 minutes in time
+            test.Update(data);
+
+            var expect = test.GetDefault().IterationNumber;
+
+            //act
+            var result = test.Simulation();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreNotEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_PayRentPerDay_StudentTokens_Less_than_1_Should_Skip()
+        {
+
+        }
+
+        #endregion PayRentPerDay
     }
+
+
 }
