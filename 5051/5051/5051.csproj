@@ -322,6 +322,8 @@
     <Content Include="Content\img\PortalViewReports.png" />
     <Content Include="Content\img\PortalViewShop.png" />
     <Content Include="Content\img\PortalVisitHome.png" />
+    <Content Include="Content\shop\AvatarFull1.png" />
+    <Content Include="Content\shop\AvatarHalf1.png" />
     <Content Include="Content\shop\ClosedSign.png" />
     <Content Include="Content\shop\IceCreamDisplay.png" />
     <Content Include="Content\shop\Menu0.png" />
@@ -389,10 +391,13 @@
     <Content Include="Content\shop\television.png" />
     <Content Include="Content\shop\Topper0.png" />
     <Content Include="Content\shop\Topper1.png" />
+    <Content Include="Content\shop\Topper2.png" />
     <Content Include="Content\shop\Trailer0.png" />
     <Content Include="Content\shop\Trailer1.png" />
+    <Content Include="Content\shop\Trailer2.png" />
     <Content Include="Content\shop\Truck0.png" />
     <Content Include="Content\shop\Truck1.png" />
+    <Content Include="Content\shop\Truck2.png" />
     <Content Include="Content\shop\TruckInside.png" />
     <Content Include="Content\shop\trumpet.png" />
     <Content Include="Content\shop\violin.png" />
