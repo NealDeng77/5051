@@ -2,105 +2,104 @@
 @{
     ViewBag.Title = "Shop";
 }
-<br />
-
 <h2>Welcome to the Store</h2>
 
-<br />
+<div class="row">
+    <div class="ImageBox" id="ImageBox">
+        @{
+            // StudentId needs to be in the Dom
+            <div>
+                @Html.Hidden("StudentId", Model.Id)
+            </div>
 
-@Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            <div class="ScoreBoardBox">
+                <div class="row">
+                    Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
+                </div>
 
-&nbsp;&nbsp;
-@Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                <div class="row">
+                    <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
+                </div>
 
-&nbsp;&nbsp;
-@Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                <div class="row">
+                    <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
+                </div>
 
-&nbsp;&nbsp;
-@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                <div class="row">
+                    <span>Customers</span>&nbsp;<span id="CustomersValue">10</span>
+                </div>
 
-<br />
+                <div class="row">
+                    <span id="StoreStatus"></span>
+                </div>
 
-<div class="ImageBox" id="ImageBox">
-    @{
-        // StudentId needs to be in the Dom
-        <div>
-            @Html.Hidden("StudentId", Model.Id)
+                <div class="row">
+                    <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+                </div>
+
+                <div class="row">
+                    <span>Game Data:&nbsp;</span><span id="GameData"></span>
+                </div>
+            </div>
+        }
+
+        <div class="TopperBox">
+            <img class="TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
         </div>
 
-        <div class="ScoreBoardBox">
-            <div class="row">
-                Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
-            </div>
-
-            <div class="row">
-                <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
-            </div>
-
-            <div class="row">
-                <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-            </div>
-
-            <div class="row">
-                <span>Customers</span>&nbsp;<span id="CustomersValue">10</span>
-            </div>
-
-            <div class="row">
-                <span id="StoreStatus"></span>
-            </div>
-
-            <div class="row">
-                <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-            </div>
-
-            <div class="row">
-                <span>Game Data:&nbsp;</span><span id="GameData"></span>
-            </div>
+        <div class="SignBox">
+            <img class="SignItem" id="Sign" src="~/Content/shop/placeholder.png" alt="Sign">
         </div>
-    }
 
-    <div class="TopperBox">
-        <img class="TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
+        <div class="TruckBox">
+            <img class="TruckItem" id="Truck" src="~/Content/shop/placeholder.png" alt="Truck">
+        </div>
+
+        <div class="MenuBox">
+            <img class="MenuItem" id="Menu" src="~/Content/shop/placeholder.png" alt="Menu">
+        </div>
+
+        <div class="WheelsBox">
+            <img class="WheelsItem" id="Wheels" src="~/Content/shop/placeholder.png" alt="Wheels">
+        </div>
+
+        <div class="TrailerBox">
+            <img class="TrailerItem" id="Trailer" src="~/Content/shop/placeholder.png" alt="Trailer">
+        </div>
+
+        <div class="TruckClosedSignBox">
+            <img class="TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/placeholder.png" alt="Trailer">
+        </div>
+
+        <div class="TruckInsideBox">
+            <img class="TruckInsideItem" id="TruckInside" src="~/Content/shop/placeholder.png" alt="Trailer">
+        </div>
+
+        <div class="PeopleBox" id="PeopleBox">
+            <img class="PeopleItem" id="PeopleItem" src="~/Content/shop/placeholder.png" alt="Shopper">
+        </div>
+
+        <div class="WorkerBox" id="WorkerBox">
+            <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
+        </div>
+
+        <div class="WorkerBoxLeft" id="WorkerBoxLeft"></div>
+        <div class="WorkerBoxRight" id="WorkerBoxRight"></div>
+
     </div>
+</div>
 
-    <div class="SignBox">
-        <img class="SignItem" id="Sign" src="~/Content/shop/placeholder.png" alt="Sign">
-    </div>
+<div class="row">
+    @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-    <div class="TruckBox">
-        <img class="TruckItem" id="Truck" src="~/Content/shop/placeholder.png" alt="Truck">
-    </div>
+    &nbsp;&nbsp;
+    @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-    <div class="MenuBox">
-        <img class="MenuItem" id="Menu" src="~/Content/shop/placeholder.png" alt="Menu">
-    </div>
+    &nbsp;&nbsp;
+    @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-    <div class="WheelsBox">
-        <img class="WheelsItem" id="Wheels" src="~/Content/shop/placeholder.png" alt="Wheels">
-    </div>
-
-    <div class="TrailerBox">
-        <img class="TrailerItem" id="Trailer" src="~/Content/shop/placeholder.png" alt="Trailer">
-    </div>
-
-    <div class="TruckClosedSignBox">
-        <img class="TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/placeholder.png" alt="Trailer">
-    </div>
-
-    <div class="TruckInsideBox">
-        <img class="TruckInsideItem" id="TruckInside" src="~/Content/shop/placeholder.png" alt="Trailer">
-    </div>
-
-    <div class="PeopleBox" id="PeopleBox">
-        <img class="PeopleItem" id="PeopleItem" src="~/Content/shop/placeholder.png" alt="Shopper">
-    </div>
-
-    <div class="WorkerBox" id="WorkerBox">
-        <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
-    </div>
-
-    <div class="WorkerBoxLeft" id="WorkerBoxLeft"></div>
-    <div class="WorkerBoxRight" id="WorkerBoxRight"></div>
+    &nbsp;&nbsp;
+    @Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </div>
 
 <script src="~/Scripts/Game.js"></script>
