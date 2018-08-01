@@ -309,6 +309,25 @@ namespace _5051.UnitTests.Models
             
         }
 
+        [TestMethod]
+        public void Backend_GameBackend_RunIteration_Student_Is_Not_Null_should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data1 = new StudentModel();
+            var data2 = new StudentModel();
+            var student1 = Backend.StudentBackend.Instance.Create(data1);
+            var student2 = Backend.StudentBackend.Instance.Create(data2);
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // act
+            test.RunIteration();
+            
+            // assert
+        }
+
 
 
         #endregion RunIteration
