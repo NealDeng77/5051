@@ -74,6 +74,7 @@ function DataLoadGameResults(data) {
     ShopData.Tokens = result.Tokens;
     ShopData.Experience = result.Experience;
     ShopData.CustomersTotal = result.CustomersTotal;
+    console.log(data.Data);
 }
 // Does a fetch to the server, and returns the Iteration Number
 function GetGameResults() {
@@ -183,7 +184,6 @@ UpdateGame();
 // Then start looping to refresh every RefreshRate Iteration
 // Get Refresh Rate
 GetRefreshRate();
-console.log(ServerRefreshRate);
 // Make Timmer to call refresh
 setInterval(function () {
     RefreshGame();

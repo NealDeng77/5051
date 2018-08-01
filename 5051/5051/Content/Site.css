@@ -358,7 +358,7 @@ input[type=submit].btn-block {
 .ScoreBoardBox {
     position: absolute;
     top:0px;
-    left:50px;
+    left:150px;
     z-index: 50;
 }
 
