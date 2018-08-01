@@ -503,3 +503,14 @@ input[type=submit].btn-block {
     width: 100px;
     height: auto;
 }
+
+.chartWithMarkerOverlay {
+    position: relative;
+}
+
+.overlay-text {
+    width: 300px;
+    position: absolute;
+    top: 150px; /* chartArea top  */
+    left: 150px; /* chartArea left */
+}
