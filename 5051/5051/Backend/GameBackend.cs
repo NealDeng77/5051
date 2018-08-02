@@ -231,13 +231,16 @@ namespace _5051.Backend
             {
                 // Update the Backend, and close the store
                 StudentData.Truck.IsClosed = false;
-                DataSourceBackend.Instance.StudentBackend.Update(StudentData);
             }
 
             result.IsClosed = StudentData.Truck.IsClosed;
             result.IterationNumber = GetDefault().IterationNumber;
             result.CustomersTotal = StudentData.Truck.CustomersTotal;
             result.TransactionList = StudentData.Truck.TransactionList;
+
+            // Clear the Student TransactionList
+            StudentData.Truck.TransactionList = new List<string>();
+            DataSourceBackend.Instance.StudentBackend.Update(StudentData);
 
             return result;
         }
@@ -339,7 +342,48 @@ namespace _5051.Backend
 
         public void CustomerPurchase(StudentModel student)
         {
-            
+            // TODO Replace with real code
+            // Pretend a Customer buys something.
+
+            // Choose an item from the inventory to buy
+            // Check that there are enough quanties.
+            // Sell it (-1 to quantity)
+            // If quantity is 0, remove from the student inventory list
+            // Calculate Tokens. Need Profit Markup factor, does student experienc help here?
+            var ProfitPercent = .1d;
+
+            // Update Tokens for Student
+            // Add a Transaction of the Sale
+            // Increment Customer Total
+
+            var Item = student.Inventory.FirstOrDefault(m => m.Category == FactoryInventoryCategoryEnum.Food);
+
+            if (Item != null)
+            {
+                // Sell Item
+                Item.Quantities--;
+
+                // Add Tokens to the Student
+                var profit = (int)Math.Ceiling(Item.Tokens * ProfitPercent);
+                student.Tokens += Item.Tokens + profit;
+
+                student.Truck.CustomersTotal++;
+
+                var myTransaction = "Sold " + Item.Name + " for profit of " + profit;
+                student.Truck.TransactionList.Add(myTransaction);
+
+                if (Item.Quantities < 1)
+                {
+                    // Remove from list
+                    student.Inventory.Remove(Item);
+                }
+            }
+            else
+            {
+                var myTransaction = "No Inventory to Sell";
+                student.Truck.TransactionList.Add(myTransaction);
+            }
+
             return;
         }
 
