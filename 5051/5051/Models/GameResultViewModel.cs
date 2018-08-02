@@ -1,4 +1,6 @@
-﻿namespace _5051.Models
+﻿using System.Collections.Generic;
+
+namespace _5051.Models
 {
     /// <summary>
     /// View Model for the GameResult Views to have the list of GameResults
@@ -20,9 +22,10 @@
         /// </summary>
         public int IterationNumber;
 
-        public bool isClosed;
-
+        public bool IsClosed;
         public int CustomersTotal;
+        public List<string> TransactionList;
+
         public int Tokens;
         public int Experience;
     }

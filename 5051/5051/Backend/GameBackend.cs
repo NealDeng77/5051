@@ -224,21 +224,20 @@ namespace _5051.Backend
             result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
             result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
 
-            result.IterationNumber = GetDefault().IterationNumber;
-
-            // TODO: Add CustomersTotal to the Truck Record on Student...
-            result.CustomersTotal = 1; //StudentData.Truck.CustomersTotal;
-
             result.Tokens = StudentData.Tokens;
             result.Experience = StudentData.ExperiencePoints;
 
-            // Todo: Add isClosed to the Truck record on Student ...
-            result.isClosed = false;
-
             if (StudentData.Tokens < 1)
             {
-                result.isClosed = true;
+                // Update the Backend, and close the store
+                StudentData.Truck.IsClosed = false;
+                DataSourceBackend.Instance.StudentBackend.Update(StudentData);
             }
+
+            result.IsClosed = StudentData.Truck.IsClosed;
+            result.IterationNumber = GetDefault().IterationNumber;
+            result.CustomersTotal = StudentData.Truck.CustomersTotal;
+            result.TransactionList = StudentData.Truck.TransactionList;
 
             return result;
         }
@@ -257,7 +256,6 @@ namespace _5051.Backend
                 // Update Student
                 DataSourceBackend.Instance.StudentBackend.Update(student);
             }
-            
         }
 
         public void CalculateStudentIteration(StudentModel student)
@@ -280,7 +278,6 @@ namespace _5051.Backend
             {
                 // quit iteration calculation
             }
-                   
         }
 
         public void PayRentPerDay(StudentModel student)
