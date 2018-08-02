@@ -444,7 +444,27 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Backend_GameBackend_PayRentPerDay_StudentTokens_Less_than_1_Should_Skip()
         {
+            //arrange          
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            data.RunDate = DateTime.UtcNow.AddHours(-25);
+            test.Update(data);
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
+            student.Tokens = 0;
+            //act   
+            var expect = student.Tokens;
+            test.PayRentPerDay(student);
 
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            var myTokens = student.Tokens;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreEqual(expect, myTokens, TestContext.TestName);
         }
 
         #endregion PayRentPerDay
