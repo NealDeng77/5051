@@ -293,7 +293,7 @@ namespace _5051.Backend
 
             // Get the current delta, and see if student need to pay for the rent
             var shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
-            if (shouldPay >= 0)
+            if (shouldPay > 0)
             {
                 // means they have paied for the rent today
             }
@@ -304,7 +304,7 @@ namespace _5051.Backend
                 {
                     // If time lapsed in > time Threshold, then pay for the rent
                     shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
-                    if (shouldPay < 0)
+                    if (shouldPay <= 0)
                     {
                         if(student.Tokens > 0)
                         {
