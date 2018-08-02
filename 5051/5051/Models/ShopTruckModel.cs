@@ -26,9 +26,22 @@ namespace _5051.Models
         // The Inventory ID for the Wheels
         public string Truck { get; set; }
 
+        // Customer Count
+        public int CustomersTotal { get; set; }
+
+        // Track the status of th Truck
+        public bool IsClosed { get; set;}
+
+        public List<string> TransactionList { get; set; }
+
+
         public ShopTruckModel()
         {
             // New Models, set default data
+
+            IsClosed = false; // Trucks Open to start with
+            TransactionList = new List<string>();   // Empty List of Transactions
+            CustomersTotal = 0; // No customers to start off with
 
             Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;
 

@@ -210,6 +210,7 @@ function MoveObject(el: any, StartPosition: any, MidPosition: any, EndPosition: 
 
 }
 
+
 /**
  * generate a random integer between min and max
  * @param {Number} min 

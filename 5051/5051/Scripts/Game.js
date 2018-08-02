@@ -70,10 +70,11 @@ function DataLoadGameResults(data) {
     ShopData.Sign = result.Sign;
     ShopData.Truck = result.Truck;
     ShopData.Trailer = result.Trailer;
-    ShopData.isClosed = result.isClosed;
+    ShopData.IsClosed = result.IsClosed;
+    ShopData.CustomersTotal = result.CustomersTotal;
+    ShopData.TransactionList = result.TransactionList;
     ShopData.Tokens = result.Tokens;
     ShopData.Experience = result.Experience;
-    ShopData.CustomersTotal = result.CustomersTotal;
     console.log(data.Data);
 }
 // Does a fetch to the server, and returns the Iteration Number
@@ -206,7 +207,7 @@ function RefreshGameDisplay() {
     $("#TokensValue").text(ShopData.Tokens);
     // Show the Status of the Store
     var storeStatus = "Open for Business";
-    if (ShopData.isClosed) {
+    if (ShopData.IsClosed) {
         storeStatus = "Closed, Rent is due";
     }
     $("#StoreStatus").text(storeStatus);
@@ -228,7 +229,7 @@ function RefreshGameDisplay() {
         $("#Worker").attr("src", BaseContentURL + "AvatarHalf1.png");
         // If the Truck is Showing, check to see if it is open for business or not
         // If not, hang the Close Sign
-        if (ShopData.isClosed) {
+        if (ShopData.IsClosed) {
             $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
             $("#Worker").attr("src", BaseContentURL + EmptyItem);
         }
@@ -248,5 +249,6 @@ function DrawEmptyTruckItems() {
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
+    $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
 }
 //# sourceMappingURL=game.js.map

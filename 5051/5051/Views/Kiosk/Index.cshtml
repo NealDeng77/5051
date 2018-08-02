@@ -75,12 +75,13 @@
                                     <br />
                                     <div class="row text-center">
                                         @{
-                                            // list emotion icons
-                                            foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
-                                            {
-                                                var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                                // list emotion icons
+                                                foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                                {
+                                                    var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                                    var emotionId = emotion + "Id";
 
-                                                <div class="BoxWithHighlightHover">
+                                                <div id="@emotionId" class="BoxWithHighlightHover">
                                                     <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
                                                 </div>
 
@@ -122,22 +123,22 @@
                                     </div>                                                                   
                                 </div>
                                 <div class="col"> </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @{ 
-                        // Put the center login box here
-                        // Have the box be just a blank box
-                        // Then when someone clicks a log in button
-                        // Update the picture in the box to be the avatar
-                        // And show a div that has a LogIn button
+                        @{ 
+                            // Put the center login box here
+                            // Have the box be just a blank box
+                            // Then when someone clicks a log in button
+                            // Update the picture in the box to be the avatar
+                            // And show a div that has a LogIn button
 
-                        // If it is for logout, then show a div for a logout button
-                        // Do that but having the javascript show or hide the div
+                            // If it is for logout, then show a div for a logout button
+                            // Do that but having the javascript show or hide the div
 
-                        // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
-                        // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
-                    }
+                            // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
+                            // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
+                        }
                     </div>
 
                     <div class="col-sm-4 text-center">
@@ -312,9 +313,9 @@
 
 <script>
     function UpdateEmotionCurrent(UserEmotionId) {
+        var currentEmotion = document.getElementById(UserEmotionId+"Id");
+        currentEmotion.style.opacity= 0.3;
         $("#EmotionCurrentId").attr("Value", UserEmotionId);
-
         $("#StudentLoginButton").attr("Disabled", false);
-
     }
 </script>
