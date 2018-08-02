@@ -320,6 +320,7 @@
     <Content Include="Content\img\PortalViewAttendance.png" />
     <Content Include="Content\img\PortalViewAvatars.png" />
     <Content Include="Content\img\PortalViewReports.png" />
+    <Content Include="Content\img\PortalViewSettings.png" />
     <Content Include="Content\img\PortalViewShop.png" />
     <Content Include="Content\img\PortalVisitHome.png" />
     <Content Include="Content\shop\AvatarFull1.png" />
