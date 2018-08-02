@@ -416,24 +416,29 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Minus_1_Should_Skip()
+        public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Minus_25_Should_Pass()
         {
-            //arrange
+            //arrange          
             var test = Backend.GameBackend.Instance;
             var data = test.GetDefault();
-            data.RunDate = DateTime.UtcNow.AddMinutes(-10); // Move it back 10 minutes in time
+            data.RunDate = DateTime.UtcNow.AddHours(-25);
             test.Update(data);
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
 
-            var expect = test.GetDefault().IterationNumber;
+            //act   
+            var expect = student.Tokens - 1;
+            test.PayRentPerDay(student);
+            
+            DataSourceBackend.Instance.StudentBackend.Update(student);
 
-            //act
-            var result = test.Simulation();
+            var myTokens = student.Tokens;
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             //assert
-            Assert.AreNotEqual(expect, result, TestContext.TestName);
+            Assert.AreEqual(expect, myTokens, TestContext.TestName);
         }
 
         [TestMethod]
