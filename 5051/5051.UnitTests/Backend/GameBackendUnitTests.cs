@@ -392,22 +392,27 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Add_1_Should_Skip()
         {
-            //arrange
+            //arrange          
             var test = Backend.GameBackend.Instance;
             var data = test.GetDefault();
-            data.RunDate = DateTime.UtcNow.AddTicks(1);
+            data.RunDate = DateTime.UtcNow.AddHours(1);
             test.Update(data);
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
 
-            var expect = test.GetDefault().IterationNumber;
+            //act   
+            test.PayRentPerDay(student);
+            var myTokens = student.Tokens;
 
-            //act
-            var result = test.Simulation();
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            var expect = student.Tokens;
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             //assert
-            Assert.AreEqual(expect, result, TestContext.TestName);
+            Assert.AreEqual(expect, myTokens, TestContext.TestName);
         }
 
         [TestMethod]
