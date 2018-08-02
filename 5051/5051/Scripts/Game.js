@@ -251,4 +251,9 @@ function DrawEmptyTruckItems() {
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
     $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
 }
+/// The Transaction List is a List of strings of the latest transactions.
+function ShowTransactionList() {
+    // Add the Latest Transactions to display
+    // .text(someHtmlString).html();
+}
 //# sourceMappingURL=game.js.map
