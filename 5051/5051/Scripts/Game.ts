@@ -344,3 +344,4 @@ function DrawEmptyTruckItems() {
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
     $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
 }
+
