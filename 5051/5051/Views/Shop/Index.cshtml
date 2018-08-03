@@ -107,8 +107,10 @@
     &nbsp;&nbsp;
     @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
 
-    &nbsp;&nbsp;
-    @Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @{
+        //&nbsp; &nbsp;
+        //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    }
 </div>
 
 <script src="~/Scripts/Game.js"></script>
