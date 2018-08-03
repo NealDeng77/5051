@@ -230,7 +230,7 @@ namespace _5051.Backend
             if (StudentData.Tokens < 1)
             {
                 // Update the Backend, and close the store
-                StudentData.Truck.IsClosed = false;
+                StudentData.Truck.IsClosed = true;
             }
 
             result.IsClosed = StudentData.Truck.IsClosed;
@@ -258,6 +258,9 @@ namespace _5051.Backend
 
                 // Update Student
                 DataSourceBackend.Instance.StudentBackend.Update(student);
+
+                // check if need to close the store
+
             }
         }
 
@@ -270,10 +273,13 @@ namespace _5051.Backend
                 PayRentPerDay(student);
                 // customer arrives
                 CustomerPassBy(student);
-                // did customer buy something when they pass by
-                CustomerPurchase(student);
-                // data change if customer did purchase
-                DataChangeAfterPurchase(student);
+                // Check if customer buy something or not
+                var ifBuy = CustomerBuyOrNot(student);
+                if (ifBuy == true)
+                {
+                    // customer buy something
+                    CustomerPurchase(student);
+                }                              
             }
             else
             {
@@ -312,7 +318,7 @@ namespace _5051.Backend
                         else
                         {
                             // stop the iteration
-                            shouldPay = 0;
+                            shouldPay = 0;                           
                         }
                         
                         // Increment the RunDate
@@ -328,9 +334,39 @@ namespace _5051.Backend
 
         public void CustomerPassBy(StudentModel student)
         {
-            
+            // TODO Replace with real code
+            // Pretend a Customer PassBy.
+            var passByPercent = .1d;
+
+            // extra precent
+            var levelExtra = student.AvatarLevel * .1d;
+            var XPExtra = student.ExperiencePoints * .01d;
+
+            // Add a Transaction of the Customer passBy           
+            var passByRandomRange = (int)Math.Ceiling((passByPercent + levelExtra + XPExtra) * 100);
+
+            // generate random number
+            var randObj = new Random();
+            var passByRandomNumber = randObj.Next(passByRandomRange, 100);
+
+            // show pass by message
+            int criterion = 50;
+            if (passByRandomNumber > criterion)
+            {
+                var myTransaction = "Customer is coming";
+                student.Truck.TransactionList.Add(myTransaction);
+            }
             return;
         }
+
+        public bool CustomerBuyOrNot(StudentModel student)
+        {
+            var buy = false;
+
+            return buy;
+        }
+
+
 
         public void CustomerPurchase(StudentModel student)
         {
@@ -378,11 +414,6 @@ namespace _5051.Backend
 
             return;
         }
-
-        public void DataChangeAfterPurchase(StudentModel student)
-        {
-            
-            return;
-        }
+       
     }
 }
