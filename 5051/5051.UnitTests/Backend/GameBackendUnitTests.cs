@@ -490,29 +490,29 @@ namespace _5051.UnitTests.Models
 
         #region CustomerPassBy
         [TestMethod]
-        //public void Backend_GameBackend_CustomerPassBy_Qualified_Data_Should_Display_Message()
-        //{
-        //    //arrange
-        //    var test = Backend.GameBackend.Instance;
-        //    var data = test.GetDefault();
-        //    var studentData = new StudentModel();
-        //    var student = Backend.StudentBackend.Instance.Create(studentData);
+        public void Backend_GameBackend_CustomerPassBy_Qualified_Data_Should_Display_Message()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
 
-        //    //act
-        //    student.AvatarLevel = 3;
-        //    student.ExperiencePoints = 20;
+            //act
+            student.AvatarLevel = 3;
+            student.ExperiencePoints = 20;
 
-        //    test.CustomerPassBy(student);
+            test.CustomerPassBy(student);
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
-        //    // Assert
-        //    Assert.IsNotNull(student.Truck.TransactionList, TestContext.TestName);
-        //}
+            // Assert
+            Assert.IsNotNull(student.Truck.TransactionList, TestContext.TestName);
+        }
 
-    #endregion CustomerPassBy
-}
+        #endregion CustomerPassBy
+    }
 
          
 }
