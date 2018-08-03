@@ -271,8 +271,10 @@ namespace _5051.Backend
             {
                 // pay rent once per day
                 PayRentPerDay(student);
+                
                 // customer arrives
                 CustomerPassBy(student);
+                
                 // Check if customer buy something or not
                 var ifBuy = WillCustomerBuyOrNot(student);
                 if (ifBuy == true)
@@ -295,11 +297,16 @@ namespace _5051.Backend
             // Get Time last Ran
             var currentData = GetDefault();
 
+            var RunDateTime = currentData.RunDate.AddHours(24);
+            
             // Get the current delta, and see if student need to pay for the rent
-            var shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
+            var shouldPay = RunDateTime.CompareTo(timeNow);
             if (shouldPay > 0)
             {
                 // means they have paied for the rent today
+
+                // Paid the rent already, so can exit.
+                return;
             }
 
             lock (Lock)
@@ -307,13 +314,19 @@ namespace _5051.Backend
                 do
                 {
                     // If time lapsed in > time Threshold, then pay for the rent
-                    shouldPay = currentData.RunDate.AddHours(24).CompareTo(timeNow);
+                    RunDateTime = currentData.RunDate.AddHours(24);
+                    shouldPay = RunDateTime.CompareTo(timeNow);
                     if (shouldPay <= 0)
                     {
                         if(student.Tokens > 0)
                         {
+                            var RentAmount = 1;
                             // the tokens of the rent is 1
-                            student.Tokens -= 1;
+                            student.Tokens -= RentAmount;
+
+                            var myTransaction = "Paid Rent "+RentAmount+" for "+RunDateTime.Date.ToShortDateString();
+                            student.Truck.TransactionList.Add(myTransaction);
+
                         }
                         else
                         {
@@ -386,8 +399,6 @@ namespace _5051.Backend
 
             return buy;
         }
-
-
 
         public void CustomerPurchase(StudentModel student)
         {
