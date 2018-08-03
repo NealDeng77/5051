@@ -272,10 +272,6 @@ namespace _5051.Controllers
                 return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
             }
 
-            // Reduce Item to Student Inventory
-            // TODO:  Mike, remove inventory to Students...
-            myStudent.Inventory.Remove(myItem);
-
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 

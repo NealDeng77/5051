@@ -264,12 +264,10 @@ namespace _5051.Backend
         public void CalculateStudentIteration(StudentModel student)
         {
             // check if it is necessary to do the iteration 
-            if (student.Tokens > 0)
+            if (student.Tokens >= 0)
             {
                 // pay rent once per day
                 PayRentPerDay(student);
-                // closed the truck once the token less than 1
-                ClosedTruck(student);
                 // customer arrives
                 CustomerPassBy(student);
                 // did customer buy something when they pass by
@@ -328,15 +326,9 @@ namespace _5051.Backend
             return;
         }
 
-        public void ClosedTruck(StudentModel student)
-        {
-            
-            return;
-        }
-
         public void CustomerPassBy(StudentModel student)
         {
-           
+            
             return;
         }
 
@@ -350,7 +342,7 @@ namespace _5051.Backend
             // Sell it (-1 to quantity)
             // If quantity is 0, remove from the student inventory list
             // Calculate Tokens. Need Profit Markup factor, does student experienc help here?
-            var ProfitPercent = .1d;
+            var ProfitPercent = .1d;                                                                                    
 
             // Update Tokens for Student
             // Add a Transaction of the Sale

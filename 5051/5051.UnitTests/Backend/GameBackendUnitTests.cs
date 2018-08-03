@@ -349,6 +349,25 @@ namespace _5051.UnitTests.Models
             // assert         
         }
 
+        [TestMethod]
+        public void Backend_GameBackend_CalculateStudentIteration_Tokens_Less_Than_zero_should_Skip()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(data);
+            student.Tokens = -1;
+
+            // act         
+
+            test.CalculateStudentIteration(student);
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // assert         
+        }
+
         #endregion CalculateStudentIteration
 
         #region PayRentPerDay
