@@ -24,6 +24,19 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_StudentInputModel_Default_Get_Set_Should_Pass()
+        {
+
+            // Act
+            var result = new StudentInputModel();
+            var expect = "id";
+            result.Id = expect;
+
+            // Assert
+            Assert.AreEqual(expect, result.Id, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
