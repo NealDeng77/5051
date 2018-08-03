@@ -362,6 +362,27 @@ namespace _5051.Backend
         public bool CustomerBuyOrNot(StudentModel student)
         {
             var buy = false;
+            // TODO Replace with real code
+            // Pretend a Customer buy or not.
+            var passByPercent = .1d;
+
+            // extra precent
+            var levelExtra = student.AvatarLevel * .1d;
+            var XPExtra = student.ExperiencePoints * .01d;
+
+            // Add a Transaction of the Customer passBy           
+            var passByRandomRange = (int)Math.Ceiling((passByPercent + levelExtra + XPExtra) * 100);
+
+            // generate random number
+            var randObj = new Random();
+            var passByRandomNumber = randObj.Next(passByRandomRange, 100);
+
+            // show pass by message
+            int criterion = 40;
+            if (passByRandomNumber > criterion)
+            {
+                buy = true;
+            }
 
             return buy;
         }
