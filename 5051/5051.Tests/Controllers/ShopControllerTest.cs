@@ -440,22 +440,22 @@ namespace _5051.Tests.Controllers
 
         #endregion SpecialsRegion
 
-        #region VisitRegion
-        [TestMethod]
-        public void Controller_Shop_Visit_Valid_Should_Return_List()
-        {
-            // Arrange
-            ShopController controller = new ShopController();
-            var expect = Backend.StudentBackend.Instance.Index();
+        //#region VisitRegion
+        //[TestMethod]
+        //public void Controller_Shop_Visit_Valid_Should_Return_List()
+        //{
+        //    // Arrange
+        //    ShopController controller = new ShopController();
+        //    var expect = Backend.StudentBackend.Instance.Index();
 
-            //// Act
-            var resultCall = controller.Visit() as ViewResult;
-            var result = (List<StudentModel>)resultCall.Model;
+        //    //// Act
+        //    var resultCall = controller.Visit() as ViewResult;
+        //    var result = (List<StudentModel>)resultCall.Model;
 
-            //// Assert
-            Assert.AreEqual(expect, result, TestContext.TestName);
-        }
-        #endregion VisitRegion
+        //    //// Assert
+        //    Assert.AreEqual(expect, result, TestContext.TestName);
+        //}
+        //#endregion VisitRegion
 
         #region VisitShopRegion
         [TestMethod]
