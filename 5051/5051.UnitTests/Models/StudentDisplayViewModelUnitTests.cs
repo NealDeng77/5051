@@ -122,6 +122,34 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(expectLastDateTime, result.LastDateTime, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Default_Instantiate_Set_LastLogin_Should_Pass()
+        {
+            // Arrange
+            var result = new StudentDisplayViewModel();
+            var expectLastLogin= DateTime.UtcNow;
+
+            //act
+            result.LastLogIn = expectLastLogin;
+
+            // Assert
+            Assert.AreEqual(expectLastLogin, result.LastLogIn, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Default_Instantiate_Set_EmotionImgeUri_Should_Pass()
+        {
+            // Arrange
+            var result = new StudentDisplayViewModel();
+            var expect = "uri";
+
+            //act
+            result.EmotionImgUri = expect;
+
+            // Assert
+            Assert.AreEqual(expect, result.EmotionImgUri, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
