@@ -658,22 +658,7 @@ namespace _5051.Tests.Controllers
 
         #endregion
 
-        #region GroupRegion
-        [TestMethod]
-        public void Controller_Portal_Group_Default_Should_Pass()
-        {
-            // Arrange
-            PortalController controller = new PortalController();
-
-            // Act
-            ViewResult result = controller.Group() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
-        #endregion
-
-        #region SettingsStringRegion
+       #region SettingsStringRegion
         [TestMethod]
         public void Controller_Portal_Settings_IDIsNull_Should_Return_RosterPage()
         {
