@@ -248,7 +248,7 @@ function DrawEmptyTruckItems() {
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
     $("#Worker").attr("src", BaseContentURL + EmptyItem);
-    $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
+    $("#Backgrond").attr("src", BaseContentURL + EmptyItem); //"Background1.png");
 }
 /// The Transaction List is a List of strings of the latest transactions.
 function ShowTransactionList() {
