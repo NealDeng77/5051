@@ -567,6 +567,35 @@ namespace _5051.UnitTests.Models
             Assert.IsTrue(result, TestContext.TestName);
             Assert.AreEqual(1, elementNumber, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_GameBackend_CustomerPurchase_valid_data_Should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
+            student.Inventory = FactoryInventoryBackend.Instance.Index();
+            student.Truck.CustomersTotal = 0;
+
+            // act
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            var myTokens = student.Tokens;
+            test.CustomerPurchase(student);
+
+            var expectCustomerTotal = 1;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(student.Truck.TransactionList, TestContext.TestName);
+            Assert.AreNotEqual(myTokens, student.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectCustomerTotal, student.Truck.CustomersTotal, TestContext.TestName);
+        }
+
         #endregion CustomerPurchase
     }
 
