@@ -301,18 +301,6 @@ namespace _5051.Controllers
             return View(SelectedAvatarViewModel);
         }
 
-
-        /// <summary>
-        /// The Group's House information
-        /// </summary>
-        /// <returns></returns>
-        // GET: Portal
-        public ActionResult Group()
-        {
-
-            return View();
-        }
-
         /// <summary>
         ///  My Settings
         /// </summary>
