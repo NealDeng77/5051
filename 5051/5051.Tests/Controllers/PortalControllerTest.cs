@@ -799,23 +799,23 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region ReportRegion
+        //#region ReportRegion
         
 
-        [TestMethod]
-        public void Controller_Portal_Report_Default_should_Pass()
-        {
-            // Arrange
-            PortalController controller = new PortalController();
-            StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.GetDefault().Id;
+        //[TestMethod]
+        //public void Controller_Portal_Report_Default_should_Pass()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    string id = Backend.StudentBackend.Instance.GetDefault().Id;
 
-            // Act
-            var result = controller.Report(id) as RedirectToRouteResult;
+        //    // Act
+        //    var result = controller.Report(id) as RedirectToRouteResult;
 
-            // Assert
-            Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
-        }
-        #endregion
+        //    // Assert
+        //    Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
+        //}
+        //#endregion
     }
 }
