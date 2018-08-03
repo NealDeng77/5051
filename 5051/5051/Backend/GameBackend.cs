@@ -274,7 +274,7 @@ namespace _5051.Backend
                 // customer arrives
                 CustomerPassBy(student);
                 // Check if customer buy something or not
-                var ifBuy = CustomerBuyOrNot(student);
+                var ifBuy = WillCustomerBuyOrNot(student);
                 if (ifBuy == true)
                 {
                     // customer buy something
@@ -359,7 +359,7 @@ namespace _5051.Backend
             return;
         }
 
-        public bool CustomerBuyOrNot(StudentModel student)
+        public bool WillCustomerBuyOrNot(StudentModel student)
         {
             var buy = false;
             // TODO Replace with real code

@@ -512,7 +512,33 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion CustomerPassBy
+
+        #region WillCustomerBuyOrNot
+        [TestMethod]
+        public void Backend_GameBackend_WillCustomerBuyOrNot_Qualified_Data_Should_Return_True()
+        {
+            //arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
+
+            //act
+            student.AvatarLevel = 3;
+            student.ExperiencePoints = 20;
+
+            var result = test.WillCustomerBuyOrNot(student);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        #endregion WillCustomerBuyOrNot
+
     }
 
-         
+
 }
