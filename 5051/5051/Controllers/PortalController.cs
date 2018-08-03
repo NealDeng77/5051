@@ -388,12 +388,12 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Report(string id = null)
         {
-            //var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
 
-            //if (myStudent == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
 
             //var myReport = new StudentReportViewModel
@@ -405,7 +405,9 @@ namespace _5051.Controllers
 
             //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
-            return RedirectToAction("MonthlyReport", "Admin", new { id });
+            return RedirectToAction("Index", "Portal", new { id=myStudent.Id });
+
+            // return RedirectToAction("MonthlyReport", "Admin", new { id });
         }
     }
 }
