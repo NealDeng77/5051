@@ -18,7 +18,7 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Roster()
         {
-            var myDataList = _5051.Backend.DataSourceBackend.Instance.StudentBackend.Index();
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
         }
@@ -28,20 +28,15 @@ namespace _5051.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Portal
-        public ActionResult Login(string id=null)
+        public ActionResult Login(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
-            // Null not possible
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Roster", "Portal");
-            //}
 
             return View(myReturn);
         }
@@ -95,7 +90,7 @@ namespace _5051.Controllers
             }
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
-            return RedirectToAction("Index","Portal", new { id = data.Id });
+            return RedirectToAction("Index", "Portal", new { id = data.Id });
         }
 
         /// <summary>
@@ -106,7 +101,7 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Index(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
 
             if (myStudent == null)
             {
@@ -138,11 +133,9 @@ namespace _5051.Controllers
                         break;
                 }
             }
-            // Null not possible
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Roster", "Portal");
-            //}
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
 
             return View(myReturn);
         }
@@ -155,7 +148,7 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Attendance(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
@@ -204,11 +197,8 @@ namespace _5051.Controllers
 
             myReturn.Attendance = myAttendanceModels;
 
-            // not possible to be null
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Roster", "Portal");
-            //}
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
 
             return View(myReturn);
         }
@@ -245,7 +235,7 @@ namespace _5051.Controllers
             }
 
             // Lookup the student id, will just replace the Avatar Id on it if it is valid
-            var myStudent = Backend.StudentBackend.Instance.Read(data.StudentId);
+            var myStudent = StudentBackend.Instance.Read(data.StudentId);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -253,7 +243,7 @@ namespace _5051.Controllers
 
             // Set the Avatar ID on the Student and update in data store
             myStudent.AvatarId = data.AvatarId;
-            Backend.StudentBackend.Instance.Update(myStudent);
+            StudentBackend.Instance.Update(myStudent);
 
             // Editing is done, so go back to the Student Portal
             return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
@@ -270,13 +260,13 @@ namespace _5051.Controllers
             // var currentUser = User.Identity.GetUserName();
             //var currentUserId = User.Identity.GetUserId();
 
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            var myAvatar = Backend.AvatarBackend.Instance.Read(myStudent.AvatarId);
+            var myAvatar = AvatarBackend.Instance.Read(myStudent.AvatarId);
             if (myAvatar == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -285,14 +275,14 @@ namespace _5051.Controllers
             var SelectedAvatarViewModel = new SelectedAvatarForStudentViewModel();
 
             // Populate the Values to use
-            SelectedAvatarViewModel.AvatarList = Backend.AvatarBackend.Instance.Index();
+            SelectedAvatarViewModel.AvatarList = AvatarBackend.Instance.Index();
 
             // Build up the List of AvatarLevels, each list holds the avatar of that level.
-            SelectedAvatarViewModel.MaxLevel = SelectedAvatarViewModel.AvatarList.Aggregate((i1, i2) => i1.Level > i2.Level? i1 : i2).Level;
+            SelectedAvatarViewModel.MaxLevel = SelectedAvatarViewModel.AvatarList.Aggregate((i1, i2) => i1.Level > i2.Level ? i1 : i2).Level;
 
             SelectedAvatarViewModel.AvatarLevelList = new List<AvatarViewModel>();
             // populate each list at the level
-            for (var i=1; i <= SelectedAvatarViewModel.MaxLevel; i++)
+            for (var i = 1; i <= SelectedAvatarViewModel.MaxLevel; i++)
             {
                 var tempList = SelectedAvatarViewModel.AvatarList.Where(m => m.Level == i).ToList();
                 var tempAvatarList = new AvatarViewModel();
@@ -305,6 +295,9 @@ namespace _5051.Controllers
             SelectedAvatarViewModel.SelectedAvatar = myAvatar;
             SelectedAvatarViewModel.Student = myStudent;
 
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
+
             return View(SelectedAvatarViewModel);
         }
 
@@ -316,6 +309,7 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Group()
         {
+
             return View();
         }
 
@@ -327,18 +321,16 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Settings(string id = null)
         {
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
-            // null not possible
-            //if (myReturn == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
 
             return View(myReturn);
         }
@@ -386,15 +378,15 @@ namespace _5051.Controllers
             }
 
             // Lookup the student id, will just replace the Avatar Id on it if it is valid
-            var myStudent = Backend.StudentBackend.Instance.Read(data.Id);
+            var myStudent = StudentBackend.Instance.Read(data.Id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
             // Set the Avatar ID on the Student and update in data store
-            myStudent.Name= data.Name;
-            Backend.StudentBackend.Instance.Update(myStudent);
+            myStudent.Name = data.Name;
+            StudentBackend.Instance.Update(myStudent);
 
             // Editing is done, so go back to the Student Portal and pass the Student Id
             return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
@@ -425,7 +417,7 @@ namespace _5051.Controllers
 
             //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
-            return RedirectToAction("MonthlyReport", "Admin", new{id});
+            return RedirectToAction("MonthlyReport", "Admin", new { id });
         }
     }
 }
