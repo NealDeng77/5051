@@ -211,8 +211,7 @@ function RefreshGameDisplay() {
         storeStatus = "Closed, Rent is due";
     }
     $("#StoreStatus").text(storeStatus);
-    // Show Game Data
-    $("#GameData").text("Game Data Goes Here");
+    ShowTransactionList();
     // Refesh Truck
     // If the Truck is Empty, remove all items
     if (ShopData.Truck != "Truck0.png") {
@@ -253,7 +252,11 @@ function DrawEmptyTruckItems() {
 }
 /// The Transaction List is a List of strings of the latest transactions.
 function ShowTransactionList() {
+    var el = $('#TransactionList');
+    el.empty();
     // Add the Latest Transactions to display
-    // .text(someHtmlString).html();
+    for (var item of ShopData.TransactionList) {
+        el.append("<span>" + item + "</span><br/>");
+    }
 }
 //# sourceMappingURL=game.js.map

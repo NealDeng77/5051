@@ -300,8 +300,7 @@ function RefreshGameDisplay() {
     }
     $("#StoreStatus").text(storeStatus);
 
-    // Show Game Data
-    $("#GameData").text("Game Data Goes Here");
+    ShowTransactionList();
 
     // Refesh Truck
     // If the Truck is Empty, remove all items
@@ -350,8 +349,13 @@ function DrawEmptyTruckItems() {
 /// The Transaction List is a List of strings of the latest transactions.
 function ShowTransactionList()
 {
-    // Add the Latest Transactions to display
+    var el = $('#TransactionList');
+    el.empty();
 
-    // .text(someHtmlString).html();
-    
+    // Add the Latest Transactions to display
+    for (var item of ShopData.TransactionList)
+    {
+        el.append("<span>"+item+"</span><br/>");
+    }
+   
 }

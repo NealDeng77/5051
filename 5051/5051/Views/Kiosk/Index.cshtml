@@ -313,8 +313,14 @@
 
 <script>
     function UpdateEmotionCurrent(UserEmotionId) {
-        var currentEmotion = document.getElementById(UserEmotionId+"Id");
-        currentEmotion.style.opacity= 0.3;
+        document.getElementById("VeryHappyId").style.opacity = 1.0;
+        document.getElementById("HappyId").style.opacity = 1.0;
+        document.getElementById("NeutralId").style.opacity = 1.0;
+        document.getElementById("SadId").style.opacity = 1.0;
+        document.getElementById("VerySadId").style.opacity = 1.0;     
+        
+        document.getElementById(UserEmotionId + "Id").style.opacity = 0.3;
+
         $("#EmotionCurrentId").attr("Value", UserEmotionId);
         $("#StudentLoginButton").attr("Disabled", false);
     }
