@@ -35,7 +35,7 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result.Trailer, "Trailer " + TestContext.TestName);
             Assert.IsNotNull(result.Topper, "Topper " + TestContext.TestName);
             Assert.IsNotNull(result.Wheels, "Wheels " + TestContext.TestName);
-
+            Assert.IsNotNull(result.IsClosed, "Closed " + TestContext.TestName);
         }
 
         #endregion Instantiate
