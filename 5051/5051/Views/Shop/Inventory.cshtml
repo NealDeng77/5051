@@ -105,8 +105,11 @@
                                             //}
 
                                             <div class="col-sm-2">
-                                                <div class="@BoxHover">
-                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                <div class="">
+                                                    @{
+                                                        // <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                    }
+                                                    <img src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1"/>
                                                     <br />
                                                     <span class="text-center">
                                                         @item.Name
