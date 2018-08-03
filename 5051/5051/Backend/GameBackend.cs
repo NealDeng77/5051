@@ -421,11 +421,10 @@ namespace _5051.Backend
                 var myTransaction = "Sold " + Item.Name + " for profit of " + profit;
                 student.Truck.TransactionList.Add(myTransaction);
 
-                if (Item.Quantities < 1)
-                {
-                    // Remove from list
-                    student.Inventory.Remove(Item);
-                }
+               
+                // Remove from list
+                student.Inventory.Remove(Item);
+
             }
             else
             {

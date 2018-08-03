@@ -583,9 +583,11 @@ namespace _5051.UnitTests.Models
             DataSourceBackend.Instance.StudentBackend.Update(student);
 
             var myTokens = student.Tokens;
+            var myInventoryItemNumber = student.Inventory.Count;
             test.CustomerPurchase(student);
 
             var expectCustomerTotal = 1;
+            var expectInventoryItemNumber = student.Inventory.Count + 1;
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -594,6 +596,7 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(student.Truck.TransactionList, TestContext.TestName);
             Assert.AreNotEqual(myTokens, student.Tokens, TestContext.TestName);
             Assert.AreEqual(expectCustomerTotal, student.Truck.CustomersTotal, TestContext.TestName);
+            Assert.AreEqual(expectInventoryItemNumber, student.Inventory.Count, TestContext.TestName);
         }
   
         #endregion CustomerPurchase
