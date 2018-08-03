@@ -595,7 +595,7 @@ namespace _5051.UnitTests.Models
             Assert.AreNotEqual(myTokens, student.Tokens, TestContext.TestName);
             Assert.AreEqual(expectCustomerTotal, student.Truck.CustomersTotal, TestContext.TestName);
         }
-
+  
         #endregion CustomerPurchase
     }
 
