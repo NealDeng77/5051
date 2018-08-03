@@ -28,6 +28,10 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
+
             return View(myStudent);
         }
 
@@ -66,6 +70,9 @@ namespace _5051.Controllers
                     myData.FactoryInventoryCategoryList.Add(temp);
                 }
             }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
 
             return View(myData);
         }
@@ -106,8 +113,6 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
-
-            
 
             // Get Item
             var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
@@ -167,6 +172,9 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
+
             return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
         }
 
@@ -223,6 +231,10 @@ namespace _5051.Controllers
                 }
 
             }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
+
             return View(myData);
         }
 
@@ -305,6 +317,9 @@ namespace _5051.Controllers
             }
 
             var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = studentdata.Id;
 
             //Return Truck Data
             return View(data);
@@ -409,7 +424,7 @@ namespace _5051.Controllers
         ///  List of Shops to Visit
         /// </summary>
         /// <returns>List of Students that you can visit</returns>
-        public ActionResult Visit()
+        public ActionResult Visit(string id=null)
         {
             // Get the list of other students' shop
             // it will show the name of the student's shop and its owner 
@@ -420,6 +435,18 @@ namespace _5051.Controllers
             // TODO
             // Make a List of the Student IDs for now.  Update this to a Shop Datastructure
             var data = StudentBackend.Instance.Index();
+
+            // Get Student
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (myStudent == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id});
+            }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = myStudent.Id;
+
             return View(data);
         }
 
