@@ -517,13 +517,13 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Backend_GameBackend_WillCustomerBuyOrNot_Qualified_Data_Should_Return_True()
         {
-            //arrange
+            // arrange
             var test = Backend.GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
             var student = Backend.StudentBackend.Instance.Create(studentData);
 
-            //act
+            // act
             student.AvatarLevel = 3;
             student.ExperiencePoints = 20;
 
@@ -538,6 +538,36 @@ namespace _5051.UnitTests.Models
 
         #endregion WillCustomerBuyOrNot
 
+        #region CustomerPurchase
+        [TestMethod]
+        public void Backend_GameBackend_CustomerPurchase_invalid_data_Should_Pass()
+        {
+            // arrange
+            var test = Backend.GameBackend.Instance;
+            var data = test.GetDefault();
+            var studentData = new StudentModel();
+            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var item = new FactoryInventoryModel();
+            item.Id = Backend.FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
+
+            // act
+            student.Inventory.Remove(item);
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            test.CustomerPurchase(student);
+
+            var message = "No Inventory to Sell";
+            var elementNumber = student.Truck.TransactionList.Count;
+            var result = student.Truck.TransactionList.Contains(message);
+          
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(1, elementNumber, TestContext.TestName);
+        }
+        #endregion CustomerPurchase
     }
 
 
