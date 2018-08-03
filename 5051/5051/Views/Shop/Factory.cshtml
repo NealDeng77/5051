@@ -48,89 +48,94 @@
             }
         </ul>
 
-        
+
         <div class="tab-content">
 
-                @{
-                    TabCount = 0;
-                    foreach (var CurrentList in Model.FactoryInventoryCategoryList)
+            @{
+                TabCount = 0;
+                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
+                {
+                    ActiveTab = "";
+                    if (CurrentList == null)
                     {
-                        ActiveTab = "";
-                        if (CurrentList == null)
-                        {
-                            continue;
-                        }
+                        continue;
+                    }
 
-                        TabCount++;
-                        if (TabCount == 1)
-                        {
-                            ActiveTab = "active";
-                        }
+                    TabCount++;
+                    if (TabCount == 1)
+                    {
+                        ActiveTab = "active";
+                    }
 
-                        <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
-                            <br />
-                            <h3>@CurrentList.Category</h3>
-                            <div class="row">
-                                @{
-                                    // If no items, the skip
-                                    if (!CurrentList.FactoryInventoryList.Any())
+                    <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
+                        <br />
+                        <h3>@CurrentList.Category</h3>
+                        <div class="row">
+                            @{
+                                // If no items, the skip
+                                if (!CurrentList.FactoryInventoryList.Any())
+                                {
+                                    <br />
+                                    <div>No Items</div>
+                                    continue;
+                                }
+
+                                //AvatarViewModel outputAvatar = new AvatarViewModel();
+                                foreach (var item in CurrentList.FactoryInventoryList)
+                                {
+                                    using (Html.BeginForm())
                                     {
-                                        <br />
-                                        <div>No Items</div>
-                                        continue;
-                                    }
+                                        @Html.Hidden("StudentId", Model.Student.Id);
+                                        @Html.Hidden("ItemId", item.Id);
 
-                                    //AvatarViewModel outputAvatar = new AvatarViewModel();
-                                    foreach (var item in CurrentList.FactoryInventoryList)
-                                    {
-                                        using (Html.BeginForm())
+                                        var picturURI = "/Content/shop/" + item.Uri;
+
+                                        disabledOn = "";
+                                        BoxHover = "BoxWithHighlightHover";
+                                        DisplayText = "";
+
+                                        // Check if the user owns the item, if so disable it.
+                                        var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
+                                        if (ItemAlreadyExists)
                                         {
-                                            @Html.Hidden("StudentId", Model.Student.Id);
-                                            @Html.Hidden("ItemId", item.Id);
+                                            // Already own it.
+                                            disabledOn = "disabled";
+                                            BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                            DisplayText = "Purchased";
 
-                                            var picturURI = "/Content/shop/" + item.Uri;
-
-                                            disabledOn = "";
-                                            BoxHover = "BoxWithHighlightHover";
-                                            DisplayText = "";
-
-                                            // Check if the user owns the item, if so disable it.
-                                            var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
-                                            if (ItemAlreadyExists)
-                                            {
-                                                // Already own it.
-                                                disabledOn = "disabled";
-                                                BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
-                                                DisplayText = "Purchaged";
-
-                                            }
-
-                                            <div class="col-sm-2">
-                                                <div class="@BoxHover">
-                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
-                                                    <br />
-                                                    <span class="text-center">
-                                                        @item.Name
-                                                        <br />
-                                                            <div>Tokens: </div>@item.Tokens
-                                                        <br />
-                                                            <span>@{if (@item.IsLimitSupply)
-                                                                {<span>Quantities: @item.Quantities</span>}
-                                                                }
-                                                        </span>
-                                                        <br />@DisplayText
-                                                    </span>
-                                                </div>
-                                            </div>
                                         }
+
+                                        <div class="col-sm-2">
+                                            <div class="@BoxHover">
+                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                <br />
+                                                <span class="text-center">
+                                                    @item.Name
+                                                    <br />
+                                                    <span>Tokens: </span>@item.Tokens
+                                                    <br />
+                                                    <span>
+                                                        @{
+                                                            if (@item.IsLimitSupply)
+                                                            {
+                                                                <span>Quantities: @item.Quantities</span>
+                                                            }
+                                                        }
+                                                    </span>
+                                                    <br />
+                                                    @DisplayText
+                                                </span>
+                                            </div>
+                                        </div>
                                     }
                                 }
-                            </div>
+                            }
                         </div>
+                    </div>
 
-                                }
                 }
-            </div>
+            }
+        </div>
 
-            }
-            }
+    }
+}
