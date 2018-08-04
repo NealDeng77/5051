@@ -338,7 +338,6 @@ namespace _5051.UnitTests.Models
             var data = new StudentModel();
             var student = Backend.StudentBackend.Instance.Create(data);
 
-
             // act         
 
             test.CalculateStudentIteration(student);          
@@ -350,13 +349,13 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Backend_GameBackend_CalculateStudentIteration_Tokens_Less_Than_zero_should_Skip()
+        public void Backend_GameBackend_CalculateStudentIteration_Truck_Is_Closed_should_Skip()
         {
             // arrange
             var test = Backend.GameBackend.Instance;
             var data = new StudentModel();
             var student = Backend.StudentBackend.Instance.Create(data);
-            student.Tokens = -1;
+            student.Truck.IsClosed = true;
 
             // act         
 

@@ -267,21 +267,21 @@ namespace _5051.Backend
         public void CalculateStudentIteration(StudentModel student)
         {
             // check if it is necessary to do the iteration 
-            if (student.Tokens >= 0)
-            {
+            if (student.Truck.IsClosed == false)
+            {                            
                 // pay rent once per day
                 PayRentPerDay(student);
-                
+
                 // customer arrives
                 CustomerPassBy(student);
-                
+
                 // Check if customer buy something or not
                 var ifBuy = WillCustomerBuyOrNot(student);
                 if (ifBuy == true)
                 {
                     // customer buy something
                     CustomerPurchase(student);
-                }                              
+                }                                       
             }
             else
             {
