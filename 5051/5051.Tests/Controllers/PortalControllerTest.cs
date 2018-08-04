@@ -658,22 +658,7 @@ namespace _5051.Tests.Controllers
 
         #endregion
 
-        #region GroupRegion
-        [TestMethod]
-        public void Controller_Portal_Group_Default_Should_Pass()
-        {
-            // Arrange
-            PortalController controller = new PortalController();
-
-            // Act
-            ViewResult result = controller.Group() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
-        #endregion
-
-        #region SettingsStringRegion
+       #region SettingsStringRegion
         [TestMethod]
         public void Controller_Portal_Settings_IDIsNull_Should_Return_RosterPage()
         {
@@ -814,23 +799,23 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        #region ReportRegion
+        //#region ReportRegion
         
 
-        [TestMethod]
-        public void Controller_Portal_Report_Default_should_Pass()
-        {
-            // Arrange
-            PortalController controller = new PortalController();
-            StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.GetDefault().Id;
+        //[TestMethod]
+        //public void Controller_Portal_Report_Default_should_Pass()
+        //{
+        //    // Arrange
+        //    PortalController controller = new PortalController();
+        //    StudentModel data = new StudentModel();
+        //    string id = Backend.StudentBackend.Instance.GetDefault().Id;
 
-            // Act
-            var result = controller.Report(id) as RedirectToRouteResult;
+        //    // Act
+        //    var result = controller.Report(id) as RedirectToRouteResult;
 
-            // Assert
-            Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
-        }
-        #endregion
+        //    // Assert
+        //    Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
+        //}
+        //#endregion
     }
 }

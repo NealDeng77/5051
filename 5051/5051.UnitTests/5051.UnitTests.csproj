@@ -118,6 +118,7 @@
     <Compile Include="Models\AddPhoneNumberViewModelTests.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
+    <Compile Include="Models\ShopTruckInputModelUnitTests.cs" />
     <Compile Include="Models\TruckItemInputModel.cs" />
     <Compile Include="Models\StudentInputModelUnitTests.cs" />
     <Compile Include="Models\GameResultViewModelUnitTests.cs" />
