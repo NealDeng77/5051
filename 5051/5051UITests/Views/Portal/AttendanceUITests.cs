@@ -42,7 +42,6 @@ namespace _5051UITests.Views.Portal
         public void Portal_Attendance_Check_That_All_Info_Is_Displayed()
         {
             var expectStatus = "Out";
-            var expectEmotion = "Neutral";
 
             NavigateToPage(_Controller, _Action, _DataFirstStudentID);
 
@@ -55,8 +54,8 @@ namespace _5051UITests.Views.Portal
             Assert.IsNotNull(resultLastLogin.Text);
 
             //emotion state
-            var resultEmotion = GetElementById("emotionStateValue");
-            Assert.AreEqual(expectEmotion, resultEmotion.Text);
+            var resultEmotion = GetElementById("currentEmotionValue");
+            Assert.IsNotNull(resultEmotion);
         }
     }
 }
