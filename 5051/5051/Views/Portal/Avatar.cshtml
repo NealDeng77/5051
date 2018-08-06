@@ -4,6 +4,50 @@
 @{
     ViewBag.Title = "My Avatar";
 }
+<br />
+<br />
+<div class="row">
+    <div class="col-sm-2 text-center">
+        <img src="~/Content/img/@Model.SelectedAvatar.Uri" id="currentAvatarImg" class="AvatarSize1" />
+        <br />
+        <div class="text-center">
+            <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
+            <br />
+            <span id="currentAvatarLevel">
+                @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
+            </span>
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <div class="col-sm-2 text-center">
+        <div class="text-center">
+
+
+            <div class="AvatarBox" id="AvatarBox">
+                <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="~/content/avatar/Head1.png" />
+                <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="~/content/avatar/Shirt1.png" />
+                <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="~/content/avatar/Accessory1.png" />
+                <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="~/content/avatar/Cheeks1.png" />
+                <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="~/content/avatar/Expression1.png" />
+                <img class="AvatarItemBase AvatarHair" id="AvatarHair" src="~/content/avatar/Hair2_long_red.png" />
+                <img class="AvatarItemBase AvatarFront" id="AvatarFront" src="~/content/avatar/Hair1_straight_red.png" />
+            </div>
+
+            <br />
+            <div class="text-center">
+                <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
+                <br />
+                <span id="currentAvatarLevel">
+                    @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
+                </span>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <br />
@@ -71,8 +115,8 @@
                                         using (Html.BeginForm())
                                         {
                                             //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                                            @Html.Hidden("StudentId", Model.Student.Id );
-                                            @Html.Hidden("AvatarId", outputAvatar.Id );
+                                            @Html.Hidden("StudentId", Model.Student.Id);
+                                            @Html.Hidden("AvatarId", outputAvatar.Id);
 
                                             var picturURI = "/Content/img/" + outputAvatar.Uri;
 
