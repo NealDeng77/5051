@@ -360,10 +360,10 @@ namespace _5051.Backend
 
             // generate random number
             var randObj = new Random();
-            var passByRandomNumber = randObj.Next(passByRandomRange, passByRandomRange * 5);
+            var passByRandomNumber = randObj.Next(passByRandomRange, passByRandomRange * 10);
 
             // show pass by message
-            int criterion = passByRandomRange * 5 / 2;
+            int criterion = passByRandomRange * 10 / 2;
             if (passByRandomNumber > criterion)
             {
                 var myTransaction = "Customer is coming";
@@ -388,10 +388,10 @@ namespace _5051.Backend
 
             // generate random number
             var randObj = new Random();
-            var passByRandomNumber = randObj.Next(passByRandomRange, 100);
+            var passByRandomNumber = randObj.Next(passByRandomRange, passByRandomRange * 5);
 
             // show pass by message
-            int criterion = 40;
+            int criterion = passByRandomRange * 5 / 2;
             if (passByRandomNumber > criterion)
             {
                 buy = true;
