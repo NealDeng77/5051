@@ -520,3 +520,48 @@ input[type=submit].btn-block {
     top: 150px; /* chartArea top  */
     left: 150px; /* chartArea left */
 }
+
+.AvatarBox {
+    position: relative;
+    height: 90px;
+    width: 90px;
+}
+
+.AvatarItemBase {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.AvatarHead 
+{
+    z-index:10;
+}
+
+.AvatarShirt {
+    z-index:15;
+}
+
+.AvatarCheeks {
+    z-index:20;
+}
+
+.AvatarAccessory {
+    z-index:30
+}
+
+.AvatarExpression{
+    z-index:25;
+}
+
+.AvatarHair {
+    z-index: 5;
+}
+
+.AvatarFront {
+    z-index: 12;
+}
