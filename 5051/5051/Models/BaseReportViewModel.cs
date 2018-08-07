@@ -38,5 +38,11 @@ namespace _5051.Models
         /// The Statistics for this report
         /// </summary>
         public StudentReportStatsModel Stats = new StudentReportStatsModel();
+
+        /// <summary>
+        /// The goal percentage for total attended time
+        /// </summary>
+        public int Goal { get; set; }
+
     }
 }
