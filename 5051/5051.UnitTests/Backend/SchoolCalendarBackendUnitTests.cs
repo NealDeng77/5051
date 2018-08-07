@@ -32,7 +32,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_SchoolCalendarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_SchoolCalendarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
             var test = SchoolCalendarBackend.Instance;
@@ -135,7 +135,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_SchoolCalendarBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Backend_SchoolCalendarBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
             var test = SchoolCalendarBackend.Instance;

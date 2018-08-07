@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using System.Web.Optimization;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Misc
 {
     [TestClass]
     public class BundleConfigUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_BundleConfig_Default_Instantiate_Should_Pass()
+        public void Misc_BundleConfig_Default_Instantiate_Should_Pass()
         {
             //arrange
             var test = new BundleConfig();

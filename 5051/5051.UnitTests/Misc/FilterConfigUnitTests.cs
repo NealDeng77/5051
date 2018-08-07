@@ -8,7 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Mvc;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Misc
 {
     [TestClass]
     public class FilterConfigUnitTests
@@ -17,7 +17,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_FilterConfig_Default_Instantiate_Should_Pass()
+        public void Misc_FilterConfig_Default_Instantiate_Should_Pass()
         {
             //arrange
             var data = new GlobalFilterCollection();

@@ -35,7 +35,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_GameBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_GameBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
             var test = GameBackend.Instance;
@@ -85,7 +85,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_GameBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Backend_GameBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
             var test = GameBackend.Instance;

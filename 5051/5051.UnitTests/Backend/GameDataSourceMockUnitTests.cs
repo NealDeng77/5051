@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class GameDataSourceMockUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_GameDataSourceMock_Default_Instantiate_Should_Pass()
+        public void Backend_GameDataSourceMock_Default_Instantiate_Should_Pass()
         {
             // Arrange
             var backend = GameDataSourceMock.Instance;
@@ -37,7 +37,7 @@ namespace _5051.UnitTests.Models
 
         #region delete
         [TestMethod]
-        public void Models_GameDataSourceMock_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_GameDataSourceMock_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -54,7 +54,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_GameDataSourceMock_Delete_With_Valid_ID_Should_Pass()
+        public void Backend_GameDataSourceMock_Delete_With_Valid_ID_Should_Pass()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -75,7 +75,7 @@ namespace _5051.UnitTests.Models
 
         #region update
         [TestMethod]
-        public void Models_GameDataSourceMock_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Backend_GameDataSourceMock_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -91,7 +91,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_GameDataSourceMock_Update_With_Invalid_Data_GameID_Should_Fail()
+        public void Backend_GameDataSourceMock_Update_With_Invalid_Data_GameID_Should_Fail()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -110,7 +110,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_GameDataSourceMock_Update_With_Valid_Data_Should_Pass()
+        public void Backend_GameDataSourceMock_Update_With_Valid_Data_Should_Pass()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -142,7 +142,7 @@ namespace _5051.UnitTests.Models
 
         #region read
         [TestMethod]
-        public void Models_GameDataSourceMock_Read_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_GameDataSourceMock_Read_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -155,7 +155,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_GameDataSourceMock_Read_With_Valid_ID_Should_Pass()
+        public void Backend_GameDataSourceMock_Read_With_Valid_ID_Should_Pass()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -172,7 +172,7 @@ namespace _5051.UnitTests.Models
 
         #region DataSet
         [TestMethod]
-        public void Models_GameDataSourceMock_DataSet_Demo_Data_Should_Pass()
+        public void Backend_GameDataSourceMock_DataSet_Demo_Data_Should_Pass()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;
@@ -190,7 +190,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_GameDataSourceMock_DataSet_UnitTest_Data_Should_Pass()
+        public void Backend_GameDataSourceMock_DataSet_UnitTest_Data_Should_Pass()
         {
             //arrange
             var backend = GameDataSourceMock.Instance;

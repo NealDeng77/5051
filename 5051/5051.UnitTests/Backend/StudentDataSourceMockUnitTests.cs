@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Backend
 
         #region Instantiate
         [TestMethod]
-        public void Models_StudentDataSourceMock_Default_Instantiate_Should_Pass()
+        public void Backend_StudentDataSourceMock_Default_Instantiate_Should_Pass()
         {
             // Arrange
             var backend = StudentDataSourceMock.Instance;

@@ -35,7 +35,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_AvatarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
+        public void Backend_AvatarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
             var test = AvatarBackend.Instance;
@@ -149,7 +149,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Models_AvatarBackend_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Backend_AvatarBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
             var test = AvatarBackend.Instance;

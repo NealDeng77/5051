@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class KioskSettingsDataSourceMockUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_KioskSettingsDataSourceMock_Default_Instantiate_Should_Pass()
+        public void Backend_KioskSettingsDataSourceMock_Default_Instantiate_Should_Pass()
         {
             // Arrange
             var backend = KioskSettingsDataSourceMock.Instance;
