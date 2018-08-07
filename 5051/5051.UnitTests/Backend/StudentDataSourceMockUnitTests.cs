@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class StudentDataSourceMockUnitTests
@@ -115,6 +115,7 @@ namespace _5051.UnitTests.Models
             var expectStatus = _5051.Models.StudentStatusEnum.Out;
             var expectPassword = "passWORD23!";
             var expectEmotionCurrent = _5051.Models.EmotionStatusEnum.Happy;
+            var expectAvatarComposite = new AvatarCompositModel();
 
             // Act
             expectStudent.Id = expectId;
@@ -126,6 +127,7 @@ namespace _5051.UnitTests.Models
             expectStudent.Status = expectStatus;
             expectStudent.Password = expectPassword;
             expectStudent.EmotionCurrent = expectEmotionCurrent;
+            expectStudent.AvatarComposite = expectAvatarComposite;
 
             var resultUpdate = backend.Update(expectStudent);
 
@@ -144,6 +146,8 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectStatus, resultUpdate.Status, TestContext.TestName);
             Assert.AreEqual(expectPassword, resultUpdate.Password, TestContext.TestName);
             Assert.AreEqual(expectEmotionCurrent, resultUpdate.EmotionCurrent, TestContext.TestName);
+            Assert.AreEqual(expectAvatarComposite.AvatarAccessoryUri, resultUpdate.AvatarComposite.AvatarAccessoryUri, TestContext.TestName);
+
         }
         #endregion update
 

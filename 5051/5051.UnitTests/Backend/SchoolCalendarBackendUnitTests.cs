@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 using _5051.Models.Enums;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class SchoolCalendarBackendUnitTests
@@ -15,7 +16,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Delete_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
             var data = new SchoolCalendarModel();
             var createResult = test.Create(data);
             var expect = true;
@@ -34,7 +35,7 @@ namespace _5051.UnitTests.Models
         public void Models_SchoolCalendarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
             var expect = false;
 
             //act
@@ -53,7 +54,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Update_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             var data = new SchoolCalendarModel();
             var createResult = test.Create(data);
@@ -93,7 +94,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Update_Valid_Reset_Modified_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             var data = new SchoolCalendarModel();
             var createResult = test.Create(data);
@@ -137,7 +138,7 @@ namespace _5051.UnitTests.Models
         public void Models_SchoolCalendarBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.Update(null);
@@ -155,7 +156,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_SetDefault_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             // act
             string id = null;
@@ -172,7 +173,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_SetDefault_Invalid_ID_Bogus_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             // act
             string id = "bogus";
@@ -189,7 +190,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_SetDefault_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             var data = test.GetDefault();
 
@@ -214,7 +215,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.Index();
@@ -229,7 +230,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.Read(null);
@@ -242,7 +243,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_ReadDate_Invalid_Date_Should_Fail()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.ReadDate(DateTime.Parse("01/01/1990"));
@@ -255,7 +256,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_GetToday_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.GetToday();
@@ -268,7 +269,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_GetDefault_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
 
             //act
             var result = test.GetDefault();
@@ -283,7 +284,7 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_Create_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
             var data = new SchoolCalendarModel();
 
             //act
@@ -303,8 +304,8 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
             //arrange
-            var test = Backend.SchoolCalendarBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;
 
             //act
@@ -320,8 +321,8 @@ namespace _5051.UnitTests.Models
         public void Backend_SchoolCalendarBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
         {
             //arange
-            var test = Backend.SchoolCalendarBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = SchoolCalendarBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var SQLEnum = DataSourceEnum.SQL;
 
             //act

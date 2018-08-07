@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class AvatarBackendUnitTests
@@ -19,7 +19,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Delete_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var data = new AvatarModel();
             var createResult = test.Create(data);
             var expect = true;
@@ -38,7 +38,7 @@ namespace _5051.UnitTests.Models
         public void Models_AvatarBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var expect = false;
 
             //act
@@ -57,7 +57,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_GetAvatarListItem_ID_Null_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
 
             //act
             var result = test.GetAvatarListItem(null);
@@ -72,7 +72,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_GetAvatarUri_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var testID = test.GetFirstAvatarId();
 
             //act
@@ -86,7 +86,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_GetAvatarUri_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
 
             //act
             var result = test.GetAvatarUri(null);
@@ -100,7 +100,7 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var data = new AvatarModel();
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             data.Id = "bogus";
 
             //act
@@ -116,7 +116,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Update_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var data = new AvatarModel();
             var createResult = test.Create(data);
             var expectName = "GoodTestName";
@@ -152,7 +152,7 @@ namespace _5051.UnitTests.Models
         public void Models_AvatarBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
 
             //act
             var result = test.Update(null);
@@ -170,7 +170,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
 
             //act
             var result = test.Index();
@@ -185,7 +185,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
 
             //act
             var result = test.Read(null);
@@ -198,7 +198,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Read_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var testID = test.GetFirstAvatarId();
 
             //act
@@ -214,7 +214,7 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_Create_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
+            var test = AvatarBackend.Instance;
             var data = new AvatarModel();
 
             //act
@@ -234,8 +234,8 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
             //arrange
-            var test = Backend.AvatarBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = AvatarBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;
 
             //act
@@ -251,8 +251,8 @@ namespace _5051.UnitTests.Models
         public void Backend_AvatarBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
         {
             //arange
-            var test = Backend.AvatarBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = AvatarBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var SQLEnum = DataSourceEnum.SQL;
 
             //act

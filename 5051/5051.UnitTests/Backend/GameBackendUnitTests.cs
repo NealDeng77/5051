@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class GameBackendUnitTests
@@ -19,7 +19,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Delete_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = new GameModel();
             var createResult = test.Create(data);
             var expect = true;
@@ -38,7 +38,7 @@ namespace _5051.UnitTests.Models
         public void Models_GameBackend_Delete_With_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var expect = false;
 
             //act
@@ -61,7 +61,7 @@ namespace _5051.UnitTests.Models
             var expectEnabled = true;
             var expectIterationNumber = 123;
 
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = new GameModel();
 
             test.Create(data);
@@ -88,7 +88,7 @@ namespace _5051.UnitTests.Models
         public void Models_GameBackend_Update_With_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
 
             //act
             var result = test.Update(null);
@@ -106,7 +106,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
 
             //act
             var result = test.Index();
@@ -121,7 +121,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
 
             //act
             var result = test.Read(null);
@@ -134,7 +134,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Read_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var testID = test.GetDefault();
 
             //act
@@ -150,7 +150,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Create_Valid_Data_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = new GameModel();
 
             //act
@@ -170,8 +170,8 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = GameBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;
 
             //act
@@ -187,8 +187,8 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_SetDataSourceDatSet_Uses_SQLData_Should_Pass()
         {
             //arange
-            var test = Backend.GameBackend.Instance;
-            var testDataSourceBackend = Backend.DataSourceBackend.Instance;
+            var test = GameBackend.Instance;
+            var testDataSourceBackend = DataSourceBackend.Instance;
             var SQLEnum = DataSourceEnum.SQL;
 
             //act
@@ -207,7 +207,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_GetResults_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
 
             //act
             var result = test.GetResult("test");
@@ -223,7 +223,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Simulation_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
 
             //act
@@ -237,7 +237,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Simulation_RunDate_UTCNow_Should_Skip()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow;
 
@@ -255,7 +255,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Simulation_RunDate_UTCNow_Add_1_Should_Skip()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow.AddTicks(1);
             test.Update(data);
@@ -276,7 +276,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_Simulation_RunDate_UTCNow_Minus_1_Should_Skip()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow.AddMinutes(-10); // Move it back 10 minutes in time
             test.Update(data);
@@ -300,7 +300,7 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_RunIteration_Student_Is_Null_should_Pass()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
 
             // act
             test.RunIteration();
@@ -313,11 +313,11 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_RunIteration_Student_Is_Not_Null_should_Pass()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data1 = new StudentModel();
             var data2 = new StudentModel();
-            var student1 = Backend.StudentBackend.Instance.Create(data1);
-            var student2 = Backend.StudentBackend.Instance.Create(data2);
+            var student1 = StudentBackend.Instance.Create(data1);
+            var student2 = StudentBackend.Instance.Create(data2);
 
             // Reset StudentBackend
             StudentBackend.Instance.Reset();
@@ -334,9 +334,9 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_CalculateStudentIteration_should_Pass()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(data);
+            var student = StudentBackend.Instance.Create(data);
 
             // act         
 
@@ -352,9 +352,9 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_CalculateStudentIteration_Truck_Is_Closed_should_Skip()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(data);
+            var student = StudentBackend.Instance.Create(data);
             student.Truck.IsClosed = true;
 
             // act         
@@ -374,10 +374,10 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_PayRentPerDay_Valid_ID_Should_Pass()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             //act
             test.PayRentPerDay(student);
@@ -392,11 +392,11 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Should_Skip()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow;
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             //act
             test.PayRentPerDay(student);
@@ -411,12 +411,12 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Add_1_Should_Skip()
         {
             //arrange          
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow.AddHours(1);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             //act   
             test.PayRentPerDay(student);
@@ -437,12 +437,12 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_PayRentPerDay_RunDate_UTCNow_Minus_25_Should_Pass()
         {
             //arrange          
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow.AddHours(-25);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             //act   
             var expect = student.Tokens - 1;
@@ -463,12 +463,12 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_PayRentPerDay_StudentTokens_Less_than_1_Should_Skip()
         {
             //arrange          
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow.AddHours(-25);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
             student.Tokens = 0;
             //act   
             var expect = student.Tokens;
@@ -492,10 +492,10 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_CustomerPassBy_Qualified_Data_Should_Display_Message()
         {
             //arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             //act
             student.AvatarLevel = 3;
@@ -517,10 +517,10 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_WillCustomerBuyOrNot_Qualified_Data_Should_Return_True()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
 
             // act
             student.AvatarLevel = 3;
@@ -542,12 +542,12 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_CustomerPurchase_invalid_data_Should_Pass()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
             var item = new FactoryInventoryModel();
-            item.Id = Backend.FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
+            item.Id = FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
 
             // act
             student.Inventory.Remove(item);
@@ -571,10 +571,10 @@ namespace _5051.UnitTests.Models
         public void Backend_GameBackend_CustomerPurchase_valid_data_Should_Pass()
         {
             // arrange
-            var test = Backend.GameBackend.Instance;
+            var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = Backend.StudentBackend.Instance.Create(studentData);
+            var student = StudentBackend.Instance.Create(studentData);
             student.Inventory = FactoryInventoryBackend.Instance.Index();
             student.Truck.CustomersTotal = 0;
 
