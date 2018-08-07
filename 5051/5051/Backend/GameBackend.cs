@@ -331,7 +331,9 @@ namespace _5051.Backend
                         else
                         {
                             // stop the iteration
-                            shouldPay = 0;                           
+                            shouldPay = 0;
+                            // close the truck
+                            student.Truck.IsClosed = true;
                         }
                         
                         // Increment the RunDate
