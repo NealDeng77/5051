@@ -236,8 +236,20 @@ namespace _5051.Backend
             result.IsClosed = StudentData.Truck.IsClosed;
             result.IterationNumber = GetDefault().IterationNumber;
             result.CustomersTotal = StudentData.Truck.CustomersTotal;
-            result.TransactionList = StudentData.Truck.TransactionList;
-
+            // display recent 5 messages
+            if (StudentData.Truck.TransactionList.Count <= 5)
+            {
+                result.TransactionList = StudentData.Truck.TransactionList;
+            } else
+            {
+                var RecentFiveMessagesList = new List<string>();
+                for (int i = StudentData.Truck.TransactionList.Count - 5; i < StudentData.Truck.TransactionList.Count; i++)
+                {
+                    RecentFiveMessagesList.Add(StudentData.Truck.TransactionList[i]);
+                }
+                result.TransactionList = RecentFiveMessagesList;
+            }           
+           
             // Clear the Student TransactionList
             StudentData.Truck.TransactionList = new List<string>();
             DataSourceBackend.Instance.StudentBackend.Update(StudentData);
