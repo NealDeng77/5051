@@ -95,6 +95,8 @@ namespace _5051.Models
         [Display(Name = "Summer Quarter Last Class Day", Description = "Summer Quarter Last Class Day")]
         public DateTime SummerQuarterLastClassDay { get; set; }
 
+        // The current setting for goal percentage
+        public int Goal { get; set; }
 
         public SchoolDismissalSettingsModel()
         {
