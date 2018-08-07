@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <br />
-                
+
                 <div class="row">
                     <div class="col-sm-3 text-right">
                         @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
@@ -208,10 +208,20 @@
                 <br/>
                 <div class="row">
                     <div class="col-sm-3 text-right">
+                        @Html.DisplayNameFor(m => m.Goal)
                     </div>
                     <div class="col-sm-4">
-                        @Html.ActionLink("Back", "Index", new {id = Model.Id, Controller = "Calendar"}, new {@class = "btn btn-success"})
-                        @Html.ActionLink("Update", "Update", new {id = Model.Id}, new {@class = "btn btn-primary"})
+                        @Model.Goal%
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-sm-3 text-right">
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>
