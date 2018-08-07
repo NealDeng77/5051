@@ -565,3 +565,14 @@ input[type=submit].btn-block {
 .AvatarFront {
     z-index: 12;
 }
+
+.AvatarCircle {
+    position:absolute;
+    top:15%;
+    left:8%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    z-index:0;
+    width:85%;
+    height:80%;
+}
