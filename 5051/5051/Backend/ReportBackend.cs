@@ -292,7 +292,7 @@ namespace _5051.Backend
             return report;
         }
         #endregion
-
+        #region GenerateOverallReportRegion
         /// <summary>
         /// Generate overall report
         /// </summary>
@@ -312,6 +312,7 @@ namespace _5051.Backend
 
             return report;
         }
+        #endregion
 
         /// <summary>
         /// Generate the report from the start date to the end date
@@ -436,6 +437,8 @@ namespace _5051.Backend
                     report.Stats.PercOutEarly = (int)Math.Round((double)report.Stats.DaysOutEarly * 100 / report.Stats.DaysPresent);
                 }
             }
+
+            report.Goal = 80;
         }
 
         /// <summary>

@@ -137,6 +137,7 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
 
+            Goal = data.Goal;
         }
 
         /// <summary>
@@ -190,6 +191,8 @@ namespace _5051.Models
 
             SummerQuarterFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
             SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
+
+            Goal = 85;
         }
 
         /// <summary>
@@ -224,6 +227,7 @@ namespace _5051.Models
             SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            Goal = data.Goal;
         }
     }
 }
