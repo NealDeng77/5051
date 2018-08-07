@@ -438,7 +438,7 @@ namespace _5051.Backend
                 }
             }
 
-            report.Goal = 80;
+            report.Goal = SchoolDismissalSettingsBackend.Instance.GetDefault().Goal;
         }
 
         /// <summary>
