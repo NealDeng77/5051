@@ -507,5 +507,96 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
         #endregion Login
+
+        #region CreateRegion
+
+        [TestMethod]
+        public void Controller_Kiosk_Create_Default_Should_Pass()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            // Act
+            var result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateRegion
+
+        #region CreatePostRegion
+
+        [TestMethod]
+        public void Controller_Kiosk_Create_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            StudentModel data = new StudentModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Create(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_Create_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Create((StudentModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_Create_Post_Id_Is_Null_Or_Empty_Should_Return_Back_For_Edit()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            StudentModel dataNull = new StudentModel();
+            StudentModel dataEmpty = new StudentModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.Create(dataNull);
+            var resultEmpty = (ViewResult)controller.Create(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Kiosk_Create_Post_Default_Should_Return_Index_Page()
+        {
+            // Arrange
+            KioskController controller = new KioskController();
+
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Create(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion CreatePostRegion
     }
 }
