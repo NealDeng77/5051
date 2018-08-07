@@ -558,11 +558,11 @@ input[type=submit].btn-block {
     z-index:25;
 }
 
-.AvatarHair {
+.AvatarHairBack {
     z-index: 5;
 }
 
-.AvatarFront {
+.AvatarHairFront {
     z-index: 12;
 }
 
