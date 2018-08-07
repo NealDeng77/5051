@@ -93,6 +93,7 @@ namespace _5051.Controllers
                                         "SpringQuarterLastClassDay," +
                                         "SummerQuarterFirstClassDay," +
                                         "SummerQuarterLastClassDay," +
+                                        "Goal," +
                                         "")] SchoolDismissalSettingsModel data)
         {
             if (!ModelState.IsValid)
