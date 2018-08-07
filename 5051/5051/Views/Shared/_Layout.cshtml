@@ -88,6 +88,9 @@
                             break;
 
                         case "Kiosk":
+                            <li class="nav-item">
+                                @Html.ActionLink("Add Student", "Create", "Kiosk", null, new { @class = "nav-link", id = "AddStudentLinkNavBar" })
+                            </li>
                             break;
 
                         case "Admin":
