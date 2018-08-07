@@ -184,6 +184,7 @@ body, html {
     height: 100%;
     width: 100%;
     margin: 0;
+    font-family: Sans-Serif;
 }
 
 .fill-height {
@@ -246,8 +247,15 @@ body, html {
     color: white;
 }
 
-.FontColorBold {
+.FontSizeLarge {
+    font-size: 50px;
+}
+
+.FontColorWhite {
     color: white;
+}
+
+.FontBold {
     font-weight: bold;
 }
 
@@ -283,7 +291,17 @@ body, html {
     /Portal/Login page
 */
 
+/*todo: remove this with refactoring*/
 div.BlockStudentLogin {
+    border-radius: 25px;
+    background-color: #202021 !important;
+    height: 400px;
+    width: 600px;
+    opacity: 0.85;
+    margin: 0 auto;
+}
+
+.BlockStudentLogin {
     border-radius: 25px;
     background-color: #202021 !important;
     height: 400px;
