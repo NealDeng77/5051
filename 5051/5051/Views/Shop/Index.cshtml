@@ -5,46 +5,73 @@
 <div class="row"><br /></div>
 
 <div class="row no-gutters">
+
     <div class="ImageBox" id="ImageBox">
         @{
-            // StudentId needs to be in the Dom
-            <div>
-                @Html.Hidden("StudentId", Model.Id)
-            </div>
+        // StudentId needs to be in the Dom
+        <div>
+            @Html.Hidden("StudentId", Model.Id)
+        </div>
 
-            <div class="ScoreBoardBox">
-                <div class="dropdown-content">
-                    <div class="ScoreBoardHeader">
-                        <a href="#">
-                            Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span> <br/>
-                            <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP <br/>
-                            <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-                        </a>
+        <div class="ScoreBoardBox">
+            <div class="StudentNavBar">
+                <div class="row">
+                    <div class="col">
+                        Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
                     </div>
-                    <a href="#">
+                    <div class="col">
+                        <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
+                    </div>
+                    <div class="col">
+                        <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
+                    </div>
+                    <div class="col">
                         <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
-                    </a>
-                    <a href="#">
-                        <span id="StoreStatus"></span>
-                    </a>
-                    <a href="#">
-                        <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-                    </a>
-                </div>               
-            </div>
-
-            <div class="FeedBox">
-                <div class="dropdown-content">
-                    <div class="ScoreBoardHeader">
-                        <a href="#">
-                            <span>Game Data:&nbsp;</span>
-                        </a>
                     </div>
-                    <a href="#">
-                        <span id="TransactionList"></span>
-                    </a>
+                    <div class="col">
+                        <span id="StoreStatus"></span>
+                    </div>
+                    @*<div class="col">
+            <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+        </div>*@
                 </div>
             </div>
+        </div>
+
+        <div class="FeedBox">
+            <div class="dropdown-content">
+                <div class="ScoreBoardHeader">
+                    <a href="#">
+                        <span>Game Data:&nbsp;</span>
+                    </a>
+                </div>
+                <a href="#">
+                    <span id="TransactionList"></span>
+                </a>
+            </div>
+        </div>
+        <div class="GameButtonsBox">
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
+
+                @{
+                //&nbsp; &nbsp;
+                //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                }
+            </div>
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
+            </div>
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn1" })
+            </div>
+        </div>
+        <div class="AvatarImageBox">
+
+        </div>
         }
 
         <div class="BackgroundBox">
@@ -93,23 +120,8 @@
 
         <div class="WorkerBoxLeft" id="WorkerBoxLeft"></div>
         <div class="WorkerBoxRight" id="WorkerBoxRight"></div>
-
     </div>
-</div>
-
-<div class="row">
-    @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-    &nbsp;&nbsp;
-    @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-    &nbsp;&nbsp;
-    @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-
-    @{
-        //&nbsp; &nbsp;
-        //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-    }
+   
 </div>
 
 <script src="~/Scripts/Game.js"></script>

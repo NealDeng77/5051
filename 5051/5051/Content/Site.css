@@ -405,7 +405,7 @@ input[type=submit].btn-block {
     position: relative;
     width: 1000px;
     height: 550px;
-    margin-left: 130px;
+    margin-left: 100px;
     /*margin-left: -180px;*/
     /*Move image to the Left so it fits better*/
 }
@@ -638,9 +638,12 @@ input[type=submit].btn-block {
 }
 
 .ScoreBoardBox {
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     display: inline-block;
-    margin-left: -80px;
+    margin-top: 600px;
+    /*margin-left: -80px;*/
 }
 
 .dropdown-content {
@@ -670,5 +673,26 @@ input[type=submit].btn-block {
 .FeedBox {
     overflow: hidden;
     overflow-y: auto;
-    margin-left: 990px;
+    margin-left: 0px;
+}
+
+.GameButtonsBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 700;
+    margin-left: 1000px;
+    margin-bottom: 600px;
+    width: 400px;
+}
+
+.StudentNavBar {
+    font-weight: bold;
+    width: 1150px;
+    padding: 11px;
+    margin: 0;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px 10px;
 }
