@@ -14,6 +14,7 @@ namespace _5051.UnitTests.Models
     {
         public TestContext TestContext { get; set; }
 
+        #region Instantiate
         [TestMethod]
         public void Models_QuarterReportViewModel_Default_Instantiate_Should_Pass()
         {
@@ -24,28 +25,28 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+        #endregion Instantiate
 
+        #region Get_Set_All_Fields
         [TestMethod]
-        public void Models_QuarterReportViewModel_InitializeQuarters_Should_Pass()
+        public void Models_QuarterReportViewModel_Get_Set_Check_All_Fields_Should_Pass()
         {
+            // Arrange
+
             // Act
-            var data = new QuarterReportViewModel();
-            data.Quarters = new List<SelectListItem>();
+            // Set all the fields for a BaseReportViewModel
+            var test = new QuarterReportViewModel();
+            test.SelectedQuarterId = 1;
+            test.Quarters = new List<SelectListItem>();
 
+            var expectedSelectedSemesterId = 1;
             // Assert
-            Assert.IsNotNull(data.Quarters, TestContext.TestName);
-        }
 
-        [TestMethod]
-        public void Models_QuarterReportViewModel_SelectedQuarterId_is_1_Should_Pass()
-        {
-            // Act
-            var data = new QuarterReportViewModel();
-            data.SelectedQuarterId = 1;
-            var expect = 1;
+            //Check each value
+            Assert.AreEqual(test.SelectedQuarterId, expectedSelectedSemesterId, "SelectedQuarterId " + TestContext.TestName);
 
-            // Assert
-            Assert.AreEqual(expect, data.SelectedQuarterId, TestContext.TestName);
+            Assert.IsNotNull(test.Quarters, "Quarters " + TestContext.TestName);
         }
+        #endregion Get_Set_All_Fields
     }
 }
