@@ -248,11 +248,23 @@ body, html {
 }
 
 .FontSizeLarge {
-    font-size: 50px;
+    font-size: xx-large;
+}
+
+.FontSizeMedium {
+    font-size: x-large;
+}
+
+.FontSizeSmall {
+    font-size: large;
 }
 
 .FontColorWhite {
     color: white;
+}
+
+.FontColorBlack {
+    color: black;
 }
 
 .FontBold {
