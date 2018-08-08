@@ -42,11 +42,21 @@
                                 <div class="col-lg-4">
                                     <div class="container text-center">
                                         <br />
-                                        <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
-                                        <br />
+
+                                        <div class="row justify-content-center">
+                                            <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
+                                                <div class="AvatarCircle"></div>
+                                                <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.AvatarComposite.AvatarHairBackUri" />
+                                                <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.AvatarComposite.AvatarHeadUri" />
+                                                <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.AvatarComposite.AvatarShirtUri" />
+                                                <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.AvatarComposite.AvatarExpressionUri" />
+                                                <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.AvatarComposite.AvatarCheeksUri" />
+                                                <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.AvatarComposite.AvatarHairFrontUri" />
+                                                <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.AvatarComposite.AvatarAccessoryUri" />
+                                            </div>
+                                        </div>
                                         <span id="currentNameDisplayed">
                                             @Model.Name
-                                            <br />
                                             <br />
                                         </span>
                                     </div>
