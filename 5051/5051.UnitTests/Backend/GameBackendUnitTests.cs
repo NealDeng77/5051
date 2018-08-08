@@ -498,8 +498,7 @@ namespace _5051.UnitTests.Backend
             var student = StudentBackend.Instance.Create(studentData);
 
             //act
-            student.AvatarLevel = 3;
-            student.ExperiencePoints = 20;
+            student.AvatarLevel = 90;
 
             test.CustomerPassBy(student);
 
@@ -523,8 +522,7 @@ namespace _5051.UnitTests.Backend
             var student = StudentBackend.Instance.Create(studentData);
 
             // act
-            student.AvatarLevel = 3;
-            student.ExperiencePoints = 20;
+            student.AvatarLevel = 90;
 
             var result = test.WillCustomerBuyOrNot(student);
 
@@ -534,7 +532,7 @@ namespace _5051.UnitTests.Backend
             // Assert
             
             // Fails because random is not a fixed number
-            //Assert.IsTrue(result, TestContext.TestName);
+            Assert.IsTrue(result, TestContext.TestName);
         }
 
         #endregion WillCustomerBuyOrNot

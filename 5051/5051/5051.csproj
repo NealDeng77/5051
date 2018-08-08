@@ -206,6 +206,7 @@
     <Compile Include="Backend\FactoryInventoryDataSourceMock.cs" />
     <Compile Include="Backend\FactoryInventoryInterface.cs" />
     <Compile Include="Backend\DataSourceBackend.cs" />
+    <Compile Include="Backend\RandomHelper.cs" />
     <Compile Include="Backend\StudentBackendHelper.cs" />
     <Compile Include="Backend\StudentInterface.cs" />
     <Compile Include="Backend\StudentDataSourceMock.cs" />

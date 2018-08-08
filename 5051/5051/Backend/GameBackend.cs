@@ -366,19 +366,17 @@ namespace _5051.Backend
             var passByPercent = .1d;
 
             // extra precent
-            var levelExtra = student.AvatarLevel * .1d;
-            var XPExtra = student.ExperiencePoints * .01d;
+            var levelExtra = student.AvatarLevel * .01d;
 
             // Add a Transaction of the Customer passBy           
-            var passByRandomRange = (int)Math.Ceiling((passByPercent + levelExtra + XPExtra) * 100);
+            var studentPoints = (int)Math.Ceiling((passByPercent + levelExtra) * 100);
 
             // generate random number
-            var randObj = new Random();
-            var passByRandomNumber = randObj.Next(passByRandomRange, passByRandomRange * 10);
+            RandomHelper.SetForcedNumber();
+            var criterion = RandomHelper.GetRandomNumber();
 
-            // show pass by message
-            int criterion = passByRandomRange * 10 / 2;
-            if (passByRandomNumber > criterion)
+            // show pass by message            
+            if (studentPoints >= criterion)
             {
                 var myTransaction = "Customer is coming";
                 student.Truck.TransactionList.Add(myTransaction);
@@ -394,19 +392,17 @@ namespace _5051.Backend
             var passByPercent = .1d;
 
             // extra precent
-            var levelExtra = student.AvatarLevel * .1d;
-            var XPExtra = student.ExperiencePoints * .01d;
+            var levelExtra = student.AvatarLevel * .01d;
 
             // Add a Transaction of the Customer passBy           
-            var passByRandomRange = (int)Math.Ceiling((passByPercent + levelExtra + XPExtra) * 100);
+            var studentPoints = (int)Math.Ceiling((passByPercent + levelExtra) * 100);
 
             // generate random number
-            var randObj = new Random();
-            var passByRandomNumber = randObj.Next(passByRandomRange, passByRandomRange * 5);
+            RandomHelper.SetForcedNumber();
+            var criterion = RandomHelper.GetRandomNumber();
 
             // show pass by message
-            int criterion = passByRandomRange * 5 / 2;
-            if (passByRandomNumber > criterion)
+            if (studentPoints >= criterion)
             {
                 buy = true;
             }
