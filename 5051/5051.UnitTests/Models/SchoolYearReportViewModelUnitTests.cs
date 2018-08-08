@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 
@@ -14,8 +10,9 @@ namespace _5051.UnitTests.Models
 
         public TestContext TestContext { get; set; }
 
+        #region Instantiate
         [TestMethod]
-        public void Models_StudentReportViewModel_Default_Instantiate_Should_Pass()
+        public void Models_SchoolYearReportViewModel_Default_Instantiate_Should_Pass()
         {
 
             // Act
@@ -24,5 +21,6 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+        #endregion Instantiate
     }
 }
