@@ -129,6 +129,9 @@
 
                                     default:
                                         <li class="nav-item">
+                                            @Html.ActionLink("Home", "Index", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
+                                        </li>
+                                        <li class="nav-item">
                                             @Html.ActionLink("Reports", "Report", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
                                         </li>
                                         <li class="nav-item">
