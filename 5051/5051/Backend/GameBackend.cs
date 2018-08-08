@@ -231,6 +231,8 @@ namespace _5051.Backend
             {
                 // Update the Backend, and close the store
                 StudentData.Truck.IsClosed = true;
+            } else {
+                StudentData.Truck.IsClosed = false;
             }
 
             result.IsClosed = StudentData.Truck.IsClosed;
