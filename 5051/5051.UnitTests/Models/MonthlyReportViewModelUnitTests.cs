@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 
@@ -15,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_StudentReportViewModel_Default_Instantiate_Should_Pass()
+        public void Models_MonthlyReportViewModel_Default_Instantiate_Should_Pass()
         {
 
             // Act
@@ -24,29 +25,28 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+        #endregion Instantiate
 
+        #region Get_Set_All_Fields
         [TestMethod]
-        public void Models_StudentReportViewModel_Default_Instantiate_Get_Set_Data_Should_Pass()
+        public void Models_MonthlyReportViewModel_Get_Set_Check_All_Fields_Should_Pass()
         {
-            //arrange
-            var result = new MonthlyReportViewModel();
-            var expectStudentId = "GoodStudentID";
-            var expectStudent = new StudentModel();
-            var expectDateStart = new DateTime();
-            var expectDateEnd = DateTime.UtcNow;
+            // Arrange
 
             // Act
-            result.StudentId = expectStudentId;
-            result.Student = expectStudent;
-            result.DateStart = expectDateStart;
-            result.DateEnd = expectDateEnd;
+            // Set all the fields for a BaseReportViewModel
+            var test = new MonthlyReportViewModel();
+            test.SelectedMonthId = 1;
+            test.Months = new List<SelectListItem>();
 
+            var expectedSelectedWeekId = 1;
             // Assert
-            Assert.AreEqual(expectStudentId, result.StudentId, TestContext.TestName);
-            Assert.AreEqual(expectStudent, result.Student, TestContext.TestName);
-            Assert.AreEqual(expectDateStart, result.DateStart, TestContext.TestName);
-            Assert.AreEqual(expectDateEnd, result.DateEnd, TestContext.TestName);
+
+            //Check each value
+            Assert.AreEqual(test.SelectedMonthId, expectedSelectedWeekId, "SelectedWeekId " + TestContext.TestName);
+
+            Assert.IsNotNull(test.Months, "Weeks " + TestContext.TestName);
         }
-        #endregion Instantiate
+        #endregion Get_Set_All_Fields
     }
 }
