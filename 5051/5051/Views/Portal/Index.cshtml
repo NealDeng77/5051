@@ -12,107 +12,127 @@
 
 <div class="row justify-content-center">
 
-    <div class="col-1 no-gutters"></div>
-    <div class="col no-gutters lightTransparentBox">
-        
-        <div class="row justify-content-center no-gutters">
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
 
-            <div class="col text-center no-gutters PortalBox">
+        <div class="row justify-content-center">
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm justify-content-center">
                 <br />
-                <span id="welcomeMessage">
-                    <span id="welcomeMessageStudentName">@Model.Name</span><br />
-                    <img src="~/Content/img/@Model.AvatarUri" alt="@Model.Name  avatar image" id="@Model.AvatarId" class="PortalIcon" />
-                </span>
+                <div class="col-sm text-center">
+                    <div class="row justify-content-center">
+                        <div id="text-center">
+                            <span class="FontSizeLarge FontColorBlack">@Model.Name</span><br />
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="AvatarBox align-self-sm-center" id="AvatarBox">
+                            <div class="AvatarCircle"></div>
+                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.AvatarComposite.AvatarHairBackUri" />
+                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.AvatarComposite.AvatarHeadUri" />
+                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.AvatarComposite.AvatarShirtUri" />
+                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.AvatarComposite.AvatarExpressionUri" />
+                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.AvatarComposite.AvatarCheeksUri" />
+                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.AvatarComposite.AvatarHairFrontUri" />
+                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.AvatarComposite.AvatarAccessoryUri" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-1 PortalBox"></div>
-
-            <div class="col text-center no-gutters">
+            <div class="col-sm text-center">
                 <br />
-                <br />
-                <h5>
+                <div class="FontSizeMedium">
                     Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
-                    <span id="xpValue">@Model.ExperiencePoints</span> XP
-                </h5>
-                <h5><span id="tokensValue">@Model.Tokens</span> Tokens</h5>
-
+                    <span id="xpValue">@Model.ExperiencePoints</span> XP<br />
+                    <span id="tokensValue">@Model.Tokens</span> Tokens<br />
+                </div>
             </div>
 
-            <div class="col-1 PortalBox"></div>
+            <div class="col-sm text-center">
+                <br />
+                <div class="FontSizeMedium">
+                    Current Status: <span id="statusValue">@Model.Status</span>
+                </div>
 
-            <div class="col text-center no-gutters">
                 @{
-                    <br />
-                    <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
-                    if (!Model.Attendance.Any())
+                    if (Model.Attendance.Any())
                     {
-                        //skip
-                    }
-                    else
-                    {
-                        <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
-                        <h6>Last logged in:<br /> <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h6>
+                        <div class="FontSizeMedium">
+                            Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span>
+                        </div>
+
+                        <div class="FontSizeMedium">
+                            Last logged in:<br /> <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span>
+                        </div>
                     }
                 }
             </div>
+
+            <div class="col-sm-1"></div>
+
         </div>
 
-            <hr />
-            <br />
+        <hr />
 
-            <div class="row justify-content-center no-gutters">
+        <br />
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Portal/Report/@Model.Id" id="reportsLinkPortalIndex">
-                        <img src="~/Content/img/PortalViewReports.png" alt="Reports" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Reports</span>
-                </div>
+        <div class="row justify-content-center">
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Portal/Attendance/@Model.Id" id="attendanceLinkPortalIndex">
-                        <img src="~/Content/img/PortalViewAttendance.png" alt="Reports" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Attendance</span>
-                </div>
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Portal/Report/@Model.Id" id="reportsLinkPortalIndex">
+                    <img src="~/Content/img/PortalViewReports.png" alt="Reports" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Reports</span>
+            </div>
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Shop/Visit" id="visitLinkPortalIndex">
-                        <img src="~/Content/img/PortalVisitHome.png" alt="Visit" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Visit</span>
-                </div>
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Portal/Attendance/@Model.Id" id="attendanceLinkPortalIndex">
+                    <img src="~/Content/img/PortalViewAttendance.png" alt="Reports" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Attendance</span>
+            </div>
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
-                        <img src="~/Content/img/PortalViewShop.png" alt="Store" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Store</span>
-                </div>
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Shop/Visit" id="visitLinkPortalIndex">
+                    <img src="~/Content/img/PortalVisitHome.png" alt="Visit" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Visit</span>
+            </div>
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Portal/Settings/@Model.Id" id="settingsLinkPortalIndex">
-                        <img src="~/Content/img/PortalViewSettings.png" alt="Customize" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Customize</span>
-                </div>
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
+                    <img src="~/Content/img/PortalViewShop.png" alt="Store" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Store</span>
+            </div>
 
-                <div class="col text-center no-gutters PortalBox">
-                    <a href="~/Portal/Avatar/@Model.Id" id="avatarLinkPortalIndex">
-                        <img src="~/Content/img/PortalViewAvatars.png" alt="Choose Avatars" class="PortalIcon" />
-                    </a>
-                    <br />
-                    <span>Avatars</span>
-                </div>
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Portal/Settings/@Model.Id" id="settingsLinkPortalIndex">
+                    <img src="~/Content/img/PortalViewSettings.png" alt="Customize" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Customize</span>
+            </div>
+
+            <div class="col-sm text-center PortalBox">
+                <a href="~/Portal/Avatar/@Model.Id" id="avatarLinkPortalIndex">
+                    <img src="~/Content/img/PortalViewAvatars.png" alt="Choose Avatars" class="PortalIcon" />
+                </a>
+                <br />
+                <span>Avatars</span>
             </div>
         </div>
-        <div class="col-1 no-gutters"></div>
     </div>
+    <div class="col-1 no-gutters"></div>
+</div>
 
 <br />
 <br />
