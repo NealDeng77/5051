@@ -696,3 +696,141 @@ input[type=submit].btn-block {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 10px 10px;
 }
+
+/*
+    Start Shop/Index page
+*/
+.ScoreBoardItem {
+    z-index: 50;
+}
+
+.BackgroundItem {
+    z-index: 1;
+}
+
+.TopperItem {
+    z-index: 20;
+}
+
+.TruckItem {
+    z-index: 10;
+}
+
+.TruckClosedSignItem {
+    z-index: 15;
+}
+
+.TruckInsideItem {
+    z-index: 5;
+}
+
+.MenuItem {
+    z-index: 15;
+}
+
+.SignItem {
+    z-index: 15;
+}
+
+.WheelsItem {
+    z-index: 15;
+}
+
+.TrailerItem {
+    z-index: 15;
+}
+
+.WorkerItemLeft {
+    z-index: 8;
+}
+
+.WorkerItemRight {
+    z-index: 8;
+}
+
+.WorkerItem {
+    z-index: 8;
+}
+
+.PeopleItem {
+    z-index: 100;
+}
+
+.WorkerBoxLeft {
+    position: absolute;
+    top: 240px;
+    left: 400px;
+    width: 280px;
+    z-index: 8;
+}
+
+.WorkerBoxRight {
+    position: absolute;
+    top: 240px;
+    left: 655px;
+    z-index: 8;
+}
+
+.WorkerBox {
+    position: absolute;
+    top: 240px;
+    left: 655px;
+    z-index: 8;
+}
+
+.PeopleBox {
+    position: absolute;
+    top: 310px;
+    left: -50px;
+    z-index: 100;
+}
+
+.TruckItemBase {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.TruckBoxLarge {
+    position: relative;
+    width: 1000px;
+    height: 550px;
+}
+
+.TruckBoxThumbnail {
+    position: relative;
+    height: 5%;
+    width: 5%;
+}
+
+/* End Truck */
+
+.ScoreBoardBox {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    z-index: 50;
+}
+
+.TruckEditBox {
+    height: 100px;
+    width: auto;
+    max-width: 150px;
+    background-color: grey;
+}
+
+.ScoreBoardHeader {
+    font-weight: bold;
+}
+
+.FeedBox {
+    overflow: hidden;
+    overflow-y: auto;
+    margin-left: 990px;
+}
+
+/* End Shop Truck */
