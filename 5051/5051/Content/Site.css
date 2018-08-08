@@ -122,11 +122,11 @@ hr {
 }
 
 .FooterBar{
-    background-color:black;
+    background-color:white;
 }
 
 .FooterText {
-    color: #999999;
+    color: black;
 }
 
 .FooterLink {
@@ -134,7 +134,7 @@ hr {
     background-size: auto;
 }
     .FooterLink:hover {
-        color: #ffffff;
+        color: darkgrey;
         background-color: transparent;
     }
 
