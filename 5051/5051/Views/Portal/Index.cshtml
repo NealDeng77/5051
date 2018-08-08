@@ -5,8 +5,21 @@
     ViewBag.Title = "Student Portal";
 }
 <br />
-<div class="text-center bg-transparent pt-5">
-    <h2>Welcome to your Student Portal</h2>
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeExtraLarge FontBold">Welcome to your Student Portal</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
     <br />
 </div>
 
@@ -14,17 +27,17 @@
 
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
-
+        <br />
         <div class="row justify-content-center">
 
             <div class="col-sm-1"></div>
 
             <div class="col-sm justify-content-center">
-                <br />
+
                 <div class="col-sm text-center">
                     <div class="row justify-content-center">
                         <div id="text-center">
-                            <span class="FontSizeLarge FontColorBlack">@Model.Name</span><br />
+                            <span class="FontSizeLarge">@Model.Name</span><br />
                         </div>
                     </div>
 
@@ -44,32 +57,46 @@
             </div>
 
             <div class="col-sm text-center">
-                <br />
                 <div class="FontSizeMedium">
+                    <br />
                     Lvl <span id="levelValue">@Model.AvatarLevel</span><br />
                     <span id="xpValue">@Model.ExperiencePoints</span> XP<br />
                     <span id="tokensValue">@Model.Tokens</span> Tokens<br />
+                    <br />
                 </div>
             </div>
 
             <div class="col-sm text-center">
-                <br />
-                <div class="FontSizeMedium">
-                    Current Status: <span id="statusValue">@Model.Status</span>
+
+                <div class="row justify-content-center">
+                    <div class="FontSizeMedium FontBold">
+                        Current Status: <br />
+                        <span class="FontNormal" id="statusValue">@Model.Status</span>
+                    </div>
                 </div>
 
                 @{
                     if (Model.Attendance.Any())
                     {
-                        <div class="FontSizeMedium">
-                            Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span>
+                        <div class="row justify-content-center">
+                            <div class="FontSizeMedium FontBold">
+                                Emotion State: <br />
+                                <span class="FontNormal">
+                                    @Model.EmotionCurrent <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="@Model.EmotionCurrent" class="AvatarSize0" /></span>
+                                </span>
+                            </div>
                         </div>
 
-                        <div class="FontSizeMedium">
-                            Last logged in:<br /> <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span>
+                        <div class="row justify-content-center">
+
+                            <div class="FontSizeMedium FontBold">
+                                Last logged in:<br />
+                                <span class="FontNormal" id="lastLoginValue">@Model.LastLogIn.ToShortDateString() @Model.LastLogIn.ToShortTimeString()</span>
+                            </div>
                         </div>
                     }
                 }
+                <span><br /></span>
             </div>
 
             <div class="col-sm-1"></div>
@@ -79,6 +106,7 @@
         <hr />
 
         <br />
+        <br />
 
         <div class="row justify-content-center">
 
@@ -87,7 +115,7 @@
                     <img src="~/Content/img/PortalViewReports.png" alt="Reports" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Reports</span>
+                <span class="FontSizeLarge">Reports</span>
             </div>
 
             <div class="col-sm text-center PortalBox">
@@ -95,7 +123,7 @@
                     <img src="~/Content/img/PortalViewAttendance.png" alt="Reports" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Attendance</span>
+                <span class="FontSizeLarge">Attendance</span>
             </div>
 
             <div class="col-sm text-center PortalBox">
@@ -103,7 +131,7 @@
                     <img src="~/Content/img/PortalVisitHome.png" alt="Visit" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Visit</span>
+                <span class="FontSizeLarge">Visit</span>
             </div>
 
             <div class="col-sm text-center PortalBox">
@@ -111,7 +139,7 @@
                     <img src="~/Content/img/PortalViewShop.png" alt="Store" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Store</span>
+                <span class="FontSizeLarge">Store</span>
             </div>
 
             <div class="col-sm text-center PortalBox">
@@ -119,7 +147,7 @@
                     <img src="~/Content/img/PortalViewSettings.png" alt="Customize" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Customize</span>
+                <span class="FontSizeLarge">Customize</span>
             </div>
 
             <div class="col-sm text-center PortalBox">
@@ -127,14 +155,9 @@
                     <img src="~/Content/img/PortalViewAvatars.png" alt="Choose Avatars" class="PortalIcon" />
                 </a>
                 <br />
-                <span>Avatars</span>
+                <span class="FontSizeLarge">Avatars</span>
             </div>
         </div>
     </div>
-    <div class="col-1 no-gutters"></div>
+    <div class="col-1"></div>
 </div>
-
-<br />
-<br />
-<br />
-<br />
