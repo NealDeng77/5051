@@ -22,7 +22,7 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion Instantiate
-
+        #region Get_Set_All_Fields
         [TestMethod]
         public void Models_BaseReportViewModel_Get_Set_Check_All_Fields_Should_Pass()
         {
@@ -58,5 +58,6 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(test.AttendanceList, "AttendanceList " + TestContext.TestName);
             Assert.IsNotNull(test.Stats, "Stats " + TestContext.TestName);
         }
+        #endregion Get_Set_All_Fields
     }
 }
