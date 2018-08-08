@@ -24,7 +24,7 @@ namespace _5051UITests.Views.Shared
 
             if (originalController == "Home")
             {
-                ClickActionById("StudentLinkNavBar");
+                ClickActionById("HomeLinkNavBar");
                 ValidatePageTransition(PortalControllerName, RosterViewName);
                 NavigateToPage(originalController, originalAction, originalData);
 

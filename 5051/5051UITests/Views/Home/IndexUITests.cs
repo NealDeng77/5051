@@ -23,5 +23,39 @@ namespace _5051UITests.Views.Home
             NavigateToPage(_Controller, _Action);
         }
 
+
+        [TestMethod]
+        public void Home_Index_Click_All_Nav_Bar_And_Footer_Links()
+        {
+            NavigateToPage(_Controller, _Action);
+
+            Shared._Layout.Click_All_Nav_Bar_Links(_Controller, _Action);
+
+            Shared._Layout.Click_All_Footer_Links(_Controller, _Action);
+        }
+
+        [TestMethod]
+        public void Home_Index_Click_All_On_Page_Links()
+        {
+            //AvatarHouses link
+            ClickActionById("houseExampleLinkHomeIndex");
+            ValidatePageTransition("Home", "HouseExample");
+            NavigateToPage(_Controller, _Action);
+
+            //ChooseAvatar link
+            ClickActionById("avatarExampleLinkHomeIndex");
+            ValidatePageTransition("Home", "AvatarExample");
+            NavigateToPage(_Controller, _Action);
+
+            //Shop link
+            ClickActionById("shopExampleLinkHomeIndex");
+            ValidatePageTransition("Home", "ShopExample");
+            NavigateToPage(_Controller, _Action);
+
+            //Show Me link
+            ClickActionById("studentExampleLinkHomeIndex");
+            ValidatePageTransition("Home", "StudentExample");
+            NavigateToPage(_Controller, _Action);
+        }
     }
 }
