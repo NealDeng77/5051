@@ -308,7 +308,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             StudentController controller = new StudentController();
 
-            StudentDisplayViewModel data = new StudentDisplayViewModel();
+            StudentDisplayViewModel data = new StudentDisplayViewModel(DataSourceBackend.Instance.StudentBackend.GetDefault());
 
             // Act
             RedirectToRouteResult result = controller.Update(data) as RedirectToRouteResult;
