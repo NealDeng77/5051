@@ -147,6 +147,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
 
             Goal = data.Goal;
+            EarlyWindow = data.EarlyWindow;
+            LateWindow = data.LateWindow;
         }
 
         /// <summary>
@@ -202,6 +204,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
 
             Goal = 85;
+            EarlyWindow = new TimeSpan(0, 30, 0);
+            LateWindow = new TimeSpan(0, 30, 0);
         }
 
         /// <summary>
@@ -237,6 +241,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             Goal = data.Goal;
+            EarlyWindow = data.EarlyWindow;
+            LateWindow = data.LateWindow;
         }
     }
 }
