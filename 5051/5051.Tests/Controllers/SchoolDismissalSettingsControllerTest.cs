@@ -192,7 +192,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_SchoolDismissalSettings_Post_Update_Default_Should_Return_Calendar_Index_Page()
+        public void Controller_SchoolDismissalSettings_Post_Update_Default_Should_Return_Read_SchoolDismissalSettings_Page()
         {
             // Arrange
             var controller = new SchoolDismissalSettingsController();
@@ -204,8 +204,8 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Update(schoolDismissalSettingsModel);
 
             // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Calendar", result.RouteValues["controller"], TestContext.TestName);
+            Assert.AreEqual("Read", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("SchoolDismissalSettings", result.RouteValues["controller"], TestContext.TestName);
         }
         #endregion PostUpdateRegion
     }
