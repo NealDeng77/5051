@@ -21,12 +21,12 @@
     <br />
 </div>
 
-<div class="row justify-content-around no-gutters">
+<div class="row justify-content-around">
     @{
         foreach (var item in Model.StudentList)
         {
 
-            <div class="col-sm-2 no-gutters lightTransparentBox BoxWithHighlightHover">
+            <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover">
                 <a id="@item.Id" href="~/Portal/Login/@item.Id">
                     <div class="row justify-content-center">
                         <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
