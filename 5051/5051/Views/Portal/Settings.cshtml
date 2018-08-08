@@ -24,18 +24,26 @@
     <br />
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3 lightTransparentBox">
-            <div class="container">
-                @{
-                    if (Model == null)
-                    {
+@{
+    if (Model == null)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 lightTransparentBox">
+                    <div class="container">
                         <p>No Student</p>
-                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
-                    else
-                    {
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 lightTransparentBox">
+                    <div class="container">
 
                         <div class="container">
                             <div class="row">
@@ -140,13 +148,10 @@
 
                             }
                         </div>
-                    }
-                }
 
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
+    }
+}
