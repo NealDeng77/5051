@@ -233,5 +233,59 @@ namespace _5051.Controllers
             ModelState.AddModelError("Password", "Invalid login attempt.");
             return View(data);
         }
+
+        /// <summary>
+        /// This opens up the make a new Student screen
+        /// </summary>
+        /// <returns></returns>
+        // GET: Kiosk/Create
+        public ActionResult Create()
+        {
+            var myData = new StudentModel();
+            return View(myData);
+        }
+
+        /// <summary>
+        /// Make a new Student sent in by the create Student screen
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        // POST: Kiosk/Create
+        [HttpPost]
+        public ActionResult Create([Bind(Include=
+                                        "Id,"+
+                                        "Name,"+
+                                        "Description,"+
+                                        "Uri,"+
+                                        "AvatarId,"+
+                                        "Status,"+
+                                        "Tokens,"+
+                                        "ExperiencePoints,"+
+                                        "AvatarLevel,"+
+                                        "")] StudentModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Return back for Edit
+                return View(data);
+            }
+
+            StudentBackend.Create(data);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

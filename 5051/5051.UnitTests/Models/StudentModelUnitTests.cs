@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.UnitTests.Models
 {
@@ -48,7 +49,7 @@ namespace _5051.UnitTests.Models
             string avatarId = null;
             var name = "name";
 
-            var expect = Backend.AvatarBackend.Instance.GetFirstAvatarId();
+            var expect = AvatarBackend.Instance.GetFirstAvatarId();
 
             // Act
             var result = new StudentModel(name, avatarId);

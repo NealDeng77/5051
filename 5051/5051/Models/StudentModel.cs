@@ -38,6 +38,11 @@ namespace _5051.Models
         public string AvatarId { get; set; }
 
         /// <summary>
+        ///  The composite for the Avatar
+        /// </summary>
+        public AvatarCompositModel AvatarComposite { get; set; }
+
+        /// <summary>
         /// The personal level for the Avatar, the avatar levels up.  switching the avatar ID (picture), does not change the level
         /// </summary>
         [Display(Name = "Avatar Level", Description = "Level of the Avatar")]
@@ -71,8 +76,7 @@ namespace _5051.Models
         [Display(Name = "Password", Description = "Student Password")]
         [PasswordPropertyText]
         public string Password { get; set; }
-
-        
+              
 
         /// <summary>
         /// The current emotion status of the student
@@ -108,6 +112,7 @@ namespace _5051.Models
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
+            AvatarComposite = new AvatarCompositModel();
 
             // All Students get a default Truck Inventory
             Inventory = new List<FactoryInventoryModel>
@@ -159,6 +164,8 @@ namespace _5051.Models
             Name = data.Name;
 
             AvatarId = data.AvatarId;
+            AvatarComposite = data.AvatarComposite;
+
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
             Status = data.Status;
@@ -183,7 +190,10 @@ namespace _5051.Models
             }
 
             Name = data.Name;
+
             AvatarId = data.AvatarId;
+            AvatarComposite = data.AvatarComposite;
+
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
             Status = data.Status;

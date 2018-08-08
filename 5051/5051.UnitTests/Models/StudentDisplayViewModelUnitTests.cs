@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.UnitTests.Models
 {
@@ -74,7 +75,7 @@ namespace _5051.UnitTests.Models
             // Arrange
 
             var dataAvatar = new AvatarModel();
-            Backend.DataSourceBackend.Instance.AvatarBackend.Create(dataAvatar);
+            DataSourceBackend.Instance.AvatarBackend.Create(dataAvatar);
 
             var data = new StudentModel();
             data.Id = "hi";
@@ -84,7 +85,7 @@ namespace _5051.UnitTests.Models
             var result = new StudentDisplayViewModel(data);
 
 
-            Backend.DataSourceBackend.Instance.AvatarBackend.Reset();
+            DataSourceBackend.Instance.AvatarBackend.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);

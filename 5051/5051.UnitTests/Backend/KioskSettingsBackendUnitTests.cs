@@ -8,7 +8,7 @@ using _5051.Models;
 using _5051.Backend;
 
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class KioskSettingsBackendUnitTests

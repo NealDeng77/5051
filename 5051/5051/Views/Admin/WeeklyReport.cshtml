@@ -244,13 +244,14 @@
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Date');
-            data.addColumn('number', 'Actual');
-            data.addColumn('number', 'Ideal');
+            data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
+            data.addColumn('number', 'Perfect: 100%');
+            data.addColumn('number', "Goal: @Model.Goal%");
             var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("dd")).ToArray())];
             var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalMinutes.ToString("0.##")).ToArray())];
             var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalMinutes.ToString("0.##")).ToArray())];
             for (i = 0; i < dates.length; i++) {
-                data.addRow([dates[i].toString(), values[i], expected[i]]);
+                data.addRow([dates[i].toString(), values[i], expected[i], expected[i] * @Model.Goal /100]);
             }
 
             var options = {

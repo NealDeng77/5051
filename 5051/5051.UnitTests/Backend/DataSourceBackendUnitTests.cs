@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class DataSourceBackendUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_DataSourceBackend_Default_Instantiate_Should_Pass()
+        public void Backend_DataSourceBackend_Default_Instantiate_Should_Pass()
         {
             // Arrange
             var backend = DataSourceBackend.Instance;
@@ -34,7 +34,7 @@ namespace _5051.UnitTests.Models
 
         #region SetDataSource
         [TestMethod]
-        public void Models_DataSourceBackend_SetDataSource_Valid_Enum_Should_Pass()
+        public void Backend_DataSourceBackend_SetDataSource_Valid_Enum_Should_Pass()
         {
             // Arrange
             var backend = DataSourceBackend.Instance;
@@ -52,7 +52,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_DataSourceBackend_SetDataSourceDataSet_Valid_Enum_Should_Pass()
+        public void Backend_DataSourceBackend_SetDataSourceDataSet_Valid_Enum_Should_Pass()
         {
             // Arrange
             var backend = DataSourceBackend.Instance;

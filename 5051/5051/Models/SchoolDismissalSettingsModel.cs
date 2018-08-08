@@ -95,6 +95,10 @@ namespace _5051.Models
         [Display(Name = "Summer Quarter Last Class Day", Description = "Summer Quarter Last Class Day")]
         public DateTime SummerQuarterLastClassDay { get; set; }
 
+        // The current setting for goal percentage
+        [Display(Name = "Attendance Goal Percentage", Description = "Attendance Goal Percentage")]
+        public int Goal { get; set; }
+
 
         public SchoolDismissalSettingsModel()
         {
@@ -135,6 +139,7 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
 
+            Goal = data.Goal;
         }
 
         /// <summary>
@@ -188,6 +193,8 @@ namespace _5051.Models
 
             SummerQuarterFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
             SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
+
+            Goal = 85;
         }
 
         /// <summary>
@@ -222,6 +229,7 @@ namespace _5051.Models
             SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            Goal = data.Goal;
         }
     }
 }

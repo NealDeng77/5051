@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.UnitTests.Models
 {
@@ -58,7 +59,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartEarly;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartEarly;
 
             // Act
             data.SetSchoolTime();
@@ -74,7 +75,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Late;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
 
             // Act
             data.SetSchoolTime();
@@ -90,7 +91,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
 
             // Act
             data.SetSchoolTime();
@@ -106,7 +107,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
 
             // Act
             data.SetSchoolTime();
@@ -122,7 +123,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Late;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndLate;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndLate;
 
             // Act
             data.SetSchoolTime();
@@ -138,7 +139,7 @@ namespace _5051.UnitTests.Models
             // Arrange
             var data = new SchoolCalendarModel();
             data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal;
-            var expect = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
+            var expect = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
 
             // Act
             data.SetSchoolTime();
@@ -171,7 +172,7 @@ namespace _5051.UnitTests.Models
             var result = data.TimeDuration;
 
             //Reset
-            Backend.DataSourceBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
             
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
@@ -213,7 +214,7 @@ namespace _5051.UnitTests.Models
         //    data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
         //    data.SetSchoolTime();
 
-        //    var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+        //    var myDefault = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
 
         //    Test is different than initial
         //   var test = new SchoolCalendarModel();
@@ -245,7 +246,7 @@ namespace _5051.UnitTests.Models
             data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
             data.SetSchoolTime();
 
-            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+            var myDefault = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
 
             // Test is different than initial
             var test = new SchoolCalendarModel();
@@ -277,7 +278,7 @@ namespace _5051.UnitTests.Models
             data.DayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
             data.SetSchoolTime();
 
-            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+            var myDefault = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
 
             // Test is different than initial
             var test = new SchoolCalendarModel();
@@ -308,7 +309,7 @@ namespace _5051.UnitTests.Models
             data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
             data.SetSchoolTime();
 
-            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+            var myDefault = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
 
             // Test is different than initial
             var test = new SchoolCalendarModel();
@@ -339,7 +340,7 @@ namespace _5051.UnitTests.Models
             data.DayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
             data.SetSchoolTime();
 
-            var myDefault = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+            var myDefault = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
 
             // Test is different than initial
             var test = new SchoolCalendarModel();

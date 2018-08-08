@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class FactoryInventoryDataSourceMockUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_FactoryInventoryDataSourceMock_Default_Instantiate_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_Default_Instantiate_Should_Pass()
         {
             // Arrange
             var backend = FactoryInventoryDataSourceMock.Instance;

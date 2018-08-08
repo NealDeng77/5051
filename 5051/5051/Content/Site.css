@@ -23,6 +23,19 @@ textarea {
     max-width: 280px;
 }
 
+/* Make the HR have extra width and black*/
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+} 
+
 /* Set items in a div */
 .div-center {
     display: inline-block;
@@ -184,6 +197,8 @@ body, html {
     height: 100%;
     width: 100%;
     margin: 0;
+    font-family: Sans-Serif;
+    color: black;
 }
 
 .fill-height {
@@ -246,9 +261,37 @@ body, html {
     color: white;
 }
 
-.FontColorBold {
+/*Extra Large must be inside a Large Span, to work*/
+.FontSizeExtraLarge {
+    font-size: 125%;
+}
+
+.FontSizeLarge {
+    font-size: xx-large;
+}
+
+.FontSizeMedium {
+    font-size: x-large;
+}
+
+.FontSizeSmall {
+    font-size: large;
+}
+
+.FontColorWhite {
     color: white;
+}
+
+.FontColorBlack {
+    color: black;
+}
+
+.FontBold {
     font-weight: bold;
+}
+
+.FontNormal {
+    font-weight: normal;
 }
 
 .btn1 {
@@ -283,7 +326,17 @@ body, html {
     /Portal/Login page
 */
 
+/*todo: remove this with refactoring*/
 div.BlockStudentLogin {
+    border-radius: 25px;
+    background-color: #202021 !important;
+    height: 400px;
+    width: 600px;
+    opacity: 0.85;
+    margin: 0 auto;
+}
+
+.BlockStudentLogin {
     border-radius: 25px;
     background-color: #202021 !important;
     height: 400px;
@@ -558,10 +611,21 @@ input[type=submit].btn-block {
     z-index:25;
 }
 
-.AvatarHair {
+.AvatarHairBack {
     z-index: 5;
 }
 
-.AvatarFront {
+.AvatarHairFront {
     z-index: 12;
+}
+
+.AvatarCircle {
+    position:absolute;
+    top:15%;
+    left:8%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    z-index:0;
+    width:85%;
+    height:80%;
 }

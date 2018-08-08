@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Misc
 {
     [TestClass]
     public class RouteConfigUnitTests
@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_RouteConfig_Default_Instantiate_Should_Pass()
+        public void Misc_RouteConfig_Default_Instantiate_Should_Pass()
         {
             //arrange
             var data = new RouteCollection();

@@ -121,8 +121,9 @@
                 // Create the data table.
                 var data = new google.visualization.DataTable();
                 data.addColumn('date', 'Date');
-                data.addColumn('number', 'Actual');
-                data.addColumn('number', 'Ideal');
+                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
+                data.addColumn('number', 'Perfect: 100%');
+                data.addColumn('number', "Goal: @Model.Goal%");
                 var dates = [
                     @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
                 ];
@@ -140,7 +141,7 @@
                     i++;
                     date = dates[i];
                     i++;
-                    data.addRow([new Date(year, month, date), values[i / 3 - 1], expected[i / 3 - 1]]);
+                    data.addRow([new Date(year, month, date), values[i / 3 - 1], expected[i / 3 - 1], expected[i / 3 - 1] * @Model.Goal / 100]);
                 }
 
                 var options = {

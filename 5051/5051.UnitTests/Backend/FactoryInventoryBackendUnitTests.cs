@@ -2,7 +2,7 @@
 using _5051.Models;
 using _5051.Backend;
 
-namespace _5051.UnitTests.Backend_FactoryInventoryBackend_
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class FactoryInventoryBackendUnitTests

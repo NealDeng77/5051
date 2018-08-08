@@ -11,7 +11,7 @@ using System.Web.SessionState;
 using System.IO;
 using System.Reflection;
 
-namespace _5051.UnitTests.Models
+namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class UTCConversionsBackendUnitTests

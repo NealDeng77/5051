@@ -4,73 +4,28 @@
 @{
     ViewBag.Title = "My Avatar";
 }
+
+<br />
+<span class="FontColorWhite FontSizeLarge FontBold">My Avatar</span>
 <br />
 <br />
+
 <div class="row">
-    <div class="col-sm-2 text-center">
-        <img src="~/Content/img/@Model.SelectedAvatar.Uri" id="currentAvatarImg" class="AvatarSize1" />
-        <br />
-        <div class="text-center">
-            <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
-            <br />
-            <span id="currentAvatarLevel">
-                @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
-            </span>
-            <br />
-            <br />
-        </div>
-    </div>
-
-    <div class="col-sm-2 text-center">
-        <div class="text-center">
-
-
-            <div class="AvatarBox" id="AvatarBox">
-                <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="~/content/avatar/Head1.png" />
-                <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="~/content/avatar/Shirt1.png" />
-                <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="~/content/avatar/Accessory1.png" />
-                <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="~/content/avatar/Cheeks1.png" />
-                <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="~/content/avatar/Expression1.png" />
-                <img class="AvatarItemBase AvatarHair" id="AvatarHair" src="~/content/avatar/Hair2_long_red.png" />
-                <img class="AvatarItemBase AvatarFront" id="AvatarFront" src="~/content/avatar/Hair1_straight_red.png" />
-            </div>
-
-            <br />
-            <div class="text-center">
-                <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
-                <br />
-                <span id="currentAvatarLevel">
-                    @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
-                </span>
-                <br />
-                <br />
-            </div>
+    <div class="col text-center">
+        <div class="AvatarBox" id="AvatarBox">
+            <div class="AvatarCircle"></div>
+            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.Student.AvatarComposite.AvatarHairBackUri" />
+            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.Student.AvatarComposite.AvatarHeadUri" />
+            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.Student.AvatarComposite.AvatarShirtUri" />
+            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.Student.AvatarComposite.AvatarExpressionUri" />
+            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.Student.AvatarComposite.AvatarCheeksUri" />
+            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.Student.AvatarComposite.AvatarHairFrontUri" />
+            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.Student.AvatarComposite.AvatarAccessoryUri" />
         </div>
     </div>
 </div>
 
-<div class="container">
-    <br />
-    <h2>My Avatar</h2>
-    <h4 id="remindOfLevel">
-        You can change to any avatar at or below Level @Html.DisplayFor(m => m.Student.AvatarLevel)
-    </h4>
-    <div class="col-sm-10 col-sm-offset-1">
-        <div class="col-sm-2 text-center">
-            <img src="~/Content/img/@Model.SelectedAvatar.Uri" id="currentAvatarImg" class="AvatarSize1" />
-            <br />
-            <div class="text-center">
-                <span id="currentAvatarName">@Html.DisplayFor(m => m.SelectedAvatar.Name)</span>
-                <br />
-                <span id="currentAvatarLevel">
-                    @Html.DisplayNameFor(m => m.SelectedAvatar.Level) @Html.DisplayFor(m => m.SelectedAvatar.Level)
-                </span>
-                <br />
-                <br />
-            </div>
-        </div>
-    </div>
-</div>
+<br />
 
 @{
     if (Model.AvatarList == null | !Model.AvatarList.Any())

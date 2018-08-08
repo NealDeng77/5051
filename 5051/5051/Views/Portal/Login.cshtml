@@ -9,66 +9,84 @@
 <br />
 <br />
 <br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-sm-0 no-gutters"></div>
+        <div class="col no-gutters">
+            <div class="row justify-content-center darkTransparentBox">
+                <div class="col-1 no-gutters"></div>
+                <div class="col no-gutters">
+                    <div class="row justify-content-center no-gutters">
+                        <div class="col text-center no-gutters">
+                            <p class="FontStyleBlockH1">Student Login</p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center no-gutters">
+                        <div class="col text-center no-gutters align-self-center">
+                            <br />
+                            <div class="row justify-content-center no-gutters">
+                                <div class="AvatarBox" id="AvatarBox">
+                                    <div class="AvatarCircle"></div>
+                                    <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.AvatarComposite.AvatarHairBackUri" />
+                                    <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.AvatarComposite.AvatarHeadUri" />
+                                    <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.AvatarComposite.AvatarShirtUri" />
+                                    <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.AvatarComposite.AvatarExpressionUri" />
+                                    <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.AvatarComposite.AvatarCheeksUri" />
+                                    <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.AvatarComposite.AvatarHairFrontUri" />
+                                    <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.AvatarComposite.AvatarAccessoryUri" />
+                                </div>
+                            </div>
+                                <span class="text-center FontColor1" id="currentStudentName">
+                                    @Model.Name
+                                    <br />
+                                    <br />
+                                </span>
+                            
+                        </div>
+                    </div>
 
-<div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6">
-        <div class="BlockStudentLogin">
-            <br />
-            <div class="row">
-                <p class="FontStyleBlockH1">Student Login</p>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4 text-center">
-                    <br />
-                    <img src="~/Content/img/@Model.AvatarUri" id="currentAvatarImg" class="AvatarSize1" />
-                    <br />
-                    <span class="text-center FontColor1" id="currentStudentName">
-                        @Model.Name
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.AvatarId)
+                        @Html.HiddenFor(m => m.Tokens)
+                        @Html.HiddenFor(m => m.Status)
+                        @Html.HiddenFor(m => m.AvatarLevel)
+                        @Html.HiddenFor(m => m.AvatarUri)
+                        @Html.HiddenFor(m => m.AvatarDescription)
+
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-1 no-gutters"></div>
+                            <div class="col-sm-12 col-md-auto pr-3 pb-3 no-gutters text-center">
+                                <i class="fa fa-lock LockStyle" aria-hidden="true"></i>
+
+                            </div>
+                            <div class="col no-gutters">
+                                @Html.PasswordFor(m => m.Password, new { @class = "input1" })
+                            </div>
+                            <div class="col-1 no-gutters"></div>
+                        </div>
+
                         <br />
-                        <br />
-                    </span>
+
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-md-1 no-gutters"></div>
+                            <div class="col-sm-12 col-md-5 pb-3 text-center no-gutters">
+                                @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn1 btn-light btn-block", id = "cancelLoginButton" })
+                            </div>
+                            <div class="col-sm-12 col-md-5 pb-5 pl-2 text-center no-gutters">
+                                <input type="submit" value="Login" id="loginButton" class="btn btn1 btn-light btn-block">
+                            </div>
+                            <div class="col-md-1 no-gutters"></div>
+
+                        </div>
+                    }
                 </div>
+                <div class="col-1 no-gutters"></div>
             </div>
-
-
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Id)
-                @Html.HiddenFor(m => m.Name)
-                @Html.HiddenFor(m => m.AvatarId)
-                @Html.HiddenFor(m => m.Tokens)
-                @Html.HiddenFor(m => m.Status)
-                @Html.HiddenFor(m => m.AvatarLevel)
-                @Html.HiddenFor(m => m.AvatarUri)
-                @Html.HiddenFor(m => m.AvatarDescription)
-
-                <div class="row">
-                    <div class="col-sm-2 text-right">
-                        <i class="fa fa-lock LockStyle" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-sm-8">
-                        @Html.PasswordFor(m => m.Password, new { @class = "input1" })
-                    </div>
-                </div>
-
-                <br />
-
-                <div class="row">
-                    <div class="col-sm-2 text-right">
-                    </div>
-                    <div class="col-sm-4">
-                        @Html.ActionLink("Cancel", "Roster", null, new { @class = "btn btn1 btn-light btn-block", id = "cancelLoginButton" })
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="submit" value="Login" id = "loginButton" class="btn btn1 btn-light btn-block">
-                    </div>
-                </div>
-            }
         </div>
+        <div class="col-md-2 col-sm-0 no-gutters"></div>
     </div>
 </div>
-

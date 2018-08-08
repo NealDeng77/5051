@@ -88,6 +88,9 @@
                             break;
 
                         case "Kiosk":
+                            <li class="nav-item">
+                                @Html.ActionLink("Add Student", "Create", "Kiosk", null, new { @class = "nav-link", id = "AddStudentLinkNavBar" })
+                            </li>
                             break;
 
                         case "Admin":
@@ -126,6 +129,9 @@
 
                                     default:
                                         <li class="nav-item">
+                                            @Html.ActionLink("Home", "Index", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
+                                        </li>
+                                        <li class="nav-item">
                                             @Html.ActionLink("Reports", "Report", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
                                         </li>
                                         <li class="nav-item">
@@ -156,7 +162,7 @@
     </nav>
 
     <div class="@background">
-        <div class="container body-content fill-height">
+        <div class="container-fluid body-content fill-height">
             @RenderBody()
 
             @{
