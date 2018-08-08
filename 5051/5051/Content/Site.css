@@ -23,6 +23,19 @@ textarea {
     max-width: 280px;
 }
 
+/* Make the HR have extra width and black*/
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+} 
+
 /* Set items in a div */
 .div-center {
     display: inline-block;
@@ -248,6 +261,11 @@ body, html {
     color: white;
 }
 
+/*Extra Large must be inside a Large Span, to work*/
+.FontSizeExtraLarge {
+    font-size: 125%;
+}
+
 .FontSizeLarge {
     font-size: xx-large;
 }
@@ -270,6 +288,10 @@ body, html {
 
 .FontBold {
     font-weight: bold;
+}
+
+.FontNormal {
+    font-weight: normal;
 }
 
 .btn1 {
