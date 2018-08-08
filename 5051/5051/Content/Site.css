@@ -262,7 +262,7 @@ body, html {
 }
 
 /*Extra Large must be inside a Large Span, to work*/
-.FontSizeExtraLarge {
+.FontSizeLarger {
     font-size: 125%;
 }
 
