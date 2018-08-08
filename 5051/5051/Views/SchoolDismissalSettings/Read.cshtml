@@ -206,14 +206,32 @@
                     </div>
                 </div>
                 <br/>
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.Goal)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.Goal%
-                    </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.Goal)
                 </div>
+                <div class="col-sm-4">
+                    @Model.Goal%
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.EarlyWindow)
+                </div>
+                <div class="col-sm-4">
+                    @Model.EarlyWindow
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.LateWindow)
+                </div>
+                <div class="col-sm-4">
+                    @Model.LateWindow
+                </div>
+            </div>
 
                 <br />
                 <div class="row">
