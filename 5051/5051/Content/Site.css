@@ -574,10 +574,16 @@ input[type=submit].btn-block {
     left: 150px; /* chartArea left */
 }
 
-.AvatarBox {
+.AvatarBoxNormal {
     position: relative;
     height: 90px;
     width: 90px;
+}
+
+.AvatarBoxLarge {
+    position: relative;
+    height: 200px;
+    width: 200px;
 }
 
 .AvatarItemBase {
