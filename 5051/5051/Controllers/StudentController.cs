@@ -165,7 +165,16 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            var myDataStudent = new StudentModel(data);
+            var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+
+            myDataStudent.EmotionCurrent = data.EmotionCurrent;
+            myDataStudent.Name = data.Name;
+            myDataStudent.AvatarId = data.AvatarId;
+            myDataStudent.Tokens = data.Tokens;
+            myDataStudent.ExperiencePoints = data.ExperiencePoints;
+            myDataStudent.AvatarLevel = data.AvatarLevel;
+            myDataStudent.Status = data.Status;
+
             StudentBackend.Update(myDataStudent);
 
             return RedirectToAction("Index");
