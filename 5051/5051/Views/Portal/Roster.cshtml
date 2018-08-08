@@ -3,27 +3,49 @@
     ViewBag.Title = "Roster";
 }
 <br />
-<div class="text-center bg-transparent pt-5">
-    <h1>Click on your Avatar to Login</h1>
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Click on your Avatar to Login</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
 </div>
 
-<br />
-<br />
+<div class="row">
+    <br />
+    <br />
+</div>
 
-<div class="row text-center">
-
+<div class="row justify-content-around">
     @{
         foreach (var item in Model.StudentList)
         {
-            <div class="col-sm-2">
-                <div class="BoxWithHighlightHover text-center darkTransparentBox">
-                    <a id="@item.Id" href="~/Portal/Login/@item.Id">
-                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                    </a>
-                    <br />
-                    <span class="text-center">
-                        @item.Name
-                    </span>
+
+            <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover">
+                <a id="@item.Id" href="~/Portal/Login/@item.Id">
+                    <div class="row justify-content-center">
+                        <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
+                            <div class="AvatarCircle"></div>
+                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
+                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                        </div>
+                    </div>
+                </a>
+
+                <div class="row justify-content-center">
+                    <div id="text-center">
+                        <span class="FontSizeMedium">@item.Name</span>
+                    </div>
                 </div>
             </div>
         }

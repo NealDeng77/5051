@@ -244,6 +244,28 @@
 
                     <div class="row">
                         <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.EarlyWindow)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.EarlyWindow, new { htmlAttributes = new { @Value = @Model.EarlyWindow } })
+                            @Html.ValidationMessageFor(m => m.EarlyWindow)
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.LateWindow)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(m => m.LateWindow, new { htmlAttributes = new { @Value = @Model.LateWindow } })
+                            @Html.ValidationMessageFor(m => m.LateWindow)
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
                         </div>
                         <div class="col-sm-4">
                             @Html.ActionLink("Back", "Read", new { id = Model.Id }, new { @class = "btn btn-success" })

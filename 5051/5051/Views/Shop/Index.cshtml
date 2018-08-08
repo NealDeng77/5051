@@ -13,37 +13,36 @@
             </div>
 
             <div class="ScoreBoardBox">
-                <div class="row">
-                    Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
-                </div>
+                <div class="dropdown-content">
+                    <div class="ScoreBoardHeader">
+                        <a href="#">
+                            Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span> <br/>
+                            <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP <br/>
+                            <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
+                        </a>
+                    </div>
+                    <a href="#">
+                        <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
+                    </a>
+                    <a href="#">
+                        <span id="StoreStatus"></span>
+                    </a>
+                    <a href="#">
+                        <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+                    </a>
+                </div>               
+            </div>
 
-                <div class="row">
-                    <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
-                </div>
-
-                <div class="row">
-                    <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-                </div>
-
-                <div class="row">
-                    <span>Customers</span>&nbsp;<span id="CustomersValue">10</span>
-                </div>
-
-                <div class="row">
-                    <span id="StoreStatus"></span>
-                </div>
-
-                <div class="row">
-                    <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-                </div>
-
-                <div class="row">
-                    <br />
-                    <span>Game Data:&nbsp;</span>
-                </div>
-
-                <div class="row">
-                    <span id="TransactionList"></span>
+            <div class="FeedBox">
+                <div class="dropdown-content">
+                    <div class="ScoreBoardHeader">
+                        <a href="#">
+                            <span>Game Data:&nbsp;</span>
+                        </a>
+                    </div>
+                    <a href="#">
+                        <span id="TransactionList"></span>
+                    </a>
                 </div>
             </div>
         }

@@ -99,6 +99,13 @@ namespace _5051.Models
         [Display(Name = "Attendance Goal Percentage", Description = "Attendance Goal Percentage")]
         public int Goal { get; set; }
 
+        // The period of time before school during which time attended by student is counted into attendance duration
+        // while time attended before this window starts is not counted into attendance duration
+        public TimeSpan EarlyWindow { get; set; }
+
+        // The period of time after school during which time attended by student is counted into attendance duration
+        // while time attended after this window ends is not counted into attendance duration
+        public TimeSpan LateWindow { get; set; }
 
         public SchoolDismissalSettingsModel()
         {
@@ -140,6 +147,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
 
             Goal = data.Goal;
+            EarlyWindow = data.EarlyWindow;
+            LateWindow = data.LateWindow;
         }
 
         /// <summary>
@@ -195,6 +204,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
 
             Goal = 85;
+            EarlyWindow = new TimeSpan(0, 30, 0);
+            LateWindow = new TimeSpan(0, 30, 0);
         }
 
         /// <summary>
@@ -230,6 +241,8 @@ namespace _5051.Models
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
             Goal = data.Goal;
+            EarlyWindow = data.EarlyWindow;
+            LateWindow = data.LateWindow;
         }
     }
 }

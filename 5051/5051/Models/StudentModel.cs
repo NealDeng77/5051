@@ -76,11 +76,12 @@ namespace _5051.Models
         [Display(Name = "Password", Description = "Student Password")]
         [PasswordPropertyText]
         public string Password { get; set; }
-              
+
 
         /// <summary>
         /// The current emotion status of the student
         /// </summary>
+        [Display(Name = "Current Emotion", Description = "Current Emotion")]
         public EmotionStatusEnum EmotionCurrent { get; set; }
 
         /// <summary>

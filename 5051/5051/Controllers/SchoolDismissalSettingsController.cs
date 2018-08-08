@@ -94,6 +94,8 @@ namespace _5051.Controllers
                                         "SummerQuarterFirstClassDay," +
                                         "SummerQuarterLastClassDay," +
                                         "Goal," +
+                                        "EarlyWindow," +
+                                        "LateWindow," +
                                         "")] SchoolDismissalSettingsModel data)
         {
             if (!ModelState.IsValid)
@@ -116,7 +118,7 @@ namespace _5051.Controllers
 
             SchoolDismissalSettingsBackend.Update(data);
 
-            return RedirectToAction("Index", "Calendar");
+            return RedirectToAction("Read", "SchoolDismissalSettings");
         }
     }
 }

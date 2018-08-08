@@ -122,11 +122,11 @@ hr {
 }
 
 .FooterBar{
-    background-color:black;
+    background-color:white;
 }
 
 .FooterText {
-    color: #999999;
+    color: black;
 }
 
 .FooterLink {
@@ -134,7 +134,7 @@ hr {
     background-size: auto;
 }
     .FooterLink:hover {
-        color: #ffffff;
+        color: darkgrey;
         background-color: transparent;
     }
 
@@ -262,7 +262,7 @@ body, html {
 }
 
 /*Extra Large must be inside a Large Span, to work*/
-.FontSizeExtraLarge {
+.FontSizeLarger {
     font-size: 125%;
 }
 
@@ -405,6 +405,7 @@ input[type=submit].btn-block {
     position: relative;
     width: 1000px;
     height: 550px;
+    margin-left: 130px;
     /*margin-left: -180px;*/
     /*Move image to the Left so it fits better*/
 }
@@ -574,10 +575,16 @@ input[type=submit].btn-block {
     left: 150px; /* chartArea left */
 }
 
-.AvatarBox {
+.AvatarBoxNormal {
     position: relative;
     height: 90px;
     width: 90px;
+}
+
+.AvatarBoxLarge {
+    position: relative;
+    height: 200px;
+    width: 200px;
 }
 
 .AvatarItemBase {
@@ -628,4 +635,40 @@ input[type=submit].btn-block {
     z-index:0;
     width:85%;
     height:80%;
+}
+
+.ScoreBoardBox {
+    position: relative;
+    display: inline-block;
+    margin-left: -80px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px 10px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 9px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.ScoreBoardHeader {
+    font-weight: bold;
+}
+
+.FeedBox {
+    overflow: hidden;
+    overflow-y: auto;
+    margin-left: 990px;
 }
