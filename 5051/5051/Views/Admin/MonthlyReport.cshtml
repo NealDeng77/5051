@@ -324,6 +324,7 @@
 
                 var options = {
                     height: 600,
+                    curveType: 'function',
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
                     colors: ['#FF5733', '#FFC300', '#3498DB'],
@@ -334,8 +335,10 @@
                     },
                     hAxis: {
                         title: "Date", gridlines: {
+                            count: 31,
                             color: 'transparent'
-                        }
+                        },
+                        format: 'M/d'
                     }
                 };
 

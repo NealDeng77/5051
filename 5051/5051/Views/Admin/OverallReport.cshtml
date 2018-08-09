@@ -135,7 +135,7 @@
                 var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
                 var options = {
-                    title: "Attendance In This School Year",
+                    title: "Attendance In This School Year",                    
                     height: 350,
                     colorAxis: {
                         minValue: 0,
@@ -189,6 +189,7 @@
 
                 var options = {
                     height: 600,
+                    curveType: 'function',
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
                     colors: ['#FF5733', '#FFC300', '#3498DB'],
@@ -199,6 +200,7 @@
                     },
                     hAxis: {
                         title: "Date", gridlines: {
+                            count: 12,
                             color: 'transparent'
                         }
                     }
