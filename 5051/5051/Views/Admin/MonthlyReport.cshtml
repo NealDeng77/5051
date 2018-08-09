@@ -2,7 +2,7 @@
 @using _5051.Models.Enums
 @model _5051.Models.MonthlyReportViewModel
 @{
-    ViewBag.Title = "Monthly Report";
+    ViewBag.Title = "" + @Model.Student.Name + "'s Monthly Report";
 }
 <script>
     function printContent(el) {
@@ -298,27 +298,44 @@
             function drawChart() {
                 // Create the data table.
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Date');
-                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
+                data.addColumn('date', 'Date');
                 data.addColumn('number', 'Perfect: 100%');
                 data.addColumn('number', "Goal: @Model.Goal%");
-                var dates = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("dd")).ToArray())];
+                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
+                var dates = [
+                    @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
+                ];
                 var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalMinutes.ToString("0.##")).ToArray())];
                 var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalMinutes.ToString("0.##")).ToArray())];
-                for (i = 0; i < dates.length; i++) {
-                    data.addRow([dates[i].toString(), values[i], expected[i], expected[i] * @Model.Goal /100]);
+
+                var year;
+                var month;
+                var date;
+                var i = 0;
+                while (i < dates.length) {
+                    year = dates[i];
+                    i++;
+                    month = dates[i] - 1;
+                    i++;
+                    date = dates[i];
+                    i++;
+                    data.addRow([new Date(year, month, date), expected[i / 3 - 1], expected[i / 3 - 1] * @Model.Goal /100, values[i / 3 - 1]]);
                 }
 
                 var options = {
-                    height: 700,
+                    height: 600,
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
+                    colors: ['#FF5733', '#FFC300', '#3498DB'],
                     vAxis: {
                         title: "Cumulative Attended School Time (Minutes)", gridlines: {
                             color: 'transparent'
-                        }},
+                        }
+                    },
                     hAxis: {
-                        title: "Date"
+                        title: "Date", gridlines: {
+                            color: 'transparent'
+                        }
                     }
                 };
 

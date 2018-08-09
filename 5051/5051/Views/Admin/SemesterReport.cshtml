@@ -1,6 +1,6 @@
 ﻿@model _5051.Models.SemesterReportViewModel
 @{
-    ViewBag.Title = "Semester Report";
+    ViewBag.Title = "" + @Model.Student.Name + "'s Semesterly Report";
 }
 <script>
     function printContent(el) {
@@ -122,11 +122,11 @@
             function drawChart() {
                 // Create the data table.
                 var data = new google.visualization.DataTable();
+
                 data.addColumn('date', 'Date');
-                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
                 data.addColumn('number', 'Perfect: 100%');
                 data.addColumn('number', "Goal: @Model.Goal%");
-
+                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
                 var dates = [
                     @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
                 ];
@@ -144,13 +144,14 @@
                     i++;
                     date = dates[i];
                     i++;
-                    data.addRow([new Date(year, month, date), values[i / 3 - 1], expected[i / 3 - 1], expected[i / 3 - 1] * @Model.Goal /100]);
+                    data.addRow([new Date(year, month, date), expected[i / 3 - 1], expected[i / 3 - 1] * @Model.Goal /100, values[i / 3 - 1]]);
                 }
 
                 var options = {
                     height: 600,
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
+                    colors: ['#FF5733', '#FFC300', '#3498DB'],
                     vAxis: {
                         title: "Cumulative Attended School Time (Minutes)", gridlines: {
                             color: 'transparent'
