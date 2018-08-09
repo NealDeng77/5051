@@ -4,284 +4,299 @@
     ViewBag.Title = "Kiosk";
 }
 
-
-<div class="container">
-    <div class="text-center">
+<br />
+<div class="row justify-content-center">
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
         <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Click on your Avatar to Check In or Out of Class
+            </span>
+        </div>
         <br />
-        <br />
-        <h1>Click on your Avatar to Check In or Out of Class</h1>
     </div>
-    <br />
-    <br />
-    <br />
-    @{
-        if (Model.StudentList == null || !Model.StudentList.Any())
-        {
-            <br />
-            <p>No Students in the System</p>
-            <br />
-        }
-        else
-        {
-            <div class="row">
-                <div class="col-sm-4 text-center">
+    <div class="col-1"></div>
+</div>
 
-                    <h2>Logged In</h2>
-                    <br />
-                    <div class="row">
-                        @{
-                            // List out the Logged IN Students, then the Logged Out students
-                            // Logged IN first
-                            foreach (var item in Model.StudentList)
-                            {
-                                if (item.Status == _5051.Models.StudentStatusEnum.In)
-                                {
-                                    var srcData = "/Content/img/" + item.AvatarUri;
-                                    <div class="col-sm-4 AvatarBlock">
-                                        <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                            <a id="@item.Id">
-                                                <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')"/>
-                                            </a>
-                                            <br />
-                                            <span class="text-center">
-                                                @item.Name
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
+<div class="row">
+    <br />
+    <br />
+</div>
+
+@{
+    if (Model.StudentList == null || !Model.StudentList.Any())
+    {
+        <div class="row justify-content-center">
+
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center">
+                    No Students in the System
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-sm-1 "></div>
+
+            <div class="col lightTransparentBox">
+                <div class="FontSizeLarge text-center">
+                    Logged Out
                 </div>
 
+                <hr />
 
-                <div class="col-sm-4">
-                        <div class="col-sm-12 text-center ClockBox">                          
-                            <div id="FullTime" class="h1"></div>
-                        </div>
-                    <br />
-                    <div class="BlockKioskIndex">
-                        <div id="centerblock" style="display:none;">
-                            <div class="row">
-                                <div class="col"> </div>
-                                <div class="col text-center">
-                                    <br />
-                                    <br />
-                                    <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
-                                    <br />
-                                    <span id="CenterName" class="FontColor1"></span>
-                                    <br />
-                                    <br />
-                                    <div class="row text-center">
-                                        @{
-                                                // list emotion icons
-                                                foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
-                                                {
-                                                    var srcData = "/Content/img/Emotion" + emotion + ".png";
-                                                    var emotionId = emotion + "Id";
-
-                                                <div id="@emotionId" class="BoxWithHighlightHover">
-                                                    <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
-                                                </div>
-
-                                            }
-                                        }
+                <div class="row">
+                    @{
+                        // Logged Out first
+                        foreach (var item in Model.StudentList)
+                        {
+                            if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                            {
+                                var srcData = "/Content/img/" + item.AvatarUri;
+                                <div class="col-sm-4 AvatarBlock">
+                                    <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                        <a id="@item.Id">
+                                            <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')" />
+                                        </a>
                                         <br />
-                                        <br />
-                                        <br />
-                                        @{
-                                            // Hide or Show the Div based on Login or Logout
-                                            // Login Div goes here
-                                            <div id="LoginBox" style="display:none;">
-                                                @using (Html.BeginForm(
-                                                "KioskLogin", "Kiosk",
-                                                FormMethod.Post,
-                                                new { enctype = "multipart/form-data" }))
-                                                {
-                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
-                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
-
-                                                    <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
-                                                }
-                                            </div>
-
-                                            // Logout Div goes here
-                                            <div id="LogoutBox" style="display:none;">
-                                                @using (Html.BeginForm(
-                                                "KioskLogout", "Kiosk",
-                                                FormMethod.Post,
-                                                new { enctype = "multipart/form-data" }))
-                                                {
-                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
-
-                                                    <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
-                                                }
-                                            </div>
-                                        }
-
-                                    </div>                                                                   
+                                        <span class="text-center">
+                                            @item.Name
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="col"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        @{ 
-                            // Put the center login box here
-                            // Have the box be just a blank box
-                            // Then when someone clicks a log in button
-                            // Update the picture in the box to be the avatar
-                            // And show a div that has a LogIn button
-
-                            // If it is for logout, then show a div for a logout button
-                            // Do that but having the javascript show or hide the div
-
-                            // Change the avatars in the IN and out sections above and blow this, to not be a link with href = href="~/Kiosk/SetLogOut/@item.Id">
-                            // but instead to call a javascript function (put at the bottom of this file), that then shows the avatar
+                            }
                         }
-                    </div>
+                    }
+                </div>
+            </div>
 
-                    <div class="col-sm-4 text-center">
+            <div class="col-sm-1 "></div>
 
-                        <h2>Logged Out</h2>
-                        <br />
-                        <div class="row">
-                            @{
-                                // Logged Out first
-                                foreach (var item in Model.StudentList)
-                                {
-                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
+            <div class="col lightTransparentBox BlockKioskIndex">
+                <div class="FontSizeLarge text-center">
+                    <div id="FullTime"></div>
+                </div>
+
+                <hr />
+
+                <div id="centerblock" style="display:none;">
+                    <div class="row">
+                        <div class="col"> </div>
+                        <div class="col text-center">
+                            <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
+                            <br />
+                            <span id="CenterName" class="FontColor1"></span>
+                            <br />
+                            <br />
+                            <div class="row text-center">
+                                @{
+                                    // list emotion icons
+                                    foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
                                     {
-                                        var srcData = "/Content/img/" + item.AvatarUri;
-                                        <div class="col-sm-4 AvatarBlock">
-                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">                                                
-                                                <a id="@item.Id">
-                                                    <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')"/>
-                                                </a>
-                                                <br />
-                                                <span class="text-center">
-                                                    @item.Name
-                                                </span>
-                                            </div>
+                                        var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                        var emotionId = emotion + "Id";
+
+                                        <div id="@emotionId" class="BoxWithHighlightHover">
+                                            <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
                                         </div>
+
                                     }
                                 }
-                            }
+                                <br />
+                                <br />
+                                <br />
+                                @{
+                                    // Hide or Show the Div based on Login or Logout
+                                    // Login Div goes here
+                                    <div id="LoginBox" style="display:none;">
+                                        @using (Html.BeginForm(
+                                        "KioskLogin", "Kiosk",
+                                        FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+                                        {
+                                            @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
+                                            @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
+
+                                            <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
+                                        }
+                                    </div>
+
+                                    // Logout Div goes here
+                                    <div id="LogoutBox" style="display:none;">
+                                        @using (Html.BeginForm(
+                                        "KioskLogout", "Kiosk",
+                                        FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+                                        {
+                                            @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
+
+                                            <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <br />
                         </div>
+                        <div class="col"> </div>
                     </div>
                 </div>
-                }
-                }
-
             </div>
+
+            <div class="col-sm-1 "></div>
+
+            <div class="col lightTransparentBox">
+                <div class="FontSizeLarge text-center">
+                    Logged In
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    @{
+                        // List out the Logged IN Students, then the Logged Out students
+                        // Logged IN first
+                        foreach (var item in Model.StudentList)
+                        {
+                            if (item.Status == _5051.Models.StudentStatusEnum.In)
+                            {
+                                var srcData = "/Content/img/" + item.AvatarUri;
+                                <div class="col-sm-4 AvatarBlock">
+                                    <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                        <a id="@item.Id">
+                                            <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')" />
+                                        </a>
+                                        <br />
+                                        <span class="text-center">
+                                            @item.Name
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-sm-1 "></div>
+        </div>
+    }
+}
+
 <script>
-        //var canvas = document.getElementById("canvas");
-        //var ctx = canvas.getContext("2d");
-        //var radius = canvas.height / 2;
-        //ctx.translate(radius, radius);
-        //radius = radius * 0.90
-        setInterval(drawClock, 1000);
+    //var canvas = document.getElementById("canvas");
+    //var ctx = canvas.getContext("2d");
+    //var radius = canvas.height / 2;
+    //ctx.translate(radius, radius);
+    //radius = radius * 0.90
+    setInterval(drawClock, 1000);
 
-        function drawClock() {
-            //drawFace(ctx, radius);
-            //drawNumbers(ctx, radius);
-            //drawTime(ctx, radius);
-            drawDigital();
-            //Output Text Time
+    function drawClock() {
+        //drawFace(ctx, radius);
+        //drawNumbers(ctx, radius);
+        //drawTime(ctx, radius);
+        drawDigital();
+        //Output Text Time
+    }
+
+    function drawFace(ctx, radius) {
+        var grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+        grad.addColorStop(0, '#333');
+        grad.addColorStop(0.5, 'white');
+        grad.addColorStop(1, '#333');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = radius * 0.1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+        ctx.fillStyle = '#333';
+        ctx.fill();
+    }
+
+    function drawNumbers(ctx, radius) {
+        var ang;
+        var num;
+        ctx.font = radius * 0.15 + "px arial";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        for (num = 1; num < 13; num++) {
+            ang = num * Math.PI / 6;
+            ctx.rotate(ang);
+            ctx.translate(0, -radius * 0.85);
+            ctx.rotate(-ang);
+            ctx.fillText(num.toString(), 0, 0);
+            ctx.rotate(ang);
+            ctx.translate(0, radius * 0.85);
+            ctx.rotate(-ang);
         }
+    }
 
-        function drawFace(ctx, radius) {
-            var grad;
-            ctx.beginPath();
-            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
-            grad.addColorStop(0, '#333');
-            grad.addColorStop(0.5, 'white');
-            grad.addColorStop(1, '#333');
-            ctx.strokeStyle = grad;
-            ctx.lineWidth = radius * 0.1;
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
-            ctx.fillStyle = '#333';
-            ctx.fill();
-        }
+    function drawTime(ctx, radius) {
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        //hour
+        hour = hour % 12;
+        hour = (hour * Math.PI / 6) +
+            (minute * Math.PI / (6 * 60)) +
+            (second * Math.PI / (360 * 60));
+        drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+        //minute
+        minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+        drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+        // second
+        second = (second * Math.PI / 30);
+        drawHand(ctx, second, radius * 0.9, radius * 0.02);
+    }
 
-        function drawNumbers(ctx, radius) {
-            var ang;
-            var num;
-            ctx.font = radius * 0.15 + "px arial";
-            ctx.textBaseline = "middle";
-            ctx.textAlign = "center";
-            for (num = 1; num < 13; num++) {
-                ang = num * Math.PI / 6;
-                ctx.rotate(ang);
-                ctx.translate(0, -radius * 0.85);
-                ctx.rotate(-ang);
-                ctx.fillText(num.toString(), 0, 0);
-                ctx.rotate(ang);
-                ctx.translate(0, radius * 0.85);
-                ctx.rotate(-ang);
-            }
-        }
+    function drawDigital() {
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
 
-        function drawTime(ctx, radius) {
-            var now = new Date();
-            var hour = now.getHours();
-            var minute = now.getMinutes();
-            var second = now.getSeconds();
-            //hour
-            hour = hour % 12;
-            hour = (hour * Math.PI / 6) +
-                (minute * Math.PI / (6 * 60)) +
-                (second * Math.PI / (360 * 60));
-            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
-            //minute
-            minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
-            drawHand(ctx, minute, radius * 0.8, radius * 0.07);
-            // second
-            second = (second * Math.PI / 30);
-            drawHand(ctx, second, radius * 0.9, radius * 0.02);
-        }
+        var d = new Date();
 
-        function drawDigital() {
-            var now = new Date();
-            var hour = now.getHours();
-            var minute = now.getMinutes();
-            var second = now.getSeconds();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
 
-            var d = new Date();
+        var fullDate =
+            (('' + month).length < 2 ? '0' : '') + month + ' / ' +
+            (('' + day).length < 2 ? '0' : '') + day;
 
-            var month = d.getMonth() + 1;
-            var day = d.getDate();
-
-            var fullDate =
-                (('' + month).length < 2 ? '0' : '') + month + ' / ' +
-                (('' + day).length < 2 ? '0' : '') + day;
-
-            var fullTime =
-                (('' + hour).length < 2 ? '0' : '') + hour + ' : ' +
-                (('' + minute).length < 2 ? '0' : '') + minute + ' : ' +
-                (('' + second).length < 2 ? '0' : '') + second;
+        var fullTime =
+            (('' + hour).length < 2 ? '0' : '') + hour + ' : ' +
+            (('' + minute).length < 2 ? '0' : '') + minute + ' : ' +
+            (('' + second).length < 2 ? '0' : '') + second;
 
 
-            $("#FullDate").text(fullDate);
-            $("#FullTime").text(fullTime);
-        }
+        $("#FullDate").text(fullDate);
+        $("#FullTime").text(fullTime);
+    }
 
 
-        function drawHand(ctx, pos, length, width) {
-            ctx.beginPath();
-            ctx.lineWidth = width;
-            ctx.lineCap = "round";
-            ctx.moveTo(0, 0);
-            ctx.rotate(pos);
-            ctx.lineTo(0, -length);
-            ctx.stroke();
-            ctx.rotate(-pos);
-        }
+    function drawHand(ctx, pos, length, width) {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.moveTo(0, 0);
+        ctx.rotate(pos);
+        ctx.lineTo(0, -length);
+        ctx.stroke();
+        ctx.rotate(-pos);
+    }
 </script>
 <script>
     function UpdateCenter(path, Id, name, request) {
@@ -297,7 +312,7 @@
         var loginBoxStatus = document.getElementById("LoginBox");
         var logoutBoxStatus = document.getElementById("LogoutBox");
         if (request == "Log In") {
-            logoutBoxStatus.style.display = "none"; 
+            logoutBoxStatus.style.display = "none";
             loginBoxStatus.style.display = "block";
             //$("#CenterStatus").attr("href", "/kiosk/SetLogIn/" + Id);
             //$("#CenterStatus").html(request);
@@ -317,8 +332,8 @@
         document.getElementById("HappyId").style.opacity = 1.0;
         document.getElementById("NeutralId").style.opacity = 1.0;
         document.getElementById("SadId").style.opacity = 1.0;
-        document.getElementById("VerySadId").style.opacity = 1.0;     
-        
+        document.getElementById("VerySadId").style.opacity = 1.0;
+
         document.getElementById(UserEmotionId + "Id").style.opacity = 0.3;
 
         $("#EmotionCurrentId").attr("Value", UserEmotionId);

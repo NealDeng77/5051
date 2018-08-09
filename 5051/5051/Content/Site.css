@@ -357,17 +357,15 @@ div.BlockStudentLogin {
 */
 
 div.BlockKioskIndex {
-    border-radius: 25px;
-    background-color: #202021 !important;
     height: 400px;
-    width: 350px;
-    opacity: 0.85;
     margin: 0 auto;
 }
 
+/*
 .ClockBox {
     min-height: 50px;
 }
+*/
 
 .CenterAvatarStyle {
     border: solid;
@@ -376,7 +374,7 @@ div.BlockKioskIndex {
 }
 
 .AvatarBlock {
-    padding: 30px;
+    padding-bottom: 30px;
 
 }
 
