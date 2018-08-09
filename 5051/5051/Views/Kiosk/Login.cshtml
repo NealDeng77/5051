@@ -31,43 +31,35 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.Id)
 
-                
-
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.Password)
+            <div class="row justify-content-center">
+                <div class="col-sm">
+                    <div class="FontSizeLarge">
+                        <div id="passwordText">
+                            @Html.DisplayNameFor(m => m.Password)
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-
-                        @Html.PasswordFor(m => m.Password)
-                        @Html.ValidationMessageFor(m => m.Password)
-
-                        @{
-                            //todo Remove the hint, just here during early development
-                            <span>Hint: 123</span>
-                        }
-
+                    <div class="">
+                        <div id="passwordValue">
+                            @Html.PasswordFor(m => m.Password)
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
                     </div>
                 </div>
-
-
+            </div>
 
                 <br />
                 <br />
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                    </div>
-                    <div class="col-sm-6 text-left">
-
+                <div class="row justify-content-center">
+                    <div class="col-3">
                         @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
+                    </div>
+                    <div class="col-3">
                         <input type="submit" value="Login" class="btn btn-primary">
-
                     </div>
                 </div>
-            }
-            <br />
-        </div>
+                }
+                <br />
+            </div>
     </div>
     <div class="col-1"></div>
 </div>
