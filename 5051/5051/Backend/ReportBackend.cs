@@ -358,10 +358,10 @@ namespace _5051.Backend
                 else
                 {
                     temp.HoursExpected = myToday.TimeDuration;
-                    // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
-                    // Todo: need to confirm: durations are accumulated, other stats are overwriten, i.e. only the last check in/out is effective
-                    var myRange = report.Student.Attendance.Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date).ToList();
 
+                    // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
+                    var myRange = report.Student.Attendance.Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date).OrderByDescending(m => m.In).ToList();
+                    
                     //if no attendance record on this day, set attendance status to absent
                     if (!myRange.Any())
                     {
@@ -370,49 +370,27 @@ namespace _5051.Backend
                     }
                     else
                     {
+                        temp.AttendanceStatus = AttendanceStatusEnum.Present;
+
+                        //set TimeIn to be the first check-in time in the list, so that if there are multiple check-ins,
+                        //the TimeIn is set to the first check-in time. Same for emotion.
+                        temp.TimeIn = UTCConversionsBackend.UtcToKioskTime(myRange.First().In);
+                        temp.Emotion = myRange.First().Emotion;
+
                         //loop through all attendance records in my range
                         foreach (var item in myRange)
                         {
-                            //calculations for each attendance record
+                            //update the TimeOut time to the current check-out time
+                            temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
 
                             //calculate effective duration
                             var tempDuration = CalculateDurationAndInOutStatus(item, myToday, temp);
-
-                            //if (item.Status == StudentStatusEnum.In)
-                            //{
-                            //    // Todo, refactor this rule based check out to a general location, and then call it when needed to force a checkout.
-                            //    var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(item.In);
-
-                            //    // If the person is still checked in, and the day is over, then check them out.
-                            //    if (item.In.DayOfYear <= DateTime.UtcNow.DayOfYear && myItemDefault.TimeEnd.Ticks < DateTime.UtcNow.Ticks)
-                            //    {
-
-                            //        var myDate = item.In.ToShortDateString() + " " + myItemDefault.TimeEnd.ToString();
-                            //        //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-                            //        item.Out = DateTime.Parse(myDate);
-                            //        item.Status = StudentStatusEnum.Out;
-
-                            //        // Log the student out as well.
-                            //        report.Student.Status = StudentStatusEnum.Out;
-
-                            //        // Update the change for that item be rewriting the student record back to the datastore
-                            //        DataSourceBackend.Instance.StudentBackend.Update(report.Student);
-                            //    }
-                            //    else
-                            //    {
-                            //        // If the person is still checked in, and it is today, use now and add up till then.
-                            //        tempDuration = DateTime.UtcNow.Subtract(item.In);
-                            //    }
-                            //}
-
-                            temp.AttendanceStatus = AttendanceStatusEnum.Present;
-                            temp.TimeIn = UTCConversionsBackend.UtcToKioskTime(item.In);
-                            temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
-                            temp.HoursAttended += tempDuration;
-                            temp.Emotion = item.Emotion;
-                            
+                                                                                
+                            temp.HoursAttended += tempDuration;                                                      
                         }
+
                         CalculateDaysInOutStats(temp, report.Stats);
+
                         //calculations for present records
                         temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);
 
@@ -446,6 +424,7 @@ namespace _5051.Backend
                 }
             }
 
+            //set the attendance goal percent according to school dismissal settings
             report.Goal = SchoolDismissalSettingsBackend.Instance.GetDefault().Goal;
         }
 
