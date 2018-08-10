@@ -73,11 +73,10 @@
 
 .PeopleBox {
     position: absolute;
-    top: 310px;
-    left: 0px;
+    top: 55%;
+    left: 0%;
     z-index: 100;
 }
-
 
 
 .overlay-text {
