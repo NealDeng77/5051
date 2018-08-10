@@ -4,51 +4,52 @@
 }
 <div class="row"><br /></div>
 
-<div class="row justify-content-center">
-    <div class="TruckBoxLarge" id="ImageBox">
+<div class="row no-gutters justify-content-center">
+    <div class="col TruckBoxLarge" id="ImageBox">
         @{
             // StudentId needs to be in the Dom
             <div>
                 @Html.Hidden("StudentId", Model.Id)
             </div>
 
-            <div class="ScoreBoardBox">
-                <div class="StudentNavBar">
-                    <div class="row">
-                        <div class="col">
-                            Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
-                        </div>
-                        <div class="col">
-                            <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
-                        </div>
-                        <div class="col">
-                            <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-                        </div>
-                        <div class="col">
-                            <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
-                        </div>
-                        <div class="col">
-                            <span id="StoreStatus"></span>
-                        </div>
-                        @*<div class="col">
-                                <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-                            </div>*@
+            <div class="StudentNavBar FontBold FontSizeSmall">
+                <div class="row justify-content-around">
+                    <div class="col-1"></div>
+                    <div class="col-1">
+                        Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
                     </div>
+                    <div class="col-1">
+                        <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
+                    </div>
+                    <div class="col-2">
+                        <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
+                    </div>
+                    <div class="col-2">
+                        <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
+                    </div>
+                    <div class="col-3">
+                        <span id="StoreStatus"></span>
+                    </div>
+                    @*
+                        <div class="col">
+                            <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
+                        </div>
+                    *@
+                    <div class="col-1"></div>
                 </div>
             </div>
 
-            <div class="FeedBox">
+            <div class="FeedBox FontSizeMedium">
                 <div class="dropdown-content">
-                    <div class="ScoreBoardHeader">
-                        <a href="#">
-                            <span>Game Data:&nbsp;</span>
-                        </a>
-                    </div>
+                    <a href="#">
+                        <span>Game Data:&nbsp;</span>
+                    </a>
                     <a href="#">
                         <span id="TransactionList"></span>
                     </a>
                 </div>
             </div>
+
             <div class="GameButtonsBox">
                 <div class="row">
                     @*&nbsp;&nbsp;*@
