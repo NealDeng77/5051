@@ -377,35 +377,77 @@ namespace _5051.Backend
                         temp.TimeIn = UTCConversionsBackend.UtcToKioskTime(myRange.First().In);
                         temp.Emotion = myRange.First().Emotion;
 
+                        //determine whether is on time or late
+                        if (temp.TimeIn.TimeOfDay > myToday.TimeStart)
+                        {
+                            temp.CheckInStatus = CheckInStatusEnum.ArriveLate;
+                        }
+                        else
+                        {
+                            temp.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
+                        }
+
                         //loop through all attendance records in my range
                         foreach (var item in myRange)
                         {
                             //update the TimeOut time to the current check-out time
-                            temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
-
+                            if (item.Out == DateTime.MinValue)
+                            {
+                                //if out is auto, set time out to today's dismissal time
+                                temp.TimeOut = currentDate.Add(myToday.TimeEnd);
+                                temp.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
+                            }
+                            else
+                            {
+                                temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
+                            }
+                            
                             //calculate effective duration
-                            var tempDuration = CalculateDurationAndInOutStatus(item, myToday, temp);
-                                                                                
-                            temp.HoursAttended += tempDuration;                                                      
+                            var tempDuration = CalculateEffectiveDuration(item, myToday, temp);
+                            
+                            //add the current effective duration to today's hours attended
+                            temp.HoursAttended += tempDuration;
+
+                            //determine whether left early or not
+                            if (temp.TimeOut.TimeOfDay < myToday.TimeEnd)
+                            {
+                                temp.CheckOutStatus = CheckOutStatusEnum.DoneEarly;
+                            }
                         }
 
-                        CalculateDaysInOutStats(temp, report.Stats);
+                        report.Stats.DaysPresent++;  //increase number of days present
 
-                        //calculations for present records
-                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);
+                        temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);  //calculate percentage of attended time
 
+                        if (temp.CheckInStatus == CheckInStatusEnum.ArriveLate)
+                        {
+                            report.Stats.DaysLate++; 
+                        }
+
+                        report.Stats.DaysOnTime = report.Stats.DaysPresent - report.Stats.DaysLate;
+
+                        if (temp.CheckOutStatus == CheckOutStatusEnum.DoneEarly)
+                        {
+                            report.Stats.DaysOutEarly++;
+                        }
+
+                        report.Stats.DaysOutAuto = report.Stats.DaysPresent - report.Stats.DaysOutEarly;   
+                        
                     }
+
                     //calculations for both absent and present records                    
                     report.Stats.NumOfSchoolDays++;
-
                     report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
                     report.Stats.AccumlatedTotalHours += temp.HoursAttended;
+
                     // Need to add the totals back to the temp, because the temp is new each iteration
                     temp.TotalHoursExpected += report.Stats.AccumlatedTotalHoursExpected;
                     temp.TotalHours = report.Stats.AccumlatedTotalHours;
                 }
 
+                //add this attendance report to the attendance list
                 report.AttendanceList.Add(temp);
+
                 currentDate = currentDate.AddDays(1);
             }
 
@@ -434,66 +476,36 @@ namespace _5051.Backend
         /// <param name="attendance"></param>
         /// <param name="schoolDay"></param>
         /// <returns></returns>
-        private TimeSpan CalculateDurationAndInOutStatus(AttendanceModel attendance, SchoolCalendarModel schoolDay, AttendanceReportViewModel attendanceReport)
+        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance, SchoolCalendarModel schoolDay, AttendanceReportViewModel attendanceReport)
         {
 
-            var start = schoolDay.TimeStart;
-            var end = schoolDay.TimeEnd;
+            //the time from which duration starts to count
+            var start = schoolDay.TimeStart.Add(-SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow);
+            //the time that duration counts until
+            var end = schoolDay.TimeEnd.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow);
 
-            //trim the effective start time to actual arrive time only if the student is late
-            if (UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay.CompareTo(schoolDay.TimeStart) > 0)
+            var myIn = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay; //check-in time
+
+            //trim the start time to actual arrive time only if the student is late
+            if (myIn.CompareTo(start) > 0)
             {
-                start = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay;
-                attendanceReport.CheckInStatus = CheckInStatusEnum.ArriveLate;
+                start = myIn;
             }
-            else
-            {
-                attendanceReport.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
-            }
-            //trim the effective end time to actual out time only if the student leave early
-            if (UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay.CompareTo(schoolDay.TimeEnd) < 0)
+            //trim the end time to actual out time only if the student leave early
+            if (attendanceReport.TimeOut.TimeOfDay.CompareTo(end) < 0)
             {
                 end = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay;
-                attendanceReport.CheckOutStatus = CheckOutStatusEnum.DoneEarly;
             }
-            else
-            {
-                attendanceReport.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
-            }
+
             var duration = end.Subtract(start);
 
             //If time-in is later than time out, just return 0
-            //Todo: prevent it from happening in kiosk
             if (duration < TimeSpan.Zero)
             {
                 return TimeSpan.Zero;
             }
 
             return duration;
-        }
-
-        /// <summary>
-        /// Calculate the stats about days in/out
-        /// </summary>
-        /// <param name="temp"></param>
-        /// <param name="stats"></param>
-        private void CalculateDaysInOutStats(AttendanceReportViewModel temp, StudentReportStatsModel stats)
-        {
-            stats.DaysPresent++;
-
-            if (temp.CheckInStatus == CheckInStatusEnum.ArriveOnTime)
-            {
-                stats.DaysOnTime++;
-            }
-
-            stats.DaysLate = stats.DaysPresent - stats.DaysOnTime;
-
-            if (temp.CheckOutStatus == CheckOutStatusEnum.DoneAuto)
-            {
-                stats.DaysOutAuto++;
-            }
-
-            stats.DaysOutEarly = stats.DaysPresent - stats.DaysOutAuto;
         }
     }
 }
