@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Kiosk";
     var TempTime = DateTime.Now.ToString("HH : mm : ss");
+    var TempDate = DateTime.Now.ToString("MM / dd");
 }
 
 <br />
@@ -109,6 +110,9 @@
                     </div>
 
                     <div class="col-2-auto no-gutters lightTransparentBox KioskBoxCenter KioskBoxMargin">
+                        <div class="row no-gutters justify-content-around">
+                            <div class="col FontSizeMedium text-center" id="FullDate">@TempDate</div>
+                        </div>
                         <div class="row no-gutters justify-content-around">
                             <div class="col FontSizeMedium text-center" id="FullTime">@TempTime</div>
                         </div>
