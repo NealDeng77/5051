@@ -143,7 +143,7 @@ namespace _5051.Models
             WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
             SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
             SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
-            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            SummerQuarterLastClassDay = data.SummerQuarterFirstClassDay;
             SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
 
             Goal = data.Goal;
