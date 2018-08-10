@@ -52,9 +52,10 @@ namespace _5051.Backend
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
 
-            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
-            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
-            //todo: convert this to kiosk timezone here
+            //to generate week selection drop down, make a list item for every week between first and last day of school
+            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
+            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
+            
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
 
             //The first valid week(Monday's date) for the dropdown
@@ -125,9 +126,10 @@ namespace _5051.Backend
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
 
-            //
-            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
-            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+            //to generate month selection drop down, make a list item for every month between first and last day of school
+            var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
+            var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
+
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
 
             //The first valid month for the dropdown
@@ -193,9 +195,9 @@ namespace _5051.Backend
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
 
+            //initialize the drop down list
             report.Semesters = new List<SelectListItem>();
 
-            //todo: remove hardcoding
             var spring = new SelectListItem { Value = "1", Text = "Spring semester 2018" };
 
             //add to the select list
@@ -203,6 +205,7 @@ namespace _5051.Backend
 
             if (report.SelectedSemesterId == 1)
             {
+                //set the first and last day of spring semester according to school dismissal settings
                 report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringFirstClassDay;
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringLastClassDay;
             }
@@ -214,6 +217,7 @@ namespace _5051.Backend
 
             if (report.SelectedSemesterId == 2)
             {
+                //set the first and last day of fall semester according to school dismissal settings
                 report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
             }
@@ -241,7 +245,6 @@ namespace _5051.Backend
 
             report.Quarters = new List<SelectListItem>();
 
-            //todo: remove hardcoding
             var summer = new SelectListItem { Value = "1", Text = "Summer quarter 2018" };
 
             //add to the select list
@@ -249,8 +252,9 @@ namespace _5051.Backend
 
             if (report.SelectedQuarterId == 1)
             {
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterLastClassDay;
+                //set the first and last day of this quarter according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterLastClassDay.Date;
             }
 
             var spring = new SelectListItem { Value = "2", Text = "Spring quarter 2018" };
@@ -260,8 +264,9 @@ namespace _5051.Backend
 
             if (report.SelectedQuarterId == 2)
             {
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterLastClassDay;
+                //set the first and last day of this quarter according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterLastClassDay.Date;
             }
 
             var winter = new SelectListItem { Value = "3", Text = "Winter quarter 2018" };
@@ -271,8 +276,9 @@ namespace _5051.Backend
 
             if (report.SelectedQuarterId == 3)
             {
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterLastClassDay;
+                //set the first and last day of this quarter according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterLastClassDay.Date;
             }
 
             var fall = new SelectListItem { Value = "4", Text = "Fall quarter 2017" };
@@ -282,8 +288,9 @@ namespace _5051.Backend
 
             if (report.SelectedQuarterId == 4)
             {
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterLastClassDay;
+                //set the first and last day of this quarter according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterLastClassDay.Date;
             }
 
             //Generate report for this semester
@@ -303,9 +310,9 @@ namespace _5051.Backend
             //set student
             report.Student = StudentBackend.Instance.Read(report.StudentId);
 
-            //set start date and end date
-            report.DateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
-            report.DateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
+            //set start date and end date according to school dismissal settings
+            report.DateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
+            report.DateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
 
 
             GenerateReportFromStartToEnd(report);
@@ -321,15 +328,16 @@ namespace _5051.Backend
         /// <returns></returns>
         private void GenerateReportFromStartToEnd(BaseReportViewModel report)
         {
+            var myDateNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date in kiosk time zone
             // Don't go beyond today
-            if (report.DateEnd.CompareTo(UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date) > 0)
+            if (report.DateEnd.CompareTo(myDateNow) > 0)
             {
-                report.DateEnd = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+                report.DateEnd = myDateNow;
             }
 
-            var currentDate = report.DateStart;
+            var currentDate = report.DateStart;  //loop variable
 
-            while (currentDate.CompareTo(report.DateEnd) <= 0)
+            while (currentDate.CompareTo(report.DateEnd) <= 0)  //loop until last date, include last date
             {
                 //create a new AttendanceReportViewmodel for each day
                 var temp = new AttendanceReportViewModel
