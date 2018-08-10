@@ -153,10 +153,9 @@
                                 </div>
 
                                 <br />
+                                <br />
 
                                 <div class="row no-gutters justify-content-around">
-                                    <div class="col-1"></div>
-
                                     <div class="col">
                                         <div class="row no-gutters justify-content-around">
                                             @{
@@ -172,7 +171,7 @@
                                                     @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
                                                     @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
 
-                                                    <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
+                                                    <input disabled id="StudentLoginButton" type="submit" name="submit" value="Log In" class="btn btn1 btn-light KioskLogButton" />
                                                 }
                                             </div>
 
@@ -182,15 +181,15 @@
                                                 FormMethod.Post,
                                                 new { enctype = "multipart/form-data" }))
                                                 {
+                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
                                                     @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
-                                                    <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
+                                                    <input id="StudentLogOutButton" type="submit" name="submit" value="Log Out" class="btn btn1 btn-light KioskLogButton" />
                                                 }
                                             </div>
                                         </div>
+                                        <br />
+                                        <br />
                                     </div>
-
-                                    <div class="col-1"></div>
-
                                 </div>
                             </div>
                         </div>

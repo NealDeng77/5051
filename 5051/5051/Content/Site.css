@@ -34,7 +34,7 @@ hr {
     border-width: 1px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-} 
+}
 
 /* Set items in a div */
 .div-center {
@@ -47,7 +47,7 @@ hr {
 }
 
 .darkTransparentBox {
-    background-color: rgba(0, 0, 0, 0.3);  
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
 }
 
@@ -56,24 +56,24 @@ hr {
     border-radius: 20px;
 }
 
-.PortalBox{
-    width:200px;
-    height:200px;
-}
-    .PortalBox:hover {
- 
-    opacity: 0.3;
-    filter: alpha(opacity=30);
+.PortalBox {
+    width: 200px;
+    height: 200px;
 }
 
-.PortalImage{
-    width:150px;
-    height:150px;
+    .PortalBox:hover {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+    }
+
+.PortalImage {
+    width: 150px;
+    height: 150px;
 }
 
 .BoxWithHighlightHover {
     /* Added tag to clear CSS.Lint error for empty css object */
-    background-size:auto;
+    background-size: auto;
 }
 
     .BoxWithHighlightHover:hover {
@@ -96,8 +96,8 @@ hr {
     height: 112px;
 }
 
-.FooterBar{
-    background-color:white;
+.FooterBar {
+    background-color: white;
 }
 
 .FooterText {
@@ -108,6 +108,7 @@ hr {
     /* Added tag to clear CSS.Lint error for empty css object */
     background-size: auto;
 }
+
     .FooterLink:hover {
         color: darkgrey;
         background-color: transparent;
@@ -128,7 +129,7 @@ hr {
     display: inline-block;
 }
 
-.table-fit{
+.table-fit {
     white-space: nowrap;
     width: 2%;
 }
@@ -159,8 +160,8 @@ hr {
 }
 
 .CalendarBox {
-    height:450px; 
-    min-width:380px
+    height: 450px;
+    min-width: 380px
 }
 
 
@@ -330,9 +331,9 @@ div.BlockStudentLogin {
 /*
     /Kiosk/Index page
 */
-.KioskBoxCenter{
-    margin-top:5px;
-    margin-bottom:5px;
+.KioskBoxCenter {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .KioskBoxMargin {
@@ -346,8 +347,8 @@ div.BlockStudentLogin {
     padding: 0px;
 }
 
-input[type=submit].btn-block {
-    width: 200px;
+.KioskLogButton {
+    min-width: 50%;
 }
 
 .chartWithMarkerOverlay {

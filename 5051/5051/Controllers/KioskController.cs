@@ -124,6 +124,7 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult KioskLogout([Bind(Include=
                                         "Id,"+
+                                        "EmotionCurrent,"+
                                         "")] StudentModel data)
         {
 
@@ -140,7 +141,7 @@ namespace _5051.Controllers
             }
 
             // perform student log out and update data
-            StudentBackend.ToggleStatusById(data.Id);
+            StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id = data.Id });
         }
 
