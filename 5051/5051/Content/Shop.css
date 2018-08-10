@@ -34,9 +34,6 @@
     position: relative;
     width: 1000px;
     height: 550px;
-    margin-left: 100px;
-    /*margin-left: -180px;*/
-    /*Move image to the Left so it fits better*/
 }
 
 .ScoreBoardBox {
@@ -44,69 +41,6 @@
     top:0px;
     left:10px;
     z-index: 50;
-}
-
-.BackgroundBox {
-    position: absolute;
-    top: 0px;
-    left: -100px;
-    z-index: 1;
-}
-
-.TopperBox {
-    position: absolute;
-    top: 0px;
-    left: 413px;
-    z-index: 20;
-}
-
-.TruckBox {
-    position: absolute;
-    top: 150px;
-    left: 138px;
-    z-index: 10;
-}
-
-.TruckClosedSignBox {
-    position: absolute;
-    top: 277px;
-    left: 252px;
-    z-index: 15;
-}
-
-.TruckInsideBox {
-    position: absolute;
-    top: 215px;
-    left: 355px;
-    z-index: 5;
-}
-
-.MenuBox {
-    position: absolute;
-    top: 217px;
-    left: 655px;
-    z-index: 15;
-}
-
-.SignBox {
-    position: absolute;
-    top: 396px;
-    left:0px;
-    z-index: 15;
-}
-
-.WheelsBox {
-    position: absolute;
-    top: 427px;
-    left: 170px;
-    z-index: 15;
-}
-
-.TrailerBox {
-    position: absolute;
-    top: 326px;
-    left: 846px;
-    z-index: 15;
 }
 
 .WorkerBoxLeft {
@@ -136,61 +70,6 @@
     top: 310px;
     left: -50px;
     z-index: 100;
-}
-
-.BackgroundItem {
-    width: 1300px;
-    height: 536px;
-}
-
-.TopperItem {
-    width: 235px;
-    height: 146px;
-}
-
-.TruckItem {
-    width: 709px;
-    height: 326px;
-}
-
-.MenuItem {
-    width: 120px;
-    height: 194px;
-}
-
-.TruckInsideItem {
-    width: 285px;
-    height: 140px;
-}
-
-.SignItem {
-    width: 141px;
-    height: 133px;
-}
-
-.TruckClosedSignItem {
-    width: 93px;
-    height: 86px;
-}
-
-.WheelsItem {
-    width: 961px;
-    height: 103px;
-}
-
-.TrailerItem {
-    width: 316px;
-    height: 154px;
-}
-
-.PeopleItem {
-    width: 62px;
-    height: 222px;
-}
-
-.WorkerItem {
-    width: 62px;
-    height: 180px;
 }
 
 .overlay-text {
