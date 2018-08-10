@@ -330,10 +330,14 @@ div.BlockStudentLogin {
 /*
     /Kiosk/Index page
 */
+.KioskBoxCenter{
+    margin-top:5px;
+    margin-bottom:5px;
+}
 
-div.BlockKioskIndex {
-    height: 400px;
-    margin: 0 auto;
+.KioskBoxMargin {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .EmotionSize {
