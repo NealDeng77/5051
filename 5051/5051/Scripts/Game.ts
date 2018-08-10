@@ -343,7 +343,9 @@ function DrawEmptyTruckItems() {
     $("#Trailer").attr("src", BaseContentURL + EmptyItem);
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
-    $("#Backgrond").attr("src", BaseContentURL + EmptyItem); //"Background1.png");
+
+    // $("#Backgrond").attr("src", BaseContentURL + EmptyItem); //"Background1.png");
+    $("#Backgrond").attr("src", BaseContentURL + "Background1.png");
 
     $("#Worker").attr("src", BaseContentAvatarURL + EmptyItem);
 }
