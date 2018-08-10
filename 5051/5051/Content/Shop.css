@@ -45,16 +45,20 @@
 
 .WorkerBoxLeft {
     position: absolute;
-    top: 240px;
-    left: 400px;
-    width:280px;
+    top: 50%;
+    left: 30%;
+    width: 30%;
+    height: 20%;
     z-index: 8;
 }
 
+
 .WorkerBoxRight {
     position: absolute;
-    top: 240px;
-    left: 655px;
+    top: 50%;
+    left: 60%;
+    width: 5%;
+    height: 20%;
     z-index: 8;
 }
 
@@ -68,9 +72,11 @@
 .PeopleBox {
     position: absolute;
     top: 310px;
-    left: -50px;
+    left: 0px;
     z-index: 100;
 }
+
+
 
 .overlay-text {
     width: 300px;
@@ -198,35 +204,6 @@
     z-index: 100;
 }
 
-.WorkerBoxLeft {
-    position: absolute;
-    top: 240px;
-    left: 400px;
-    width: 280px;
-    z-index: 8;
-}
-
-.WorkerBoxRight {
-    position: absolute;
-    top: 240px;
-    left: 655px;
-    z-index: 8;
-}
-
-.WorkerBox {
-    position: absolute;
-    top: 240px;
-    left: 655px;
-    z-index: 8;
-}
-
-.PeopleBox {
-    position: absolute;
-    top: 310px;
-    left: -50px;
-    z-index: 100;
-}
-
 .TruckItemBase {
     position: absolute;
     top: 0;
@@ -274,5 +251,3 @@
     overflow-y: auto;
     margin-left: 990px;
 }
-
-/* End Shop Truck */
