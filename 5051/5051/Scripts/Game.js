@@ -28,7 +28,7 @@ var GameUpdateTimer;
 var ShopData = {};
 // The global path to the Shop Folder for Images
 var BaseContentURL = "/Content/shop/";
-var BaseContentAvatar = "/Content/avatar/";
+var BaseContentAvatarURL = "/Content/avatar/";
 // Empty Item
 var EmptyItem = "placeholder.png";
 /*
@@ -226,12 +226,12 @@ function RefreshGameDisplay() {
         $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
         // Worker
         // TODO:  Have the Worker be the Student's Avater...
-        $("#Worker").attr("src", BaseContentAvatar + "AvatarHalf.png");
+        $("#Worker").attr("src", BaseContentAvatarURL + "AvatarHalf.png");
         // If the Truck is Showing, check to see if it is open for business or not
         // If not, hang the Close Sign
         if (ShopData.IsClosed) {
             $("#TruckClosedSign").attr("src", BaseContentURL + "ClosedSign.png");
-            $("#Worker").attr("src", BaseContentURL + EmptyItem);
+            $("#Worker").attr("src", BaseContentAvatarURL + EmptyItem);
         }
     }
     else {
@@ -248,8 +248,8 @@ function DrawEmptyTruckItems() {
     $("#Trailer").attr("src", BaseContentURL + EmptyItem);
     $("#TruckInside").attr("src", BaseContentURL + EmptyItem);
     $("#TruckClosedSign").attr("src", BaseContentURL + EmptyItem);
-    $("#Worker").attr("src", BaseContentURL + EmptyItem);
     $("#Backgrond").attr("src", BaseContentURL + EmptyItem); //"Background1.png");
+    $("#Worker").attr("src", BaseContentAvatarURL + EmptyItem);
 }
 /// The Transaction List is a List of strings of the latest transactions.
 function ShowTransactionList() {

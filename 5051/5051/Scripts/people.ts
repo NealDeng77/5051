@@ -1,6 +1,6 @@
 ﻿/// <reference path ="../scripts/jquery/index.d.ts"/>
 
-var BaseContentURL = "/Content/avatar/"; 
+var BaseContentAvatarURL = "/Content/avatar/"; 
 
 // Get the Overall Image Box size
 var ImageBox = $("#ImageBox");
@@ -52,7 +52,7 @@ function MoveShopper() {
     // Put an image on the Shopper
     // TODO:  In the future make it random...
     var ShopperItem = $("#PeopleItem");
-    ShopperItem.attr("src", BaseContentURL + "AvatarFull.png");
+    ShopperItem.attr("src", BaseContentAvatarURL + "AvatarFull.png");
 
     // Set the Timmer for Animation Checks
     var AnimationCount = 0;
@@ -136,7 +136,7 @@ function MoveWorker() {
     // Put an image on the Worker
     // TODO:  In the future make it the Avatar of the Student...
     var WorkerItem = $("#WorkerItem");
-    WorkerItem.attr("src", BaseContentURL + "AvatarHalf.png");
+    WorkerItem.attr("src", BaseContentAvatarURL + "AvatarHalf.png");
 
     // Set the Timmer for Animation Checks
     var AnimationCount = 0;
