@@ -66,7 +66,7 @@
                                             <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')" />
                                         </a>
                                         <br />
-                                        <span class="text-center">
+                                        <span class="FontSizeMedium text-center">
                                             @item.Name
                                         </span>
                                     </div>
@@ -92,10 +92,10 @@
                         <div class="col text-center">
                             <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
                             <br />
-                            <span id="CenterName" class="FontColor1"></span>
+                            <span id="CenterName" class="FontSizeLarge"></span>
                             <br />
                             <br />
-                            <div class="row text-center">
+                            <div class="row justify-content-center">
                                 @{
                                     // list emotion icons
                                     foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
@@ -109,7 +109,6 @@
 
                                     }
                                 }
-                                <br />
                                 <br />
                                 <br />
                                 @{
@@ -173,7 +172,7 @@
                                             <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')" />
                                         </a>
                                         <br />
-                                        <span class="text-center">
+                                        <span class="FontSizeMedium text-center">
                                             @item.Name
                                         </span>
                                     </div>
