@@ -56,7 +56,7 @@
 
                         <hr />
 
-                        <div class="row justify-content-around">
+                        <div class="row no-gutters justify-content-around">
                             @{
                                 // Logged Out first
                                 foreach (var item in Model.StudentList)
@@ -64,27 +64,27 @@
                                     var srcData = "/Content/img/" + item.AvatarUri;
                                     if (item.Status == _5051.Models.StudentStatusEnum.Out)
                                     {
-                            <div class="col-2 AvatarBoxNormal">
-                                <a id="@item.Id" href="#FullTime" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')">
-                                    <div class="row justify-content-around">
-                                        <div class="col AvatarBoxNormal" id="AvatarBox">
-                                            <div class="AvatarCircle"></div>
-                                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
-                                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
-                                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
-                                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
-                                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
-                                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
-                                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                        <div class="col-sm-auto AvatarKioskBox">
+                                            <a id="@item.Id" href="#FullTime" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')">
+                                                <div class="row no-gutters justify-content-around">
+                                                    <div class="col no-gutters AvatarBoxNormal" id="AvatarBox">
+                                                        <div class="AvatarCircle"></div>
+                                                        <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                                        <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                                        <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
+                                                        <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                                        <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                                        <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                                        <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="row justify-content-around">
+                                                <span class="col FontSizeSmall text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                                <div class="row justify-content-around">
-                                    <span class="col FontSizeSmall text-center">
-                                        @item.Name
-                                    </span>
-                                </div>
-                            </div>
                                     }
                                 }
                             }
@@ -168,14 +168,17 @@
                         <br />
                     </div>
 
+
                     <div class="col-sm-4 lightTransparentBox">
-                        <div class="FontSizeMedium text-center">
-                            Logged In
+                        <div class="row justify-content-around">
+                            <div class="FontSizeMedium text-center">
+                                Logged In
+                            </div>
                         </div>
 
                         <hr />
 
-                        <div class="row">
+                        <div class="row no-gutters justify-content-around">
                             @{
                                 // List out the Logged IN Students, then the Logged Out students
                                 // Logged IN first
@@ -184,17 +187,28 @@
                                     if (item.Status == _5051.Models.StudentStatusEnum.In)
                                     {
                                         var srcData = "/Content/img/" + item.AvatarUri;
-                                        <div class="col-sm-4 AvatarBlock">
-                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                                <a id="@item.Id">
-                                                    <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')" />
-                                                </a>
-                                                <br />
-                                                <span class="FontSizeMedium text-center">
+                                        <div class="col-sm-auto AvatarKioskBox">
+                                            <a id="@item.Id" href="#FullTime" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log Out')">
+                                                <div class="row no-gutters justify-content-around">
+                                                    <div class="col no-gutters AvatarBoxNormal" id="AvatarBox">
+                                                        <div class="AvatarCircle"></div>
+                                                        <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                                        <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                                        <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
+                                                        <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                                        <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                                        <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                                        <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="row justify-content-around">
+                                                <span class="col FontSizeSmall text-center">
                                                     @item.Name
                                                 </span>
                                             </div>
                                         </div>
+
                                     }
                                 }
                             }

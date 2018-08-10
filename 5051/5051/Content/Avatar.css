@@ -19,6 +19,10 @@
     height: 50px;
 }
 
+.AvatarKioskBox {
+    width: 100px;
+    height: 130px;
+}
 
 .CenterAvatarStyle {
     border: solid;
