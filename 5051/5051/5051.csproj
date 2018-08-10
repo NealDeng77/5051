@@ -283,6 +283,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\avatar\placeholder.png" />
     <Content Include="Content\Shop.css" />
     <Content Include="Content\avatar\Accessory0.png" />
     <Content Include="Content\avatar\Accessory1.png" />
