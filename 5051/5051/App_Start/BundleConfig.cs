@@ -21,12 +21,16 @@ namespace _5051
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/Site.css",
-                      "~/Content/fontawesome.css"));
+                      "~/Content/fontawesome.css",
+                      "~/Content/Shop.css",
+                      "~/Content/Avatar.css",
+                      "~/Content/Site.css"
+                        ));
         }
     }
 }
