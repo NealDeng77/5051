@@ -2,16 +2,17 @@
 
 @{
     ViewBag.Title = "Kiosk";
+    var TempTime = DateTime.Now.ToString("HH : mm : ss");
 }
 
 <br />
-<div class="row justify-content-center">
+<div class="row justify-content-around">
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
         <br />
         <div class="FontSizeLarge text-center">
             <span class="FontSizeLarger FontBold">
-                Click on your Avatar to Check In or Out of Class
+                Click on your Avatar
             </span>
         </div>
         <br />
@@ -21,18 +22,17 @@
 
 <div class="row">
     <br />
-    <br />
 </div>
 
 @{
     if (Model.StudentList == null || !Model.StudentList.Any())
     {
-        <div class="row justify-content-center">
+        <div class="row justify-content-around">
 
             <div class="col-1 "></div>
             <div class="col lightTransparentBox">
                 <br />
-                <div class="FontSizeLarge text-center">
+                <div class="FontSizeMedium text-center">
                     No Students in the System
                 </div>
                 <br />
@@ -42,148 +42,171 @@
     }
     else
     {
-        <div class="row justify-content-center">
-            <div class="col-sm-1 "></div>
+        <div class="row justify-content-around">
+            <div class="col-1 "></div>
 
-            <div class="col lightTransparentBox">
-                <div class="FontSizeLarge text-center">
-                    Logged Out
-                </div>
+            <div class="col">
+                <div class="row justify-content-around">
+                    <div class="col-sm-4 lightTransparentBox">
+                        <div class="row justify-content-around">
+                            <div class="FontSizeMedium text-center">
+                                Logged Out
+                            </div>
+                        </div>
 
-                <hr />
+                        <hr />
 
-                <div class="row">
-                    @{
-                        // Logged Out first
-                        foreach (var item in Model.StudentList)
-                        {
-                            if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                            {
-                                var srcData = "/Content/img/" + item.AvatarUri;
-                                <div class="col-sm-4 AvatarBlock">
-                                    <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                        <a id="@item.Id">
-                                            <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')" />
-                                        </a>
-                                        <br />
-                                        <span class="FontSizeMedium text-center">
-                                            @item.Name
-                                        </span>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
-            </div>
-
-            <div class="col-sm-1 "></div>
-
-            <div class="col lightTransparentBox BlockKioskIndex">
-                <div class="FontSizeLarge text-center">
-                    <div id="FullTime"></div>
-                </div>
-
-                <hr />
-
-                <div id="centerblock" style="display:none;">
-                    <div class="row">
-                        <div class="col"> </div>
-                        <div class="col text-center">
-                            <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
-                            <br />
-                            <span id="CenterName" class="FontSizeLarge"></span>
-                            <br />
-                            <br />
-                            <div class="row justify-content-center">
-                                @{
-                                    // list emotion icons
-                                    foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                        <div class="row justify-content-around">
+                            @{
+                                // Logged Out first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    var srcData = "/Content/img/" + item.AvatarUri;
+                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
                                     {
-                                        var srcData = "/Content/img/Emotion" + emotion + ".png";
-                                        var emotionId = emotion + "Id";
-
-                                        <div id="@emotionId" class="BoxWithHighlightHover">
-                                            <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
+                            <div class="col-2 AvatarBoxNormal">
+                                <a id="@item.Id" href="#FullTime" onclick="UpdateCenter('@srcData','@item.Id', '@item.Name','Log In')">
+                                    <div class="row justify-content-around">
+                                        <div class="col AvatarBoxNormal" id="AvatarBox">
+                                            <div class="AvatarCircle"></div>
+                                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
+                                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
                                         </div>
-
+                                    </div>
+                                </a>
+                                <div class="row justify-content-around">
+                                    <span class="col FontSizeSmall text-center">
+                                        @item.Name
+                                    </span>
+                                </div>
+                            </div>
                                     }
                                 }
-                                <br />
-                                <br />
-                                @{
-                                    // Hide or Show the Div based on Login or Logout
-                                    // Login Div goes here
-                                    <div id="LoginBox" style="display:none;">
-                                        @using (Html.BeginForm(
-                                        "KioskLogin", "Kiosk",
-                                        FormMethod.Post,
-                                        new { enctype = "multipart/form-data" }))
-                                        {
-                                            @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
-                                            @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
-
-                                            <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
-                                        }
-                                    </div>
-
-                                    // Logout Div goes here
-                                    <div id="LogoutBox" style="display:none;">
-                                        @using (Html.BeginForm(
-                                        "KioskLogout", "Kiosk",
-                                        FormMethod.Post,
-                                        new { enctype = "multipart/form-data" }))
-                                        {
-                                            @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
-
-                                            <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
-                                        }
-                                    </div>
-                                }
-                            </div>
-                            <br />
+                            }
                         </div>
-                        <div class="col"> </div>
+                        <br />
+                        <br />
+                    </div>
+
+                    <div class="col-1 ">
+                        <br />
+                    </div>
+
+                    <div class="col-sm-2 lightTransparentBox BlockKioskIndex">
+                        <div class="FontSizeMedium text-center" id="FullTime">@TempTime</div>
+
+                        <hr />
+
+                        <div id="centerblock" style="display:none;">
+                            <div class="row">
+                                <div class="col"> </div>
+                                <div class="col text-center">
+                                    <img id="CenterAvatar" src="" class="AvatarSize3 CenterAvatarStyle" />
+                                    <br />
+                                    <span id="CenterName" class="FontSizeLarge"></span>
+                                    <br />
+                                    <br />
+                                    <div class="row justify-content-around">
+                                        @{
+                                            // list emotion icons
+                                            foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                            {
+                                                var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                                var emotionId = emotion + "Id";
+
+                                                <div id="@emotionId" class="BoxWithHighlightHover">
+                                                    <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
+                                                </div>
+
+                                            }
+                                        }
+                                        <br />
+                                        <br />
+                                        @{
+                                            // Hide or Show the Div based on Login or Logout
+                                            // Login Div goes here
+                                            <div id="LoginBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                "KioskLogin", "Kiosk",
+                                                FormMethod.Post,
+                                                new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
+
+                                                    <input id="StudentLoginButton" disabled type="submit" name="submit" value="Log In" class="btn btn1 btn-light btn-block" />
+                                                }
+                                            </div>
+
+                                            // Logout Div goes here
+                                            <div id="LogoutBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                "KioskLogout", "Kiosk",
+                                                FormMethod.Post,
+                                                new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
+
+                                                    <input type="submit" name="submit" value="Log Out" class="btn btn1 btn-light btn-block" />
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="col"> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-1 ">
+                        <br />
+                    </div>
+
+                    <div class="col-sm-4 lightTransparentBox">
+                        <div class="FontSizeMedium text-center">
+                            Logged In
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            @{
+                                // List out the Logged IN Students, then the Logged Out students
+                                // Logged IN first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    if (item.Status == _5051.Models.StudentStatusEnum.In)
+                                    {
+                                        var srcData = "/Content/img/" + item.AvatarUri;
+                                        <div class="col-sm-4 AvatarBlock">
+                                            <div class="AvatarOuterBox BoxWithHighlightHover text-center">
+                                                <a id="@item.Id">
+                                                    <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')" />
+                                                </a>
+                                                <br />
+                                                <span class="FontSizeMedium text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-1 "></div>
-
-            <div class="col lightTransparentBox">
-                <div class="FontSizeLarge text-center">
-                    Logged In
-                </div>
-
-                <hr />
-
-                <div class="row">
-                    @{
-                        // List out the Logged IN Students, then the Logged Out students
-                        // Logged IN first
-                        foreach (var item in Model.StudentList)
-                        {
-                            if (item.Status == _5051.Models.StudentStatusEnum.In)
-                            {
-                                var srcData = "/Content/img/" + item.AvatarUri;
-                                <div class="col-sm-4 AvatarBlock">
-                                    <div class="AvatarOuterBox BoxWithHighlightHover text-center">
-                                        <a id="@item.Id">
-                                            <img src="@srcData" class="AvatarSize2" onclick="UpdateCenter('@srcData','@item.Id','@item.Name','Log Out')" />
-                                        </a>
-                                        <br />
-                                        <span class="FontSizeMedium text-center">
-                                            @item.Name
-                                        </span>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
+            <div class="col-1 ">
+                <br />
             </div>
-
-            <div class="col-sm-1 "></div>
         </div>
     }
 }
