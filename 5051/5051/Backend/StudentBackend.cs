@@ -191,12 +191,6 @@ namespace _5051.Backend
                 Emotion = data.EmotionCurrent
             };
 
-            //Set the time out to be default time out. If the student checks out himself, just update the time out.
-            var myItemDefault = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(temp.In);
-            var myDate = temp.In.ToShortDateString() + " " + myItemDefault.TimeEnd;
-            //Add the current date of Item, with the end time for the default date, and return that back as a date time.
-            temp.Out = UTCConversionsBackend.KioskTimeToUtc(DateTime.Parse(myDate));
-
             data.Attendance.Add(temp);
 
         }
@@ -220,12 +214,8 @@ namespace _5051.Backend
                 return;
             }
 
-
             // Add the new one it with the new data
             myTimeData.Out = DateTime.UtcNow;
-            //myTimeData.Status = data.Status;
-
-
         }
 
         /// <summary>
