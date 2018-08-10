@@ -28,6 +28,7 @@ var GameUpdateTimer;
 var ShopData = {};
 // The global path to the Shop Folder for Images
 var BaseContentURL = "/Content/shop/";
+var BaseContentAvatar = "/Content/avatar/";
 // Empty Item
 var EmptyItem = "placeholder.png";
 /*
@@ -225,7 +226,7 @@ function RefreshGameDisplay() {
         $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
         // Worker
         // TODO:  Have the Worker be the Student's Avater...
-        $("#Worker").attr("src", BaseContentURL + "AvatarHalf1.png");
+        $("#Worker").attr("src", BaseContentAvatar + "AvatarHalf.png");
         // If the Truck is Showing, check to see if it is open for business or not
         // If not, hang the Close Sign
         if (ShopData.IsClosed) {

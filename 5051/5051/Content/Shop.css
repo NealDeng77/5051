@@ -64,8 +64,10 @@
 
 .WorkerBox {
     position: absolute;
-    top: 240px;
-    left: 655px;
+    top: 50%;
+    left: 60%;
+    width: 1%;
+    height: 1%;
     z-index: 8;
 }
 
