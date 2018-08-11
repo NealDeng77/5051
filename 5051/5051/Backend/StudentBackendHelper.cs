@@ -95,7 +95,6 @@ namespace _5051.Backend
                     {
                         case 0: //Perfect
                             temp.In = InGood(currentDate, r);
-                            temp.Out = OutAuto(currentDate, r);
                             temp.Emotion = (EmotionStatusEnum)(rn+1);
                             myStudent.Attendance.Add(temp);
                             break;
@@ -105,7 +104,7 @@ namespace _5051.Backend
                                 {
                                     case 0:
                                         temp.In = InLate(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
+                                        temp.Out = OutLate(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Happy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -117,7 +116,7 @@ namespace _5051.Backend
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
+                                        
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -138,13 +137,11 @@ namespace _5051.Backend
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -157,7 +154,6 @@ namespace _5051.Backend
                                 {
                                     case 0:
                                         temp.In = InVeryLate(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -169,7 +165,6 @@ namespace _5051.Backend
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
-                                        temp.Out = OutAuto(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Sad;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -223,9 +218,9 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private static DateTime OutAuto(DateTime date, Random r)
+        private static DateTime OutLate(DateTime date, Random r)
         {
-            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(945)); // out 15:45pm
+            return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(1000)); // out 15:45pm
         }
         /// <summary>
         /// Check-out time is early, return a random time between 10:00am - 3:00pm
