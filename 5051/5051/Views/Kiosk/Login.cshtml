@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Login";
 }
+<br/>
 <div class="row justify-content-center">
     <div class="col-1"></div>
     <div class="col lightTransparentBox">
@@ -32,34 +33,34 @@
                 @Html.HiddenFor(m => m.Id)
 
             <div class="row justify-content-center">
-                <div class="col-sm">
-                    <div class="FontSizeLarge">
-                        <div id="passwordText">
-                            @Html.DisplayNameFor(m => m.Password)
+                <div class="col-3"></div>
+                <div class="col FontSizeLarge">
+                    <div class="row">
+                        <div class="col-1">
+                            <i class="fa fa-lock LockStyle" aria-hidden="true"></i>
                         </div>
-                    </div>
-                    <div class="">
-                        <div id="passwordValue">
-                            @Html.PasswordFor(m => m.Password)
+                        <div class="col-1"></div>
+                        <div class="col">
+                            @Html.PasswordFor(m => m.Password, new { @class = "input1" })
                             @Html.ValidationMessageFor(m => m.Password)
                         </div>
                     </div>
                 </div>
+                <div class="col-3"></div>
             </div>
 
-                <br />
-                <br />
-                <div class="row justify-content-center">
-                    <div class="col-3">
-                        @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
-                    </div>
-                    <div class="col-3">
-                        <input type="submit" value="Login" class="btn btn-primary">
-                    </div>
+            <br />
+            <div class="row justify-content-center">
+                <div class="col-3">
+                    @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
                 </div>
-                }
-                <br />
+                <div class="col-3">
+                    <input type="submit" value="Log In" class="btn btn-primary">
+                </div>
             </div>
+            }
+            <br />
+        </div>
     </div>
     <div class="col-1"></div>
 </div>

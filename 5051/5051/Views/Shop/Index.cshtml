@@ -7,71 +7,61 @@
 <div class="row no-gutters justify-content-center">
     <div class="col TruckBoxLarge" id="ImageBox">
         @{
-            // StudentId needs to be in the Dom
-            <div>
-                @Html.Hidden("StudentId", Model.Id)
-            </div>
+        // StudentId needs to be in the Dom
+        <div>
+            @Html.Hidden("StudentId", Model.Id)
+        </div>
 
-            <div class="StudentNavBar FontBold FontSizeSmall">
-                <div class="row justify-content-around">
-                    <div class="col-1"></div>
-                    <div class="col-1">
-                        Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
-                    </div>
-                    <div class="col-1">
-                        <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
-                    </div>
-                    <div class="col-2">
-                        <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-                    </div>
-                    <div class="col-2">
-                        <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
-                    </div>
-                    <div class="col-3">
-                        <span id="StoreStatus"></span>
-                    </div>
-                    @*
-                        <div class="col">
-                            <span>Iteration Number:&nbsp;</span><span id="IterationNumber"></span>
-                        </div>
-                    *@
-                    <div class="col-1"></div>
+        <div class="StudentNavBar FontBold FontSizeSmall">
+            <div class="row justify-content-around">
+                <div class="col-1"></div>
+                <div class="col-1">
+                    Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
                 </div>
+                <div class="col-1">
+                    <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
+                </div>
+                <div class="col-2">
+                    <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
+                </div>
+                <div class="col-2">
+                    <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
+                </div>
+                <div class="col-3">
+                    <span id="StoreStatus"></span>
+                </div>
+                <div class="col-1"></div>
             </div>
+        </div>
 
-            <div class="FeedBox FontSizeMedium">
-                <div class="dropdown-content">
-                    <a href="#">
-                        <span>Game Data:&nbsp;</span>
-                    </a>
-                    <a href="#">
-                        <span id="TransactionList"></span>
-                    </a>
-                </div>
+        <div class="FeedBar FontSizeSmall">
+            <div class="row justify-content-around">
+                Game Data: <span id="TransactionList"></span>
             </div>
+        </div>
 
-            <div class="GameButtonsBox">
-                <div class="row">
-                    @*&nbsp;&nbsp;*@
-                    @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
+        <div class="GameButtonsBox">
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
 
-                    @{
-                        //&nbsp; &nbsp;
-                        //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                    }
-                </div>
-                <div class="row">
-                    @*&nbsp;&nbsp;*@
-                    @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
-                </div>
-                <div class="row">
-                    @*&nbsp;&nbsp;*@
-                    @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn1" })
-                </div>
+                @{
+                //&nbsp; &nbsp;
+                //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                }
             </div>
-            <div class="AvatarImageBox">
-
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
             </div>
+            <div class="row">
+                @*&nbsp;&nbsp;*@
+                @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn1" })
+            </div>
+        </div>
+        <div class="AvatarImageBox">
+
+        </div>
         }
 
         <img class="TruckItemBase BackgroundItem" id="Background" src="~/Content/shop/Background1.png" alt="Background">
