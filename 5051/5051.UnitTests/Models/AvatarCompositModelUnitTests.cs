@@ -25,7 +25,7 @@ namespace _5051.UnitTests.Models
             string AvatarHairBackUri = "/content/avatar/Hair2_short_black.png";
             string AvatarHairFrontUri = "/content/avatar/Hair1_straight_black.png";
             string AvatarHeadUri = "/content/avatar/Head0.png";
-            string AvatarShirtUri = "/content/avatar/Shirt0.png";
+            string AvatarShirtUri = "/content/avatar/Shirt_short_white.png";
 
             // Act
             var result = new AvatarCompositModel();
