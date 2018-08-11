@@ -140,6 +140,11 @@ namespace _5051.Backend
                                         temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
+                                    case 3:
+                                        temp.In = InLate(currentDate, r);
+                                        temp.Emotion = EmotionStatusEnum.Sad;
+                                        myStudent.Attendance.Add(temp);
+                                        break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
