@@ -27,14 +27,12 @@ namespace _5051.Models
         /// The Friendly name for the student, does not need to be directly associated with the actual student name
         /// </summary>
         [Display(Name = "Name", Description = "Nick Name")]
-        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         /// <summary>
         /// The ID of the Avatar the student is associated with, this will convert to an avatar picture
         /// </summary>
         [Display(Name = "AvatarId", Description = "Avatar")]
-        [Required(ErrorMessage = "Avatar is required")]
         public string AvatarId { get; set; }
 
         /// <summary>
@@ -46,28 +44,24 @@ namespace _5051.Models
         /// The personal level for the Avatar, the avatar levels up.  switching the avatar ID (picture), does not change the level
         /// </summary>
         [Display(Name = "Avatar Level", Description = "Level of the Avatar")]
-        [Required(ErrorMessage = "Level is required")]
         public int AvatarLevel { get; set; }
 
         /// <summary>
         /// The number of Tokens the student has, tokens are used in the store, and also to level up
         /// </summary>
         [Display(Name = "XP", Description = "Experience Points Earned")]
-        [Required(ErrorMessage = "XP is required")]
         public int ExperiencePoints { get; set; }
 
         /// <summary>
         /// The number of Tokens the student has, tokens are used in the store, and also to level up
         /// </summary>
         [Display(Name = "Tokens", Description = "Tokens Saved")]
-        [Required(ErrorMessage = "Tokens are required")]
         public int Tokens { get; set; }
 
         /// <summary>
         /// The status of the student, for example currently logged in, out
         /// </summary>
         [Display(Name = "Current Status", Description = "Status of the Student")]
-        [Required(ErrorMessage = "Status is required")]
         public StudentStatusEnum Status { get; set; }
 
         /// <summary>
