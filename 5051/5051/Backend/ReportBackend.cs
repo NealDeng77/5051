@@ -494,7 +494,7 @@ namespace _5051.Backend
             //trim the end time to actual out time only if the student leave early
             if (attendanceReport.TimeOut.TimeOfDay.CompareTo(end) < 0)
             {
-                end = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay;
+                end = attendanceReport.TimeOut.TimeOfDay;
             }
 
             var duration = end.Subtract(start);
