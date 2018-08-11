@@ -70,13 +70,9 @@ namespace _5051.Controllers
         public ActionResult Create([Bind(Include=
                                         "Id,"+
                                         "Name,"+
-                                        "Description,"+
-                                        "Uri,"+
-                                        "AvatarId,"+
                                         "Status,"+
                                         "Tokens,"+
                                         "ExperiencePoints,"+
-                                        "AvatarLevel,"+
                                         "")] StudentModel data)
         {
             if (!ModelState.IsValid)
@@ -117,11 +113,6 @@ namespace _5051.Controllers
             }
 
             var myData = new StudentDisplayViewModel(myDataStudent);
-            // null not possible
-            //if (myData == null)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
 
             return View(myData);
         }
@@ -136,15 +127,9 @@ namespace _5051.Controllers
         public ActionResult Update([Bind(Include=
                                         "Id,"+
                                         "Name,"+
-                                        "Description,"+
-                                        "Uri,"+
-                                        "AvatarId,"+
-                                        "AvatarLevel,"+
                                         "Tokens,"+
                                         "Status,"+
                                         "ExperiencePoints,"+
-                                        "Password,"+
-                                        "Tokens,"+
                                         "")] StudentDisplayViewModel data)
         {
             if (!ModelState.IsValid)
@@ -169,11 +154,9 @@ namespace _5051.Controllers
 
             myDataStudent.EmotionCurrent = data.EmotionCurrent;
             myDataStudent.Name = data.Name;
-            myDataStudent.AvatarId = data.AvatarId;
             myDataStudent.Tokens = data.Tokens;
-            myDataStudent.ExperiencePoints = data.ExperiencePoints;
-            myDataStudent.AvatarLevel = data.AvatarLevel;
             myDataStudent.Status = data.Status;
+            myDataStudent.ExperiencePoints = data.ExperiencePoints;
 
             StudentBackend.Update(myDataStudent);
 
