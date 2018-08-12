@@ -90,6 +90,7 @@
                             break;
 
                         case "Admin":
+                        case "AvatarItem":
                             <li class="nav-item">
                                 @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
                             </li>
@@ -103,7 +104,7 @@
                                 @Html.ActionLink("Calendar", "Index", "Calendar", null, new { @class = "nav-link", id = "CalendarLinkNavBar" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Avatars", "Index", "Avatar", null, new { @class = "nav-link", id = "AvatarLinkNavBar" })
+                                @Html.ActionLink("Avatars", "Index", "AvatarItem", null, new { @class = "nav-link", id = "AvatarLinkNavBar" })
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Settings", "Settings", "Admin", null, new { @class = "nav-link", id = "AdminSettingsLinkNavBar" })
