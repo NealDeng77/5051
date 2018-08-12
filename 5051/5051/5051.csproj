@@ -237,6 +237,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\AvatarItemModel.cs" />
+    <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
