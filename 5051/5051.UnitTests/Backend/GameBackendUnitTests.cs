@@ -557,8 +557,8 @@ namespace _5051.UnitTests.Backend
 
             var message = "No Inventory to Sell";
             var elementNumber = student.Truck.TransactionList.Count;
-            var result = student.Truck.TransactionList.Contains(message);
-          
+            var result = student.Truck.TransactionList.ElementAt(0).Name.Equals(message);
+
             // Reset
             DataSourceBackend.Instance.Reset();
 
