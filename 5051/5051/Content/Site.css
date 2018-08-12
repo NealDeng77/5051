@@ -361,3 +361,10 @@ div.BlockStudentLogin {
     top: 150px; /* chartArea top  */
     left: 150px; /* chartArea left */
 }
+
+.AdminSmallChartBox {
+    height: 80px;
+    width: 80px;
+    margin-top: 10px;
+    margin-left: 10px;
+}

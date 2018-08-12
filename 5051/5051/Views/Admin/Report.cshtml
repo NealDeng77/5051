@@ -1,41 +1,74 @@
 ﻿@model _5051.Models.StudentViewModel
-
 @{
     ViewBag.Title = "Reports";
 }
-
 <br />
-<h2>Reports</h2>
+<div class="row justify-content-center">
 
-<h3>Click on the Student to view their individual report</h3>
-<br />
-
-<div class="row">
-@{
-    if (Model.StudentList == null || !Model.StudentList.Any())
-    {
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
         <br />
-        <p>No Students in the System</p>
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Click on the student to view their reports</span>
+        </div>
         <br />
-    }
-    else
-    {
-        foreach (var item in Model.StudentList)
-        {
-            <div class="col-sm-3 text-center">
-                <div class="PortalBox">
-                    <a id="@item.Id" href="~/Admin/MonthlyReport/@item.Id">
-                        <img src="~/Content/img/@item.AvatarUri" class="AvatarSize1" />
-                        <img src="~/Content/img/ChartPlaceholder.png" class="AvatarSize1" />
-                    </a>
-                    <br />
-                    <span>
-                        @item.Name
-                    </span>
-                </div>
-            </div>
-        }
-    }
-}
+    </div>
+    <div class="col-1"></div>
 </div>
 
+<div class="row">
+    <br />
+    <br />
+</div>
+
+<div class="row justify-content-around">
+    @{
+        if (Model.StudentList == null || !Model.StudentList.Any())
+        {
+            <div class="col text-center FontSizeLarge">
+                <br />
+                No Students in the System
+                <br />
+            </div>
+        }
+        else
+        {
+
+            foreach (var item in Model.StudentList)
+            {
+
+                <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover">
+
+                    <a id="@item.Id" href="~/Admin/MonthlyReport/@item.Id">
+                        <div class="row justify-content-center">
+                            <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
+                                <div class="AvatarCircle"></div>
+                                <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtUri" />
+                                <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                            </div>
+                            <div class="AvatarBoxNormal" id="AvatarBox">
+                                <img src="~/Content/img/ChartPlaceholder.png" class="AdminSmallChartBox" />
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="row justify-content-center">
+                        <div id="text-center">
+                            <span class="FontSizeMedium">@item.Name</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
