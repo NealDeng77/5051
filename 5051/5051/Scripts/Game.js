@@ -258,7 +258,10 @@ function ShowTransactionList() {
     el.empty();
     // Add the Latest Transactions to display
     for (var item of ShopData.TransactionList) {
-        el.append("<span>" + item + "</span><br/>");
+        el.append("<span>" + item.Name + "</span> &nbsp;");
+        if (item.Uri != null) {
+            el.append("<img class=\"ProductBoughtBar\" id = \"ProductBought\" src = \"/Content/shop/" + item.Uri + "\" alt = \"ProductBought\" /> &nbsp;");
+        }
     }
 }
 //# sourceMappingURL=game.js.map

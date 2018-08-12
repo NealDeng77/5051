@@ -244,7 +244,7 @@ namespace _5051.Backend
                 result.TransactionList = StudentData.Truck.TransactionList;
             } else
             {
-                var RecentFiveMessagesList = new List<string>();
+                var RecentFiveMessagesList = new List<TransactionModel>();
                 for (int i = StudentData.Truck.TransactionList.Count - 5; i < StudentData.Truck.TransactionList.Count; i++)
                 {
                     RecentFiveMessagesList.Add(StudentData.Truck.TransactionList[i]);
@@ -253,7 +253,7 @@ namespace _5051.Backend
             }           
            
             // Clear the Student TransactionList
-            StudentData.Truck.TransactionList = new List<string>();
+            StudentData.Truck.TransactionList = new List<TransactionModel>();
             DataSourceBackend.Instance.StudentBackend.Update(StudentData);
 
             return result;
@@ -338,7 +338,9 @@ namespace _5051.Backend
                             // the tokens of the rent is 1
                             student.Tokens -= RentAmount;
 
-                            var myTransaction = "Paid Rent "+RentAmount+" for "+RunDateTime.Date.ToShortDateString();
+                            TransactionModel myTransaction = new TransactionModel();
+                            myTransaction.Name = "Paid Rent " + RentAmount + " for " + RunDateTime.Date.ToShortDateString();
+                            myTransaction.Uri = null;
                             student.Truck.TransactionList.Add(myTransaction);
 
                         }
@@ -380,7 +382,9 @@ namespace _5051.Backend
             // show pass by message            
             if (studentPoints >= criterion)
             {
-                var myTransaction = "Customer is coming";
+                TransactionModel myTransaction = new TransactionModel();
+                myTransaction.Name = "Customer is coming";
+                myTransaction.Uri = null;
                 student.Truck.TransactionList.Add(myTransaction);
             }
             return;
@@ -441,17 +445,21 @@ namespace _5051.Backend
 
                 student.Truck.CustomersTotal++;
 
-                var myTransaction = "Sold " + Item.Name + " for profit of " + profit;
+                TransactionModel myTransaction = new TransactionModel();
+                myTransaction.Name = "Sold " + Item.Name + " for profit of " + profit;
+                myTransaction.Uri = Item.Uri;
                 student.Truck.TransactionList.Add(myTransaction);
 
-               
+
                 // Remove from list
                 student.Inventory.Remove(Item);
 
             }
             else
             {
-                var myTransaction = "No Inventory to Sell";
+                TransactionModel myTransaction = new TransactionModel();
+                myTransaction.Name = "No Inventory to Sell";
+                myTransaction.Uri = null;
                 student.Truck.TransactionList.Add(myTransaction);
             }
 

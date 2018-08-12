@@ -24,7 +24,7 @@ namespace _5051.Models
 
         public bool IsClosed;
         public int CustomersTotal;
-        public List<string> TransactionList;
+        public List<TransactionModel> TransactionList;
 
         public int Tokens;
         public int Experience;

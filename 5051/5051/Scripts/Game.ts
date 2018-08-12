@@ -51,6 +51,11 @@ interface iJsonDataInventory {
     URI: string[];
 }
 
+interface iJsonTransactionList {
+    Name: string;
+    Uri: string;
+}
+
 // The result data
 interface iJsonDataResult {
     IterationNumber: number;
@@ -65,7 +70,7 @@ interface iJsonDataResult {
 
     IsClosed: boolean;
     CustomersTotal: number;
-    TransactionList: string[];
+    TransactionList: Array<iJsonTransactionList>;
 
     Tokens: number;
     Experience: number;
@@ -359,7 +364,11 @@ function ShowTransactionList()
     // Add the Latest Transactions to display
     for (var item of ShopData.TransactionList)
     {
-        el.append("<span>"+item+"</span><br/>");
+        el.append("<span>" + item.Name + "</span> &nbsp;");
+
+        if (item.Uri != null) {
+            el.append("<img class=\"ProductBoughtBar\" id = \"ProductBought\" src = \"/Content/shop/" + item.Uri + "\" alt = \"ProductBought\" /> &nbsp;");
+        }
     }
    
 }
