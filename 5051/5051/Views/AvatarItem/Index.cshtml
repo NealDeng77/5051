@@ -1,13 +1,13 @@
 ﻿@model _5051.Models.AvatarItemViewModel
 
 @{
-    ViewBag.Title = "Edit Avatar";
+    ViewBag.Title = "Edit Avatar Items";
 }
 
 
 <div class="container">
     <br />
-    <h2>Click on an Avatar to Edit</h2>
+    <h2>Click on an Avatar Item to Edit</h2>
     <br />
     <br />
 
@@ -16,7 +16,7 @@
             if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
             {
                 <br />
-                <p>No Avatars in the System</p>
+                <p>No Avatar Items in the System</p>
                 <br />
             }
             else
@@ -26,12 +26,13 @@
                     <div class="col-sm-2">
                         <div class="BoxWithHighlightHover">
                             <a id="@item.Id" href="~/Avatar/Read/@item.Id">
-                                <img src="~/Content/img/@item.Uri" class="AvatarSize1" />
+                                <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
                             </a>
                             <br />
                             <span>
                                 @item.Name
                                 <br />
+                                @item.Category
                                 <br />
                                 <br />
                             </span>
@@ -46,7 +47,7 @@
     <br />
     <div class="row text-center">
         <div class="col-sm-2">
-            @Html.ActionLink("Create New Avatar", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Create New Item", "Create", null, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>
