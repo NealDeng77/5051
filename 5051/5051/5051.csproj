@@ -220,6 +220,7 @@
     <Compile Include="Backend\UTCConversionsBackend.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AvatarItemController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameSettingsController.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Models\AttendanceReportViewModel.cs" />
     <Compile Include="Models\AvatarItemModel.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
+    <Compile Include="Models\AvatarItemViewModel.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
@@ -655,6 +657,11 @@
     <Content Include="Views\Admin\QuarterReport.cshtml" />
     <Content Include="Scripts\people.js.map" />
     <Content Include="Views\Kiosk\Create.cshtml" />
+    <Content Include="Views\AvatarItem\Create.cshtml" />
+    <Content Include="Views\AvatarItem\Delete.cshtml" />
+    <Content Include="Views\AvatarItem\Index.cshtml" />
+    <Content Include="Views\AvatarItem\Read.cshtml" />
+    <Content Include="Views\AvatarItem\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

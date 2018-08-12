@@ -122,6 +122,7 @@
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnumUnitTests .cs" />
     <Compile Include="Models\AvatarItemModelUnitTests.cs" />
+    <Compile Include="Models\AvatarItemViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckInputModelUnitTests.cs" />
     <Compile Include="Models\AvatarCompositModelUnitTests.cs" />
     <Compile Include="Models\TruckItemInputModel.cs" />
