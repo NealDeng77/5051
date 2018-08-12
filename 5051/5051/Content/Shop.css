@@ -47,6 +47,16 @@
 /* End Truck Sizes */
 
 /* Start Truck Components */
+.TruckNameBox {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 50%;
+    height: 20%;
+    z-index: 8;
+    font-size: 35px;
+    color: white;
+}
 
 .WorkerBoxLeft {
     position: absolute;

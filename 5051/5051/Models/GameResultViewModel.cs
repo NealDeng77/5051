@@ -16,6 +16,7 @@ namespace _5051.Models
         public string Wheels;
         public string Topper;
         public string Menu;
+        public string TruckName;
 
         /// <summary>
         /// Iteratoin Number

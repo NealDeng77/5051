@@ -226,6 +226,7 @@ namespace _5051.Backend
 
             result.Tokens = StudentData.Tokens;
             result.Experience = StudentData.ExperiencePoints;
+            result.TruckName = StudentData.Truck.TruckName;
 
             if (StudentData.Tokens < 1)
             {

@@ -34,6 +34,9 @@ namespace _5051.Models
 
         public List<TransactionModel> TransactionList { get; set; }
 
+        // Truck Name
+        public string TruckName { get; set; }
+
 
         public ShopTruckModel()
         {
@@ -42,6 +45,7 @@ namespace _5051.Models
             IsClosed = false; // Trucks Open to start with
             TransactionList = new List<TransactionModel>();   // Empty List of Transactions
             CustomersTotal = 0; // No customers to start off with
+            TruckName = "My Truck";
 
             Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;
 
