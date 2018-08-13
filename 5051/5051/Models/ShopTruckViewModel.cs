@@ -20,5 +20,6 @@ namespace _5051.Models
 
         // The StudentID for this truck, used to simplify the models
         public string StudentId;
+        public string TruckName;
     }
 }

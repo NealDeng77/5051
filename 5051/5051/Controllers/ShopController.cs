@@ -316,6 +316,11 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
+            if (studentdata.Truck.TruckName == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+           
             var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
 
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
@@ -335,6 +340,7 @@ namespace _5051.Controllers
                                         "StudentId,"+
                                         "ItemId,"+
                                         "Position,"+
+                                        "TruckName," +
                                         "")] ShopTruckInputModel data)
         {
             if (!ModelState.IsValid)
@@ -357,6 +363,12 @@ namespace _5051.Controllers
             if (string.IsNullOrEmpty(data.ItemId))
             {
                 // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.TruckName))
+            {
+                // Send back for default
                 return RedirectToAction("Index", "Shop", new { id = data.StudentId });
             }
 
@@ -402,6 +414,8 @@ namespace _5051.Controllers
                     myStudent.Truck.Trailer = myItem.Id;
                     break;
             }
+
+            myStudent.Truck.TruckName = data.TruckName;
 
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);

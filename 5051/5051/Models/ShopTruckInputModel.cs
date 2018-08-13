@@ -11,5 +11,8 @@
 
         // Where to place the item
         public FactoryInventoryCategoryEnum Position { get; set; }
+
+        // updated the truck name
+        public string TruckName { get; set; }
     }
 }
