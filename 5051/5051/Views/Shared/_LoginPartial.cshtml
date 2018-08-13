@@ -1,16 +1,38 @@
 ﻿@using Microsoft.AspNet.Identity
+@using _5051.Backend
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav ml-auto">
+<ul class="nav navbar-nav ml-auto">
+    <li>
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    @{
+        var isTeacher = User.Identity.GetIsTeacherUser();
+
+        if (isTeacher)
+        {
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                Teachers Click Here
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
+        }
+    }
+
+    @{
+        var isSupport = User.Identity.GetIsSupportUser();
+
+        if (isSupport)
+        {
+            <li>
+                Support Users Click Here
+            </li>
+        }
+    }
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
     }
 }
 else
