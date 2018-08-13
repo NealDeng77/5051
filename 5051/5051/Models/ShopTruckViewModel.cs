@@ -17,9 +17,10 @@ namespace _5051.Models
         public ShopTruckItemViewModel TrailerItem;
         public ShopTruckItemViewModel MenuItem;
         public ShopTruckItemViewModel SignItem;
+        public string TruckName;
 
         // The StudentID for this truck, used to simplify the models
         public string StudentId;
-        public string TruckName;
+        
     }
 }

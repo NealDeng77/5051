@@ -315,11 +315,6 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
-
-            if (studentdata.Truck.TruckName == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
            
             var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
 
@@ -340,7 +335,6 @@ namespace _5051.Controllers
                                         "StudentId,"+
                                         "ItemId,"+
                                         "Position,"+
-                                        "TruckName," +
                                         "")] ShopTruckInputModel data)
         {
             if (!ModelState.IsValid)
@@ -365,12 +359,7 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Index", "Shop", new { id = data.StudentId });
             }
-
-            if (string.IsNullOrEmpty(data.TruckName))
-            {
-                // Send back for default
-                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
-            }
+           
 
             // Get Student
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -413,6 +402,49 @@ namespace _5051.Controllers
                 case FactoryInventoryCategoryEnum.Trailer:
                     myStudent.Truck.Trailer = myItem.Id;
                     break;
+            }
+
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+        }
+
+
+        public ActionResult EditName([Bind(Include=
+                                        "StudentId,"+
+                                        "TruckName,"+                                       
+                                        "")] ShopTruckInputModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit, with Error Message
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (data == null)
+            {
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            if (string.IsNullOrEmpty(data.TruckName))
+            {
+                // Send back for default
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+            }
+
+            // Get Student
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            if (myStudent == null)
+            {
+                // Send back for Edit
+                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
             }
 
             myStudent.Truck.TruckName = data.TruckName;
