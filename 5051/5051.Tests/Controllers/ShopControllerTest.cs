@@ -917,6 +917,25 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_StudentId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = "bogus";
+            data.TruckName = "truckName";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
 
         #endregion EditName
 
