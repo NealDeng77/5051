@@ -607,6 +607,38 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Invalid_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Invalid_StudentID_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion Edit
 
 
