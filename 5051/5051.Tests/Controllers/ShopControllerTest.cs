@@ -937,6 +937,30 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Valid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.TruckName = DataSourceBackend.Instance.StudentBackend.GetDefault().Truck.TruckName;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.TruckName;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.EditName(data);
+
+            // Act
+            ViewResult result = controller.EditName(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.TruckName, TestContext.TestName);
+        }
         #endregion EditName
 
 
