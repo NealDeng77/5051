@@ -613,14 +613,14 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = null;
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            data = null;
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
 
             // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
