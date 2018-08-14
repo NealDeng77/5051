@@ -823,6 +823,32 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(expect, myStudent2.Truck.Wheels, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Trailer_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Trailer).Id;
+            data.Position = FactoryInventoryCategoryEnum.Trailer;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Trailer;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Trailer, TestContext.TestName);
+        }
+
         #endregion Edit
 
 
