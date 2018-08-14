@@ -32,6 +32,37 @@
     max-width: 1000px
 }
 
+@media screen and (max-width: 700px) {
+    .TruckBoxLarge {
+        min-height: 180px;
+        max-height: 180px;
+        min-width: 300px;
+        max-width: 300px;
+        margin-top: 100px;
+    }
+
+    .GameButtonsBox {
+        margin-top: -100px;
+    }
+
+    .grid-container > div {
+        font-size: 10px;
+    }
+
+    .PeopleItem {
+        display: none;
+    }
+
+    .WorkerItem {
+        display: none;
+    }
+
+    #TruckName {
+        font-size: 20px;
+    }
+
+}
+
 .TruckBoxThumbnail {
     position: relative;
     height: 5%;
@@ -53,7 +84,7 @@
     left: 10%;
     width: 50%;
     height: 20%;
-    z-index: 8;
+    z-index: 500;
     font-size: 35px;
     color: white;
 }
@@ -177,27 +208,7 @@
     width: 30%;
 }
 
-.dropdown-content {
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 10px 10px;
-}
-
-    .dropdown-content a {
-        color: black;
-        padding: 9px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1
-        }
-
-.StudentNavBar {
+.grid-container {
     position: absolute;
     top: 100%;
     left: 0%;
@@ -209,7 +220,16 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 10px 10px;
     z-index: 10;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 0.5px;
+    align-content: center;
+    justify-content: center;
 }
+
+    .grid-container > div {
+        text-align: center;
+    }
 
 .ProductBoughtBar {
     position: absolute;
@@ -227,8 +247,6 @@
     height: 5%;
     padding: 0;
     margin: 0;
-    /*background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     border-radius: 10px 10px;
     z-index: 11;
 
