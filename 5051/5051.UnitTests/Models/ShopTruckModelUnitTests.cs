@@ -16,7 +16,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopTruck_Default_Instantiate_Get_Set_Should_Pass()
+        public void Models_ShopTruckModel_Default_Instantiate_Get_Set_Should_Pass()
         {
             // Arange
 
@@ -36,6 +36,9 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result.Topper, "Topper " + TestContext.TestName);
             Assert.IsNotNull(result.Wheels, "Wheels " + TestContext.TestName);
             Assert.IsNotNull(result.IsClosed, "Closed " + TestContext.TestName);
+            Assert.IsNotNull(result.CustomersTotal, "Customers" + TestContext.TestName);
+            Assert.IsNotNull(result.TransactionList, "TransactionList" + TestContext.TestName);
+            Assert.IsNotNull(result.TruckName, "TruckName" + TestContext.TestName);
         }
 
         #endregion Instantiate
