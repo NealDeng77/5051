@@ -868,7 +868,21 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
 
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
         #endregion EditName
 
 

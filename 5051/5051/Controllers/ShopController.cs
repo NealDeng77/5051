@@ -424,7 +424,7 @@ namespace _5051.Controllers
 
             if (data == null)
             {
-                return RedirectToAction("Index", "Shop", new { id = data.StudentId });
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
             if (string.IsNullOrEmpty(data.StudentId))
