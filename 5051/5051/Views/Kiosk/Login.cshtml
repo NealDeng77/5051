@@ -32,8 +32,8 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.Id)
 
-            <div class="row justify-content-center">
-                <div class="col-3"></div>
+            <div class="row no-gutters justify-content-center">
+                <div class="col-1"></div>
                 <div class="col FontSizeLarge">
                     <div class="row">
                         <div class="col-1">
@@ -46,16 +46,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-2"></div>
             </div>
 
             <br />
-            <div class="row justify-content-center">
-                <div class="col-3">
-                    @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn-success" })
+            <div class="row no-gutters justify-content-around">
+                <div class="col">
+                    @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn1 btn-light" })
                 </div>
-                <div class="col-3">
-                    <input type="submit" value="Log In" class="btn btn-primary">
+                <div class="col">
+                    <input id="LogInButton" type="submit" name="submit" value="Log In" class="btn btn1 btn-light" />
                 </div>
             </div>
             }
