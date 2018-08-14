@@ -719,6 +719,32 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(expect, myStudent2.Truck.Truck, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Topper_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Topper).Id;
+            data.Position = FactoryInventoryCategoryEnum.Topper;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Topper;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Topper, TestContext.TestName);
+        }
+
 
         #endregion Edit
 
