@@ -851,8 +851,23 @@ namespace _5051.Tests.Controllers
 
         #endregion Edit
 
-
         #region EditName
+        [TestMethod]
+        public void Controller_Shop_EditName_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.EditName(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
 
         #endregion EditName
 
