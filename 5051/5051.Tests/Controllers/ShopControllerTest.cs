@@ -590,7 +590,30 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
         #endregion Edit
+
+
+        #region EditName
+
+        #endregion EditName
+
 
         #region Inventory
         [TestMethod]
