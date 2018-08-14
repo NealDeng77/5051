@@ -294,13 +294,14 @@ namespace _5051.Backend
         /// </summary>
         public void ResetAllStatus()
         {
-            if (SystemGlobalsModel.Instance.CurrentDate.ToShortDateString() != DateTime.UtcNow.ToShortDateString())
+            if (SystemGlobalsModel.Instance.CurrentDate.Date != UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date)
             {
                 //Reset all Student Status to "Out"
                 foreach (var item in Index())
                 {
                     item.Status = StudentStatusEnum.Out;
                 }
+
                 SystemGlobalsModel.Instance.CurrentDate = DateTime.UtcNow;
             }
         }
