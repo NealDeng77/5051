@@ -38,12 +38,14 @@ namespace _5051.UnitTests.Models
             expect.ItemId = "item";
             expect.Position = FactoryInventoryCategoryEnum.Topper;
             expect.StudentId = "student";
+            expect.TruckName = "truckName";
 
             // Act
             var result = new ShopTruckInputModel();
             result.ItemId = expect.ItemId;
             result.Position = expect.Position;
             result.StudentId = expect.StudentId;
+            result.TruckName = expect.TruckName;
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -54,6 +56,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect.ItemId, result.ItemId, "Item " + TestContext.TestName);
             Assert.AreEqual(expect.Position, result.Position, "Position " + TestContext.TestName);
             Assert.AreEqual(expect.StudentId, result.StudentId, "Student " + TestContext.TestName);
+            Assert.AreEqual(expect.TruckName, result.TruckName, "TruckName " + TestContext.TestName);
         }
         #endregion Instantiate
     }
