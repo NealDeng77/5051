@@ -88,6 +88,9 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
+            // Update token
+            StudentBackend.UpdateToken(data.Id);
+
             // perform student log in and update data
             StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
 

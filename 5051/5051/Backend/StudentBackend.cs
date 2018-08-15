@@ -294,7 +294,7 @@ namespace _5051.Backend
         /// </summary>
         public void ResetAllStatus()
         {
-            if (SystemGlobalsModel.Instance.CurrentDate.Date != UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date)
+            if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date) == 0)
             {
                 //Reset all Student Status to "Out"
                 foreach (var item in Index())
@@ -304,6 +304,93 @@ namespace _5051.Backend
 
                 SystemGlobalsModel.Instance.CurrentDate = DateTime.UtcNow;
             }
+        }
+
+        /// <summary>
+        /// Update token
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdateToken(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return;
+            }
+
+            var data = DataSource.Read(id);
+            if (data == null)
+            {
+                return;
+            }
+
+            //get the list of new attendances, for which token amount has not been added yet.
+            var newLogIns = data.Attendance.Where(m => m.IsNew);
+
+            //for each new attendance, calculate effective duration and according collected tokens,
+            //add to current tokens of the student.
+            foreach (var attendance in newLogIns)
+            {
+                var effectiveDuration = CalculateEffectiveDuration(attendance);
+
+                //todo: since hours attended is rounded up, need to prevent the case where consecutive check-ins in a short period
+                //todo: of time could add 1 tokens everytime
+                var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
+                data.Tokens += collectedTokens;
+
+                //mark it as old attendance
+                attendance.IsNew = false;
+            }
+
+        }
+
+        /// <summary>
+        /// private helper method to calculate effective duration
+        /// </summary>
+        /// <param name="attendance"></param>
+        /// <returns></returns>
+        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance)
+        {
+            //the school day model, will use the school day's start time and end time later
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
+
+            
+            var start = schoolDay.TimeStart.Add(-SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow); //the time from which duration starts to count
+
+            var end = schoolDay.TimeEnd.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow); //the time that duration counts until
+
+            var myIn = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay; //check-in time
+            TimeSpan myOut; //check-out time
+
+            //if out is auto, use today's dismissal time
+            if (attendance.Out == DateTime.MinValue)
+            {             
+                myOut = schoolDay.TimeEnd;
+            }
+            else //otherwise, use attendance's check-out time
+            {
+                myOut = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay;
+            }
+
+            //trim the start time to actual arrive time only if the student is late
+            if (myIn.CompareTo(start) > 0)
+            {
+                start = myIn;
+            }
+            //trim the end time to actual out time only if the student leave early
+            if (myOut.CompareTo(end) < 0)
+            {
+                end = myOut;
+            }
+
+            var duration = end.Subtract(start);
+
+            //If time-in is later than time out, just return 0
+            if (duration < TimeSpan.Zero)
+            {
+                return TimeSpan.Zero;
+            }
+
+            return duration;
         }
 
         /// <summary>
