@@ -293,11 +293,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar\placeholder.png" />
+    <Content Include="Content\img\PortalCalendar.png" />
     <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\EmotionVeryHappy.png" />
     <Content Include="Content\img\EmotionHappy.png" />
     <Content Include="Content\img\EmotionNeutral.png" />
     <Content Include="Content\img\EmotionSad.png" />
+    <Content Include="Content\img\PortalStore.png" />
+    <Content Include="Content\img\PortalReport.png" />
+    <Content Include="Content\img\PortalSettings.png" />
+    <Content Include="Content\img\PortalStudents.png" />
     <Content Include="Content\Shop.css" />
     <Content Include="Content\avatar\Accessory0.png" />
     <Content Include="Content\avatar\Accessory1.png" />
@@ -432,17 +437,12 @@
     <Content Include="Content\shop\Menu2.png" />
     <Content Include="Content\shop\placeholder.png" />
     <Content Include="Content\img\PortalAvatars.png" />
-    <Content Include="Content\img\PortalCalendar.jpeg" />
     <Content Include="Content\img\PortalCustomize.png" />
     <Content Include="Content\img\PortalHouse.png" />
     <Content Include="Content\img\PortalIndex.png" />
     <Content Include="Content\img\PortalLogin.png" />
-    <Content Include="Content\img\PortalReport.jpg" />
     <Content Include="Content\img\PortalReports.png" />
     <Content Include="Content\img\PortalSchool.png" />
-    <Content Include="Content\img\PortalSettings.png" />
-    <Content Include="Content\img\PortalStore.png" />
-    <Content Include="Content\img\PortalStudents.png" />
     <Content Include="Content\img\ReportBar.png" />
     <Content Include="Content\img\ReportStudentMay.png" />
     <Content Include="Content\img\SchoolCalendar.png" />
