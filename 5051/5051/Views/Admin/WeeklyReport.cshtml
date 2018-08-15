@@ -2,7 +2,7 @@
 @using _5051.Models.Enums
 @model _5051.Models.WeeklyReportViewModel
 @{
-    ViewBag.Title = ""+@Model.Student.Name+"'s Weekly Report";
+    ViewBag.Title = "" + @Model.Student.Name + "'s Weekly Report";
 }
 <script>
     function printContent(el) {
@@ -16,7 +16,7 @@
 
 <br />
 <ul class="nav nav-pills">
-    <li class="nav-item">
+    <li class="nav-item ml-3">
         @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-white" })
     </li>
     <li class="nav-item">
@@ -40,203 +40,204 @@
             @Html.DropDownListFor(m => m.SelectedWeekId, Model.Weeks, new { onchange = "this.form.submit();", @class = "form-control" })
         </li>
     }
-    <li class="nav-item ml-5">
+    <li class="nav-item ml-3 mr-3">
         <div href="#" class="nav-link text-white btn-primary" onclick="printContent('div1')">Print Report</div>
     </li>
 </ul>
 <br />
-<div id="div1" class="bg-white p-5">
-    <div class="text-center">
+<div class="row justify-content-center m-auto" style="width: 1200px">
+    <div id="div1" class="bg-white p-5 w-100">
+        <div class="text-center">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col">
-                <h4>@Model.Student.Name's Weekly Report</h4>
-                <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
+                <div class="col">
+                    <h4>@Model.Student.Name's Weekly Report</h4>
+                    <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
+                </div>
             </div>
-        </div>
-
-
-
-    </div>
-    <br />
-    @if (Model.Stats.NumOfSchoolDays == 0)
-    {
-        <h5>No Data of this Week</h5>
-    }
-    else
-    {
-        <div class="chartWithMarkerOverlay">
-            <div class="card w-100" id="curve_chart"></div>
-            <div class="overlay-text">
-                <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this week.
-                <br />
-                Percentage of attended school time is:
-                <h1>@Model.Stats.PercAttendedHours%.</h1>
-            </div>
-        </div>
-        <br/>
-        <div class="card w-100">
-
-            <table class="table">
-
-
-
-                <tbody>
-                    <tr>
-                        <td>Present</td>
-                        <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercPresent%</td>
-                    </tr>
-                    <tr>
-                        <td>Absent Unexcused</td>
-                        <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercUnexcused%</td>
-                    </tr>
-                    <tr>
-                        <td>Absent Excused</td>
-                        <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercExcused%</td>
-                    </tr>
-                    <tr>
-                        <td>In Late</td>
-                        <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                        <td>@Model.Stats.PercInLate%</td>
-                    </tr>
-                    <tr>
-                        <td>Out Early</td>
-                        <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                        <td>@Model.Stats.PercOutEarly%</td>
-                    </tr>
-                </tbody>
-            </table>
 
         </div>
         <br />
-        <div class="col-12 p-0">
-            <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
+        @if (Model.Stats.NumOfSchoolDays == 0)
+        {
+            <h5>No Data of this Week</h5>
+        }
+        else
+        {
+            <div class="chartWithMarkerOverlay">
+                <div class="card w-100" id="curve_chart"></div>
+                <div class="overlay-text">
+                    <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
+                    <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this week.
+                    <br />
+                    Percentage of attended school time is:
+                    <h1>@Model.Stats.PercAttendedHours%.</h1>
+                </div>
+            </div>
+            <br />
+            <div class="card w-100" id="stepped_chart"></div>
+            <br />
+            <div class="card w-100">
 
-                <tr class="text-center">
-                    <th class="text-center">Mon</th>
-                    <th class="text-center">Tue</th>
-                    <th class="text-center">Wed</th>
-                    <th class="text-center">Thu</th>
-                    <th class="text-center">Fri</th>
-                </tr>
-                <tr>
-                    @foreach (var item in Model.AttendanceList)
-                    {
-                        <td class="p-3">
+                <table class="table">
 
-                            <div class="text-center">
-                                <div>
-                                    @switch (item.Emotion)
+
+
+                    <tbody>
+                        <tr>
+                            <td>Present</td>
+                            <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercPresent%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Unexcused</td>
+                            <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercUnexcused%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Excused</td>
+                            <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercExcused%</td>
+                        </tr>
+                        <tr>
+                            <td>In Late</td>
+                            <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercInLate%</td>
+                        </tr>
+                        <tr>
+                            <td>Out Early</td>
+                            <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercOutEarly%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <br />
+            <div class="col-12 p-0">
+                <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
+
+                    <tr class="text-center">
+                        <th class="text-center">Mon</th>
+                        <th class="text-center">Tue</th>
+                        <th class="text-center">Wed</th>
+                        <th class="text-center">Thu</th>
+                        <th class="text-center">Fri</th>
+                    </tr>
+                    <tr>
+                        @foreach (var item in Model.AttendanceList)
+                        {
+                            <td class="p-3">
+
+                                <div class="text-center">
+                                    <div>
+                                        @switch (item.Emotion)
+                                        {
+                                            case EmotionStatusEnum.VeryHappy:
+                                                <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Happy:
+                                                <img src="/Content/img/EmotionHappy.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Neutral:
+                                                <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.Sad:
+                                                <img src="/Content/img/EmotionSad.png" height="30" />
+                                                break;
+                                            case EmotionStatusEnum.VerySad:
+                                                <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                                break;
+                                        }
+                                        @item.Date.ToString("MM/dd")
+                                    </div>
+
+                                    @if (!item.IsSchoolDay)
                                     {
-                                        case EmotionStatusEnum.VeryHappy:
-                                            <img src="/Content/img/EmotionVeryHappy.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Happy:
-                                            <img src="/Content/img/EmotionHappy.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Neutral:
-                                            <img src="/Content/img/EmotionNeutral.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.Sad:
-                                            <img src="/Content/img/EmotionSad.png" height="30" />
-                                            break;
-                                        case EmotionStatusEnum.VerySad:
-                                            <img src="/Content/img/EmotionVerySad.png" height="30" />
-                                            break;
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>No School</h6>
+                                            </div>
+                                        </div>
                                     }
-                                    @item.Date.ToString("MM/dd")
+                                    else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>Absent Excused</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <h6>Absent Unexcused</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.PercentAttended < 100)
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <div>@item.PercentAttended%</div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div>
+                                                    @Convert.ToInt32(item.HoursAttended.TotalMinutes) / @Convert.ToInt32(item.HoursExpected.TotalMinutes) minutes
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                In<br />
+                                                @item.TimeIn.ToString("h:mm tt")<br />
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                Out<br />
+                                                @item.TimeOut.ToString("h:mm tt")<br />
+                                            </div>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="row" style="height: 100px">
+                                            <div class="col align-self-center">
+                                                <img src="~/Content/img/CheckMark.png" style="height: 80px" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                In<br />
+                                                @item.TimeIn.ToString("h:mm tt")<br />
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                Out<br />
+                                                @item.TimeOut.ToString("h:mm tt")<br />
+                                            </div>
+                                        </div>
+
+                                    }
                                 </div>
 
-                                @if (!item.IsSchoolDay)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>No School</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>Absent Excused</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <h6>Absent Unexcused</h6>
-                                        </div>
-                                    </div>
-                                }
-                                else if (item.PercentAttended < 100)
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <div>@item.PercentAttended%</div>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div>
-                                                @Convert.ToInt32(item.HoursAttended.TotalMinutes) / @Convert.ToInt32(item.HoursExpected.TotalMinutes) minutes
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            In<br />
-                                            @item.TimeIn.ToString("h:mm tt")<br />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            Out<br />
-                                            @item.TimeOut.ToString("h:mm tt")<br />
-                                        </div>
-                                    </div>
-
-                                }
-                                else
-                                {
-                                    <div class="row" style="height: 100px">
-                                        <div class="col align-self-center">
-                                            <img src="~/Content/img/CheckMark.png" style="height: 80px" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            In<br />
-                                            @item.TimeIn.ToString("h:mm tt")<br />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            Out<br />
-                                            @item.TimeOut.ToString("h:mm tt")<br />
-                                        </div>
-                                    </div>
-
-                                }
-                            </div>
 
 
 
+                            </td>
+                        }
+                    </tr>
 
-                        </td>
-                    }
-                </tr>
-
-            </table>
-        </div>
-        <br />
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
+                </table>
+            </div>
+            <br />
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -244,7 +245,7 @@
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('date', 'Date');
-            
+
             data.addColumn('number', 'Perfect: 100%');
             data.addColumn('number', "Goal: @Model.Goal%");
             data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
@@ -269,7 +270,7 @@
             }
 
             var options = {
-                height: 600,
+                height: 500,
                 curveType: 'function',
                 chartArea: { width: "85%", height: "70%" },
                 legend: 'top',
@@ -297,12 +298,80 @@
             google.visualization.events.addListener(chart, 'ready',
                 placeMarker.bind(chart, data));
             chart.draw(data, options);
+                }
+            </script>
+
+            //emotion state chart
+            <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'Date');
+
+            data.addColumn('number', 'Emotion Level');
+            var dates = [
+                @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
+            ];
+            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => (int)m.Emotion).ToArray())];
+
+            var year;
+            var month;
+            var date;
+            var i = 0;
+            while (i < dates.length) {
+                year = dates[i];
+                i++;
+                month = dates[i] - 1;
+                i++;
+                date = dates[i];
+                i++;
+                data.addRow([new Date(year, month, date), values[i / 3 - 1]]);
+            }
+
+            var options = {
+                height: 300,
+                chartArea: { width: "85%", height: "70%" },
+                legend: 'top',
+                colors: ['#3498DB'],
+                vAxis: {
+                    title: "Cumulative Attendance (Minutes)", gridlines: {
+                        color: 'transparent'
+                    },
+
+                        viewWindow: {
+                            min: 0,
+                            max: 5
+                        },
+                        ticks: [0, 1, 2, 3, 4, 5]
+
+                },
+                hAxis: {
+                    title: "Date", gridlines: {
+                        color: 'transparent'
+                    },
+                    format: 'M/d'
+                }
+            };
+
+            function placeMarker(dataTable) {
+                var cli = this.getChartLayoutInterface();
+                var chartArea = cli.getChartAreaBoundingBox();
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('stepped_chart'));
+
+            google.visualization.events.addListener(chart, 'ready',
+                placeMarker.bind(chart, data));
+            chart.draw(data, options);
+                }
+            </script>
+
+
         }
-        </script>
-
-
-
-
-    }
+    </div>
 </div>
+
 <br />
