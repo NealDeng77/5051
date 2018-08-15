@@ -33,5 +33,11 @@ namespace _5051.Models
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
 
+        /// <summary>
+        /// If this is a newly added attendance, which means that token accumulated in this attendance has not been added yet.
+        /// Need to process token.
+        /// </summary>
+        public bool IsNew { get; set; } = true;
+
     }
 }
