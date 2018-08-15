@@ -358,7 +358,7 @@ div.BlockStudentLogin {
 .overlay-text {
     width: 300px;
     position: absolute;
-    top: 150px; /* chartArea top  */
+    top: 120px; /* chartArea top  */
     left: 150px; /* chartArea left */
 }
 
