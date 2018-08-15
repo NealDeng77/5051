@@ -5,10 +5,10 @@
     /// </summary>
     public enum EmotionStatusEnum
     {
-        VeryHappy = 1,
-        Happy = 2,
+        VeryHappy = 5,
+        Happy = 4,
         Neutral = 3,
-        Sad = 4,
-        VerySad = 5,
+        Sad = 2,
+        VerySad = 1,
     }
 }
