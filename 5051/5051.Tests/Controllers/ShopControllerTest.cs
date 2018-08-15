@@ -639,11 +639,328 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Invalid_ItemIdIsNull_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Invalid_StudentId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = "bogus";
+            data.ItemId = "itemID";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Invalid_ItemId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Truck_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Truck).Id;
+            data.Position = FactoryInventoryCategoryEnum.Truck;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Truck;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+           
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Truck, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Topper_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Topper).Id;
+            data.Position = FactoryInventoryCategoryEnum.Topper;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Topper;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Topper, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Menu_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Menu).Id;
+            data.Position = FactoryInventoryCategoryEnum.Menu;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Menu;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Menu, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Sign_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Sign).Id;
+            data.Position = FactoryInventoryCategoryEnum.Sign;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Sign;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Sign, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Wheels_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Wheels).Id;
+            data.Position = FactoryInventoryCategoryEnum.Wheels;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Wheels;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Wheels, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Edit_Data_Valid_Position_Trailer_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Trailer).Id;
+            data.Position = FactoryInventoryCategoryEnum.Trailer;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.Trailer;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.Edit(data);
+
+            // Act
+            ViewResult result = controller.Edit(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.Trailer, TestContext.TestName);
+        }
+
         #endregion Edit
 
-
         #region EditName
+        [TestMethod]
+        public void Controller_Shop_EditName_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
 
+            // Act
+            ViewResult result = controller.EditName(data) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            ShopTruckInputModel data = new ShopTruckInputModel();
+            data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_StudentID_Null_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_TruckNameIsNull_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.TruckName = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Invalid_StudentId_Bogus_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopTruckInputModel();
+            data.StudentId = "bogus";
+            data.TruckName = "truckName";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.EditName(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_EditName_Data_Valid_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = new ShopTruckInputModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.TruckName = DataSourceBackend.Instance.StudentBackend.GetDefault().Truck.TruckName;
+
+            // Get the Student Record
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            var expect = myStudent.Truck.TruckName;
+
+            // select item
+            var mySelect = (RedirectToRouteResult)controller.EditName(data);
+
+            // Act
+            ViewResult result = controller.EditName(data) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Truck.TruckName, TestContext.TestName);
+        }
         #endregion EditName
 
 

@@ -12,26 +12,12 @@
             @Html.Hidden("StudentId", Model.Id)
         </div>
 
-        <div class="StudentNavBar FontBold FontSizeSmall">
-            <div class="row justify-content-around">
-                <div class="col-1"></div>
-                <div class="col-1">
-                    Lvl &nbsp;<span id="levelValue">@Model.AvatarLevel</span>
-                </div>
-                <div class="col-1">
-                    <span id="ExperienceValue">@Model.ExperiencePoints</span>&nbsp; XP
-                </div>
-                <div class="col-2">
-                    <span id="TokensValue">@Model.Tokens</span>&nbsp; Tokens
-                </div>
-                <div class="col-2">
-                    <span>Customers:</span>&nbsp;<span id="CustomersValue">10</span>
-                </div>
-                <div class="col-3">
-                    <span id="StoreStatus"></span>
-                </div>
-                <div class="col-1"></div>
-            </div>
+        <div class="grid-container justify-content-around FontBold FontSizeSmall">
+            <div>Lvl <span id="levelValue">@Model.AvatarLevel</span></div>
+            <div><span id="ExperienceValue">@Model.ExperiencePoints</span> XP</div>
+            <div><span id="TokensValue">@Model.Tokens</span> Tokens</div>
+            <div><span>Customers:</span><span id="CustomersValue">10</span></div>
+            <div><span id="StoreStatus"></span></div>
         </div>
 
         <div class="FeedBar FontSizeSmall">
@@ -46,8 +32,8 @@
                 @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn1" })
 
                 @{
-            //&nbsp; &nbsp;
-            //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                //&nbsp; &nbsp;
+                //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
                 }
             </div>
             <div class="row">
@@ -57,7 +43,7 @@
             <div class="row">
                 @*&nbsp;&nbsp;*@
                 @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn1" })
-            </div>            
+            </div>
         </div>
         <div class="AvatarImageBox">
 

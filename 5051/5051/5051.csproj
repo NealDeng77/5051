@@ -293,6 +293,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar\placeholder.png" />
+    <Content Include="Content\img\EmotionVerySad.png" />
+    <Content Include="Content\img\EmotionVeryHappy.png" />
+    <Content Include="Content\img\EmotionHappy.png" />
+    <Content Include="Content\img\EmotionNeutral.png" />
+    <Content Include="Content\img\EmotionSad.png" />
     <Content Include="Content\Shop.css" />
     <Content Include="Content\avatar\Accessory0.png" />
     <Content Include="Content\avatar\Accessory1.png" />
@@ -411,11 +416,6 @@
     <Content Include="Content\img\ChartPlaceholder.png" />
     <Content Include="Content\img\CheckMark.png" />
     <Content Include="Content\img\EditPicture.png" />
-    <Content Include="Content\img\EmotionVeryHappy.png" />
-    <Content Include="Content\img\EmotionHappy.png" />
-    <Content Include="Content\img\EmotionNeutral.png" />
-    <Content Include="Content\img\EmotionSad.png" />
-    <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\HomeArrange.jpg" />
     <Content Include="Content\img\HomeExample.jpg" />
     <Content Include="Content\img\PortalCustomizeAvatar.png" />
