@@ -185,6 +185,7 @@ namespace _5051.Backend
                 // Look to the next day
                 currentDate = currentDate.AddDays(1);
             }
+            StudentBackend.Instance.UpdateToken(myStudent.Id);
         }
 
         /// <summary>
