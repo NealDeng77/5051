@@ -32,12 +32,12 @@
     max-width: 1000px
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
     .TruckBoxLarge {
-        min-height: 180px;
-        max-height: 180px;
-        min-width: 300px;
-        max-width: 300px;
+        min-height: 450px;
+        max-height: 450px;
+        min-width: 750px;
+        max-width: 750px;
         margin-top: 100px;
     }
 
@@ -46,7 +46,7 @@
     }
 
     .grid-container > div {
-        font-size: 10px;
+        font-size: 17px;
     }
 
     .PeopleItem {
@@ -58,9 +58,146 @@
     }
 
     #TruckName {
-        font-size: 20px;
+        font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 805px) {
+    .TruckBoxLarge {
+        min-height: 414px;
+        max-height: 414px;
+        min-width: 690px;
+        max-width: 690px;
+        margin-top: 100px;
     }
 
+    .grid-container > div {
+        font-size: 16px;
+    }
+
+    #TruckName {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .TruckBoxLarge {
+        min-height: 360px;
+        max-height: 360px;
+        min-width: 600px;
+        max-width: 600px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 15px;
+    }
+
+    #TruckName {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .TruckBoxLarge {
+        min-height: 324px;
+        max-height: 324px;
+        min-width: 540px;
+        max-width: 540px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 14px;
+    }
+
+    #TruckName {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .TruckBoxLarge {
+        min-height: 300px;
+        max-height: 300px;
+        min-width: 500px;
+        max-width: 500px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 13px;
+    }
+
+    #TruckName {
+        font-size: 23px;
+    }
+}
+
+@media screen and (max-width: 525px) {
+    .TruckBoxLarge {
+        min-height: 270px;
+        max-height: 270px;
+        min-width: 450px;
+        max-width: 450px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 12px;
+    }
+
+    #TruckName {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 434px) {
+    .TruckBoxLarge {
+        min-height: 223px;
+        max-height: 223px;
+        min-width: 372px;
+        max-width: 372px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 11px;
+    }
+
+    #TruckName {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .TruckBoxLarge {
+        min-height: 180px;
+        max-height: 180px;
+        min-width: 300px;
+        max-width: 300px;
+        margin-top: 100px;
+    }
+
+    .grid-container > div {
+        font-size: 10px;
+    }
+
+    #TruckName {
+        font-size: 20px;
+    }
+}
+
+.TruckBoxThumbnail {
+    position: relative;
+    height: 5%;
+    width: 5%;
+}
+
+.ImageBox {
+    position: relative;
+    width: 1000px;
+    height: 550px;
 }
 
 .TruckBoxThumbnail {
