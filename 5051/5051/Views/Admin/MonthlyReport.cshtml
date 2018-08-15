@@ -77,6 +77,8 @@
                 </div>
             </div>
             <br />
+            <div class="card w-100" id="stepped_chart"></div>
+            <br />
             <div class="card w-100">
 
                 <table class="table">
@@ -114,7 +116,7 @@
 
             </div>
 
-           
+
             <div class="col-12 p-0">
                 <div>
                     <table class="table table-bordered table-fit" style="width: 100%; table-layout: fixed">
@@ -324,7 +326,7 @@
                 }
 
                 var options = {
-                    height: 600,
+                    height: 500,
                     curveType: 'function',
                     chartArea: { width: "85%", height: "70%" },
                     legend: 'top',
@@ -348,7 +350,73 @@
                 chart.draw(data, options);
             }
             </script>
+            //emotion state chart
+            <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
+        function drawChart() {
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'Date');
+
+            data.addColumn('number', 'Emotion Level');
+            var dates = [
+                @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
+            ];
+            var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => (int)m.Emotion).ToArray())];
+
+            var year;
+            var month;
+            var date;
+            var i = 0;
+            while (i < dates.length) {
+                year = dates[i];
+                i++;
+                month = dates[i] - 1;
+                i++;
+                date = dates[i];
+                i++;
+                data.addRow([new Date(year, month, date), values[i / 3 - 1]]);
+            }
+
+            var options = {
+                height: 300,
+                chartArea: { width: "85%", height: "70%" },
+                legend: 'top',
+                colors: ['#3498DB'],
+                vAxis: {
+                    title: "Cumulative Attendance (Minutes)", gridlines: {
+                        color: 'transparent'
+                    },
+
+                        viewWindow: {
+                            min: 0,
+                            max: 5
+                        },
+                        ticks: [0, 1, 2, 3, 4, 5]
+
+                },
+                hAxis: {
+                    title: "Date", gridlines: {
+                        color: 'transparent'
+                    },
+                    format: 'M/d'
+                }
+            };
+
+            function placeMarker(dataTable) {
+                var cli = this.getChartLayoutInterface();
+                var chartArea = cli.getChartAreaBoundingBox();
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('stepped_chart'));
+
+            google.visualization.events.addListener(chart, 'ready',
+                placeMarker.bind(chart, data));
+            chart.draw(data, options);
+                }
+            </script>
         }
 
     </div>
