@@ -14,7 +14,7 @@
 
 <br />
 <ul class="nav nav-pills">
-    <li class="nav-item">
+    <li class="nav-item ml-3">
         @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
     </li>
     <li class="nav-item">
@@ -38,82 +38,83 @@
             @Html.DropDownListFor(m => m.SelectedQuarterId, Model.Quarters, new { onchange = "this.form.submit();", @class = "form-control" })
         </li>
     }
-    <li class="nav-item ml-5">
+    <li class="nav-item ml-3 mr-3">
         <div href="#" class="nav-link text-white btn-primary" onclick="printContent('div1')">Print Report</div>
     </li>
 </ul>
 <br />
-<div id="div1" class="bg-white" style="padding: 30px">
-    <div class="text-center">
-        <div class="row">
+<div class="row justify-content-center m-auto" style="width: 1200px">
+    <div id="div1" class="bg-white p-5 w-100">
+        <div class="text-center">
+            <div class="row">
 
-            <div class="col">
-                <h4>@Model.Student.Name's Quarter Report</h4>
-                <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
+                <div class="col">
+                    <h4>@Model.Student.Name's Quarter Report</h4>
+                    <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
+                </div>
             </div>
-        </div>
 
 
 
-    </div>
-    <br />
-    @if (Model.Stats.NumOfSchoolDays == 0)
-    {
-        <h5 class="text-light">No Data of this semester</h5>
-    }
-    else
-    {
-        <div class="chartWithMarkerOverlay">
-            <div class="card w-100" id="curve_chart"></div>
-            <div class="overlay-text">
-                <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
-                <br />
-                Percentage of attended school time is:
-                <h1>@Model.Stats.PercAttendedHours%.</h1>
-            </div>
         </div>
         <br />
-        <div class="card w-100">
-            <table class="table">
+        @if (Model.Stats.NumOfSchoolDays == 0)
+        {
+            <h5 class="text-light">No Data of this semester</h5>
+        }
+        else
+        {
+            <div class="chartWithMarkerOverlay">
+                <div class="card w-100" id="curve_chart"></div>
+                <div class="overlay-text">
+                    <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
+                    <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
+                    <br />
+                    Percentage of attended school time is:
+                    <h1>@Model.Stats.PercAttendedHours%.</h1>
+                </div>
+            </div>
+            <br />
+            <div class="card w-100">
+                <table class="table">
 
 
 
-                <tbody>
-                    <tr>
-                        <td>Present</td>
-                        <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercPresent%</td>
-                    </tr>
-                    <tr>
-                        <td>Absent Unexcused</td>
-                        <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercUnexcused%</td>
-                    </tr>
-                    <tr>
-                        <td>Absent Excused</td>
-                        <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                        <td>@Model.Stats.PercExcused%</td>
-                    </tr>
-                    <tr>
-                        <td>In Late</td>
-                        <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                        <td>@Model.Stats.PercInLate%</td>
-                    </tr>
-                    <tr>
-                        <td>Out Early</td>
-                        <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                        <td>@Model.Stats.PercOutEarly%</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <tbody>
+                        <tr>
+                            <td>Present</td>
+                            <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercPresent%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Unexcused</td>
+                            <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercUnexcused%</td>
+                        </tr>
+                        <tr>
+                            <td>Absent Excused</td>
+                            <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
+                            <td>@Model.Stats.PercExcused%</td>
+                        </tr>
+                        <tr>
+                            <td>In Late</td>
+                            <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercInLate%</td>
+                        </tr>
+                        <tr>
+                            <td>Out Early</td>
+                            <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
+                            <td>@Model.Stats.PercOutEarly%</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        </div>
+            </div>
 
-        <br />
+            <br />
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
 
@@ -166,7 +167,8 @@
 
                 chart.draw(data, options);
             }
-        </script>
-    }
+            </script>
+        }
+    </div>
 </div>
 <br />
