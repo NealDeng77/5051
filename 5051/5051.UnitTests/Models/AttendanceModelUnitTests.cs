@@ -34,7 +34,8 @@ namespace _5051.UnitTests.Models
             var expectIn = DateTime.UtcNow;
             var expectOut = DateTime.UtcNow;
             //var expectStatus = _5051.Models.StudentStatusEnum.In;
-            var expectDuration = TimeSpan.Zero;
+            //var expectDuration = TimeSpan.Zero;
+            var expectedIsNew = false;
             var expectEmotion = _5051.Models.EmotionStatusEnum.Neutral;
 
             // Act
@@ -42,6 +43,7 @@ namespace _5051.UnitTests.Models
             result.In = expectIn;
             result.Out = expectOut;
             //result.Status = expectStatus;
+            result.IsNew = expectedIsNew;
             result.Emotion = expectEmotion;
 
             // Assert
@@ -50,6 +52,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectOut, result.Out, TestContext.TestName);
             //Assert.AreEqual(expectStatus, result.Status, TestContext.TestName);
             Assert.AreEqual(expectEmotion, result.Emotion, TestContext.TestName);
+            Assert.AreEqual(expectedIsNew, result.IsNew, TestContext.TestName);
         }
         #endregion Instantiate
     }
