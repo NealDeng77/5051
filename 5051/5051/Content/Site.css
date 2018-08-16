@@ -329,6 +329,23 @@ div.BlockStudentLogin {
 
 
 /*
+    /Admin/Index page
+*/
+.AdminIconBox {
+    width: 250px;
+    height: 250px;
+}
+    .AdminIconBox:hover {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+    }
+
+.AdminIconImage {
+    width: 100px;
+    height: 100px;
+}
+
+/*
     /Kiosk/Index page
 */
 .KioskBoxCenter {
