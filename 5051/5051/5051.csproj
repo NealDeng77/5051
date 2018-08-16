@@ -293,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar\placeholder.png" />
+    <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.png" />
     <Content Include="Content\img\EmotionVerySad.png" />
     <Content Include="Content\img\EmotionVeryHappy.png" />
@@ -436,7 +437,6 @@
     <Content Include="Content\shop\Menu1.png" />
     <Content Include="Content\shop\Menu2.png" />
     <Content Include="Content\shop\placeholder.png" />
-    <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCustomize.png" />
     <Content Include="Content\img\PortalHouse.png" />
     <Content Include="Content\img\PortalIndex.png" />
