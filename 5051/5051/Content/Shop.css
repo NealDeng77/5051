@@ -49,12 +49,16 @@
         font-size: 17px;
     }
 
+    .AvatarImageBox {
+        margin-top: -100px;
+    }
+
     .PeopleItem {
-        display: none;
+        width: 6.2%;
     }
 
     .WorkerItem {
-        display: none;
+        width: 6.2%;
     }
 
     #TruckName {
@@ -438,6 +442,132 @@
 }
 
 /* End Feed Components */
+
+/* Start People */
+
+.WorkerImageBox {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+    /* Starting position */
+    -moz-transform: translateX(60%);
+    -webkit-transform: translateX(60%);
+    transform: translateX(60%);
+    /* Apply animation to this element */
+    -moz-animation: WorkerImageBox 15s alternate infinite;
+    -webkit-animation: WorkerImageBox 15s alternate infinite;
+    animation: WorkerImageBox 15s alternate infinite;
+}
+
+.AvatarImageBox {
+    position: absolute;
+    top: 60%;
+    left: 0%;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    z-index: 500;
+
+    /* Starting position */
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    /* Apply animation to this element */
+    -moz-animation: AvatarImageBox 15s alternate infinite;
+    -webkit-animation: AvatarImageBox 15s alternate infinite;
+    animation: AvatarImageBox 15s alternate infinite;
+}
+
+/* Animation */
+@-moz-keyframes AvatarImageBox {
+    0% {
+        -moz-transform: translateX(200%);
+    }
+
+    50% {
+        -moz-transform: translateX(50%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes AvatarImageBox {
+    0% {
+        -webkit-transform: translateX(200%);
+    }
+
+    50% {
+        -webkit-transform: translateX(50%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes AvatarImageBox {
+    0% {
+        -moz-transform: translateX(200%);
+        -webkit-transform: translateX(200%);
+        transform: translateX(200%);
+    }
+
+    50% {
+        -moz-transform: translateX(50%);
+        -webkit-transform: translateX(50%);
+        transform: translateX(50%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+
+@-moz-keyframes WorkerImageBox {
+    60% {
+        -moz-transform: translateX(40%);
+    }
+
+    40% {
+        -moz-transform: translateX(60%);
+    }
+}
+
+@-webkit-keyframes WorkerImageBox {
+    60% {
+        -webkit-transform: translateX(40%);
+    }
+
+    40% {
+        -webkit-transform: translateX(60%);
+    }
+}
+
+@keyframes WorkerImageBox {
+    60% {
+        -moz-transform: translateX(40%);
+        -webkit-transform: translateX(40%);
+        transform: translateX(40%);
+    }
+
+    40% {
+        -moz-transform: translateX(60%);
+        -webkit-transform: translateX(60%);
+        transform: translateX(60%);
+    }
+}
+
+/* End People */
 
 /* Start Truck Navigation Buttons */
 .GameButtonsBox {
