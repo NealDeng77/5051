@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using _5051.Models.Enums;
 
 namespace _5051.Models
 {
@@ -46,7 +47,7 @@ namespace _5051.Models
         public List<SelectListItem> DayEndDropDown { get; set; }
 
         //Selected start time and end time type id for each day of week.
-        public int MonStartSelected { get; set; }
+        public int MonStartSelected { get; set; }        
         public int MonEndSelected { get; set; }
 
         public int TueStartSelected { get; set; }
@@ -67,6 +68,20 @@ namespace _5051.Models
         public int SunStartSelected { get; set; }
         public int SunEndSelected { get; set; }
 
+        public SchoolCalendarDismissalEnum MonStartType { get; set; }
+        public SchoolCalendarDismissalEnum MonEndType { get; set; }
+        public SchoolCalendarDismissalEnum TueStartType { get; set; }
+        public SchoolCalendarDismissalEnum TueEndType { get; set; }
+        public SchoolCalendarDismissalEnum WedStartType { get; set; }
+        public SchoolCalendarDismissalEnum WedEndType { get; set; }
+        public SchoolCalendarDismissalEnum ThuStartType { get; set; }
+        public SchoolCalendarDismissalEnum ThuEndType { get; set; }
+        public SchoolCalendarDismissalEnum FriStartType { get; set; }
+        public SchoolCalendarDismissalEnum FriEndType { get; set; }
+        public SchoolCalendarDismissalEnum SatStartType { get; set; }
+        public SchoolCalendarDismissalEnum SatEndType { get; set; }
+        public SchoolCalendarDismissalEnum SunStartType { get; set; }
+        public SchoolCalendarDismissalEnum SunEndType { get; set; }
 
         // First day of school
         [Display(Name = "First Day", Description = "First Day of School")]
@@ -251,6 +266,7 @@ namespace _5051.Models
             SatEndSelected = 0;
             SunStartSelected =0;
             SunEndSelected = 0;
+            
 
             var Year = DateTime.UtcNow.Year;
             if (DateTime.UtcNow.Month > 1)
