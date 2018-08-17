@@ -251,6 +251,10 @@ namespace _5051.Models
             EndNormal = data.EndNormal;
             EndEarly = data.EndEarly;
             EndLate = data.EndLate;
+
+            DayStartDropDown = data.DayStartDropDown;
+            DayEndDropDown = data.DayEndDropDown;
+
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
             FallFirstClassDay = data.FallFirstClassDay;
