@@ -45,7 +45,7 @@ namespace _5051.Models
         // Day end time drop down list: normal, early, late
         public List<SelectListItem> DayEndDropDown { get; set; }
 
-        //Selected start time and end time type for each day of week.
+        //Selected start time and end time type id for each day of week.
         public int MonStartSelected { get; set; }
         public int MonEndSelected { get; set; }
 
@@ -168,6 +168,20 @@ namespace _5051.Models
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
+
+            MonStartSelected = data.MonStartSelected;
+            MonEndSelected = data.MonEndSelected;
+            TueStartSelected = data.TueStartSelected;
+            TueEndSelected = data.TueEndSelected;
+            WedStartSelected = data.WedStartSelected;
+            ThuStartSelected = data.ThuStartSelected;
+            ThuEndSelected = data.ThuEndSelected;
+            FriStartSelected = data.FriStartSelected;
+            FriEndSelected = data.FriEndSelected;
+            SatStartSelected = data.SatStartSelected;
+            SatEndSelected = data.SatEndSelected;
+            SunStartSelected = data.SunStartSelected;
+            SunEndSelected = data.SunEndSelected;
 
             FallFirstClassDay = data.FallFirstClassDay;
             FallLastClassDay = data.FallLastClassDay;
