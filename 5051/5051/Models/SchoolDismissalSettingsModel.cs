@@ -163,11 +163,9 @@ namespace _5051.Models
             EndNormal = data.EndNormal;
             EndEarly = data.EndEarly;
             EndLate = data.EndLate;
+
             DayStartDropDown = data.DayStartDropDown;
             DayEndDropDown = data.DayEndDropDown;
-
-            DayFirst = data.DayFirst;
-            DayLast = data.DayLast;
 
             MonStartSelected = data.MonStartSelected;
             MonEndSelected = data.MonEndSelected;
@@ -182,6 +180,9 @@ namespace _5051.Models
             SatEndSelected = data.SatEndSelected;
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
+
+            DayFirst = data.DayFirst;
+            DayLast = data.DayLast;
 
             FallFirstClassDay = data.FallFirstClassDay;
             FallLastClassDay = data.FallLastClassDay;
@@ -291,6 +292,20 @@ namespace _5051.Models
 
             DayStartDropDown = data.DayStartDropDown;
             DayEndDropDown = data.DayEndDropDown;
+
+            MonStartSelected = data.MonStartSelected;
+            MonEndSelected = data.MonEndSelected;
+            TueStartSelected = data.TueStartSelected;
+            TueEndSelected = data.TueEndSelected;
+            WedStartSelected = data.WedStartSelected;
+            ThuStartSelected = data.ThuStartSelected;
+            ThuEndSelected = data.ThuEndSelected;
+            FriStartSelected = data.FriStartSelected;
+            FriEndSelected = data.FriEndSelected;
+            SatStartSelected = data.SatStartSelected;
+            SatEndSelected = data.SatEndSelected;
+            SunStartSelected = data.SunStartSelected;
+            SunEndSelected = data.SunEndSelected;
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
