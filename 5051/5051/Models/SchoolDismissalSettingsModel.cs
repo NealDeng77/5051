@@ -193,6 +193,12 @@ namespace _5051.Models
             DayStartDropDown.Add(new SelectListItem { Value = "2", Text = "Start Early" });
             DayStartDropDown.Add(new SelectListItem { Value = "3", Text = "Start Late" });
 
+            DayEndDropDown = new List<SelectListItem>();
+
+            DayEndDropDown.Add(new SelectListItem { Value = "1", Text = "End Normal" });
+            DayEndDropDown.Add(new SelectListItem { Value = "2", Text = "End Early" });
+            DayEndDropDown.Add(new SelectListItem { Value = "3", Text = "End Late" });
+
             var Year = DateTime.UtcNow.Year;
             if (DateTime.UtcNow.Month > 1)
             {
