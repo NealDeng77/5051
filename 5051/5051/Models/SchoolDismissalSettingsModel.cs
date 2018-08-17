@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Web.Mvc;
 using _5051.Models.Enums;
 
@@ -195,6 +196,21 @@ namespace _5051.Models
             SatEndSelected = data.SatEndSelected;
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
+
+            MonStartType = data.MonStartType;
+            MonEndType = data.MonEndType;
+            TueStartType = data.TueStartType;
+            TueEndType = data.TueEndType;
+            WedStartType = data.WedStartType;
+            WedEndType = data.WedEndType;
+            ThuStartType = data.ThuStartType;
+            ThuEndType = data.ThuEndType;
+            FriStartType = data.FriStartType;
+            FriEndType = data.FriEndType;
+            SatStartType = data.SatStartType;
+            SatEndType = data.SatEndType;
+            SunStartType = data.SunStartType;
+            SunEndType = data.SunEndType;
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
