@@ -79,6 +79,20 @@ namespace _5051.Controllers
                                         "EndNormal," +
                                         "EndEarly," +
                                         "EndLate," +
+                                        "MonStartSelected" +
+                                        "MonEndSelected" +
+                                        "TueStartSelected" +
+                                        "TueEndSelected" +
+                                        "WedStartSelected" +
+                                        "WedEndSelected" +
+                                        "ThuStartSelected" +
+                                        "ThuEndSelected" +
+                                        "FriStartSelected" +
+                                        "FriEndSelected" +
+                                        "SatStartSelected" +
+                                        "SatEndSelected" +
+                                        "SunStartSelected" +
+                                        "SunEndSelected" +
                                         "DayFirst," +
                                         "DayLast," +
                                         "FallFirstClassDay," +
