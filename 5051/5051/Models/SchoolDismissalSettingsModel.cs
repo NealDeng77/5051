@@ -256,17 +256,21 @@ namespace _5051.Models
             EndEarly = TimeSpan.Parse("14:00");
             EndLate = TimeSpan.Parse("16:00");
 
-            DayStartDropDown = new List<SelectListItem>();
-            DayStartDropDown.Add(new SelectListItem { Value = "0", Text = "No School" });
-            DayStartDropDown.Add(new SelectListItem { Value = "1", Text = "Start Normal" });
-            DayStartDropDown.Add(new SelectListItem { Value = "2", Text = "Start Early" });
-            DayStartDropDown.Add(new SelectListItem { Value = "3", Text = "Start Late" });
+            DayStartDropDown = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No School" },
+                new SelectListItem { Value = "1", Text = "Start Normal" },
+                new SelectListItem { Value = "2", Text = "Start Early" },
+                new SelectListItem { Value = "3", Text = "Start Late" }
+            };
 
-            DayEndDropDown = new List<SelectListItem>();
-            DayEndDropDown.Add(new SelectListItem { Value = "0", Text = "No School" });
-            DayEndDropDown.Add(new SelectListItem { Value = "1", Text = "End Normal" });
-            DayEndDropDown.Add(new SelectListItem { Value = "2", Text = "End Early" });
-            DayEndDropDown.Add(new SelectListItem { Value = "3", Text = "End Late" });
+            DayEndDropDown = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No School" },
+                new SelectListItem { Value = "1", Text = "End Normal" },
+                new SelectListItem { Value = "2", Text = "End Early" },
+                new SelectListItem { Value = "3", Text = "End Late" }
+            };
 
             MonStartSelected = 1;
             MonEndSelected = 1;
