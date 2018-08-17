@@ -354,6 +354,21 @@ namespace _5051.Models
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
 
+            MonStartType = data.MonStartType;
+            MonEndType = data.MonEndType;
+            TueStartType = data.TueStartType;
+            TueEndType = data.TueEndType;
+            WedStartType = data.WedStartType;
+            WedEndType = data.WedEndType;
+            ThuStartType = data.ThuStartType;
+            ThuEndType = data.ThuEndType;
+            FriStartType = data.FriStartType;
+            FriEndType = data.FriEndType;
+            SatStartType = data.SatStartType;
+            SatEndType = data.SatEndType;
+            SunStartType = data.SunStartType;
+            SunEndType = data.SunEndType;
+
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
             FallFirstClassDay = data.FallFirstClassDay;
