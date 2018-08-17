@@ -187,6 +187,12 @@ namespace _5051.Models
             EndEarly = TimeSpan.Parse("14:00");
             EndLate = TimeSpan.Parse("16:00");
 
+            DayStartDropDown = new List<SelectListItem>();
+
+            DayStartDropDown.Add(new SelectListItem { Value = "1", Text = "Start Normal" });
+            DayStartDropDown.Add(new SelectListItem { Value = "2", Text = "Start Early" });
+            DayStartDropDown.Add(new SelectListItem { Value = "3", Text = "Start Late" });
+
             var Year = DateTime.UtcNow.Year;
             if (DateTime.UtcNow.Month > 1)
             {
