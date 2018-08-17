@@ -71,16 +71,131 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.EndLate)
-                    </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
-                    </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.EndLate)
                 </div>
+                <div class="col-sm-4">
+                    @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.MonStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.MonStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.MonEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.MonEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.TueStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.TueStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.TueEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.TueEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.WedStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.WedStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.WedEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.WedEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.ThuStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.ThuStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.ThuEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.ThuEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.FriStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.FriStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.FriEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.FriEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.SatStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.SatStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.SatEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.SatEndSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.SunStartType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.SunStartSelected].Text
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-right">
+                    @Html.DisplayNameFor(m => m.SunEndType)
+                </div>
+                <div class="col-sm-4">
+                    @Model.DayStartDropDown[@Model.SunEndSelected].Text
+                </div>
+            </div>
 
-                <br />
+
+
+            <br />
                 <br />
 
                 <div class="row">
