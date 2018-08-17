@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace _5051.Models
 {
@@ -36,6 +38,12 @@ namespace _5051.Models
         // The Late Dismissal 4pm
         [Display(Name = "End Late", Description = "Time Class Ends if Late End")]
         public TimeSpan EndLate { get; set; }
+
+        // Day start time drop down list: normal, early, late
+        public List<SelectListItem> DayStartDropDown { get; set; }
+
+        // Day end time drop down list: normal, early, late
+        public List<SelectListItem> DayEndDropDown { get; set; }
 
         // First day of school
         [Display(Name = "First Day", Description = "First Day of School")]
