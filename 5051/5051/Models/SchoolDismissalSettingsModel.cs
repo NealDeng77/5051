@@ -282,7 +282,21 @@ namespace _5051.Models
             SatEndSelected = 0;
             SunStartSelected =0;
             SunEndSelected = 0;
-            
+
+            MonStartType = SchoolCalendarDismissalEnum.Normal;
+            MonEndType = SchoolCalendarDismissalEnum.Normal;
+            TueStartType = SchoolCalendarDismissalEnum.Normal;
+            TueEndType = SchoolCalendarDismissalEnum.Normal;
+            WedStartType = SchoolCalendarDismissalEnum.Normal;
+            WedEndType = SchoolCalendarDismissalEnum.Early;
+            ThuStartType = SchoolCalendarDismissalEnum.Normal;
+            ThuEndType = SchoolCalendarDismissalEnum.Normal;
+            FriStartType = SchoolCalendarDismissalEnum.Late;
+            FriEndType = SchoolCalendarDismissalEnum.Normal;
+            SatStartType = SchoolCalendarDismissalEnum.Unknown;
+            SatEndType = SchoolCalendarDismissalEnum.Unknown;
+            SunStartType = SchoolCalendarDismissalEnum.Unknown;
+            SunEndType = SchoolCalendarDismissalEnum.Unknown;
 
             var Year = DateTime.UtcNow.Year;
             if (DateTime.UtcNow.Month > 1)
