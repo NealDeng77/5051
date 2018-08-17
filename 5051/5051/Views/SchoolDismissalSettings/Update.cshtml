@@ -91,6 +91,20 @@
                     </div>
 
                     <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.MonStartType)
+                        </div>
+                        <div class="col-sm-5 text-right">
+                            @Html.DropDownListFor(m => m.MonStartSelected, Model.DayStartDropDown)
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            @Html.DisplayNameFor(m => m.MonEndType)
+                        </div>
+                        <div class="col-sm-5 text-right">
+                            @Html.DropDownListFor(m => m.TueStartSelected, Model.DayStartDropDown)
+                        </div>
+                    </div>
                     <br />
                     <div class="row">
                         <div class="col-sm-3 text-right">
