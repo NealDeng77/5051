@@ -385,3 +385,7 @@ div.BlockStudentLogin {
     margin-top: 10px;
     margin-left: 10px;
 }
+
+.DispalyBoxWithMargin {
+    margin: 5px;
+}

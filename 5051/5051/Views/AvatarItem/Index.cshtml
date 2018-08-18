@@ -1,54 +1,86 @@
 ﻿@model _5051.Models.AvatarItemViewModel
-
 @{
     ViewBag.Title = "Edit Avatar Items";
 }
 
+<br />
+<div class="row justify-content-center">
 
-<div class="container">
-    <br />
-    <h2>Click on an Avatar Item to Edit</h2>
-    <br />
-    <br />
-
-    <div class="row text-center">
-        @{
-            if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
-            {
-                <br />
-                <p>No Avatar Items in the System</p>
-                <br />
-            }
-            else
-            {
-                foreach (var item in Model.AvatarItemList)
-                {
-                    <div class="col-sm-2">
-                        <div class="BoxWithHighlightHover">
-                            <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
-                                <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
-                            </a>
-                            <br />
-                            <span>
-                                @item.Name
-                                <br />
-                                @item.Category
-                                <br />
-                                <br />
-                            </span>
-                        </div>
-                    </div>
-                }
-            }
-        }
-
-    </div>
-    <br />
-    <br />
-    <div class="row text-center">
-        <div class="col-sm-2">
-            @Html.ActionLink("Create New Item", "Create", null, new { @class = "btn btn-success" })
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Click on the Avatar Item</span>
         </div>
+        <br />
     </div>
+    <div class="col-1"></div>
 </div>
 
+<div class="row">
+    <br />
+    <br />
+</div>
+
+@{
+    if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
+    {
+        <div class="row justify-content-center">
+
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center">
+                    No Avatar Items.  Click Create New Item to make one
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-around">
+            <div class="col-1 "></div>
+
+            <div class="col">
+                <div class="row justify-content-start">
+                    @{
+                        foreach (var item in Model.AvatarItemList)
+                        {
+                            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+
+                                <div class="row no-gutters justify-content-center">
+                                    <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
+                                        <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
+                                    </a>
+                                </div>
+
+                                <div class="row no-gutters justify-content-center">
+                                    <div class="text-center FontSizeSmall">
+                                        <br />
+                                        @item.Name
+                                        <br />
+                                        @item.Category
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-1 "></div>
+
+        </div>
+    }
+}
+
+<div class="row justify-content-center">
+    <div class="col text-center">
+        <br />
+        <br />
+        @Html.ActionLink("Create New Item", "Create", null, new { @class = "btn btn1 btn-light" })
+        <br />
+        <br />
+    </div>
+</div>

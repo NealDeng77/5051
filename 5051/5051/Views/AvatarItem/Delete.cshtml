@@ -1,61 +1,132 @@
 ﻿@model _5051.Models.AvatarItemModel
-
 @{
     ViewBag.Title = "Delete";
 }
 
+<br />
+<div class="row justify-content-center">
 
-<div class="container">
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Delete Avatar Item
+            </span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
     <br />
+    <br />
+</div>
 
-    @{
-        if (Model == null)
-        {
-            <p>No Avatar Item</p>
-        }
 
-        else
-        {
-            <div class="container">
-                <h2>Delete Avatar Item</h2>
+@{
+    if (Model == null)
+    {
+        <div class="row justify-content-center">
+
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
                 <br />
+                <div class="FontSizeLarge text-center">
+                    No Avatar Item
+                </div>
                 <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-around">
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                    </div>
-                    <div class="col-sm-4">
-                        <img src="~/Content/avatar/@Model.Uri" class="AvatarSize1" />
-                        <br />
-                        <span>
-                            @Model.Name
-                            <br />
-                            <br />
-                            <br />
-                        </span>
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox FontSizeMedium text-center">
+                <br />
+                <div class="row justify-content-center">
+                    <img src="~/Content/avatar/@Model.Uri" class="AvatarSize1" />
+                </div>
+
+                <div class="row justify-content-center">
+                    <div id="currentNameDisplayed" class="col FontSizeLarge">
+                        @Model.Name
                     </div>
                 </div>
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
-                    @Html.HiddenFor(m => m.Name)
-                    @Html.HiddenFor(m => m.Description)
-                    @Html.HiddenFor(m => m.Uri)
+                <br />
+                <br />
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                        </div>
-                        <div class="col-sm-4">
-                            @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                            <input type="submit" value="Delete" class="btn btn-danger">
-                        </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm text-sm-center text-md-right" id="studentName">
+                        @Html.DisplayNameFor(m => m.Name)
                     </div>
-                }
+                    <div class="col-1">
+                    </div>
+                    <div class="col-sm text-left lightTransparentBox" id="studentValue">
+                        @Html.DisplayFor(m => m.Name)
+                    </div>
+                </div>
 
+                <div class="row justify-content-center">
+                    <div class="col-sm text-sm-center text-md-right" id="tokensName">
+                        @Html.DisplayNameFor(m => m.Description)
+                    </div>
+                    <div class="col-1">
+
+                    </div>
+                    <div class="col-sm text-left lightTransparentBox" id="tokensValue">
+                        @Html.DisplayFor(m => m.Description)
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm text-sm-center text-md-right" id="xpName">
+                        @Html.DisplayNameFor(m => m.Uri)
+                    </div>
+                    <div class="col-1">
+
+                    </div>
+                    <div class="col-sm text-left lightTransparentBox" id="xpValue">
+                        @Html.DisplayFor(m => m.Uri)
+                    </div>
+                </div>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="row justify-content-around">
+                    <div class="col-sm-auto justify-content-center text-center">
+                        @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                    </div>
+
+
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.Description)
+                        @Html.HiddenFor(m => m.Uri)
+
+                        <div class="col-sm-auto justify-content-center text-center">
+                            <input type="submit" value="Delete" class="btn btn1 btn-light DispalyBoxWithMargin">
+                        </div>
+
+                    }
+
+                </div>
+                <br />
             </div>
-        }
-
+            <div class="col-1"></div>
+        </div>
+        <br />
+        <br />
     }
-</div>
+}

@@ -233,8 +233,15 @@ namespace _5051.Backend
             }
 
             // Get the 2nd in the set, the 1st is blanks.
-            var data = TruckSet[1];
-
+            var data = new FactoryInventoryModel();
+            if (TruckSet.Count > 1)
+            {
+                data = TruckSet[1];
+            } else
+            {
+                data = GetDefault(category);
+            }
+            
             return data;
         }
 
