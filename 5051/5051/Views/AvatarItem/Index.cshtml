@@ -48,7 +48,7 @@
                     @{
                         foreach (var item in Model.AvatarItemList)
                         {
-                            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover AvatarItemDisplayBox">
+                            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover StudentDispalyBox">
 
                                 <div class="row no-gutters justify-content-center">
                                     <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
@@ -75,12 +75,12 @@
     }
 }
 
-<br />
-<br />
-
 <div class="row justify-content-center">
     <div class="col text-center">
+        <br />
+        <br />
         @Html.ActionLink("Create New Item", "Create", null, new { @class = "btn btn1 btn-light" })
+        <br />
         <br />
     </div>
 </div>
