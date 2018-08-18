@@ -6,9 +6,10 @@
     var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
 }
 
-<div class="container">
+<div class="text-center">
     <br />
-    <h2>School Dismissal Settings</h2>
+
+    <h2>Admin Settings</h2>
     <br />
 
     @{
@@ -18,346 +19,272 @@
         }
         else
         {
-            <div class="container">
+            <div>
 
                 <br />
-                <br />
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.StartNormal)
+                <div class="row justify-content-center">
+                    <div class="col-sm-5">
+                        <div class="lightTransparentBox m-1 p-2">
+                            <h4>Dismissal Time Settings</h4>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.StartNormal)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes)
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.StartEarly)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes)
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.StartLate)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes)
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.EndNormal)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes)
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.EndEarly)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes)
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.EndLate)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lightTransparentBox m-1 p-2">
+                            <h4>Day of Week Dismissal Settings</h4>
+                            <table class="table table-borderless table-condensed w-75 m-auto">
+                                <thead>
+                                    <tr>
+                                        <td>Day of Week</td>
+                                        <td>Start</td>
+                                        <td>End</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mon</td>
+                                        <td>@Model.DayStartDropDown[@Model.MonStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.MonEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tue</td>
+                                        <td>@Model.DayStartDropDown[@Model.TueStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.TueEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wed</td>
+                                        <td>@Model.DayStartDropDown[@Model.WedStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.WedEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thu</td>
+                                        <td>@Model.DayStartDropDown[@Model.ThuStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.ThuEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fri</td>
+                                        <td>@Model.DayStartDropDown[@Model.FriStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.FriEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sat</td>
+                                        <td>@Model.DayStartDropDown[@Model.SatStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.SatEndSelected].Text</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sun</td>
+                                        <td>@Model.DayStartDropDown[@Model.SunStartSelected].Text</td>
+                                        <td>@Model.DayEndDropDown[@Model.SunEndSelected].Text</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes)
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.StartEarly)
+                    <div class="col-sm-5">
+                        <div class="lightTransparentBox m-1 p-2">
+                            <h4>Semester Settings</h4>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    School Year Start Date:
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @DayFirst
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    School Year End Date:
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @DayLast
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.FallFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.FallLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.FallLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SpringFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SpringLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lightTransparentBox m-1 p-2">
+                            <h4>Quarter Settings</h4>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.FallQuarterFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.FallQuarterLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.WinterQuarterFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.WinterQuarterLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SpringQuarterFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SpringQuarterLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SummerQuarterFirstClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.SummerQuarterLastClassDay.ToShortDateString()
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lightTransparentBox m-1 p-2">
+                            <h4>Report Settings</h4>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.Goal)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.Goal%
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.EarlyWindow)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.EarlyWindow
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6 text-right">
+                                    @Html.DisplayNameFor(m => m.LateWindow)
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    @Model.LateWindow
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes)
-                    </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.StartLate)
-                    </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes)
-                    </div>
-                </div>
-
-                <br />
-                <br />
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.EndNormal)
-                    </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes)
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.EndEarly)
-                    </div>
-                    <div class="col-sm-4">
-                        @string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes)
-                    </div>
-                </div>
-
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.EndLate)
-                </div>
-                <div class="col-sm-4">
-                    @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.MonStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.MonStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.MonEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.MonEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.TueStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.TueStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.TueEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.TueEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.WedStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.WedStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.WedEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.WedEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.ThuStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.ThuStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.ThuEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.ThuEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.FriStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.FriStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.FriEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.FriEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.SatStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.SatStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.SatEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.SatEndSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.SunStartType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayStartDropDown[@Model.SunStartSelected].Text
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.SunEndType)
-                </div>
-                <div class="col-sm-4">
-                    @Model.DayEndDropDown[@Model.SunEndSelected].Text
-                </div>
-            </div>
-
-
+            </div>        
 
             <br />
-                <br />
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.DayFirst)
-                    </div>
-                    <div class="col-sm-4">
-                        @DayFirst
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.DayLast)
-                    </div>
-                    <div class="col-sm-4">
-                        @DayLast
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.FallFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.FallFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.FallLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.FallLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SpringFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SpringFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SpringLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SpringLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <br />
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.FallQuarterFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.FallQuarterLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.WinterQuarterFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.WinterQuarterLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SpringQuarterFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SpringQuarterLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SummerQuarterFirstClassDay.ToShortDateString()
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                        @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
-                    </div>
-                    <div class="col-sm-4">
-                        @Model.SummerQuarterLastClassDay.ToShortDateString()
-                    </div>
-                </div>
-                <br/>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.Goal)
-                </div>
+            <div class="row justify-content-center">
                 <div class="col-sm-4">
-                    @Model.Goal%
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.EarlyWindow)
-                </div>
-                <div class="col-sm-4">
-                    @Model.EarlyWindow
+                    @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-3 text-right">
-                    @Html.DisplayNameFor(m => m.LateWindow)
-                </div>
-                <div class="col-sm-4">
-                    @Model.LateWindow
-                </div>
-            </div>
-
-                <br />
-                <div class="row">
-                    <div class="col-sm-3 text-right">
-                    </div>
-                    <div class="col-sm-4">
-                        @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                    </div>
-                </div>
-            </div>
         }
     }
 
