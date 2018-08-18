@@ -21,4 +21,12 @@ namespace _5051.Models
     {
         public List<AvatarItemViewModel> AvatarItemCategoryList = new List<AvatarItemViewModel>();
     }
+
+    /// <summary>
+    /// Adds the Student Information to the View Model for the AvatarItemLists availble for the student to select
+    /// </summary>
+    public class SelectedAvatarItemListForStudentViewModel : AvatarItemListViewModel
+    {
+        public StudentModel Student = new StudentModel();
+    }
 }
