@@ -236,6 +236,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KioskController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -664,6 +665,9 @@
     <Content Include="Views\AvatarItem\Index.cshtml" />
     <Content Include="Views\AvatarItem\Read.cshtml" />
     <Content Include="Views\AvatarItem\Update.cshtml" />
+    <Content Include="Views\Support\Index.cshtml" />
+    <Content Include="Views\Support\UserList.cshtml" />
+    <Content Include="Views\Support\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
