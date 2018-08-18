@@ -3,14 +3,27 @@
 @{
     ViewBag.Title = "Edit Avatar Items";
 }
+<br />
+<div class="row justify-content-center">
 
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Click on the Avatar Item</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
 
 <div class="container">
-    <br />
-    <h2>Click on an Avatar Item to Edit</h2>
-    <br />
-    <br />
-
+    
     <div class="row text-center">
         @{
             if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
