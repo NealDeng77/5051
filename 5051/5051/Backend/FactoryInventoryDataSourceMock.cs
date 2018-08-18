@@ -162,11 +162,11 @@ namespace _5051.Backend
             //Create(new FactoryInventoryModel("moviecamera.png", "Movie Camera", "Making Movies", FactoryInventoryCategoryEnum.Entertainment, 10, 10, true));
 
             Create(new FactoryInventoryModel("GChocolate.png", "Chocolate Gallon", "Chocolate Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            Create(new FactoryInventoryModel("GCoffee.png", "Coffee Gallon", "Coffee Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
-            Create(new FactoryInventoryModel("GCookiedough.png", "Cookie Dough Gallon", "Cookie Dough Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
-            Create(new FactoryInventoryModel("GMintChip.png", "Mint Chip Gallon", "Mint Chip Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
-            Create(new FactoryInventoryModel("GSherbert.png", "Sherbert Gallon", "Sherbert", FactoryInventoryCategoryEnum.Food, 10, 10, true));
-            Create(new FactoryInventoryModel("GStrawberry.png", "Strawberry Gallon", "Strawberry Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, true));
+            Create(new FactoryInventoryModel("GCoffee.png", "Coffee Gallon", "Coffee Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            Create(new FactoryInventoryModel("GCookiedough.png", "Cookie Dough Gallon", "Cookie Dough Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            Create(new FactoryInventoryModel("GMintChip.png", "Mint Chip Gallon", "Mint Chip Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            Create(new FactoryInventoryModel("GSherbert.png", "Sherbert Gallon", "Sherbert", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            Create(new FactoryInventoryModel("GStrawberry.png", "Strawberry Gallon", "Strawberry Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
 
             //Create(new FactoryInventoryModel("FBarstool.png", "Barstool", "Barstool", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
             //Create(new FactoryInventoryModel("FBench.png", "Bench", "Bench", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
@@ -188,11 +188,11 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("Topper1.png", "Slick Topper", "Slick Topper", FactoryInventoryCategoryEnum.Topper, 10, 10, false));
             Create(new FactoryInventoryModel("Sign1.png", "Slick Sign", "Slick Sign", FactoryInventoryCategoryEnum.Sign, 10, 10, false));
 
-            Create(new FactoryInventoryModel("Trailer2.png", "Taco Fire Trailer", "Tack FireTrailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false));
-            Create(new FactoryInventoryModel("Truck2.png", "Taco Fire Truck", "Taco Fire Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false));
-            Create(new FactoryInventoryModel("Menu2.png", "Taco Fire Menu", "Taco Fire Menu", FactoryInventoryCategoryEnum.Menu, 10, 10, false));
-            Create(new FactoryInventoryModel("Topper2.png", "Taco Fire Topper", "Taco Fire Topper", FactoryInventoryCategoryEnum.Topper, 10, 10, false));
-            Create(new FactoryInventoryModel("Sign2.png", "Taco Fire Sign", "Taco Fire Sign", FactoryInventoryCategoryEnum.Sign, 10, 10, false));
+            Create(new FactoryInventoryModel("Trailer2.png", "Taco Fire Trailer", "Tack FireTrailer", FactoryInventoryCategoryEnum.Trailer, 15, 10, false));
+            Create(new FactoryInventoryModel("Truck2.png", "Taco Fire Truck", "Taco Fire Truck", FactoryInventoryCategoryEnum.Truck, 15, 10, false));
+            Create(new FactoryInventoryModel("Menu2.png", "Taco Fire Menu", "Taco Fire Menu", FactoryInventoryCategoryEnum.Menu, 15, 10, false));
+            Create(new FactoryInventoryModel("Topper2.png", "Taco Fire Topper", "Taco Fire Topper", FactoryInventoryCategoryEnum.Topper, 15, 10, false));
+            Create(new FactoryInventoryModel("Sign2.png", "Taco Fire Sign", "Taco Fire Sign", FactoryInventoryCategoryEnum.Sign, 15, 10, false));
         }
 
         /// <summary>
