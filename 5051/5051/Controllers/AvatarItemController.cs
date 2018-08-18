@@ -115,7 +115,9 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "Level,"+
+                                        "Category,"+
+                                        "Tokens,"+
+                                        "Quantities,"+
                                         "")] AvatarItemModel data)
         {
             if (!ModelState.IsValid)
@@ -162,10 +164,6 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult Delete([Bind(Include=
                                         "Id,"+
-                                        "Name,"+
-                                        "Description,"+
-                                        "Uri,"+
-                                        "Level,"+
                                         "")] AvatarItemModel data)
         {
             if (!ModelState.IsValid)
@@ -190,5 +188,6 @@ namespace _5051.Controllers
 
             return RedirectToAction("Index");
         }
+
     }
 }

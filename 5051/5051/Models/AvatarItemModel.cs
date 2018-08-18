@@ -13,27 +13,21 @@ namespace _5051.Models
         public string Id { get; set; }
 
         [Display(Name = "Uri", Description = "Picture to Show")]
-        [Required(ErrorMessage = "Picture is required")]
         public string Uri { get; set; }
 
         [Display(Name = "Name", Description = "AvatarItem Name")]
-        [Required(ErrorMessage = "AvatarItem Name is required")]
         public string Name { get; set; }
 
         [Display(Name = "Description", Description = "AvatarItem Description")]
-        [Required(ErrorMessage = "AvatarItem Description is required")]
         public string Description { get; set; }
 
         [Display(Name = "Category", Description = "AvatarItem Category")]
-        [Required(ErrorMessage = "Category is required")]
         public AvatarItemCategoryEnum Category { get; set; }
 
         [Display(Name = "Tokens", Description = "Cost in Tokens")]
-        [Required(ErrorMessage = "Tokens is required")]
         public int Tokens { get; set; }
 
         [Display(Name = "Quantities", Description = "AvatarItem Quantities")]
-        [Required(ErrorMessage = "Quantities is required")]
         public int Quantities { get; set; }
 
         public bool IsLimitSupply { get; set; }
