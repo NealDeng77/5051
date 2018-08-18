@@ -1,8 +1,8 @@
 ﻿@model _5051.Models.AvatarItemViewModel
-
 @{
     ViewBag.Title = "Edit Avatar Items";
 }
+
 <br />
 <div class="row justify-content-center">
 
@@ -28,9 +28,18 @@
         @{
             if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
             {
-                <br />
-                <p>No Avatar Items in the System</p>
-                <br />
+                <div class="row justify-content-center">
+
+                    <div class="col-1 "></div>
+                    <div class="col lightTransparentBox">
+                        <br />
+                        <div class="FontSizeLarge text-center">
+                            No Avatar Items.  Click Create New Item to make one
+                        </div>
+                        <br />
+                    </div>
+                    <div class="col-1"></div>
+                </div>
             }
             else
             {
