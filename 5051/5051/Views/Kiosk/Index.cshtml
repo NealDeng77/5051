@@ -140,7 +140,8 @@
                                 </div>
 
                                 <br />
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-around">
+                                    <div class="col"></div>
                                     @{
                                         // list emotion icons
                                         foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
@@ -151,9 +152,9 @@
                                             <div id="@emotionId" class="col BoxWithHighlightHover">
                                                 <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
                                             </div>
-
                                         }
                                     }
+                                    <div class="col"></div>
                                 </div>
 
                                 <br />
