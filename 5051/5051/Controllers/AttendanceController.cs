@@ -82,6 +82,8 @@ namespace _5051.Controllers
                     myAttendance.Out = UTCConversionsBackend.UtcToKioskTime(item.Out);
                 }
 
+                myAttendance.Id = item.Id;
+
                 myAttendanceModels.Add(myAttendance);
             }
 
