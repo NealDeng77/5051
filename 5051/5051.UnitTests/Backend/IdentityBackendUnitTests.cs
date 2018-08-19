@@ -24,7 +24,7 @@ namespace _5051.UnitTests.Backend
     [TestClass]
     public class IdentityBackendUnitTests
     {
-        public TestContext TestContext { get; set; }
+        //public TestContext TestContext { get; set; }
 
         //[TestMethod]
         //public void Backend_IdentityBackend_CreateSupportUser_Should_Pass()
