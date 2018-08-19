@@ -57,10 +57,11 @@ namespace _5051.Controllers
                 }
             }
 
+            var attendanceListOrdered = myReturn.Attendance.OrderByDescending(m => m.In);
             //Deep copy Attendance list and convert time zone
             var myAttendanceModels = new List<AttendanceModel>();
 
-            foreach (var item in myReturn.Attendance)
+            foreach (var item in attendanceListOrdered)
             {
                 var myAttendance = new AttendanceModel()
                 {
