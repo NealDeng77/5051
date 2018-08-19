@@ -280,8 +280,9 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
 
-            if (string.IsNullOrEmpty(data.Id))
+            if (string.IsNullOrEmpty(data.Name))
             {
+                ModelState.AddModelError("Name", "Please Enter a Name.");
                 // Return back for Edit
                 return View(data);
             }
