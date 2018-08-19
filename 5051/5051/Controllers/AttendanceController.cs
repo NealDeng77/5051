@@ -117,27 +117,33 @@ namespace _5051.Controllers
             }
         }
 
-        // GET: Attendance/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Attendance/Update
+        public ActionResult Update(string id)
         {
-            return View();
+            var myAttendance = StudentBackend.ReadAttendance(id);
+            if (myAttendance == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(myAttendance);
         }
 
-        // POST: Attendance/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: Attendance/Update/5
+        //[HttpPost]
+        //public ActionResult Update(string id)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Attendance/Delete/5
         public ActionResult Delete(int id)
