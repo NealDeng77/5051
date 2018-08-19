@@ -18,7 +18,7 @@
     }
     else
     {
-        <h4>You last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
+        <h4> @Model.Name last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
 
         <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
     }
@@ -31,7 +31,29 @@
         {
             <div class="col-sm-4 col-md-2 p-0">
                 <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
-                    @item.In.ToShortDateString()<br />
+                    <div class="text-center">
+                        <div>
+                            @switch (item.Emotion)
+                            {
+                                case EmotionStatusEnum.VeryHappy:
+                                    <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                    break;
+                                case EmotionStatusEnum.Happy:
+                                    <img src="/Content/img/EmotionHappy.png" height="30" />
+                                    break;
+                                case EmotionStatusEnum.Neutral:
+                                    <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                    break;
+                                case EmotionStatusEnum.Sad:
+                                    <img src="/Content/img/EmotionSad.png" height="30" />
+                                    break;
+                                case EmotionStatusEnum.VerySad:
+                                    <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                    break;
+                            }
+                            @item.In.ToShortDateString()
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             In<br />
@@ -46,38 +68,20 @@
                             </div>
                         }
                     </div>
-
-                    <div class="row text-center">
-                        <div class="col">
-                            @switch (@item.Emotion)
-                            {
-                                case EmotionStatusEnum.VeryHappy:
-                                    <div class="badge badge-success w-75">
-                                        Very Happy
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Happy:
-                                    <div class="badge badge-warning w-75">
-                                        Happy
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Neutral:
-                                    <div class="badge badge-info w-75">
-                                        Neutral
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Sad:
-                                    <div class="badge badge-secondary w-75">
-                                        Sad
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.VerySad:
-                                    <div class="badge badge-dark w-75">
-                                        Very Sad
-                                    </div>
-                                    break;
-                            }
-
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <a href="~/Attendance/Update/">
+                                <div class="w-50 btn-sm btn-primary btn">
+                                    Edit
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="~/Attendance/Delete/">
+                                <div class="w-50 btn-sm btn-danger btn">
+                                    Delete
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
