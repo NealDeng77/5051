@@ -246,6 +246,7 @@
     <Compile Include="Models\AvatarItemModel.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
     <Compile Include="Models\AvatarItemViewModel.cs" />
+    <Compile Include="Models\BusinessReoprtViewModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
