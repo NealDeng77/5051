@@ -121,12 +121,22 @@ namespace _5051.Controllers
         public ActionResult Update(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
+            
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            return View(myAttendance);
+            //Create a new attendance to hold converted times
+            var myReturn = new AttendanceModel
+            {
+                StudentId = myAttendance.StudentId,
+                Id = myAttendance.StudentId,
+                In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
+                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out)
+            };
+
+            return View(myReturn);
         }
 
         //// POST: Attendance/Update/5
