@@ -19,11 +19,11 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(5, enumCount, TestContext.TestName);
 
             // Check each value against their expected value.
-            Assert.AreEqual(1, (int)EmotionStatusEnum.VeryHappy, TestContext.TestName);
-            Assert.AreEqual(2, (int)EmotionStatusEnum.Happy, TestContext.TestName);
+            Assert.AreEqual(5, (int)EmotionStatusEnum.VeryHappy, TestContext.TestName);
+            Assert.AreEqual(4, (int)EmotionStatusEnum.Happy, TestContext.TestName);
             Assert.AreEqual(3, (int)EmotionStatusEnum.Neutral, TestContext.TestName);
-            Assert.AreEqual(4, (int)EmotionStatusEnum.Sad, TestContext.TestName);
-            Assert.AreEqual(5, (int)EmotionStatusEnum.VerySad, TestContext.TestName);
+            Assert.AreEqual(2, (int)EmotionStatusEnum.Sad, TestContext.TestName);
+            Assert.AreEqual(1, (int)EmotionStatusEnum.VerySad, TestContext.TestName);
         }
         #endregion Instantiate
     }

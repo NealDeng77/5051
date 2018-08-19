@@ -72,10 +72,6 @@ namespace _5051.Backend
                 result = UserManager.Create(user, userName);
             }
 
-            //UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
-
-            //UserManager.AddClaim(user.Id, new Claim("SupportUser", "True"));
-
             AddClaimToUser(user.Id, "TeacherUser", "True");
             AddClaimToUser(user.Id, "SupportUser", "True");
 
@@ -103,10 +99,6 @@ namespace _5051.Backend
 
                 return null;
             }
-
-            //UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
-
-            //UserManager.AddClaim(user.Id, new Claim("TeacherID", teacherId));
 
             AddClaimToUser(user.Id, "TeacherUser", "True");
             AddClaimToUser(user.Id, "TeacherID", teacherId);
@@ -136,10 +128,6 @@ namespace _5051.Backend
 
                 return null;
             }
-
-            //UserManager.AddClaim(user.Id, new Claim("StudentUser", "True"));
-
-            //UserManager.AddClaim(user.Id, new Claim("StudentID", student.Id));
 
             AddClaimToUser(user.Id, "StudentUser", "True");
             AddClaimToUser(user.Id, "StudentID", student.Id);
@@ -285,30 +273,6 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// checks if user has the claim type
-        /// returns false if user does not
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="claimType"></param>
-        /// <returns></returns>
-        public bool UserHasClaim(string userID, string claimType)
-        {
-            var user = FindUserByID(userID);
-
-            var claims = user.Claims.ToList();
-
-            foreach (var item in claims)
-            {
-                if(item.ClaimType == claimType)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
         /// checks if user has the given claim type and value
         /// returns false if not
         /// </summary>
@@ -333,6 +297,14 @@ namespace _5051.Backend
             return false;
         }
 
+        /// <summary>
+        /// Adds the given claim type and value to the user
+        /// returns false if failure to add
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="claimTypeToAdd"></param>
+        /// <param name="claimValueToAdd"></param>
+        /// <returns></returns>
         public bool AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
         {
             var findResult = FindUserByID(userID);
@@ -347,6 +319,13 @@ namespace _5051.Backend
             return true;
         }
 
+        /// <summary>
+        /// removes a claim from the user
+        /// returns false if failure to remove
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="claimTypeToRemove"></param>
+        /// <returns></returns>
         public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
         {
             var claims = UserManager.GetClaims(userID);

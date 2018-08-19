@@ -204,6 +204,11 @@ namespace _5051.Backend
         /// <param name="setEnum"></param>
         public void LoadDataSet(DataSourceDataSetEnum setEnum)
         {
+            //var identityBackend = new IdentityBackend();
+            //create support user
+            //identityBackend.CreateNewSupportUser("su5051", "su5051");
+            //create teacher user
+            //identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
             switch (setEnum)
             {
                 case DataSourceDataSetEnum.Demo:

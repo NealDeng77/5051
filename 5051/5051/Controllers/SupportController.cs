@@ -60,6 +60,7 @@ namespace _5051.Controllers
             }
         }
 
+        //GET lists all the users
         public ActionResult UserList()
         {
             if (User.Identity.GetIsSupportUser())
@@ -90,22 +91,7 @@ namespace _5051.Controllers
             }
         }
 
-        ////POST
-        //[HttpPost]
-        //public ActionResult UserInfo([Bind(Include =
-        //                                    "Id,"+
-        //                                    "")] StudentModel data)
-        //{
-
-        //    //user idbackend
-        //    //if user has claim, remove claim, else add the claim
-        //    //what could this be based on tho?
-        //    identityBackend.FindUserByID(data.Id);
-
-
-        //    return RedirectToAction("UserList", "Support");
-        //}
-
+        //GET support/togglestudent/userID
         public ActionResult ToggleStudent(string id = null)
         {
             if (User.Identity.GetIsSupportUser())
@@ -120,7 +106,7 @@ namespace _5051.Controllers
             }
         }
 
-
+        //toggles whether or not given user is a student
         [HttpPost]
         public ActionResult ToggleStudent([Bind(Include =
                                                 "Id,"+
@@ -145,6 +131,7 @@ namespace _5051.Controllers
             }
         }
 
+        //GET support/toggleTeacher/userID
         public ActionResult ToggleTeacher(string id = null)
         {
             if (User.Identity.GetIsSupportUser())
@@ -159,21 +146,21 @@ namespace _5051.Controllers
             }
         }
 
-
+        //toggles whether or not user is a teacher
         [HttpPost]
         public ActionResult ToggleTeacher([Bind(Include =
                                                 "Id,"+
-                                                "")] ApplicationUser studentUser)
+                                                "")] ApplicationUser teacherUser)
         {
             if (User.Identity.GetIsSupportUser())
             {
-                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "TeacherUser", "True"))
+                if (identityBackend.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
                 {
-                    identityBackend.RemoveClaimFromUser(studentUser.Id, "TeacherUser");
+                    identityBackend.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
                 }
                 else
                 {
-                    identityBackend.AddClaimToUser(studentUser.Id, "TeacherUser", "True");
+                    identityBackend.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
                 }
 
                 return RedirectToAction("UserList", "Support");
@@ -184,6 +171,7 @@ namespace _5051.Controllers
             }
         }
 
+        //GET support/ToggleSupport/userID
         public ActionResult ToggleSupport(string id = null)
         {
             if (User.Identity.GetIsSupportUser())
@@ -198,21 +186,21 @@ namespace _5051.Controllers
             }
         }
 
-
+        //toggles whether or not user is a support user
         [HttpPost]
         public ActionResult ToggleSupport([Bind(Include =
                                                 "Id,"+
-                                                "")] ApplicationUser studentUser)
+                                                "")] ApplicationUser supportUser)
         {
             if (User.Identity.GetIsSupportUser())
             {
-                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "SupportUser", "True"))
+                if (identityBackend.UserHasClaimOfValue(supportUser.Id, "SupportUser", "True"))
                 {
-                    identityBackend.RemoveClaimFromUser(studentUser.Id, "SupportUser");
+                    identityBackend.RemoveClaimFromUser(supportUser.Id, "SupportUser");
                 }
                 else
                 {
-                    identityBackend.AddClaimToUser(studentUser.Id, "SupportUser", "True");
+                    identityBackend.AddClaimToUser(supportUser.Id, "SupportUser", "True");
                 }
 
                 return RedirectToAction("UserList", "Support");
