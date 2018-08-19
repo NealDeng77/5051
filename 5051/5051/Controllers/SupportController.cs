@@ -47,7 +47,6 @@ namespace _5051.Controllers
             }
         }
 
-
         // GET: Support
         public ActionResult Index()
         {
@@ -75,6 +74,8 @@ namespace _5051.Controllers
             }
         }
 
+
+        //GET Support/UserInfo/userID
         public ActionResult UserInfo(string id = null)
         {
             if (User.Identity.GetIsSupportUser())
@@ -82,6 +83,139 @@ namespace _5051.Controllers
                 var myUserInfo = identityBackend.FindUserByID(id);
 
                 return View(myUserInfo);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        ////POST
+        //[HttpPost]
+        //public ActionResult UserInfo([Bind(Include =
+        //                                    "Id,"+
+        //                                    "")] StudentModel data)
+        //{
+
+        //    //user idbackend
+        //    //if user has claim, remove claim, else add the claim
+        //    //what could this be based on tho?
+        //    identityBackend.FindUserByID(data.Id);
+
+
+        //    return RedirectToAction("UserList", "Support");
+        //}
+
+        public ActionResult ToggleStudent(string id = null)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                var myUserInfo = identityBackend.FindUserByID(id);
+
+                return View(myUserInfo);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult ToggleStudent([Bind(Include =
+                                                "Id,"+
+                                                "")] ApplicationUser studentUser)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "StudentUser", "True"))
+                {
+                    identityBackend.RemoveClaimFromUser(studentUser.Id, "StudentUser");
+                }
+                else
+                {
+                    identityBackend.AddClaimToUser(studentUser.Id, "StudentUser", "True");
+                }
+
+                return RedirectToAction("UserList", "Support");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        public ActionResult ToggleTeacher(string id = null)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                var myUserInfo = identityBackend.FindUserByID(id);
+
+                return View(myUserInfo);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult ToggleTeacher([Bind(Include =
+                                                "Id,"+
+                                                "")] ApplicationUser studentUser)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "TeacherUser", "True"))
+                {
+                    identityBackend.RemoveClaimFromUser(studentUser.Id, "TeacherUser");
+                }
+                else
+                {
+                    identityBackend.AddClaimToUser(studentUser.Id, "TeacherUser", "True");
+                }
+
+                return RedirectToAction("UserList", "Support");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        public ActionResult ToggleSupport(string id = null)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                var myUserInfo = identityBackend.FindUserByID(id);
+
+                return View(myUserInfo);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult ToggleSupport([Bind(Include =
+                                                "Id,"+
+                                                "")] ApplicationUser studentUser)
+        {
+            if (User.Identity.GetIsSupportUser())
+            {
+                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "SupportUser", "True"))
+                {
+                    identityBackend.RemoveClaimFromUser(studentUser.Id, "SupportUser");
+                }
+                else
+                {
+                    identityBackend.AddClaimToUser(studentUser.Id, "SupportUser", "True");
+                }
+
+                return RedirectToAction("UserList", "Support");
             }
             else
             {

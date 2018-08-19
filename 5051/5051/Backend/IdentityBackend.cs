@@ -72,9 +72,12 @@ namespace _5051.Backend
                 result = UserManager.Create(user, userName);
             }
 
-            UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
+            //UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
 
-            UserManager.AddClaim(user.Id, new Claim("SupportUser", "True"));
+            //UserManager.AddClaim(user.Id, new Claim("SupportUser", "True"));
+
+            AddClaimToUser(user.Id, "TeacherUser", "True");
+            AddClaimToUser(user.Id, "SupportUser", "True");
 
             return user;
         }
@@ -101,9 +104,12 @@ namespace _5051.Backend
                 return null;
             }
 
-            UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
+            //UserManager.AddClaim(user.Id, new Claim("TeacherUser", "True"));
 
-            UserManager.AddClaim(user.Id, new Claim("TeacherID", teacherId));
+            //UserManager.AddClaim(user.Id, new Claim("TeacherID", teacherId));
+
+            AddClaimToUser(user.Id, "TeacherUser", "True");
+            AddClaimToUser(user.Id, "TeacherID", teacherId);
 
             return user;
         }
@@ -131,9 +137,12 @@ namespace _5051.Backend
                 return null;
             }
 
-            UserManager.AddClaim(user.Id, new Claim("StudentUser", "True"));
+            //UserManager.AddClaim(user.Id, new Claim("StudentUser", "True"));
 
-            UserManager.AddClaim(user.Id, new Claim("StudentID", student.Id));
+            //UserManager.AddClaim(user.Id, new Claim("StudentID", student.Id));
+
+            AddClaimToUser(user.Id, "StudentUser", "True");
+            AddClaimToUser(user.Id, "StudentID", student.Id);
 
             return user;
         }
@@ -194,6 +203,15 @@ namespace _5051.Backend
             return findResult;
         }
 
+        public StudentModel GetStudentById(string id)
+        {
+            var studentBackend = StudentBackend.Instance;
+
+            var studentResult = studentBackend.Read(id);
+
+            return studentResult;
+        }
+
         /// <summary>
         /// Lists all the users
         /// </summary>
@@ -216,7 +234,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if (UserHasClaimOfValue(user, "StudentUser", "True"))
+                if (UserHasClaimOfValue(user.Id, "StudentUser", "True"))
                 {
                     studentList.Add(user);
                 }
@@ -236,7 +254,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if (UserHasClaimOfValue(user, "TeacherUser", "True"))
+                if (UserHasClaimOfValue(user.Id, "TeacherUser", "True"))
                 {
                     teacherList.Add(user);
                 }
@@ -257,7 +275,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if(UserHasClaimOfValue(user, "SupportUser", "True"))
+                if(UserHasClaimOfValue(user.Id, "SupportUser", "True"))
                 {
                     supportList.Add(user);
                 }
@@ -273,8 +291,10 @@ namespace _5051.Backend
         /// <param name="user"></param>
         /// <param name="claimType"></param>
         /// <returns></returns>
-        public bool UserHasClaim(ApplicationUser user, string claimType)
+        public bool UserHasClaim(string userID, string claimType)
         {
+            var user = FindUserByID(userID);
+
             var claims = user.Claims.ToList();
 
             foreach (var item in claims)
@@ -296,8 +316,10 @@ namespace _5051.Backend
         /// <param name="claimType"></param>
         /// <param name="claimValue"></param>
         /// <returns></returns>
-        public bool UserHasClaimOfValue(ApplicationUser user, string claimType, string claimValue)
+        public bool UserHasClaimOfValue(string userID, string claimType, string claimValue)
         {
+            var user = FindUserByID(userID);
+
             var claims = user.Claims.ToList();
 
             foreach (var item in claims)
@@ -309,6 +331,36 @@ namespace _5051.Backend
             }
 
             return false;
+        }
+
+        public bool AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
+        {
+            var findResult = FindUserByID(userID);
+
+            var claimAddResult = UserManager.AddClaim(userID, new Claim(claimTypeToAdd, claimValueToAdd));
+
+            if(!claimAddResult.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
+        {
+            var claims = UserManager.GetClaims(userID);
+
+            var lastAccessedClaim = claims.FirstOrDefault(t => t.Type == claimTypeToRemove);
+
+            var resultDelete = (lastAccessedClaim == null) ? null :  UserManager.RemoveClaim(userID, lastAccessedClaim);
+
+            if(!resultDelete.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

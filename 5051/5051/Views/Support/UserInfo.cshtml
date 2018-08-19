@@ -1,9 +1,57 @@
-﻿@model _5051.Models.ApplicationUser
+﻿@using _5051.Backend
+@model _5051.Models.ApplicationUser
 @{
     ViewBag.Title = "UserInfo";
 }
 <br />
 <h2>UserInfo</h2>
 
-<h4>@Model.UserName</h4>
+@{
+    var idback = new IdentityBackend();
 
+    if (Model == null)
+    {
+        <p>No valid user given</p>
+    }
+    else
+    {
+        <h4>@Model.UserName</h4>
+
+        if (idback.UserHasClaimOfValue(Model.Id, "StudentUser", "True"))
+        {
+            <h5>User is a Student</h5>
+        }
+        else
+        {
+            <h5>User is not a Student</h5>
+        }
+        @Html.ActionLink("Toggle Student", "ToggleStudent", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        <br />
+        <br />
+
+        if (idback.UserHasClaimOfValue(Model.Id, "TeacherUser", "True"))
+        {
+            <h5>User is a Teacher</h5>
+        }
+        else
+        {
+            <h5>User is not a Teacher</h5>
+        }
+        @Html.ActionLink("Toggle Teacher", "ToggleTeacher", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        <br />
+        <br />
+
+        if (idback.UserHasClaimOfValue(Model.Id, "SupportUser", "True"))
+        {
+            <h5>User is a Support User</h5>
+        }
+        else
+        {
+            <h5>User is not a Support User</h5>
+        }
+        @Html.ActionLink("Toggle Support User", "ToggleSupport", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        <br />
+        <br />
+
+    }
+}

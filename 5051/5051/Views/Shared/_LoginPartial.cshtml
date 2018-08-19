@@ -8,7 +8,7 @@
 
 <ul class="nav navbar-nav ml-auto">
     <li>
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
     </li>
     @{
         var isTeacher = User.Identity.GetIsTeacherUser();
@@ -16,7 +16,7 @@
         if (isTeacher)
         {
             <li>
-                Teachers Click Here
+                @Html.ActionLink("Teachers", "Index", "Admin", routeValues: new { id = User.Identity.Name}, htmlAttributes: new { @class = "nav-link", id = "AdminLinkNavBar"})
             </li>
         }
     }
@@ -27,11 +27,11 @@
         if (isSupport)
         {
             <li>
-                Support Users Click Here
+                @Html.ActionLink("Support", "Index", "Support", null, htmlAttributes: new { @class = "nav-link", id = "SupportLinkNavBar"})
             </li>
         }
     }
-    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>
 </ul>
     }
 }

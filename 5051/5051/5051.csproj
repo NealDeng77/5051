@@ -668,6 +668,9 @@
     <Content Include="Views\Support\Index.cshtml" />
     <Content Include="Views\Support\UserList.cshtml" />
     <Content Include="Views\Support\UserInfo.cshtml" />
+    <Content Include="Views\Support\ToggleStudent.cshtml" />
+    <Content Include="Views\Support\ToggleTeacher.cshtml" />
+    <Content Include="Views\Support\ToggleSupport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
