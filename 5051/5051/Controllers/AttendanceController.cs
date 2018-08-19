@@ -133,7 +133,9 @@ namespace _5051.Controllers
                 StudentId = myAttendance.StudentId,
                 Id = myAttendance.StudentId,
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
-                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out)
+                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
+                Emotion = myAttendance.Emotion,
+                IsNew = myAttendance.IsNew
             };
 
             return View(myReturn);
