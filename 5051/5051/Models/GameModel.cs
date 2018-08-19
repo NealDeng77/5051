@@ -44,7 +44,16 @@ namespace _5051.Models
         [Display(Name = "Experience", Description = "Experience")]
         public int Experience { get; set; }
 
-        
+        [Display(Name = "Income", Description = "Income")]
+        public int Income { get; set; }
+
+        [Display(Name = "Outcome", Description = "Outcome")]
+        public int Outcome { get; set; }
+
+        [Display(Name = "Profit", Description = "Profit")]
+        public int Profit { get; set; }
+
+
 
         /// <summary>
         /// Create the default values
@@ -60,7 +69,10 @@ namespace _5051.Models
             Experience = 0;           
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
             RunDate = DateTime.UtcNow;
-            RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
+            RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);    // default to 1 minute
+            Income = 0;
+            Outcome = 0;
+            Profit = Income - Outcome;
         }
 
         /// <summary>
@@ -100,7 +112,10 @@ namespace _5051.Models
             RunDate = data.RunDate;
             Enabled = data.Enabled;
             TimeIteration = data.TimeIteration;
-            RefreshRate = data.RefreshRate;           
+            RefreshRate = data.RefreshRate;
+            Income = data.Income;
+            Outcome = data.Outcome;
+            Profit = data.Profit;
         }
     }
 }
