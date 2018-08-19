@@ -519,5 +519,26 @@ namespace _5051.Controllers
 
             return View(data);
         }
+
+        public ActionResult BusinessReport(string id = null)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var data = new BusinessReportViewModel();
+            data.income = myStudent.Truck.Income;
+            data.outcome = myStudent.Truck.Outcome;
+            data.BusinessList = myStudent.Truck.BusinessList;
+
+            return View(data);
+        }
     }
 }

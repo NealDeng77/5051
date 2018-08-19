@@ -37,6 +37,15 @@ namespace _5051.Models
         // Truck Name
         public string TruckName { get; set; }
 
+  
+        public int Income { get; set; }
+
+        public int Outcome { get; set; }
+
+        public int Profit { get; set; }
+
+        public List<TransactionModel> BusinessList { get; set; }
+
 
         public ShopTruckModel()
         {
@@ -46,6 +55,10 @@ namespace _5051.Models
             TransactionList = new List<TransactionModel>();   // Empty List of Transactions
             CustomersTotal = 0; // No customers to start off with
             TruckName = "My Truck";
+            Income = 0;
+            Outcome = 0;
+            Profit = Income - Outcome;
+            BusinessList = new List<TransactionModel>();
 
             Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;
 
