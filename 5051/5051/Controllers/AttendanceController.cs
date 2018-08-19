@@ -121,7 +121,7 @@ namespace _5051.Controllers
         public ActionResult Update(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
-            
+
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -141,21 +141,44 @@ namespace _5051.Controllers
             return View(myReturn);
         }
 
-        //// POST: Attendance/Update/5
-        //[HttpPost]
-        //public ActionResult Update(string id)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
+        // POST: Attendance/Update/5
+        [HttpPost]
+        public ActionResult Update([Bind(Include=
+            "Id,"+
+            "StudentId,"+
+            "In,"+
+            "Out,"+
+            "Emotion,"+
+            "IsNew,"+
+            "")] AttendanceModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return View(data);
+            }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
+
+            //update the time
+            myAttendance.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
+            myAttendance.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
+
+            return RedirectToAction("Read", new { id = myAttendance.StudentId });
+        }
 
         // GET: Attendance/Delete/5
         public ActionResult Delete(int id)
