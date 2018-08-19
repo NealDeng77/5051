@@ -221,6 +221,7 @@
     <Compile Include="Backend\UTCConversionsBackend.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AvatarItemController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -672,6 +673,7 @@
     <Content Include="Views\Support\ToggleStudent.cshtml" />
     <Content Include="Views\Support\ToggleTeacher.cshtml" />
     <Content Include="Views\Support\ToggleSupport.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
