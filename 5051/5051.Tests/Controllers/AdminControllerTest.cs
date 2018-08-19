@@ -399,18 +399,18 @@ namespace _5051.Tests.Controllers
         }
 
 
-        [TestMethod]
-        public void Controller_Admin_Attendance_Default_Should_Pass()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
+        //[TestMethod]
+        //public void Controller_Admin_Attendance_Default_Should_Pass()
+        //{
+        //    // Arrange
+        //    AdminController controller = new AdminController();
 
-            // Act
-            ViewResult result = controller.Attendance() as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.Attendance() as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result, TestContext.TestName);
+        //}
 
         [TestMethod]
         public void Controller_Admin_Settings_Default_Should_Pass()
