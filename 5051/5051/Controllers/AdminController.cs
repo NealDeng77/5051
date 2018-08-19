@@ -263,16 +263,6 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// Attendance Editing
-        /// </summary>
-        /// <returns></returns>
-        // GET: Attendance
-        public ActionResult Attendance()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Settings page for the admin, allows for data reset, switching between data modes etc.
         /// </summary>
         /// <returns></returns>
