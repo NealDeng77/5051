@@ -675,6 +675,7 @@
     <Content Include="Views\Support\ToggleSupport.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
     <Content Include="Views\Attendance\Read.cshtml" />
+    <Content Include="Views\Attendance\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
