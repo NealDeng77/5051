@@ -9,6 +9,11 @@ namespace _5051.Models
     public class AttendanceModel
     {
         /// <summary>
+        /// ID of the attendance
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// ID of the Student
         /// </summary>
         public string StudentId { get; set; }
@@ -24,11 +29,6 @@ namespace _5051.Models
         public DateTime Out { get; set; }
 
         /// <summary>
-        /// Status of the transaction (in, out, hold)
-        /// </summary>
-        //public StudentStatusEnum Status { get; set; }  //removed this property for now because I don't see it useful
-
-        /// <summary>
         /// The emotion state
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
@@ -38,6 +38,11 @@ namespace _5051.Models
         /// Need to process token.
         /// </summary>
         public bool IsNew { get; set; } = true;
+
+        public AttendanceModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
     }
 }
