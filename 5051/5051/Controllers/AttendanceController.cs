@@ -96,7 +96,7 @@ namespace _5051.Controllers
         }
 
         // GET: Attendance/Detail
-        public ActionResult Detail(string id)
+        public ActionResult Details(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
 
