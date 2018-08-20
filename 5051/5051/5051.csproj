@@ -271,7 +271,6 @@
     <Compile Include="Models\SemesterReportViewModel.cs" />
     <Compile Include="Models\ShopTruckInputModel.cs" />
     <Compile Include="Models\ShopTruckItemViewModel.cs" />
-    <Compile Include="Models\AvatarCompositModel.cs" />
     <Compile Include="Models\ShopTruckViewModel.cs" />
     <Compile Include="Models\ShopTruckModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />

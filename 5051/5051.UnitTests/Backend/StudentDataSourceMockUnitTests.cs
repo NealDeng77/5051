@@ -115,7 +115,7 @@ namespace _5051.UnitTests.Backend
             var expectStatus = _5051.Models.StudentStatusEnum.Out;
             var expectPassword = "passWORD23!";
             var expectEmotionCurrent = _5051.Models.EmotionStatusEnum.Happy;
-            var expectAvatarComposite = new AvatarCompositModel();
+            var expectAvatarComposite = new AvatarCompositeModel();
 
             // Act
             expectStudent.Id = expectId;

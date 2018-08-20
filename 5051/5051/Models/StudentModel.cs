@@ -38,7 +38,7 @@ namespace _5051.Models
         /// <summary>
         ///  The composite for the Avatar
         /// </summary>
-        public AvatarCompositModel AvatarComposite { get; set; }
+        public AvatarCompositeModel AvatarComposite { get; set; }
 
         /// <summary>
         /// The personal level for the Avatar, the avatar levels up.  switching the avatar ID (picture), does not change the level
@@ -107,7 +107,7 @@ namespace _5051.Models
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
-            AvatarComposite = new AvatarCompositModel();
+            AvatarComposite = new AvatarCompositeModel();
 
             // All Students get a default Truck Inventory
             Inventory = new List<FactoryInventoryModel>
