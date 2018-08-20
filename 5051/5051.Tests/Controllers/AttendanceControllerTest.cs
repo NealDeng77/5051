@@ -306,5 +306,24 @@ namespace _5051.Tests.Controllers
 
         #endregion UpdateRegion
 
+        #region UpdatePostRegion
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            AttendanceModel data = new AttendanceModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Update(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
     }
 }
