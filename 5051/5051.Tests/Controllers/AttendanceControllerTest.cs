@@ -362,5 +362,24 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(resultNull, TestContext.TestName);
             Assert.IsNotNull(resultEmpty, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Post_Id_Is_Invalid_Should_Return_Error_Page()
+        {
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel();
+            myStudent.Attendance.Add(myAttendance);
+
+            var myData = new AttendanceModel();
+            myData.StudentId = myAttendance.Id;
+            myData.Id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.Update(myData);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
