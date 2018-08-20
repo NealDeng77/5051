@@ -59,6 +59,7 @@ namespace _5051.Backend
         /// <summary>
         /// Creates a new Support User
         /// returns the newly created user
+        /// returns null if failed
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
@@ -71,20 +72,21 @@ namespace _5051.Backend
 
             if (!result.Succeeded)
             {
-                //if user does exist, delete. This is just temporary
-                var findResult = FindUserByUserName(userName);
+                //if user does exist, delete. This is just temporary will return null
+                //var findResult = FindUserByUserName(userName);
 
-                var deleteResult = DeleteUser(findResult);
+                //var deleteResult = DeleteUser(findResult);
 
-                user = new ApplicationUser { UserName = userName, Email = userName + "@seattleu.edu" };
+                //user = new ApplicationUser { UserName = userName, Email = userName + "@seattleu.edu" };
 
-                result = UserManager.Create(user, userName);
+                //result = UserManager.Create(user, userName);
+                return null;
             }
 
-            AddClaimToUser(user.Id, "TeacherUser", "True");
-            AddClaimToUser(user.Id, "SupportUser", "True");
+            var claimResult = AddClaimToUser(user.Id, "TeacherUser", "True");
+            claimResult = AddClaimToUser(user.Id, "SupportUser", "True");
 
-            return user;
+            return claimResult;
         }
 
 
@@ -104,15 +106,13 @@ namespace _5051.Backend
 
             if (!result.Succeeded)
             {
-                var findResult = FindUserByUserName(teacherName);
-
                 return null;
             }
 
-            AddClaimToUser(user.Id, "TeacherUser", "True");
-            AddClaimToUser(user.Id, "TeacherID", teacherId);
+            var claimResult = AddClaimToUser(user.Id, "TeacherUser", "True");
+            claimResult = AddClaimToUser(user.Id, "TeacherID", teacherId);
 
-            return user;
+            return claimResult;
         }
 
         /// <summary>
@@ -133,15 +133,13 @@ namespace _5051.Backend
 
             if (!result.Succeeded)
             {
-                var findResult = FindUserByUserName(student.Name);
-
                 return null;
             }
 
-            AddClaimToUser(user.Id, "StudentUser", "True");
-            AddClaimToUser(user.Id, "StudentID", student.Id);
+            var claimResult = AddClaimToUser(user.Id, "StudentUser", "True");
+            claimResult = AddClaimToUser(user.Id, "StudentID", student.Id);
 
-            return user;
+            return claimResult;
         }
 
 
@@ -308,13 +306,13 @@ namespace _5051.Backend
 
         /// <summary>
         /// Adds the given claim type and value to the user
-        /// returns false if failure to add
+        /// returns null if failure to add
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="claimTypeToAdd"></param>
         /// <param name="claimValueToAdd"></param>
         /// <returns></returns>
-        public bool AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
+        public ApplicationUser AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
         {
             var findResult = FindUserByID(userID);
 
@@ -322,10 +320,10 @@ namespace _5051.Backend
 
             if(!claimAddResult.Succeeded)
             {
-                return false;
+                return null;
             }
 
-            return true;
+            return findResult;
         }
 
         /// <summary>
