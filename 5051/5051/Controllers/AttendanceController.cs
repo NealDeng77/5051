@@ -128,7 +128,8 @@ namespace _5051.Controllers
         //Create a new attendance
         public ActionResult Create()
         {
-            return View();
+            var myData = new AttendanceModel();
+            return View(myData);
         }
 
         // POST: Attendance/Create
