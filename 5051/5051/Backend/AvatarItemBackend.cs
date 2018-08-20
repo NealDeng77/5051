@@ -232,5 +232,83 @@ namespace _5051.Backend
             return data;
         }
 
+        /// <summary>
+        /// Build out the View used by Edit.
+        /// If anything is wrong, don't init the studentID.
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="InventoryId"></param>
+        /// <param name="defaultUri"></param>
+        public AvatarItemShopViewModel GetAvatarItemShopViewModel(string studentId, string inventoryId)
+        {
+            /* 
+             * Pass in the inventory Id for the Item.
+             * 
+             * Retrieve the Id item
+             * 
+             * Put the returned Factory Item in the Item Slot
+             * 
+             * Get the Category
+             * 
+             * Get the StudentId Inventory
+             * 
+             * Find all the Items that match the Category
+             * 
+             * Add them to the Item List
+             * 
+             */
+
+            var data = new AvatarItemShopViewModel();
+
+            if (string.IsNullOrEmpty(studentId))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(inventoryId))
+            {
+                return null;
+            }
+
+            var InventoryData = DataSourceBackend.Instance.AvatarItemBackend.Read(inventoryId);
+            if (InventoryData == null)
+            {
+                return null;
+            }
+
+            var StudentData = DataSourceBackend.Instance.StudentBackend.Read(studentId);
+            if (StudentData == null)
+            {
+                return null;
+            }
+
+            var InventoryListData = StudentData.AvatarInventory.Where(m => m.Category == InventoryData.Category).ToList();
+
+            // Found the Item, and Found the Inventory List for the Item
+            data.Item = InventoryData;
+            data.ItemList = InventoryListData;
+
+            return data;
+        }
+
+        public AvatarSelectShopViewModel GetAvatarShopViewModel(StudentModel studentData)
+        {
+            var data = new AvatarSelectShopViewModel();
+
+            data.StudentId = studentData.Id;
+
+            // Load the data set for each type
+            data.Expression = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ExpressionId);
+            data.HairBack = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HairBackId);
+            data.Head = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HeadId);
+            data.ShirtShort = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ShirtShortId);
+            data.Cheeks = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.CheeksId);
+            data.HairFront = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HairFrontId);
+            data.Accessory = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.AccessoryId);
+            data.ShirtFull = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ShirtFullId);
+            data.Pants = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.PantsId);
+
+            return data;
+        }
     }
 }

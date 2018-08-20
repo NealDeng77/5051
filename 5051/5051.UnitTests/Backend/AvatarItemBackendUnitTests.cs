@@ -342,5 +342,109 @@ namespace _5051.UnitTests.Backend
             Assert.IsNull(result, TestContext.TestName);
         }
         #endregion GetDefaultAvatarItemFullItem
+
+        #region GetAvatarShopViewModel
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarShopViewModel_Valid_Student_Should_Pass()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarShopViewModel(student);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetAvatarShopViewModel
+
+        #region GetAvatarItemShopViewModel
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarItemShopViewModel_Valid_Should_Pass()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarItemShopViewModel(student.Id,item.Id );
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarItemShopViewModel_StudentId_Null_Should_Fail()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarItemShopViewModel((string)null, item.Id);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarItemShopViewModel_StudentId_Bogus_Should_Fail()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarItemShopViewModel("bogus", item.Id);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarItemShopViewModel_ItemId_Null_Should_Fail()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarItemShopViewModel(student.Id, (string)null);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAvatarItemShopViewModel_ItemId_Bogus_Should_Fail()
+        {
+            //arrange
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarItemShopViewModel(student.Id,"bogus");
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion GetAvatarItemShopViewModel
     }
 }
