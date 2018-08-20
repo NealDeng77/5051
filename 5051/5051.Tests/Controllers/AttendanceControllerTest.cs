@@ -473,5 +473,18 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Delete_Post_Null_Data_Should_Return_Error()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete((AttendanceModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
