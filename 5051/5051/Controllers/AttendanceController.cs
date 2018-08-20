@@ -220,7 +220,7 @@ namespace _5051.Controllers
             var myReturn = new AttendanceModel
             {
                 StudentId = myAttendance.StudentId,
-                Id = myAttendance.StudentId,
+                Id = myAttendance.Id,
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
@@ -232,18 +232,47 @@ namespace _5051.Controllers
 
         // POST: Attendance/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete([Bind(Include =
+            "Id," +
+            "")] AttendanceModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                // Send back for edit
+                return View(data);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (data == null)
             {
-                return View();
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
+            if (myAttendance == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            //get the student, then remove the attendance from his attendance list
+            var myStudent = StudentBackend.Instance.Read(myAttendance.StudentId);
+            if (myStudent == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            myStudent.Attendance.Remove(myAttendance);
+
+            return RedirectToAction("Read", new { id = myAttendance.StudentId });
         }
     }
 }
