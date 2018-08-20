@@ -223,6 +223,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AvatarItemController.cs" />
+    <Compile Include="Controllers\AvatarSelectController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameSettingsController.cs" />
