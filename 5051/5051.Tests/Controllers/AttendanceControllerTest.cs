@@ -120,5 +120,25 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion ReadStringRegion
+
+        #region DetailsStringRegion
+        [TestMethod]
+        public void Controller_Attendance_Details_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel();
+            var myId = myAttendance.Id;
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            var result = controller.Details(myId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
     }
 }
