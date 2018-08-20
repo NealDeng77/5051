@@ -338,5 +338,29 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Post_Id_Is_Null_Or_Empty_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            AttendanceModel dataNull = new AttendanceModel();
+            AttendanceModel dataEmpty = new AttendanceModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.Update(dataNull);
+            var resultEmpty = (ViewResult)controller.Update(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
     }
 }
