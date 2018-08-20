@@ -552,5 +552,28 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+        [TestMethod]
+        public void Controller_Attendance_Delete_Post_Default_Should_Return_Read_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel
+            {
+                StudentId = myStudent.Id
+            };
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete(myAttendance);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Read", result.RouteValues["action"], TestContext.TestName);
+        }
+        #endregion DeletePostRegion
     }
 }
