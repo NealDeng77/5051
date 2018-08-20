@@ -95,6 +95,32 @@ namespace _5051.Controllers
             return View(myReturn);
         }
 
+        // GET: Attendance/Detail
+        public ActionResult Detail(string id)
+        {
+            var myAttendance = StudentBackend.ReadAttendance(id);
+
+            if (myAttendance == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //Create a new attendance to hold converted times
+            var myReturn = new AttendanceModel
+            {
+                StudentId = myAttendance.StudentId,
+                Id = myAttendance.StudentId,
+                In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
+                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
+                Emotion = myAttendance.Emotion,
+                IsNew = myAttendance.IsNew
+            };
+
+            return View(myReturn);
+        }
+
+
+
         // GET: Attendance/Create
         public ActionResult Create()
         {
@@ -181,9 +207,27 @@ namespace _5051.Controllers
         }
 
         // GET: Attendance/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            var myAttendance = StudentBackend.ReadAttendance(id);
+
+            if (myAttendance == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //Create a new attendance to hold converted times
+            var myReturn = new AttendanceModel
+            {
+                StudentId = myAttendance.StudentId,
+                Id = myAttendance.StudentId,
+                In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
+                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
+                Emotion = myAttendance.Emotion,
+                IsNew = myAttendance.IsNew
+            };
+
+            return View(myReturn);
         }
 
         // POST: Attendance/Delete/5
