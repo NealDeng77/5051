@@ -252,5 +252,20 @@ namespace _5051.Tests.Controllers
 
 
         #endregion CreatePostRegion
+
+        #region UpdateRegion
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Get_Id_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
