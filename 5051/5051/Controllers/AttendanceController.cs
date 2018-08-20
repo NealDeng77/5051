@@ -126,9 +126,13 @@ namespace _5051.Controllers
 
         // GET: Attendance/Create
         //Create a new attendance
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
-            var myData = new AttendanceModel();
+            var myData = new AttendanceModel
+            {
+                StudentId = id
+            };
+
             return View(myData);
         }
 
