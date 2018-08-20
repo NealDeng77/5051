@@ -400,5 +400,19 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion UpdatePostRegion
+
+        #region DeleteRegion
+        [TestMethod]
+        public void Controller_Attendance_Delete_Get_Null_Id_Should_Return_Error()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
