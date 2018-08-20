@@ -109,7 +109,7 @@ namespace _5051.Controllers
             var myReturn = new AttendanceModel
             {
                 StudentId = myAttendance.StudentId,
-                Id = myAttendance.StudentId,
+                Id = myAttendance.Id,
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
@@ -157,7 +157,7 @@ namespace _5051.Controllers
             var myReturn = new AttendanceModel
             {
                 StudentId = myAttendance.StudentId,
-                Id = myAttendance.StudentId,
+                Id = myAttendance.Id,
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
