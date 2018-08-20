@@ -85,5 +85,19 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Read_Get_Id_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            // Act
+            var result = controller.Read(null) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
     }
 }
