@@ -267,5 +267,23 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Get_myData_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Update("bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
     }
 }
