@@ -49,5 +49,41 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region ReadStringRegion
+        [TestMethod]
+        public void Controller_Attendance_Read_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            var myAttendance1 = new AttendanceModel
+            {
+                StudentId = id,
+                Emotion = EmotionStatusEnum.VeryHappy,
+                In = DateTime.UtcNow,
+
+                IsNew = false
+            };
+            var myAttendance2 = new AttendanceModel
+            {
+                StudentId = id,
+                Emotion = EmotionStatusEnum.VeryHappy,
+                In = DateTime.UtcNow,
+                Out = DateTime.UtcNow,
+                IsNew = false
+            };
+
+
+            StudentBackend.Instance.GetDefault().Attendance.Add(myAttendance1);
+            StudentBackend.Instance.GetDefault().Attendance.Add(myAttendance2);
+
+            // Act
+            var result = controller.Read(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
     }
 }
