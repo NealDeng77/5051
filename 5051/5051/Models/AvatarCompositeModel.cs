@@ -38,6 +38,7 @@ namespace _5051.Models
         public AvatarCompositeModel()
         {
             var item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head);
+
             HeadId = item.Id;
             HeadUri = item.Uri;
             AvatarHeadUri = AvatarBase + HeadUri;
@@ -60,7 +61,7 @@ namespace _5051.Models
             item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Cheeks);
             CheeksId = item.Id;
             CheeksUri = item.Uri;
-            AvatarCheeksUri = AvatarBase + CheeksUri;
+            AvatarCheeksUri = AvatarBase+ CheeksUri;
 
             item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Expression);
             ExpressionId = item.Id;

@@ -41,6 +41,11 @@ namespace _5051.Models
         public AvatarCompositeModel AvatarComposite { get; set; }
 
         /// <summary>
+        /// The inventory list of the Avatar Components for the student
+        /// </summary>
+        public List<AvatarItemModel> AvatarInventory { get; set; }
+
+        /// <summary>
         /// The personal level for the Avatar, the avatar levels up.  switching the avatar ID (picture), does not change the level
         /// </summary>
         [Display(Name = "Avatar Level", Description = "Level of the Avatar")]
@@ -108,6 +113,16 @@ namespace _5051.Models
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
             AvatarComposite = new AvatarCompositeModel();
+            AvatarInventory = new List<AvatarItemModel>
+            {
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Cheeks),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Expression),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairBack),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairFront),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull)
+            };
 
             // All Students get a default Truck Inventory
             Inventory = new List<FactoryInventoryModel>
@@ -160,6 +175,7 @@ namespace _5051.Models
 
             AvatarId = data.AvatarId;
             AvatarComposite = data.AvatarComposite;
+            AvatarInventory = data.AvatarInventory;
 
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
@@ -188,6 +204,7 @@ namespace _5051.Models
 
             AvatarId = data.AvatarId;
             AvatarComposite = data.AvatarComposite;
+            AvatarInventory = data.AvatarInventory;
 
             AvatarLevel = data.AvatarLevel;
             Tokens = data.Tokens;
