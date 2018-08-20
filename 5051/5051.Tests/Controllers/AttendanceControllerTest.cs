@@ -524,5 +524,33 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(resultEmpty, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Delete_Post_Id_Is_Invalid_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel
+            {
+                StudentId = myStudent.Id,
+            };
+            myStudent.Attendance.Add(myAttendance);
+
+            var myData = new AttendanceModel
+            {
+                StudentId = myStudent.Id,
+                Id = "bogus"
+            };
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete(myData);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
