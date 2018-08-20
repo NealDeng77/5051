@@ -414,5 +414,23 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Delete_Invalid_Null_Data_Should_Return_Error()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Delete(id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
     }
 }
