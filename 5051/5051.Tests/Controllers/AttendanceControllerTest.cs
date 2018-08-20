@@ -33,6 +33,21 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
+        #region IndexRegion
+        [TestMethod]
+        public void Controller_Attendance_Index_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion IndexRegion
 
     }
 }
