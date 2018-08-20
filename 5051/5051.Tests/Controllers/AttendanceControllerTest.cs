@@ -455,5 +455,23 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion DeleteRegion
+
+        #region DeletePostRegion
+        [TestMethod]
+        public void Controller_Attendance_Delete_Post_Invalid_Model_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+            AttendanceModel data = new AttendanceModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.Delete(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
     }
 }
