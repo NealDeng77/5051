@@ -381,5 +381,24 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Post_Default_Should_Return_Details_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel();
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            RedirectToRouteResult result = controller.Update(myAttendance) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Details", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion UpdatePostRegion
     }
 }
