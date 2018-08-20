@@ -505,5 +505,24 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(resultNull, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Delete_Post_Empty_Id_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+            AttendanceModel dataEmpty = new AttendanceModel
+            {
+
+                // Make data.Id empty
+                Id = ""
+            };
+
+            // Act
+            var resultEmpty = (ViewResult)controller.Delete(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
     }
 }
