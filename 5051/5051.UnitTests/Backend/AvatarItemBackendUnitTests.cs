@@ -311,7 +311,6 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
-
         #region GetDefaultAvatarItemFullItem
         [TestMethod]
         public void Backend_AvatarItemBackend_GetDefaultAvatarItemFullItem_Valid_Category_Should_Pass()
@@ -319,7 +318,6 @@ namespace _5051.UnitTests.Backend
             //arrange
 
             //act
-           
             var result = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Accessory);
 
             //reset
@@ -327,6 +325,21 @@ namespace _5051.UnitTests.Backend
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefaultAvatarItemFullItem_Null_Category_Should_Fail()
+        {
+            //arrange
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Unknown);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
         }
         #endregion GetDefaultAvatarItemFullItem
     }

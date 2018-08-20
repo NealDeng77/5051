@@ -222,18 +222,12 @@ namespace _5051.Backend
         public AvatarItemModel GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum category)
         {
             var DataSet = Index().Where(m => m.Category == category).ToList();
-            if (DataSet == null)
+            if (DataSet.Count == 0)
             {
                 return GetDefault(category);
             }
 
-            if (DataSet.Count() == 0)
-            {
-                return GetDefault(category);
-            }
-
-            // Get the 2nd in the set, the 1st is blank.
-            var data = DataSet[1];
+            var data = DataSet.FirstOrDefault();
 
             return data;
         }
