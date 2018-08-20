@@ -37,50 +37,50 @@ namespace _5051.Models
 
         public AvatarCompositeModel()
         {
-            //var item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head);
-            //HeadId = item.Id;
-            //HeadUri = item.Uri;
-            //AvatarHeadUri = AvatarBase + HeadUri;
+            var item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head);
+            HeadId = item.Id;
+            HeadUri = item.Uri;
+            AvatarHeadUri = AvatarBase + HeadUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort);
-            //ShirtShortId = item.Id;
-            //ShirtShortUri = item.Uri;
-            //AvatarShirtShortUri = AvatarBase + ShirtShortUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort);
+            ShirtShortId = item.Id;
+            ShirtShortUri = item.Uri;
+            AvatarShirtShortUri = AvatarBase + ShirtShortUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull);
-            //ShirtFullId = item.Id;
-            //ShirtFullUri = item.Uri;
-            //AvatarShirtFullUri = AvatarBase + ShirtFullUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull);
+            ShirtFullId = item.Id;
+            ShirtFullUri = item.Uri;
+            AvatarShirtFullUri = AvatarBase + ShirtFullUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
-            //AccessoryId = item.Id;
-            //AccessoryUri = item.Uri;
-            //AvatarAccessoryUri = AvatarBase + AccessoryUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+            AccessoryId = item.Id;
+            AccessoryUri = item.Uri;
+            AvatarAccessoryUri = AvatarBase + AccessoryUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Cheeks);
-            //CheeksId = item.Id;
-            //CheeksUri = item.Uri;
-            //AvatarCheeksUri = AvatarBase+ CheeksUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Cheeks);
+            CheeksId = item.Id;
+            CheeksUri = item.Uri;
+            AvatarCheeksUri = AvatarBase + CheeksUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Expression);
-            //ExpressionId = item.Id;
-            //ExpressionUri = item.Uri;
-            //AvatarExpressionUri = AvatarBase + ExpressionUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Expression);
+            ExpressionId = item.Id;
+            ExpressionUri = item.Uri;
+            AvatarExpressionUri = AvatarBase + ExpressionUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairFront);
-            //HairFrontId = item.Id;
-            //HairFrontUri = item.Uri;
-            //AvatarHairFrontUri = AvatarBase + HairFrontUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairFront);
+            HairFrontId = item.Id;
+            HairFrontUri = item.Uri;
+            AvatarHairFrontUri = AvatarBase + HairFrontUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairBack);
-            //HairBackId = item.Id;
-            //HairBackUri = item.Uri;
-            //AvatarHairBackUri = AvatarBase + HairBackUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairBack);
+            HairBackId = item.Id;
+            HairBackUri = item.Uri;
+            AvatarHairBackUri = AvatarBase + HairBackUri;
 
-            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Pants);
-            //PantsId = item.Id;
-            //PantsUri = item.Uri;
-            //AvatarPantsUri = AvatarBase + PantsUri;
+            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Pants);
+            PantsId = item.Id;
+            PantsUri = item.Uri;
+            AvatarPantsUri = AvatarBase + PantsUri;
         }
     }
 }
