@@ -12,6 +12,8 @@ namespace _5051.Backend
         /// Hold one of each of the DataSources as an instance to the datasource
         /// </summary>
         public AvatarBackend AvatarBackend = AvatarBackend.Instance;
+
+        public AvatarItemBackend AvatarItemBackend = AvatarItemBackend.Instance;
         public StudentBackend StudentBackend = StudentBackend.Instance;
         public FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
         public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
@@ -29,6 +31,8 @@ namespace _5051.Backend
         {
             // Avatar must be before Student, because Student needs the default avatarID
             AvatarBackend = AvatarBackend.Instance;
+
+            AvatarItemBackend = AvatarItemBackend.Instance;
             StudentBackend = StudentBackend.Instance;
             FactoryInventoryBackend = FactoryInventoryBackend.Instance;
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
@@ -68,6 +72,8 @@ namespace _5051.Backend
             FactoryInventoryBackend.Reset();
 
             AvatarBackend.Reset();
+
+            AvatarItemBackend.Reset();
             StudentBackend.Reset();
         }
 
@@ -85,6 +91,8 @@ namespace _5051.Backend
 
             // Avatar must be reset before Student, because Student needs the default avatarID
             AvatarBackend.SetDataSource(dataSourceEnum);
+
+            AvatarItemBackend.SetDataSource(dataSourceEnum);
             StudentBackend.SetDataSource(dataSourceEnum);
         }
 
@@ -102,6 +110,8 @@ namespace _5051.Backend
 
             // Avatar must be reset before Student, because Student needs the default avatarID
             AvatarBackend.SetDataSourceDataSet(SetEnum);
+
+            AvatarItemBackend.SetDataSourceDataSet(SetEnum);
             StudentBackend.SetDataSourceDataSet(SetEnum);
         }
     }
