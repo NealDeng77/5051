@@ -53,28 +53,27 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
-
-
-                    <div class="row justify-content-center">
-                        <div class="col-sm text-sm-center text-md-right" id="studentName">
+                    <div class="row">
+                        <div class="col-6 text-right" id="avatarLevelName">
                             @Html.DisplayNameFor(m => m.In)
                         </div>
                         <div class="col-1">
+                            &nbsp;:&nbsp;
                         </div>
-                        <div class="col-sm text-left" id="studentValue">
+                        <div class="col text-left" id="avatarLevelValue">
                             @Html.EditorFor(m => m.In)
                             @Html.ValidationMessageFor(m => m.In)
                         </div>
                     </div>
-                    <br/>
-                    <div class="row justify-content-center">
-                        <div class="col-sm text-sm-center text-md-right" id="tokensName">
+                    <br />
+                    <div class="row">
+                        <div class="col-6 text-right" id="tokensName">
                             @Html.DisplayNameFor(m => m.Out)
                         </div>
                         <div class="col-1">
-
+                            &nbsp;:&nbsp;
                         </div>
-                        <div class="col-sm text-left" id="tokensValue">
+                        <div class="col text-left" id="tokensValue">
                             @Html.EditorFor(m => m.Out)
                             @Html.ValidationMessageFor(m => m.Out)
                         </div>
@@ -88,7 +87,7 @@
 
                     <div class="row justify-content-around">
                         <div class="col-sm-auto justify-content-center text-center">
-                            @Html.ActionLink("Cancel", "Read", new { id = Model.StudentId }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                            @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                         </div>
 
                         <div class="col-sm-auto justify-content-center text-center">
