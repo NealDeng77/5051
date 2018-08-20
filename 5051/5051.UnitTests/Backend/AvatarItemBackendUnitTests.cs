@@ -273,5 +273,61 @@ namespace _5051.UnitTests.Backend
         }
         #endregion GetDefault
 
+        #region SetDataSource
+        [TestMethod]
+        public void Backend_AvatarItemBackend_SetDataSource_Valid_Enum_SQL_Should_Pass()
+        {
+            //arrange
+            var sqlEnum = _5051.Models.DataSourceEnum.SQL;
+            var backend = AvatarItemBackend.Instance;
+
+            //act
+            AvatarItemBackend.SetDataSource(sqlEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_SetDataSourceDataSet_Valid_Enum_UnitTests_Should_Pass()
+        {
+            //arrange
+            var unitEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+            var backend = AvatarItemBackend.Instance;
+
+            //act
+            AvatarItemBackend.SetDataSourceDataSet(unitEnum);
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
+
+
+        #region GetDefaultAvatarItemFullItem
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefaultAvatarItemFullItem_Valid_Category_Should_Pass()
+        {
+            //arrange
+
+            //act
+           
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Accessory);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetDefaultAvatarItemFullItem
     }
 }

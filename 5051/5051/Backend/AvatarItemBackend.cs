@@ -219,21 +219,21 @@ namespace _5051.Backend
             return data;
         }
 
-        public AvatarItemModel GetDefaultTruckFullItem(AvatarItemCategoryEnum category)
+        public AvatarItemModel GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum category)
         {
-            var TruckSet = Index().Where(m => m.Category == category).ToList();
-            if (TruckSet == null)
+            var DataSet = Index().Where(m => m.Category == category).ToList();
+            if (DataSet == null)
             {
                 return GetDefault(category);
             }
 
-            if (TruckSet.Count() == 0)
+            if (DataSet.Count() == 0)
             {
                 return GetDefault(category);
             }
 
-            // Get the 2nd in the set, the 1st is blanks.
-            var data = TruckSet[1];
+            // Get the 2nd in the set, the 1st is blank.
+            var data = DataSet[1];
 
             return data;
         }
