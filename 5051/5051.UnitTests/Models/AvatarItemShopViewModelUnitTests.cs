@@ -9,7 +9,7 @@ using _5051.Models;
 namespace _5051.UnitTests.Models
 {
     [TestClass]
-    public class AvatarItemShopViewModel
+    public class AvatarItemShopViewModelUnitTests
     {
         public TestContext TestContext { get; set; }
 
