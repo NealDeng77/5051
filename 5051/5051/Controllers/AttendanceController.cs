@@ -138,18 +138,53 @@ namespace _5051.Controllers
 
         // POST: Attendance/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include=
+            "Id,"+
+            "StudentId,"+
+            "In,"+
+            "Out,"+
+            "Emotion,"+
+            "IsNew,"+
+            "")] AttendanceModel data)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                // Send back for edit
+                return View(data);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (data == null)
             {
-                return View();
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
             }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            //create a new attendance using the data
+            var myAttendance = new AttendanceModel
+            {
+                StudentId = data.StudentId,
+                //update the time
+                In = UTCConversionsBackend.KioskTimeToUtc(data.In),
+                Out = UTCConversionsBackend.KioskTimeToUtc(data.Out)
+            };
+
+            //add the attendance to the student's attendance
+            var myStudent = StudentBackend.Instance.Read(myAttendance.StudentId);
+            if (myStudent == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+            }
+
+            myStudent.Attendance.Add(myAttendance);
+
+            return RedirectToAction("Read", new { id = myAttendance.StudentId });
         }
 
         // GET: Attendance/Update
