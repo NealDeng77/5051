@@ -248,6 +248,7 @@
     <Compile Include="Models\AvatarItemInputModel.cs" />
     <Compile Include="Models\AvatarItemModel.cs" />
     <Compile Include="Models\AvatarItemShopViewModel.cs" />
+    <Compile Include="Models\AvatarSelectShopViewModel.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
     <Compile Include="Models\AvatarItemViewModel.cs" />
     <Compile Include="Models\BusinessReoprtViewModel.cs" />
