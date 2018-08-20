@@ -679,6 +679,7 @@
     <Content Include="Views\Attendance\Index.cshtml" />
     <Content Include="Views\Attendance\Read.cshtml" />
     <Content Include="Views\Attendance\Update.cshtml" />
+    <Content Include="Views\AvatarSelect\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

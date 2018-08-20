@@ -1,0 +1,550 @@
+﻿@using _5051.Models;
+@using _5051.Models.Enums;
+@model _5051.Models.AvatarSelectShopViewModel
+@{
+
+    ViewBag.Title = "Edit Truck";
+    var myPlace = Model.Accessory;
+}
+
+<br />
+
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeMedium text-center">
+            <span class="FontSizeMedium FontBold">
+                Avatar Customization
+            </span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+
+<div class="row justify-content-start">
+    <div class="col-1"></div>
+
+    <div class="col">
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Head</h2>
+                </div>
+                @{
+                    // Iterate through all the Wheels bodies
+                    // Have a form post that takes the Wheels position, student ID, Wheels body when student selects
+
+                    myPlace = Model.Head;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Head);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Hair Back</h2>
+                </div>
+                @{
+                    // Iterate through all the Sign bodies
+                    // Have a form post that takes the Sign position, student ID, Sign body when student selects
+
+                    myPlace = Model.HairBack;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.HairBack);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Hair Front</h2>
+                </div>
+                @{
+                    // Iterate through all the Topper bodies
+                    // Have a form post that takes the Topper position, student ID, Topper body when student selects
+
+                    myPlace = Model.HairFront;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.HairFront);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+
+        <div class="row justify-content-start">
+            <div class="col">
+                <div class="row">
+                    <h2>Accessories</h2>
+                </div>
+
+                @{
+                    // Iterate through all the Truck bodies
+                    // Have a form post that takes the truck position, student ID, truck body when student selects
+
+                    myPlace = Model.Accessory;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Accessory);
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Cheeks</h2>
+                </div>
+                @{
+                    // Iterate through all the Trailer bodies
+                    // Have a form post that takes the Trailer position, student ID, Trailer body when student selects
+
+                    myPlace = Model.Cheeks;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Cheeks);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Expression</h2>
+                </div>
+                @{
+                    // Iterate through all the Menu bodies
+                    // Have a form post that takes the Menu position, student ID, Menu body when student selects
+
+                    myPlace = Model.Expression;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Expression);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Shirt</h2>
+                </div>
+                @{
+                    // Iterate through all the Wheels bodies
+                    // Have a form post that takes the Wheels position, student ID, Wheels body when student selects
+
+                    myPlace = Model.ShirtFull;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.ShirtFull);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h2>Pants</h2>
+                </div>
+                @{
+                    // Iterate through all the Wheels bodies
+                    // Have a form post that takes the Wheels position, student ID, Wheels body when student selects
+
+                    myPlace = Model.Pants;
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="">
+                                <img src="~/Content/avatar/@myPlace.Item.Uri" class="FactoryInventorySize1" />
+                                <br />
+                                <span>
+                                    @myPlace.Item.Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <span>Inventory</span>
+                    </div>
+
+                    <div class="row">
+                        @{
+                            if (myPlace.ItemList.Count < 1)
+                            {
+                                <div>No Items to Select</div><br /><br />
+                            }
+
+                            foreach (var InventoryItem in myPlace.ItemList)
+                            {
+                                using (Html.BeginForm())
+                                {
+                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("ItemId", InventoryItem.Id);
+                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Pants);
+
+
+                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                                    <div class="col-sm-2 text-center">
+                                        <div class="BoxWithHighlightHover">
+                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                            <br />
+                                            <span class="text-center">
+                                                @InventoryItem.Name
+                                                <br />
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+
+    <div class="col-1"></div>
+</div>
