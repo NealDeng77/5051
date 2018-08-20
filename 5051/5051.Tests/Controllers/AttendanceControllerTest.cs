@@ -99,5 +99,26 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Read__Get_myDataAttendance_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Reset DataSourceBackend
+            DataSourceBackend.Instance.Reset();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Read(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        #endregion ReadStringRegion
     }
 }
