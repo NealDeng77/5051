@@ -285,5 +285,26 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Update_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+
+            var myStudent = StudentBackend.Instance.GetDefault();
+            var myAttendance = new AttendanceModel();
+            var myId = myAttendance.Id;
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            var result = controller.Update(myId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
+
     }
 }
