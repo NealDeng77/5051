@@ -193,5 +193,18 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Create_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Create((AttendanceModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
     }
 }
