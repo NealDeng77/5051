@@ -8,11 +8,13 @@ using _5051.Models;
 
 namespace _5051.Controllers
 {
+    //The controller that handles attendance crudi
     public class AttendanceController : Controller
     {
         // The Backend Data source
         private StudentBackend StudentBackend = StudentBackend.Instance;
-        // GET: Attendance
+
+        // GET: Attendance. Select a student here
         public ActionResult Index()
         {
             // Load the list of data into the StudentList
@@ -21,7 +23,7 @@ namespace _5051.Controllers
             return View(StudentViewModel);
         }
 
-        // GET: Attendance/Read/
+        // GET: Attendance/Read/. Read the attendance history of the student
         public ActionResult Read(string id)
         {
             var myStudent = StudentBackend.Instance.Read(id);
@@ -96,6 +98,7 @@ namespace _5051.Controllers
         }
 
         // GET: Attendance/Detail
+        // Read the details of the attendance(time in, time out).
         public ActionResult Details(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
@@ -122,6 +125,7 @@ namespace _5051.Controllers
 
 
         // GET: Attendance/Create
+        //Create a new attendance
         public ActionResult Create()
         {
             return View();
@@ -144,6 +148,7 @@ namespace _5051.Controllers
         }
 
         // GET: Attendance/Update
+        // Update in and out times.
         public ActionResult Update(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
@@ -207,6 +212,7 @@ namespace _5051.Controllers
         }
 
         // GET: Attendance/Delete/5
+        // Remove the attendance
         public ActionResult Delete(string id)
         {
             var myAttendance = StudentBackend.ReadAttendance(id);
