@@ -9,20 +9,7 @@
 <h2>Welcome to @Model.Name's Attendance History</h2>
 <br />
 
-@{
-    <br />
-    <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
-    if (!Model.Attendance.Any())
-    {
-        //skip
-    }
-    else
-    {
-        <h4> @Model.Name last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
 
-        <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
-    }
-}
 <hr />
 <div class="row w-100 text-center">
 
