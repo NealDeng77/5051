@@ -179,16 +179,6 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// Things on sale at the store
-        /// </summary>
-        /// <returns></returns>
-        // GET: Discounts
-        public ActionResult Discounts()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// store items of the AvatarSelect
         /// </summary>
         /// <returns></returns>
