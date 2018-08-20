@@ -21,6 +21,15 @@ namespace _5051.Backend
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+
+        public IdentityBackend() { }
+
+        public IdentityBackend(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -45,7 +54,7 @@ namespace _5051.Backend
             }
         }
 
-        public IdentityBackend() { }
+
 
         /// <summary>
         /// Creates a new Support User
@@ -53,10 +62,10 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public ApplicationUser CreateNewSupportUser(string userName, string password)
+        public ApplicationUser CreateNewSupportUser(string userName, string password, string supportId)
         {
             //fill in all fields needed
-            var user = new ApplicationUser { UserName = userName, Email = userName + "@seattleu.edu" };
+            var user = new ApplicationUser { UserName = userName, Email = userName + "@seattleu.edu", Id = supportId };
 
             var result = UserManager.Create(user, password);
 
@@ -309,7 +318,7 @@ namespace _5051.Backend
         {
             var findResult = FindUserByID(userID);
 
-            var claimAddResult = UserManager.AddClaim(userID, new Claim(claimTypeToAdd, claimValueToAdd));
+            var claimAddResult = UserManager.AddClaim(findResult.Id, new Claim(claimTypeToAdd, claimValueToAdd));
 
             if(!claimAddResult.Succeeded)
             {
