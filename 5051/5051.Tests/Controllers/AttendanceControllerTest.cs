@@ -230,5 +230,27 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(resultNull, TestContext.TestName);
             Assert.IsNotNull(resultEmpty, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Attendance_Create_Post_Default_Should_Return_Read_Page()
+        {
+            // Arrange
+            AttendanceController controller = new AttendanceController();
+
+            var attendanceModel = new AttendanceModel
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id
+            };
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Create(attendanceModel);
+
+            // Assert
+            Assert.AreEqual("Read", result.RouteValues["action"], TestContext.TestName);
+        }
+
+
+
+        #endregion CreatePostRegion
     }
 }
