@@ -30,62 +30,48 @@
         foreach (var item in Model.Attendance)
         {
             <div class="col-sm-4 col-md-2 p-0">
-                <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
-                    <div class="text-center">
-                        <div>
-                            @switch (item.Emotion)
-                            {
-                                case EmotionStatusEnum.VeryHappy:
-                                    <img src="/Content/img/EmotionVeryHappy.png" height="30" />
-                                    break;
-                                case EmotionStatusEnum.Happy:
-                                    <img src="/Content/img/EmotionHappy.png" height="30" />
-                                    break;
-                                case EmotionStatusEnum.Neutral:
-                                    <img src="/Content/img/EmotionNeutral.png" height="30" />
-                                    break;
-                                case EmotionStatusEnum.Sad:
-                                    <img src="/Content/img/EmotionSad.png" height="30" />
-                                    break;
-                                case EmotionStatusEnum.VerySad:
-                                    <img src="/Content/img/EmotionVerySad.png" height="30" />
-                                    break;
-                            }
-                            @item.In.ToShortDateString()
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            In<br />
-                            @item.In.ToShortTimeString()<br />
-                        </div>
-                        @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
-                        {
-                            <div class="col-sm-6">
-                                Out<br />
-
-                                @item.Out.ToShortTimeString()<br />
+                <div class="BoxWithHighlightHover bg-white" style="border: solid 1px; margin-bottom: 5px; padding: 5px">
+                    <a href="~/Attendance/Details/@item.Id">
+                        <div class="text-center text-body">
+                            <div>
+                                @switch (item.Emotion)
+                                {
+                                    case EmotionStatusEnum.VeryHappy:
+                                        <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Happy:
+                                        <img src="/Content/img/EmotionHappy.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Neutral:
+                                        <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Sad:
+                                        <img src="/Content/img/EmotionSad.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.VerySad:
+                                        <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                        break;
+                                }
+                                @item.In.ToShortDateString()
                             </div>
-                        }
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3">
-                            <a href="~/Attendance/Update/@item.Id">
-                                <div class="btn-sm btn-primary btn">
-                                    Update
-                                </div>
-                            </a>
                         </div>
-                        &nbsp;&nbsp;
-                        <div class="col-3">
-                            <a href="~/Attendance/Delete/@item.Id">
-                                <div class="btn-sm btn-danger btn">
-                                    Delete
+                        <div class="row">
+                            <div class="col-sm-6 text-body">
+                                In<br />
+                                @item.In.ToShortTimeString()<br />
+                            </div>
+                            @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
+                            {
+                                <div class="col-sm-6  text-body">
+                                    Out<br />
+
+                                    @item.Out.ToShortTimeString()<br />
                                 </div>
-                            </a>
+                            }
                         </div>
-                    </div>
+                    </a>
                 </div>
+            
             </div>
         }
     }
