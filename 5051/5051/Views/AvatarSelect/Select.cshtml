@@ -1,7 +1,141 @@
 ﻿@model _5051.Models.SelectedAvatarItemListForStudentViewModel
-
 @{
-    ViewBag.Title = "Avatar Index";
+    ViewBag.Title = "Avatar Components";
+
+    if (Model == null || Model.Student == null || Model.AvatarItemCategoryList== null || !Model.AvatarItemCategoryList.Any())
+    {
+        <br />
+        <h2>No Data to show</h2>
+    }
+
+    else
+    {
+        <br />
+        <h2 class="text-left">See something cool?</h2>
+        <h4 class="text-left">Use your tokens to purchage items</h4>
+        <br />
+
+        <p>Tokens Available: @Model.Student.Tokens </p>
+        <hr />
+
+        var disabledOn = "";
+        var BoxHover = "BoxWithHighlightHover";
+        var ActiveTab = "";
+        var TabCount = 0;
+        var DisplayText = "";
+
+
+        <ul class="nav nav-tabs">
+            @{
+                TabCount = 0;
+                foreach (var CurrentList in Model.AvatarItemCategoryList)
+                {
+                    ActiveTab = "";
+
+                    if (CurrentList == null)
+                    {
+                        continue;
+                    }
+
+                    TabCount++;
+                    if (TabCount == 1)
+                    {
+                        ActiveTab = "active";
+                    }
+
+                    <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category</a></li>
+                }
+            }
+        </ul>
+
+
+        <div class="tab-content">
+
+            @{
+                TabCount = 0;
+                foreach (var CurrentList in Model.AvatarItemCategoryList)
+                {
+                    ActiveTab = "";
+                    if (CurrentList == null)
+                    {
+                        continue;
+                    }
+
+                    TabCount++;
+                    if (TabCount == 1)
+                    {
+                        ActiveTab = "active";
+                    }
+
+                    <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
+                        <br />
+                        <h3>@CurrentList.Category</h3>
+                        <div class="row">
+                            @{
+                                // If no items, the skip
+
+                                if (!CurrentList.AvatarItemList.Any())
+                                {
+                                    <br />
+                                    <div>No Items</div>
+                                    continue;
+                                }
+
+                                //AvatarViewModel outputAvatar = new AvatarViewModel();
+                                foreach (var item in CurrentList.AvatarItemList)
+                                {
+                                    using (Html.BeginForm())
+                                    {
+                                        @Html.Hidden("StudentId", Model.Student.Id);
+                                        @Html.Hidden("ItemId", item.Id);
+
+                                        var picturURI = "/Content/avatar/" + item.Uri;
+
+                                        disabledOn = "";
+                                        BoxHover = "BoxWithHighlightHover";
+                                        DisplayText = "";
+
+                                        // Check if the user owns the item, if so disable it.
+                                        var ItemAlreadyExists = Model.Student.AvatarInventory.Exists(m => m.Id == item.Id);
+                                        if (ItemAlreadyExists)
+                                        {
+                                            // Already own it.
+                                            disabledOn = "disabled";
+                                            BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                            DisplayText = "Purchased";
+
+                                        }
+
+                                        <div class="col-sm-2">
+                                            <div class="@BoxHover">
+                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                <br />
+                                                <span class="text-center">
+                                                    @item.Name
+                                                    <br />
+                                                    <span>Tokens: </span>@item.Tokens
+                                                    <br />
+                                                    <span>
+                                                        @{
+                                                            if (@item.IsLimitSupply)
+                                                            {
+                                                                <span>Quantities: @item.Quantities</span>
+                                                            }
+                                                        }
+                                                    </span>
+                                                    <br />
+                                                    @DisplayText
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+    }
 }
-
-
