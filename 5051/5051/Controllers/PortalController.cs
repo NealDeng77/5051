@@ -101,6 +101,9 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Index(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myStudent = StudentBackend.Instance.Read(id);
 
             if (myStudent == null)
@@ -134,9 +137,6 @@ namespace _5051.Controllers
                 }
             }
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return View(myReturn);
         }
 
@@ -148,6 +148,9 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Attendance(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
@@ -209,9 +212,6 @@ namespace _5051.Controllers
 
             myReturn.Attendance = myAttendanceModels;
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return View(myReturn);
         }
 
@@ -269,6 +269,9 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Avatar(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+            
             // var currentUser = User.Identity.GetUserName();
             //var currentUserId = User.Identity.GetUserId();
 
@@ -307,9 +310,6 @@ namespace _5051.Controllers
             SelectedAvatarViewModel.SelectedAvatar = myAvatar;
             SelectedAvatarViewModel.Student = myStudent;
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return View(SelectedAvatarViewModel);
         }
 
@@ -321,6 +321,9 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Settings(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
@@ -328,9 +331,6 @@ namespace _5051.Controllers
             }
 
             var myReturn = new StudentDisplayViewModel(myStudent);
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myReturn);
         }

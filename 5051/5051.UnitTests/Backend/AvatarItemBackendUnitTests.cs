@@ -349,8 +349,10 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
             //act
-            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarShopViewModel(student);
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarShopViewModel(student,item);
 
             //reset
             DataSourceBackend.Instance.Reset();

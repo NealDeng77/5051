@@ -22,15 +22,15 @@ namespace _5051.Controllers
         // GET: Shop
         public ActionResult Index(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Get the Student
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myStudent);
         }
@@ -42,6 +42,9 @@ namespace _5051.Controllers
         // GET: Buy
         public ActionResult Factory(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Load the list of data into the FactoryInventoryList
             var myData = new SelectedFactoryInventoryForStudentViewModel();
 
@@ -70,10 +73,7 @@ namespace _5051.Controllers
                     myData.FactoryInventoryCategoryList.Add(temp);
                 }
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
+            
             return View(myData);
         }
         [HttpPost]
@@ -91,7 +91,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.StudentId))
@@ -99,6 +99,9 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
             }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = data.StudentId;
 
             if (string.IsNullOrEmpty(data.ItemId))
             {
@@ -172,9 +175,6 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return RedirectToAction("Factory", "Shop", new { id = data.StudentId });
         }
 
@@ -205,6 +205,9 @@ namespace _5051.Controllers
         // GET: Inventory
         public ActionResult Inventory(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myData = new SelectedFactoryInventoryForStudentViewModel();
 
             // Get the Student
@@ -231,9 +234,6 @@ namespace _5051.Controllers
                 }
 
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myData);
         }
@@ -472,6 +472,9 @@ namespace _5051.Controllers
         /// <returns>List of Students that you can visit</returns>
         public ActionResult Visit(string id=null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Get the list of other students' shop
             // it will show the name of the student's shop and its owner 
 
@@ -489,10 +492,7 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Index", "Shop", new { id});
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
+            
             return View(data);
         }
 

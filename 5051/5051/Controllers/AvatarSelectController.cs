@@ -22,15 +22,15 @@ namespace _5051.Controllers
         // GET: AvatarSelect
         public ActionResult Index(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Get the Student
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myStudent);
         }
@@ -42,6 +42,9 @@ namespace _5051.Controllers
         // GET: Buy
         public ActionResult Select(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Load the list of data into the AvatarItemList
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
@@ -71,11 +74,9 @@ namespace _5051.Controllers
                 }
             }
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return View(myData);
         }
+
         [HttpPost]
         public ActionResult Select([Bind(Include=
                                         "StudentId,"+
@@ -99,6 +100,9 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Select", "AvatarSelect", new { id = data.StudentId });
             }
+
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = data.StudentId;
 
             if (string.IsNullOrEmpty(data.ItemId))
             {
@@ -172,9 +176,6 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return RedirectToAction("Select", "AvatarSelect", new { id = data.StudentId });
         }
 
@@ -185,6 +186,9 @@ namespace _5051.Controllers
         // GET: Inventory
         public ActionResult Inventory(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
             // Get the Student
@@ -210,9 +214,6 @@ namespace _5051.Controllers
                 }
 
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myData);
         }
@@ -270,11 +271,19 @@ namespace _5051.Controllers
 
         }
         /// <summary>
-        /// Edit The AvatarSelect Details
+        /// Edit The items from the Inventory that match the Item passed in
         /// </summary>
         /// <returns></returns>
-        public ActionResult Edit(string id=null)
+        public ActionResult Edit(string id=null, string item=null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -291,10 +300,15 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata);
+            // Get Item
+            var myItem = DataSourceBackend.Instance.AvatarItemBackend.Read(item);
+            if (myItem == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = studentdata.Id;
+            // Use the Item, to populate the ShopViewModel
+            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata,myItem);
 
             //Return Truck Data
             return View(data);
