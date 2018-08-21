@@ -408,7 +408,7 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            return RedirectToAction("Edit", "AvatarSelect", new { id = data.StudentId });
+            return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId });
         }
 
     }
