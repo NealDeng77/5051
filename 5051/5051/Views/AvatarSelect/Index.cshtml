@@ -6,9 +6,175 @@
     item.Id = "bogus";
 }
 
-@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn" })
 <br />
-@Html.ActionLink("Select", "Select", new { id = Model.Id }, new { @class = "btn" })
-<br />
-@Html.ActionLink("Inventory", "Inventory", new { id = Model.Id }, new { @class = "btn" })
+<div class="row justify-content-center">
 
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Customize your Avatar</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="row justify-content-center">
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm justify-content-center">
+
+                <div class="col-sm text-center">
+
+                    <div class="row justify-content-center">
+                        <div class="AvatarBoxLarge align-self-sm-center" id="AvatarBox">
+                            <div class="AvatarCircle"></div>
+                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.AvatarComposite.AvatarHairBackUri" />
+                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.AvatarComposite.AvatarHeadUri" />
+                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.AvatarComposite.AvatarShirtShortUri" />
+                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.AvatarComposite.AvatarExpressionUri" />
+                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.AvatarComposite.AvatarCheeksUri" />
+                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.AvatarComposite.AvatarHairFrontUri" />
+                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.AvatarComposite.AvatarAccessoryUri" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm text-center">
+                <div class="FontSizeMedium">
+                    <br />
+
+                    @Html.ActionLink("Buy Components", "Select", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                    <br />
+                    <br />
+                    @Html.ActionLink("My Inventory", "Inventory", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                    <br />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+        </div>
+
+        <br />
+        <hr />
+        <br />
+
+        <div class="row justify-content-around">
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarHead" src="@Model.AvatarComposite.AvatarHeadUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Head</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/Shop/Index/@Model.Id" id="shopLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarHairBack" src="@Model.AvatarComposite.AvatarHairBackUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Hair Back</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarHairFront" src="@Model.AvatarComposite.AvatarHairFrontUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Hair Front</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarExpression" src="@Model.AvatarComposite.AvatarExpressionUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Expression</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarCheeks" src="@Model.AvatarComposite.AvatarCheeksUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Cheeks</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarAccessory" src="@Model.AvatarComposite.AvatarAccessoryUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Accessory</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarShirt" src="@Model.AvatarComposite.AvatarShirtFullUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Shirt</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                <div class="row no-gutters justify-content-center">
+                    <a href="~/AvatarSelect/Edit/@Model.Id" id="avatarLinkPortalIndex">
+                        <img class="AvatarKioskBox" id="AvatarShirt" src="@Model.AvatarComposite.AvatarPantsUri" />
+                    </a>
+                    <br />
+                </div>
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeSmall text-center">Pants</span>
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+
+    </div>
+    <div class="col-1"></div>
+</div>
