@@ -130,7 +130,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
@@ -201,7 +201,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
@@ -216,7 +216,7 @@ namespace _5051.Controllers
             if (myAttendance == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             //update the time
@@ -266,7 +266,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
@@ -281,7 +281,7 @@ namespace _5051.Controllers
             if (myAttendance == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             //get the student, then remove the attendance from his attendance list

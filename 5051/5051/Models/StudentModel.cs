@@ -113,6 +113,7 @@ namespace _5051.Models
             EmotionCurrent = EmotionStatusEnum.Neutral;
             Truck = new ShopTruckModel();
             AvatarComposite = new AvatarCompositeModel();
+
             AvatarInventory = new List<AvatarItemModel>
             {
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory),
@@ -121,7 +122,9 @@ namespace _5051.Models
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairBack),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairFront),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head),
-                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull)
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort),
+                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Pants)
             };
 
             // All Students get a default Truck Inventory
@@ -134,7 +137,6 @@ namespace _5051.Models
                 DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Sign),
                 DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Menu)
             };
-
         }
 
         /// <summary>

@@ -446,17 +446,20 @@ namespace _5051.UnitTests.Backend
 
             //act   
             var expect = student.Tokens - 1;
+            var expectOutcome = student.Truck.Outcome + 1;
             test.PayRentPerDay(student);
             
             DataSourceBackend.Instance.StudentBackend.Update(student);
 
             var myTokens = student.Tokens;
+            var myOutcome = student.Truck.Outcome;
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expect, myTokens, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myOutcome, TestContext.TestName);
         }
 
         [TestMethod]
@@ -583,6 +586,7 @@ namespace _5051.UnitTests.Backend
 
             var myTokens = student.Tokens;
             var myInventoryItemNumber = student.Inventory.Count;
+            var myIncome = student.Truck.Income;
             test.CustomerPurchase(student);
 
             var expectCustomerTotal = 1;
@@ -596,6 +600,8 @@ namespace _5051.UnitTests.Backend
             Assert.AreNotEqual(myTokens, student.Tokens, TestContext.TestName);
             Assert.AreEqual(expectCustomerTotal, student.Truck.CustomersTotal, TestContext.TestName);
             Assert.AreEqual(expectInventoryItemNumber, student.Inventory.Count, TestContext.TestName);
+            Assert.AreNotEqual(myIncome, student.Truck.Income, TestContext.TestName);
+            Assert.IsNotNull(student.Truck.BusinessList, TestContext.TestName);
         }
   
         #endregion CustomerPurchase

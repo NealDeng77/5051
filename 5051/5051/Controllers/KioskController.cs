@@ -79,13 +79,13 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             // Update token
@@ -134,13 +134,13 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             // perform student log out and update data
@@ -277,7 +277,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Name))

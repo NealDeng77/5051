@@ -687,6 +687,7 @@
     <Content Include="Views\AvatarSelect\Index.cshtml" />
     <Content Include="Views\AvatarSelect\Select.cshtml" />
     <Content Include="Views\AvatarSelect\Inventory.cshtml" />
+    <Content Include="Views\Shop\BusinessReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

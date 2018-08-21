@@ -239,6 +239,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             var expect = myStudent.Tokens - myInventory.Tokens;
+            var expectOutcome = myStudent.Truck.Outcome + myInventory.Tokens;
 
             // Act
             ViewResult result = controller.Factory(data) as ViewResult;
@@ -249,6 +250,8 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.IsNotNull(myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
         [TestMethod]
@@ -1170,6 +1173,45 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_BusinessReport_Invalid_ID_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.BusinessReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_BusinessReport_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            var data = Backend.StudentBackend.Instance.GetDefault();
+            data.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            
+            // Act
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+            var expectIncome = myStudent.Truck.Income;
+            var expectOutcome = myStudent.Truck.Outcome;
+            var expectProfit = myStudent.Truck.Profit;
+            var expectBusinessList = myStudent.Truck.BusinessList;
+
+            var result = controller.BusinessReport(data.Id) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+
+            //// Assert
+            Assert.AreEqual(expectIncome, myStudent2.Truck.Income, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.AreEqual(expectProfit, myStudent2.Truck.Profit, TestContext.TestName);
+            Assert.AreEqual(expectBusinessList, myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
         #endregion BusinessReport
