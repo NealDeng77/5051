@@ -78,7 +78,7 @@ namespace _5051.Controllers
             if (data == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", new { route = "Home", action = "Error" });
+                return RedirectToAction("Error", "Home");
             }
 
             if (string.IsNullOrEmpty(data.Id))
