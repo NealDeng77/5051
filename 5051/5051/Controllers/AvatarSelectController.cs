@@ -414,15 +414,15 @@ namespace _5051.Controllers
 
                 case AvatarItemCategoryEnum.ShirtFull:
                     myStudent.AvatarComposite.ShirtFullId = myItem.Id;
-                    myStudent.AvatarComposite.ShirtFullUri = myItem.Uri;
+                    myStudent.AvatarComposite.ShirtFullUri = myItem.Uri+".png";
                     myStudent.AvatarComposite.AvatarShirtFullUri = AvatarBase + myItem.Uri;
+
+                    myStudent.AvatarComposite.ShirtShortId = myItem.Id;
+                    var temp = myItem.Uri.Split('.');
+                    myStudent.AvatarComposite.ShirtShortUri = temp[0] + "_short.png"; ;
+                    myStudent.AvatarComposite.AvatarShirtShortUri = AvatarBase + myStudent.AvatarComposite.ShirtShortUri;
                     break;
 
-                case AvatarItemCategoryEnum.ShirtShort:
-                    myStudent.AvatarComposite.ShirtShortId = myItem.Id;
-                    myStudent.AvatarComposite.ShirtShortUri = myItem.Uri;
-                    myStudent.AvatarComposite.AvatarShirtShortUri = AvatarBase + myItem.Uri;
-                    break;
             }
 
     // Update Student

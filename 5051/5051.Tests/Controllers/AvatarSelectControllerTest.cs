@@ -982,30 +982,30 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtFullId, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Edit_Data_Valid_Position_ShirtShort_Should_Pass()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtShort).Id;
-            data.Position = AvatarItemCategoryEnum.ShirtShort;
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Edit_Data_Valid_Position_ShirtShort_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
+        //    var data = new AvatarItemInputModel();
+        //    data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+        //    data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtShort).Id;
+        //    data.Position = AvatarItemCategoryEnum.ShirtShort;
 
-            // Get the Student Record
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            var expect = myStudent.AvatarComposite.ShirtShortId;
+        //    // Get the Student Record
+        //    var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    var expect = myStudent.AvatarComposite.ShirtShortId;
 
-            // Act
-            ViewResult result = controller.Edit(data) as ViewResult;
-            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    // Act
+        //    ViewResult result = controller.Edit(data) as ViewResult;
+        //    var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtShortId, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtShortId, TestContext.TestName);
+        //}
         #endregion Edit
 
         #region Inventory

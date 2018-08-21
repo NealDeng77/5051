@@ -300,6 +300,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar\placeholder.png" />
+    <Content Include="Content\avatar\Shirt_black.png" />
+    <Content Include="Content\avatar\Shirt_black_short.png" />
+    <Content Include="Content\avatar\Shirt_blue.png" />
+    <Content Include="Content\avatar\Shirt_blue_short.png" />
+    <Content Include="Content\avatar\Shirt_green.png" />
+    <Content Include="Content\avatar\Shirt_green_short.png" />
+    <Content Include="Content\avatar\Shirt_orange.png" />
+    <Content Include="Content\avatar\Shirt_orange_short.png" />
+    <Content Include="Content\avatar\Shirt_red.png" />
+    <Content Include="Content\avatar\Shirt_red_short.png" />
+    <Content Include="Content\avatar\Shirt_white.png" />
+    <Content Include="Content\avatar\Shirt_white_short.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.png" />
     <Content Include="Content\img\EmotionVerySad.png" />
@@ -389,18 +401,6 @@
     <Content Include="Content\avatar\Head5.png" />
     <Content Include="Content\avatar\Head0.png" />
     <Content Include="Content\avatar\Pants.png" />
-    <Content Include="Content\avatar\Shirt_short_green.png" />
-    <Content Include="Content\avatar\Shirt_short_red.png" />
-    <Content Include="Content\avatar\Shirt_short_blue.png" />
-    <Content Include="Content\avatar\Shirt_short_orange.png" />
-    <Content Include="Content\avatar\Shirt_short_black.png" />
-    <Content Include="Content\avatar\Shirt_short_white.png" />
-    <Content Include="Content\avatar\Shirt_full_black.png" />
-    <Content Include="Content\avatar\Shirt_full_blue.png" />
-    <Content Include="Content\avatar\Shirt_Full_green.png" />
-    <Content Include="Content\avatar\Shirt_full_orange.png" />
-    <Content Include="Content\avatar\Shirt_full_red.png" />
-    <Content Include="Content\avatar\Shirt_full_white.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />

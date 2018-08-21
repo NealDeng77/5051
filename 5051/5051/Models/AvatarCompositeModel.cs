@@ -43,15 +43,22 @@ namespace _5051.Models
             HeadUri = item.Uri;
             AvatarHeadUri = AvatarBase + HeadUri;
 
-            item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort);
-            ShirtShortId = item.Id;
-            ShirtShortUri = item.Uri;
-            AvatarShirtShortUri = AvatarBase + ShirtShortUri;
+            //item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort);
+            //ShirtShortId = item.Id;
+            //ShirtShortUri = item.Uri;
+            //AvatarShirtShortUri = AvatarBase + ShirtShortUri;
 
+            // Short Shirt, is the same as Long, just add Short to the URL
             item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull);
             ShirtFullId = item.Id;
             ShirtFullUri = item.Uri;
             AvatarShirtFullUri = AvatarBase + ShirtFullUri;
+
+            // Short Shirt is the _short before the end of the file
+            ShirtShortId = item.Id;
+            var temp = item.Uri.Split('.');
+            ShirtShortUri =  temp[0] + "_short.png"; ;
+            AvatarShirtShortUri = AvatarBase + ShirtShortUri;
 
             item = Backend.DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
             AccessoryId = item.Id;

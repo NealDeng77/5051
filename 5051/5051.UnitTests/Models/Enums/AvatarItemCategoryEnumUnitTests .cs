@@ -16,13 +16,13 @@ namespace _5051.UnitTests.Models
 
             // Make sure there are no additional values
             var enumCount = AvatarItemCategoryEnum.GetNames(typeof(AvatarItemCategoryEnum)).Length;
-            Assert.AreEqual(10, enumCount, TestContext.TestName);
+            Assert.AreEqual(9, enumCount, TestContext.TestName);
 
             // Check each value against their expected value.
             Assert.AreEqual(0, (int)AvatarItemCategoryEnum.Unknown, TestContext.TestName);
             Assert.AreEqual(1, (int)AvatarItemCategoryEnum.HairBack, TestContext.TestName);
             Assert.AreEqual(2, (int)AvatarItemCategoryEnum.Head, TestContext.TestName);
-            Assert.AreEqual(3, (int)AvatarItemCategoryEnum.ShirtShort, TestContext.TestName);
+            //Assert.AreEqual(3, (int)AvatarItemCategoryEnum.ShirtShort, TestContext.TestName);
             Assert.AreEqual(4, (int)AvatarItemCategoryEnum.Expression, TestContext.TestName);
             Assert.AreEqual(5, (int)AvatarItemCategoryEnum.Cheeks, TestContext.TestName);
             Assert.AreEqual(6, (int)AvatarItemCategoryEnum.HairFront, TestContext.TestName);
