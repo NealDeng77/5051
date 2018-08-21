@@ -39,6 +39,10 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result.CustomersTotal, "Customers" + TestContext.TestName);
             Assert.IsNotNull(result.TransactionList, "TransactionList" + TestContext.TestName);
             Assert.IsNotNull(result.TruckName, "TruckName" + TestContext.TestName);
+            Assert.IsNotNull(result.Income, "Income" + TestContext.TestName);
+            Assert.IsNotNull(result.Outcome, "Outcome" + TestContext.TestName);
+            Assert.IsNotNull(result.Profit, "Profit" + TestContext.TestName);
+            Assert.IsNotNull(result.BusinessList, "BusinessList" + TestContext.TestName);
         }
 
         #endregion Instantiate
