@@ -1189,23 +1189,26 @@ namespace _5051.Tests.Controllers
         [TestMethod]
         public void Controller_Shop_BusinessReport_Valid_Id_Should_Pass()
         {
-            //// Arrange
+            // Arrange
             ShopController controller = new ShopController();
             var data = Backend.StudentBackend.Instance.GetDefault();
-            var expectIncome = data.Truck.Income;
-            var expectOutcome = data.Truck.Outcome;
-            var expectProfit = data.Truck.Profit;
-            var expectBusinessList = data.Truck.BusinessList;
+            data.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            
+            // Act
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+            var expectIncome = myStudent.Truck.Income;
+            var expectOutcome = myStudent.Truck.Outcome;
+            var expectProfit = myStudent.Truck.Profit;
+            var expectBusinessList = myStudent.Truck.BusinessList;
 
-            //// Act
-            var resultCall = controller.BusinessReport(data.Id) as ViewResult;
-            var result = (StudentModel)resultCall.Model;
+            var result = controller.BusinessReport(data.Id) as ViewResult;
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
 
             //// Assert
-            Assert.AreEqual(expectIncome, result.Truck.Income, TestContext.TestName);
-            Assert.AreEqual(expectOutcome, result.Truck.Outcome, TestContext.TestName);
-            Assert.AreEqual(expectProfit, result.Truck.Profit, TestContext.TestName);
-            Assert.AreEqual(expectBusinessList, result.Truck.BusinessList, TestContext.TestName);
+            Assert.AreEqual(expectIncome, myStudent2.Truck.Income, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.AreEqual(expectProfit, myStudent2.Truck.Profit, TestContext.TestName);
+            Assert.AreEqual(expectBusinessList, myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
         #endregion BusinessReport
