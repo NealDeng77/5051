@@ -25,7 +25,7 @@ namespace _5051.Models
         //public AvatarItemShopViewModel Pants;
 
         // The StudentID for this truck, used to simplify the models
-        public string StudentId;
+        public StudentModel Student;
         
     }
 }
