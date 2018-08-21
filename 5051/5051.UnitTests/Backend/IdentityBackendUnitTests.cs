@@ -400,5 +400,185 @@ namespace _5051.UnitTests.Backend
 
         }
         #endregion
+
+        #region ListUsers
+        [TestMethod]
+        public void Backend_IdentityBackend_ListAllStudentUsers_Should_Pass()
+        {
+            //arrange
+            var testUsername1 = "testUser1";
+            var testUsername2 = "userNumber2";
+            var expectStudentUsers = 1;
+            var dummyUser1 = new ApplicationUser() { UserName = testUsername1, Email = testUsername1 + "@seattleu.edu", Id = testUsername1 };
+            var dummyUser2 = new ApplicationUser() { UserName = testUsername2, Email = testUsername2 + "@seattleu.edu", Id = testUsername2 };
+
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "StudentUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "StudentUser",
+                ClaimValue = "False",
+            };
+
+            //only 1 user is a support user
+            dummyUser1.Claims.Add(claimIdentity1);
+            dummyUser2.Claims.Add(claimIdentity2);
+
+            var userList = new List<ApplicationUser>()
+            {
+                dummyUser1,
+                dummyUser2,
+            }.AsQueryable();
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser1))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager1 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername1))
+                .ReturnsAsync(dummyUser1);
+            var passwordManager2 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername2))
+                .ReturnsAsync(dummyUser2);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+            var iQueryManager = userStore.As<IQueryableUserStore<ApplicationUser>>()
+                .Setup(x => x.Users)
+                .Returns(userList);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.ListAllStudentUsers();
+
+            //assert
+            Assert.AreEqual(expectStudentUsers, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_ListAllTeacherUsers_Should_Pass()
+        {
+            //arrange
+            var testUsername1 = "testUser1";
+            var testUsername2 = "userNumber2";
+            var expectTeacherUsers = 1;
+            var dummyUser1 = new ApplicationUser() { UserName = testUsername1, Email = testUsername1 + "@seattleu.edu", Id = testUsername1 };
+            var dummyUser2 = new ApplicationUser() { UserName = testUsername2, Email = testUsername2 + "@seattleu.edu", Id = testUsername2 };
+
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "False",
+            };
+
+            //only 1 user is a support user
+            dummyUser1.Claims.Add(claimIdentity1);
+            dummyUser2.Claims.Add(claimIdentity2);
+
+            var userList = new List<ApplicationUser>()
+            {
+                dummyUser1,
+                dummyUser2,
+            }.AsQueryable();
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser1))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager1 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername1))
+                .ReturnsAsync(dummyUser1);
+            var passwordManager2 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername2))
+                .ReturnsAsync(dummyUser2);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+            var iQueryManager = userStore.As<IQueryableUserStore<ApplicationUser>>()
+                .Setup(x => x.Users)
+                .Returns(userList);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.ListAllTeacherUsers();
+
+            //assert
+            Assert.AreEqual(expectTeacherUsers, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_ListAllSupportUsers_Should_Pass()
+        {
+            //arrange
+            var testUsername1 = "testUser1";
+            var testUsername2 = "userNumber2";
+            var expectSupportUsers = 1;
+            var dummyUser1 = new ApplicationUser() { UserName = testUsername1, Email = testUsername1 + "@seattleu.edu", Id = testUsername1 };
+            var dummyUser2 = new ApplicationUser() { UserName = testUsername2, Email = testUsername2 + "@seattleu.edu", Id = testUsername2 };
+
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "SupportUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity3 = new IdentityUserClaim()
+            {
+                ClaimType = "SupportUser",
+                ClaimValue = "False",
+            };
+
+            //only 1 user is a support user
+            dummyUser1.Claims.Add(claimIdentity1);
+            dummyUser1.Claims.Add(claimIdentity2);
+            dummyUser2.Claims.Add(claimIdentity3);
+
+            var userList = new List<ApplicationUser>()
+            {
+                dummyUser1,
+                dummyUser2,
+            }.AsQueryable();
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser1))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager1 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername1))
+                .ReturnsAsync(dummyUser1);
+            var passwordManager2 = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername2))
+                .ReturnsAsync(dummyUser2);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+            var iQueryManager = userStore.As<IQueryableUserStore<ApplicationUser>>()
+                .Setup(x => x.Users)
+                .Returns(userList);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.ListAllSupportUsers();
+
+            //assert
+            Assert.AreEqual(expectSupportUsers, result.Count, TestContext.TestName);
+        }
+
+        #endregion
     }
 }

@@ -300,9 +300,12 @@ namespace _5051.Backend
 
             foreach (var item in claims)
             {
-                if (item.ClaimType == claimType && item.ClaimValue == claimValue)
+                if (item.ClaimType == claimType)
                 {
-                    return true;
+                    if (item.ClaimValue == claimValue)
+                    {
+                        return true;
+                    }                  
                 }
             }
 
