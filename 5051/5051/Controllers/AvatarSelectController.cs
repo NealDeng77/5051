@@ -101,6 +101,9 @@ namespace _5051.Controllers
                 return RedirectToAction("Select", "AvatarSelect", new { id = data.StudentId });
             }
 
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = data.StudentId;
+
             if (string.IsNullOrEmpty(data.ItemId))
             {
                 // Send back for Edit
@@ -173,9 +176,6 @@ namespace _5051.Controllers
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return RedirectToAction("Select", "AvatarSelect", new { id = data.StudentId });
         }
 
@@ -186,6 +186,9 @@ namespace _5051.Controllers
         // GET: Inventory
         public ActionResult Inventory(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
             // Get the Student
@@ -211,9 +214,6 @@ namespace _5051.Controllers
                 }
 
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myData);
         }
