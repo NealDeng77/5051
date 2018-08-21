@@ -1,5 +1,4 @@
 ﻿@using _5051.Models;
-@using _5051.Models.Enums;
 @model _5051.Models.AvatarSelectShopViewModel
 @{
     ViewBag.Title = "Edit Avatar Components";
@@ -36,76 +35,61 @@
     </div>
 </div>
 
+<div class="row justify-content-around">
+    <div class="col-1"></div>
+    <div class="col text-center">
+        <br />
+        <span class="FontSizeLarge">@Model.data.Item.Category</span>
+        <br />
+        <br />
+        <hr />
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
 
 <div class="row justify-content-start">
     <div class="col-1"></div>
 
     <div class="col">
 
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <h2>@Model.data.Item.Category</h2>
-                </div>
-                @{
-                    myPlace = Model.data.Item.Category;
+        <div class="row justify-content-around">
+            @{
+                if (Model.data.ItemList.Count < 1)
+                {
+                    <div>No Items to Select</div><br /><br />
+                }
 
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="">
-                                <img src="~/Content/avatar/@Model.data.Item.Uri" class="FactoryInventorySize1" />
+                foreach (var InventoryItem in Model.data.ItemList)
+                {
+                    using (Html.BeginForm())
+                    {
+                        //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                        @Html.Hidden("StudentId", Model.Student.Id);
+                        @Html.Hidden("ItemId", InventoryItem.Id);
+                        @Html.Hidden("Position", AvatarItemCategoryEnum.Head);
+
+
+                        var picturURI = "/Content/avatar/" + InventoryItem.Uri;
+
+                        <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin AvatarPortalBox">
+                            <div class="row no-gutters justify-content-center">
+                                <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
                                 <br />
-                                <span>
-                                    @Model.data.Item.Name
-                                </span>
+                            </div>
+                            <div class="row no-gutters justify-content-center">
+                                <span class="FontSizeSmall text-center">@InventoryItem.Name</span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <span>Inventory</span>
-                    </div>
-
-                    <div class="row">
-                        @{
-                            if (Model.data.ItemList.Count < 1)
-                            {
-                                <div>No Items to Select</div><br /><br />
-                            }
-
-                            foreach (var InventoryItem in Model.data.ItemList)
-                            {
-                                using (Html.BeginForm())
-                                {
-                                    //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                                    @Html.Hidden("StudentId", Model.Student.Id);
-                                    @Html.Hidden("ItemId", InventoryItem.Id);
-                                    @Html.Hidden("Position", AvatarItemCategoryEnum.Head);
-
-
-                                    var picturURI = "/Content/avatar/" + InventoryItem.Uri;
-
-                                    <div class="col-sm-2 text-center">
-                                        <div class="BoxWithHighlightHover">
-                                            <input type="image" name="submit" src="@picturURI" border="0" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
-                                            <br />
-                                            <span class="text-center">
-                                                @InventoryItem.Name
-                                                <br />
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
+                    }
                 }
-            </div>
-
+            }
         </div>
-        <br />
-        <br />
-    </div>
 
+    </div>
     <div class="col-1"></div>
+    <br />
+    <br />
 </div>
