@@ -447,7 +447,7 @@ namespace _5051.Backend
                 var profit = (int)Math.Ceiling(Item.Tokens * ProfitPercent);
                 student.Tokens += Item.Tokens + profit;
                 // increase income
-                student.Truck.Outcome += Item.Tokens + profit;
+                student.Truck.Income += Item.Tokens + profit;
 
                 student.Truck.CustomersTotal++;
 
