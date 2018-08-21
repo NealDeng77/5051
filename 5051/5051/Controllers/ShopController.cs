@@ -160,6 +160,9 @@ namespace _5051.Controllers
             // Reduce the Student Tokens by Item Price
             myStudent.Tokens -= myItem.Tokens;
 
+            // Increase the Student Income by Item Price
+            myStudent.Truck.Outcome += myItem.Tokens;
+
             // Time to buy !
             // Check if the item is limited or not
             if (myItem.IsLimitSupply == true)
@@ -171,6 +174,12 @@ namespace _5051.Controllers
             // Add Item to Student Inventory
             // TODO:  Mike, add inventory to Students...
             myStudent.Inventory.Add(myItem);
+
+            // Add info into businessList
+            TransactionModel myTransaction = new TransactionModel();
+            myTransaction.Name = "Buy " + myItem.Name + "by spending " + myItem.Tokens;
+            myTransaction.Uri = null;
+            myStudent.Truck.BusinessList.Add(myTransaction);
 
             // Update Student
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
