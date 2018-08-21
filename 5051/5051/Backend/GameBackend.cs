@@ -338,11 +338,14 @@ namespace _5051.Backend
                             var RentAmount = 1;
                             // the tokens of the rent is 1
                             student.Tokens -= RentAmount;
+                            // increase outcome
+                            student.Truck.Outcome += 1;
 
                             TransactionModel myTransaction = new TransactionModel();
                             myTransaction.Name = "Paid Rent " + RentAmount + " for " + RunDateTime.Date.ToShortDateString();
                             myTransaction.Uri = null;
                             student.Truck.TransactionList.Add(myTransaction);
+                            student.Truck.BusinessList.Add(myTransaction);
 
                         }
                         else
@@ -443,6 +446,8 @@ namespace _5051.Backend
                 // Add Tokens to the Student
                 var profit = (int)Math.Ceiling(Item.Tokens * ProfitPercent);
                 student.Tokens += Item.Tokens + profit;
+                // increase income
+                student.Truck.Outcome += Item.Tokens + profit;
 
                 student.Truck.CustomersTotal++;
 
@@ -450,6 +455,7 @@ namespace _5051.Backend
                 myTransaction.Name = "Sold " + Item.Name + " for profit of " + profit;
                 myTransaction.Uri = Item.Uri;
                 student.Truck.TransactionList.Add(myTransaction);
+                student.Truck.BusinessList.Add(myTransaction);
 
 
                 // Remove from list
