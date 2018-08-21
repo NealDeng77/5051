@@ -446,17 +446,20 @@ namespace _5051.UnitTests.Backend
 
             //act   
             var expect = student.Tokens - 1;
+            var expectOutcome = student.Truck.Outcome + 1;
             test.PayRentPerDay(student);
             
             DataSourceBackend.Instance.StudentBackend.Update(student);
 
             var myTokens = student.Tokens;
+            var myOutcome = student.Truck.Outcome;
 
             // Reset
             DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expect, myTokens, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myOutcome, TestContext.TestName);
         }
 
         [TestMethod]
