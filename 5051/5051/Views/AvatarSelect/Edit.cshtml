@@ -23,6 +23,19 @@
     <div class="col-1"></div>
 </div>
 
+<div class="row justify-content-center">
+    <div class="AvatarBoxLarge align-self-sm-center" id="AvatarBox">
+        <div class="AvatarCircle"></div>
+        <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@Model.Student.AvatarComposite.AvatarHairBackUri" />
+        <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@Model.Student.AvatarComposite.AvatarHeadUri" />
+        <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@Model.Student.AvatarComposite.AvatarShirtShortUri" />
+        <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@Model.Student.AvatarComposite.AvatarExpressionUri" />
+        <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@Model.Student.AvatarComposite.AvatarCheeksUri" />
+        <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@Model.Student.AvatarComposite.AvatarHairFrontUri" />
+        <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@Model.Student.AvatarComposite.AvatarAccessoryUri" />
+    </div>
+</div>
+
 
 <div class="row justify-content-start">
     <div class="col-1"></div>
@@ -65,7 +78,7 @@
                                 using (Html.BeginForm())
                                 {
                                     //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                                    @Html.Hidden("StudentId", Model.StudentId);
+                                    @Html.Hidden("StudentId", Model.Student.Id);
                                     @Html.Hidden("ItemId", InventoryItem.Id);
                                     @Html.Hidden("Position", AvatarItemCategoryEnum.Head);
 

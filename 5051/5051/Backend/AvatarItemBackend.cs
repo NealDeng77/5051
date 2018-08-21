@@ -295,7 +295,7 @@ namespace _5051.Backend
         {
             var data = new AvatarSelectShopViewModel();
 
-            data.StudentId = studentData.Id;
+            data.Student = studentData;
 
             data.data = GetAvatarItemShopViewModel(studentData.Id, item.Id);
 
