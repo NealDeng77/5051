@@ -204,6 +204,11 @@ namespace _5051.Backend
 
             var studentResult = studentBackend.Read(id);
 
+            if(studentResult == null)
+            {
+                return null;
+            }
+
             return studentResult;
         }
 
