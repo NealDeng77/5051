@@ -22,15 +22,15 @@ namespace _5051.Controllers
         // GET: AvatarSelect
         public ActionResult Index(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Get the Student
             var myStudent = StudentBackend.Instance.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
 
             return View(myStudent);
         }
@@ -42,6 +42,9 @@ namespace _5051.Controllers
         // GET: Buy
         public ActionResult Select(string id = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             // Load the list of data into the AvatarItemList
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
@@ -71,11 +74,9 @@ namespace _5051.Controllers
                 }
             }
 
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = myStudent.Id;
-
             return View(myData);
         }
+
         [HttpPost]
         public ActionResult Select([Bind(Include=
                                         "StudentId,"+
@@ -275,6 +276,9 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Edit(string id=null, string item=null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             if (string.IsNullOrEmpty(item))
             {
                 return RedirectToAction("Error", "Home");
@@ -305,9 +309,6 @@ namespace _5051.Controllers
 
             // Use the Item, to populate the ShopViewModel
             var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata,myItem);
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = studentdata.Id;
 
             //Return Truck Data
             return View(data);
