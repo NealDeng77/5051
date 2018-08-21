@@ -432,5 +432,38 @@ namespace _5051.UnitTests.Backend
 
         #region GetGetShopTruckItemViewModel
         #endregion GetGetShopTruckItemViewModel
+
+        #region GetDefaultTruckFullItem
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefaultTruckFullItem_Valid_Category_Should_Pass()
+        {
+            //arrange
+
+            //act
+
+            var result = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Truck);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefaultTruckFullItem_Null_Category_Should_Fail()
+        {
+            //arrange
+
+            //act
+            var result = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Unknown);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion GetDefaultTruckFullItem
     }
 }

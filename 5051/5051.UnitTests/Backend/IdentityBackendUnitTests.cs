@@ -18,27 +18,387 @@ using _5051.Backend;
 using System.Web.SessionState;
 using System.IO;
 using System.Reflection;
+using Moq;
 
 namespace _5051.UnitTests.Backend
 {
     [TestClass]
     public class IdentityBackendUnitTests
     {
-        //public TestContext TestContext { get; set; }
+        public TestContext TestContext { get; set; }
 
-        //[TestMethod]
-        //public void Backend_IdentityBackend_CreateSupportUser_Should_Pass()
-        //{
-        //    //arrange
-        //    var backend = new IdentityBackend();
-        //    var userStore = new IUserStore<ApplicationUser>();
+        #region CreateNewSupportUser
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewSupportUser_Valid_User_Should_Pass()
+        {
+            //arrange
+            var expectedClaimCount = 2;
+            var testUsername = "testsu5051";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
 
-        //    //act
-        //    var result = backend.CreateNewSupportUser("su5051");
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "SupportUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True",
+            };
 
-        //    //assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
+            dummyUser.Claims.Add(claimIdentity1);
+            dummyUser.Claims.Add(claimIdentity2);
 
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.CreateNewSupportUser(testUsername, testUsername, testUsername);
+
+            //assert
+            Assert.AreEqual(testUsername, result.UserName, TestContext.TestName);
+            Assert.AreEqual(expectedClaimCount, result.Claims.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewSupportUser_Result_Failed_Should_Return_Null()
+        {
+            //arrange
+            var testUsername = "testSupport";
+
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+
+            //act
+            //pass in a bad password, causes create failure
+            var result = backend.CreateNewSupportUser(testUsername, "", testUsername);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region CreateNewTeacher
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewTeacher_Valid_User_Should_Pass()
+        {
+            //arrange
+            var expectedClaimCount = 2;
+            var testUsername = "testTeacher";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "TeacherID",
+                ClaimValue = testUsername,
+            };
+
+            dummyUser.Claims.Add(claimIdentity1);
+            dummyUser.Claims.Add(claimIdentity2);
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.CreateNewTeacher(testUsername, testUsername, testUsername);
+
+            //assert
+            Assert.AreEqual(testUsername, result.UserName, TestContext.TestName);
+            Assert.AreEqual(expectedClaimCount, result.Claims.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewTeacher_Result_Failed_Should_Return_Null()
+        {
+            //arrange
+            var testUsername = "testTeacher";
+
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+
+            //act
+            //pass in a bad password, causes create failure
+            var result = backend.CreateNewTeacher(testUsername, "", testUsername);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region CreateNewStudent
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewStudent_Valid_User_Should_Pass()
+        {
+            //arrange
+            var testUsername = "testStudent";
+            var expectedClaimCount = 2;
+            var testStudent = new StudentModel();
+            testStudent.Name = testUsername;
+            testStudent.Id = testUsername;
+
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var claimIdentity1 = new IdentityUserClaim()
+            {
+                ClaimType = "StudentUser",
+                ClaimValue = "True",
+            };
+            var claimIdentity2 = new IdentityUserClaim()
+            {
+                ClaimType = "StudentID",
+                ClaimValue = testStudent.Id,
+            };
+
+            dummyUser.Claims.Add(claimIdentity1);
+            dummyUser.Claims.Add(claimIdentity2);
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();          
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.CreateNewStudent(testStudent);
+
+            //assert
+            Assert.AreEqual(testUsername, result.UserName, TestContext.TestName);
+            Assert.AreEqual(expectedClaimCount, result.Claims.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_CreateNewStudent_Result_Failed_Should_Return_Null()
+        {
+            //arrange
+            var testUsername = "testStudent";
+            var testStudent = new StudentModel();
+            testStudent.Name = "";
+            testStudent.Id = testUsername;
+
+
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+
+            //act
+            //pass in a bad password, causes create failure
+            var result = backend.CreateNewStudent(testStudent);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region GetStudentByID
+        [TestMethod]
+        public void Backend_IdentityBackend_GetStudentById_Valid_Student_Should_Pass()
+        {
+            //arrange
+            var backend = new IdentityBackend();
+            var studentBackend = StudentBackend.Instance;
+            var expectStudent = studentBackend.GetDefault();
+
+            //act
+            var result = backend.GetStudentById(expectStudent.Id);
+
+            //assert
+            Assert.AreEqual(expectStudent, result,TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_GetStudentById_Invalid_Student_ID_Should_Fail()
+        {
+            //arrange
+            var backend = new IdentityBackend();
+            var fakeID = "bogus";
+
+            //act
+            var result = backend.GetStudentById(fakeID);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region FindUserByUserName
+        [TestMethod]
+        public void Backend_IdentityBackend_FindUserByUserName_Should_Pass()
+        {
+            //arrange
+            var testUsername = "testUser";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByNameAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.FindUserByUserName(testUsername);
+
+            //assert
+            Assert.AreEqual(dummyUser, result, TestContext.TestName);
+        }
+        #endregion
+
+        #region UpdateStudent
+        [TestMethod]
+        public void Backend_IdentityBackend_UpdateStudent_Null_Student_Should_Fail()
+        {
+            //arrange
+            var backend = new IdentityBackend();
+
+            //act
+            var result = backend.UpdateStudent(null);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_UpdateStudent_ID_Not_Found_Should_Fail()
+        {
+            //arrange
+            var testUsername = "testUser";
+            var testUserID = "AGoodID";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUserID };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUserID))
+                .ReturnsAsync(dummyUser);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+
+            var testStudent = new StudentModel();
+            var badID = "bogus";
+            testStudent.Id = badID;
+
+            //act
+            var result = backend.UpdateStudent(testStudent);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_UpdateStudent_Should_Pass()
+        {
+            //arrange
+            var testUsername = "testUser";
+            var testUserID = "AGoodID";
+            var studentNewName = "testStudent";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUserID };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.CreateAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUserID))
+                .ReturnsAsync(dummyUser);
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+
+            var testStudent = new StudentModel();
+            testStudent.Id = testUserID;
+            testStudent.Name = studentNewName;
+
+            //act
+            var result = backend.UpdateStudent(testStudent);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(dummyUser.UserName, studentNewName, TestContext.TestName);
+
+        }
+        #endregion
     }
 }

@@ -221,7 +221,9 @@
     <Compile Include="Backend\UTCConversionsBackend.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AvatarItemController.cs" />
+    <Compile Include="Controllers\AvatarSelectController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameSettingsController.cs" />
@@ -243,7 +245,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\AvatarCompositeModel.cs" />
+    <Compile Include="Models\AvatarItemInputModel.cs" />
     <Compile Include="Models\AvatarItemModel.cs" />
+    <Compile Include="Models\AvatarItemShopViewModel.cs" />
+    <Compile Include="Models\AvatarSelectShopViewModel.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
     <Compile Include="Models\AvatarItemViewModel.cs" />
     <Compile Include="Models\BusinessReoprtViewModel.cs" />
@@ -269,7 +275,6 @@
     <Compile Include="Models\SemesterReportViewModel.cs" />
     <Compile Include="Models\ShopTruckInputModel.cs" />
     <Compile Include="Models\ShopTruckItemViewModel.cs" />
-    <Compile Include="Models\AvatarCompositModel.cs" />
     <Compile Include="Models\ShopTruckViewModel.cs" />
     <Compile Include="Models\ShopTruckModel.cs" />
     <Compile Include="Models\ShopBuyViewModel.cs" />
@@ -672,6 +677,16 @@
     <Content Include="Views\Support\ToggleStudent.cshtml" />
     <Content Include="Views\Support\ToggleTeacher.cshtml" />
     <Content Include="Views\Support\ToggleSupport.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\Attendance\Read.cshtml" />
+    <Content Include="Views\Attendance\Update.cshtml" />
+    <Content Include="Views\AvatarSelect\Edit.cshtml" />
+    <Content Include="Views\Attendance\Details.cshtml" />
+    <Content Include="Views\Attendance\Delete.cshtml" />
+    <Content Include="Views\Attendance\Create.cshtml" />
+    <Content Include="Views\AvatarSelect\Index.cshtml" />
+    <Content Include="Views\AvatarSelect\Select.cshtml" />
+    <Content Include="Views\AvatarSelect\Inventory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

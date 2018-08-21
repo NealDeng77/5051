@@ -35,18 +35,18 @@
 @using (Html.BeginForm("EditName", "Shop", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.Hidden("StudentId", Model.StudentId);
-    <div class="row justify-content-center">
-        <div class="col-sm text-sm-center text-md-right" id="truckName">
+    <br />
+    <div class="justify-content-center grid-box">
+        <div class="col-sm text-sm-center text-md-right FontSizeMedium FontBold" id="truckName">
             @Html.DisplayNameFor(m => m.TruckName)
         </div>
-        <div class="col-1">
-        </div>
         <div class="col-sm text-left" id="studentValue">
-            @Html.EditorFor(m => m.TruckName)
+            @Html.TextBoxFor(m => m.TruckName, new { @class = "input2" })
             @Html.ValidationMessageFor(m => m.TruckName)
         </div>
     </div>
 
+    <br />
     <div class="row justify-content-around">
         <div class="col justify-content-center text-center">
             <input type="submit" value="Update" class="btn btn1 btn-light">
@@ -54,7 +54,7 @@
     </div>
 }
 
-    <br />
+<br />
 
 <div class="row no-gutters justify-content-around">
 
@@ -63,71 +63,75 @@
             int count = 0;
             foreach (ShopTruckItemViewModel place in shopItems)
             {
-        <div class="row">
-            <h2>@shopTitles[count]</h2>
-        </div>
+                <div class="TruckEditBox">
+                    <div class="row justify-content-center">
+                        <h2>@shopTitles[count]</h2>
+                    </div>
 
-                if (place.ItemList.Count < 1)
-                {
-                    <div>No Items to Select</div><br /><br />
-                }
-
-                foreach (var InventoryItem in place.ItemList)
-                {
-                    using (Html.BeginForm())
-                    {
-                        //Send up the AvatarId, and the StudentId to associated the Avatar with.
-                        @Html.Hidden("StudentId", Model.StudentId);
-                        @Html.Hidden("ItemId", InventoryItem.Id);
-                        if (InventoryItem.Name.Contains("Truck"))
+                    @{
+                        if (place.ItemList.Count < 1)
                         {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Truck);
-                        }
-                        else if (InventoryItem.Name.Contains("Trailer"))
-                        {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Trailer);
-                        }
-                        else if (InventoryItem.Name.Contains("Menu"))
-                        {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Menu);
-                        }
-                        else if (InventoryItem.Name.Contains("Sign"))
-                        {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Sign);
-                        }
-                        else if (InventoryItem.Name.Contains("Topper"))
-                        {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Topper);
-                        }
-                        else if (InventoryItem.Name.Contains("Wheels"))
-                        {
-                            @Html.Hidden("Position", FactoryInventoryCategoryEnum.Wheels);
+                            <div>No Items to Select</div><br /><br />
                         }
 
-                        var picturURI = "/Content/shop/" + InventoryItem.Uri;
+                        foreach (var InventoryItem in place.ItemList)
+                        {
+                            using (Html.BeginForm())
+                            {
+                                //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                                @Html.Hidden("StudentId", Model.StudentId);
+                                @Html.Hidden("ItemId", InventoryItem.Id);
+                                if (InventoryItem.Name.Contains("Truck"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Truck);
+                                }
+                                else if (InventoryItem.Name.Contains("Trailer"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Trailer);
+                                }
+                                else if (InventoryItem.Name.Contains("Menu"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Menu);
+                                }
+                                else if (InventoryItem.Name.Contains("Sign"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Sign);
+                                }
+                                else if (InventoryItem.Name.Contains("Topper"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Topper);
+                                }
+                                else if (InventoryItem.Name.Contains("Wheels"))
+                                {
+                                    @Html.Hidden("Position", FactoryInventoryCategoryEnum.Wheels);
+                                }
 
-                        if (InventoryItem.Name.Equals(place.Item.Name))
-                        {
-                            selectedItem = "background-color:rgba(21, 32, 90, 0.3); border-radius: 10px; opacity: 0.7;";
-                        } else
-                        {
-                            selectedItem = "";
+                                var picturURI = "/Content/shop/" + InventoryItem.Uri;
+
+                                if (InventoryItem.Name.Equals(place.Item.Name))
+                                {
+                                    selectedItem = "background-color:rgba(190, 227, 243, 0.7); border-radius: 10px; opacity: 0.7; padding: 10px;";
+                                }
+                                else
+                                {
+                                    selectedItem = "background-color:rgba(190, 227, 243, 0.9); border-radius: 10px; border-color: rgba(255, 255, 255, 0.4); border-style: outset; border-width: thick; padding: 10px;";
+                                }
+
+                                <div class="">
+                                    <div class="BoxWithHighlightHover" style="@selectedItem">
+                                        <input type="image" name="submit" src="@picturURI" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
+                                        <span class="text-center">
+                                            @InventoryItem.Name
+                                        </span>
+                                    </div>
+                                </div>
+                                <br />
+                            }
                         }
-
-                        <div class="">
-                            <div class="BoxWithHighlightHover" style="@selectedItem">
-                                <input type="image" name="submit" src="@picturURI" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
-                                <span class="text-center">
-                                    @InventoryItem.Name
-                                </span>
-                            </div>
-                        </div>
-                        <br />
+                        count++;
                     }
-                }
-                count++;
+                </div>
                 <br />
-
             }
 
         }

@@ -1,0 +1,70 @@
+﻿@using _5051.Models
+@model _5051.Models.StudentDisplayViewModel
+
+@{
+
+    ViewBag.Title = "Student Attendance";
+}
+<br />
+<h2>Welcome to @Model.Name's Attendance History</h2>
+<br />
+
+
+<hr />
+<div class="row w-100 text-center">
+
+    @{
+        foreach (var item in Model.Attendance)
+        {
+            <div class="col-sm-4 col-md-2 p-0">
+                <div class="BoxWithHighlightHover bg-white" style="border: solid 1px; margin-bottom: 5px; padding: 5px">
+                    <a href="~/Attendance/Details/@item.Id">
+                        <div class="text-center text-body">
+                            <div>
+                                @switch (item.Emotion)
+                                {
+                                    case EmotionStatusEnum.VeryHappy:
+                                        <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Happy:
+                                        <img src="/Content/img/EmotionHappy.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Neutral:
+                                        <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.Sad:
+                                        <img src="/Content/img/EmotionSad.png" height="30" />
+                                        break;
+                                    case EmotionStatusEnum.VerySad:
+                                        <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                        break;
+                                }
+                                @item.In.ToShortDateString()
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 text-body">
+                                In<br />
+                                @item.In.ToShortTimeString()<br />
+                            </div>
+                            @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
+                            {
+                                <div class="col-sm-6  text-body">
+                                    Out<br />
+
+                                    @item.Out.ToShortTimeString()<br />
+                                </div>
+                            }
+                        </div>
+                    </a>
+                </div>
+            
+            </div>
+        }
+    }
+
+</div>
+
+
+
+<br /><br /><br />

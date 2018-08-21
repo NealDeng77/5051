@@ -47,6 +47,7 @@ namespace _5051.UnitTests.Models
             result.Emotion = expectEmotion;
 
             // Assert
+            Assert.IsNotNull(result.Id, TestContext.TestName);
             Assert.AreEqual(expectStudentId, result.StudentId, TestContext.TestName);
             Assert.AreEqual(expectIn, result.In, TestContext.TestName);
             Assert.AreEqual(expectOut, result.Out, TestContext.TestName);

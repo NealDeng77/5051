@@ -290,6 +290,27 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Get the attendance model with given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public AttendanceModel ReadAttendance(string id)
+        {
+            foreach (var student in Index())
+            {
+                foreach (var attendance in student.Attendance)
+                {
+                    if (attendance.Id == id)
+                    {
+                        return attendance;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// If date has changed, reset all students' status to out.
         /// </summary>
         public void ResetAllStatus()

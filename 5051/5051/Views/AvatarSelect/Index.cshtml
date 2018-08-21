@@ -1,0 +1,14 @@
+﻿@using _5051.Models
+@model _5051.Models.StudentModel
+@{
+    ViewBag.Title = "Avatar Index";
+    var item = new AvatarItemModel();
+    item.Id = "bogus";
+}
+
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn" })
+<br />
+@Html.ActionLink("Select", "Select", new { id = Model.Id }, new { @class = "btn" })
+<br />
+@Html.ActionLink("Inventory", "Inventory", new { id = Model.Id }, new { @class = "btn" })
+

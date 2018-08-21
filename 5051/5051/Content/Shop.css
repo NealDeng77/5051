@@ -221,12 +221,13 @@
 /* Start Truck Components */
 .TruckNameBox {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 10%;
     width: 50%;
     height: 20%;
     z-index: 500;
     font-size: 35px;
+    font-weight: bold;
     color: white;
 }
 
@@ -577,3 +578,31 @@
     z-index: 700;
 }
 /* End Truck Naviation Buttons*/
+
+/* Start Edit Truck */
+.input2 {
+    /*width: 85%;*/
+    width: auto;
+    height: 40px;
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 45px;
+    max-width: 100%;
+    /*padding-left: 15px;*/
+}
+
+.grid-box {
+    display: grid;
+    grid-template-columns: 45% 55%;
+}
+
+.TruckEditBox {
+    border-radius: 15px;
+    padding: 20px;
+    background-color: rgba(21, 32, 90, 0.2);
+}
+
+/* End Edit Truck */
+
+

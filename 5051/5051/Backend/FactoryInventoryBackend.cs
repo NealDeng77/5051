@@ -222,11 +222,6 @@ namespace _5051.Backend
         public FactoryInventoryModel GetDefaultTruckFullItem(FactoryInventoryCategoryEnum category)
         {
             var TruckSet = Index().Where(m => m.Category == category).ToList();
-            if (TruckSet == null)
-            {
-                return GetDefault(category);
-            }
-
             if (TruckSet.Count() == 0)
             {
                 return GetDefault(category);
