@@ -1172,6 +1172,42 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Shop_BusinessReport_Invalid_ID_Should_Fail()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.BusinessReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_BusinessReport_Valid_Id_Should_Pass()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            var data = Backend.StudentBackend.Instance.GetDefault();
+            var expectIncome = data.Truck.Income;
+            var expectOutcome = data.Truck.Outcome;
+            var expectProfit = data.Truck.Profit;
+            var expectBusinessList = data.Truck.BusinessList;
+
+            //// Act
+            var resultCall = controller.BusinessReport(data.Id) as ViewResult;
+            var result = (StudentModel)resultCall.Model;
+
+            //// Assert
+            Assert.AreEqual(expectIncome, result.Truck.Income, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, result.Truck.Outcome, TestContext.TestName);
+            Assert.AreEqual(expectProfit, result.Truck.Profit, TestContext.TestName);
+            Assert.AreEqual(expectBusinessList, result.Truck.BusinessList, TestContext.TestName);
+        }
+
         #endregion BusinessReport
     }
 }
