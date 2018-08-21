@@ -167,7 +167,7 @@ namespace _5051.Controllers
             {
                 // Reduce the quantities of Item
                 myItem.Quantities -= 1;
-            }                           
+            }
 
             // Add Item to Student Inventory
             // TODO:  Mike, add inventory to Students...
@@ -274,7 +274,7 @@ namespace _5051.Controllers
         /// Edit The items from the Inventory that match the Item passed in
         /// </summary>
         /// <returns></returns>
-        public ActionResult Edit(string id=null, string item=null)
+        public ActionResult Edit(string id = null, string item = null)
         {
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
@@ -308,7 +308,7 @@ namespace _5051.Controllers
             }
 
             // Use the Item, to populate the ShopViewModel
-            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata,myItem);
+            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata, myItem);
 
             //Return Truck Data
             return View(data);
@@ -348,7 +348,7 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId });
             }
-           
+
 
             // Get Student
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -366,49 +366,70 @@ namespace _5051.Controllers
                 return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId });
             }
 
+            var AvatarBase = "/Content/Avatar/";
+
             switch (data.Position)
             {
                 case AvatarItemCategoryEnum.Accessory:
                     myStudent.AvatarComposite.AccessoryId = myItem.Id;
+                    myStudent.AvatarComposite.AccessoryUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarAccessoryUri= AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Cheeks:
                     myStudent.AvatarComposite.CheeksId = myItem.Id;
+                    myStudent.AvatarComposite.CheeksUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarCheeksUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Expression:
                     myStudent.AvatarComposite.ExpressionId= myItem.Id;
+                    myStudent.AvatarComposite.ExpressionUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarExpressionUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.HairBack:
                     myStudent.AvatarComposite.HairBackId= myItem.Id;
+                    myStudent.AvatarComposite.HairBackUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarHairBackUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.HairFront:
                     myStudent.AvatarComposite.HairFrontId= myItem.Id;
+                    myStudent.AvatarComposite.HairFrontUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarHairFrontUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Head:
                     myStudent.AvatarComposite.HeadId= myItem.Id;
+                    myStudent.AvatarComposite.HeadUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarHeadUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Pants:
                     myStudent.AvatarComposite.PantsId = myItem.Id;
+                    myStudent.AvatarComposite.PantsUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarPantsUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.ShirtFull:
                     myStudent.AvatarComposite.ShirtFullId = myItem.Id;
+                    myStudent.AvatarComposite.ShirtFullUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarShirtFullUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.ShirtShort:
                     myStudent.AvatarComposite.ShirtShortId = myItem.Id;
+                    myStudent.AvatarComposite.ShirtShortUri = myItem.Uri;
+                    myStudent.AvatarComposite.AvatarShirtShortUri = AvatarBase + myItem.Uri;
                     break;
             }
 
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+    // Update Student
+    DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId });
+            return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId
+});
         }
 
     }
