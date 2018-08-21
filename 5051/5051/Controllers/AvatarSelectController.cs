@@ -270,11 +270,16 @@ namespace _5051.Controllers
 
         }
         /// <summary>
-        /// Edit The AvatarSelect Details
+        /// Edit The items from the Inventory that match the Item passed in
         /// </summary>
         /// <returns></returns>
-        public ActionResult Edit(string id=null)
+        public ActionResult Edit(string id=null, string item=null)
         {
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -291,7 +296,15 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata);
+            // Get Item
+            var myItem = DataSourceBackend.Instance.AvatarItemBackend.Read(item);
+            if (myItem == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            // Use the Item, to populate the ShopViewModel
+            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata,myItem);
 
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = studentdata.Id;

@@ -11,15 +11,18 @@ namespace _5051.Models
     public class AvatarSelectShopViewModel
     {
         // Positions, with current item.
-        public AvatarItemShopViewModel HairBack;
-        public AvatarItemShopViewModel Head;
-        public AvatarItemShopViewModel ShirtShort;
-        public AvatarItemShopViewModel Expression;
-        public AvatarItemShopViewModel Cheeks;
-        public AvatarItemShopViewModel HairFront;
-        public AvatarItemShopViewModel Accessory;
-        public AvatarItemShopViewModel ShirtFull;
-        public AvatarItemShopViewModel Pants;
+
+        public AvatarItemShopViewModel data;
+
+        //public AvatarItemShopViewModel HairBack;
+        //public AvatarItemShopViewModel Head;
+        //public AvatarItemShopViewModel ShirtShort;
+        //public AvatarItemShopViewModel Expression;
+        //public AvatarItemShopViewModel Cheeks;
+        //public AvatarItemShopViewModel HairFront;
+        //public AvatarItemShopViewModel Accessory;
+        //public AvatarItemShopViewModel ShirtFull;
+        //public AvatarItemShopViewModel Pants;
 
         // The StudentID for this truck, used to simplify the models
         public string StudentId;

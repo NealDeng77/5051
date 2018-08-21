@@ -27,15 +27,16 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.GetType();
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(result, new AdminController().GetType(), TestContext.TestName);
         }
 
         #endregion Instantiate
 
-
         #region IndexRegion
-
         [TestMethod]
         public void Controller_AvatarSelectShop_Index_Default_Should_Pass()
         {
@@ -46,6 +47,8 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Index(id) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -79,7 +82,6 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
-
         #region SelectRegion
         [TestMethod]
         public void Controller_AvatarSelectShop_Select_Default_Should_Pass()
@@ -90,6 +92,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             ViewResult result = controller.Select(id) as ViewResult;
+            
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -108,10 +113,13 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Select(data) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
-        
+
         [TestMethod]
         public void Controller_AvatarSelectShop_Select_Get_myDataIsNull_ShouldReturnErrorPage()
         {
@@ -124,6 +132,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -141,6 +152,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -156,6 +170,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Select", result.RouteValues["action"], TestContext.TestName);
@@ -173,6 +190,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Select", result.RouteValues["action"], TestContext.TestName);
@@ -210,6 +230,34 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Select", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_AvatarSelectShop_Select_Data_Invalid_AvatarComposite_Null_Should_Fail()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory).Id;
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.AvatarComposite = null;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Select(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Select", result.RouteValues["action"], TestContext.TestName);
@@ -254,6 +302,46 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
+        public void Controller_AvatarSelectShop_Select_Data_Valid_Limited_Should_Pass()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 1000;
+
+            // Clear the Student AvatarInventory, so one can be purchanged.
+            myStudent.AvatarInventory.Clear();
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.AvatarItemBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 10;
+            myInventory.IsLimitSupply = true;
+
+            DataSourceBackend.Instance.AvatarItemBackend.Update(myInventory);
+
+            var expect = myStudent.Tokens - myInventory.Tokens;
+
+            // Act
+            ViewResult result = controller.Select(data) as ViewResult;
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Controller_AvatarSelectShop_Select_Data_InValid_Quantities_Not_Enough_Should_Fail()
         {
             // Arrange
@@ -264,7 +352,7 @@ namespace _5051.Tests.Controllers
             data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
 
             // Get the Student Record and Add some Tokens to it.
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);          
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
             // Get the Item Record and Set the Token Value
             var myInventory = DataSourceBackend.Instance.AvatarItemBackend.Read(data.ItemId);
@@ -412,7 +500,7 @@ namespace _5051.Tests.Controllers
         }
         #endregion SelectRegion
 
-          #region Edit
+        #region Edit
         [TestMethod]
         public void Controller_AvatarSelectShop_Edit_Invalid_No_StudentID_Should_Fail()
         {
@@ -436,6 +524,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Edit((string)null) as RedirectToRouteResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
@@ -450,6 +541,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Edit("bogus") as RedirectToRouteResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
@@ -461,12 +555,92 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
 
             // Act
-            var result = controller.Edit(data.Id) as ViewResult;
+            var result = controller.Edit(data.Id, item.Id) as ViewResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_AvatarSelectShop_Edit_InValid_StudentID_Should_Fail()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            // Act
+            var result = controller.Edit((string)null, item.Id) as RedirectToRouteResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_AvatarSelectShop_Edit_InValid_StudentID_Bogus_Should_Fail()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            // Act
+            var result = controller.Edit("Bogus", item.Id) as RedirectToRouteResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_AvatarSelectShop_Edit_InValid_Item_Should_Fail()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            // Act
+            var result = controller.Edit(data.Id, (string)null) as RedirectToRouteResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_AvatarSelectShop_Edit_InValid_Item_Bogus_Should_Fail()
+        {
+            // Arrange
+            var controller = new AvatarSelectController();
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            // Act
+            var result = controller.Edit(data.Id, "Bogus") as RedirectToRouteResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
 
         [TestMethod]
@@ -476,9 +650,15 @@ namespace _5051.Tests.Controllers
             var controller = new AvatarSelectController();
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.AvatarComposite = null;
+            DataSourceBackend.Instance.StudentBackend.Update(data);
+
+            var item = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory);
 
             // Act
-            var result = controller.Edit(data.Id) as RedirectToRouteResult;
+            var result = controller.Edit(data.Id, item.Id) as RedirectToRouteResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -497,6 +677,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Edit(data) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
         }
@@ -512,6 +695,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -529,6 +715,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
@@ -545,6 +734,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -582,6 +774,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -824,6 +1019,9 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Inventory(id) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -843,6 +1041,9 @@ namespace _5051.Tests.Controllers
 
             ViewResult result = controller.Inventory(student.Id) as ViewResult;
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -852,13 +1053,16 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data= new ShopBuyViewModel();
+            var data = new ShopBuyViewModel();
 
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
             // Act
             ViewResult result = controller.Inventory(data) as ViewResult;
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
@@ -878,6 +1082,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(id);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
@@ -895,6 +1102,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(data);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -910,6 +1120,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
@@ -927,6 +1140,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
@@ -964,6 +1180,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
