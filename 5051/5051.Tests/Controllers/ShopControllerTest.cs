@@ -239,6 +239,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             var expect = myStudent.Tokens - myInventory.Tokens;
+            var expectOutcome = myStudent.Truck.Outcome + myInventory.Tokens;
 
             // Act
             ViewResult result = controller.Factory(data) as ViewResult;
@@ -249,6 +250,8 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.IsNotNull(myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
         [TestMethod]
