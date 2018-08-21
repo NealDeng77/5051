@@ -165,7 +165,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
 
         [TestMethod]
@@ -261,7 +260,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
 
         [TestMethod]
@@ -395,7 +393,6 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual("Home", result.RouteValues["route"], TestContext.TestName);
         }
 
         [TestMethod]
