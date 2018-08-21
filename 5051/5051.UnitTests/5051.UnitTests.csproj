@@ -153,6 +153,7 @@
     <Compile Include="Models\AvatarItemViewModelUnitTests.cs" />
     <Compile Include="Models\AvatarItemListViewModelUnitTests.cs" />
     <Compile Include="Models\AvatarItemInputModelUnitTests.cs" />
+    <Compile Include="Models\BusinessReportViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckInputModelUnitTests.cs" />
     <Compile Include="Models\AvatarCompositeModelUnitTests.cs" />
     <Compile Include="Models\AvatarSelectShopViewModelUnitTests.cs" />
