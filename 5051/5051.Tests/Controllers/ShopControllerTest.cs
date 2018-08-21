@@ -1156,5 +1156,22 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion Inventory
+
+        #region BusinessReport
+        [TestMethod]
+        public void Controller_Shop_BusinessReport_Invalid_Null_Id_Should_Return_ErrorPage()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.BusinessReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion BusinessReport
     }
 }
