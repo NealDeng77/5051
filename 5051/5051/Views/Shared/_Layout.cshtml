@@ -74,6 +74,14 @@
                 @{
                     switch (routeController)
                     {
+
+                        case "Support":
+                        case "support":
+                            <li class="nav-item">
+                                @Html.ActionLink("temp", "temp", "temp", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                            </li>
+                            break;
+
                         case "Home":
                             <li class="nav-item">
                                 @Html.ActionLink("Student", "Roster", "Portal", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
