@@ -100,9 +100,19 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
+            //current date
+            var myDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            //the school day model
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myDate);
+
+            var defaultStart = myDate.Add(schoolDay.TimeStart);
+            var defaultEnd = myDate.Add(schoolDay.TimeEnd);
+
             var myData = new AttendanceModel
             {
-                StudentId = id
+                StudentId = id,
+                In = defaultStart,
+                Out = defaultEnd,
             };
 
             return View(myData);
@@ -143,7 +153,9 @@ namespace _5051.Controllers
                 StudentId = data.StudentId,
                 //update the time
                 In = UTCConversionsBackend.KioskTimeToUtc(data.In),
-                Out = UTCConversionsBackend.KioskTimeToUtc(data.Out)
+                Out = UTCConversionsBackend.KioskTimeToUtc(data.Out),
+                Emotion = data.Emotion,
+                IsNew = data.IsNew
             };
 
             //add the attendance to the student's attendance
@@ -221,7 +233,10 @@ namespace _5051.Controllers
             myAttendance.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
             myAttendance.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
 
-            return RedirectToAction("Details", new { id = myAttendance.StudentId });
+            //update the emotion
+            myAttendance.Emotion = data.Emotion;
+
+            return RedirectToAction("Details", new { id = myAttendance.Id });
         }
 
         // GET: Attendance/Delete/5
