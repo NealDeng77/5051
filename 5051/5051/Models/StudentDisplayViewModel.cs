@@ -73,6 +73,8 @@ namespace _5051.Models
             Tokens = data.Tokens;
             AvatarLevel = data.AvatarLevel;
             AvatarId = data.AvatarId;
+            AvatarComposite = data.AvatarComposite;
+
             Status = data.Status;
             ExperiencePoints = data.ExperiencePoints;
             Password = data.Password;
