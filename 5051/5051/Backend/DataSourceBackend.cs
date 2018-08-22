@@ -27,6 +27,8 @@ namespace _5051.Backend
         private static volatile DataSourceBackend instance;
         private static object syncRoot = new Object();
 
+        private static bool isTestingMode = false;
+
         private DataSourceBackend()
         {
             // Avatar must be before Student, because Student needs the default avatarID
@@ -113,6 +115,33 @@ namespace _5051.Backend
 
             AvatarItemBackend.SetDataSourceDataSet(SetEnum);
             StudentBackend.SetDataSourceDataSet(SetEnum);
+        }
+
+        public bool GetTestingMode()
+        {
+            return isTestingMode;
+        }
+
+        public bool SetTestingMode(bool mode)
+        {
+            isTestingMode = mode;
+            return isTestingMode;
+        }
+
+        public bool IsUserNotInRole(string userID, string role)
+        {
+            if (isTestingMode)
+            {
+                return false; // all OK
+            }
+
+            var IdentityBackend = new IdentityBackend();
+
+            if (IdentityBackend.UserHasClaimOfValue(userID, role, "True"))
+            {
+                return false;
+            }
+            return true; // Not in role, so error
         }
     }
 }
