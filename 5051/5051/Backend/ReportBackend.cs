@@ -55,7 +55,7 @@ namespace _5051.Backend
             //to generate week selection drop down, make a list item for every week between first and last day of school
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
-            
+
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
 
             //The first valid week(Monday's date) for the dropdown
@@ -184,7 +184,7 @@ namespace _5051.Backend
         }
         #endregion
         #region GenerateSemesterReportRegion
-        
+
         /// <summary>
         /// Generate Weekly report
         /// </summary>
@@ -222,7 +222,7 @@ namespace _5051.Backend
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
             }
 
- 
+
 
             //Generate report for this semester
             GenerateReportFromStartToEnd(report);
@@ -361,7 +361,7 @@ namespace _5051.Backend
 
                     // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
                     var myRange = report.Student.Attendance.Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date).OrderByDescending(m => m.In).ToList();
-                    
+
                     //if no attendance record on this day, set attendance status to absent
                     if (!myRange.Any())
                     {
@@ -390,21 +390,12 @@ namespace _5051.Backend
                         //loop through all attendance records in my range
                         foreach (var item in myRange)
                         {
-                            //update the TimeOut time to the current check-out time
-                            if (item.Out == DateTime.MinValue)
-                            {
-                                //if out is auto, set time out to today's dismissal time
-                                temp.TimeOut = currentDate.Add(myToday.TimeEnd);
-                                temp.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
-                            }
-                            else
-                            {
-                                temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
-                            }
-                            
+
+                            temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
+
                             //calculate effective duration
                             var tempDuration = CalculateEffectiveDuration(item, myToday, temp);
-                            
+
                             //add the current effective duration to today's hours attended
                             temp.HoursAttended += tempDuration;
 
@@ -421,7 +412,7 @@ namespace _5051.Backend
 
                         if (temp.CheckInStatus == CheckInStatusEnum.ArriveLate)
                         {
-                            report.Stats.DaysLate++; 
+                            report.Stats.DaysLate++;
                         }
 
                         report.Stats.DaysOnTime = report.Stats.DaysPresent - report.Stats.DaysLate;
@@ -431,8 +422,8 @@ namespace _5051.Backend
                             report.Stats.DaysOutEarly++;
                         }
 
-                        report.Stats.DaysOutAuto = report.Stats.DaysPresent - report.Stats.DaysOutEarly;   
-                        
+                        report.Stats.DaysOutAuto = report.Stats.DaysPresent - report.Stats.DaysOutEarly;
+
                     }
 
                     //calculations for both absent and present records                    
@@ -485,6 +476,7 @@ namespace _5051.Backend
             var end = schoolDay.TimeEnd.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow);
 
             var myIn = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay; //check-in time
+            var myOut = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay; //check-in time
 
             //trim the start time to actual arrive time only if the student is late
             if (myIn.CompareTo(start) > 0)
@@ -492,9 +484,9 @@ namespace _5051.Backend
                 start = myIn;
             }
             //trim the end time to actual out time only if the student leave early
-            if (attendanceReport.TimeOut.TimeOfDay.CompareTo(end) < 0)
+            if (myOut.CompareTo(end) < 0)
             {
-                end = attendanceReport.TimeOut.TimeOfDay;
+                end = myOut;
             }
 
             var duration = end.Subtract(start);
