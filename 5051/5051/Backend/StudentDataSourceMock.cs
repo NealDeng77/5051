@@ -15,6 +15,9 @@ namespace _5051.Backend
         private static volatile StudentDataSourceMock instance;
         private static object syncRoot = new Object();
 
+        private static bool isTestingMode = false;
+        //IdentityBackend identityBackend = new IdentityBackend();
+
         private StudentDataSourceMock() { }
 
         public static StudentDataSourceMock Instance
@@ -49,7 +52,14 @@ namespace _5051.Backend
         /// <returns>Student Passed In</returns>
         public StudentModel Create(StudentModel data)
         {
+            //if (!isTestingMode)
+            //{
+            //    var identityBackend = new IdentityBackend();
+            //    identityBackend.CreateNewStudent(data);
+            //}
+
             StudentList.Add(data);
+
             return data;
         }
 
@@ -204,11 +214,15 @@ namespace _5051.Backend
         /// <param name="setEnum"></param>
         public void LoadDataSet(DataSourceDataSetEnum setEnum)
         {
-            //var identityBackend = new IdentityBackend();
-            //create support user
-            //identityBackend.CreateNewSupportUser("su5051", "su5051");
-            //create teacher user
-            //identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
+            //if (!isTestingMode)
+            //{
+            //    var identityBackend = new IdentityBackend();
+            //    identityBackend.Reset();
+            //    //create support user
+            //    identityBackend.CreateNewSupportUser("su5051", "su5051", "su5051");
+            //    //create teacher user
+            //    identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
+            //}
             switch (setEnum)
             {
                 case DataSourceDataSetEnum.Demo:
@@ -224,6 +238,17 @@ namespace _5051.Backend
                     DataSetDefault();
                     break;
             }
+        }
+
+        public bool GetTestingMode()
+        {
+            return isTestingMode;
+        }
+
+        public static bool SetTestingMode(bool mode)
+        {
+            isTestingMode = mode;
+            return isTestingMode;
         }
     }
 }

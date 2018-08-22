@@ -27,6 +27,18 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            DataSourceBackend.Instance.Reset();
+        }
+
         #region CreateNewSupportUser
         [TestMethod]
         public void Backend_IdentityBackend_CreateNewSupportUser_Valid_User_Should_Pass()
@@ -266,8 +278,14 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var backend = new IdentityBackend();
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            
+            //var dataSourceBack = DataSourceBackend.Instance;
+            //dataSourceBack.SetTestingMode(true);
+            //var expectStudent = dataSourceBack.StudentBackend.GetDefault();
+            
+            //var studentBackend = StudentBackend.Instance;
+            //var expectStudent = studentBackend.GetDefault();
 
             //act
             var result = backend.GetStudentById(expectStudent.Id);

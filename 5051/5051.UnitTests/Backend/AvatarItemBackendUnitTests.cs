@@ -9,6 +9,19 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            DataSourceBackend.Instance.Reset();
+        }
+
+
         #region delete
         [TestMethod]
         public void Backend_AvatarItemBackend_Delete_Valid_Data_Should_Pass()
@@ -226,7 +239,7 @@ namespace _5051.UnitTests.Backend
         [TestMethod]
         public void Backend_AvatarItemBackend_SetDataSourceDataSet_Uses_MockData_Should_Pass()
         {
-            //arrange
+            //arrange            
             var test = AvatarItemBackend.Instance;
             var testDataSourceBackend = DataSourceBackend.Instance;
             var mockEnum = DataSourceDataSetEnum.Demo;

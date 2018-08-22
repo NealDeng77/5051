@@ -14,6 +14,18 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            DataSourceBackend.Instance.Reset();
+        }
+
         #region delete
         [TestMethod]
         public void Backend_AvatarBackend_Delete_Valid_Data_Should_Pass()
