@@ -191,6 +191,14 @@ namespace _5051.Backend
                 Emotion = data.EmotionCurrent
             };
 
+            //the school day model
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(temp.In));
+
+            //set auto check-out time
+            var currentDate = new DateTime(temp.In.Year, temp.In.Month, temp.In.Day);
+            var defaultOut = currentDate.Add(schoolDay.TimeEnd);
+            temp.Out = UTCConversionsBackend.KioskTimeToUtc(defaultOut);
+
             data.Attendance.Add(temp);
 
         }
@@ -214,7 +222,6 @@ namespace _5051.Backend
                 return;
             }
 
-            // Add the new one it with the new data
             myTimeData.Out = DateTime.UtcNow;
         }
 
@@ -316,7 +323,7 @@ namespace _5051.Backend
         /// </summary>
         public void ResetStatusAndProcessNewAttendance()
         {
-            
+
             foreach (var item in Index())  //for each student
             {
                 //Reset Status to "Out"
@@ -330,16 +337,6 @@ namespace _5051.Backend
                 //add to current tokens of the student.
                 foreach (var attendance in newLogIns)
                 {
-                    //the school day model
-                    var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
-
-                    //set auto check-out time
-                    if (attendance.Out == DateTime.MinValue)
-                    {
-                        var currentDate = new DateTime(attendance.In.Year, attendance.In.Month, attendance.In.Day);
-                        var defaultOut = currentDate.Add(schoolDay.TimeEnd);
-                        attendance.Out = UTCConversionsBackend.KioskTimeToUtc(defaultOut) ;
-                    }
 
                     //calculate tokens
                     var effectiveDuration = CalculateEffectiveDuration(attendance);
