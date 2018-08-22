@@ -54,7 +54,7 @@
                 {
                     <div class="container text-left">
                         <div class="row">
-                            <div class="col-md-4"></div>
+                            <div class="col-md-5"></div>
                             <div class="col text-left">
                                 <span class="FontSizeMedium">
                                     @Today
@@ -62,19 +62,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"></div>
+                            <div class="col-md-5"></div>
                             <div class="col text-left">
                                 @{
                                     if (!Model.SchoolDay)
                                     {
-                                        <h3>Not a school day</h3>
+                                        <span class="FontSizeMedium FontColorWhite">Not a school day</span>
                                         @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
                                         @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
 
                                     }
                                     else
                                     {
-                                        <h3>Time in school: @TimeDuration</h3>
+                                        <span class="FontSizeMedium FontColorWhite">Time in school: @TimeDuration</span>
                                     }
                                 }
                             </div>
@@ -89,7 +89,7 @@
                             @Html.HiddenFor(m => m.Id)
 
                     <div class="row">
-                        <div class="col-4 text-right">
+                        <div class="col-5 text-right">
                             @Html.DisplayNameFor(m => m.TimeStart)
                         </div>
                         <div class="col">
@@ -111,7 +111,7 @@
                     </div>
 
                             <div class="row">
-                                <div class="col-4 text-right">
+                                <div class="col-5 text-right">
                                     @Html.DisplayNameFor(m => m.TimeEnd)
                                 </div>
                                 <div class="col">
@@ -135,7 +135,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-5">
                                 </div>
                                 <div class="col text-left">
                                     <br />
@@ -147,7 +147,7 @@
                         <br />
                         <br />
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-5">
                             </div>
                             <div class="col text-left">
                                 @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })

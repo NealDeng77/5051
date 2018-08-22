@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace _5051.Models
 {
     /// <summary>
     /// View Model for the GameResult Views to have the list of GameResults
     /// </summary>
-    public class BusinessReportViewModel
+    public class BusinessReportViewModel : BaseReportViewModel
     {
         /// <summary>
         /// The Report Parts
@@ -15,5 +16,14 @@ namespace _5051.Models
         public int profit;
         public List<TransactionModel> BusinessList;
 
+        /// <summary>
+        /// Contains a select list for quarter selection dropdown
+        /// </summary>
+        public List<SelectListItem> Quarters { get; set; }
+
+        /// <summary>
+        /// The selected quarter's id for quarter selection dropdown
+        /// </summary>
+        public int SelectedQuarterId { get; set; }
     }
 }

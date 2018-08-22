@@ -1,7 +1,80 @@
-﻿
+﻿@model _5051.Models.BusinessReportViewModel
 @{
-    ViewBag.Title = "BusinessReport";
+    ViewBag.Title = " Business Report";
 }
 
-<h2>BusinessReport</h2>
+<br />
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Business Report</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
+<div class="row justify-content-center ">
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+        <div class="row justify-content-around">
+            <div class="col-sm-auto">
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeMedium text-center">Income: @Model.income</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto">
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeMedium text-center">Outcome: @Model.outcome</span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto">
+                <div class="row no-gutters justify-content-center">
+                    <span class="FontSizeMedium text-center">Profit: @Model.profit</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
+<div class="row justify-content-around ">
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+        <div class="col">
+            <span class="FontSizeMedium text-center">Transaction detail</span>
+        </div>
+        <div class="col">
+            @{
+                foreach (var item in @Model.BusinessList)
+                {
+                    <div class="col-sm-4 text-center">
+                        <span class="text-center">
+                            @item.Name
+                        </span>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+
+
 

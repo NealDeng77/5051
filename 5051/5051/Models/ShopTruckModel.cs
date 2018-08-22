@@ -71,6 +71,12 @@ namespace _5051.Models
             Sign = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Sign).Id;
 
             Menu = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Menu).Id;
+
+            //// only for test:
+            //TransactionModel myTransaction = new TransactionModel();
+            //myTransaction.Name = "Nothing to show";
+            //myTransaction.Uri = null;
+            //BusinessList.Add(myTransaction);
         }
     }
 }

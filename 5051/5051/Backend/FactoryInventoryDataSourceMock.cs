@@ -193,6 +193,9 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("Menu2.png", "Taco Fire Menu", "Taco Fire Menu", FactoryInventoryCategoryEnum.Menu, 15, 10, false));
             Create(new FactoryInventoryModel("Topper2.png", "Taco Fire Topper", "Taco Fire Topper", FactoryInventoryCategoryEnum.Topper, 15, 10, false));
             Create(new FactoryInventoryModel("Sign2.png", "Taco Fire Sign", "Taco Fire Sign", FactoryInventoryCategoryEnum.Sign, 15, 10, false));
+
+            Create(new FactoryInventoryModel("Trailer3.png", "Bubble Trailer", "Bubble Trailer", FactoryInventoryCategoryEnum.Trailer, 20, 10, false));
+            Create(new FactoryInventoryModel("Truck3.png", "Bubble Truck", "Bubble Truck", FactoryInventoryCategoryEnum.Truck, 20, 10, false));
         }
 
         /// <summary>
