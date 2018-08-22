@@ -60,7 +60,7 @@
 
                         <hr />
 
-                        <div class="row no-gutters justify-content-around">
+                        <div class="row no-gutters justify-content-start">
                             @{
                                 // Logged Out first
                                 foreach (var item in Model.StudentList)
@@ -77,7 +77,7 @@
                                         var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
                                         var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
 
-                                        <div class="col-sm-auto AvatarKioskBox">
+                                        <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
                                             <a id="@item.Id" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log In')">
                                                 <div class="row no-gutters justify-content-around">
                                                     <div class="col no-gutters AvatarBoxNormal">
@@ -209,7 +209,7 @@
 
                         <hr />
 
-                        <div class="row no-gutters justify-content-around">
+                        <div class="row no-gutters justify-content-start">
                             @{
                                 // List out the Logged IN Students, then the Logged Out students
                                 // Logged IN first
@@ -225,7 +225,7 @@
                                         var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
                                         var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
 
-                                        <div class="col-sm-auto AvatarKioskBox">
+                                        <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
                                             <a id="@item.Id-LogOut" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log Out')">
                                                 <div class="row no-gutters justify-content-around">
                                                     <div class="col no-gutters AvatarBoxNormal" id="AvatarBox">
