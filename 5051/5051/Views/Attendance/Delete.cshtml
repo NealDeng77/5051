@@ -1,4 +1,5 @@
-﻿@model _5051.Models.AttendanceModel
+﻿@using _5051.Models
+@model _5051.Models.AttendanceModel
 
 @{
     ViewBag.Title = "Attendance Details";
@@ -11,7 +12,7 @@
     <div class="col lightTransparentBox">
         <br />
         <div class="FontSizeLarge text-center">
-            <span class="FontSizeLarger FontBold">
+            <span class="FontSizeLarger FontBold FontColorWhite">
                 Attendance Details
             </span>
         </div>
@@ -75,8 +76,35 @@
                         @Html.DisplayFor(m => m.Out)
                     </div>
                 </div>
-
-
+                <br/>
+                <div class="row">
+                    <div class="col-6 text-right" id="tokensName">
+                        @Html.DisplayNameFor(m => m.Emotion)
+                    </div>
+                    <div class="col-1">
+                        &nbsp;:&nbsp;
+                    </div>
+                    <div class="col text-left" id="tokensValue">
+                        @switch (Model.Emotion)
+                        {
+                            case EmotionStatusEnum.VeryHappy:
+                                <img src="/Content/img/EmotionVeryHappy.png" height="30" />
+                                break;
+                            case EmotionStatusEnum.Happy:
+                                <img src="/Content/img/EmotionHappy.png" height="30" />
+                                break;
+                            case EmotionStatusEnum.Neutral:
+                                <img src="/Content/img/EmotionNeutral.png" height="30" />
+                                break;
+                            case EmotionStatusEnum.Sad:
+                                <img src="/Content/img/EmotionSad.png" height="30" />
+                                break;
+                            case EmotionStatusEnum.VerySad:
+                                <img src="/Content/img/EmotionVerySad.png" height="30" />
+                                break;
+                        }
+                    </div>
+                </div>
                 <br />
 
                 <hr />

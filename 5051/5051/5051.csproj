@@ -300,6 +300,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar\placeholder.png" />
+    <Content Include="Content\avatar\Shirt_black.png" />
+    <Content Include="Content\avatar\Shirt_black_short.png" />
+    <Content Include="Content\avatar\Shirt_blue.png" />
+    <Content Include="Content\avatar\Shirt_blue_short.png" />
+    <Content Include="Content\avatar\Shirt_green.png" />
+    <Content Include="Content\avatar\Shirt_green_short.png" />
+    <Content Include="Content\avatar\Shirt_orange.png" />
+    <Content Include="Content\avatar\Shirt_orange_short.png" />
+    <Content Include="Content\avatar\Shirt_red.png" />
+    <Content Include="Content\avatar\Shirt_red_short.png" />
+    <Content Include="Content\avatar\Shirt_white.png" />
+    <Content Include="Content\avatar\Shirt_white_short.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.png" />
     <Content Include="Content\img\EmotionVerySad.png" />
@@ -389,18 +401,6 @@
     <Content Include="Content\avatar\Head5.png" />
     <Content Include="Content\avatar\Head0.png" />
     <Content Include="Content\avatar\Pants.png" />
-    <Content Include="Content\avatar\Shirt_short_green.png" />
-    <Content Include="Content\avatar\Shirt_short_red.png" />
-    <Content Include="Content\avatar\Shirt_short_blue.png" />
-    <Content Include="Content\avatar\Shirt_short_orange.png" />
-    <Content Include="Content\avatar\Shirt_short_black.png" />
-    <Content Include="Content\avatar\Shirt_short_white.png" />
-    <Content Include="Content\avatar\Shirt_full_black.png" />
-    <Content Include="Content\avatar\Shirt_full_blue.png" />
-    <Content Include="Content\avatar\Shirt_Full_green.png" />
-    <Content Include="Content\avatar\Shirt_full_orange.png" />
-    <Content Include="Content\avatar\Shirt_full_red.png" />
-    <Content Include="Content\avatar\Shirt_full_white.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -482,9 +482,11 @@
     <Content Include="Content\shop\Trailer0.png" />
     <Content Include="Content\shop\Trailer1.png" />
     <Content Include="Content\shop\Trailer2.png" />
+    <Content Include="Content\shop\Trailer3.png" />
     <Content Include="Content\shop\Truck0.png" />
     <Content Include="Content\shop\Truck1.png" />
     <Content Include="Content\shop\Truck2.png" />
+    <Content Include="Content\shop\Truck3.png" />
     <Content Include="Content\shop\TruckInside.png" />
     <Content Include="Content\shop\Wheels0.png" />
     <Content Include="Content\shop\Wheels1.png" />
@@ -688,6 +690,7 @@
     <Content Include="Views\AvatarSelect\Select.cshtml" />
     <Content Include="Views\AvatarSelect\Inventory.cshtml" />
     <Content Include="Views\Shop\BusinessReport.cshtml" />
+    <Content Include="Views\Support\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,20 +46,10 @@ namespace _5051.Controllers
                 {
                     //deep copy the AttendanceModel and convert time zone
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
-
+                    Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
 
                     Emotion = item.Emotion
                 };
-
-                if (item.Out == DateTime.MinValue)
-                {
-                    //if out is auto, set time out to today's dismissal time
-                    myAttendance.Out = item.Out.Add(DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myAttendance.In.Date).TimeEnd);
-                }
-                else
-                {
-                    myAttendance.Out = UTCConversionsBackend.UtcToKioskTime(item.Out);
-                }
 
                 myAttendance.Id = item.Id;
 
@@ -102,9 +92,27 @@ namespace _5051.Controllers
         //Create a new attendance
         public ActionResult Create(string id)
         {
+
+            var myStudent = StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //current date
+            var myDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            //the school day model
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myDate);
+
+            var defaultStart = myDate.Add(schoolDay.TimeStart);
+            var defaultEnd = myDate.Add(schoolDay.TimeEnd);
+
             var myData = new AttendanceModel
             {
-                StudentId = id
+                StudentId = id,
+                In = defaultStart,
+                Out = defaultEnd,
             };
 
             return View(myData);
@@ -145,7 +153,9 @@ namespace _5051.Controllers
                 StudentId = data.StudentId,
                 //update the time
                 In = UTCConversionsBackend.KioskTimeToUtc(data.In),
-                Out = UTCConversionsBackend.KioskTimeToUtc(data.Out)
+                Out = UTCConversionsBackend.KioskTimeToUtc(data.Out),
+                Emotion = data.Emotion,
+                IsNew = data.IsNew
             };
 
             //add the attendance to the student's attendance
@@ -223,7 +233,10 @@ namespace _5051.Controllers
             myAttendance.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
             myAttendance.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
 
-            return RedirectToAction("Details", new { id = myAttendance.StudentId });
+            //update the emotion
+            myAttendance.Emotion = data.Emotion;
+
+            return RedirectToAction("Details", new { id = myAttendance.Id });
         }
 
         // GET: Attendance/Delete/5

@@ -52,6 +52,8 @@ namespace _5051.Backend
             //Student at index 4 has no attendance: always absent
             GenerateAttendance(4, dateStart, dateEnd);
             //To do: create scenario for multiple check-ins
+
+            StudentBackend.Instance.ResetStatusAndProcessNewAttendance();
         }
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace _5051.Backend
                     {
                         case 0: //Perfect
                             temp.In = InGood(currentDate, r);
+                            temp.Out = OutAuto(currentDate);
                             temp.Emotion = (EmotionStatusEnum)(rn+1);
                             myStudent.Attendance.Add(temp);
                             break;
@@ -104,7 +107,7 @@ namespace _5051.Backend
                                 {
                                     case 0:
                                         temp.In = InLate(currentDate, r);
-                                        temp.Out = OutLate(currentDate, r);
+                                        temp.Out = OutLate(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Happy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -116,7 +119,7 @@ namespace _5051.Backend
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
-                                        
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -137,16 +140,19 @@ namespace _5051.Backend
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 3:
                                         temp.In = InLate(currentDate, r);
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Sad;
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -159,6 +165,7 @@ namespace _5051.Backend
                                 {
                                     case 0:
                                         temp.In = InVeryLate(currentDate, r);
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -170,6 +177,7 @@ namespace _5051.Backend
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
+                                        temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Sad;
                                         myStudent.Attendance.Add(temp);
                                         break;
@@ -185,7 +193,6 @@ namespace _5051.Backend
                 // Look to the next day
                 currentDate = currentDate.AddDays(1);
             }
-            StudentBackend.Instance.UpdateToken(myStudent.Id);
         }
 
         /// <summary>
@@ -224,7 +231,7 @@ namespace _5051.Backend
         /// <param name="date"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        private static DateTime OutLate(DateTime date, Random r)
+        private static DateTime OutLate(DateTime date)
         {
             return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(1000)); // out 15:45pm
         }
@@ -237,6 +244,16 @@ namespace _5051.Backend
         private static DateTime OutEarly(DateTime date, Random r)
         {
             return UTCConversionsBackend.KioskTimeToUtc(date.AddMinutes(r.Next(600, 900))); // out 10:00am - 3:00pm
+        }
+
+        private static DateTime OutAuto(DateTime date)
+        {
+
+            //the school day model
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(date);
+            var defaultOut = date.Add(schoolDay.TimeEnd);
+
+            return UTCConversionsBackend.KioskTimeToUtc(defaultOut); // out auto
         }
     }
 }

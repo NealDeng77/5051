@@ -23,6 +23,14 @@ namespace _5051.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        public SupportController() { }
+
+        public SupportController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -50,14 +58,7 @@ namespace _5051.Controllers
         // GET: Support
         public ActionResult Index()
         {
-            if (User.Identity.GetIsSupportUser())
-            {
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
         //GET lists all the users
@@ -152,23 +153,25 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser teacherUser)
         {
-            if (User.Identity.GetIsSupportUser())
-            {
-                if (identityBackend.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
-                {
-                    identityBackend.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
-                }
-                else
-                {
-                    identityBackend.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
-                }
 
-                return RedirectToAction("UserList", "Support");
+            if (DataSourceBackend.Instance.IsUserNotInRole(User.Identity.GetUserId(), "support"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (identityBackend.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
+            {
+                identityBackend.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
             }
             else
             {
-                return RedirectToAction("Login", "Account");
+                identityBackend.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
             }
+
+            return RedirectToAction("UserList", "Support");
+
+
+
         }
 
         //GET support/ToggleSupport/userID
@@ -209,6 +212,89 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+        }
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Calls the data sources and has them reset to default data
+        /// </summary>
+        /// <returns></returns>
+        // GET: Reset
+        public ActionResult Reset()
+        {
+            DataSourceBackend.Instance.Reset();
+            return RedirectToAction("Index", "Support");
+        }
+
+        /// <summary>
+        /// Change the data set from default to demo, to ut etc.
+        /// </summary>
+        /// <returns></returns>
+        // GET: Settings
+        public ActionResult DataSourceSet(string id = null)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index", "Support");
+            }
+
+            DataSourceDataSetEnum SetEnum = DataSourceDataSetEnum.Default;
+            switch (id)
+            {
+                case "Default":
+                    SetEnum = DataSourceDataSetEnum.Default;
+                    break;
+
+                case "Demo":
+                    SetEnum = DataSourceDataSetEnum.Demo;
+                    break;
+
+                case "UnitTest":
+                    SetEnum = DataSourceDataSetEnum.UnitTest;
+                    break;
+            }
+
+            DataSourceBackend.Instance.SetDataSourceDataSet(SetEnum);
+
+            return RedirectToAction("Index", "Support");
+        }
+
+        /// <summary>
+        /// Change the data source
+        /// </summary>
+        /// <returns></returns>
+        // GET: Settings
+        public ActionResult DataSource(string id = null)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index", "Support");
+            }
+
+            DataSourceEnum SetEnum = DataSourceEnum.Mock;
+            switch (id)
+            {
+                case "Mock":
+                    SetEnum = DataSourceEnum.Mock;
+                    break;
+
+                case "SQL":
+                    SetEnum = DataSourceEnum.SQL;
+                    break;
+
+                case "Unknown":
+                default:
+                    SetEnum = DataSourceEnum.Unknown;
+                    break;
+            }
+
+            DataSourceBackend.Instance.SetDataSource(SetEnum);
+
+            return RedirectToAction("Index", "Support");
         }
     }
 }

@@ -12,8 +12,8 @@
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
         <br />
-        <div class="FontSizeMedium text-center">
-            <span class="FontSizeMedium FontBold">
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
                 Avatar Customization
             </span>
         </div>
@@ -90,4 +90,32 @@
     <div class="col-1"></div>
     <br />
     <br />
+</div>
+
+
+<div class="row justify-content-start">
+
+    <div class="col-1 "></div>
+
+    <div class="col text-left">
+        <br />
+        <br />
+
+        <div class="row justify-content-start">
+
+            <div class="col-auto text-center">
+                @Html.ActionLink("Back to Avatar", "Index", new { id = Model.Student.Id }, new { @class = "btn btn1 btn-light" })
+            </div>
+
+            <div class="col-auto text-center">
+                @Html.ActionLink("Go to Shop", "Select", new { id = Model.Student.Id }, new { @class = "btn btn1 btn-light" })
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+    </div>
+
+    <div class="col-1 "></div>
 </div>

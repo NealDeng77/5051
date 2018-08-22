@@ -10,7 +10,7 @@
 
         HairBack = 1,
         Head = 2,
-        ShirtShort = 3,
+        //ShirtShort = 3,
         Expression = 4,
         Cheeks = 5,
         HairFront = 6,

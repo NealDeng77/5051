@@ -22,32 +22,38 @@
 </div>
 
 <div class="row justify-content-around">
-    @{
-        foreach (var item in Model.StudentList)
-        {
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="row justify-content-start">
 
-            <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover">
-                <a id="@item.Id" href="~/Portal/Login/@item.Id">
-                    <div class="row justify-content-center">
-                        <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
-                            <div class="AvatarCircle"></div>
-                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
-                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
-                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
-                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
-                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
-                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
-                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+            @{
+                foreach (var item in Model.StudentList)
+                {
+                    <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                        <a id="@item.Id" href="~/Portal/Login/@item.Id">
+                            <div class="row justify-content-center">
+                                <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
+                                    <div class="AvatarCircle"></div>
+                                    <img class="AvatarItemBase AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                    <img class="AvatarItemBase AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                    <img class="AvatarItemBase AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
+                                    <img class="AvatarItemBase AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                    <img class="AvatarItemBase AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                    <img class="AvatarItemBase AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                    <img class="AvatarItemBase AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                </div>
+                            </div>
+                        </a>
+                        <div class="row justify-content-around">
+                            <span class="col FontSizeSmall text-center">
+                                @item.Name
+                            </span>
                         </div>
                     </div>
-                </a>
-
-                <div class="row justify-content-center">
-                    <div id="text-center">
-                        <span class="FontSizeMedium">@item.Name</span>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-</div>
+                }
+            }
+            <br />
+        </div>
+    </div>
+        <div class="col-1"></div>
+    </div>

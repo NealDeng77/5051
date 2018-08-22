@@ -300,9 +300,12 @@ namespace _5051.Backend
 
             foreach (var item in claims)
             {
-                if (item.ClaimType == claimType && item.ClaimValue == claimValue)
+                if (item.ClaimType == claimType)
                 {
-                    return true;
+                    if (item.ClaimValue == claimValue)
+                    {
+                        return true;
+                    }                  
                 }
             }
 
@@ -321,7 +324,12 @@ namespace _5051.Backend
         {
             var findResult = FindUserByID(userID);
 
-            var claimAddResult = UserManager.AddClaim(findResult.Id, new Claim(claimTypeToAdd, claimValueToAdd));
+            if(findResult == null)
+            {
+                return null;
+            }
+
+            var claimAddResult = UserManager.AddClaim(userID, new Claim(claimTypeToAdd, claimValueToAdd));
 
             if(!claimAddResult.Succeeded)
             {
@@ -341,6 +349,11 @@ namespace _5051.Backend
         public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
         {
             var claims = UserManager.GetClaims(userID);
+
+            if (claims == null)
+            {
+                return false;
+            }
 
             var lastAccessedClaim = claims.FirstOrDefault(t => t.Type == claimTypeToRemove);
 

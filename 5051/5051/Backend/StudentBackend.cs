@@ -191,6 +191,14 @@ namespace _5051.Backend
                 Emotion = data.EmotionCurrent
             };
 
+            //the school day model
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(temp.In));
+
+            //set auto check-out time
+            var currentDate = new DateTime(temp.In.Year, temp.In.Month, temp.In.Day);
+            var defaultOut = currentDate.Add(schoolDay.TimeEnd);
+            temp.Out = UTCConversionsBackend.KioskTimeToUtc(defaultOut);
+
             data.Attendance.Add(temp);
 
         }
@@ -214,7 +222,6 @@ namespace _5051.Backend
                 return;
             }
 
-            // Add the new one it with the new data
             myTimeData.Out = DateTime.UtcNow;
         }
 
@@ -311,58 +318,78 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// If date has changed, reset all students' status to out.
+        /// Reset all students' status to "out", then for each new attendance of each student,
+        /// set auto check-out time, then compute tokens
         /// </summary>
-        public void ResetAllStatus()
+        public void ResetStatusAndProcessNewAttendance()
         {
-            if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date) == 0)
+
+            foreach (var item in Index())  //for each student
             {
-                //Reset all Student Status to "Out"
-                foreach (var item in Index())
+                //Reset Status to "Out"
+                item.Status = StudentStatusEnum.Out;
+
+                //get the list of new attendances of the student, for which token amount has not been added yet,
+                //and auto check-out time has not been set yet
+                var newLogIns = item.Attendance.Where(m => m.IsNew);
+
+                //for each new attendance, set auto check-out time, then calculate effective duration and according collected tokens,
+                //add to current tokens of the student.
+                foreach (var attendance in newLogIns)
                 {
-                    item.Status = StudentStatusEnum.Out;
+
+                    //calculate tokens
+                    var effectiveDuration = CalculateEffectiveDuration(attendance);
+
+                    //todo: since hours attended is rounded up, need to prevent the case where consecutive check-ins in a short period
+                    //todo: of time could add 1 tokens everytime
+                    var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
+                    item.Tokens += collectedTokens;
+
+                    //mark it as old attendance
+                    attendance.IsNew = false;
                 }
 
-                SystemGlobalsModel.Instance.CurrentDate = DateTime.UtcNow;
-            }
-        }
-
-        /// <summary>
-        /// Update token
-        /// </summary>
-        /// <param name="id"></param>
-        public void UpdateToken(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                return;
-            }
-
-            var data = DataSource.Read(id);
-            if (data == null)
-            {
-                return;
-            }
-
-            //get the list of new attendances, for which token amount has not been added yet.
-            var newLogIns = data.Attendance.Where(m => m.IsNew);
-
-            //for each new attendance, calculate effective duration and according collected tokens,
-            //add to current tokens of the student.
-            foreach (var attendance in newLogIns)
-            {
-                var effectiveDuration = CalculateEffectiveDuration(attendance);
-
-                //todo: since hours attended is rounded up, need to prevent the case where consecutive check-ins in a short period
-                //todo: of time could add 1 tokens everytime
-                var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
-                data.Tokens += collectedTokens;
-
-                //mark it as old attendance
-                attendance.IsNew = false;
             }
 
         }
+
+        ///// <summary>
+        ///// Update token
+        ///// </summary>
+        ///// <param name="id"></param>
+        //public void UpdateToken(string id)
+        //{
+        //    if (string.IsNullOrEmpty(id))
+        //    {
+        //        return;
+        //    }
+
+        //    var data = DataSource.Read(id);
+        //    if (data == null)
+        //    {
+        //        return;
+        //    }
+
+        //    //get the list of new attendances, for which token amount has not been added yet.
+        //    var newLogIns = data.Attendance.Where(m => m.IsNew);
+
+        //    //for each new attendance, calculate effective duration and according collected tokens,
+        //    //add to current tokens of the student.
+        //    foreach (var attendance in newLogIns)
+        //    {
+        //        var effectiveDuration = CalculateEffectiveDuration(attendance);
+
+        //        //todo: since hours attended is rounded up, need to prevent the case where consecutive check-ins in a short period
+        //        //todo: of time could add 1 tokens everytime
+        //        var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
+        //        data.Tokens += collectedTokens;
+
+        //        //mark it as old attendance
+        //        attendance.IsNew = false;
+        //    }
+
+        //}
 
         /// <summary>
         /// private helper method to calculate effective duration
@@ -374,23 +401,13 @@ namespace _5051.Backend
             //the school day model, will use the school day's start time and end time later
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
 
-            
+
             var start = schoolDay.TimeStart.Add(-SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow); //the time from which duration starts to count
 
             var end = schoolDay.TimeEnd.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow); //the time that duration counts until
 
             var myIn = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay; //check-in time
-            TimeSpan myOut; //check-out time
-
-            //if out is auto, use today's dismissal time
-            if (attendance.Out == DateTime.MinValue)
-            {             
-                myOut = schoolDay.TimeEnd;
-            }
-            else //otherwise, use attendance's check-out time
-            {
-                myOut = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay;
-            }
+            var myOut = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay; //check-out time
 
             //trim the start time to actual arrive time only if the student is late
             if (myIn.CompareTo(start) > 0)

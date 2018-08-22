@@ -157,6 +157,20 @@ namespace _5051.Tests.Controllers
         #endregion ReadStringRegion
 
         #region CreateRegion
+        [TestMethod]
+        public void Controller_Attendance_Create_Invalid_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new AttendanceController();
+            string id = "bogus";
+
+            // Act
+            var result = controller.Create(id) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
 
         [TestMethod]
         public void Controller_Attendance_Create_Default_Should_Pass()

@@ -10,8 +10,6 @@ namespace _5051.Controllers
     /// </summary>
     public class KioskController : BaseController
     {
-        // A ViewModel used for the Student that contains the StudentList
-        private StudentViewModel StudentViewModel = new StudentViewModel();
 
         // The Backend Data source
         private StudentBackend StudentBackend = StudentBackend.Instance;
@@ -32,8 +30,12 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            //If date has changed, reset all students' status to out.
-            StudentBackend.ResetAllStatus();
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
+            {             
+                StudentBackend.ResetStatusAndProcessNewAttendance();
+                SystemGlobalsModel.Instance.CurrentDate = currentDate;
+            }
 
 
             var StudentViewModel = new StudentViewModel(myDataList);
@@ -87,9 +89,6 @@ namespace _5051.Controllers
                 // Send to Error Page
                 return RedirectToAction("Error", "Home");
             }
-
-            // Update token
-            StudentBackend.UpdateToken(data.Id);
 
             // perform student log in and update data
             StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);

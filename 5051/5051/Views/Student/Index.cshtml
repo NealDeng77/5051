@@ -8,7 +8,7 @@
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
         <br />
-        <div class="FontSizeLarge text-center">
+        <div class="FontSizeLarge text-center FontColorWhite">
             <span class="FontSizeLarger FontBold">Click on the student to view</span>
         </div>
         <br />
@@ -21,7 +21,7 @@
     <br />
 </div>
 
-<div class="row justify-content-around">
+<div class="row justify-content-around FontColorWhite">
     @{
         if (Model.StudentList == null || !Model.StudentList.Any())
         {
@@ -35,7 +35,7 @@
         {
             <div class="col-1"></div>
             <div class="col">
-                <div class="row justify-content-start">
+                <div class="row justify-content-around">
 
                     @{
                         foreach (var item in Model.StudentList)

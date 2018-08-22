@@ -10,7 +10,7 @@
     <div class="col lightTransparentBox">
         <br />
         <div class="FontSizeLarge text-center">
-            <span class="FontSizeLarger FontBold">
+            <span class="FontSizeLarger FontBold FontColorWhite">
                 Update Attendance
             </span>
         </div>
@@ -53,6 +53,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
+                    @Html.Hidden("Emotion", @Model.Emotion, new { @id = "EmotionCurrentId" });
                     <div class="row">
                         <div class="col-6 text-right" id="avatarLevelName">
                             @Html.DisplayNameFor(m => m.In)
@@ -79,6 +80,31 @@
                         </div>
                     </div>
 
+                    <br />
+                    <div class="row">
+                        <div class="col-6 text-right" id="tokensName">
+                            @Html.DisplayNameFor(m => m.Emotion)
+                        </div>
+                        <div class="col-1">
+                            &nbsp;:&nbsp;
+                        </div>
+                        <div class="col text-left" id="tokensValue">
+                            <div class="row">
+                                @{
+                                    // list emotion icons
+                                    foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                    {
+                                        var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                        var emotionId = emotion + "Id";
+
+                                        <div id="@emotionId" class="col BoxWithHighlightHover">
+                                            <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
 
 
                     <br />
@@ -108,3 +134,18 @@
         <br />
     }
 }
+
+<script>
+    function UpdateEmotionCurrent(UserEmotionId) {
+        document.getElementById("VeryHappyId").style.opacity = 1.0;
+        document.getElementById("HappyId").style.opacity = 1.0;
+        document.getElementById("NeutralId").style.opacity = 1.0;
+        document.getElementById("SadId").style.opacity = 1.0;
+        document.getElementById("VerySadId").style.opacity = 1.0;
+
+        document.getElementById(UserEmotionId + "Id").style.opacity = 0.3;
+
+        $("#EmotionCurrentId").attr("Value", UserEmotionId);
+        $("#StudentLoginButton").attr("Disabled", false);
+    }
+</script>

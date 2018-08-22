@@ -177,24 +177,26 @@ namespace _5051.Backend
             Create(new AvatarItemModel("Head4.png", "Head", "Dark", AvatarItemCategoryEnum.Head, 1, 10, false));
             Create(new AvatarItemModel("Head5.png", "Head", "Darker", AvatarItemCategoryEnum.Head, 1, 10, false));
 
-            Create(new AvatarItemModel("Shirt_full_white.png", "Shirt", "White", AvatarItemCategoryEnum.ShirtFull, 1, 10, false));
-            Create(new AvatarItemModel("Shirt_full_black.png", "Shirt", "Black", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_full_blue.png", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_full_green.png", "Shirt", "Green", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_full_orange.png", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_full_red.png", "Shirt", "Red", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            Create(new AvatarItemModel("Shirt_white.png", "Shirt", "White", AvatarItemCategoryEnum.ShirtFull, 1, 10, false));
+            Create(new AvatarItemModel("Shirt_black.png", "Shirt", "Black", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            Create(new AvatarItemModel("Shirt_blue.png", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            Create(new AvatarItemModel("Shirt_green.png", "Shirt", "Green", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            Create(new AvatarItemModel("Shirt_orange.png", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            Create(new AvatarItemModel("Shirt_red.png", "Shirt", "Red", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
 
-
-            Create(new AvatarItemModel("Shirt_Short_white.png", "Shirt", "White", AvatarItemCategoryEnum.ShirtShort, 1, 10, false));
-            Create(new AvatarItemModel("Shirt_Short_black.png", "Shirt", "Black", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_Short_blue.png", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_Short_green.png", "Shirt", "Green", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_Short_orange.png", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
-            Create(new AvatarItemModel("Shirt_Short_red.png", "Shirt", "Red", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
+            //Create(new AvatarItemModel("Shirt_white_short", "Shirt", "White", AvatarItemCategoryEnum.ShirtShort, 1, 10, false));
+            //Create(new AvatarItemModel("Shirt_black_short", "Shirt", "Black", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
+            //Create(new AvatarItemModel("Shirt_blue_short", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
+            //Create(new AvatarItemModel("Shirt_green_short", "Shirt", "Green", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
+            //Create(new AvatarItemModel("Shirt_orange_short", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
+            //Create(new AvatarItemModel("Shirt_red_short", "Shirt", "Red", AvatarItemCategoryEnum.ShirtShort, 50, 10, false));
 
             Create(new AvatarItemModel("Pants.png", "Pants", "Pants", AvatarItemCategoryEnum.Pants, 1, 10, false));
 
             #region FrontHair
+
+            Create(new AvatarItemModel("placeholder.png", "None", "Bald", AvatarItemCategoryEnum.HairFront, 1, 30, false));
+
             Create(new AvatarItemModel("Hair1_straight_white.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
             Create(new AvatarItemModel("Hair1_straight_black.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
             Create(new AvatarItemModel("Hair1_straight_blonde.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));

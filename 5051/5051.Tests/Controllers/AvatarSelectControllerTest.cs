@@ -982,30 +982,30 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtFullId, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Edit_Data_Valid_Position_ShirtShort_Should_Pass()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtShort).Id;
-            data.Position = AvatarItemCategoryEnum.ShirtShort;
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Edit_Data_Valid_Position_ShirtShort_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
+        //    var data = new AvatarItemInputModel();
+        //    data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+        //    data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtShort).Id;
+        //    data.Position = AvatarItemCategoryEnum.ShirtShort;
 
-            // Get the Student Record
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            var expect = myStudent.AvatarComposite.ShirtShortId;
+        //    // Get the Student Record
+        //    var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    var expect = myStudent.AvatarComposite.ShirtShortId;
 
-            // Act
-            ViewResult result = controller.Edit(data) as ViewResult;
-            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    // Act
+        //    ViewResult result = controller.Edit(data) as ViewResult;
+        //    var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtShortId, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expect, myStudent2.AvatarComposite.ShirtShortId, TestContext.TestName);
+        //}
         #endregion Edit
 
         #region Inventory
@@ -1048,25 +1048,25 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Post_ModelIsInvalid_Should_Pass()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
-            var data = new ShopBuyViewModel();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Post_ModelIsInvalid_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
+        //    var data = new ShopBuyViewModel();
 
-            // Make ModelState Invalid
-            controller.ModelState.AddModelError("test", "test");
+        //    // Make ModelState Invalid
+        //    controller.ModelState.AddModelError("test", "test");
 
-            // Act
-            ViewResult result = controller.Inventory(data) as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.Inventory(data) as ViewResult;
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(controller.ModelState.IsValid, false, TestContext.TestName);
+        //}
 
         [TestMethod]
         public void Controller_AvatarSelectShop_Inventory_Get_myDataIsNull_ShouldReturnErrorPage()
@@ -1090,137 +1090,137 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Invalid_Null_Should_Fail()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Invalid_Null_Should_Fail()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
 
-            ShopBuyViewModel data;
-            data = null;
+        //    ShopBuyViewModel data;
+        //    data = null;
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Inventory(data);
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Inventory(data);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Invalid_StudentID_Null_Should_Fail()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Invalid_StudentID_Null_Should_Fail()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = null;
+        //    var data = new ShopBuyViewModel();
+        //    data.StudentId = null;
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Inventory(data);
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Inventory(data);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Invalid_ItemId_Null_Should_Fail()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Invalid_ItemId_Null_Should_Fail()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = "studentID";
-            data.ItemId = null;
+        //    var data = new ShopBuyViewModel();
+        //    data.StudentId = "studentID";
+        //    data.ItemId = null;
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Inventory(data);
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Inventory(data);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Invalid_StudentId_Bogus_Should_Fail()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Invalid_StudentId_Bogus_Should_Fail()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = "bogus";
-            data.ItemId = "itemID";
+        //    var data = new ShopBuyViewModel();
+        //    data.StudentId = "bogus";
+        //    data.ItemId = "itemID";
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Inventory(data);
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Inventory(data);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Invalid_ItemId_Bogus_Should_Fail()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Invalid_ItemId_Bogus_Should_Fail()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = "bogus";
+        //    var data = new ShopBuyViewModel();
+        //    data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+        //    data.ItemId = "bogus";
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Inventory(data);
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Inventory(data);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Inventory", result.RouteValues["action"], TestContext.TestName);
+        //}
 
-        [TestMethod]
-        public void Controller_AvatarSelectShop_Inventory_Data_Valid_Should_Pass()
-        {
-            // Arrange
-            var controller = new AvatarSelectController();
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
-            var InventoryList = DataSourceBackend.Instance.AvatarItemBackend.Index();
-            var Item = new AvatarItemModel();
+        //[TestMethod]
+        //public void Controller_AvatarSelectShop_Inventory_Data_Valid_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new AvatarSelectController();
+        //    var data = new ShopBuyViewModel();
+        //    data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+        //    data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+        //    var InventoryList = DataSourceBackend.Instance.AvatarItemBackend.Index();
+        //    var Item = new AvatarItemModel();
 
-            // Get the Student Record
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    // Get the Student Record
+        //    var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
-            // Get the Inventory
-            myStudent.AvatarInventory = InventoryList;
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+        //    // Get the Inventory
+        //    myStudent.AvatarInventory = InventoryList;
+        //    DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            // remove the data
-            Item.Id = data.ItemId;
-            InventoryList.Remove(Item);
-            var expect = InventoryList;
+        //    // remove the data
+        //    Item.Id = data.ItemId;
+        //    InventoryList.Remove(Item);
+        //    var expect = InventoryList;
 
-            // Act
-            ViewResult result = controller.Inventory(data) as ViewResult;
-            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+        //    // Act
+        //    ViewResult result = controller.Inventory(data) as ViewResult;
+        //    var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual(expect, myStudent2.AvatarInventory, TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expect, myStudent2.AvatarInventory, TestContext.TestName);
+        //}
 
         #endregion Inventory
     }

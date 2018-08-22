@@ -460,6 +460,40 @@ namespace _5051.Tests.Controllers
         //}
         //#endregion VisitRegion
 
+        #region VisitRegion
+        [TestMethod]
+        public void Controller_Shop_Visit_Null_Id_Should_Return_IndexPage()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = null;
+
+            // Reset
+            DataSourceBackend.Instance.StudentBackend.Reset();
+
+            // Act
+            var result = controller.Visit(id) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Shop", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Default_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            var result = controller.Visit(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion VisitRegion
+
         #region VisitShopRegion
         [TestMethod]
         public void Controller_Shop_VisitShop_Invalid_Null_Id_Should_Return_RosterPage()

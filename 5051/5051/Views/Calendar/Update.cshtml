@@ -8,60 +8,91 @@
 }
 
 <br />
+<div class="row justify-content-center">
 
-<div class="container text-left">
-    <h2>Calendar Update</h2>
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold FontColorWhite">Calendar Update</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
     <br />
-    <h3>Enter the Information for this Day</h3>
-    <h3>To reset the day to default settings, click the Default button</h3>
     <br />
+</div>
 
-    @{
-        if (Model == null)
-        {
-            <p>No Data</p>
-        }
-        else
-        {
-            <div class="container text-left">
-                <div class="row">
-                    <div class="col-sm-4 offset-md-3 text-left">
-                        <h2>
-                            @Today
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 offset-md-3 text-left">
-                        @{
-                            if (!Model.SchoolDay)
-                            {
-                                <h3>Not a school day</h3>
-                                @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                                @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+<div class="row justify-content-center FontColorWhite">
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeSmall text-left">
+            <span>Enter the Information for this Day</span>
+            <br />
+            <span>To reset the day to default settings, click the Default button</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
 
-                            }
-                            else
-                            {
-                                <h3>Time in school: @TimeDuration</h3>
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
+<br />
 
-            if (Model.SchoolDay)
-            {
-                using (Html.BeginForm())
+        <div class="container text-left FontColorWhite FontSizeMedium">    
+            <br />
+
+            @{
+                if (Model == null)
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
+                    <p>No Data</p>
+                }
+                else
+                {
+                    <div class="container text-left">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col text-left">
+                                <span class="FontSizeMedium">
+                                    @Today
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col text-left">
+                                @{
+                                    if (!Model.SchoolDay)
+                                    {
+                                        <span class="FontSizeMedium FontColorWhite">Not a school day</span>
+                                        @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+                                        @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+
+                                    }
+                                    else
+                                    {
+                                        <span class="FontSizeMedium FontColorWhite">Time in school: @TimeDuration</span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    if (Model.SchoolDay)
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.Id)
 
                     <div class="row">
-                        <div class="col-sm-3 text-right">
+                        <div class="col-5 text-right">
                             @Html.DisplayNameFor(m => m.TimeStart)
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col">
                             @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
                             <div class="row">
                                 @Html.ValidationMessageFor(m => m.TimeStart)
@@ -79,57 +110,57 @@
                         }
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-right">
-                            @Html.DisplayNameFor(m => m.TimeEnd)
-                        </div>
-                        <div class="col-sm-3">
-                            @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
                             <div class="row">
-                                @Html.ValidationMessageFor(m => m.TimeEnd)
-                            </div>
-                        </div>
-
-                        @{
-                            if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                            {
-                                <div class="col-sm-2">
-                                    <div class="text-left">
-                                        @Model.DayEnd Dismissal
+                                <div class="col-5 text-right">
+                                    @Html.DisplayNameFor(m => m.TimeEnd)
+                                </div>
+                                <div class="col">
+                                    @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.TimeEnd)
                                     </div>
                                 </div>
 
-                            }
-                        }
-                    </div>
+                                @{
+                                    if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                                    {
+                                        <div class="col-sm-2">
+                                            <div class="text-left">
+                                                @Model.DayEnd Dismissal
+                                            </div>
+                                        </div>
 
-                    <div class="row">
-                        <div class="col-sm-3 text-center">
+                                    }
+                                }
+                            </div>
+
+                            <div class="row">
+                                <div class="col-5">
+                                </div>
+                                <div class="col text-left">
+                                    <br />
+                                    <input type="submit" value="Update" class="btn btn1 btn-light">
+                                </div>
+                            </div>
+                        }
+
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-5">
+                            </div>
+                            <div class="col text-left">
+                                @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                                @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                                @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                                @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                                @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                            </div>
                         </div>
-                        <div class="col-sm-3 text-left">
-                            <br />
-                            <input type="submit" value="Update" class="btn btn-primary">
-                        </div>
-                    </div>
+                    }
+
+
                 }
 
-                <br />
-                <br />
-                <div class="row">
-                    <div class="col-sm-3 text-center">
-                    </div>
-                    <div class="col-sm-6 text-left">
-                        @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
-                    </div>
-                </div>
             }
-
-
-        }
-
-    }
-</div>
+        </div>
