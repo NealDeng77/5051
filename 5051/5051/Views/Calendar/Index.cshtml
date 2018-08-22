@@ -28,22 +28,21 @@
     <div class="col-1"></div>
     <div class="col lightTransparentBox">
         <br />
-        <div class="FontSizeLarge text-left">
-            <span class="FontSizeSmall">Highlighted days are school days</span>
+        <div class="FontSizeSmall text-left">
+            <span>Highlighted days are school days</span>
             <br />
-            <span class="FontSizeSmall">Early dismissal are blue</span>
+            <span>Early dismissal are blue</span>
             <br />
-            <span class="FontSizeSmall">Modified days are Green</span>
+            <span>Modified days are Green</span>
             <br />
             <br />
-            <span class="FontSizeSmall">Early dismissal every Wednesday</span>
+            <span>Early dismissal every Wednesday</span>
             <br />
-            <span class="FontSizeSmall">First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</span>
+            <span>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</span>
             <br />
-            <span class="FontSizeSmall">Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</span>
+            <span>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</span>
             <br />
         </div>
-        <br />
         <br />
         @Html.ActionLink("Change Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" }, new { @class = "btn btn1 btn-light" })
         <br />
