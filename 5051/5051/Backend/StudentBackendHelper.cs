@@ -52,6 +52,8 @@ namespace _5051.Backend
             //Student at index 4 has no attendance: always absent
             GenerateAttendance(4, dateStart, dateEnd);
             //To do: create scenario for multiple check-ins
+
+            StudentBackend.Instance.ResetStatusAndProcessNewAttendance();
         }
 
         /// <summary>
@@ -185,7 +187,6 @@ namespace _5051.Backend
                 // Look to the next day
                 currentDate = currentDate.AddDays(1);
             }
-            StudentBackend.Instance.UpdateToken(myStudent.Id);
         }
 
         /// <summary>
