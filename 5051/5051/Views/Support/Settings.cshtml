@@ -8,20 +8,20 @@
 <div class="col text-left">
     <br />
     <h4>What settings do you want to change?</h4>
-    @Html.ActionLink("Reset Data", "Reset", "Admin", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reset Data", "Reset", "Support", null, new { @class = "btn btn-primary" })
 </div>
 
 <div class="col text-left">
     <br />
     <h4>Configure Source Data Set</h4>
-    @Html.ActionLink("Default Data", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Default }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Demo Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Demo }, new { @class = "btn btn-primary", id = _5051.Models.DataSourceDataSetEnum.Demo })
-    @Html.ActionLink("Unit Test Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.UnitTest }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Default Data", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceDataSetEnum.Default }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Demo Data Set", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceDataSetEnum.Demo }, new { @class = "btn btn-primary", id = _5051.Models.DataSourceDataSetEnum.Demo })
+    @Html.ActionLink("Unit Test Data Set", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceDataSetEnum.UnitTest }, new { @class = "btn btn-primary" })
 </div>
 
 <div class="col text-left">
     <br />
     <h4>Configure Data Source</h4>
-    @Html.ActionLink("Mock Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("SQL Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Mock Database", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("SQL Database", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn-primary" })
 </div>

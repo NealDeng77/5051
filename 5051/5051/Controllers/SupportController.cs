@@ -19,6 +19,7 @@ namespace _5051.Controllers
     public class SupportController : BaseController
     {
         private IdentityBackend identityBackend = new IdentityBackend();
+        private DataSourceBackend DataSourceBackend = DataSourceBackend.Instance;
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -64,47 +65,42 @@ namespace _5051.Controllers
         //GET lists all the users
         public ActionResult UserList()
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
                 var userList = identityBackend.ListAllUsers();
 
                 return View(userList);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
 
         //GET Support/UserInfo/userID
         public ActionResult UserInfo(string id = null)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
                 var myUserInfo = identityBackend.FindUserByID(id);
 
                 return View(myUserInfo);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            
         }
 
         //GET support/togglestudent/userID
         public ActionResult ToggleStudent(string id = null)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
                 var myUserInfo = identityBackend.FindUserByID(id);
 
                 return View(myUserInfo);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
         //toggles whether or not given user is a student
@@ -113,8 +109,11 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser studentUser)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
                 if (identityBackend.UserHasClaimOfValue(studentUser.Id, "StudentUser", "True"))
                 {
                     identityBackend.RemoveClaimFromUser(studentUser.Id, "StudentUser");
@@ -125,26 +124,22 @@ namespace _5051.Controllers
                 }
 
                 return RedirectToAction("UserList", "Support");
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
         }
 
         //GET support/toggleTeacher/userID
         public ActionResult ToggleTeacher(string id = null)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
+
                 var myUserInfo = identityBackend.FindUserByID(id);
 
                 return View(myUserInfo);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
         }
 
         //toggles whether or not user is a teacher
@@ -153,8 +148,7 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser teacherUser)
         {
-
-            if (DataSourceBackend.Instance.IsUserNotInRole(User.Identity.GetUserId(), "support"))
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -169,24 +163,20 @@ namespace _5051.Controllers
             }
 
             return RedirectToAction("UserList", "Support");
-
-
-
         }
 
         //GET support/ToggleSupport/userID
         public ActionResult ToggleSupport(string id = null)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
+
                 var myUserInfo = identityBackend.FindUserByID(id);
 
                 return View(myUserInfo);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
         //toggles whether or not user is a support user
@@ -195,8 +185,12 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser supportUser)
         {
-            if (User.Identity.GetIsSupportUser())
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             {
+                return RedirectToAction("Index", "Home");
+            }
+
+
                 if (identityBackend.UserHasClaimOfValue(supportUser.Id, "SupportUser", "True"))
                 {
                     identityBackend.RemoveClaimFromUser(supportUser.Id, "SupportUser");
@@ -207,15 +201,16 @@ namespace _5051.Controllers
                 }
 
                 return RedirectToAction("UserList", "Support");
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
         }
 
         public ActionResult Settings()
         {
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -226,6 +221,11 @@ namespace _5051.Controllers
         // GET: Reset
         public ActionResult Reset()
         {
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             DataSourceBackend.Instance.Reset();
             return RedirectToAction("Index", "Support");
         }
@@ -237,6 +237,11 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSourceSet(string id = null)
         {
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index", "Support");
@@ -270,6 +275,11 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSource(string id = null)
         {
+            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index", "Support");
