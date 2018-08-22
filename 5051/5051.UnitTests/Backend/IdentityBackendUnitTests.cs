@@ -743,6 +743,65 @@ namespace _5051.UnitTests.Backend
         //ned a test for if removing the claim failed
         #endregion
 
+        #region DeleteUser
+        [TestMethod]
+        public void Backend_IdentityBackend_DeleteUser_Valid_User_Should_Pass()
+        {
+            //arrange
+            var testUsername = "testUser";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.DeleteAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.DeleteUser(dummyUser);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_DeleteUser_Uses_ID_Valid_User_Should_Pass()
+        {
+            //arrange
+            var testUsername = "testUser";
+            var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
+
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var createDummyUser = userStore
+                .Setup(x => x.DeleteAsync(dummyUser))
+                .Returns(Task.FromResult(IdentityResult.Success));
+            var passwordManager = userStore.As<IUserPasswordStore<ApplicationUser>>()
+                .Setup(x => x.FindByIdAsync(testUsername))
+                .ReturnsAsync(dummyUser);
+            var claimsManager = userStore.As<IUserClaimStore<ApplicationUser>>();
+
+            var userManager = new ApplicationUserManager(userStore.Object);
+
+            var backend = new IdentityBackend(userManager, null);
+
+            //act
+            var result = backend.DeleteUser(dummyUser.Id);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        //need a test for if the delete failed, can't find a way to cause the IdentityResult to not be success
+        #endregion
+
+
         //[TestMethod]
         //public void Backend_IdentityBackend_GetIsTeacherUser_Should_Pass()
         //{
