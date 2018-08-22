@@ -296,6 +296,11 @@ namespace _5051.Backend
         {
             var user = FindUserByID(userID);
 
+            if(user == null)
+            {
+                return false;
+            }
+
             var claims = user.Claims.ToList();
 
             foreach (var item in claims)
@@ -457,6 +462,17 @@ namespace _5051.Backend
 
             return true;
         }
+
+        public void Reset()
+        {
+            var userList = ListAllUsers();
+
+            foreach (var item in userList)
+            {
+                var deleteResult = DeleteUser(item);
+            }
+        }
+
 
         //need all the above functions again but async
 

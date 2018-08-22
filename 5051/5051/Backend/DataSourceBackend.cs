@@ -77,6 +77,8 @@ namespace _5051.Backend
 
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
+
+            SetTestingMode(false);
         }
 
         /// <summary>
@@ -122,9 +124,13 @@ namespace _5051.Backend
             return isTestingMode;
         }
 
-        public bool SetTestingMode(bool mode)
+        public static bool SetTestingMode(bool mode)
         {
             isTestingMode = mode;
+
+            //set the testing mode for other backends
+            Backend.StudentDataSourceMock.SetTestingMode(mode);
+
             return isTestingMode;
         }
 
