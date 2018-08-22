@@ -194,6 +194,9 @@ namespace _5051.Backend
             Create(new AvatarItemModel("Pants.png", "Pants", "Pants", AvatarItemCategoryEnum.Pants, 1, 10, false));
 
             #region FrontHair
+
+            Create(new AvatarItemModel("placeholder.png", "None", "Bald", AvatarItemCategoryEnum.HairFront, 1, 30, false));
+
             Create(new AvatarItemModel("Hair1_straight_white.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
             Create(new AvatarItemModel("Hair1_straight_black.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
             Create(new AvatarItemModel("Hair1_straight_blonde.png", "Front", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
