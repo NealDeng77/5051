@@ -6,21 +6,10 @@
     {
         @Html.AntiForgeryToken()
 
-<ul class="nav navbar-nav ml-auto">
+<ul class="navbar-nav mr-auto FontBold FontColorBlack FontSizeSmall">
     <li>
         @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
     </li>
-    @{
-        var isTeacher = User.Identity.GetIsTeacherUser();
-
-        if (isTeacher)
-        {
-            <li>
-                @Html.ActionLink("Teachers", "Index", "Admin", routeValues: new { id = User.Identity.Name}, htmlAttributes: new { @class = "nav-link", id = "AdminLinkNavBar"})
-            </li>
-        }
-    }
-
     @{
         var isSupport = User.Identity.GetIsSupportUser();
 
