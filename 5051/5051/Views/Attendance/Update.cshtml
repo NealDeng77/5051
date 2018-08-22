@@ -53,7 +53,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
-                    @Html.Hidden("Emotion", 1, new { @id = "EmotionCurrentId" });
+                    @Html.Hidden("Emotion", @Model.Emotion, new { @id = "EmotionCurrentId" });
                     <div class="row">
                         <div class="col-6 text-right" id="avatarLevelName">
                             @Html.DisplayNameFor(m => m.In)
