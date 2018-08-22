@@ -4,41 +4,69 @@
 @{
     ViewBag.Title = "Calendar";
 }
-<br />
-<h2>Welcome to School Calendar</h2>
-<br />
-<h5>Highlighted days are school days</h5>
-<h5>Early dismissal are blue</h5>
-<h5>Modified days are Green</h5>
-<br />
-<h5>Early dismissal every Wednesday</h5>
-
-
-<h5>First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</h5>
-<h5>Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</h5>
 
 <br />
-<br />
+<div class="row justify-content-center">
 
-@Html.ActionLink("Change Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" }, new { @class = "btn btn-primary" })
-
-<br />
-<br />
-
-<hr />
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">Welcome to School Calendar</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
 
 <div class="row">
+    <br />
+    <br />
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-left">
+            <span class="FontSizeSmall">Highlighted days are school days</span>
+            <br />
+            <span class="FontSizeSmall">Early dismissal are blue</span>
+            <br />
+            <span class="FontSizeSmall">Modified days are Green</span>
+            <br />
+            <br />
+            <span class="FontSizeSmall">Early dismissal every Wednesday</span>
+            <br />
+            <span class="FontSizeSmall">First Day of School is @Model.FirstDay.ToString("MMMM dd, yyyy")</span>
+            <br />
+            <span class="FontSizeSmall">Most Recent Day is @Model.LastDay.ToString("MMMM dd, yyyy")</span>
+            <br />
+        </div>
+        <br />
+        <br />
+        @Html.ActionLink("Change Default Settings", "Read", "SchoolDismissalSettings", new { controller = "SchoolDismissalSettings" }, new { @class = "btn btn1 btn-light" })
+        <br />
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<br />
+<hr />
+
+<div class="row justify-content-center">
     @{
         foreach (var MonthItem in Model.Months)
         {
             <div class="col-sm-4 CalendarBox">
                 <br />
-                <div class="row">
+                <div class="row justify-content-center">
                     <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
                     <br />
                 </div>
 
-                <div class="row text-center">
+                <div class="row justify-content-center">
                     <table class="table table-bordered table-condensed table-fit table-sm table-striped">
                         <thead>
                             <tr class="text-center">
@@ -174,6 +202,5 @@
 
 
 <br />
-<br />
-<br />
+
 
