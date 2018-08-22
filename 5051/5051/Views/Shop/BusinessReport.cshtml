@@ -1,7 +1,51 @@
-﻿
+﻿@model _5051.Models.BusinessReportViewModel
 @{
-    ViewBag.Title = "BusinessReport";
+    ViewBag.Title = " Business Report";
 }
 
-<h2>BusinessReport</h2>
+<div class="row justify-content-center m-auto" style="width: 1200px">
+    <div id="div1" class="bg-white p-5 w-100">
+        <div class="text-center">
+            <div class="row">
+
+                <div class="col">
+                    <h4>Business Report</h4>
+                </div>
+            </div>
+        </div>
+        <br />
+        <table style="width:100%">
+            <tr>
+                <th>Income</th>
+                <th>Outcome</th>
+                <th>Profit</th>
+            </tr>
+            <tr>
+                <td>@Model.income</td>
+                <td>@Model.outcome</td>
+                <td>@Model.profit</td>
+            </tr>
+        </table>
+        <br />
+        <div class="row">
+            <div class="col">
+                <h5>Transaction detail</h5>
+            </div>
+        </div>
+        <br />
+        @{
+            foreach (var item in @Model.BusinessList)
+            {
+                <div class="col-sm-4 text-center">                 
+                    <span class="text-center">
+                        @item.Name
+                    </span>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+
 
