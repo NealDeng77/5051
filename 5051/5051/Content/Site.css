@@ -221,6 +221,18 @@ body, html {
     background-size: cover;
 }
 
+.IncludeBackgroundImageNone {
+    background-image: none;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.IncludeBackgroundColorNone {
+    background-color: darkseagreen
+}
+
 .FontName {
     font-family: Sans-Serif;
 }
