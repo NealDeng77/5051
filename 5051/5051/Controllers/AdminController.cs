@@ -32,6 +32,16 @@ namespace _5051.Controllers
             // Load the list of data into the StudentList
             var myDataList = StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
+
+            //If date has changed, reset all students' status to "out", then for each new attendance of each student,
+            // set auto check-out time, then compute tokens
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
+            {
+                StudentBackend.ResetStatusAndProcessNewAttendance();
+                SystemGlobalsModel.Instance.CurrentDate = currentDate;
+            }
+
             return View(StudentViewModel);
         }
 
