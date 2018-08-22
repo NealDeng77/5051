@@ -160,8 +160,10 @@ hr {
 }
 
 .CalendarBox {
-    height: 450px;
+    min-height: 475px;
     min-width: 380px;
+    height:auto;
+    width:auto;
 }
 
 

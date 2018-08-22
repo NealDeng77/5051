@@ -12,7 +12,9 @@
     <div class="col lightTransparentBox">
         <br />
         <div class="FontSizeLarge text-center">
-            <span class="FontSizeLarger FontBold">Welcome to School Calendar</span>
+            <span class="FontSizeLarger FontBold FontColorWhite">
+                Welcome to School Calendar
+            </span>
         </div>
         <br />
     </div>
@@ -24,7 +26,7 @@
     <br />
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center FontColorWhite">
     <div class="col-1"></div>
     <div class="col lightTransparentBox">
         <br />
@@ -54,152 +56,161 @@
 <br />
 <hr />
 
-<div class="row justify-content-center">
-    @{
-        foreach (var MonthItem in Model.Months)
-        {
-            <div class="col-sm-4 CalendarBox">
-                <br />
-                <div class="row justify-content-center">
-                    <h3>@MonthItem.First().Date.ToString("MMMM")</h3>
-                    <br />
-                </div>
+<div class="row justify-content-around FontColorWhite">
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="row justify-content-around FontColorWhite">
 
-                <div class="row justify-content-center">
-                    <table class="table table-bordered table-condensed table-fit table-sm table-striped">
-                        <thead>
-                            <tr class="text-center">
-                                <th class="text-center">Mo</th>
-                                <th class="text-center">Tu</th>
-                                <th class="text-center">We</th>
-                                <th class="text-center">Th</th>
-                                <th class="text-center">Fr</th>
-                                <th class="text-center">Sa</th>
-                                <th class="text-center">Su</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                int ColumnSpaceCount = 0;
-                                var ColumnSpace = "<td/>";
-                                foreach (var dayItem in MonthItem)
-                                {
-                                    var newRow = "<td>";
-                                    var endRow = "</td>";
+            @{
+                foreach (var MonthItem in Model.Months)
+                {
+                    <div class="col-auto CalendarBox lightTransparentBox DispalyBoxWithMargin">
+                        <br />
+                        <div class="row justify-content-center">
+                            <span class="FontSizeMedium">@MonthItem.First().Date.ToString("MMMM")</span>
+                            <br />
+                        </div>
 
-                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Monday)
-                                    {
-                                        newRow = "<tr><td>";
-                                    }
-
-                                    if (dayItem.Date.DayOfWeek == DayOfWeek.Sunday)
-                                    {
-                                        endRow = "</td></tr>";
-                                    }
-
-                                    @Html.Raw(newRow)
-
-                                    if (dayItem.Date.Day == 1)
-                                    {
-                                        // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
-                                        // Don't include the column to show, so just the previous columns
-                                        DayOfWeek today = dayItem.Date.DayOfWeek;
-                                        switch (today)
+                        <div class="row justify-content-center">
+                            <table class="table table-bordered table-condensed table-fit table-sm table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="text-center">Mo</th>
+                                        <th class="text-center">Tu</th>
+                                        <th class="text-center">We</th>
+                                        <th class="text-center">Th</th>
+                                        <th class="text-center">Fr</th>
+                                        <th class="text-center">Sa</th>
+                                        <th class="text-center">Su</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    @{
+                                        int ColumnSpaceCount = 0;
+                                        var ColumnSpace = "<td/>";
+                                        foreach (var dayItem in MonthItem)
                                         {
-                                            case DayOfWeek.Monday:
-                                                //nothing
-                                                ColumnSpaceCount = 0;
-                                                break;
+                                            var newRow = "<td>";
+                                            var endRow = "</td>";
 
-                                            case DayOfWeek.Tuesday:
-                                                ColumnSpaceCount = 1;
-                                                break;
+                                            if (dayItem.Date.DayOfWeek == DayOfWeek.Monday)
+                                            {
+                                                newRow = "<tr><td>";
+                                            }
 
-                                            case DayOfWeek.Wednesday:
-                                                ColumnSpaceCount = 2;
-                                                break;
+                                            if (dayItem.Date.DayOfWeek == DayOfWeek.Sunday)
+                                            {
+                                                endRow = "</td></tr>";
+                                            }
 
-                                            case DayOfWeek.Thursday:
-                                                ColumnSpaceCount = 3;
-                                                break;
+                                            @Html.Raw(newRow)
 
-                                            case DayOfWeek.Friday:
-                                                ColumnSpaceCount = 4;
-                                                break;
+                                            if (dayItem.Date.Day == 1)
+                                            {
+                                                // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
+                                                // Don't include the column to show, so just the previous columns
+                                                DayOfWeek today = dayItem.Date.DayOfWeek;
+                                                switch (today)
+                                                {
+                                                    case DayOfWeek.Monday:
+                                                        //nothing
+                                                        ColumnSpaceCount = 0;
+                                                        break;
 
-                                            case DayOfWeek.Saturday:
-                                                ColumnSpaceCount = 5;
-                                                break;
+                                                    case DayOfWeek.Tuesday:
+                                                        ColumnSpaceCount = 1;
+                                                        break;
 
-                                            case DayOfWeek.Sunday:
-                                                ColumnSpaceCount = 6;
-                                                break;
-                                        }
-                                        for (var i = 0; i < ColumnSpaceCount; i++)
-                                        {
-                                            @Html.Raw(ColumnSpace)
+                                                    case DayOfWeek.Wednesday:
+                                                        ColumnSpaceCount = 2;
+                                                        break;
+
+                                                    case DayOfWeek.Thursday:
+                                                        ColumnSpaceCount = 3;
+                                                        break;
+
+                                                    case DayOfWeek.Friday:
+                                                        ColumnSpaceCount = 4;
+                                                        break;
+
+                                                    case DayOfWeek.Saturday:
+                                                        ColumnSpaceCount = 5;
+                                                        break;
+
+                                                    case DayOfWeek.Sunday:
+                                                        ColumnSpaceCount = 6;
+                                                        break;
+                                                }
+                                                for (var i = 0; i < ColumnSpaceCount; i++)
+                                                {
+                                                    @Html.Raw(ColumnSpace)
+                                                }
+                                            }
+
+                                            // Output this date
+                                            <div>
+                                                @{
+                                                    var buttonClass = "btn btn-sm active btn-light";
+
+                                                    if (dayItem.SchoolDay == false)
+                                                    {
+                                                        buttonClass = "btn btn-sm btn-outline-secondary";
+                                                    }
+
+                                                    else
+                                                    {
+                                                        if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
+                                                        {
+                                                            buttonClass += "btn btn-sm active btn-info";
+                                                        }
+
+                                                        if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
+                                                        {
+                                                            buttonClass += "btn btn-sm active btn-info";
+                                                        }
+
+                                                        if (dayItem.Modified == true)
+                                                        {
+                                                            buttonClass += "btn btn-sm active btn-success";
+                                                        }
+                                                    }
+                                                    @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass });
+
+
+                                                    if (dayItem.TimeDuration.Ticks > 0)
+                                                    {
+                                                        <span>
+                                                            <br />
+                                                            @string.Format("{0:D1}:{1:D2}", dayItem.TimeDuration.Hours, dayItem.TimeDuration.Minutes)
+                                                            <br />
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <br />
+                                                    }
+                                                }
+
+                                            </div>
+                                            @Html.Raw(endRow)
                                         }
                                     }
-
-                                    // Output this date
-                                    <div>
-                                        @{
-                                            var buttonClass = "btn btn-sm active btn-light";
-
-                                            if (dayItem.SchoolDay == false)
-                                            {
-                                                buttonClass = "btn btn-sm btn-outline-secondary";
-                                            }
-
-                                            else
-                                            {
-                                                if (dayItem.DayEnd != SchoolCalendarDismissalEnum.Normal)
-                                                {
-                                                    buttonClass += "btn btn-sm active btn-info";
-                                                }
-
-                                                if (dayItem.DayStart != SchoolCalendarDismissalEnum.Normal)
-                                                {
-                                                    buttonClass += "btn btn-sm active btn-info";
-                                                }
-
-                                                if (dayItem.Modified == true)
-                                                {
-                                                    buttonClass += "btn btn-sm active btn-success";
-                                                }
-                                            }
-                                            @Html.ActionLink(dayItem.Date.Day.ToString(), "Update", new { id = dayItem.Id }, new { @class = buttonClass });
-
-
-                                            if (dayItem.TimeDuration.Ticks > 0)
-                                            {
-                                                <span>
-                                                    <br />
-                                                    @string.Format("{0:D1}:{1:D2}", dayItem.TimeDuration.Hours, dayItem.TimeDuration.Minutes)
-                                                    <br />
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <br />
-                                            }
-                                        }
-
-                                    </div>
-                                    @Html.Raw(endRow)
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        }
-    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+</div>
+    <div class="col-1"></div>
 
 </div>
 
+<div class="row">
+    <br />
+    <br />
+</div>
 
-
-<br />
 
 
