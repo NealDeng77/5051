@@ -30,7 +30,7 @@ namespace _5051.Controllers
         }
 
         /// <summary>
-        /// The about page for Avatar Attendance
+        /// The about page for AttendanceStar
         /// </summary>
         /// <returns></returns>
         public ActionResult About()
