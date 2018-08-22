@@ -221,6 +221,18 @@ body, html {
     background-size: cover;
 }
 
+.IncludeBackgroundImageNone {
+    background-image: none;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.IncludeBackgroundColorNone {
+    background-color: darkseagreen
+}
+
 .FontName {
     font-family: Sans-Serif;
 }
@@ -277,6 +289,7 @@ body, html {
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
+    color: black !important;
     /*width: 500px;*/
 }
 
@@ -394,5 +407,5 @@ div.BlockStudentLogin {
 
 a:hover, a:visited, a:link, a:active {
     text-decoration: none !important;
-    color: inherit !important;
+    color: inherit;
 }

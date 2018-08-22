@@ -29,6 +29,10 @@
 
     switch (routeController)
     {
+        case "Support":
+            background = "IncludeBackgroundImageNone";
+            backgroundColor = "IncludeBackgroundColorNone";
+            break;
 
         case "Kiosk":
             background = "IncludeBackgroundImageSunset";
@@ -87,8 +91,13 @@
                             </li>
                             break;
 
-                        case "Admin":
+                        case "Attendance":
+                        case "SchoolDismissalSettings":
+                        case "FactoryInventory":
                         case "AvatarItem":
+                        case "Calendar":
+                        case "Student":
+                        case "Admin":
                             <li class="nav-item">
                                 @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
                             </li>
