@@ -316,10 +316,10 @@ namespace _5051.Backend
         /// </summary>
         public void ResetStatusAndProcessNewAttendance()
         {
-
-            foreach (var item in Index())
+            
+            foreach (var item in Index())  //for each student
             {
-                //Reset all Student Status to "Out"
+                //Reset Status to "Out"
                 item.Status = StudentStatusEnum.Out;
 
                 //get the list of new attendances of the student, for which token amount has not been added yet,
