@@ -47,7 +47,7 @@
                                 In<br />
                                 @item.In.ToShortTimeString()<br />
                             </div>
-                            @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
+                            @if (item != Model.Attendance.First() || Model.Status != StudentStatusEnum.In)
                             {
                                 <div class="col-sm-6  text-body">
                                     Out<br />
