@@ -17,6 +17,8 @@ namespace _5051.Backend
         private static volatile StudentBackend instance;
         private static object syncRoot = new Object();
 
+        private bool isTestingMode = false;
+
         private StudentBackend() { }
 
         public static StudentBackend Instance
@@ -447,6 +449,18 @@ namespace _5051.Backend
         {
             var myReturn = DataSource.Index().First();
             return myReturn;
+        }
+
+        public bool GetTestingMode()
+        {
+            return isTestingMode;
+        }
+
+        public bool SetTestingMode(bool mode)
+        {
+            isTestingMode = mode;
+
+            return isTestingMode;
         }
     }
 }
