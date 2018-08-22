@@ -92,6 +92,14 @@ namespace _5051.Controllers
         //Create a new attendance
         public ActionResult Create(string id)
         {
+
+            var myStudent = StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
             var myData = new AttendanceModel
             {
                 StudentId = id
