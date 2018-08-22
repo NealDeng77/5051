@@ -61,13 +61,13 @@
 
 <body class="@backgroundColor" id="BodyBackgroundColorId">
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
-        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
-        
+
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="navbar-nav mr-auto FontBold FontColorBlack FontSizeSmall">
 
@@ -191,35 +191,45 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer fixed-bottom">
-            <div class="FooterBar body-content">
-                <div class="row FooterText flex-row">
-                    <div class="col FooterText align-left">
-                        &copy;@DateTime.Now.Year, All rights reserved
-                    </div>
-                </div>
-                <div class="row no-gutters flex-row-reverse justify-content-around">
-                    <div class="col">
-                        @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "AboutLinkFooter" })
-                    </div>
-                    <div class="col">
-                        @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "PrivacyPolicyLinkFooter" })
-                    </div>
-                    <div class="col">
-                        @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "ContactLinkFooter" })
-                    </div>
-                    <div class="col">
-                        @Html.ActionLink("FAQ's", "FAQ", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "FAQLinkFooter" })
-                    </div>
-                    <div class="col">
-                        @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "UserGuideLinkFooter" })
-                    </div>
-                </div>
-            </div>
+    @{
+            switch (routeController)
+            {
+                case "Kiosk":
+                    break;
 
-        </div>
-    </footer>
+                default:
+                <footer>
+                    <div class="footer fixed-bottom">
+                        <div class="FooterBar body-content">
+                            <div class="row FooterText flex-row">
+                                <div class="col FooterText align-left">
+                                    &copy;@DateTime.Now.Year, All rights reserved
+                                </div>
+                            </div>
+                            <div class="row no-gutters flex-row-reverse justify-content-around">
+                                <div class="col">
+                                    @Html.ActionLink("About", "About", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "AboutLinkFooter" })
+                                </div>
+                                <div class="col">
+                                    @Html.ActionLink("Privacy Policy", "Privacy", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "PrivacyPolicyLinkFooter" })
+                                </div>
+                                <div class="col">
+                                    @Html.ActionLink("Contact", "Contact", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "ContactLinkFooter" })
+                                </div>
+                                <div class="col">
+                                    @Html.ActionLink("FAQ's", "FAQ", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "FAQLinkFooter" })
+                                </div>
+                                <div class="col">
+                                    @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "UserGuideLinkFooter" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </footer>
+                break;
+        }
+    }
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
