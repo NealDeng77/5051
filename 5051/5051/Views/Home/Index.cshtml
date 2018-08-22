@@ -2,49 +2,86 @@
     ViewBag.Title = "Welcome";
 }
 
-<div class="jumbotron text-center bg-transparent">
-    <h1>Welcome to AttendanceStar</h1>
-    <p class="lead">Earn Points, Shop, Level up your Avatar all while attending class.</p>
+<br />
+<div class="row justify-content-center">
+
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Welcome to AttendanceStar
+            </span>
+        </div>
+        <br />
+
+        <div class="FontSizeLarge text-center">
+            Earn Tokens, Run your Shop, Customize your Avatar<br />
+            <br />
+            All While Attending Class.
+            <br />
+            <br />
+        </div>
+    </div>
+    <div class="col-1"></div>
 </div>
 
-<div class="row" style="padding:0;margin:0">
-    <div class="col-md-3">
-        <h2>Getting started</h2>
-        <p style="height:100px">
-            Each student earns points while attending class, and can use the points to level up their personal Avatar, or shop for items to decorate the Avatar's house.
-        </p>
-        <p>
-            @Html.ActionLink("Avatar Houses", "HouseExample", "Home", null, new { @class = "btn btn-primary", id="houseExampleLinkHomeIndex"})
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        <h2>Level Up</h2>
-        <p style="height:100px">
-            Earn Bonus points to level up your Avatar. Higher level avatars can buy special items, as well as get daily discounts.
-        </p>
-        <p>
-            @Html.ActionLink("Choose Avatars", "AvatarExample", "Home", null, new { @class = "btn btn-primary", id="avatarExampleLinkHomeIndex"})
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        <h2>Shop</h2>
-        <p style="height:100px">
-            Go Shopping to get fantastic deals, and decorations.
-        </p>
-        <p>
-            @Html.ActionLink("Shop", "ShopExample", "Home", null, new { @class = "btn btn-primary", id="shopExampleLinkHomeIndex"})
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        <h2>Track Progress</h2>
-        <p style="height:100px">
-            View your attendance history, and track your progress over the school year.
-        </p>
-        <p>
-            @Html.ActionLink("Show Me", "StudentExample", "Home", null, new { @class = "btn btn-primary", id="studentExampleLinkHomeIndex"})
-        </p>
-    </div>
+<div class="row">
+    <br />
+    <br />
 </div>
+
+<div class="row justify-content-center">
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+
+        <div class="row">
+            <br />
+            <br />
+        </div>
+
+        <div class="row justify-content-center FontColorBlack">
+            <div class="col text-center DispalyBoxWithMargin">
+                <a href="~/Portal/Roster">
+                    <img src="~/Content/img/StudentPage_dark.png" alt="Student Pages" class="AdminIconImage" />
+                    <br />
+                    <span class="FontSizeLarge">
+                        Student
+                    </span>
+                </a>
+            </div>
+
+            <div class="col text-center DispalyBoxWithMargin">
+                <a href="~/Admin/Index">
+                    <img src="~/Content/img/AdminPage_dark.png" alt="Admin Pages" class="AdminIconImage" />
+                    <br />
+                    <span class="FontSizeLarge">
+                        Admin
+                    </span>
+                </a>
+            </div>
+
+            <div class="col text-center DispalyBoxWithMargin">
+                <a href="~/Kiosk/Login">
+                    <img src="~/Content/img/KioskPage_dark.png" alt="Kiosk Mode" class="AdminIconImage" />
+                    <br />
+                    <span class="FontSizeLarge">
+                        Kiosk Mode
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <br />
+            <br />
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
