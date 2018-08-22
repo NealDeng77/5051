@@ -46,20 +46,10 @@ namespace _5051.Controllers
                 {
                     //deep copy the AttendanceModel and convert time zone
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
-
+                    Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
 
                     Emotion = item.Emotion
                 };
-
-                if (item.Out == DateTime.MinValue)
-                {
-                    //if out is auto, set time out to today's dismissal time
-                    myAttendance.Out = item.Out.Add(DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myAttendance.In.Date).TimeEnd);
-                }
-                else
-                {
-                    myAttendance.Out = UTCConversionsBackend.UtcToKioskTime(item.Out);
-                }
 
                 myAttendance.Id = item.Id;
 
