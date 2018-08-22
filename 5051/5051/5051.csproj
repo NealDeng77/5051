@@ -482,9 +482,11 @@
     <Content Include="Content\shop\Trailer0.png" />
     <Content Include="Content\shop\Trailer1.png" />
     <Content Include="Content\shop\Trailer2.png" />
+    <Content Include="Content\shop\Trailer3.png" />
     <Content Include="Content\shop\Truck0.png" />
     <Content Include="Content\shop\Truck1.png" />
     <Content Include="Content\shop\Truck2.png" />
+    <Content Include="Content\shop\Truck3.png" />
     <Content Include="Content\shop\TruckInside.png" />
     <Content Include="Content\shop\Wheels0.png" />
     <Content Include="Content\shop\Wheels1.png" />
