@@ -404,6 +404,10 @@ namespace _5051.Backend
                             {
                                 temp.CheckOutStatus = CheckOutStatusEnum.DoneEarly;
                             }
+                            else
+                            {
+                                temp.CheckOutStatus = CheckOutStatusEnum.DoneAuto;
+                            }
                         }
 
                         report.Stats.DaysPresent++;  //increase number of days present
