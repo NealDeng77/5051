@@ -8,7 +8,9 @@
 <br />
 <h2>Welcome to @Model.Name's Attendance History</h2>
 <br />
-
+<div class="col-sm-auto justify-content-center text-center">
+    @Html.ActionLink("Add a New Attendance", "Create", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+</div>
 
 <hr />
 <div class="row w-100 text-center">
