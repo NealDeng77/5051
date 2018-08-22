@@ -66,7 +66,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
+        @{
+            switch (routeController)
+            {
+                case "Kiosk":
+                    break;
+
+                default:
+
+                    @Html.ActionLink("Avatar Attendance", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
+                    break;
+            } 
+        }
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="navbar-nav mr-auto FontBold FontColorBlack FontSizeSmall">
@@ -192,12 +203,12 @@
     </div>
 
     @{
-            switch (routeController)
-            {
-                case "Kiosk":
-                    break;
+        switch (routeController)
+        {
+            case "Kiosk":
+                break;
 
-                default:
+            default:
                 <footer>
                     <div class="footer fixed-bottom">
                         <div class="FooterBar body-content">
