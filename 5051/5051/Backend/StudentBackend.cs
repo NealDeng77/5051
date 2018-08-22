@@ -336,7 +336,9 @@ namespace _5051.Backend
                     //set auto check-out time
                     if (attendance.Out == DateTime.MinValue)
                     {
-                        attendance.Out = attendance.In.Date.Add(schoolDay.TimeEnd);
+                        var currentDate = new DateTime(attendance.In.Year, attendance.In.Month, attendance.In.Day);
+                        var defaultOut = currentDate.Add(schoolDay.TimeEnd);
+                        attendance.Out = UTCConversionsBackend.KioskTimeToUtc(defaultOut) ;
                     }
 
                     //calculate tokens
