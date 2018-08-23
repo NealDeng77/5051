@@ -1,91 +1,109 @@
 ﻿@using _5051.Models
 @model _5051.Models.StudentDisplayViewModel
-
 @{
 
     ViewBag.Title = "Student Attendance";
 }
+
 <br />
-<h2>Welcome to your Attendance History</h2>
-<br />
+<div class="row justify-content-center">
 
-@{
-    <br />
-    <h4>Current Status: <span id="statusValue">@Model.Status</span></h4>
-    if (!Model.Attendance.Any())
-    {
-        //skip
-    }else
-    {
-        <h4>You last logged in at: <span id="lastLoginValue">@Model.LastLogIn.ToString("f")</span></h4>
-
-        <h4>Emotion State: <span id="currentEmotionValue"><img src="~/Content/img/@Model.EmotionImgUri" alt="Emotion happy icon" class="AvatarSize0" /></span></h4>
-    }
-}
-<hr />
-<div class="row w-100 text-center">
-
-    @{
-        foreach (var item in Model.Attendance)
-        {
-            <div class="col-sm-4 col-md-2 p-0">
-                <div class="BoxWithHighlightHover bg-white" style="border:solid 1px; margin-bottom: 5px; padding: 5px">
-                    @item.In.ToShortDateString()<br />
-                    <div class="row">
-                        <div class="col-sm-6">
-                            In<br />
-                            @item.In.ToShortTimeString()<br />
-                        </div>
-                        @if (item != Model.Attendance.Last() || Model.Status != StudentStatusEnum.In)
-                        {
-                            <div class="col-sm-6">
-                                Out<br />
-
-                                @item.Out.ToShortTimeString()<br />
-                            </div>
-                        }
-                    </div>
-
-                    <div class="row text-center">
-                        <div class="col">
-                            @switch (@item.Emotion)
-                            {
-                                case EmotionStatusEnum.VeryHappy:
-                                    <div class="badge badge-success w-75">
-                                        Very Happy
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Happy:
-                                    <div class="badge badge-warning w-75">
-                                        Happy
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Neutral:
-                                    <div class="badge badge-info w-75">
-                                        Neutral
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.Sad:
-                                    <div class="badge badge-secondary w-75">
-                                        Sad
-                                    </div>
-                                    break;
-                                case EmotionStatusEnum.VerySad:
-                                    <div class="badge badge-dark w-75">
-                                        Very Sad
-                                    </div>
-                                    break;
-                            }
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Welcome to your Attendance History
+            </span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
 </div>
 
+<div class="row">
+    <br />
+    <hr />
+    <br />
+</div>
 
+<div class="row justify-content-around">
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="row justify-content-around">
+            @{
+                if (Model.Attendance == null || !Model.Attendance.Any())
+                {
+                    <div class="col text-center FontSizeLarge">
+                        <br />
+                        No Attendance Records
+                        <br />
+                    </div>
+                }
+                else
+                {
+                    foreach (var item in Model.Attendance)
+                    {
+                        <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin FontSizeSmall">
 
-<br /><br /><br />
+                            <div class="row justify-content-around">
+                                <div class="col text-center">
+                                    @item.In.ToShortDateString()
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-around">
+
+                                <div class="col text-center">
+                                    In<br />
+                                    @item.In.ToShortTimeString()<br />
+                                </div>
+
+                                <div class="col text-center align-self-center">
+                                    <div>
+                                        @switch (item.Emotion)
+                                        {
+                                            case EmotionStatusEnum.VeryHappy:
+                                                <img src="/Content/img/EmotionVeryHappy.png" class="EmotionSize" />
+                                                break;
+                                            case EmotionStatusEnum.Happy:
+                                                <img src="/Content/img/EmotionHappy.png" class="EmotionSize" />
+                                                break;
+                                            case EmotionStatusEnum.Neutral:
+                                                <img src="/Content/img/EmotionNeutral.png" class="EmotionSize" />
+                                                break;
+                                            case EmotionStatusEnum.Sad:
+                                                <img src="/Content/img/EmotionSad.png" class="EmotionSize" />
+                                                break;
+                                            case EmotionStatusEnum.VerySad:
+                                                <img src="/Content/img/EmotionVerySad.png" class="EmotionSize" />
+                                                break;
+                                        }
+                                    </div>
+                                </div>
+
+                                @if (item != Model.Attendance.First() || Model.Status != StudentStatusEnum.In)
+                                {
+                                    <div class="col text-center">
+                                        Out<br />
+
+                                        @item.Out.ToShortTimeString()<br />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row justify-content-start">
+    <div class="col text-center">
+        <br />
+        <br />
+        <br />
+    </div>
+</div>
