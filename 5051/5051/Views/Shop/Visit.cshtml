@@ -11,10 +11,21 @@
     @{
         foreach (var item in Model)
         {
+            item.Update(item);
             <div class="col-sm-4 text-center">
                 <div class="PortalBox">
                     <a href="~/Shop/VisitShop/@item.Id" id="@item.Id">
-                        <img src="~/Content/img/PortalHouse.png" alt="Reports" class="PortalImage" />
+                        <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.TruckItems.Topper" alt="Topper">
+                        <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.TruckItems.Sign" alt="Sign">
+                        <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.TruckItems.Truck" alt="Truck">
+                        <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/@item.TruckItems.Menu" alt="Menu">
+                        <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.TruckItems.Wheels" alt="Wheels">
+                        <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.TruckItems.Trailer" alt="Trailer">
+                        <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
+                        @if (item.TruckItems.IsClosed == true)
+                        {
+                            <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="Trailer">
+                        }
                     </a>
                     <br />
                     <span class="text-center FontColor1">
