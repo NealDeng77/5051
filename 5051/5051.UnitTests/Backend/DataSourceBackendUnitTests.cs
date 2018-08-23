@@ -20,12 +20,6 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.SetTestingMode(true);
         }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            DataSourceBackend.Instance.Reset();
-        }
-
         #region Instantiate
         [TestMethod]
         public void Backend_DataSourceBackend_Default_Instantiate_Should_Pass()
