@@ -219,6 +219,12 @@ namespace _5051.Backend
             return data;
         }
 
+        public List<AvatarItemModel> GetAllAvatarItem(AvatarItemCategoryEnum category)
+        {
+            var DataSet = Index().Where(m => m.Category == category).ToList();
+            return DataSet;
+        }
+
         public AvatarItemModel GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum category)
         {
             var DataSet = Index().Where(m => m.Category == category).ToList();

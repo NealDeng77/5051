@@ -461,5 +461,52 @@ namespace _5051.UnitTests.Backend
             Assert.IsNull(result, TestContext.TestName);
         }
         #endregion GetAvatarItemShopViewModel
+
+        #region GetAllAvatarItem
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAllAvatarItem_Valid_Category_One_Should_Pass()
+        {
+            //arrange
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAllAvatarItem(AvatarItemCategoryEnum.Accessory);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAllAvatarItem_Valid_Category_Multiple_Should_Pass()
+        {
+            //arrange
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAllAvatarItem(AvatarItemCategoryEnum.Head);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetAllAvatarItem_Null_Category_Should_Fail()
+        {
+            //arrange
+
+            //act
+            var result = DataSourceBackend.Instance.AvatarItemBackend.GetAllAvatarItem(AvatarItemCategoryEnum.Unknown);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetAllAvatarItem
     }
 }

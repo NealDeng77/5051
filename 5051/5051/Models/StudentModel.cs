@@ -121,11 +121,13 @@ namespace _5051.Models
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Expression),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairBack),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.HairFront),
-                DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Head),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtFull),
                 //DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.ShirtShort),
                 DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Pants)
             };
+
+            // Load all the Heads
+            AvatarInventory.AddRange(DataSourceBackend.Instance.AvatarItemBackend.GetAllAvatarItem(AvatarItemCategoryEnum.Head));
 
             // All Students get a default Truck Inventory
             Inventory = new List<FactoryInventoryModel>
