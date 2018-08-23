@@ -146,10 +146,10 @@ namespace _5051.UnitTests.Models
             var expect = "uri";
 
             //act
-            result.EmotionImgUri = expect;
+            result.EmotionUri = expect;
 
             // Assert
-            Assert.AreEqual(expect, result.EmotionImgUri, TestContext.TestName);
+            Assert.AreEqual(expect, result.EmotionUri, TestContext.TestName);
         }
         #endregion Instantiate
     }

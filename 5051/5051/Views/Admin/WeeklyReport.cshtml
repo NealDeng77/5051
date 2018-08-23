@@ -131,27 +131,8 @@
                             <td class="p-3">
 
                                 <div class="text-center">
-                                    <div>
-                                        @switch (item.Emotion)
-                                        {
-                                            case EmotionStatusEnum.VeryHappy:
-                                                <img src="/Content/img/EmotionVeryHappy.png" height="30" />
-                                                break;
-                                            case EmotionStatusEnum.Happy:
-                                                <img src="/Content/img/EmotionHappy.png" height="30" />
-                                                break;
-                                            case EmotionStatusEnum.Neutral:
-                                                <img src="/Content/img/EmotionNeutral.png" height="30" />
-                                                break;
-                                            case EmotionStatusEnum.Sad:
-                                                <img src="/Content/img/EmotionSad.png" height="30" />
-                                                break;
-                                            case EmotionStatusEnum.VerySad:
-                                                <img src="/Content/img/EmotionVerySad.png" height="30" />
-                                                break;
-                                        }
+                                    <img src="@item.EmotionUri" class="EmotionSize" alt="@item.Emotion" />
                                         @item.Date.ToString("MM/dd")
-                                    </div>
 
                                     @if (!item.IsSchoolDay)
                                     {

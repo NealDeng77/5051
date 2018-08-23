@@ -76,5 +76,6 @@ namespace _5051.Models
         ///  The emotion state
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
+        public string EmotionUri { get; set; }
     }
 }

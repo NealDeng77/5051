@@ -322,6 +322,7 @@
     <Content Include="Content\img\Inventory_light.png" />
     <Content Include="Content\img\KioskPage_dark.png" />
     <Content Include="Content\img\KioskPage_Light.png" />
+    <Content Include="Content\img\placeholder.png" />
     <Content Include="Content\img\PortalAvatars.png" />
     <Content Include="Content\img\PortalCalendar.png" />
     <Content Include="Content\img\EmotionVerySad.png" />

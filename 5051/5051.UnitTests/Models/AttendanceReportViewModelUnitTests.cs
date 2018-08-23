@@ -43,6 +43,7 @@ namespace _5051.UnitTests.Models
             var expectCheckInStatus = _5051.Models.Enums.CheckInStatusEnum.ArriveOnTime;
             var expectCheckOutstatus = _5051.Models.Enums.CheckOutStatusEnum.DoneEarly;
             var expectEmotion = _5051.Models.EmotionStatusEnum.Happy;
+            var expectEmotionUri = Emotion.GetEmotionURI(result.Emotion);
 
             // Act
             result.Date = expectDate;
@@ -58,6 +59,7 @@ namespace _5051.UnitTests.Models
             result.CheckInStatus = expectCheckInStatus;
             result.CheckOutStatus = expectCheckOutstatus;
             result.Emotion = expectEmotion;
+            result.EmotionUri = expectEmotionUri;
 
             // Assert
             Assert.AreEqual(expectDate, result.Date, TestContext.TestName);
@@ -73,6 +75,7 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectCheckInStatus, result.CheckInStatus, TestContext.TestName);
             Assert.AreEqual(expectCheckOutstatus, result.CheckOutStatus, TestContext.TestName);
             Assert.AreEqual(expectEmotion, result.Emotion, TestContext.TestName);
+            Assert.AreEqual(expectEmotionUri, result.EmotionUri, TestContext.TestName);
         }
         #endregion Instantiate
     }

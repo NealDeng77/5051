@@ -345,6 +345,9 @@ namespace _5051.Backend
                     Date = currentDate
                 };
 
+                // Hold the emotion for the null condition
+                temp.EmotionUri = "/content/img/placeholder.png";
+
                 //get today's school calendar model
                 var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
@@ -376,6 +379,7 @@ namespace _5051.Backend
                         //the TimeIn is set to the first check-in time. Same for emotion.
                         temp.TimeIn = UTCConversionsBackend.UtcToKioskTime(myRange.First().In);
                         temp.Emotion = myRange.First().Emotion;
+                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
 
                         //determine whether is on time or late
                         if (temp.TimeIn.TimeOfDay > myToday.TimeStart)

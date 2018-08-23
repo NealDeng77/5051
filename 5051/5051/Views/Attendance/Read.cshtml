@@ -66,26 +66,7 @@
                                     </div>
 
                                     <div class="col text-center align-self-center">
-                                        <div>
-                                            @switch (item.Emotion)
-                                            {
-                                                case EmotionStatusEnum.VeryHappy:
-                                                    <img src="/Content/img/EmotionVeryHappy.png" class="EmotionSize"/>
-                                                    break;
-                                                case EmotionStatusEnum.Happy:
-                                                    <img src="/Content/img/EmotionHappy.png" class="EmotionSize"/>
-                                                    break;
-                                                case EmotionStatusEnum.Neutral:
-                                                    <img src="/Content/img/EmotionNeutral.png" class="EmotionSize"/>
-                                                    break;
-                                                case EmotionStatusEnum.Sad:
-                                                    <img src="/Content/img/EmotionSad.png" class="EmotionSize"/>
-                                                    break;
-                                                case EmotionStatusEnum.VerySad:
-                                                    <img src="/Content/img/EmotionVerySad.png" class="EmotionSize"/>
-                                                    break;
-                                            }
-                                        </div>
+                                        <img src="@Model.EmotionUri" class="EmotionSize" alt="@Model.Emotion" />
                                     </div>
 
                                     @if (item != Model.Attendance.First() || Model.Status != StudentStatusEnum.In)

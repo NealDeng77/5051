@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using System.Linq;
 
 namespace _5051.UnitTests.Models
 {
@@ -26,5 +27,23 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(1, (int)EmotionStatusEnum.VerySad, TestContext.TestName);
         }
         #endregion Instantiate
+
+        #region GetEmotionUri
+        [TestMethod]
+        public void Models_Emotion_GetEmotionUri_Values_Should_Pass()
+        {
+            // Assert
+
+            // Make sure there are no additional values
+            var enumValues = EmotionStatusEnum.GetValues(typeof(EmotionStatusEnum)).Cast< EmotionStatusEnum>();
+
+            foreach (var item in enumValues)
+            {
+                var expect = Emotion.GetEmotionURI(item);
+                Assert.IsNotNull(expect, TestContext.TestName);
+            }
+
+        }
+        #endregion GetEmotionUri
     }
 }

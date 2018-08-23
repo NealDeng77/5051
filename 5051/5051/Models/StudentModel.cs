@@ -76,12 +76,16 @@ namespace _5051.Models
         [PasswordPropertyText]
         public string Password { get; set; }
 
-
         /// <summary>
         /// The current emotion status of the student
         /// </summary>
         [Display(Name = "Current Emotion", Description = "Current Emotion")]
         public EmotionStatusEnum EmotionCurrent { get; set; }
+
+        /// <summary>
+        /// The URL to the current emotion
+        /// </summary>
+        public string EmotionUri { get; set; }
 
         /// <summary>
         /// The inventory list for the student
@@ -111,6 +115,8 @@ namespace _5051.Models
             Password = string.Empty;
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
+            EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
+
             Truck = new ShopTruckModel();
             AvatarComposite = new AvatarCompositeModel();
 
@@ -189,6 +195,8 @@ namespace _5051.Models
             Inventory = data.Inventory;
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
+            EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
+
             Truck = data.Truck;
         }
 
@@ -218,6 +226,8 @@ namespace _5051.Models
             Inventory = data.Inventory;
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
+            EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
+
             Truck = data.Truck;
 
             return true;

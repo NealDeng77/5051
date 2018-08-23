@@ -117,24 +117,6 @@ namespace _5051.Controllers
             if (myReturn.Attendance.Any())
             {
                 myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
-                switch (myReturn.EmotionCurrent)
-                {
-                    case EmotionStatusEnum.VeryHappy:
-                        myReturn.EmotionImgUri = "EmotionVeryHappy.png";
-                        break;
-                    case EmotionStatusEnum.Happy:
-                        myReturn.EmotionImgUri = "EmotionHappy.png";
-                        break;
-                    case EmotionStatusEnum.Neutral:
-                        myReturn.EmotionImgUri = "EmotionNeutral.png";
-                        break;
-                    case EmotionStatusEnum.Sad:
-                        myReturn.EmotionImgUri = "EmotionSad.png";
-                        break;
-                    case EmotionStatusEnum.VerySad:
-                        myReturn.EmotionImgUri = "EmotionVerySad.png";
-                        break;
-                }
             }
 
             return View(myReturn);

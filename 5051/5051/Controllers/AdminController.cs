@@ -44,12 +44,10 @@ namespace _5051.Controllers
         public ActionResult WeeklyReport(string id = null)
         {
             var myStudent = StudentBackend.Instance.Read(id);
-
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-
 
             var myReport = new WeeklyReportViewModel()
             {
