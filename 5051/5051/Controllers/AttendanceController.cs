@@ -27,7 +27,6 @@ namespace _5051.Controllers
         public ActionResult Read(string id)
         {
             var myStudent = StudentBackend.Instance.Read(id);
-
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -35,8 +34,8 @@ namespace _5051.Controllers
 
             var myReturn = new StudentDisplayViewModel(myStudent);
 
-
             var attendanceListOrdered = myReturn.Attendance.OrderByDescending(m => m.In);
+
             //Deep copy Attendance list and convert time zone
             var myAttendanceModels = new List<AttendanceModel>();
 
