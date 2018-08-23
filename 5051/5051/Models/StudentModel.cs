@@ -213,6 +213,8 @@ namespace _5051.Models
 
             Truck = data.Truck;
 
+            TruckItems = new GameResultViewModel();
+
             TruckItems.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
             TruckItems.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
             TruckItems.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
