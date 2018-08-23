@@ -159,56 +159,32 @@ namespace _5051.Controllers
 
             var myReturn = new StudentDisplayViewModel(myStudent);
 
+            var attendanceListOrdered = myReturn.Attendance.OrderByDescending(m => m.In);
+
             //Set the last log in time and emotion status img uri
-            if (myReturn.Attendance.Any())
+            if (attendanceListOrdered.Any())
             {
-                myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
-                switch (myReturn.EmotionCurrent)
-                {
-                    case EmotionStatusEnum.VeryHappy:
-                        myReturn.EmotionImgUri = "EmotionVeryHappy.png";
-                        break;
-                    case EmotionStatusEnum.Happy:
-                        myReturn.EmotionImgUri = "EmotionHappy.png";
-                        break;
-                    case EmotionStatusEnum.Neutral:
-                        myReturn.EmotionImgUri = "EmotionNeutral.png";
-                        break;
-                    case EmotionStatusEnum.Sad:
-                        myReturn.EmotionImgUri = "EmotionSad.png";
-                        break;
-                    case EmotionStatusEnum.VerySad:
-                        myReturn.EmotionImgUri = "EmotionVerySad.png";
-                        break;
-                }
+                myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(attendanceListOrdered.FirstOrDefault().In);
             }
 
             //Deep copy Attendance list and convert time zone
             var myAttendanceModels = new List<AttendanceModel>();
 
-            foreach (var item in myReturn.Attendance)
+            foreach (var item in attendanceListOrdered)
             {
                 var myAttendance = new AttendanceModel()
                 {
                     //deep copy the AttendanceModel and convert time zone
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
+                    Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
 
-                    
                     Emotion = item.Emotion
                 };
 
-                if (item.Out == DateTime.MinValue)
-                {
-                    //if out is auto, set time out to today's dismissal time
-                    myAttendance.Out = item.Out.Add(DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myAttendance.In.Date).TimeEnd);
-                }
-                else
-                {
-                    myAttendance.Out = UTCConversionsBackend.UtcToKioskTime(item.Out);
-                }
+                myAttendance.Id = item.Id;
 
                 myAttendanceModels.Add(myAttendance);
-            }
+            }    
 
             myReturn.Attendance = myAttendanceModels;
 
