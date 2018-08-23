@@ -33,11 +33,6 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.SetTestingMode(true);
         }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            DataSourceBackend.Instance.Reset();
-        }
 
         #region CreateNewSupportUser
         [TestMethod]

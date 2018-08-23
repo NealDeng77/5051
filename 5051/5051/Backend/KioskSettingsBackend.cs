@@ -15,7 +15,6 @@ namespace _5051.Backend
         private static volatile KioskSettingsBackend instance;
         private static object syncRoot = new Object();
 
-        private static bool isTestingMode = false;
 
         private KioskSettingsBackend() { }
 
@@ -112,7 +111,7 @@ namespace _5051.Backend
             //    // Need to go through the calendar and change things.  That way a change to the dismissal time is reflected if changed etc.
             //    SchoolCalendarBackend.Instance.ResetDefaults();
             //}
-            
+
             return myReturn;
         }
 
@@ -124,18 +123,6 @@ namespace _5051.Backend
         {
             var myReturn = DataSource.Index().First();
             return myReturn;
-        }
-
-        public bool GetTestingMode()
-        {
-            return isTestingMode;
-        }
-
-        public bool SetTestingMode(bool mode)
-        {
-            isTestingMode = mode;
-
-            return isTestingMode;
         }
     }
 }
