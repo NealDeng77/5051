@@ -209,6 +209,67 @@ namespace _5051.UnitTests.Backend
             //arrange
             var test = GameBackend.Instance;
 
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            var StudentData = DataSourceBackend.Instance.StudentBackend.Read(id);
+
+            //act
+            var result = test.GetResult(id);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_GetResults_MoreTransactionItems_Should_Pass()
+        {
+            //arrange
+            var test = GameBackend.Instance;
+
+            StudentModel studentModel = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            for (int i = 0; i < 6; i++)
+            {
+                TransactionModel transaction = new TransactionModel();
+                transaction.Name = "testing";
+                transaction.Uri = null;
+                studentModel.Truck.TransactionList.Add(transaction);
+            }
+
+            DataSourceBackend.Instance.StudentBackend.Update(studentModel);
+            var id = studentModel.Id;
+
+            //act
+            var result = test.GetResult(id);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_GetResults_No_Tokens_Should_Pass()
+        {
+            //arrange
+            var test = GameBackend.Instance;
+
+            StudentModel studentModel = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            studentModel.Tokens = 0;
+
+            DataSourceBackend.Instance.StudentBackend.Update(studentModel);
+            var id = studentModel.Id;
+
+            //act
+            var result = test.GetResult(id);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_GameBackend_GetResults_Default_Should_Pass()
+        {
+            //arrange
+            var test = GameBackend.Instance;
+
             //act
             var result = test.GetResult("test");
 
