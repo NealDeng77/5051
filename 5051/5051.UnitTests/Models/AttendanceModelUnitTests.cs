@@ -37,7 +37,8 @@ namespace _5051.UnitTests.Models
             //var expectDuration = TimeSpan.Zero;
             var expectedIsNew = false;
             var expectEmotion = _5051.Models.EmotionStatusEnum.Neutral;
-
+            var expectEmotionUri = Emotion.GetEmotionURI(expectEmotion);
+            
             // Act
             result.StudentId = expectStudentId;
             result.In = expectIn;
@@ -45,6 +46,7 @@ namespace _5051.UnitTests.Models
             //result.Status = expectStatus;
             result.IsNew = expectedIsNew;
             result.Emotion = expectEmotion;
+            result.EmotionUri = expectEmotionUri;
 
             // Assert
             Assert.IsNotNull(result.Id, TestContext.TestName);
@@ -53,7 +55,10 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expectOut, result.Out, TestContext.TestName);
             //Assert.AreEqual(expectStatus, result.Status, TestContext.TestName);
             Assert.AreEqual(expectEmotion, result.Emotion, TestContext.TestName);
+            Assert.AreEqual(expectEmotionUri, result.EmotionUri, TestContext.TestName);
+
             Assert.AreEqual(expectedIsNew, result.IsNew, TestContext.TestName);
+
         }
         #endregion Instantiate
     }
