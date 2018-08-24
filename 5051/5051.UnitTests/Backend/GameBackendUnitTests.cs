@@ -400,7 +400,7 @@ namespace _5051.UnitTests.Backend
             var student = StudentBackend.Instance.Create(data);
 
             // act         
-
+            student.AvatarLevel = 90;
             test.CalculateStudentIteration(student);          
 
             // Reset StudentBackend

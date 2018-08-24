@@ -658,7 +658,7 @@ namespace _5051.Tests.Controllers
 
         #endregion
 
-       #region SettingsStringRegion
+        #region SettingsStringRegion
         [TestMethod]
         public void Controller_Portal_Settings_IDIsNull_Should_Return_RosterPage()
         {
