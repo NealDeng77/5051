@@ -99,6 +99,8 @@ namespace _5051.Backend
                             temp.In = InGood(currentDate, r);
                             temp.Out = OutAuto(currentDate);
                             temp.Emotion = (EmotionStatusEnum)(rn+1);
+                            temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                             myStudent.Attendance.Add(temp);
                             break;
                         case 1: //Good
@@ -109,18 +111,24 @@ namespace _5051.Backend
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutLate(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Happy;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Sad;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -134,6 +142,8 @@ namespace _5051.Backend
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.Happy;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
@@ -142,18 +152,24 @@ namespace _5051.Backend
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 3:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Sad;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.VeryHappy;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }
@@ -167,18 +183,24 @@ namespace _5051.Backend
                                         temp.In = InVeryLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Neutral;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 1:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
                                         temp.Emotion = EmotionStatusEnum.VerySad;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
                                         temp.Emotion = EmotionStatusEnum.Sad;
+                                        temp.EmotionUri = Emotion.GetEmotionURI(temp.Emotion);
+
                                         myStudent.Attendance.Add(temp);
                                         break;
                                 }

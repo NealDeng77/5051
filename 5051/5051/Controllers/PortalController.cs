@@ -160,13 +160,14 @@ namespace _5051.Controllers
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
                     Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
 
-                    Emotion = item.Emotion
+                    Emotion = item.Emotion,
+                    EmotionUri = Emotion.GetEmotionURI(item.Emotion)
                 };
 
                 myAttendance.Id = item.Id;
 
                 myAttendanceModels.Add(myAttendance);
-            }    
+            }
 
             myReturn.Attendance = myAttendanceModels;
 
@@ -229,7 +230,7 @@ namespace _5051.Controllers
         {
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
-            
+
             // var currentUser = User.Identity.GetUserName();
             //var currentUserId = User.Identity.GetUserId();
 

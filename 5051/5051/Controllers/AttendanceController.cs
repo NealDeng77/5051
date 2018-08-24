@@ -47,7 +47,8 @@ namespace _5051.Controllers
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
                     Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
 
-                    Emotion = item.Emotion
+                    Emotion = item.Emotion,
+                    EmotionUri = Emotion.GetEmotionURI(item.Emotion)
                 };
 
                 myAttendance.Id = item.Id;
@@ -79,6 +80,8 @@ namespace _5051.Controllers
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
+                EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion),
+
                 IsNew = myAttendance.IsNew
             };
 
@@ -154,6 +157,8 @@ namespace _5051.Controllers
                 In = UTCConversionsBackend.KioskTimeToUtc(data.In),
                 Out = UTCConversionsBackend.KioskTimeToUtc(data.Out),
                 Emotion = data.Emotion,
+                EmotionUri = Emotion.GetEmotionURI(data.Emotion),
+
                 IsNew = data.IsNew
             };
 
@@ -184,6 +189,8 @@ namespace _5051.Controllers
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
+                EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion),
+
                 IsNew = myAttendance.IsNew
             };
 
@@ -234,6 +241,7 @@ namespace _5051.Controllers
 
             //update the emotion
             myAttendance.Emotion = data.Emotion;
+            myAttendance.EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion);
 
             return RedirectToAction("Details", new { id = myAttendance.Id });
         }
@@ -257,6 +265,8 @@ namespace _5051.Controllers
                 In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
                 Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
                 Emotion = myAttendance.Emotion,
+                EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion),
+
                 IsNew = myAttendance.IsNew
             };
 

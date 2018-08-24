@@ -32,6 +32,7 @@ namespace _5051.Models
         /// The emotion state
         /// </summary>
         public EmotionStatusEnum Emotion { get; set; }
+        public string EmotionUri { get; set; }
 
         /// <summary>
         /// If this is a newly added attendance, which means that token accumulated in this attendance has not been added yet.
