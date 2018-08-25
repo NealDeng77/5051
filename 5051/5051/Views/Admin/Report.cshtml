@@ -1,4 +1,4 @@
-﻿@model _5051.Models.StudentViewModel
+﻿@model _5051.Models.AdminReportIndexViewModel
 @{
     ViewBag.Title = "Reports";
 }
@@ -60,17 +60,43 @@
                                     </div>
                                 </div>
 
-                                <div class="btn-group-vertical" role="group">
-                                    <a href="~/Admin/WeeklyReport/@item.Id" class="btn btn-dark btn-block btn-sm">Weekly</a>
-                                    <a href="~/Admin/MonthlyReport/@item.Id" class="btn btn-dark btn-block btn-sm">Monthly</a>
-                                    <a href="~/Admin/SemesterReport/@item.Id" class="btn btn-dark btn-block btn-sm">Semesterly</a>
-                                    <a href="~/Admin/QuarterReport/@item.Id" class="btn btn-dark btn-block btn-sm">Quarterly</a>
-                                    <a href="~/Admin/OverallReport/@item.Id" class="btn btn-dark btn-block btn-sm">School Year</a>
+                                <div class="col text-white">
+                                    <a href="~/Admin/WeeklyReport/@item.Id" class="btn darkTransparentBox BoxWithHighlightHover btn-block btn-sm">Weekly</a>
+                                    <a href="~/Admin/MonthlyReport/@item.Id" class="btn darkTransparentBox BoxWithHighlightHover btn-block btn-sm">Monthly</a>
+                                    <a href="~/Admin/SemesterReport/@item.Id" class="btn darkTransparentBox BoxWithHighlightHover btn-block btn-sm">Semesterly</a>
+                                    <a href="~/Admin/QuarterReport/@item.Id" class="btn darkTransparentBox BoxWithHighlightHover btn-block btn-sm">Quarterly</a>
+                                    <a href="~/Admin/OverallReport/@item.Id" class="btn darkTransparentBox BoxWithHighlightHover btn-block btn-sm">School Year</a>
                                 </div>
                             </div>
 
                         </div>
                     }
+                    <div class="col-auto">
+                        <div class="lightTransparentBox p-4 row justify-content-center align-items-center DispalyBoxWithMargin">
+                            <div class="col text-center">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <td>Rank</td>
+                                            <td>Name</td>
+                                            <td>Minutes</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @for (int i = 0; i < Model.Leaderboard.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@(i+1)</td>
+                                            <td>@Model.Leaderboard[i].Name</td>
+                                            <td>@Model.Leaderboard[i].AttendedMinutesThisWeek</td>
+                                        </tr>
+                                    }                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
                 }
             }
         </div>
