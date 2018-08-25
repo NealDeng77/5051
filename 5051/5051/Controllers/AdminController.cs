@@ -31,8 +31,13 @@ namespace _5051.Controllers
         {
             // Load the list of data into the StudentList
             var myDataList = StudentBackend.Index();
-            var StudentViewModel = new StudentViewModel(myDataList);
-            return View(StudentViewModel);
+
+            var myReturn = new AdminReportIndexViewModel(myDataList);
+
+            myReturn.Leaderboard = ReportBackend.Instance.GenerateLeaderboard();
+            
+
+            return View(myReturn);
         }
 
         // GET: WeeklyReport
