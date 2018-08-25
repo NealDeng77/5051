@@ -377,7 +377,8 @@ div.BlockStudentLogin {
     width: 35px;
     height: 35px;
     padding: 0px;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .KioskLogButton {
