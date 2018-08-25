@@ -188,6 +188,7 @@ namespace _5051.Models
             TueStartSelected = data.TueStartSelected;
             TueEndSelected = data.TueEndSelected;
             WedStartSelected = data.WedStartSelected;
+            WedEndSelected = data.WedEndSelected;
             ThuStartSelected = data.ThuStartSelected;
             ThuEndSelected = data.ThuEndSelected;
             FriStartSelected = data.FriStartSelected;
@@ -363,6 +364,7 @@ namespace _5051.Models
             TueStartSelected = data.TueStartSelected;
             TueEndSelected = data.TueEndSelected;
             WedStartSelected = data.WedStartSelected;
+            WedEndSelected = data.WedEndSelected;
             ThuStartSelected = data.ThuStartSelected;
             ThuEndSelected = data.ThuEndSelected;
             FriStartSelected = data.FriStartSelected;
