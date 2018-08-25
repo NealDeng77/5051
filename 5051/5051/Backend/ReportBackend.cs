@@ -41,6 +41,7 @@ namespace _5051.Backend
             }
         }
 
+
         #region GenerateWeeklyReportRegion
         /// <summary>
         /// Generate Weekly report
@@ -59,9 +60,9 @@ namespace _5051.Backend
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
 
             //The first valid week(Monday's date) for the dropdown
-            var FirstWeek = dayFirst.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //added this mod operation to make sure it's the previous monday not the next monday
+            var FirstWeek = dayFirst.AddDays(-((dayFirst.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //added this mod operation to make sure it's the previous monday not the next monday
             //The last valid month for the dropdown
-            var LastWeek = dayLast.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7));
+            var LastWeek = dayLast.AddDays(-((dayLast.DayOfWeek - DayOfWeek.Monday + 7) % 7));
             //The month of today
             var WeekNow = dayNow.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //if today is sunday, dayNow.DayOfWeek - DayOfWeek.Monday = -1
 
@@ -322,6 +323,51 @@ namespace _5051.Backend
         #endregion
 
         /// <summary>
+        /// Generate a leaderboard. Rank students according to their attended minutes in this week.
+        /// </summary>
+        /// <returns></returns>
+        public List<StudentModel> GenerateLeaderboard()
+        {
+            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
+            var thisMonday = dayNow.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
+
+            var studentList = StudentBackend.Instance.Index();  //student list
+
+            foreach (var student in studentList)
+            {
+                student.AttendedMinutesThisWeek = 0; //reset
+
+                var currentDate = thisMonday; //loop variable
+
+                while (currentDate.CompareTo(dayNow) < 0) //loop until today, don't include today
+                {
+                    //get today's school calendar model
+                    var myToday = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
+                    if (myToday != null && myToday.SchoolDay)
+                    {
+                        var myRange = student.Attendance
+                            .Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date)
+                            .OrderByDescending(m => m.In).ToList();
+                        if (myRange.Any())
+                        {
+                            //loop through all attendance records in my range
+                            foreach (var item in myRange)
+                            {
+                                //calculate effective duration
+                                var tempDuration = CalculateEffectiveDuration(item, myToday);
+                                student.AttendedMinutesThisWeek += (int) tempDuration.TotalMinutes;
+                            }
+                        }
+                    }
+                    currentDate = currentDate.AddDays(1);
+                }
+            }
+            //sort
+            var leaderboard = studentList.OrderByDescending(m => m.AttendedMinutesThisWeek).ToList();
+            return leaderboard;
+        }
+
+        /// <summary>
         /// Generate the report from the start date to the end date
         /// </summary>
         /// <param name="report"></param>
@@ -398,7 +444,7 @@ namespace _5051.Backend
                             temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
 
                             //calculate effective duration
-                            var tempDuration = CalculateEffectiveDuration(item, myToday, temp);
+                            var tempDuration = CalculateEffectiveDuration(item, myToday);
 
                             //add the current effective duration to today's hours attended
                             temp.HoursAttended += tempDuration;
@@ -475,7 +521,7 @@ namespace _5051.Backend
         /// <param name="attendance"></param>
         /// <param name="schoolDay"></param>
         /// <returns></returns>
-        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance, SchoolCalendarModel schoolDay, AttendanceReportViewModel attendanceReport)
+        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance, SchoolCalendarModel schoolDay)
         {
 
             //the time from which duration starts to count
