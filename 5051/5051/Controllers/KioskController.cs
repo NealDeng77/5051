@@ -2,6 +2,7 @@
 using _5051.Models;
 using _5051.Backend;
 using System;
+using System.Linq;
 
 namespace _5051.Controllers
 {
@@ -37,9 +38,12 @@ namespace _5051.Controllers
                 SystemGlobalsModel.Instance.CurrentDate = currentDate;
             }
 
+            var myReturn = new AdminReportIndexViewModel(myDataList);
 
-            var StudentViewModel = new StudentViewModel(myDataList);
-            return View(StudentViewModel);       
+            //top 5 leaderboard
+            myReturn.Leaderboard = ReportBackend.Instance.GenerateLeaderboard().Take(5).ToList();
+
+            return View(myReturn);       
         }
 
 
