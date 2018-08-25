@@ -11,7 +11,7 @@
     @{
         foreach (var item in Model)
         {
-            item.Update(item);
+            _5051.Backend.GameBackend.Instance.GetResult(item.Id);
             <div class="col-sm-4 text-center">
                 <div class="PortalBox">
                     <a href="~/Shop/VisitShop/@item.Id" id="@item.Id">
@@ -22,7 +22,7 @@
                         <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.TruckItems.Wheels" alt="Wheels">
                         <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.TruckItems.Trailer" alt="Trailer">
                         <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
-                        @if (item.TruckItems.IsClosed == true)
+                        @if (item.Truck.IsClosed == true)
                         {
                             <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="Trailer">
                         }
