@@ -24,11 +24,11 @@ namespace _5051.Controllers
             //TODO: Need to add a check here to validate if the request comes from a validated login or not.
 
             var myDataList = StudentBackend.Index();
-            if (myDataList.Count == 0)
-            {
-                // Send to Error Page
-                return RedirectToAction("Error", "Home");
-            }
+            //if (myDataList.Count == 0)
+            //{
+            //    // Send to Error Page
+            //    return RedirectToAction("Error", "Home");
+            //}
 
             var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
             if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
