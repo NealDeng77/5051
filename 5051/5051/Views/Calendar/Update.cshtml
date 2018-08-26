@@ -40,127 +40,178 @@
     <div class="col-1"></div>
 </div>
 
-<br />
+<div class="row">
+    <br />
+    <br />
+</div>
 
-        <div class="container text-left FontColorWhite FontSizeMedium">    
-            <br />
+@{
+    if (Model == null)
+    {
+        <div class="row justify-content-center">
 
-            @{
-                if (Model == null)
-                {
-                    <p>No Data</p>
-                }
-                else
-                {
-                    <div class="container text-left">
-                        <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col text-left">
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center FontColorWhite">
+                    No Data
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox FontSizeMedium text-center FontColorWhite">
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-5 text-right">
+                        <span class="FontSizeMedium">
+                            Date
+                        </span>
+                    </div>
+                    <div class="col-1">
+                        &nbsp;:&nbsp;
+                    </div>
+                    <div class="col text-left">
+                        <span class="FontSizeMedium">
+                            @Today
+                        </span>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @{
+                        if (!Model.SchoolDay)
+                        {
+                            <div class="col-12 text-center">
                                 <span class="FontSizeMedium">
-                                    @Today
+                                    Not a school day
                                 </span>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col text-left">
-                                @{
-                                    if (!Model.SchoolDay)
-                                    {
-                                        <span class="FontSizeMedium FontColorWhite">Not a school day</span>
-                                        @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
-                                        @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn-warning" })
+                                                      
+                                <div class="col text-center DispalyBoxWithMargin">
+                                    @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                                </div>
+                                <div class="col text-center DispalyBoxWithMargin">
+                                    @Html.ActionLink("Enable School Day", "SetSchoolDay", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                                </div>
 
-                                    }
-                                    else
-                                    {
-                                        <span class="FontSizeMedium FontColorWhite">Time in school: @TimeDuration</span>
-                                    }
-                                }
+                        }
+                        else
+                        {
+                            <div class="col-5 text-right">
+                                <span class="FontSizeMedium">
+                                    Time in school
+                                </span>
                             </div>
-                        </div>
-                    </div>
-
+                            <div class="col-1">
+                                &nbsp;:&nbsp;
+                            </div>
+                            <div class="col text-left">
+                                <span class="FontSizeMedium">@TimeDuration</span>
+                            </div>
+                        }
+                    }
+                </div>
+                <br />
+                @{ 
                     if (Model.SchoolDay)
                     {
                         using (Html.BeginForm())
                         {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(m => m.Id)
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
 
-                    <div class="row">
-                        <div class="col-5 text-right">
-                            @Html.DisplayNameFor(m => m.TimeStart)
-                        </div>
-                        <div class="col">
-                            @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
-                            <div class="row">
-                                @Html.ValidationMessageFor(m => m.TimeStart)
-                            </div>
-                        </div>
-                        @{
-                            if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                            {
-                                <div class="col-sm-2">
-                                    <div class="text-left">
-                                        @Model.DayStart Start
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </div>
-
-                            <div class="row">
-                                <div class="col-5 text-right">
-                                    @Html.DisplayNameFor(m => m.TimeEnd)
-                                </div>
-                                <div class="col">
-                                    @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.TimeEnd)
-                                    </div>
-                                </div>
-
-                                @{
-                                    if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
-                                    {
-                                        <div class="col-sm-2">
-                                            <div class="text-left">
-                                                @Model.DayEnd Dismissal
-                                            </div>
-                                        </div>
-
-                                    }
-                                }
-                            </div>
-
-                            <div class="row">
-                                <div class="col-5">
-                                </div>
-                                <div class="col text-left">
-                                    <br />
-                                    <input type="submit" value="Update" class="btn btn1 btn-light">
-                                </div>
-                            </div>
-                        }
-
-                        <br />
-                        <br />
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-5 text-right">
+                                @Html.DisplayNameFor(m => m.TimeStart)
+                            </div>
+                            <div class="col-1">
+                                &nbsp;:&nbsp;
                             </div>
                             <div class="col text-left">
-                                @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                                @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                                @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                                @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                                @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                                @Html.EditorFor(m => m.TimeStart, new { htmlAttributes = new { @Value = TimeStart } })
+                                @Html.ValidationMessageFor(m => m.TimeStart)
+                            </div>
+                            @{
+                                if (Model.DayStart != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                                {
+                                    <div class="col-sm-2">
+                                        <div class="text-left">
+                                            @Model.DayStart Start
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-5 text-right">
+                                @Html.DisplayNameFor(m => m.TimeEnd)
+                            </div>
+                            <div class="col-1">
+                                &nbsp;:&nbsp;
+                            </div>
+                            <div class="col text-left">
+                                @Html.EditorFor(m => m.TimeEnd, new { htmlAttributes = new { @Value = TimeEnd } })
+                                @Html.ValidationMessageFor(m => m.TimeEnd)
+                            </div>
+                            @{
+                                if (Model.DayEnd != _5051.Models.Enums.SchoolCalendarDismissalEnum.Normal)
+                                {
+                                    <div class="col-sm-2">
+                                        <div class="text-left">
+                                            @Model.DayEnd Dismissal
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <br />
+                        <hr />
+                        <br />
+
+                        <div class="row">
+                            <div class="col justify-content-center">
+                                <div class="col text-center DispalyBoxWithMargin">
+                                    <input type="submit" value="Update" class="btn btn1 btn-light DispalyBoxWithMargin">
+                                </div>
                             </div>
                         </div>
                     }
 
+                    <br />
 
-                }
-
-            }
+                    <div class="row justify-content-around DispalyBoxWithMargin">
+                        <div class="col text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+                        <div class="col text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Default", "SetDefault", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+                        <div class="col text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Late Start", "SetLateStart", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+                        <div class="col text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Early Dismissal", "SetEarlyEnd", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+                        <div class="col text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Disable School Day", "SetNoSchoolDay", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+                    </div>
+                                    }
+                                }
+            </div>
+            <div class="col-1 "></div>
         </div>
+        }
+
+}
+
+
