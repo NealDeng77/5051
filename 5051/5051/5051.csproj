@@ -246,7 +246,6 @@
     <Compile Include="Models\AdminReportIndexViewModel.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
-    <Compile Include="Models\AttendanceDetailsViewModel.cs" />
     <Compile Include="Models\AvatarCompositeModel.cs" />
     <Compile Include="Models\AvatarItemInputModel.cs" />
     <Compile Include="Models\AvatarItemModel.cs" />
