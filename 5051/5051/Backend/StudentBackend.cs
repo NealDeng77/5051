@@ -248,6 +248,51 @@ namespace _5051.Backend
             ToggleStatus(myData);
         }
 
+        // </summary> Uses an attendance id to fetch attendance data and then student data to create a viewmodel </summary>
+        public AttendanceDetailsViewModel GetAttendanceDetailsViewModel(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+
+            var attendanceData = ReadAttendance(id);
+
+            if (attendanceData == null)
+            {
+                return null;
+            }
+
+            var studentId = attendanceData.StudentId;
+
+            var student = Read(studentId);
+
+            if (student == null)
+            {
+                return null;
+            }
+
+            var ret = new AttendanceDetailsViewModel
+            {
+                Attendance = new AttendanceModel
+                {
+                    StudentId = attendanceData.StudentId,
+                    Id = attendanceData.Id,
+                    In = UTCConversionsBackend.UtcToKioskTime(attendanceData.In),
+                    Out = UTCConversionsBackend.UtcToKioskTime(attendanceData.Out),
+                    Emotion = attendanceData.Emotion,
+                    EmotionUri = Emotion.GetEmotionURI(attendanceData.Emotion),
+
+                    IsNew = attendanceData.IsNew
+                },
+                Name = student.Name,
+                AvatarId = student.AvatarId,
+                AvatarComposite = student.AvatarComposite
+            };
+
+            return ret;
+        }
+
         /// <summary>
         /// Use the ID to toggle the status
         /// </summary>
