@@ -27,7 +27,7 @@
 
 <div class="row justify-content-center">
     <div class="col-1 "></div>
-    <div class="col lightTransparentBox FontSizeMedium text-center">
+    <div class="col lightTransparentBox FontSizeMedium text-center FontColorWhite">
         <br />
         <br />
         @using (Html.BeginForm())
@@ -37,36 +37,40 @@
             @Html.HiddenFor(m => m.StudentId)
             @Html.HiddenFor(m => m.IsNew)
             @Html.Hidden("Emotion", 1, new { @id = "EmotionCurrentId" });
-            <div class="row justify-content-center">
-                <div class="col-sm text-sm-center text-md-right">
+            <div class="row">
+                <div class="col-5 text-right">
                     @Html.DisplayNameFor(m => m.In)
                 </div>
                 <div class="col-1">
+                    &nbsp;:&nbsp;
                 </div>
-                <div class="col-sm text-left" id="studentValue">
+                <div class="col text-left" id="studentValue">
                     @Html.EditorFor(m => m.In)
                     @Html.ValidationMessageFor(m => m.In)
                 </div>
             </div>
-
-            <div class="row justify-content-center mt-1">
-                <div class="col-sm text-sm-center text-md-right">
+            <br />
+            <div class="row">
+                <div class="col-5 text-right">
                     @Html.DisplayNameFor(m => m.Out)
                 </div>
                 <div class="col-1">
+                    &nbsp;:&nbsp;
                 </div>
-                <div class="col-sm text-left">
+                <div class="col text-left">
                     @Html.EditorFor(m => m.Out)
                     @Html.ValidationMessageFor(m => m.Out)
                 </div>
             </div>
-            <div class="row justify-content-center mt-1">
-                <div class="col-sm text-sm-center text-md-right">
+            <br />
+            <div class="row">
+                <div class="col-5 text-right">
                     @Html.DisplayNameFor(m => m.Emotion)
                 </div>
                 <div class="col-1">
+                    &nbsp;:&nbsp;
                 </div>
-                <div class="col-sm text-left">
+                <div class="col text-left">
                     <div class="row">
                         @{
                             // list emotion icons
@@ -75,7 +79,7 @@
                                 var srcData = "/Content/img/Emotion" + emotion + ".png";
                                 var emotionId = emotion + "Id";
 
-                                <div id="@emotionId" class="col-2 BoxWithHighlightHover">
+                                <div id="@emotionId" class="col BoxWithHighlightHover">
                                     <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
                                 </div>
                             }
@@ -86,12 +90,12 @@
             <br />
             <hr />
             <br />
-            <div class="row justify-content-around">
-                <div class="col justify-content-center text-center">
-                    @Html.ActionLink("Cancel", "Read", new { id = Model.StudentId }, new { @class = "btn btn1 btn-light" })
+            <div class="row justify-content-around DispalyBoxWithMargin">
+                <div class="col  text-center DispalyBoxWithMargin">
+                    @Html.ActionLink("Cancel", "Read", new { id = Model.StudentId }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                 </div>
-                <div class="col justify-content-center text-center">
-                    <input disabled id="StudentLoginButton" type="submit" value="Create" class="btn btn1 btn-light">
+                <div class="col  text-center DispalyBoxWithMargin">
+                    <input disabled id="StudentLoginButton" type="submit" value="Create" class="btn btn1 btn-light DispalyBoxWithMargin">
                 </div>
             </div>
         }
@@ -99,6 +103,9 @@
     </div>
     <div class="col-1"></div>
 </div>
+<br />
+<br />
+
 <script>
     function UpdateEmotionCurrent(UserEmotionId) {
         document.getElementById("VeryHappyId").style.opacity = 1.0;
