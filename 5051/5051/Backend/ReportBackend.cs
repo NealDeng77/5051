@@ -409,7 +409,7 @@ namespace _5051.Backend
                     temp.HoursExpected = myToday.TimeDuration;
 
                     // Find out if the student attended that day, and add that in.  Because the student can check in/out multiple times add them together.
-                    var myRange = report.Student.Attendance.Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date).OrderByDescending(m => m.In).ToList();
+                    var myRange = report.Student.Attendance.Where(m => UTCConversionsBackend.UtcToKioskTime(m.In).Date == currentDate.Date).OrderBy(m => m.In).ToList();
 
                     //if no attendance record on this day, set attendance status to absent
                     if (!myRange.Any())
