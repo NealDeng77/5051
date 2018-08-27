@@ -205,6 +205,32 @@ namespace _5051.Controllers
         }
 
         //GET
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginViewModel user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var loginResult = identityBackend.LogUserIn(user.Email, user.Password);
+            if(!loginResult)
+            {
+                ModelState.AddModelError("", "Invalid Login Attempt");
+                return View(user);
+            }
+
+            return RedirectToAction("Index", "Support");
+        }
+
+        //GET
         public ActionResult DeleteUser(string id = null)
         {
             var findResult = identityBackend.FindUserByID(id);
