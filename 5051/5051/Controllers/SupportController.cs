@@ -204,6 +204,39 @@ namespace _5051.Controllers
 
         }
 
+        //GET
+        public ActionResult DeleteUser(string id = null)
+        {
+            var findResult = identityBackend.FindUserByID(id);
+            if(findResult == null)
+            {
+                return RedirectToAction("UserList", "Support");
+            }
+
+            return View(findResult);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser([Bind(Include =
+                                             "Id," +
+                                             "")] ApplicationUser user)
+        {
+            var findResult = identityBackend.FindUserByID(user.Id);
+            if (findResult == null)
+            {
+                return View(user);
+            }
+
+            var deleteResult = identityBackend.DeleteUser(findResult);
+            if(!deleteResult)
+            {
+                ModelState.AddModelError("", "Invalid Delete Attempt.");
+                return View(user);
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
         public ActionResult Settings()
         {
             if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))

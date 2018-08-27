@@ -440,6 +440,11 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool LogUserIn(string userName, string password)
         {
+            if(password == null)
+            {
+                return false;
+            }
+
             var result = SignInManager.PasswordSignIn(userName, password, isPersistent: false, shouldLockout: false);
 
             switch (result)
