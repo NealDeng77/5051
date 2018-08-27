@@ -17,6 +17,12 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+        
         #region Instantiate
         [TestMethod]
         public void Controller_AvatarSelectShop_Instantiate_Default_Should_Pass()
@@ -129,6 +135,7 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(id);
@@ -1078,6 +1085,7 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
 
             // Act
             var result = (RedirectToRouteResult)controller.Inventory(id);

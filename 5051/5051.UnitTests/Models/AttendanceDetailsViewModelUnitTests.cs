@@ -10,6 +10,12 @@ namespace _5051.UnitTests.Models
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         [TestMethod]
         public void AttendanceDetailsViewModel_Initialize_Invalid_AttendanceId_Should_Fail()
         {

@@ -78,6 +78,12 @@ namespace _5051.Backend
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
 
+            //if (!isTestingMode)
+            //{
+            //    var identityBackend = new IdentityBackend();
+            //    identityBackend.Reset();
+            //}
+
             SetTestingMode(false);
         }
 

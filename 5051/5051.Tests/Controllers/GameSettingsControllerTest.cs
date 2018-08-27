@@ -17,6 +17,12 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Instantiate
         [TestMethod]
         public void Controller_GameSettings_Instantiate_Default_Should_Pass()

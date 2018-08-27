@@ -14,6 +14,12 @@ namespace _5051.UnitTests.Models
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Instantiate
         [TestMethod]
         public void Models_StudentModel_Default_Instantiate_Should_Pass()

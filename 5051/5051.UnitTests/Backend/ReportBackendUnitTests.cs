@@ -14,6 +14,12 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         [TestMethod]
         public void Backend_ReportBackend_GenerateOverallReport_Valid_Report_Should_Pass()
         {
@@ -173,8 +179,8 @@ namespace _5051.UnitTests.Backend
             StudentBackend.Instance.Reset();
 
             //assert
-            Assert.AreEqual(result[0].Name, studentList[1].Name, TestContext.TestName);
-            Assert.AreEqual(result[1].Name, studentList[0].Name, TestContext.TestName);
+            Assert.AreEqual(result[0].Name, studentList[0].Name, TestContext.TestName);
+            Assert.AreEqual(result[1].Name, studentList[1].Name, TestContext.TestName);
         }
 
 

@@ -16,6 +16,12 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         [TestMethod]
         public void Controller_Admin_Index_Default_Should_Pass()
         {

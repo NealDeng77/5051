@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
+using _5051.Backend;
 
 namespace _5051.UnitTests.Models
 {
@@ -12,6 +13,12 @@ namespace _5051.UnitTests.Models
     public class AvatarItemListViewModelTests
     {
         public TestContext TestContext { get; set; }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
 
         #region Instantiate
         [TestMethod]
