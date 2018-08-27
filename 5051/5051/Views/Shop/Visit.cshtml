@@ -11,7 +11,7 @@
 <h2 id="PageTitle">Please pick one shop to visit</h2>
 
 <br />
-<div class="row" id="AllTrucks">
+<div class="row justify-content-center" id="AllTrucks">
     @{
         foreach (var item in Model)
         {
@@ -27,8 +27,8 @@
                 WorkerPresent = "/Content/avatar/AvatarHalf.png";
             }
 
-            <div class="col-sm-4 text-center">
-                <div class="PortalBox">
+            <div class="col-sm-auto text-center">
+                <div class="TruckBoxMedium">
                     <div class="Trucks" data-topper="/Content/shop/@item.TruckItems.Topper"
                          data-sign="/Content/shop/@item.TruckItems.Sign" data-truck="/Content/shop/@item.TruckItems.Truck"
                          data-menu="/Content/shop/@item.TruckItems.Menu" data-wheels="/Content/shop/@item.TruckItems.Wheels"
@@ -46,11 +46,12 @@
                         {
                             <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="closed">
                         }
+
+                        <br />
+                        <span class="text-center FontColor1 PeopleBox FontBold">
+                            @item.Name
+                        </span>
                     </div>
-                    <br />
-                    <span class="text-center FontColor1">
-                        @item.Name
-                    </span>
                 </div>
             </div>
         }
