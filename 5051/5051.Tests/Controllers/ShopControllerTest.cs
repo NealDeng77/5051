@@ -224,7 +224,7 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Factory_Data_Valid_Item_Is_Not_Limited_Should_Pass()
+        public void Controller_Shop_Factory_Data_Valid_Item_Quantity_Is_Not_Limited_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
