@@ -268,7 +268,10 @@ namespace _5051.Tests.Controllers
 
             var data = new ShopBuyViewModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var ItemList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+            data.ItemId = ItemList.Find(n => n.IsLimitSupply == true).Id;
+
+            // Get the Item which is limited
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -279,10 +282,12 @@ namespace _5051.Tests.Controllers
             var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
 
             myInventory.Tokens = 10;
+            myInventory.Quantities = 10;
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             var expect = myStudent.Tokens - myInventory.Tokens;
             var expectOutcome = myStudent.Truck.Outcome + myInventory.Tokens;
+            var expectQuantities = myInventory.Quantities - 1;
 
             // Act
             ViewResult result = controller.Factory(data) as ViewResult;
@@ -294,6 +299,7 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
             Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.AreEqual(expectQuantities, myInventory.Quantities, TestContext.TestName);
             Assert.IsNotNull(myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
