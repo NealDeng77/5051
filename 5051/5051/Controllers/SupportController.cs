@@ -231,6 +231,82 @@ namespace _5051.Controllers
         }
 
         //GET
+        public ActionResult CreateStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateStudent(LoginViewModel user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var newStudent = new StudentModel();
+
+            newStudent.Name = user.Email;
+
+            var createResult = StudentBackend.Instance.Create(newStudent);
+
+            if (createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
+        public ActionResult CreateTeacher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateTeacher(LoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var createResult = identityBackend.CreateNewTeacher(user.Email, user.Password, user.Email);
+
+            if(createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
+        public ActionResult CreateSupport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSupport(LoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var createResult = identityBackend.CreateNewSupportUser(user.Email, user.Password, user.Email);
+
+            if (createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
         public ActionResult DeleteUser(string id = null)
         {
             var findResult = identityBackend.FindUserByID(id);

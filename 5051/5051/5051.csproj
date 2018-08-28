@@ -718,6 +718,9 @@
     <Content Include="Views\Support\Settings.cshtml" />
     <Content Include="Views\Support\DeleteUser.cshtml" />
     <Content Include="Views\Support\Login.cshtml" />
+    <Content Include="Views\Support\CreateStudent.cshtml" />
+    <Content Include="Views\Support\CreateTeacher.cshtml" />
+    <Content Include="Views\Support\CreateSupport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

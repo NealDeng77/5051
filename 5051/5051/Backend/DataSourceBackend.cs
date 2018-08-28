@@ -67,6 +67,12 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
+            ////if (!isTestingMode)
+            ////{
+            ////    var identityBackend = new IdentityBackend();
+            ////    identityBackend.Reset();
+            ////}
+
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
             SchoolCalendarBackend.Reset();
@@ -78,11 +84,7 @@ namespace _5051.Backend
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
 
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityBackend();
-            //    identityBackend.Reset();
-            //}
+
 
             SetTestingMode(false);
         }
