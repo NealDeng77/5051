@@ -224,7 +224,44 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
-        public void Controller_Shop_Factory_Data_Valid_Should_Pass()
+        public void Controller_Shop_Factory_Data_Valid_Item_Is_Not_Limited_Should_Pass()
+        {
+            // Arrange
+            ShopController controller = new ShopController();
+
+            var data = new ShopBuyViewModel();
+            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+
+            // Get the Student Record and Add some Tokens to it.
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 1000;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+
+            // Get the Item Record and Set the Token Value
+            var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+
+            myInventory.Tokens = 10;
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
+
+            var expect = myStudent.Tokens - myInventory.Tokens;
+            var expectOutcome = myStudent.Truck.Outcome + myInventory.Tokens;
+
+            // Act
+            ViewResult result = controller.Factory(data) as ViewResult;
+
+            var myStudent2 = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, myStudent2.Tokens, TestContext.TestName);
+            Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
+            Assert.IsNotNull(myStudent2.Truck.BusinessList, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Factory_Data_Valid_Item_Is_Limited_Should_Pass()
         {
             // Arrange
             ShopController controller = new ShopController();
