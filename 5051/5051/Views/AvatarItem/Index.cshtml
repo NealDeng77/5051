@@ -50,17 +50,17 @@
                     @{
                         foreach (var item in Model.AvatarItemList)
                         {
-                            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
 
                                 <div class="row no-gutters text-center justify-content-center">
                                     <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
                                         <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
                                                               
                                         <div class="text-center FontSizeSmall">
+                                            @item.Name<br />
+                                            @item.Description<br />
+                                            @item.Category<br />
                                             <br />
-                                            @item.Name
-                                            <br />
-                                            @item.Category
                                         </div>
                                     </a>
                                 </div>

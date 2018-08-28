@@ -62,7 +62,7 @@
                 <br />
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="studentName">
+                    <div class="col-6 text-sm-center text-md-right" id="studentName">
                         @Html.DisplayNameFor(m => m.Name)
                     </div>
                     <div class="col-1">
@@ -70,10 +70,11 @@
                     <div class="col-sm text-left lightTransparentBox" id="studentValue">
                         @Html.DisplayFor(m => m.Name)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="tokensName">
+                    <div class="col-6 text-sm-center text-md-right" id="tokensName">
                         @Html.DisplayNameFor(m => m.Description)
                     </div>
                     <div class="col-1">
@@ -82,10 +83,11 @@
                     <div class="col-sm text-left lightTransparentBox" id="tokensValue">
                         @Html.DisplayFor(m => m.Description)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="xpName">
+                    <div class="col-6 text-sm-center text-md-right" id="xpName">
                         @Html.DisplayNameFor(m => m.Uri)
                     </div>
                     <div class="col-1">
@@ -94,10 +96,11 @@
                     <div class="col-sm text-left lightTransparentBox" id="xpValue">
                         @Html.DisplayFor(m => m.Uri)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="xpName">
+                    <div class="col-6 text-sm-center text-md-right" id="xpName">
                         @Html.DisplayNameFor(m => m.Category)
                     </div>
                     <div class="col-1">
@@ -106,10 +109,11 @@
                     <div class="col-sm text-left lightTransparentBox" id="xpValue">
                         @Html.DisplayFor(m => m.Category)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="xpName">
+                    <div class="col-6 text-sm-center text-md-right" id="xpName">
                         @Html.DisplayNameFor(m => m.Tokens)
                     </div>
                     <div class="col-1">
@@ -118,10 +122,11 @@
                     <div class="col-sm text-left lightTransparentBox" id="xpValue">
                         @Html.DisplayFor(m => m.Tokens)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm text-sm-center text-md-right" id="xpName">
+                    <div class="col-6 text-sm-center text-md-right" id="xpName">
                         @Html.DisplayNameFor(m => m.Quantities)
                     </div>
                     <div class="col-1">
@@ -130,6 +135,7 @@
                     <div class="col-sm text-left lightTransparentBox" id="xpValue">
                         @Html.DisplayFor(m => m.Quantities)
                     </div>
+                    <div class="col-1"></div>
                 </div>
 
                 <br />
@@ -137,13 +143,13 @@
                 <br />
 
                 <div class="row justify-content-around">
-                    <div class="col-sm-auto justify-content-center text-center">
+                    <div class="col justify-content-center text-center">
                         @Html.ActionLink("Cancel", "Index", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
-                    <div class="col-sm-auto justify-content-center text-center">
+                    <div class="col justify-content-center text-center">
                         @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
-                    <div class="col-sm-auto justify-content-center text-center">
+                    <div class="col justify-content-center text-center">
                         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                 </div>
