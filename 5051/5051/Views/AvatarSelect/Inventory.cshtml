@@ -69,7 +69,7 @@
                                     @{
                                         foreach (var item in category.AvatarItemList)
                                         {
-                                            <div class="col-sm-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
 
                                                 <div class="row no-gutters justify-content-center">
                                                     <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
@@ -78,7 +78,9 @@
                                                 <div class="row no-gutters justify-content-center">
                                                     <div class="text-center FontSizeSmall">
                                                         <br />
-                                                        @item.Name
+                                                        @item.Name<br />
+                                                        @item.Description<br />
+                                                        <br />
                                                     </div>
                                                 </div>
                                             </div>
