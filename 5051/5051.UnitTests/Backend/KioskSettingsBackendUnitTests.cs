@@ -15,6 +15,12 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Instantiate
         [TestMethod]
         public void Backend_KioskSettingsBackend_Default_Instantiate_Should_Pass()

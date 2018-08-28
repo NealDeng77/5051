@@ -67,6 +67,12 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
+            if (!isTestingMode)
+            {
+                var identityBackend = new IdentityBackend();
+                identityBackend.Reset();
+            }
+
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
             SchoolCalendarBackend.Reset();
@@ -77,6 +83,8 @@ namespace _5051.Backend
 
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
+
+
 
             SetTestingMode(false);
         }
@@ -119,7 +127,7 @@ namespace _5051.Backend
             StudentBackend.SetDataSourceDataSet(SetEnum);
         }
 
-        public bool GetTestingMode()
+        public static bool GetTestingMode()
         {
             return isTestingMode;
         }

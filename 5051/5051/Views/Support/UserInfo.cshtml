@@ -25,7 +25,7 @@
         {
             <h5>User is not a Student</h5>
         }
-        @Html.ActionLink("Toggle Student", "ToggleStudent", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        @Html.ActionLink("Toggle Student", "ToggleStudent", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary" , id = "StudentToggleBtn" });
         <br />
         <br />
 
@@ -37,7 +37,7 @@
         {
             <h5>User is not a Teacher</h5>
         }
-        @Html.ActionLink("Toggle Teacher", "ToggleTeacher", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        @Html.ActionLink("Toggle Teacher", "ToggleTeacher", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary", id = "TeacherToggleBtn" });
         <br />
         <br />
 
@@ -49,9 +49,11 @@
         {
             <h5>User is not a Support User</h5>
         }
-        @Html.ActionLink("Toggle Support User", "ToggleSupport", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new { id = Model.Id });
+        @Html.ActionLink("Toggle Support User", "ToggleSupport", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary", id = "SupportToggleBtn" });
         <br />
         <br />
 
+        <h5>Delete this user?</h5>
+        @Html.ActionLink("Delete the user", "DeleteUser", "Support", routeValues: new { id = Model.Id}, htmlAttributes: new { @class="btn btn-primary", id = "DeleteUserBtn"})
     }
 }

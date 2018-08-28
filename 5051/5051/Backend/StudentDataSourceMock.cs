@@ -52,11 +52,11 @@ namespace _5051.Backend
         /// <returns>Student Passed In</returns>
         public StudentModel Create(StudentModel data)
         {
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityBackend();
-            //    identityBackend.CreateNewStudent(data);
-            //}
+            if (!isTestingMode)
+            {
+                var identityBackend = new IdentityBackend();
+                identityBackend.CreateNewStudent(data);
+            }
 
             StudentList.Add(data);
 
@@ -214,15 +214,15 @@ namespace _5051.Backend
         /// <param name="setEnum"></param>
         public void LoadDataSet(DataSourceDataSetEnum setEnum)
         {
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityBackend();
-            //    identityBackend.Reset();
-            //    //create support user
-            //    identityBackend.CreateNewSupportUser("su5051", "su5051", "su5051");
-            //    //create teacher user
-            //    identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
-            //}
+            if (!isTestingMode)
+            {
+                var identityBackend = new IdentityBackend();
+                identityBackend.Reset();
+                //create support user
+                identityBackend.CreateNewSupportUser("su5051", "su5051", "su5051");
+                //create teacher user
+                identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
+            }
             switch (setEnum)
             {
                 case DataSourceDataSetEnum.Demo:

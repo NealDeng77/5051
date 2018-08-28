@@ -2,40 +2,124 @@
 @{
     ViewBag.Title = "Settings";
 }
+
 <br />
-<h2>Settings</h2>
+<div class="row justify-content-center">
 
-
-<div class="col text-left">
-    <br />
-    <h4>What settings do you want to change?</h4>
-    @Html.ActionLink("Reset Data", "Reset", "Admin", null, new { @class = "btn btn-primary" })
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold FontColorWhite">Settings</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
 </div>
 
-<div class="col text-left">
+<div class="row">
     <br />
-    <h4>Configure Source Data Set</h4>
-    @Html.ActionLink("Default Data", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Default }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Demo Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Demo }, new { @class = "btn btn-primary", id = _5051.Models.DataSourceDataSetEnum.Demo })
-    @Html.ActionLink("Unit Test Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.UnitTest }, new { @class = "btn btn-primary" })
+    <br />
 </div>
 
-<div class="col text-left">
-    <br />
-    <h4>Configure Data Source</h4>
-    @Html.ActionLink("Mock Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("SQL Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn-primary" })
+<div class="row justify-content-center">
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            What settings do you want to change?
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Reset Data", "Reset", "Admin", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <br />
+        </div>
+
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            Configure Source Data Set
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Default Data", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Default }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Demo Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Demo }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Unit Test Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.UnitTest }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <br />
+        </div>
+
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            Configure Data Source
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Mock Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("SQL Database", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <br />
+        </div>
+
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            System Settings
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Kiosk", "Read", "KioskSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("School Dismissal Settings", "Read", "SchoolDismissalSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <br />
+        </div>
+
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            Game Settings
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Game", "Read", "GameSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <br />
+        </div>
+
+        <br />
+        <div class="FontSizeMedium text-left FontColorWhite">
+            Support Users
+        </div>
+        <div class="row justify-content-around DispalyBoxWithMargin">
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Login Portal", "Login", "Support", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <div class="col text-left DispalyBoxWithMargin">
+            </div>
+            <br />
+        </div>
+    </div>
+    <div class="col-1 "></div>
 </div>
 
-<div class="col text-left">
-    <br />
-    <h4>System Settings</h4>
-    @Html.ActionLink("Kiosk", "Read", "KioskSettings", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("School Dismissal Settings", "Read", "SchoolDismissalSettings", null, new { @class = "btn btn-primary" })
-</div>
-
-<div class="col text-left">
-    <br />
-    <h4>Game Settings</h4>
-    @Html.ActionLink("Game", "Read", "GameSettings", null, new { @class = "btn btn-primary" })
-</div>
+<br />

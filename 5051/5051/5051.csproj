@@ -246,6 +246,7 @@
     <Compile Include="Models\AdminReportIndexViewModel.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
+    <Compile Include="Models\AttendanceDetailsViewModel.cs" />
     <Compile Include="Models\AvatarCompositeModel.cs" />
     <Compile Include="Models\AvatarItemInputModel.cs" />
     <Compile Include="Models\AvatarItemModel.cs" />
@@ -715,6 +716,11 @@
     <Content Include="Views\AvatarSelect\Inventory.cshtml" />
     <Content Include="Views\Shop\BusinessReport.cshtml" />
     <Content Include="Views\Support\Settings.cshtml" />
+    <Content Include="Views\Support\DeleteUser.cshtml" />
+    <Content Include="Views\Support\Login.cshtml" />
+    <Content Include="Views\Support\CreateStudent.cshtml" />
+    <Content Include="Views\Support\CreateTeacher.cshtml" />
+    <Content Include="Views\Support\CreateSupport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

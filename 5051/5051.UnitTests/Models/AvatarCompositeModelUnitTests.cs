@@ -14,6 +14,12 @@ namespace _5051.UnitTests.Models
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Instantiate
         [TestMethod]
         public void Models_AvatarComposite_Default_Instantiate_Get_Set_Should_Pass()

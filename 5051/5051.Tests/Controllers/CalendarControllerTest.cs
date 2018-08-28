@@ -16,6 +16,12 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Instantiate
         [TestMethod]
         public void Controller_Calendar_Instantiate_Default_Should_Pass()

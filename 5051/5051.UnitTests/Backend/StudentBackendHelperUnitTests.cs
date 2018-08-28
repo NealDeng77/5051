@@ -14,6 +14,12 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         [TestMethod]
         public void Backend_StudentBackendHelper_CreateDemoAttendance_Yesterday_Is_Before_DateEnd_Should_Pass()
         {

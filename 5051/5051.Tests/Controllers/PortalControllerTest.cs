@@ -18,6 +18,12 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region RosterRegion
         [TestMethod]
         public void Controller_Portal_Roster_Should_Return_NewModel()

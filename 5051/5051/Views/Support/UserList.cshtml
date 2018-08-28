@@ -4,6 +4,18 @@
     ViewBag.Title = "UserList";
 }
 <br />
+<ul class="nav nav-pills">
+    <li class="nav-item ml-3">
+        @Html.ActionLink("Create A Student", "CreateStudent", "Support", null, new { @class = "nav-link text-white btn-primary" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Create A Teacher", "CreateTeacher", "Support", null, new { @class = "nav-link text-white btn-primary" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Create A Support", "CreateSupport", "Support", null, new { @class = "nav-link text-white btn-primary" })
+    </li>
+</ul>
+
 <h2>UserList</h2>
 
 @{

@@ -14,6 +14,12 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region Read
         [TestMethod]
         public void Backend_StudentBackend_Read_Invalid_ID_Null_Should_Fail()

@@ -204,6 +204,141 @@ namespace _5051.Controllers
 
         }
 
+        //GET
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginViewModel user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var loginResult = identityBackend.LogUserIn(user.Email, user.Password);
+            if(!loginResult)
+            {
+                ModelState.AddModelError("", "Invalid Login Attempt");
+                return View(user);
+            }
+
+            return RedirectToAction("Index", "Support");
+        }
+
+        //GET
+        public ActionResult CreateStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateStudent(LoginViewModel user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var newStudent = new StudentModel();
+
+            newStudent.Name = user.Email;
+
+            var createResult = StudentBackend.Instance.Create(newStudent);
+
+            if (createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
+        public ActionResult CreateTeacher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateTeacher(LoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var createResult = identityBackend.CreateNewTeacher(user.Email, user.Password, user.Email);
+
+            if(createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
+        public ActionResult CreateSupport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSupport(LoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var createResult = identityBackend.CreateNewSupportUser(user.Email, user.Password, user.Email);
+
+            if (createResult == null)
+            {
+                ModelState.AddModelError("", "Invalid Create Attempt");
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
+        //GET
+        public ActionResult DeleteUser(string id = null)
+        {
+            var findResult = identityBackend.FindUserByID(id);
+            if(findResult == null)
+            {
+                return RedirectToAction("UserList", "Support");
+            }
+
+            return View(findResult);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser([Bind(Include =
+                                             "Id," +
+                                             "")] ApplicationUser user)
+        {
+            var findResult = identityBackend.FindUserByID(user.Id);
+            if (findResult == null)
+            {
+                return View(user);
+            }
+
+            var deleteResult = identityBackend.DeleteUser(findResult);
+            if(!deleteResult)
+            {
+                ModelState.AddModelError("", "Invalid Delete Attempt.");
+                return View(user);
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
+
         public ActionResult Settings()
         {
             if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))

@@ -15,6 +15,12 @@ namespace _5051.UnitTests.Models
     {       
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         [TestMethod]
         public void Models_IndexViewModels_Default_Instantiate_Should_Pass()
         {

@@ -29,7 +29,15 @@
     min-height: 600px;
     max-height: 600px;
     min-width: 1000px;
-    max-width: 1000px
+    max-width: 1000px;
+}
+
+.TruckBoxMedium {
+    position: relative;
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 500px;
+    max-width: 500px;
 }
 
 @media screen and (max-width: 850px) {
@@ -146,6 +154,12 @@
         max-width: 450px;
         margin-top: 100px;
     }
+    .TruckBoxMedium {
+        min-height: 270px;
+        max-height: 270px;
+        min-width: 450px;
+        max-width: 450px;
+    }
 
     .grid-container > div {
         font-size: 12px;
@@ -164,6 +178,12 @@
         max-width: 372px;
         margin-top: 100px;
     }
+    .TruckBoxMedium {
+        min-height: 223px;
+        max-height: 223px;
+        min-width: 372px;
+        max-width: 372px;
+    }
 
     .grid-container > div {
         font-size: 11px;
@@ -181,6 +201,12 @@
         min-width: 300px;
         max-width: 300px;
         margin-top: 100px;
+    }
+    .TruckBoxMedium {
+        min-height: 180px;
+        max-height: 180px;
+        min-width: 300px;
+        max-width: 300px;
     }
 
     .grid-container > div {
@@ -604,5 +630,4 @@
 }
 
 /* End Edit Truck */
-
 
