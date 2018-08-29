@@ -180,6 +180,12 @@ namespace _5051.Backend
             // Storage Load all rows
             var DataSetList = DataSourceBackendTable.Instance.LoadAll<AvatarItemModel>(tableName, partitionKey);
 
+            if (DataSourceBackend.GetTestingMode())
+            {
+                var temp = new AvatarItemModel();
+                DataSetList.Add(temp);
+            }
+
             foreach (var item in DataSetList)
             {
                 DataList.Add(item);
