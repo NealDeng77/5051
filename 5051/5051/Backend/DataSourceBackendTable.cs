@@ -6,6 +6,7 @@ using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
+using Newtonsoft.Json;
 
 namespace _5051.Backend
 {
@@ -95,7 +96,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<DataSourceBackendTableEntity> LoadAll(string tableName, string pk)
+        public List<T> LoadAll<T>(string tableName, string pk)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -126,7 +127,14 @@ namespace _5051.Backend
                 result.AddRange(queryResponse.Results);
             } while (tableContinuationToken != null);
 
-            return result;
+            var myReturnList = new List<T>();
+
+            foreach (var item in result)
+            {
+                myReturnList.Add(ConvertFromEntity<T>(item));
+            }
+
+            return myReturnList;
         }
 
         /// <summary>
@@ -135,9 +143,9 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public DataSourceBackendTableEntity Create(string tableName, DataSourceBackendTableEntity data)
+        public T Create<T>(string tableName, string pk, string rk, T data)
         {
-            return Update(tableName, data);
+            return Update<T>(tableName, pk, rk, data);
         }
 
         /// <summary>
@@ -147,21 +155,23 @@ namespace _5051.Backend
         /// <param name="pk"></param>
         /// <param name="rk"></param>
         /// <returns></returns>
-        public DataSourceBackendTableEntity Load(string tableName, string pk, string rk)
+        public T Load<T>(string tableName, string pk, string rk)
         {
+            var myReturn = default(T);
+
             if (string.IsNullOrEmpty(tableName))
             {
-                return null;
+                return myReturn;
             }
 
             if (string.IsNullOrEmpty(pk))
             {
-                return null;
+                return myReturn;
             }
 
             if (string.IsNullOrEmpty(rk))
             {
-                return null;
+                return myReturn;
             }
 
             var Table = tableClient.GetTableReference(tableName);
@@ -172,10 +182,12 @@ namespace _5051.Backend
             var query = Table.Execute(retrieveOperation);
             if (query.Result == null)
             {
-                return null;
+                return myReturn;
             }
 
-            var myReturn = (DataSourceBackendTableEntity)query.Result;
+            var data = (DataSourceBackendTableEntity)query.Result;
+
+            myReturn = ConvertFromEntity<T>(data);
             return myReturn;
         }
 
@@ -185,24 +197,31 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public DataSourceBackendTableEntity Update(string tableName, DataSourceBackendTableEntity data)
+        public T Update<T>(string tableName, string pk, string rk, T data)
         {
+            var myResult = default(T);
+
             if (data == null)
             {
-                return null;
+                return myResult;
             }
+
+            // Add to Storage
+            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data,pk,rk);
 
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
 
-            var updateOperation = TableOperation.InsertOrReplace(data);
+            var updateOperation = TableOperation.InsertOrReplace(entity);
             var query = Table.Execute(updateOperation);
             if (query.Result == null)
             {
-                return null;
+                return myResult;
             }
 
-            return data;
+            myResult = DataSourceBackendTable.Instance.ConvertFromEntity<T>(entity);
+
+            return myResult;
         }
 
         /// <summary>
@@ -211,7 +230,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Delete(string tableName, DataSourceBackendTableEntity data)
+        public bool Delete<T>(string tableName, string pk, string rk, T data)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -226,10 +245,12 @@ namespace _5051.Backend
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
 
-            // Delete
-            data.ETag = "*";
 
-            var Operation = TableOperation.Delete(data);
+            // Delete
+            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
+            entity.ETag = "*";
+
+            var Operation = TableOperation.Delete(entity);
             var query = Table.Execute(Operation);
             if (query.Result == null)
             {
@@ -239,8 +260,54 @@ namespace _5051.Backend
             return true;
         }
 
+        /// <summary>
+        /// Convert the data item to an entity
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public DataSourceBackendTableEntity ConvertToEntity<T>(T data, string pk, string rk)
+        {
+            var entity = new DataSourceBackendTableEntity();
+            entity.PartitionKey = pk;
+            entity.RowKey = rk;
+            entity.Blob = JsonConvert.SerializeObject(data);
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Convert an entity to a data item
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public T ConvertFromEntity<T>(DataSourceBackendTableEntity data)
+        {
+            var myReturn = JsonConvert.DeserializeObject<T>(data.Blob);
+            return myReturn;
+        }
+
+        /// <summary>
+        /// Convert all the entities to data items
+        /// </summary>
+        /// <param name="dataList"></param>
+        /// <returns></returns>
+        public List<T> ConvertFromEntityList<T>(List<DataSourceBackendTableEntity> dataList)
+        {
+            var myReturn = new List<T>();
+
+            if (dataList == null)
+            {
+                return myReturn;
+            }
+
+            foreach (var item in dataList)
+            {
+                var temp = JsonConvert.DeserializeObject<T>(item.Blob);
+                myReturn.Add(temp);
+            }
+
+            return myReturn;
+        }
+
     }
 }
-
-
-//connectionString = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;";

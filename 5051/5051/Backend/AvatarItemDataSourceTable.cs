@@ -45,65 +45,16 @@ namespace _5051.Backend
         /// </summary>
         private List<AvatarItemModel> DataList = new List<AvatarItemModel>();
 
+        private const string ClassName = "AvatarItemModel";
         /// <summary>
         /// Table Name used for data storage
         /// </summary>
-        private string tableName = "AvatarItemModel".ToLower();
+        private string tableName = ClassName.ToLower();
 
         /// <summary>
         /// Partition Key used for data storage
         /// </summary>
-        private string partitionKey = "AvatarItemModel".ToLower();
-
-        /// <summary>
-        /// Convert the data item to an entity
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private DataSourceBackendTableEntity ConvertToEntity(AvatarItemModel data)
-        {
-            var entity = new DataSourceBackendTableEntity();
-            entity.PartitionKey = partitionKey;
-            entity.RowKey = data.Id;
-            entity.Blob = JsonConvert.SerializeObject(data);
-
-            return entity;
-        }
-
-        /// <summary>
-        /// Convert an entity to a data item
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private AvatarItemModel ConvertFromEntity(DataSourceBackendTableEntity data)
-        {
-            var myReturn = JsonConvert.DeserializeObject<AvatarItemModel>(data.Blob);
-            return myReturn;
-        }
-
-        /// <summary>
-        /// Convert all the entities to data items
-        /// </summary>
-        /// <param name="dataList"></param>
-        /// <returns></returns>
-        private List<AvatarItemModel> ConvertFromEntityList(List<DataSourceBackendTableEntity> dataList)
-        {
-            var myReturn = new List<AvatarItemModel>();
-
-            if (dataList == null)
-            {
-                return myReturn;
-            }
-
-            foreach (var item in dataList)
-            {
-                var temp = JsonConvert.DeserializeObject<AvatarItemModel>(item.Blob);
-                myReturn.Add(temp);
-            }
-
-            return myReturn;
-        }
-
+        private string partitionKey = ClassName.ToLower();
 
         /// <summary>
         /// Makes a new AvatarItem
@@ -115,9 +66,7 @@ namespace _5051.Backend
             DataList.Add(data);
 
             // Add to Storage
-            var entity = ConvertToEntity(data);
-            var entityResult = DataSourceBackendTable.Instance.Create(tableName, entity);
-            var myResult = ConvertFromEntity(entityResult);
+            var myResult = DataSourceBackendTable.Instance.Create<AvatarItemModel>(tableName, partitionKey, data.Id, data);
 
             return myResult;
         }
@@ -159,9 +108,7 @@ namespace _5051.Backend
             myReturn.Update(data);
 
             // Update Storage
-            var entity = ConvertToEntity(data);
-            var entityResult = DataSourceBackendTable.Instance.Update(tableName, entity);
-            var myResult = ConvertFromEntity(entityResult);
+            var myResult = DataSourceBackendTable.Instance.Create<AvatarItemModel>(tableName, partitionKey, data.Id, data);
 
             return myReturn;
         }
@@ -185,8 +132,7 @@ namespace _5051.Backend
             }
 
             // Storage Delete
-            var entity = ConvertToEntity(myData);
-            var myReturn = DataSourceBackendTable.Instance.Delete(tableName, entity);
+            var myReturn = DataSourceBackendTable.Instance.Delete<AvatarItemModel>(tableName, partitionKey, myData.Id, myData);
 
             return myReturn;
         }
@@ -232,8 +178,12 @@ namespace _5051.Backend
             DataSetClear();
 
             // Storage Load all rows
-            var EntityList = DataSourceBackendTable.Instance.LoadAll(tableName, partitionKey);
-            DataList = ConvertFromEntityList(EntityList);
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<AvatarItemModel>(tableName, partitionKey);
+
+            foreach (var item in DataSetList)
+            {
+                DataList.Add(item);
+            }
 
             // If Storage is Empty, then Create.
             if (DataList.Count < 1)
