@@ -382,6 +382,10 @@ namespace _5051.Backend
             }
 
             var currentDate = report.DateStart;  //loop variable
+            
+            TimeSpan accumlatedTotalHoursExpected = TimeSpan.Zero; //current accumulated total hours expected
+            TimeSpan accumlatedTotalHours = TimeSpan.Zero; //current accululated total hours attended
+            int emotionLevel = 0; //current emotion level
 
             while (currentDate.CompareTo(report.DateEnd) <= 0)  //loop until last date, include last date
             {
@@ -480,14 +484,43 @@ namespace _5051.Backend
 
                     }
 
+                    switch (temp.Emotion)
+                    {
+                        case EmotionStatusEnum.VeryHappy:
+                            temp.EmotionLevel = emotionLevel + 2;
+                            report.Stats.DaysVeryHappy++;
+                            break;
+                        case EmotionStatusEnum.Happy:
+                            temp.EmotionLevel = emotionLevel + 1;
+                            report.Stats.DaysHappy++;
+                            break;
+                        case EmotionStatusEnum.Neutral:
+                            temp.EmotionLevel = emotionLevel;
+                            report.Stats.DaysNeutral++;
+                            break;
+                        case EmotionStatusEnum.Sad:
+                            temp.EmotionLevel = emotionLevel - 1;
+                            report.Stats.DaysSad++;
+                            break;
+                        case EmotionStatusEnum.VerySad:
+                            temp.EmotionLevel = emotionLevel - 2;
+                            report.Stats.DaysVerySad++;
+                            break;
+                        default:
+                            temp.EmotionLevel = emotionLevel;
+                            break;
+                    }
+
+                    emotionLevel = temp.EmotionLevel;
+                    //calculations for both absent and present records                    
                     //calculations for both absent and present records                    
                     report.Stats.NumOfSchoolDays++;
-                    report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
-                    report.Stats.AccumlatedTotalHours += temp.HoursAttended;
+                    accumlatedTotalHoursExpected += temp.HoursExpected;
+                    accumlatedTotalHours += temp.HoursAttended;
 
                     // Need to add the totals back to the temp, because the temp is new each iteration
-                    temp.TotalHoursExpected += report.Stats.AccumlatedTotalHoursExpected;
-                    temp.TotalHours = report.Stats.AccumlatedTotalHours;
+                    temp.TotalHoursExpected += accumlatedTotalHoursExpected;
+                    temp.TotalHours = accumlatedTotalHours;
                 }
 
                 //add this attendance report to the attendance list
