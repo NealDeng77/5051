@@ -21,6 +21,9 @@ namespace _5051.Backend
         public KioskSettingsBackend KioskSettingsBackend = KioskSettingsBackend.Instance;
         public GameBackend GameBackend = GameBackend.Instance;
 
+        // Set the Mock System as the default DataSource
+        public DataSourceEnum DataSourceEnum = DataSourceEnum.Mock;
+
         /// <summary>
         /// Make into a Singleton
         /// </summary>
@@ -67,11 +70,11 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            ////if (!isTestingMode)
-            ////{
-            ////    var identityBackend = new IdentityBackend();
-            ////    identityBackend.Reset();
-            ////}
+            if (!isTestingMode)
+            {
+                var identityBackend = new IdentityBackend();
+                identityBackend.Reset();
+            }
 
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
@@ -127,7 +130,7 @@ namespace _5051.Backend
             StudentBackend.SetDataSourceDataSet(SetEnum);
         }
 
-        public bool GetTestingMode()
+        public static bool GetTestingMode()
         {
             return isTestingMode;
         }
