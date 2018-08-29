@@ -71,6 +71,59 @@ namespace _5051.Tests.Controllers
 
         #endregion LoginRegion
 
+        #region LoginViewModelRegion
+
+        [TestMethod]
+        public void Controller_Support_Login_LoginViewModel_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.Login(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_Login_LoginViewModel_loginResult_False_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Act
+            var result = controller.Login(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Controller_Support_Login_LoginViewModel_loginResult_True_Should_RedirectTo_Index()
+        //{
+        //    // Arrange
+        //    var controller = new SupportController();
+        //    LoginViewModel loginViewModel = new LoginViewModel();
+
+        //    loginViewModel.Email = "name@seattleu.edu";
+        //    loginViewModel.Password = "password";
+
+        //    // Act
+        //    var result = controller.Login(loginViewModel) as ViewResult;
+
+        //    // Assert
+        //    Assert.IsNotNull(result, TestContext.TestName);
+        //}
+
+
+        #endregion LoginViewModelRegion
+
         #region CreateStudentRegion
         [TestMethod]
         public void Controller_Support_CreateStudent_Default_Should_Pass()
