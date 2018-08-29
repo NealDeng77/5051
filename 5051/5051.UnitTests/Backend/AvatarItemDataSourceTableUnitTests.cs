@@ -197,6 +197,26 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
+        public void Backend_AvatarItemDataSourceTable_Delete_Invalid_ID_Bogus_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = AvatarItemDataSourceTable.Instance;
+            var expect = false;
+
+            // Act
+            var result = backend.Delete("bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_AvatarItemDataSourceTable_Delete_Valid_ID_Should_Pass()
         {
             // Arrange
