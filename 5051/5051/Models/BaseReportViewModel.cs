@@ -47,17 +47,17 @@ namespace _5051.Models
         /// <summary>
         /// Hold the string representation of all year values of dates. Use this string in javascript to generate charts.
         /// </summary>
-        public string Years { get; set; }
+        public string YearArray { get; set; }
 
         /// <summary>
         /// Hold the string representation of all months values of dates. Use this string in javascript to generate charts.
         /// </summary>
-        public string Months { get; set; }
+        public string MonthArray { get; set; }
 
         /// <summary>
         /// Hold the string representation of all day values of dates. Use this string in javascript to generate charts.
         /// </summary>
-        public string Days { get; set; }
+        public string DayArray { get; set; }
 
         /// <summary>
         /// Hold the string representation of all perfect attendance values of dates. Use this string in javascript to generate charts.

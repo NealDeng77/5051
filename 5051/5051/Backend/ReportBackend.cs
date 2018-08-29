@@ -551,9 +551,9 @@ namespace _5051.Backend
             report.Goal = SchoolDismissalSettingsBackend.Instance.GetDefault().Goal;
 
             //set the date array, ideal value array and actual value array for line chart
-            report.Years = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Year.ToString()).ToArray());
-            report.Months = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Month.ToString()).ToArray());
-            report.Days = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Day.ToString()).ToArray());
+            report.YearArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Year.ToString()).ToArray());
+            report.MonthArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Month.ToString()).ToArray());
+            report.DayArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Day.ToString()).ToArray());
             report.ActualValues = @String.Join(", ",
                 report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
                     .Select(m => m.TotalHours.TotalHours.ToString("0.#")).ToArray());

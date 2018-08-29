@@ -350,9 +350,9 @@
         data.addColumn('number', "Goal: @Model.Goal%");
         data.addColumn('number', '@Model.Student.Name');
 
-        var years = [@Model.Years];
-        var months = [@Model.Months];
-        var days = [@Model.Days];
+        var years = [@Model.YearArray];
+        var months = [@Model.MonthArray];
+        var days = [@Model.DayArray];
         var perfect = [@Model.PerfectValues];
         var goal = [@Model.GoalValues];
         var actual = [@Model.ActualValues];
@@ -402,9 +402,9 @@
         data.addColumn('date', 'Date');
         data.addColumn('number', 'Emotion Level');
 
-        var years = [@Model.Years];
-        var months = [@Model.Months];
-        var days = [@Model.Days];
+        var years = [@Model.YearArray];
+        var months = [@Model.MonthArray];
+        var days = [@Model.DayArray];
         var emotionLevelValues = [@Model.EmotionLevelValues];
         var i = 0;
         while (i < years.length) {
