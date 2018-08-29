@@ -202,10 +202,120 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="row justify-content-center">
+                <div class="col-11 text-center">
+                    <br />
+                    <hr />
+                    <div class="FontSizeMedium m-3">Statistics</div>
+                </div>
+            </div>
+            <div class="col-sm-auto"></div>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="row mt-3">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Total Hours :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.AccumlatedTotalHours.TotalHours.ToString("0.#") hours / @Model.Stats.AccumlatedTotalHoursExpected.TotalHours.ToString("0.#") hours (@Model.Stats.PercAttendedHours%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Present :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days (@Model.Stats.PercPresent%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Absent :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days (@Model.Stats.PercUnexcused%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Punch In Late :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days (@Model.Stats.PercInLate%)
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Punch Out Early :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days (@Model.Stats.PercOutEarly%)
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Very Happy :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysVeryHappy days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Happy :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysHappy days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Neutral :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysNeutral days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Sad :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysSad days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Very Sad :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysVerySad days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="donutchart" class="chart2"></div>
+                </div>
+
+
+
+            </div>
 
         </div>
-
     </div>
     <div class="col-1 "></div>
 </div>
