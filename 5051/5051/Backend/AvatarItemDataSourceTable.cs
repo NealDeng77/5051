@@ -68,7 +68,7 @@ namespace _5051.Backend
             // Add to Storage
             var myResult = DataSourceBackendTable.Instance.Create<AvatarItemModel>(tableName, partitionKey, data.Id, data);
 
-            return myResult;
+            return data;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace _5051.Backend
             // Update Storage
             var myResult = DataSourceBackendTable.Instance.Create<AvatarItemModel>(tableName, partitionKey, data.Id, data);
 
-            return myReturn;
+            return data;
         }
 
         /// <summary>

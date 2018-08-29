@@ -87,8 +87,6 @@ namespace _5051.Backend
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
 
-
-
             SetTestingMode(false);
         }
 
@@ -129,6 +127,12 @@ namespace _5051.Backend
             AvatarItemBackend.SetDataSourceDataSet(SetEnum);
             StudentBackend.SetDataSourceDataSet(SetEnum);
         }
+
+        //public static void ResetTestingModes(DataSourceDataSetEnum dataSourceDataSetEnum)
+        //{
+        //    SetTestingMode(false);
+        //    DataSourceBackend.Instance.s(dataSourceDataSetEnum);
+        //}
 
         public static bool GetTestingMode()
         {

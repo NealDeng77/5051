@@ -49,29 +49,40 @@ namespace _5051.Backend
 
         public bool SetDataSourceServerMode(DataSourceEnum dataSourceServerMode)
         {
+            var connectionString = string.Empty;
+            var StorageConnectionString = string.Empty;
+
+            switch (dataSourceServerMode)
+            {
+                case DataSourceEnum.Local:
+                    StorageConnectionString = "StorageConnectionStringLocal";
+                    break;
+
+                case DataSourceEnum.ServerLive:
+                    StorageConnectionString = "StorageConnectionStringServerLive";
+                    break;
+
+                case DataSourceEnum.ServerTest:
+                    StorageConnectionString = "StorageConnectionStringServerTest";
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return true;
+            }
+
+            return SetDataSourceServerModeDirect(StorageConnectionString);
+        }
+
+        public bool SetDataSourceServerModeDirect(string StorageConnectionString)
+        {
             try
             {
-                var connectionString = string.Empty;
-                var StorageConnectionString = string.Empty;
-
-                switch (dataSourceServerMode)
-                {
-                    case DataSourceEnum.Local:
-                        StorageConnectionString = "StorageConnectionStringLocal";
-                        break;
-
-                    case DataSourceEnum.ServerLive:
-                        StorageConnectionString = "StorageConnectionStringServerLive";
-                        break;
-
-                    case DataSourceEnum.ServerTest:
-                        StorageConnectionString = "StorageConnectionStringServerTest";
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                         CloudConfigurationManager.GetSetting(StorageConnectionString));
 
@@ -88,7 +99,6 @@ namespace _5051.Backend
                 return false;
             }
         }
-
 
         /// <summary>
         /// Load All Rows that match the PK
@@ -108,6 +118,21 @@ namespace _5051.Backend
                 return null;
             }
 
+            var myReturnList = new List<T>();
+
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return myReturnList;
+            }
+
+            return LoadAllDirect<T>(tableName, pk);
+        }
+
+        public List<T> LoadAllDirect<T>(string tableName, string pk)
+        {
+            var myReturnList = new List<T>();
+
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
 
@@ -126,8 +151,6 @@ namespace _5051.Backend
                 tableContinuationToken = queryResponse.ContinuationToken;
                 result.AddRange(queryResponse.Results);
             } while (tableContinuationToken != null);
-
-            var myReturnList = new List<T>();
 
             foreach (var item in result)
             {
@@ -174,6 +197,19 @@ namespace _5051.Backend
                 return myReturn;
             }
 
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return myReturn;
+            }
+
+            return LoadDirect<T>(tableName, pk, rk);
+        }
+
+        public T LoadDirect<T>(string tableName, string pk, string rk)
+        {
+            var myReturn = default(T);
+
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
 
@@ -206,11 +242,24 @@ namespace _5051.Backend
                 return myResult;
             }
 
-            // Add to Storage
-            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data,pk,rk);
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return myResult;
+            }
+
+            return UpdateDirect<T>(tableName, pk, rk, data);
+        }
+
+        public T UpdateDirect<T>(string tableName, string pk, string rk, T data)
+        {
+            var myResult = default(T);
 
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
+
+            // Add to Storage
+            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
 
             var updateOperation = TableOperation.InsertOrReplace(entity);
             var query = Table.Execute(updateOperation);
@@ -242,9 +291,18 @@ namespace _5051.Backend
                 return false;
             }
 
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return true;
+            }
+
+            return DeleteDirect<T>(tableName, pk, rk, data);
+        }
+        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data)
+        { 
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
-
 
             // Delete
             var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
