@@ -55,6 +55,22 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region LoginRegion
+        [TestMethod]
+        public void Controller_Support_Login_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            // Act
+            var result = controller.Login() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion LoginRegion
+
         #region CreateStudentRegion
         [TestMethod]
         public void Controller_Support_CreateStudent_Default_Should_Pass()
@@ -71,6 +87,37 @@ namespace _5051.Tests.Controllers
 
         #endregion CreateStudentRegion
 
+        #region CreateTeacherRegion
+        [TestMethod]
+        public void Controller_Support_CreateTeacher_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            // Act
+            var result = controller.CreateTeacher() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateTeacherRegion
+
+        #region CreateSupportRegion
+        [TestMethod]
+        public void Controller_Support_CreateSupport_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            // Act
+            var result = controller.CreateSupport() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateSupportRegion
 
     }
 }
