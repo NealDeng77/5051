@@ -213,6 +213,27 @@ namespace _5051.Tests.Controllers
 
         #endregion CreateTeacherRegion
 
+        #region CreateTeacherPostRegion
+
+        [TestMethod]
+        public void Controller_Support_CreateTeacher_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.CreateTeacher(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateTeacherPostRegion
+
         #region CreateSupportRegion
         [TestMethod]
         public void Controller_Support_CreateSupport_Default_Should_Pass()
