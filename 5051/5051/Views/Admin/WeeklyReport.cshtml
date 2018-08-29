@@ -10,6 +10,8 @@
 <div class="row justify-content-center">
     <div class="col-1 "></div>
     <div class="col">
+        
+
         <div class="row text-white">
             <a href="~/Admin/WeeklyReport/@Model.StudentId">
                 <div class="btn btn1 btn-light disabled p-2 m-2">
@@ -54,6 +56,20 @@
                 <br />
             }
         </div>
+        
+        
+        <div class="p-5 lightTransparentBox bg-white" id="div1">
+
+            <div class="row">
+                <div class="col text-center">
+                    <div class="FontSizeLarge">@Model.Student.Name's Weekly Report</div>
+                    <div class="FontSizeMedium">@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</div>
+                </div>
+            </div>
+            
+
+        </div>
+
     </div>
     <div class="col-1 "></div>
 </div>
