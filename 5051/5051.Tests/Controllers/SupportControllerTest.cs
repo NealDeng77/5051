@@ -162,6 +162,24 @@ namespace _5051.Tests.Controllers
         #region CreateStudentPostRegion
 
         [TestMethod]
+        public void Controller_Support_CreateStudent_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.CreateStudent(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+
+        [TestMethod]
         public void Controller_Support_CreateStudent_Post_Default_Should_RedirectTo_UserList()
         {
             // Arrange
