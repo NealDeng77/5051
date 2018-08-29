@@ -82,26 +82,12 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
             if (myStudent == null)
             {
                 // Send to Error Page
                 return RedirectToAction("Error", "Home");
             }
-
-            data.Name = myStudent.Name;
-            if (!DataSourceBackend.GetTestingMode())
-            {
-                var idBackend = new IdentityBackend();
-                var loginResult = idBackend.LogUserIn(myStudent.Name, data.Password);
-                if (!loginResult)
-                {
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(data);
-                }
-            }
-
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
