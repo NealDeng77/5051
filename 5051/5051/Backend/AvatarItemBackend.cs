@@ -49,14 +49,25 @@ namespace _5051.Backend
         /// <param name="dataSourceEnum"></param>
         public static void SetDataSource(DataSourceEnum dataSourceEnum)
         {
-            if (dataSourceEnum == DataSourceEnum.SQL)
+            switch (dataSourceEnum)
             {
-                // SQL not hooked up yet...
-                // throw new NotImplementedException();
+                case DataSourceEnum.SQL:
+                    break;
+
+                case DataSourceEnum.Local:
+                case DataSourceEnum.ServerLive:
+                case DataSourceEnum.ServerTest:
+                    DataSourceBackendTable.Instance.SetDataSourceServerMode(dataSourceEnum);
+                    DataSource = AvatarItemDataSourceTable.Instance;
+                    break;
+
+                case DataSourceEnum.Mock:
+                default:
+                    // Default is to use the Mock
+                    DataSource = AvatarItemDataSourceMock.Instance;
+                    break;
             }
 
-            // Default is to use the Mock
-            DataSource = AvatarItemDataSourceMock.Instance;
         }
 
         /// <summary>
