@@ -66,7 +66,7 @@
                     <div class="FontSizeMedium">@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</div>
                 </div>
             </div>
-            
+
             <div class="row justify-content-center">
                 <div class="col-11 text-center">
                     <br /><hr />
@@ -78,7 +78,7 @@
                     <div id="curve_chart" class="chart"></div>
                 </div>
             </div>
-            
+
             <div class="row justify-content-center">
                 <div class="col-11 text-center">
                     <br />
@@ -91,6 +91,118 @@
                     <div id="stepped_chart" class="chart"></div>
                 </div>
             </div>
+
+            <div class="row justify-content-center">
+                <div class="col-11 text-center">
+                    <br />
+                    <hr />
+                    <div class="FontSizeMedium m-3">Attendance / Day</div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-fit table-bordered m-auto">
+                            <tr class="text-center">
+                                <th class="text-center reportTableCell">Mon</th>
+                                <th class="text-center reportTableCell">Tue</th>
+                                <th class="text-center reportTableCell">Wed</th>
+                                <th class="text-center reportTableCell">Thu</th>
+                                <th class="text-center reportTableCell">Fri</th>
+                            </tr>
+                            <tr>
+                                @foreach (var item in Model.AttendanceList)
+                                {
+                                    <td class="p-3">
+
+                                        <div class="text-center">
+
+                                            @item.Date.ToString("MM/dd")
+                                            <img src="@item.EmotionUri" class="EmotionSize" alt="@item.Emotion" />
+                                            @if (!item.IsSchoolDay)
+                                            {
+                                                <div class="row" style="height: 100px">
+                                                    <div class="col align-self-center">
+                                                        <h6>No School</h6>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentExcused)
+                                            {
+                                                <div class="row" style="height: 100px">
+                                                    <div class="col align-self-center">
+                                                        <h6>Absent Excused</h6>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (item.AttendanceStatus == AttendanceStatusEnum.AbsentUnexcused)
+                                            {
+                                                <div class="row" style="height: 100px">
+                                                    <div class="col align-self-center">
+                                                        <h6>Absent Unexcused</h6>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (item.PercentAttended < 100)
+                                            {
+                                                <div class="row" style="height: 100px">
+                                                    <div class="col align-self-center">
+                                                        <div>@item.PercentAttended%</div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" style="width: @(item.PercentAttended)%; background-color: black" aria-valuenow="@item.PercentAttended * 100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                        <div>
+                                                            @item.HoursAttended.TotalHours.ToString("0.#") / @item.HoursExpected.TotalHours.ToString("0.#") hours
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        In<br />
+                                                        @item.TimeIn.ToString("h:mm tt")<br />
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        Out<br />
+                                                        @item.TimeOut.ToString("h:mm tt")<br />
+                                                    </div>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="row" style="height: 100px">
+                                                    <div class="col align-self-center">
+                                                        <img src="~/Content/img/blackCheckMark.png" style="height: 80px" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        In<br />
+                                                        @item.TimeIn.ToString("h:mm tt")<br />
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        Out<br />
+                                                        @item.TimeOut.ToString("h:mm tt")<br />
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        </div>
+
+
+
+
+                                    </td>
+                                }
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
 
         </div>
 
