@@ -529,6 +529,9 @@ namespace _5051.Backend
                 currentDate = currentDate.AddDays(1);
             }
 
+            report.Stats.AccumlatedTotalHoursExpected = accumlatedTotalHoursExpected;
+            report.Stats.AccumlatedTotalHours = accumlatedTotalHours;
+
             //if there is at least one school days in this report, calculate the following stats
             if (report.Stats.NumOfSchoolDays > 0)
             {
