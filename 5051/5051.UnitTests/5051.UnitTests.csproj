@@ -162,6 +162,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AttendanceReportViewModelUnitTests.cs" />
     <Compile Include="Models\AvatarItemShopViewModelUnitTests.cs" />
+    <Compile Include="Models\DataSourceBackendTableEntityUnitTests.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnumUnitTests .cs" />
     <Compile Include="Models\AvatarItemModelUnitTests.cs" />
     <Compile Include="Models\AvatarItemViewModelUnitTests.cs" />
