@@ -1,7 +1,219 @@
-﻿@model _5051.Models.QuarterReportViewModel
+﻿@using _5051.Models.Enums
+@model _5051.Models.QuarterReportViewModel
 @{
-    ViewBag.Title = "" + @Model.Student.Name + "'s Quarterly Report";
+    ViewBag.Title = "" + @Model.Student.Name + "'s Semesterly Report";
 }
+
+<div class="row">
+    <br />
+</div>
+<div class="row justify-content-center">
+    <div class="col-1 "></div>
+    <div class="col">
+
+
+        <div class="row text-white">
+            <a href="~/Admin/WeeklyReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Weekly
+                </div>
+            </a>
+            <a href="~/Admin/MonthlyReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Monthly
+                </div>
+            </a>
+            <a href="~/Admin/SemesterReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Semesterly
+                </div>
+            </a>
+            <a href="~/Admin/QuarterReport/@Model.StudentId">
+                <div class="btn btn1 btn-light disabled p-2 m-2">
+                    Quarterly
+                </div>
+            </a>
+            <a href="~/Admin/OverallReport/@Model.StudentId" class="mr-auto">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    School Year
+                </div>
+            </a>
+            <a onclick="printContent('div1')">
+                <div class="btn btn1 btn-light p-2 m-2 mr-4">
+                    Print Report
+                </div>
+            </a>
+        </div>
+        <div class="row text-white justify-content-center">
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.StudentId)
+                <div class="m-2">
+                    @Html.DropDownListFor(m => m.SelectedQuarterId, Model.Quarters, new { onchange = "this.form.submit();", @class = "form-control" })
+                </div>
+                <br />
+            }
+        </div>
+
+
+        <div class="p-5 lightTransparentBox bg-white" id="div1">
+
+            <div class="row">
+                <div class="col text-center">
+                    <div class="FontSizeLarge">@Model.Student.Name's Quarterly Report</div>
+                    <div class="FontSizeMedium">@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-11 text-center">
+                    <br /><hr />
+                    <div class="FontSizeMedium mt-3">Attendance Score: @Model.Stats.PercAttendedHours%</div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div id="curve_chart" class="chart"></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-11 text-center">
+                    <br />
+                    <hr />
+                    <div class="FontSizeMedium mt-3">Emotion Trend</div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div id="stepped_chart" class="chart"></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-11 text-center">
+                    <br />
+                    <hr />
+                    <div class="FontSizeMedium m-3">Statistics</div>
+                </div>
+            </div>
+            <div class="col-sm-auto"></div>
+            <div class="row">
+                <div class="col-md-7">
+
+                    <div class="row mt-3">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Total Hours :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.AccumlatedTotalHours.TotalHours.ToString("0.#") hours / @Model.Stats.AccumlatedTotalHoursExpected.TotalHours.ToString("0.#") hours (@Model.Stats.PercAttendedHours%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Present :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days (@Model.Stats.PercPresent%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Absent :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days (@Model.Stats.PercUnexcused%)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Punch In Late :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days (@Model.Stats.PercInLate%)
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Punch Out Early :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days (@Model.Stats.PercOutEarly%)
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Very Happy :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysVeryHappy days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Happy :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysHappy days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Neutral :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysNeutral days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Sad :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysSad days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                    <div class="col-sm-auto"></div>
+                    <div class="row">
+                        <div class="col-6 text-right FontSizeSmall">
+                            Very Sad :
+                        </div>
+                        <div class="col text-left FontSizeSmall">
+                            @Model.Stats.DaysVerySad days / @Model.Stats.DaysPresent present days
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="donutchart" class="chart2"></div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-1 "></div>
+</div>
+
+
+<div class="row">
+    <br />
+</div>
+
 <script>
     function printContent(el) {
         var restorepage = document.body.innerHTML;
@@ -11,164 +223,137 @@
         document.body.innerHTML = restorepage;
     }
 </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<br />
-<ul class="nav nav-pills">
-    <li class="nav-item ml-3">
-        @Html.ActionLink("Weekly", "WeeklyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
-    </li>
-    <li class="nav-item">
-        @Html.ActionLink("Monthly", "MonthlyReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
-    </li>
-    <li class="nav-item">
-        @Html.ActionLink("Semester", "SemesterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
-    </li>
-    <li class="nav-item">
-        @Html.ActionLink("Quarter", "QuarterReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link active text-white" })
-    </li>
-    <li class="nav-item mr-auto">
-        @Html.ActionLink("School Year", "OverallReport", "Admin", new { id = Model.StudentId }, new { @class = "nav-link text-white" })
-    </li>
-    @using (Html.BeginForm())
-    {
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart1);
 
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.StudentId)
-        <li class="nav-item">
-            @Html.DropDownListFor(m => m.SelectedQuarterId, Model.Quarters, new { onchange = "this.form.submit();", @class = "form-control" })
-        </li>
-    }
-    <li class="nav-item ml-3 mr-3">
-        <div href="#" class="nav-link text-white btn-primary" onclick="printContent('div1')">Print Report</div>
-    </li>
-</ul>
-<br />
-<div class="row justify-content-center m-auto" style="width: 1200px">
-    <div id="div1" class="bg-white p-5 w-100">
-        <div class="text-center">
-            <div class="row">
+    function drawChart1() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
 
-                <div class="col">
-                    <h4>@Model.Student.Name's Quarter Report</h4>
-                    <h6>@Model.DateStart.ToString("d") to @Model.DateEnd.ToString("d")</h6>
-                </div>
-            </div>
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Perfect: 100%');
+        data.addColumn('number', "Goal: @Model.Goal%");
+        data.addColumn('number', '@Model.Student.Name');
 
-
-
-        </div>
-        <br />
-        @if (Model.Stats.NumOfSchoolDays == 0)
-        {
-            <h5 class="text-light">No Data of this semester</h5>
+        var years = [@Model.YearArray];
+        var months = [@Model.MonthArray];
+        var days = [@Model.DayArray];
+        var perfect = [@Model.PerfectValues];
+        var goal = [@Model.GoalValues];
+        var actual = [@Model.ActualValues];
+        var i = 0;
+        while (i < years.length) {
+            data.addRow([new Date(years[i], months[i] - 1, days[i]), perfect[i], goal[i], actual[i]]);
+            i++;
         }
-        else
-        {
-            <div class="chartWithMarkerOverlay">
-                <div class="card w-100" id="curve_chart"></div>
-                <div class="overlay-text">
-                    <strong>@Model.Student.Name</strong> attended <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHours.TotalMinutes)</strong> minutes out of
-                    <strong>@Convert.ToInt32(Model.Stats.AccumlatedTotalHoursExpected.TotalMinutes)</strong> minutes of school time this quarter.
-                    <br />
-                    Percentage of attended school time is:
-                    <h1>@Model.Stats.PercAttendedHours%.</h1>
-                </div>
-            </div>
-            <br />
-            <div class="card w-100">
-                <table class="table">
 
-
-
-                    <tbody>
-                        <tr>
-                            <td>Present</td>
-                            <td>@Model.Stats.DaysPresent days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercPresent%</td>
-                        </tr>
-                        <tr>
-                            <td>Absent Unexcused</td>
-                            <td>@Model.Stats.DaysAbsentUnexcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercUnexcused%</td>
-                        </tr>
-                        <tr>
-                            <td>Absent Excused</td>
-                            <td>@Model.Stats.DaysAbsentExcused days / @Model.Stats.NumOfSchoolDays school days</td>
-                            <td>@Model.Stats.PercExcused%</td>
-                        </tr>
-                        <tr>
-                            <td>In Late</td>
-                            <td>@Model.Stats.DaysLate days / @Model.Stats.DaysPresent present days</td>
-                            <td>@Model.Stats.PercInLate%</td>
-                        </tr>
-                        <tr>
-                            <td>Out Early</td>
-                            <td>@Model.Stats.DaysOutEarly days / @Model.Stats.DaysPresent present days</td>
-                            <td>@Model.Stats.PercOutEarly%</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <br />
-
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-                // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('date', 'Date');
-                data.addColumn('number', 'Perfect: 100%');
-                data.addColumn('number', "Goal: @Model.Goal%");
-                data.addColumn('number', '@Model.Student.Name: @Model.Stats.PercAttendedHours%');
-                var dates = [
-                    @String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.ToString("yyyy,MM,dd")).ToArray())
-                ];
-                var values = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHours.TotalMinutes.ToString("0.##")).ToArray())];
-                var expected = [@String.Join(", ", Model.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.TotalHoursExpected.TotalMinutes.ToString("0.##")).ToArray())];
-
-                var year;
-                var month;
-                var date;
-                var i = 0;
-                while (i < dates.length) {
-                    year = dates[i];
-                    i++;
-                    month = dates[i] - 1;
-                    i++;
-                    date = dates[i];
-                    i++;
-                    data.addRow([new Date(year, month, date), expected[i / 3 - 1], expected[i / 3 - 1] * @Model.Goal /100, values[i / 3 - 1]]);
-                }
-
-                var options = {
-                    height: 600,
-                    curveType: 'function',
-                    chartArea: { width: "85%", height: "70%" },
-                    legend: 'top',
-                    colors: ['#FF5733', '#FFC300', '#3498DB'],
-                    vAxis: {
-                        title: "Cumulative Attendance (Minutes)", gridlines: {
-                            color: 'transparent'
-                        }
-                    },
-                    hAxis: {
-                        title: "Date", gridlines: {
-                            color: 'transparent'
-                        }
-                    }
-                };
-
-                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                chart.draw(data, options);
+        var options = {
+            series: {
+                0: { lineDashStyle: [2, 2, 20, 2, 20,
+                    2] },
+                1: { lineDashStyle: [4, 4] },
+            },
+            legend: 'top',
+            colors: ['#000000', '#000000', '#000000'],
+            vAxis: {
+                title: "Cumulative Attendance (Hours)",
+                minValue: 0
+            },
+            hAxis: {
+                title: "Date", gridlines: {
+                    count: 20,
+                },
+                format: 'M/d'
             }
-            </script>
+        };
+
+        function placeMarker(dataTable) {
+            var cli = this.getChartLayoutInterface();
+            var chartArea = cli.getChartAreaBoundingBox();
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        google.visualization.events.addListener(chart, 'ready',
+            placeMarker.bind(chart, data));
+        chart.draw(data, options);
+    }
+
+
+    google.charts.load('current', {'packages':['timeline']});
+    google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Emotion Level');
+
+        var years = [@Model.YearArray];
+        var months = [@Model.MonthArray];
+        var days = [@Model.DayArray];
+        var emotionLevelValues = [@Model.EmotionLevelValues];
+        var i = 0;
+        while (i < years.length) {
+            data.addRow([new Date(years[i], months[i] - 1, days[i]), emotionLevelValues[i]]);
+            i++;
         }
-    </div>
-</div>
-<br />
+
+        var options = {
+            legend: 'top',
+            colors: ['#000000'],
+            vAxis: {
+                title: "Emotion Level",
+                minValue: 0
+            },
+            hAxis: {
+                title: "Date", gridlines: {
+                    count: 20
+                },
+                format: 'M/d'
+            }
+        };
+
+        function placeMarker(dataTable) {
+            var cli = this.getChartLayoutInterface();
+            var chartArea = cli.getChartAreaBoundingBox();
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('stepped_chart'));
+
+        google.visualization.events.addListener(chart, 'ready',
+            placeMarker.bind(chart, data));
+        chart.draw(data, options);
+    }
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart3);
+    function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+            ['Emotion', 'Hours per Day'],
+            ['Very Happy', @Model.Stats.DaysVeryHappy],
+            ['Happy', @Model.Stats.DaysHappy],
+            ['Neutral', @Model.Stats.DaysNeutral],
+            ['Sad', @Model.Stats.DaysSad],
+            ['Very Sad', @Model.Stats.DaysVerySad]
+        ]);
+
+        var options = {
+            pieHole: 0.4,
+            colors: ['#ff8c00', '#ffc125', '#8ee5ee', '#008b8b', '#ee6a50'],
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+    }
+
+
+    $(window).resize(function(){
+        drawChart1();
+        drawChart2();
+        drawChart3();
+    });
+</script>

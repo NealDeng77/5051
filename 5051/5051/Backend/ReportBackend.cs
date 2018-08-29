@@ -382,6 +382,10 @@ namespace _5051.Backend
             }
 
             var currentDate = report.DateStart;  //loop variable
+            
+            TimeSpan accumlatedTotalHoursExpected = TimeSpan.Zero; //current accumulated total hours expected
+            TimeSpan accumlatedTotalHours = TimeSpan.Zero; //current accululated total hours attended
+            int emotionLevel = 0; //current emotion level
 
             while (currentDate.CompareTo(report.DateEnd) <= 0)  //loop until last date, include last date
             {
@@ -480,14 +484,43 @@ namespace _5051.Backend
 
                     }
 
+                    switch (temp.Emotion)
+                    {
+                        case EmotionStatusEnum.VeryHappy:
+                            temp.EmotionLevel = emotionLevel + 2;
+                            report.Stats.DaysVeryHappy++;
+                            break;
+                        case EmotionStatusEnum.Happy:
+                            temp.EmotionLevel = emotionLevel + 1;
+                            report.Stats.DaysHappy++;
+                            break;
+                        case EmotionStatusEnum.Neutral:
+                            temp.EmotionLevel = emotionLevel;
+                            report.Stats.DaysNeutral++;
+                            break;
+                        case EmotionStatusEnum.Sad:
+                            temp.EmotionLevel = emotionLevel - 1;
+                            report.Stats.DaysSad++;
+                            break;
+                        case EmotionStatusEnum.VerySad:
+                            temp.EmotionLevel = emotionLevel - 2;
+                            report.Stats.DaysVerySad++;
+                            break;
+                        default:
+                            temp.EmotionLevel = emotionLevel;
+                            break;
+                    }
+
+                    emotionLevel = temp.EmotionLevel;
+                    //calculations for both absent and present records                    
                     //calculations for both absent and present records                    
                     report.Stats.NumOfSchoolDays++;
-                    report.Stats.AccumlatedTotalHoursExpected += temp.HoursExpected;
-                    report.Stats.AccumlatedTotalHours += temp.HoursAttended;
+                    accumlatedTotalHoursExpected += temp.HoursExpected;
+                    accumlatedTotalHours += temp.HoursAttended;
 
                     // Need to add the totals back to the temp, because the temp is new each iteration
-                    temp.TotalHoursExpected += report.Stats.AccumlatedTotalHoursExpected;
-                    temp.TotalHours = report.Stats.AccumlatedTotalHours;
+                    temp.TotalHoursExpected += accumlatedTotalHoursExpected;
+                    temp.TotalHours = accumlatedTotalHours;
                 }
 
                 //add this attendance report to the attendance list
@@ -495,6 +528,9 @@ namespace _5051.Backend
 
                 currentDate = currentDate.AddDays(1);
             }
+
+            report.Stats.AccumlatedTotalHoursExpected = accumlatedTotalHoursExpected;
+            report.Stats.AccumlatedTotalHours = accumlatedTotalHours;
 
             //if there is at least one school days in this report, calculate the following stats
             if (report.Stats.NumOfSchoolDays > 0)
@@ -513,6 +549,22 @@ namespace _5051.Backend
 
             //set the attendance goal percent according to school dismissal settings
             report.Goal = SchoolDismissalSettingsBackend.Instance.GetDefault().Goal;
+
+            //set the date array, ideal value array and actual value array for line chart
+            report.YearArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Year.ToString()).ToArray());
+            report.MonthArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Month.ToString()).ToArray());
+            report.DayArray = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Day.ToString()).ToArray());
+            report.ActualValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => m.TotalHours.TotalHours.ToString("0.#")).ToArray());
+            report.PerfectValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => m.TotalHoursExpected.TotalHours.ToString("0.#")).ToArray());
+            report.GoalValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => (m.TotalHoursExpected.TotalHours * (report.Goal) / 100).ToString("0.#")).ToArray());
+            report.EmotionLevelValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).Select(m => m.EmotionLevel).ToArray());
         }
 
         /// <summary>
