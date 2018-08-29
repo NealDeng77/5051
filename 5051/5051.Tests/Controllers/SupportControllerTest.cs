@@ -39,9 +39,25 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
+        #region IndexRegion
+        [TestMethod]
+        public void Controller_Support_Index_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion IndexRegion
+
         #region CreateStudentRegion
         [TestMethod]
-        public void Controller_Student_Index_Default_Should_Pass()
+        public void Controller_Support_CreateStudent_Default_Should_Pass()
         {
             // Arrange
             var controller = new SupportController();
