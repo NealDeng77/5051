@@ -92,13 +92,14 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center">
-                <div class="col-11 text-center">
-                    <br />
-                    <hr />
-                    <div class="FontSizeMedium m-3">Attendance / Day</div>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-11 text-center">
+                <br />
+                <hr />
+                <div class="FontSizeMedium m-3">Attendance / Day</div>
             </div>
+        </div>
+
             <div class="row justify-content-center">
                 <div class="col">
                     <div class="table-responsive">
@@ -433,6 +434,27 @@
 
         google.visualization.events.addListener(chart, 'ready',
             placeMarker.bind(chart, data));
+        chart.draw(data, options);
+    }
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart3);
+    function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+            ['Emotion', 'Hours per Day'],
+            ['Very Happy', @Model.Stats.DaysVeryHappy],
+            ['Happy', @Model.Stats.DaysHappy],
+            ['Neutral', @Model.Stats.DaysNeutral],
+            ['Sad', @Model.Stats.DaysSad],
+            ['Very Sad', @Model.Stats.DaysVerySad]
+        ]);
+
+        var options = {
+            pieHole: 0.4,
+            colors: ['#ff8c00', '#ffc125', '#8ee5ee', '#008b8b', '#ee6a50'],
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
     }
 
