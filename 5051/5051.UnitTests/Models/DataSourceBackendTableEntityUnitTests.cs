@@ -15,7 +15,7 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_AvatarViewModel_Default_Instantiate_Should_Pass()
+        public void Models_DataSourceBackendTableEntity_Default_Instantiate_Should_Pass()
         {
 
             // Act
@@ -26,7 +26,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_AvatarViewModel_Default_Instantiate_With_Keys_Should_Pass()
+        public void Models_DataSourceBackendTableEntity_Default_Instantiate_With_Keys_Should_Pass()
         {
 
             // Act
@@ -37,7 +37,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_AvatarViewModel_Default_Instantiate_With_Blob_Should_Pass()
+        public void Models_DataSourceBackendTableEntity_Default_Instantiate_With_Blob_Should_Pass()
         {
             // Arrange
             var blob = "abc";
@@ -50,7 +50,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_AvatarViewModel_Default_Blob_Get_Should_Pass()
+        public void Models_DataSourceBackendTableEntity_Default_Blob_Get_Should_Pass()
         {
             // Arrange
             var data = new DataSourceBackendTableEntity("pk", "rk", "123");
@@ -63,7 +63,7 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_AvatarViewModel_Default_Blob_Set_Should_Pass()
+        public void Models_DataSourceBackendTableEntity_Default_Blob_Set_Should_Pass()
         {
             // Arrange
             var data = new DataSourceBackendTableEntity("pk", "rk");
