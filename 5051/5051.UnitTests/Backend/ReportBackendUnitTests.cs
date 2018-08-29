@@ -179,8 +179,8 @@ namespace _5051.UnitTests.Backend
             StudentBackend.Instance.Reset();
 
             //assert
-            Assert.AreEqual(result[0].Name, studentList[0].Name, TestContext.TestName);
-            Assert.AreEqual(result[1].Name, studentList[1].Name, TestContext.TestName);
+            Assert.AreEqual(result[0].Name, studentList[1].Name, TestContext.TestName);
+            Assert.AreEqual(result[1].Name, studentList[0].Name, TestContext.TestName);
         }
 
 
