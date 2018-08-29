@@ -513,6 +513,22 @@ namespace _5051.Backend
 
             //set the attendance goal percent according to school dismissal settings
             report.Goal = SchoolDismissalSettingsBackend.Instance.GetDefault().Goal;
+
+            //set the date array, ideal value array and actual value array for line chart
+            report.Years = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Year.ToString()).ToArray());
+            report.Months = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Month.ToString()).ToArray());
+            report.Days = @String.Join(", ", report.AttendanceList.Where(m => m.IsSchoolDay).ToList().Select(m => m.Date.Day.ToString()).ToArray());
+            report.ActualValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => m.TotalHours.TotalHours.ToString("0.#")).ToArray());
+            report.PerfectValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => m.TotalHoursExpected.TotalHours.ToString("0.#")).ToArray());
+            report.GoalValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).ToList()
+                    .Select(m => (m.TotalHoursExpected.TotalHours * (report.Goal) / 100).ToString("0.#")).ToArray());
+            report.EmotionLevelValues = @String.Join(", ",
+                report.AttendanceList.Where(m => m.IsSchoolDay).Select(m => m.EmotionLevel).ToArray());
         }
 
         /// <summary>
