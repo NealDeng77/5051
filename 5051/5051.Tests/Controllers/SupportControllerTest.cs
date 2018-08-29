@@ -39,6 +39,23 @@ namespace _5051.Tests.Controllers
 
         #endregion Instantiate
 
+        #region SupportSignInManagersRegion
+
+        [TestMethod]
+        public void Controller_Support_User_SignIn_Managers_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController((ApplicationUserManager)null, (ApplicationSignInManager)null);
+
+            // Act
+            var result = controller.GetType();
+
+            // Assert
+            Assert.AreEqual(result, new SupportController().GetType(), TestContext.TestName);
+        }
+
+        #endregion SupportSignInManagersRegion
+
         #region IndexRegion
         [TestMethod]
         public void Controller_Support_Index_Default_Should_Pass()
@@ -103,6 +120,23 @@ namespace _5051.Tests.Controllers
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        //[TestMethod]
+        //public void Controller_Support_Login_Post_Default_Should_Pass()
+        //{
+        //    // Arrange
+        //    var controller = new SupportController();
+
+        //    LoginViewModel loginViewModel = new LoginViewModel();
+        //    var viewModelResult = loginViewModel.GetType();
+
+        //    // Act
+        //    var resultViewModel = controller.Login(loginViewModel).GetType();
+
+        //    // Assert
+        //    Assert.AreEqual(viewModelResult, new LoginViewModel().GetType(), TestContext.TestName);
+
+        //}
 
         //[TestMethod]
         //public void Controller_Support_Login_Post_loginResult_True_Should_RedirectTo_Index()
