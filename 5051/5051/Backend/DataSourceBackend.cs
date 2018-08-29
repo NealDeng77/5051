@@ -72,7 +72,7 @@ namespace _5051.Backend
         {
             if (!isTestingMode)
             {
-                var identityBackend = new IdentityBackend();
+                var identityBackend = new IdentityDataSourceMock();
                 identityBackend.Reset();
             }
 
@@ -156,7 +156,7 @@ namespace _5051.Backend
                 return false; // all OK
             }
 
-            var IdentityBackend = new IdentityBackend();
+            var IdentityBackend = new IdentityDataSourceMock();
 
             if (IdentityBackend.UserHasClaimOfValue(userID, role, "True"))
             {

@@ -68,7 +68,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.CreateNewSupportUser(testUsername, testUsername, testUsername);
@@ -97,7 +97,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
 
             //act
@@ -143,7 +143,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.CreateNewTeacher(testUsername, testUsername, testUsername);
@@ -172,7 +172,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
 
             //act
@@ -222,7 +222,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.CreateNewStudent(testStudent);
@@ -255,7 +255,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
 
             //act
@@ -272,7 +272,7 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityBackend_GetStudentById_Valid_Student_Should_Pass()
         {
             //arrange
-            var backend = new IdentityBackend();
+            var backend = new IdentityDataSourceMock();
             var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             
             //var dataSourceBack = DataSourceBackend.Instance;
@@ -293,7 +293,7 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityBackend_GetStudentById_Invalid_Student_ID_Should_Fail()
         {
             //arrange
-            var backend = new IdentityBackend();
+            var backend = new IdentityDataSourceMock();
             var fakeID = "bogus";
 
             //act
@@ -322,7 +322,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.FindUserByUserName(testUsername);
@@ -337,7 +337,7 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityBackend_UpdateStudent_Null_Student_Should_Fail()
         {
             //arrange
-            var backend = new IdentityBackend();
+            var backend = new IdentityDataSourceMock();
 
             //act
             var result = backend.UpdateStudent(null);
@@ -364,7 +364,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
 
             var testStudent = new StudentModel();
@@ -397,7 +397,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
 
             var testStudent = new StudentModel();
@@ -463,7 +463,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.ListAllStudentUsers();
@@ -520,7 +520,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.ListAllTeacherUsers();
@@ -583,7 +583,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.ListAllSupportUsers();
@@ -617,7 +617,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.AddClaimToUser(testUserId, testClaimTypeToAdd, testClaimValueToAdd);
@@ -702,7 +702,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.RemoveClaimFromUser(testUsername, claimToRemove);
@@ -744,7 +744,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.RemoveClaimFromUser(testUsername, claimToRemove);
@@ -775,7 +775,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.DeleteUser(dummyUser);
@@ -802,7 +802,7 @@ namespace _5051.UnitTests.Backend
 
             var userManager = new ApplicationUserManager(userStore.Object);
 
-            var backend = new IdentityBackend(userManager, null);
+            var backend = new IdentityDataSourceMock(userManager, null);
 
             //act
             var result = backend.DeleteUser(dummyUser.Id);

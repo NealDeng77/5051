@@ -122,23 +122,6 @@ namespace _5051.Tests.Controllers
         }
 
         //[TestMethod]
-        //public void Controller_Support_Login_Post_Default_Should_Pass()
-        //{
-        //    // Arrange
-        //    var controller = new SupportController();
-
-        //    LoginViewModel loginViewModel = new LoginViewModel();
-        //    var viewModelResult = loginViewModel.GetType();
-
-        //    // Act
-        //    var resultViewModel = controller.Login(loginViewModel).GetType();
-
-        //    // Assert
-        //    Assert.AreEqual(viewModelResult, new LoginViewModel().GetType(), TestContext.TestName);
-
-        //}
-
-        //[TestMethod]
         //public void Controller_Support_Login_Post_loginResult_True_Should_RedirectTo_Index()
         //{
         //    // Arrange
@@ -176,6 +159,44 @@ namespace _5051.Tests.Controllers
 
         #endregion CreateStudentRegion
 
+        #region CreateStudentPostRegion
+
+        [TestMethod]
+        public void Controller_Support_CreateStudent_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.CreateStudent(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+
+        [TestMethod]
+        public void Controller_Support_CreateStudent_Post_Default_Should_RedirectTo_UserList()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+            loginViewModel.Email = StudentBackend.Instance.GetDefault().Name;
+            loginViewModel.Password = StudentBackend.Instance.GetDefault().Password;
+
+            // Act
+            var result = controller.CreateStudent(loginViewModel) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion CreateStudentPostRegion
+
         #region CreateTeacherRegion
         [TestMethod]
         public void Controller_Support_CreateTeacher_Default_Should_Pass()
@@ -191,6 +212,27 @@ namespace _5051.Tests.Controllers
         }
 
         #endregion CreateTeacherRegion
+
+        #region CreateTeacherPostRegion
+
+        [TestMethod]
+        public void Controller_Support_CreateTeacher_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.CreateTeacher(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion CreateTeacherPostRegion
 
         #region CreateSupportRegion
         [TestMethod]
