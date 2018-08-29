@@ -44,5 +44,40 @@ namespace _5051.Models
         /// </summary>
         public int Goal { get; set; }
 
+        /// <summary>
+        /// Hold the string representation of all year values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string Years { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all months values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string Months { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all day values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string Days { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all perfect attendance values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string PerfectValues { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all goal attendance values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string GoalValues { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all actual attendance values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string ActualValues { get; set; }
+
+        /// <summary>
+        /// Hold the string representation of all emotion level values values of dates. Use this string in javascript to generate charts.
+        /// </summary>
+        public string EmotionLevelValues { get; set; }
+
     }
 }
