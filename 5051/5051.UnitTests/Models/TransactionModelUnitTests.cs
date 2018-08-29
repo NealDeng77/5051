@@ -65,13 +65,13 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_AvatarItemModel_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Models_TransactionModel_Update_With_Invalid_Data_Null_Should_Fail()
         {
             // Arrange
 
             var expect = "test";
 
-            var data = new AvatarItemModel();
+            var data = new TransactionModel();
             data.Id = "test";
 
             // Act
@@ -81,8 +81,6 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
-
-
         #endregion Update
     }
 
