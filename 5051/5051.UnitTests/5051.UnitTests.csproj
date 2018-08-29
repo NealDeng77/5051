@@ -222,6 +222,7 @@
     <Compile Include="Models\SystemGlobalsModelUnitTests.cs" />
     <Compile Include="Models\BaseReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceDetailsViewModelUnitTests.cs" />
+    <Compile Include="Models\TransactionModelUnitTests.cs" />
     <Compile Include="Models\VerifyCodeViewModelUnitTests.cs" />
     <Compile Include="Models\VerifyPhoneNumberViewModelUnitTests.cs" />
     <Compile Include="Models\WeeklyReportViewModelUnitTests.cs" />

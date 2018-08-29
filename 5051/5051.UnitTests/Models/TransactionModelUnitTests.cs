@@ -1,16 +1,12 @@
-﻿using _5051.Models;
+﻿using System;
+using _5051.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5051.UnitTests.Models
 {
     [TestClass]
     public class TransactionModelUnitTests
-    {
+    {     
         public TestContext TestContext { get; set; }
 
         #region Instantiate
@@ -24,13 +20,70 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_TransactionModel_Instantiate_Valid_Should_Pass()
+        {
+            // Arrange
+            var expectUri = "uri";
+            var expectName = "name";
+            var test = new TransactionModel();
+
+            test.Name = expectName;
+            test.Uri = expectUri;
+
+            // Act
+            var result = new TransactionModel(test);
+
+            // Assert
+            Assert.AreEqual(expectUri, result.Uri, TestContext.TestName);
+            Assert.AreEqual(expectName, result.Name, TestContext.TestName);
+        }
         #endregion Instantiate
 
-
-
         #region Update
+        [TestMethod]
+        public void Models_TransactionModel_Update_With_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            var expectUri = "uri";
+            var expectName = "Name";
+
+            var data = new TransactionModel();
+
+            var test = new TransactionModel();
+            test.Uri = expectUri;
+            test.Name = expectName;
+
+            // Act
+            data.Update(test);
+            var result = data;
+
+            // Assert
+            Assert.AreEqual(expectUri, result.Uri, "Uri " + TestContext.TestName);
+            Assert.AreEqual(expectName, result.Name, "Name " + TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_AvatarItemModel_Update_With_Invalid_Data_Null_Should_Fail()
+        {
+            // Arrange
+
+            var expect = "test";
+
+            var data = new AvatarItemModel();
+            data.Id = "test";
+
+            // Act
+            data.Update(null);
+            var result = data.Id;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
 
 
         #endregion Update
     }
+
 }
