@@ -9,7 +9,52 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-1 "></div>
-    <div class="col"></div>
+    <div class="col">
+        <div class="row text-white">
+            <a href="~/Admin/WeeklyReport/@Model.StudentId">
+                <div class="btn btn1 btn-light disabled p-2 m-2">
+                    Weekly
+                </div>
+            </a>
+            <a href="~/Admin/MonthlyReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Monthly
+                </div>
+            </a>
+            <a href="~/Admin/SemesterReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Semesterly
+                </div>
+            </a>
+            <a href="~/Admin/QuarterReport/@Model.StudentId">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    Quarterly
+                </div>
+            </a>
+            <a href="~/Admin/OverallReport/@Model.StudentId" class="mr-auto">
+                <div class="btn btn1 btn-light p-2 m-2">
+                    School Year
+                </div>
+            </a>
+            <a onclick="printContent('div1')">
+                <div class="btn btn1 btn-light p-2 m-2 mr-4">
+                    Print Report
+                </div>
+            </a>
+        </div>
+        <div class="row text-white justify-content-center">
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.StudentId)
+                <div class="m-2">
+                    @Html.DropDownListFor(m => m.SelectedWeekId, Model.Weeks, new { onchange = "this.form.submit();", @class = "form-control" })
+                </div>
+                <br />
+            }
+        </div>
+    </div>
     <div class="col-1 "></div>
 </div>
 @*@using _5051.Models
