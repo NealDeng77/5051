@@ -334,7 +334,63 @@
         document.body.innerHTML = restorepage;
     }
 </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart1() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Perfect: 100%');
+        data.addColumn('number', "Goal: @Model.Goal%");
+        data.addColumn('number', '@Model.Student.Name');
+
+        var years = [@Model.Years];
+        var months = [@Model.Months];
+        var days = [@Model.Days];
+        var perfect = [@Model.PerfectValues];
+        var goal = [@Model.GoalValues];
+        var actual = [@Model.ActualValues];
+        var i = 0;
+        while (i < years.length) {
+            data.addRow([new Date(years[i], months[i] - 1, days[i]), perfect[i], goal[i], actual[i]]);
+            i++;
+        }
+
+        var options = {
+            series: {
+                0: { lineDashStyle: [2, 2, 20, 2, 20,
+                    2] },
+                1: { lineDashStyle: [4, 4] },
+            },
+            legend: 'top',
+            colors: ['#000000', '#000000', '#000000'],
+            vAxis: {
+                title: "Cumulative Attendance (Hours)",
+                minValue: 0
+            },
+            hAxis: {
+                title: "Date",
+                format: 'M/d'
+            }
+        };
+
+        function placeMarker(dataTable) {
+            var cli = this.getChartLayoutInterface();
+            var chartArea = cli.getChartAreaBoundingBox();
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        google.visualization.events.addListener(chart, 'ready',
+            placeMarker.bind(chart, data));
+        chart.draw(data, options);
+    }
+</script>
 @*@using _5051.Models
     @using _5051.Models.Enums
     @model _5051.Models.WeeklyReportViewModel
