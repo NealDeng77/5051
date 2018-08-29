@@ -53,31 +53,31 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Controller_Kiosk_Index_With_Empty_List_Should_Return_Error_Page()
-        {
-            // Arrange
-            KioskController controller = new KioskController();
+        //[TestMethod]
+        //public void Controller_Kiosk_Index_With_Empty_List_Should_Return_Error_Page()
+        //{
+        //    // Arrange
+        //    KioskController controller = new KioskController();
             
-            // Set unitesting backend data
-            DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
+        //    // Set unitesting backend data
+        //    DataSourceBackend.Instance.SetDataSourceDataSet(DataSourceDataSetEnum.UnitTest);
 
-            // Make empty StudentList
-            while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
-            {
-                var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
-                DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
-            }
+        //    // Make empty StudentList
+        //    while (DataSourceBackend.Instance.StudentBackend.Index().Count != 0)
+        //    {
+        //        var first = DataSourceBackend.Instance.StudentBackend.GetDefault();
+        //        DataSourceBackend.Instance.StudentBackend.Delete(first.Id);
+        //    }
 
-            // Act
-            var result = (RedirectToRouteResult)controller.Index();
+        //    // Act
+        //    var result = (RedirectToRouteResult)controller.Index();
 
-            // Reset DataSourceBackend
-            DataSourceBackend.Instance.Reset();
+        //    // Reset DataSourceBackend
+        //    DataSourceBackend.Instance.Reset();
 
-            // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        //}
         #endregion IndexRegion
 
         #region KioskLoginRegion

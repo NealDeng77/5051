@@ -436,8 +436,30 @@ namespace _5051.UnitTests.Backend
 
         #endregion GetShopTruckViewModel
 
-        #region GetGetShopTruckItemViewModel
-        #endregion GetGetShopTruckItemViewModel
+        #region GetShopTruckItemViewModel_StudentModel
+        [TestMethod]
+        public void Backend_FactoryInventoryBackend_GetShopTruckViewModel_StudentModel_Valid_Model_Should_Pass()
+        {
+            // Arrange
+            var test = FactoryInventoryBackend.Instance;
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            // Add item to Student Inventory and save student
+            student.Inventory.Add(item);
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            // Act
+            var result = test.GetShopTruckViewModel(student);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetShopTruckItemViewModel_StudentModel
 
         #region GetDefaultTruckFullItem
         [TestMethod]
