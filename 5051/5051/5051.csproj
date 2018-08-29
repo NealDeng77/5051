@@ -206,7 +206,7 @@
     <Compile Include="Backend\GameInterface.cs" />
     <Compile Include="Backend\GameDataSourceMock.cs" />
     <Compile Include="Backend\GameBackend.cs" />
-    <Compile Include="Backend\IdentityBackend.cs" />
+    <Compile Include="Backend\IdentityDataSourceMock.cs" />
     <Compile Include="Backend\IdentityDataSourceTable.cs" />
     <Compile Include="Backend\IdentityInterface.cs" />
     <Compile Include="Backend\KioskSettingsInterface.cs" />

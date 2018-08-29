@@ -16,15 +16,15 @@ using System.Security.Principal;
 
 namespace _5051.Backend
 {
-    public class IdentityBackend
+    public class IdentityDataSourceMock
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
 
-        public IdentityBackend() { }
+        public IdentityDataSourceMock() { }
 
-        public IdentityBackend(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public IdentityDataSourceMock(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;

@@ -18,7 +18,7 @@ namespace _5051.Controllers
 {
     public class SupportController : BaseController
     {
-        private IdentityBackend identityBackend = new IdentityBackend();
+        private IdentityDataSourceMock identityBackend = new IdentityDataSourceMock();
         private DataSourceBackend DataSourceBackend = DataSourceBackend.Instance;
 
         private ApplicationSignInManager _signInManager;
