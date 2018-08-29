@@ -6,12 +6,26 @@
     var DayLast = Model.DayLast.ToShortDateString(); //string.Format("{0:D1}:{1:D2}", Model.DayLast.Month, Model.DayLast.Day);
 }
 
+<br />
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold FontColorWhite">Admin Settings</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
 <div class="text-center FontColorWhite FontSizeSmall">
-    <br />
-
-    <h2>Admin Settings</h2>
-    <br />
-
     @{
         if (Model == null)
         {
@@ -275,14 +289,17 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>
 
             <br />
-            <div class="row justify-content-center">
-                <div class="col-sm-4">
-                    @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            <div class="row justify-content-around DispalyBoxWithMargin">
+                <div class="col text-center DispalyBoxWithMargin">
+                    @Html.ActionLink("Back", "Index", new { id = Model.Id, Controller = "Calendar" }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                 </div>
+                <div class="col text-center DispalyBoxWithMargin">
+                    @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                </div>
+                <br />
             </div>
 
         }
