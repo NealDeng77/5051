@@ -342,6 +342,18 @@ namespace _5051.Controllers
                     SetEnum = DataSourceEnum.SQL;
                     break;
 
+                case "Local":
+                    SetEnum = DataSourceEnum.Local;
+                    break;
+
+                case "ServerLive":
+                    SetEnum = DataSourceEnum.ServerLive;
+                    break;
+
+                case "ServerTest":
+                    SetEnum = DataSourceEnum.ServerTest;
+                    break;
+
                 case "Unknown":
                 default:
                     SetEnum = DataSourceEnum.Unknown;

@@ -11,7 +11,12 @@
         // Mock Dataset
         Mock = 1,
 
-        // SQL Dataset
-        SQL = 2
+        //TODO, remove
+        SQL = 2,
+
+        // Data Storage
+        Local = 10,
+        ServerTest = 11,
+        ServerLive = 12
     }
 }

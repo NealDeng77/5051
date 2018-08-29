@@ -63,12 +63,19 @@
         </div>
         <div class="row justify-content-around DispalyBoxWithMargin">
             <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Mock Database", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Mock Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+            @*<div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("SQL Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>*@
+            <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Local Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.Local }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
             <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("SQL Database", "DataSourceSet", "Support", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Server Test Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.ServerTest }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
             <div class="col text-left DispalyBoxWithMargin">
+                @Html.ActionLink("Server Live Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.ServerLive }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
             <br />
         </div>
