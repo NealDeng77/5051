@@ -29,7 +29,18 @@
     @{
         if (Model == null)
         {
-            <p>No Data</p>
+            <div class="row justify-content-center">
+
+                <div class="col-1 "></div>
+                <div class="col lightTransparentBox">
+                    <br />
+                    <div class="FontSizeLarge text-center FontColorWhite">
+                        No Data
+                    </div>
+                    <br />
+                </div>
+                <div class="col-1"></div>
+            </div>
         }
         else
         {
@@ -40,58 +51,62 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-5">
                         <div class="lightTransparentBox m-1 p-2">
-                            <h4>Dismissal Time Settings</h4>
+                            <div class="FontSizeMedium text-center FontColorWhite">
+                                Dismissal Time Settings
+                            </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.StartNormal)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.StartNormal.Hours, Model.StartNormal.Minutes)
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.StartEarly)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.StartEarly.Hours, Model.StartEarly.Minutes)
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.StartLate)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.StartLate.Hours, Model.StartLate.Minutes)
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.EndNormal)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.EndNormal.Hours, Model.EndNormal.Minutes)
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.EndEarly)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.EndEarly.Hours, Model.EndEarly.Minutes)
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.EndLate)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @string.Format("{0:D1}:{1:D2}", Model.EndLate.Hours, Model.EndLate.Minutes)
                                 </div>
                             </div>
                         </div>
                         <div class="lightTransparentBox m-1 p-2">
-                            <h4>Day of Week Dismissal Settings</h4>
+                            <div class="FontSizeMedium text-center FontColorWhite">
+                                Day of Week Dismissal Settings
+                            </div>
                             <table class="table table-borderless table-condensed w-75 m-auto">
                                 <thead>
                                     <tr>
@@ -143,146 +158,152 @@
 
                     <div class="col-sm-5">
                         <div class="lightTransparentBox m-1 p-2">
-                            <h4>Semester Settings</h4>
+                            <div class="FontSizeMedium text-center FontColorWhite">
+                                Semester Settings
+                            </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
-                                    School Year Start Date:
+                                <div class="col text-right">
+                                    School Year Start Date
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @DayFirst
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
-                                    School Year End Date:
+                                <div class="col text-right">
+                                    School Year End Date
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @DayLast
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.FallFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.FallFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.FallLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.FallLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SpringFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SpringFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SpringLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SpringLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                         </div>
                         <div class="lightTransparentBox m-1 p-2">
-                            <h4>Quarter Settings</h4>
+                            <div class="FontSizeMedium text-center FontColorWhite">
+                                Quarter Settings
+                            </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.FallQuarterFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.FallQuarterLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.WinterQuarterFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.WinterQuarterLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SpringQuarterFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SpringQuarterLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SummerQuarterFirstClassDay.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.SummerQuarterLastClassDay.ToShortDateString()
                                 </div>
                             </div>
                         </div>
                         <div class="lightTransparentBox m-1 p-2">
-                            <h4>Report Settings</h4>
+                            <div class="FontSizeMedium text-center FontColorWhite">
+                                Report Settings
+                            </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.Goal)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.Goal%
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.EarlyWindow)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.EarlyWindow
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-6 text-right">
+                                <div class="col text-right">
                                     @Html.DisplayNameFor(m => m.LateWindow)
                                 </div>
-                                <div class="col-sm-6 text-left">
+                                <div class="col text-left">
                                     @Model.LateWindow
                                 </div>
                             </div>
