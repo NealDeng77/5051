@@ -321,7 +321,7 @@ namespace _5051.Tests.Controllers
             myInventory.Quantities = 0;
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
-            // No purchage, so tokens stay the same
+            // No Purchase, so tokens stay the same
             var expect = myStudent.Tokens;
             var expectCount = myStudent.Inventory.Count();
 
@@ -359,7 +359,7 @@ namespace _5051.Tests.Controllers
             myInventory.Tokens = 100;
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
-            // No purchage, so tokens stay the same
+            // No Purchase, so tokens stay the same
             var expect = myStudent.Tokens;
             var expectCount = myStudent.Inventory.Count();
 
@@ -397,7 +397,7 @@ namespace _5051.Tests.Controllers
             myInventory.Tokens = 0;
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
-            // No purchage, so tokens stay the same
+            // No Purchase, so tokens stay the same
             var expect = myStudent.Tokens;
             var expectCount = myStudent.Inventory.Count();
 
@@ -436,9 +436,9 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.FactoryInventoryBackend.Update(myInventory);
 
             // Buy it one time, this puts the item in the student inventory
-            var myPurchage1 = (RedirectToRouteResult)controller.Factory(data);
+            var myPurchase1 = (RedirectToRouteResult)controller.Factory(data);
 
-            // No purchage, so tokens stay the same
+            // No Purchase, so tokens stay the same
             var expect = myStudent.Tokens;
             var expectCount = myStudent.Inventory.Count();
 
