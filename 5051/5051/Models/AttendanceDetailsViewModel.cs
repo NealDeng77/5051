@@ -51,20 +51,18 @@ namespace _5051.Models
             }
 
             var attendanceData = StudentBackend.Instance.ReadAttendance(id);
-
             if (attendanceData == null)
             {
                 return null;
             }
 
             var studentId = attendanceData.StudentId;
-
             var student = StudentBackend.Instance.Read(studentId);
-
-            if (student == null)
-            {
-                return null;
-            }
+            // Not possible to be null, because ReadAttendance returns with the student Id
+            //if (student == null)
+            //{
+            //    return null;
+            //}
 
             var ret = new AttendanceDetailsViewModel
             {

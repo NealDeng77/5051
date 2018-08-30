@@ -57,5 +57,87 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(testAttendance.Id, result.Attendance.Id, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void AttendanceDetailsViewModel_Get_Set_Should_Pass()
+        {
+            // Arrange
+            var backend = StudentBackend.Instance;
+            var myAttendanceDetails = new AttendanceDetailsViewModel();
+            var testStudent = backend.GetDefault();
+            var testAttendance = new AttendanceModel();
+            testAttendance.StudentId = testStudent.Id;
+            testStudent.Attendance.Add(testAttendance);
+            backend.Update(testStudent);
+
+            // Act
+            var result = myAttendanceDetails.Initialize(testAttendance.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(testStudent.Id, result.Attendance.StudentId, TestContext.TestName);
+            Assert.AreEqual(testAttendance.Id, result.Attendance.Id, TestContext.TestName);
+
+            Assert.IsNotNull(result.AvatarComposite, TestContext.TestName);
+            Assert.IsNotNull(result.AvatarId, TestContext.TestName);
+            Assert.IsNotNull(result.Name, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void AttendanceDetailsViewModel_Invalid_Null_Id_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentBackend.Instance;
+
+            // Act
+            var result = new AttendanceDetailsViewModel(null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+
+            Assert.IsNull(result.AvatarComposite, TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void AttendanceDetailsViewModel_Valid_Id_Should_Pass()
+        //{
+        //    // Arrange
+        //    var backend = StudentBackend.Instance;
+        //    var testStudent = backend.GetDefault();
+        //    var testAttendance = new AttendanceModel();
+        //    testAttendance.StudentId = testStudent.Id;
+        //    testStudent.Attendance.Add(testAttendance);
+        //    backend.Update(testStudent);
+
+        //    // Act
+        //    var result = new AttendanceDetailsViewModel(testAttendance.StudentId);
+
+        //    // Reset
+        //    DataSourceBackend.Instance.Reset();
+
+        //    // Assert
+
+        //    Assert.IsNotNull(result.AvatarComposite, TestContext.TestName);
+        //}
+
+        [TestMethod]
+        public void AttendanceDetailsViewModel_InValid_Id_Bogus_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentBackend.Instance;
+
+            // Act
+            var result = new AttendanceDetailsViewModel("bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+
+            Assert.IsNull(result.AvatarComposite, TestContext.TestName);
+        }
     }
 }
