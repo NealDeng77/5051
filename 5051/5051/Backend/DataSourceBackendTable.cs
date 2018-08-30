@@ -210,21 +210,43 @@ namespace _5051.Backend
         {
             var myReturn = default(T);
 
-            var Table = tableClient.GetTableReference(tableName);
-            Table.CreateIfNotExists();
-
-            // Retrieve
-            var retrieveOperation = TableOperation.Retrieve<DataSourceBackendTableEntity>(pk, rk);
-            var query = Table.Execute(retrieveOperation);
-            if (query.Result == null)
+            if (string.IsNullOrEmpty(tableName))
             {
                 return myReturn;
             }
 
-            var data = (DataSourceBackendTableEntity)query.Result;
+            if (string.IsNullOrEmpty(pk))
+            {
+                return myReturn;
+            }
 
-            myReturn = ConvertFromEntity<T>(data);
-            return myReturn;
+            if (string.IsNullOrEmpty(rk))
+            {
+                return myReturn;
+            }
+
+            try
+            {
+                var Table = tableClient.GetTableReference(tableName);
+                Table.CreateIfNotExists();
+
+                // Retrieve
+                var retrieveOperation = TableOperation.Retrieve<DataSourceBackendTableEntity>(pk, rk);
+                var query = Table.Execute(retrieveOperation);
+                if (query.Result == null)
+                {
+                    return myReturn;
+                }
+
+                var data = (DataSourceBackendTableEntity)query.Result;
+
+                myReturn = ConvertFromEntity<T>(data);
+                return myReturn;
+            }
+            catch (Exception ex)
+            {
+                return myReturn;
+            }
         }
 
         /// <summary>
@@ -300,7 +322,7 @@ namespace _5051.Backend
             return DeleteDirect<T>(tableName, pk, rk, data);
         }
         public bool DeleteDirect<T>(string tableName, string pk, string rk, T data)
-        { 
+        {
             var Table = tableClient.GetTableReference(tableName);
             Table.CreateIfNotExists();
 
