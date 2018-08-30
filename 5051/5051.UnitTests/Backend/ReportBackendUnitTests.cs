@@ -30,17 +30,48 @@ namespace _5051.UnitTests.Backend
             var testStudent = studentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
-            var testStudentAttendance1 = new AttendanceModel
+
+            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
+
+            var thisMonday = dayNow.AddDays(-7-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
+
+            var attendanceMon = new AttendanceModel
             {
-                In = new DateTime(2018, 1, 15)
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(8)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(9)),
+                Emotion = EmotionStatusEnum.VeryHappy
             };
-            testStudent.Attendance.Add(testStudentAttendance1);
-            var testStudentAttendance2 = new AttendanceModel
+            var attendanceTue = new AttendanceModel
             {
-                In = DateTime.UtcNow
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(1).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(1).AddHours(12)),
+                Emotion = EmotionStatusEnum.Happy
             };
-            testStudent.Attendance.Add(testStudentAttendance2);
-            testReport.Stats.DaysPresent = 2;
+            var attendanceWed = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(2).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(2).AddHours(12)),
+                Emotion = EmotionStatusEnum.Neutral
+            };
+            var attendanceThu = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(3).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(3).AddHours(12)),
+                Emotion = EmotionStatusEnum.Sad
+            };
+            var attendanceFri = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(4).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(4).AddHours(12)),
+                Emotion = EmotionStatusEnum.VerySad
+            };
+
+            testStudent.Attendance.Add(attendanceMon);
+            testStudent.Attendance.Add(attendanceTue);
+            testStudent.Attendance.Add(attendanceWed);
+            testStudent.Attendance.Add(attendanceThu);
+            testStudent.Attendance.Add(attendanceFri);
+
             testReport.DateEnd = DateTime.UtcNow;
 
             //act
