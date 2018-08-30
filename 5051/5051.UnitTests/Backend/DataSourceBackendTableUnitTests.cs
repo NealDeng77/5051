@@ -2,6 +2,7 @@
 using _5051.Models;
 using _5051.Backend;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
 
 namespace _5051.UnitTests.Backend
 {
@@ -48,7 +49,6 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
-
         #endregion Instantiate
 
         #region Load
@@ -143,9 +143,7 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNull(result, TestContext.TestName);
         }
-
         #endregion Load
-
 
         #region LoadDirect
         [TestMethod]
@@ -242,6 +240,136 @@ namespace _5051.UnitTests.Backend
 
         #endregion LoadDirect
 
+        #region LoadAll
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAll_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAll<AvatarItemModel>(table, pk);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAll_Invalid_table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAll<AvatarItemModel>(null, pk);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAll_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAll<AvatarItemModel>(table, null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+        }
+        #endregion LoadAll
+
+        #region LoadAllDirect
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAllDirect_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAllDirect<AvatarItemModel>(table, pk);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAllDirect_Invalid_table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAllDirect<AvatarItemModel>(null, pk);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_LoadAllDirect_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+
+            // Act
+            var result = backend.LoadAllDirect<AvatarItemModel>(table, null);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(0, result.Count, TestContext.TestName);
+        }
+        #endregion LoadAllDirect
 
         #region Update
         [TestMethod]
@@ -314,6 +442,31 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
+        public void Backend_DataSourceBackendTable_Update_Invalid_data_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            data = null;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.Update<AvatarItemModel>(table, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_DataSourceBackendTable_Update_Valid_Should_Return()
         {
             // Arrange
@@ -337,7 +490,6 @@ namespace _5051.UnitTests.Backend
         }
 
         #endregion Update
-
 
         #region UpdateDirect
         [TestMethod]
@@ -410,6 +562,31 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
+        public void Backend_DataSourceBackendTable_UpdateDirect_Invalid_data_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            data = null;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.UpdateDirect<AvatarItemModel>(table, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_DataSourceBackendTable_UpdateDirect_Valid_Should_Return()
         {
             // Arrange
@@ -431,221 +608,331 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNull(result, TestContext.TestName);
         }
-
         #endregion UpdateDirect
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Load_Valid_ID_Should_Pass()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var shopBackend = AvatarItemBackend.Instance;
-        //    var expectShopItem = shopBackend.GetFirstAvatarItemId();
+        #region SetDataSourceServerMode
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void Backend_DataSourceBackendTable_SetDataSourceServerMode_Valid_Enum_Unknown_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
 
-        //    // Act
-        //    var result = backend.Load(expectShopItem);
+            var backend = DataSourceBackendTable.Instance;
+            var expectEnum = DataSourceEnum.Unknown;
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Act
+            backend.SetDataSourceServerMode(expectEnum);
+            var result = backend;
 
-        //    // Assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
-        //#endregion Load
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //#region update
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Update_Invalid_Data_Null_Should_Fail()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-        //    var backend = DataSourceBackendTable.Instance;
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_SetDataSourceServerMode_Valid_Enum_Local_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
 
-        //    // Act
-        //    var result = backend.Update(null);
+            var backend = DataSourceBackendTable.Instance;
+            var expectEnum = DataSourceEnum.Local;
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Act
+            backend.SetDataSourceServerMode(expectEnum);
+            var result = backend;
 
-        //    // Assert
-        //    Assert.IsNull(result, TestContext.TestName);
-        //}
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Update_Invalid_Data_Shop_Item_Does_Not_Exist_Should_Fail()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var expectShopModel = new AvatarItemModel();
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_SetDataSourceServerMode_Valid_Enum_ServerTest_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
 
-        //    // Act
-        //    var result = backend.Update(expectShopModel);
+            var backend = DataSourceBackendTable.Instance;
+            var expectEnum = DataSourceEnum.ServerTest;
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Act
+            backend.SetDataSourceServerMode(expectEnum);
+            var result = backend;
 
-        //    // Assert
-        //    Assert.IsNull(result, TestContext.TestName);
-        //}
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Update_Valid_Data_Should_Pass()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var shopBackend = AvatarItemBackend.Instance;
-        //    var expectShopItemId = shopBackend.GetFirstAvatarItemId();
-        //    var expectShopModel = backend.Load(expectShopItemId);
-        //    var expectId = "GoodID";
-        //    var expectUri = "GoodUri";
-        //    var expectName = "Shop Item";
-        //    var expectDescription = "A good description of the item";
-        //    var expectCatagory = AvatarItemCategoryEnum.Accessory;
-        //    var expectTokens = 1000;
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_SetDataSourceServerMode_Valid_Enum_ServerLive_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
 
-        //    // Act
-        //    expectShopModel.Id = expectId;
-        //    expectShopModel.Uri = expectUri;
-        //    expectShopModel.Name = expectName;
-        //    expectShopModel.Description = expectDescription;
-        //    expectShopModel.Category = expectCatagory;
-        //    expectShopModel.Tokens = expectTokens;
+            var backend = DataSourceBackendTable.Instance;
+            var expectEnum = DataSourceEnum.ServerLive;
 
-        //    var resultUpdate = backend.Update(expectShopModel);
+            // Act
+            backend.SetDataSourceServerMode(expectEnum);
+            var result = backend;
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Assert
-        //    Assert.AreEqual(expectShopModel, resultUpdate, TestContext.TestName);
-        //    Assert.AreEqual(expectId, resultUpdate.Id, TestContext.TestName);
-        //    Assert.AreEqual(expectUri, resultUpdate.Uri, TestContext.TestName);
-        //    Assert.AreEqual(expectName, resultUpdate.Name, TestContext.TestName);
-        //    Assert.AreEqual(expectDescription, resultUpdate.Description, TestContext.TestName);
-        //    Assert.AreEqual(expectCatagory, resultUpdate.Category, TestContext.TestName);
-        //    Assert.AreEqual(expectTokens, resultUpdate.Tokens, TestContext.TestName);
-        //}
-        //#endregion update
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DataSet
 
-        //#region delete
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Delete_Invalid_ID_Null_Should_Fail()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+        #region Delete
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Delete_Invalid_Table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var expect = false;
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
 
-        //    // Act
-        //    var result = backend.Delete(null);
+            // Act
+            var result = backend.Delete<AvatarItemModel>(null, pk, rk, data);
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Assert
-        //    Assert.AreEqual(expect, result, TestContext.TestName);
-        //}
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
 
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Delete_Invalid_ID_Bogus_Should_Fail()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Delete_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var expect = false;
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
 
-        //    // Act
-        //    var result = backend.Delete("bogus");
+            // Act
+            var result = backend.Delete<AvatarItemModel>(table, null, rk, data);
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Assert
-        //    Assert.AreEqual(expect, result, TestContext.TestName);
-        //}
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
 
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_Delete_Valid_ID_Should_Pass()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Delete_Invalid_rk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
 
-        //    var backend = DataSourceBackendTable.Instance;
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
 
-        //    DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Local);
-        //    var shopBackend = DataSourceBackend.Instance.AvatarItemBackend;
+            // Act
+            var result = backend.Delete<AvatarItemModel>(table, pk, null, data);
 
-        //    var expectShopItem = shopBackend.GetFirstAvatarItemId();
-        //    var expect = true;
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Act
-        //    var result = backend.Delete(expectShopItem);
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Delete_Invalid_data_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
 
-        //    // Assert
-        //    Assert.AreEqual(expect, result, TestContext.TestName);
-        //}
-        //#endregion delete
+            var data = new AvatarItemModel();
+            data = null;
 
-        //#region DataSet
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_LoadDataSet_Valid_Enum_Demo_Should_Pass()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var expectEnum = _5051.Models.DataSourceDataSetEnum.Demo;
+            // Act
+            var result = backend.Delete<AvatarItemModel>(table, pk, rk, data);
 
-        //    // Act
-        //    backend.LoadDataSet(expectEnum);
-        //    var result = backend;
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
 
-        //    // Assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Delete_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
 
-        //[TestMethod]
-        //public void Backend_DataSourceBackendTable_LoadDataSet_Valid_Enum_UnitTest_Should_Pass()
-        //{
-        //    // Arrange
-        //    DataSourceBackend.SetTestingMode(true);
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
 
-        //    var backend = DataSourceBackendTable.Instance;
-        //    var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+            // Act
+            var result = backend.Delete<AvatarItemModel>(table, pk, rk, data);
 
-        //    // Act
-        //    backend.LoadDataSet(expectEnum);
-        //    var result = backend;
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
-        //    DataSourceBackend.SetTestingMode(false);
+            // Assert
+            Assert.AreEqual(true, result, TestContext.TestName);
+        }
+        #endregion Delete
 
-        //    // Assert
-        //    Assert.IsNotNull(result, TestContext.TestName);
-        //}
-        //#endregion DataSet
+        #region DeleteDirect
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_DeleteDirect_Invalid_Table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.DeleteDirect<AvatarItemModel>(null, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_DeleteDirect_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.DeleteDirect<AvatarItemModel>(table, null, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_DeleteDirect_Invalid_rk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, null, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_DeleteDirect_Invalid_data_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            data = null;
+
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(false, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_DeleteDirect_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(true, result, TestContext.TestName);
+        }
+        #endregion DeleteDirect
     }
 }
