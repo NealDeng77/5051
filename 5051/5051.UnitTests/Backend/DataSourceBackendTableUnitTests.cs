@@ -3,6 +3,7 @@ using _5051.Models;
 using _5051.Backend;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
+using System.Collections.Generic;
 
 namespace _5051.UnitTests.Backend
 {
@@ -695,6 +696,26 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_SetDataSourceServerModeDirect_InValid_String_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = DataSourceBackendTable.Instance;
+            var expectEnum = DataSourceEnum.ServerLive;
+
+            // Act
+            var result = backend.SetDataSourceServerModeDirect("bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
         #endregion DataSet
 
         #region Delete
@@ -934,5 +955,128 @@ namespace _5051.UnitTests.Backend
             Assert.AreEqual(true, result, TestContext.TestName);
         }
         #endregion DeleteDirect
+
+        #region ConvertToEntity
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_ConvertToEntity_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.ConvertToEntity<AvatarItemModel>(data, pk, rk);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion ConvertToEntity
+
+        #region ConvertFromEntity
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_ConvertFromEntity_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new DataSourceBackendTableEntity();
+            data.PartitionKey = "pk";
+            data.RowKey = "rk";
+            var datablob = new AvatarItemModel();
+
+            var entity = backend.ConvertToEntity<AvatarItemModel>(datablob, data.PartitionKey,data.RowKey);
+
+            // Act
+            var result = backend.ConvertFromEntity<AvatarItemModel>(entity);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion ConvertFromEntity
+
+        #region ConvertFromEntityList
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_ConvertFromEntityList_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new List<DataSourceBackendTableEntity>();
+
+            // Act
+            var result = backend.ConvertFromEntityList<AvatarItemModel>(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_ConvertFromEntityList_Valid_List_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var temp = new DataSourceBackendTableEntity();
+            temp.PartitionKey = "pk";
+            temp.RowKey = "rk";
+            var tempblob = new AvatarItemModel();
+
+            var entity = backend.ConvertToEntity<AvatarItemModel>(tempblob, temp.PartitionKey, temp.RowKey);
+
+            var data = new List<DataSourceBackendTableEntity>();
+            data.Add(entity);
+
+            // Act
+            var result = backend.ConvertFromEntityList<AvatarItemModel>(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_ConvertFromEntityList_Invalid_Null_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new List<DataSourceBackendTableEntity>();
+            data = null;
+
+            // Act
+            var result = backend.ConvertFromEntityList<AvatarItemModel>(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion ConvertFromEntityList
     }
 }
