@@ -609,7 +609,72 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
             //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
             Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
 
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_Local_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "Local";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_ServerTest_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "ServerTest";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_DataSource_Id_Equals_ServerLive_Should_Return_Index_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var myId = "ServerLive";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSource(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
