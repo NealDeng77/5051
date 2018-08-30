@@ -7,55 +7,85 @@
     string WorkerPresent = "";
 
 }
-<br />
-<h2 id="PageTitle">Please pick one shop to visit</h2>
+
 
 <br />
-<div class="row justify-content-center" id="AllTrucks">
-    @{
-        foreach (var item in Model)
-        {
-            _5051.Backend.GameBackend.Instance.GetResult(item.Id);
+<div class="row justify-content-center">
 
-            if(item.Truck.IsClosed)
-            {
-                TruckClosed = "<img class='TruckItemBase TruckClosedSignItem' id='TruckClosedSign' src='/Content/shop/ClosedSign.png' alt='closed'>";
-                WorkerPresent = "/Content/shop/placeholder.png";
-            } else
-            {
-                TruckClosed = "";
-                WorkerPresent = "/Content/avatar/AvatarHalf.png";
-            }
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold" id="PageTitle">Please pick one shop to visit</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
 
-            <div class="col-sm-auto text-center">
-                <div class="TruckBoxMedium">
-                    <div class="Trucks" data-topper="/Content/shop/@item.TruckItems.Topper"
-                         data-sign="/Content/shop/@item.TruckItems.Sign" data-truck="/Content/shop/@item.TruckItems.Truck"
-                         data-menu="/Content/shop/@item.TruckItems.Menu" data-wheels="/Content/shop/@item.TruckItems.Wheels"
-                         data-trailer="/Content/shop/@item.TruckItems.Trailer" data-closed="@TruckClosed" data-worker="@WorkerPresent"
-                         data-truckname="@item.Truck.TruckName" data-studentname="@item.Name">
+<div class="row">
+    <br />
+    <br />
+</div>
 
-                        <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.TruckItems.Topper" alt="Topper">
-                        <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.TruckItems.Sign" alt="Sign">
-                        <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.TruckItems.Truck" alt="Truck">
-                        <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/@item.TruckItems.Menu" alt="Menu">
-                        <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.TruckItems.Wheels" alt="Wheels">
-                        <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.TruckItems.Trailer" alt="Trailer">
-                        <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
-                        @if (item.Truck.IsClosed == true)
-                        {
-                            <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="closed">
-                        }
+<div class="row justify-content-around">
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="row justify-content-around" id="AllTrucks">
 
-                        <br />
-                        <span class="text-center FontColor1 PeopleBox FontBold">
-                            @item.Name
-                        </span>
+            @{
+                foreach (var item in Model)
+                {
+                    _5051.Backend.GameBackend.Instance.GetResult(item.Id);
+
+                    if (item.Truck.IsClosed)
+                    {
+                        TruckClosed = "<img class='TruckItemBase TruckClosedSignItem' id='TruckClosedSign' src='/Content/shop/ClosedSign.png' alt='closed'>";
+                        WorkerPresent = "/Content/shop/placeholder.png";
+                    }
+                    else
+                    {
+                        TruckClosed = "";
+                        WorkerPresent = "/Content/avatar/AvatarHalf.png";
+                    }
+                    <div class="col-sm-3 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                        <div class="TruckBoxMedium">
+                            <div class="Trucks" data-topper="/Content/shop/@item.TruckItems.Topper"
+                                 data-sign="/Content/shop/@item.TruckItems.Sign" data-truck="/Content/shop/@item.TruckItems.Truck"
+                                 data-menu="/Content/shop/@item.TruckItems.Menu" data-wheels="/Content/shop/@item.TruckItems.Wheels"
+                                 data-trailer="/Content/shop/@item.TruckItems.Trailer" data-closed="@TruckClosed" data-worker="@WorkerPresent"
+                                 data-truckname="@item.Truck.TruckName" data-studentname="@item.Name">
+
+                                <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.TruckItems.Topper" alt="Topper">
+                                <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.TruckItems.Sign" alt="Sign">
+                                <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.TruckItems.Truck" alt="Truck">
+                                <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/@item.TruckItems.Menu" alt="Menu">
+                                <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.TruckItems.Wheels" alt="Wheels">
+                                <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.TruckItems.Trailer" alt="Trailer">
+                                <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
+                                @if (item.Truck.IsClosed == true)
+                                {
+                                    <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="closed">
+                                }
+
+                                <br />
+                                @*<span class="text-center FontColor1 PeopleBox FontBold justify-content-around">
+                                        @item.Name
+                                    </span>*@
+                            </div>
+                        </div>
+                        <div class="row justify-content-around">
+                            <span class="col FontSizeMedium text-center">
+                                @item.Name
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
-    }
+                }
+            }
+            <br />
+        </div>
+    </div>
+    <div class="col-1"></div>
 </div>
 
 <div class="row no-gutters justify-content-center">
@@ -87,31 +117,31 @@
 </div>
 
 
-    <script>
+<script>
 
-        $(document).ready(function () {
-            $(".Trucks").click(function () {
-                $("#BodyBackgroundImageId").removeClass();
+    $(document).ready(function () {
+        $(".Trucks").click(function () {
+            $("#BodyBackgroundImageId").removeClass();
 
-                document.getElementById("AllTrucks").style.display = "none";
+            document.getElementById("AllTrucks").style.display = "none";
 
-                document.getElementById("PageTitle").innerHTML = "Visiting " + $(this).data('studentname') + "'s Shop";
-                document.getElementById("TruckName").innerHTML = $(this).data('truckname');
+            document.getElementById("PageTitle").innerHTML = "Visiting " + $(this).data('studentname') + "'s Shop";
+            document.getElementById("TruckName").innerHTML = $(this).data('truckname');
 
-                $("#SingleTopper").attr('src', $(this).data('topper'));
-                $("#SingleSign").attr('src', $(this).data('sign'));
-                $("#SingleTruck").attr('src', $(this).data('truck'));
-                $("#SingleMenu").attr('src', $(this).data('menu'));
-                $("#SingleWheels").attr('src', $(this).data('wheels'));
-                $("#SingleTrailer").attr('src', $(this).data('trailer'));
-                $("#Worker").attr('src', $(this).data('worker'));
+            $("#SingleTopper").attr('src', $(this).data('topper'));
+            $("#SingleSign").attr('src', $(this).data('sign'));
+            $("#SingleTruck").attr('src', $(this).data('truck'));
+            $("#SingleMenu").attr('src', $(this).data('menu'));
+            $("#SingleWheels").attr('src', $(this).data('wheels'));
+            $("#SingleTrailer").attr('src', $(this).data('trailer'));
+            $("#Worker").attr('src', $(this).data('worker'));
 
-                $("#Single").append($(this).data('closed'));
-                
+            $("#Single").append($(this).data('closed'));
 
-                document.getElementById("Single").style.display = "block";
 
-            });
+            document.getElementById("Single").style.display = "block";
+
         });
+    });
 
-    </script>
+</script>

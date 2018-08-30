@@ -35,10 +35,13 @@
 
 .TruckBoxMedium {
     position: relative;
-    min-height: 300px;
+    width: 100%;
+    height: auto;
+    padding-top: 50%;
+    /*min-height: 300px;
     max-height: 300px;
     min-width: 500px;
-    max-width: 500px;
+    max-width: 500px;*/
 }
 
 @media screen and (max-width: 850px) {
@@ -47,20 +50,19 @@
         max-height: 450px;
         min-width: 750px;
         max-width: 750px;
-        margin-top: 100px;
     }
 
-    .GameButtonsBox {
+    /*.GameButtonsBox {
         margin-top: -100px;
-    }
+    }*/
 
     .grid-container > div {
         font-size: 17px;
     }
 
-    .AvatarImageBox {
+    /*.AvatarImageBox {
         margin-top: -100px;
-    }
+    }*/
 
     .PeopleItem {
         width: 6.2%;
@@ -164,12 +166,12 @@
         min-width: 450px;
         max-width: 450px;
     }
-    .TruckBoxMedium {
+    /*.TruckBoxMedium {
         min-height: 270px;
         max-height: 270px;
         min-width: 450px;
         max-width: 450px;
-    }
+    }*/
 
     .grid-container > div {
         font-size: 12px;
@@ -187,12 +189,12 @@
         min-width: 372px;
         max-width: 372px;
     }
-    .TruckBoxMedium {
+    /*.TruckBoxMedium {
         min-height: 223px;
         max-height: 223px;
         min-width: 372px;
         max-width: 372px;
-    }
+    }*/
 
     .grid-container > div {
         font-size: 11px;
@@ -210,12 +212,12 @@
         min-width: 300px;
         max-width: 300px;
     }
-    .TruckBoxMedium {
+    /*.TruckBoxMedium {
         min-height: 180px;
         max-height: 180px;
         min-width: 300px;
         max-width: 300px;
-    }
+    }*/
 
     .grid-container > div {
         font-size: 10px;
