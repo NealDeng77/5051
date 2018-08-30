@@ -168,6 +168,15 @@ namespace _5051.Backend
             Create(new FactoryInventoryModel("GSherbert.png", "Sherbert Gallon", "Sherbert", FactoryInventoryCategoryEnum.Food, 20, 10, true));
             Create(new FactoryInventoryModel("GStrawberry.png", "Strawberry Gallon", "Strawberry Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
 
+            Create(new FactoryInventoryModel("Cheese.png", "Cheese", "Cheese", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Avacadoes.png", "Avacadoes", "Avacadoes", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Cilantro.png", "Cilantro", "Cilantro", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Onions.png", "Onions", "Onions", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Meat.png", "Meat", "Meat", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Lime.png", "Lime", "Lime", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Tomatoes.png", "Tomatoes", "Tomatoes", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            Create(new FactoryInventoryModel("Tortillas.png", "Tortillas", "Tortillas", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+
             //Create(new FactoryInventoryModel("FBarstool.png", "Barstool", "Barstool", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
             //Create(new FactoryInventoryModel("FBench.png", "Bench", "Bench", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
             //Create(new FactoryInventoryModel("FCounter.png", "Counter", "Counter", FactoryInventoryCategoryEnum.Furniture, 10, 10, true));
