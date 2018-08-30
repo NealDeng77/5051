@@ -242,6 +242,197 @@ namespace _5051.UnitTests.Backend
 
         #endregion LoadDirect
 
+
+        #region Update
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Update_Invalid_Table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.Update<AvatarItemModel>(null, pk, rk,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Update_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.Update<AvatarItemModel>(table, null, rk,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Update_Invalid_rk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.Update<AvatarItemModel>(table, pk, null,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_Update_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.Update<AvatarItemModel>(table, pk, rk,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        #endregion Update
+
+
+        #region UpdateDirect
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_UpdateDirect_Invalid_Table_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.UpdateDirect<AvatarItemModel>(null, pk, rk,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_UpdateDirect_Invalid_pk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.UpdateDirect<AvatarItemModel>(table, null, rk,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_UpdateDirect_Invalid_rk_Null_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.UpdateDirect<AvatarItemModel>(table, pk, null,data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_DataSourceBackendTable_UpdateDirect_Valid_Should_Return()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+            var backend = DataSourceBackendTable.Instance;
+
+            var data = new AvatarItemModel();
+            var table = "AvatarItemModel".ToLower();
+            var pk = table;
+            var rk = "rk";
+
+            // Act
+            var result = backend.UpdateDirect<AvatarItemModel>(table, pk, rk, data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateDirect
         //[TestMethod]
         //public void Backend_DataSourceBackendTable_Load_Valid_ID_Should_Pass()
         //{
