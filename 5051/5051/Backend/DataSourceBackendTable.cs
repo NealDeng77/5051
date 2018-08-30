@@ -108,17 +108,17 @@ namespace _5051.Backend
         /// <returns></returns>
         public List<T> LoadAll<T>(string tableName, string pk)
         {
+            var myReturnList = new List<T>();
+
             if (string.IsNullOrEmpty(tableName))
             {
-                return null;
+                return myReturnList;
             }
 
             if (string.IsNullOrEmpty(pk))
             {
-                return null;
+                return myReturnList;
             }
-
-            var myReturnList = new List<T>();
 
             // If under Test, return True;
             if (DataSourceBackend.GetTestingMode())
@@ -133,29 +133,44 @@ namespace _5051.Backend
         {
             var myReturnList = new List<T>();
 
-            var Table = tableClient.GetTableReference(tableName);
-            Table.CreateIfNotExists();
-
-            var result = new List<DataSourceBackendTableEntity>();
-            var query =
-                new TableQuery<DataSourceBackendTableEntity>().Where(
-                    TableQuery.GenerateFilterCondition(
-                        "PartitionKey", QueryComparisons.Equal, pk));
-
-            query.TakeCount = takeCount;
-
-            TableContinuationToken tableContinuationToken = null;
-            do
+            if (string.IsNullOrEmpty(tableName))
             {
-                var queryResponse = Table.ExecuteQuerySegmented(query, tableContinuationToken);
-                tableContinuationToken = queryResponse.ContinuationToken;
-                result.AddRange(queryResponse.Results);
-            } while (tableContinuationToken != null);
-
-            foreach (var item in result)
-            {
-                myReturnList.Add(ConvertFromEntity<T>(item));
+                return myReturnList;
             }
+
+            if (string.IsNullOrEmpty(pk))
+            {
+                return myReturnList;
+            }
+
+            try
+            {
+
+                var Table = tableClient.GetTableReference(tableName);
+                Table.CreateIfNotExists();
+
+                var result = new List<DataSourceBackendTableEntity>();
+                var query =
+                    new TableQuery<DataSourceBackendTableEntity>().Where(
+                        TableQuery.GenerateFilterCondition(
+                            "PartitionKey", QueryComparisons.Equal, pk));
+
+                query.TakeCount = takeCount;
+
+                TableContinuationToken tableContinuationToken = null;
+                do
+                {
+                    var queryResponse = Table.ExecuteQuerySegmented(query, tableContinuationToken);
+                    tableContinuationToken = queryResponse.ContinuationToken;
+                    result.AddRange(queryResponse.Results);
+                } while (tableContinuationToken != null);
+
+                foreach (var item in result)
+                {
+                    myReturnList.Add(ConvertFromEntity<T>(item));
+                }
+            }
+            catch (Exception ex) { }
 
             return myReturnList;
         }
@@ -210,20 +225,43 @@ namespace _5051.Backend
         {
             var myReturn = default(T);
 
-            var Table = tableClient.GetTableReference(tableName);
-            Table.CreateIfNotExists();
-
-            // Retrieve
-            var retrieveOperation = TableOperation.Retrieve<DataSourceBackendTableEntity>(pk, rk);
-            var query = Table.Execute(retrieveOperation);
-            if (query.Result == null)
+            if (string.IsNullOrEmpty(tableName))
             {
                 return myReturn;
             }
 
-            var data = (DataSourceBackendTableEntity)query.Result;
+            if (string.IsNullOrEmpty(pk))
+            {
+                return myReturn;
+            }
 
-            myReturn = ConvertFromEntity<T>(data);
+            if (string.IsNullOrEmpty(rk))
+            {
+                return myReturn;
+            }
+
+            try
+            {
+                var Table = tableClient.GetTableReference(tableName);
+                Table.CreateIfNotExists();
+
+                // Retrieve
+                var retrieveOperation = TableOperation.Retrieve<DataSourceBackendTableEntity>(pk, rk);
+                var query = Table.Execute(retrieveOperation);
+                if (query.Result == null)
+                {
+                    return myReturn;
+                }
+
+                var data = (DataSourceBackendTableEntity)query.Result;
+
+                myReturn = ConvertFromEntity<T>(data);
+                return myReturn;
+            }
+            catch (Exception ex)
+            {
+            }
+
             return myReturn;
         }
 
@@ -235,17 +273,32 @@ namespace _5051.Backend
         /// <returns></returns>
         public T Update<T>(string tableName, string pk, string rk, T data)
         {
-            var myResult = default(T);
+            var myReturn = default(T);
+
+            if (string.IsNullOrEmpty(tableName))
+            {
+                return myReturn;
+            }
+
+            if (string.IsNullOrEmpty(pk))
+            {
+                return myReturn;
+            }
+
+            if (string.IsNullOrEmpty(rk))
+            {
+                return myReturn;
+            }
 
             if (data == null)
             {
-                return myResult;
+                return myReturn;
             }
 
             // If under Test, return True;
             if (DataSourceBackend.GetTestingMode())
             {
-                return myResult;
+                return myReturn;
             }
 
             return UpdateDirect<T>(tableName, pk, rk, data);
@@ -253,24 +306,48 @@ namespace _5051.Backend
 
         public T UpdateDirect<T>(string tableName, string pk, string rk, T data)
         {
-            var myResult = default(T);
+            var myReturn = default(T);
 
-            var Table = tableClient.GetTableReference(tableName);
-            Table.CreateIfNotExists();
-
-            // Add to Storage
-            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
-
-            var updateOperation = TableOperation.InsertOrReplace(entity);
-            var query = Table.Execute(updateOperation);
-            if (query.Result == null)
+            if (string.IsNullOrEmpty(tableName))
             {
-                return myResult;
+                return myReturn;
             }
 
-            myResult = DataSourceBackendTable.Instance.ConvertFromEntity<T>(entity);
+            if (string.IsNullOrEmpty(pk))
+            {
+                return myReturn;
+            }
 
-            return myResult;
+            if (string.IsNullOrEmpty(rk))
+            {
+                return myReturn;
+            }
+
+            if (data == null)
+            {
+                return myReturn;
+            }
+
+            try
+            {
+                var Table = tableClient.GetTableReference(tableName);
+                Table.CreateIfNotExists();
+
+                // Add to Storage
+                var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
+
+                var updateOperation = TableOperation.InsertOrReplace(entity);
+                var query = Table.Execute(updateOperation);
+                if (query.Result == null)
+                {
+                    return myReturn;
+                }
+
+                myReturn = DataSourceBackendTable.Instance.ConvertFromEntity<T>(entity);
+            }
+            catch (Exception ex) { }
+
+            return myReturn;
         }
 
         /// <summary>
@@ -282,6 +359,16 @@ namespace _5051.Backend
         public bool Delete<T>(string tableName, string pk, string rk, T data)
         {
             if (string.IsNullOrEmpty(tableName))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(pk))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(rk))
             {
                 return false;
             }
@@ -299,21 +386,46 @@ namespace _5051.Backend
 
             return DeleteDirect<T>(tableName, pk, rk, data);
         }
+
         public bool DeleteDirect<T>(string tableName, string pk, string rk, T data)
-        { 
-            var Table = tableClient.GetTableReference(tableName);
-            Table.CreateIfNotExists();
-
-            // Delete
-            var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
-            entity.ETag = "*";
-
-            var Operation = TableOperation.Delete(entity);
-            var query = Table.Execute(Operation);
-            if (query.Result == null)
+        {
+            if (string.IsNullOrEmpty(tableName))
             {
                 return false;
             }
+
+            if (string.IsNullOrEmpty(pk))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(rk))
+            {
+                return false;
+            }
+
+            if (data == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                var Table = tableClient.GetTableReference(tableName);
+                Table.CreateIfNotExists();
+
+                // Delete
+                var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
+                entity.ETag = "*";
+
+                var Operation = TableOperation.Delete(entity);
+                var query = Table.Execute(Operation);
+                if (query.Result == null)
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex) { }
 
             return true;
         }

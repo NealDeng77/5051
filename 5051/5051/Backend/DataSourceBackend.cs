@@ -70,11 +70,11 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            if (!isTestingMode)
-            {
-                var identityBackend = new IdentityDataSourceMock();
-                identityBackend.Reset();
-            }
+            //if (!isTestingMode)
+            //{
+            //    var identityBackend = new IdentityDataSourceMock();
+            //    identityBackend.Reset();
+            //}
 
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
@@ -106,6 +106,12 @@ namespace _5051.Backend
             AvatarBackend.SetDataSource(dataSourceEnum);
 
             AvatarItemBackend.SetDataSource(dataSourceEnum);
+
+            if (!isTestingMode)
+            {
+                IdentityBackend.SetDataSource(dataSourceEnum);
+            }
+
             StudentBackend.SetDataSource(dataSourceEnum);
         }
 
