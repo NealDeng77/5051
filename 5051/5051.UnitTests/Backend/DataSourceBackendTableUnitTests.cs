@@ -613,7 +613,6 @@ namespace _5051.UnitTests.Backend
 
         #region SetDataSourceServerMode
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void Backend_DataSourceBackendTable_SetDataSourceServerMode_Valid_Enum_Unknown_Should_Fail()
         {
             // Arrange

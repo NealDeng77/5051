@@ -33,7 +33,8 @@ namespace _5051.Backend
                     lock (syncRoot)
                     {
                         instance = new IdentityDataSourceTable();
-                        instance.Reset();
+                        instance.DataSetDefault();
+                        //instance.Reset();
                     }
                 }
 
@@ -64,7 +65,12 @@ namespace _5051.Backend
         {
             var user = new ApplicationUser { UserName = userName, Email = userName + "@seattleu.edu", Id = supportId };
 
-            //need to add claims / role / something to distinguish user
+            //need to add claims
+            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = "SupportUser",
+                ClaimValue = "True"
+            });
 
             DataList.Add(user);
 
@@ -433,21 +439,24 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool LogUserIn(string userName, string password)
         {
-            //if (password == null)
-            //{
-            //    return false;
-            //}
+            if(userName == null || password == null)
+            {
+                return false;
+            }
 
-            //var result = idBackend.SignInManager.PasswordSignIn(userName, password, isPersistent: false, shouldLockout: false);
+            foreach (var item in DataList)
+            {
+                //check if user is in DataList
+                if (item.UserName == userName)
+                {
+                    //check that password is correct
+                    if(item.UserName == password)
+                    {
+                        return true;
+                    }
+                }
+            }
 
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return true;
-            //    case SignInStatus.Failure:
-            //    default:
-            //        return false;
-            //}
             return false;
         }
 
@@ -465,11 +474,13 @@ namespace _5051.Backend
 
         public void Reset()
         {
-            var userList = ListAllUsers();
+            DataSetClear();
 
-            foreach (var item in userList)
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey);
+
+            foreach (var item in DataSetList)
             {
-                var deleteResult = DeleteUser(item);
+                var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
             }
 
             LoadDataSet(DataSourceDataSetEnum.Default);
@@ -502,7 +513,13 @@ namespace _5051.Backend
 
         private void CreateDataSetDefault()
         {
+            //create support user
             CreateNewSupportUser("su5051", "su5051", "su5051");
+
+            //create teacher user
+
+            //create the student users
+
         }
 
         /// <summary>
