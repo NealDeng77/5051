@@ -9,6 +9,19 @@ using _5051;
 using _5051.Controllers;
 using _5051.Backend;
 using _5051.Models;
+using Moq;
+
+using System.Threading.Tasks;
+using System.Web;
+using System.Data.Entity;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+//using Microsoft.AspNet.Identity.Owin;
+using System.Security.Principal;
+using System.Web.SessionState;
+using System.IO;
+using System.Reflection;
 
 namespace _5051.Tests.Controllers
 {
@@ -284,6 +297,170 @@ namespace _5051.Tests.Controllers
         //}
 
         #endregion CreateSupportPostRegion
+
+        #region DataSourceSetRegion 
+
+        [TestMethod]
+        //[ExpectedException(typeof(System.ArgumentNullException))]
+        public void Controller_Support_DataSourceSet_Id_Is_Null_Should_Return_Index_Page()
+        {
+            // Arrange
+
+            var controller = new SupportController();
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var resultPage = (RedirectToRouteResult)controller.DataSourceSet(null);
+
+            // Assert
+            Assert.AreEqual("Index", resultPage.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_DataSourceSet_Id_Is_Empty_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet("");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_DataSourceSet_Id_Equals_DeFault_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var myId = "Default";
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSourceSet is set to Default using avatar count
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_DataSourceSet_Id_Equals_Demo_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var myId = "Demo";
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSourceSet is set to Demo using avatar count, Demo set not implemented yet, set to Default
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+
+        }
+
+        [TestMethod]
+        public void Controller_Support_DataSourceSet_Id_Equals_UnitTest_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var myId = "UnitTest";
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
+
+            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
+
+            //Reset the data source backend
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+
+            //Check that the DataSourceSet is set to UnitTest using avatar count, UnitTest set not implemented yet, set to Default
+            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
+        }
+
+        #endregion DataSourceSetRegion
 
     }
 }
