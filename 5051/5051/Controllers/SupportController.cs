@@ -220,8 +220,15 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var loginResult = identityBackend.LogUserIn(user.Email, user.Password);
-            if(!loginResult)
+            //var loginResult = identityBackend.LogUserIn(user.Email, user.Password);
+            //if(!loginResult)
+            //{
+            //    ModelState.AddModelError("", "Invalid Login Attempt");
+            //    return View(user);
+            //}
+
+            var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password);
+            if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
                 return View(user);

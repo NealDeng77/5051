@@ -70,11 +70,10 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityDataSourceMock();
-            //    identityBackend.Reset();
-            //}
+            if (!isTestingMode)
+            {
+                IdentityDataSourceTable.Instance.Reset();
+            }
 
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
