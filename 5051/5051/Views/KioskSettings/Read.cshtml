@@ -54,26 +54,26 @@
                     <br />
                     <br />
 
-                    <div class="row justify-content-around">
-                        <div class="col text-right" id="avatarLevelName">
+                    <div class="row">
+                        <div class="col-5 text-right">
                             @Html.DisplayNameFor(m => m.Password)
                         </div>
                         <div class="col-1">
                             &nbsp;:&nbsp;
                         </div>
-                        <div class="col text-left" id="avatarLevelValue">
+                        <div class="col text-left">
                             @Html.DisplayFor(m => m.Password)
                         </div>
                     </div>
 
-                    <div class="row justify-content-around">
-                        <div class="col text-right" id="tokensName">
+                    <div class="row">
+                        <div class="col-5 text-right">
                             @Html.DisplayNameFor(m => m.TimeZone)
                         </div>
                         <div class="col-1">
                             &nbsp;:&nbsp;
                         </div>
-                        <div class="col text-left" id="tokensValue">
+                        <div class="col text-left">
                             @Html.DisplayFor(m => m.TimeZone.DisplayName)
                         </div>
                     </div>
@@ -99,3 +99,5 @@
         </div>
     }
 }
+
+<br />
