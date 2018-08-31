@@ -298,10 +298,40 @@ namespace _5051.Tests.Controllers
 
         #endregion CreateSupportPostRegion
 
+        #region SettingsRegion
+
+        [TestMethod]
+        public void Controller_Support_Settings_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.SetupGet(p => p.Identity.Name).Returns("name");
+            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+
+            var contextMock = new Mock<HttpContextBase>();
+            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            contextMock.SetupGet(p => p.Request.IsAuthenticated).Returns(true);
+
+            var controllerContextMock = new Mock<ControllerContext>();
+            controllerContextMock.SetupGet(con => con.HttpContext).Returns(contextMock.Object);
+
+            controller.ControllerContext = controllerContextMock.Object;
+
+            // Act
+            var result = controller.Settings() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion SettingsRegion
+
         #region ResetRegion
 
         [TestMethod]
-        public void Controller_Support_Reset_Default_Should_Pass()
+        public void Controller_Support_Reset_Default_Should_Return_Index_Page()
         {
             // Arrange
             var controller = new SupportController();
