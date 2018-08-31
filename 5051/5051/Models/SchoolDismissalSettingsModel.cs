@@ -309,7 +309,7 @@ namespace _5051.Models
                 Year--;
             }
 
-            DayFirst = DateTime.Parse("09/01/" + Year);
+            DayFirst = DateTime.Parse("10/01/" + Year);
             DayLast = DateTime.Parse("09/30/" + (Year + 1));
 
             //The following specifies the start and end date of semesters
