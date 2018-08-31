@@ -39,7 +39,7 @@
     <div class="col-1"></div>
     <div class="col text-center">
         <br />
-        <span class="FontSizeLarge">@Model.data.Item.Category</span>
+        <span class="FontSizeLarge">@Model.data.Item.Category.GetDisplayName()</span>
         <br />
         <br />
         <hr />
@@ -54,7 +54,7 @@
 
     <div class="col">
 
-        <div class="row justify-content-around">
+        <div class="row justify-content-center">
             @{
                 if (Model.data.ItemList.Count < 1)
                 {
