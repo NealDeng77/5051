@@ -310,7 +310,7 @@ namespace _5051.Models
             }
 
             DayFirst = DateTime.Parse("09/01/" + Year);
-            DayLast = DateTime.Parse("08/31/" + (Year + 1));
+            DayLast = DateTime.Parse("09/30/" + (Year + 1));
 
             //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
