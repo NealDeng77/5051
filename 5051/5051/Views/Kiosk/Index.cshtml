@@ -44,255 +44,270 @@
     else
     {
         <div class="row justify-content-around">
-        <div class="col-1 ">
-            <br />
-        </div>
-
-        <div class="col">
-        <div class="row justify-content-around">
-
-        <div class="col-sm-4 no-gutters lightTransparentBox KioskBoxMargin">
-            <div class="row justify-content-around">
-                <div class="FontSizeMedium text-center">
-                    Logged Out
-                </div>
+            <div class="col-1 ">
+                <br />
             </div>
 
-            <hr />
+            <div class="col">
+                <div class="row justify-content-around">
 
-            <div class="row no-gutters justify-content-start">
-                @{
-                    // Logged Out first
-                    foreach (var item in Model.StudentList)
-                    {
-                        var srcData = "/Content/img/" + item.AvatarUri;
-                        if (item.Status == _5051.Models.StudentStatusEnum.Out)
-                        {
-
-                            var srcCompsoiteHairBack = item.AvatarComposite.AvatarHairBackUri;
-                            var srcCompsoiteHead = item.AvatarComposite.AvatarHeadUri;
-                            var srcCompsoiteShirt = item.AvatarComposite.AvatarShirtShortUri;
-                            var srcCompsoiteExpression = item.AvatarComposite.AvatarExpressionUri;
-                            var srcCompsoiteCheeks = item.AvatarComposite.AvatarCheeksUri;
-                            var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
-                            var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
-
-                            <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
-                                <a id="@item.Id" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log In')">
-                                    <div class="row no-gutters justify-content-around">
-                                        <div class="col no-gutters AvatarBoxNormal">
-                                            <div class="AvatarCircle"></div>
-                                            <img class="AvatarItemBase AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
-                                            <img class="AvatarItemBase AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
-                                            <img class="AvatarItemBase AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
-                                            <img class="AvatarItemBase AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
-                                            <img class="AvatarItemBase AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
-                                            <img class="AvatarItemBase AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
-                                            <img class="AvatarItemBase AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="row justify-content-around">
-                                    <span class="col FontSizeSmall text-center">
-                                        @item.Name
-                                    </span>
-                                </div>
+                    <div class="col-sm-4 no-gutters lightTransparentBox KioskBoxMargin">
+                        <div class="row justify-content-around">
+                            <div class="FontSizeMedium text-center">
+                                Logged Out
                             </div>
-                        }
-                    }
-                }
-            </div>
-            <div>
-                <br />
-                <br />
-                <br />
-            </div>
-        </div>
-
-        <div class="col-2-auto no-gutters lightTransparentBox KioskBoxCenter KioskBoxMargin">
-            <div id="JumpReference"></div>
-
-            <div class="row no-gutters justify-content-around">
-                <div class="col FontSizeMedium text-center" id="FullDate">@TempDate</div>
-            </div>
-            <div class="row no-gutters justify-content-around">
-                <div class="col FontSizeMedium text-center" id="FullTime">@TempTime</div>
-            </div>
-            <hr />
-
-            <div class="row no-gutters justify-content-around">
-                <div class="col no-gutters text-center">
-                    <div class="row no-gutters justify-content-around">
-                        <div class="col-sm-auto AvatarBoxLarge">
-                            <div class="AvatarCircle"></div>
-                            <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="~/Content/avatar/placeholder.png" />
-                            <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="~/Content/avatar/placeholder.png" />
                         </div>
-                    </div>
 
-                    <div class="row justify-content-around">
-                        <span class="col FontSizeSmall text-center" id="CenterName">
-                            &nbsp;&nbsp;
-                        </span>
-                    </div>
+                        <hr />
 
-                    <br />
-                    <div class="row justify-content-around">
-                        <div class="col"></div>
-                        @{
-                            // list emotion icons
-                            foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
-                            {
-                                var srcData = "/Content/img/Emotion" + emotion + ".png";
-                                var emotionId = emotion + "Id";
+                        <div class="row no-gutters justify-content-start">
+                            @{
+                                // Logged Out first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    var srcData = "/Content/img/" + item.AvatarUri;
+                                    if (item.Status == _5051.Models.StudentStatusEnum.Out)
+                                    {
 
-                                <div id="@emotionId" class="col BoxWithHighlightHover">
-                                    <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
-                                </div>
-                            }
-                        }
-                        <div class="col"></div>
-                    </div>
+                                        var srcCompsoiteHairBack = item.AvatarComposite.AvatarHairBackUri;
+                                        var srcCompsoiteHead = item.AvatarComposite.AvatarHeadUri;
+                                        var srcCompsoiteShirt = item.AvatarComposite.AvatarShirtShortUri;
+                                        var srcCompsoiteExpression = item.AvatarComposite.AvatarExpressionUri;
+                                        var srcCompsoiteCheeks = item.AvatarComposite.AvatarCheeksUri;
+                                        var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
+                                        var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
 
-                    <br />
-                    <br />
-
-                    <div class="row no-gutters justify-content-around">
-                        <div class="col">
-                            <div class="row no-gutters justify-content-around">
-                                @{
-                                    // Hide or Show the Div based on Login or Logout
-                                    // Login Div goes here
+                                        <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
+                                            <a id="@item.Id" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log In')">
+                                                <div class="row no-gutters justify-content-around">
+                                                    <div class="col no-gutters AvatarBoxNormal">
+                                                        <div class="AvatarCircle"></div>
+                                                        <img class="AvatarItemBase AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                                        <img class="AvatarItemBase AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                                        <img class="AvatarItemBase AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
+                                                        <img class="AvatarItemBase AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                                        <img class="AvatarItemBase AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                                        <img class="AvatarItemBase AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                                        <img class="AvatarItemBase AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="row justify-content-around">
+                                                <span class="col FontSizeSmall text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
                                 }
-                                <div class="col" id="LoginBox" style="display:none;">
-                                    @using (Html.BeginForm(
-                                        "KioskLogin", "Kiosk",
-                                        FormMethod.Post,
-                                        new { enctype = "multipart/form-data" }))
-                                    {
-                                        @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
-                                        @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
-
-                                        <input disabled id="StudentLoginButton" type="submit" name="submit" value="Log In" class="btn btn1 btn-light KioskLogButton" />
-                                    }
-                                </div>
-
-                                <div class="col" id="LogoutBox" style="display:none;">
-                                    @using (Html.BeginForm(
-                                        "KioskLogout", "Kiosk",
-                                        FormMethod.Post,
-                                        new { enctype = "multipart/form-data" }))
-                                    {
-                                        @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
-                                        @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
-                                        <input id="StudentLogOutButton" type="submit" name="submit" value="Log Out" class="btn btn1 btn-light KioskLogButton" />
-                                    }
-                                </div>
-                            </div>
+                            }
+                        </div>
+                        <div>
+                            <br />
                             <br />
                             <br />
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-4 no-gutters lightTransparentBox KioskBoxMargin">
-            <div class="row justify-content-around">
-                <div class="FontSizeMedium text-center">
-                    Logged In
-                </div>
-            </div>
+                    <div class="col-2-auto no-gutters lightTransparentBox KioskBoxCenter KioskBoxMargin">
+                        <div id="JumpReference"></div>
 
-            <hr />
+                        <div class="row no-gutters justify-content-around">
+                            <div class="col FontSizeMedium text-center" id="FullDate">@TempDate</div>
+                        </div>
+                        <div class="row no-gutters justify-content-around">
+                            <div class="col FontSizeMedium text-center" id="FullTime">@TempTime</div>
+                        </div>
+                        <hr />
 
-            <div class="row no-gutters justify-content-start">
-                @{
-                    // List out the Logged IN Students, then the Logged Out students
-                    // Logged IN first
-                    foreach (var item in Model.StudentList)
-                    {
-                        if (item.Status == _5051.Models.StudentStatusEnum.In)
-                        {
-                            var srcCompsoiteHairBack = item.AvatarComposite.AvatarHairBackUri;
-                            var srcCompsoiteHead = item.AvatarComposite.AvatarHeadUri;
-                            var srcCompsoiteShirt = item.AvatarComposite.AvatarShirtShortUri;
-                            var srcCompsoiteExpression = item.AvatarComposite.AvatarExpressionUri;
-                            var srcCompsoiteCheeks = item.AvatarComposite.AvatarCheeksUri;
-                            var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
-                            var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
-
-                            <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
-                                <a id="@item.Id-LogOut" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log Out')">
-                                    <div class="row no-gutters justify-content-around">
-                                        <div class="col no-gutters AvatarBoxNormal" id="AvatarBox">
-                                            <div class="AvatarCircle"></div>
-                                            <img class="AvatarItemBase AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
-                                            <img class="AvatarItemBase AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
-                                            <img class="AvatarItemBase AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
-                                            <img class="AvatarItemBase AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
-                                            <img class="AvatarItemBase AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
-                                            <img class="AvatarItemBase AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
-                                            <img class="AvatarItemBase AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
-                                        </div>
+                        <div class="row no-gutters justify-content-around">
+                            <div class="col no-gutters text-center">
+                                <div class="row no-gutters justify-content-around">
+                                    <div class="col-sm-auto AvatarBoxLarge">
+                                        <div class="AvatarCircle"></div>
+                                        <img class="AvatarItemBase AvatarHairBack" id="AvatarHairBack" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarHead" id="AvatarHead" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarShirt" id="AvatarShirt" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarExpression" id="AvatarExpression" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarCheeks" id="AvatarCheeks" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarHairFront" id="AvatarHairFront" src="~/Content/avatar/placeholder.png" />
+                                        <img class="AvatarItemBase AvatarAccessory" id="AvatarAccessory" src="~/Content/avatar/placeholder.png" />
                                     </div>
-                                </a>
+                                </div>
+
                                 <div class="row justify-content-around">
-                                    <span class="col FontSizeSmall text-center">
-                                        @item.Name
+                                    <span class="col FontSizeSmall text-center" id="CenterName">
+                                        &nbsp;&nbsp;
                                     </span>
                                 </div>
+
+                                <br />
+                                <div class="row justify-content-around">
+                                    <div class="col-1"></div>
+                                    @{
+                                        // list emotion icons
+                                        foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                        {
+                                            var srcData = "/Content/img/Emotion" + emotion + ".png";
+                                            var emotionId = emotion + "Id";
+
+                                            <div id="@emotionId" class="col BoxWithHighlightHover EmotionSize">
+                                                <img src="@srcData" class="EmotionSize" onclick="UpdateEmotionCurrent('@emotion')" />
+                                            </div>
+                                        }
+                                    }
+                                    <div class="col-1"></div>
+                                </div>
+
+                                <br />
+                                <br />
+
+                                <div class="row no-gutters justify-content-around">
+                                    <div class="col">
+                                        <div class="row no-gutters justify-content-around">
+                                            @{
+                                                // Hide or Show the Div based on Login or Logout
+                                                // Login Div goes here
+                                            }
+                                            <div class="col" id="LoginBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                    "KioskLogin", "Kiosk",
+                                                    FormMethod.Post,
+                                                    new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogInId" });
+
+                                                    <input disabled id="StudentLoginButton" type="submit" name="submit" value="Log In" class="btn btn1 btn-light KioskLogButton" />
+                                                }
+                                            </div>
+
+                                            <div class="col" id="LogoutBox" style="display:none;">
+                                                @using (Html.BeginForm(
+                                                    "KioskLogout", "Kiosk",
+                                                    FormMethod.Post,
+                                                    new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.Hidden("EmotionCurrent", 1, new { @id = "EmotionCurrentId" });
+                                                    @Html.Hidden("Id", 1, new { @id = "StudentLogOutId" });
+                                                    <input id="StudentLogOutButton" type="submit" name="submit" value="Log Out" class="btn btn1 btn-light KioskLogButton" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
-                        }
-                    }
-                }
-            </div>
-            <br />
-            <br />
-        </div>
-        </div>
-        </div>
+                    <div class="col-sm-4 no-gutters lightTransparentBox KioskBoxMargin">
+                        <div class="row justify-content-around">
+                            <div class="FontSizeMedium text-center">
+                                Logged In
+                            </div>
+                        </div>
 
-        <div class="col-1 ">
-        </div>
-        </div>
-        <div class="col-auto">
-            <div class="lightTransparentBox p-4 row justify-content-center align-items-center DispalyBoxWithMargin">
-                <div class="col text-center">
-                    <table class="table table-borderless">
-                        <thead>
-                        <tr>
-                            <td>Rank</td>
-                            <td>Name</td>
-                            <td>Minutes</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @for (int i = 0; i < Model.Leaderboard.Count; i++)
-                        {
-                            <tr>
-                                <td>@(i+1)</td>
-                                <td>@Model.Leaderboard[i].Name</td>
-                                <td>@Model.Leaderboard[i].AttendedMinutesThisWeek</td>
-                            </tr>
-                        }                                    
-                        </tbody>
-                    </table>
+                        <hr />
+
+                        <div class="row no-gutters justify-content-start">
+                            @{
+                                // List out the Logged IN Students, then the Logged Out students
+                                // Logged IN first
+                                foreach (var item in Model.StudentList)
+                                {
+                                    if (item.Status == _5051.Models.StudentStatusEnum.In)
+                                    {
+                                        var srcCompsoiteHairBack = item.AvatarComposite.AvatarHairBackUri;
+                                        var srcCompsoiteHead = item.AvatarComposite.AvatarHeadUri;
+                                        var srcCompsoiteShirt = item.AvatarComposite.AvatarShirtShortUri;
+                                        var srcCompsoiteExpression = item.AvatarComposite.AvatarExpressionUri;
+                                        var srcCompsoiteCheeks = item.AvatarComposite.AvatarCheeksUri;
+                                        var srcCompsoiteHairFront = item.AvatarComposite.AvatarHairFrontUri;
+                                        var srcCompsoiteAccessory = item.AvatarComposite.AvatarAccessoryUri;
+
+                                        <div class="col-sm-auto AvatarKioskBox DispalyBoxWithMargin">
+                                            <a id="@item.Id-LogOut" href="#JumpReference" onclick="UpdateCenter('@srcCompsoiteHairBack', '@srcCompsoiteHead', '@srcCompsoiteShirt', '@srcCompsoiteExpression','@srcCompsoiteCheeks','@srcCompsoiteHairFront','@srcCompsoiteAccessory','@item.Id', '@item.Name','Log Out')">
+                                                <div class="row no-gutters justify-content-around">
+                                                    <div class="col no-gutters AvatarBoxNormal" id="AvatarBox">
+                                                        <div class="AvatarCircle"></div>
+                                                        <img class="AvatarItemBase AvatarHairBack" src="@item.AvatarComposite.AvatarHairBackUri" />
+                                                        <img class="AvatarItemBase AvatarHead" src="@item.AvatarComposite.AvatarHeadUri" />
+                                                        <img class="AvatarItemBase AvatarShirt" src="@item.AvatarComposite.AvatarShirtShortUri" />
+                                                        <img class="AvatarItemBase AvatarExpression" src="@item.AvatarComposite.AvatarExpressionUri" />
+                                                        <img class="AvatarItemBase AvatarCheeks" src="@item.AvatarComposite.AvatarCheeksUri" />
+                                                        <img class="AvatarItemBase AvatarHairFront" src="@item.AvatarComposite.AvatarHairFrontUri" />
+                                                        <img class="AvatarItemBase AvatarAccessory" src="@item.AvatarComposite.AvatarAccessoryUri" />
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="row justify-content-around">
+                                                <span class="col FontSizeSmall text-center">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            }
+                        </div>
+                        <br />
+                        <br />
+                    </div>
                 </div>
             </div>
 
+            <div class="col-1 ">
+            </div>
         </div>
+
+        <div class="row justify-content-around">
+            <br />
+        </div>
+
+        <div class="row justify-content-around">
+            <div class="col-1 ">
+                <br />
+            </div>
+
+            <div class="col">
+                <div class="lightTransparentBox row justify-content-center align-items-center DispalyBoxWithMargin">
+                    <div class="col text-center">
+                        <table class="table table-borderless FontSizeSmall FontBold">
+                            <thead>
+                                <tr>
+                                    <td>Rank</td>
+                                    <td>Name</td>
+                                    <td>Minutes</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Leaderboard.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td>@Model.Leaderboard[i].Name</td>
+                                        <td>@Model.Leaderboard[i].AttendedMinutesThisWeek</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 ">
+                <br />
+            </div>
+        </div>
+
         <div class="row">
             <br />
             <br />
             <br />
-        </div>    }
+        </div>
+    }
 }
 
 <script>
