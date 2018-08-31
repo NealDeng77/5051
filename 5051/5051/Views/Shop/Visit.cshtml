@@ -8,10 +8,8 @@
 
 }
 
-
 <br />
 <div class="row justify-content-center">
-
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
         <br />
@@ -48,6 +46,7 @@
                         TruckClosed = "";
                         WorkerPresent = "/Content/avatar/AvatarHalf.png";
                     }
+
                     <div class="col-sm-3 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
                         <div class="TruckBoxMedium">
                             <div class="Trucks" data-topper="/Content/shop/@item.TruckItems.Topper"
@@ -75,7 +74,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-around">
-                            <span class="col FontSizeMedium text-center">
+                            <span class="col FontSizeMedium FontBold text-center">
                                 @item.Name
                             </span>
                         </div>
@@ -89,9 +88,9 @@
 </div>
 
 <div class="row no-gutters justify-content-center">
-    <div class="row TruckNameBox text-center justify-content-center" id="TruckNameBox">
+    @*<div class="row TruckNameBox text-center justify-content-center" id="TruckNameBox">
         <span id="TruckName"></span>&nbsp;
-    </div>
+    </div>*@
 
     <div class="row TruckBoxLarge" id="Single" style="display: none">
 
@@ -125,8 +124,8 @@
 
             document.getElementById("AllTrucks").style.display = "none";
 
-            document.getElementById("PageTitle").innerHTML = "Visiting " + $(this).data('studentname') + "'s Shop";
-            document.getElementById("TruckName").innerHTML = $(this).data('truckname');
+            document.getElementById("PageTitle").innerHTML = "Visiting " + $(this).data('studentname') + "'s Shop : "+$(this).data('truckname');
+            //document.getElementById("TruckName").innerHTML = $(this).data('truckname');
 
             $("#SingleTopper").attr('src', $(this).data('topper'));
             $("#SingleSign").attr('src', $(this).data('sign'));
