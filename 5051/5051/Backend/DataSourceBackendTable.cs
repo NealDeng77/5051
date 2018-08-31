@@ -63,11 +63,9 @@ namespace _5051.Backend
                     break;
 
                 case DataSourceEnum.ServerTest:
+                default:
                     StorageConnectionString = "StorageConnectionStringServerTest";
                     break;
-
-                default:
-                    throw new NotImplementedException();
             }
 
             // If under Test, return True;
