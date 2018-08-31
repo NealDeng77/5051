@@ -284,6 +284,29 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_AvatarItemDataSourceMock_LoadDataSet_Twice_Valid_Enum_UnitTest_Should_Pass()
+        {
+            // Arrange
+            var backend = AvatarItemDataSourceTable.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+
+            // Act
+            backend.LoadDataSet(expectEnum);
+
+            // Load again, makes sure there is multiple data
+            backend.CreateDataSetDefaultData();
+
+            var result = backend;
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
         #endregion DataSet
     }
 }
