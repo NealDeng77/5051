@@ -77,7 +77,7 @@
                                 ActiveTab = "active";
                             }
 
-                            <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category</a></li>
+                            <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category.GetDisplayName()</a></li>
                         }
                     }
                 </ul>
