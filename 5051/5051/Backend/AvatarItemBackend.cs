@@ -316,17 +316,6 @@ namespace _5051.Backend
 
             data.data = GetAvatarItemShopViewModel(studentData.Id, item.Id);
 
-            //// Load the data set for each type
-            //data.Expression = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ExpressionId);
-            //data.HairBack = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HairBackId);
-            //data.Head = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HeadId);
-            //data.ShirtShort = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ShirtShortId);
-            //data.Cheeks = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.CheeksId);
-            //data.HairFront = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.HairFrontId);
-            //data.Accessory = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.AccessoryId);
-            //data.ShirtFull = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.ShirtFullId);
-            //data.Pants = GetAvatarItemShopViewModel(studentData.Id, studentData.AvatarComposite.PantsId);
-
             return data;
         }
     }

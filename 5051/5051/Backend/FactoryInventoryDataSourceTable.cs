@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 using _5051.Models;
+using Microsoft.WindowsAzure.Storage.Table;
+using Newtonsoft.Json;
+
 namespace _5051.Backend
 {
     /// <summary>
-    /// Backend Mock DataSource for FactoryInventorys, to manage them
+    /// Backend Table DataSource for AvatarItems, to manage them
     /// </summary>
-    public class FactoryInventoryDataSourceMock : IFactoryInventoryInterface
+    public class FactoryInventoryDataSourceTable : IFactoryInventoryInterface
     {
         /// <summary>
         /// Make into a Singleton
         /// </summary>
-        private static volatile FactoryInventoryDataSourceMock instance;
+        private static volatile FactoryInventoryDataSourceTable instance;
         private static object syncRoot = new Object();
 
-        private FactoryInventoryDataSourceMock() { }
+        private FactoryInventoryDataSourceTable() { }
 
-        public static FactoryInventoryDataSourceMock Instance
+        public static FactoryInventoryDataSourceTable Instance
         {
             get
             {
@@ -29,7 +30,7 @@ namespace _5051.Backend
                     {
                         if (instance == null)
                         {
-                            instance = new FactoryInventoryDataSourceMock();
+                            instance = new FactoryInventoryDataSourceTable();
                             instance.Initialize();
                         }
                     }
@@ -40,23 +41,39 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// The FactoryInventory List
+        /// The AvatarItem List
         /// </summary>
-        private List<FactoryInventoryModel> FactoryInventoryList = new List<FactoryInventoryModel>();
+        private List<FactoryInventoryModel> DataList = new List<FactoryInventoryModel>();
+
+        private const string ClassName = "FactoryInventoryModel";
+        /// <summary>
+        /// Table Name used for data storage
+        /// </summary>
+        private string tableName = ClassName.ToLower();
 
         /// <summary>
-        /// Makes a new FactoryInventory
+        /// Partition Key used for data storage
+        /// </summary>
+        private string partitionKey = ClassName.ToLower();
+
+        /// <summary>
+        /// Makes a new AvatarItem
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>FactoryInventory Passed In</returns>
+        /// <returns>AvatarItem Passed In</returns>
         public FactoryInventoryModel Create(FactoryInventoryModel data)
         {
-            FactoryInventoryList.Add(data);
+            DataList.Add(data);
+
+            // Add to Storage
+            var myResult = DataSourceBackendTable.Instance.Create<FactoryInventoryModel>(tableName, partitionKey, data.Id, data);
+
             return data;
         }
 
         /// <summary>
         /// Return the data for the id passed in
+        /// Does not access storage, just reads from memeory
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Null or valid data</returns>
@@ -67,7 +84,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var myReturn = FactoryInventoryList.Find(n => n.Id == id);
+            var myReturn = DataList.Find(n => n.Id == id);
             return myReturn;
         }
 
@@ -82,7 +99,7 @@ namespace _5051.Backend
             {
                 return null;
             }
-            var myReturn = FactoryInventoryList.Find(n => n.Id == data.Id);
+            var myReturn = DataList.Find(n => n.Id == data.Id);
             if (myReturn == null)
             {
                 return null;
@@ -90,7 +107,10 @@ namespace _5051.Backend
 
             myReturn.Update(data);
 
-            return myReturn;
+            // Update Storage
+            var myResult = DataSourceBackendTable.Instance.Create<FactoryInventoryModel>(tableName, partitionKey, data.Id, data);
+
+            return data;
         }
 
         /// <summary>
@@ -105,18 +125,25 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = FactoryInventoryList.Find(n => n.Id == Id);
-            var myReturn = FactoryInventoryList.Remove(myData);
+            var myData = DataList.Find(n => n.Id == Id);
+            if (DataList.Remove(myData) == false)
+            {
+                return false;
+            }
+
+            // Storage Delete
+            var myReturn = DataSourceBackendTable.Instance.Delete<FactoryInventoryModel>(tableName, partitionKey, myData.Id, myData);
+
             return myReturn;
         }
 
         /// <summary>
         /// Return the full dataset
         /// </summary>
-        /// <returns>List of FactoryInventorys</returns>
+        /// <returns>List of AvatarItems</returns>
         public List<FactoryInventoryModel> Index()
         {
-            return FactoryInventoryList;
+            return DataList;
         }
 
         /// <summary>
@@ -140,7 +167,7 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetClear()
         {
-            FactoryInventoryList.Clear();
+            DataList.Clear();
         }
 
         /// <summary>
@@ -149,7 +176,35 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
+            CreateDataSetDefaultData();
+        }
 
+        /// <summary>
+        /// Load the data from the server, and then default data if needed.
+        /// </summary>
+        public void CreateDataSetDefaultData()
+        {
+
+            // Storage Load all rows
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<FactoryInventoryModel>(tableName, partitionKey);
+
+            foreach (var item in DataSetList)
+            {
+                DataList.Add(item);
+            }
+
+            // If Storage is Empty, then Create.
+            if (DataList.Count < 1)
+            {
+                CreateDataSetDefault();
+            }
+        }
+
+        /// <summary>
+        /// Get the Default data set, and then add it to the current
+        /// </summary>
+        private void CreateDataSetDefault()
+        {
             var dataSet = FactoryInventoryDataSourceHelper.Instance.GetDefaultDataSet();
             foreach (var item in dataSet)
             {
