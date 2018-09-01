@@ -17,7 +17,17 @@ namespace _5051.Backend
     public class IdentityDataSourceTable : IIdentityInterface
     {
 
+        public enum IdentityRole
+        {
+            // Not specified
+            Student = 0,
 
+            // Mock Dataset
+            Teacher = 1,
+
+            // SQL Dataset
+            Support = 2
+        }
 
         private static volatile IdentityDataSourceTable instance;
         private static object syncRoot = new Object();
@@ -477,7 +487,7 @@ namespace _5051.Backend
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool LogUserIn(string userName, string password)
+        public bool LogUserIn(string userName, string password, IdentityRole role)
         {
             if(userName == null || password == null)
             {
@@ -487,13 +497,32 @@ namespace _5051.Backend
             foreach (var item in DataList)
             {
                 //check if user is in DataList
-                if (item.UserName == userName)
+                if (item.UserName != userName)
                 {
-                    //check that password is correct
-                    if(item.UserName == password)
+                    continue;
+                }
+
+                //check that role is correct
+                if (role == IdentityRole.Support)
+                {
+                    if (!UserHasClaimOfValue(item.Id, "SupportUser", "True"))
                     {
-                        return true;
+                        return false;
                     }
+                }
+
+                if (role == IdentityRole.Teacher)
+                {
+                    if (!UserHasClaimOfValue(item.Id, "TeacherUser", "True"))
+                    {
+                        return false;
+                    }
+                }
+
+                //check that password is correct
+                if (item.UserName == password)
+                {
+                    return true;
                 }
             }
 
@@ -554,9 +583,10 @@ namespace _5051.Backend
         private void CreateDataSetDefault()
         {
             //create support user
-            CreateNewSupportUser("su5051", "su5051", "su5051");
+            CreateNewSupportUser("su5051", "su5051", "su5051ID");
 
             //create teacher user
+            CreateNewTeacher("Teacher", "Teacher", "TeacherID");
 
             //create the student users
 
