@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backend\AvatarItemBackendUnitTests.cs" />
+    <Compile Include="Backend\KioskSettingsDataSourceTableUnitTests.cs" />
     <Compile Include="Backend\FactoryInventoryDataSourceTableUnitTests.cs" />
     <Compile Include="Backend\DataSourceBackendTableUnitTests.cs" />
     <Compile Include="Backend\AvatarItemDataSourceTableUnitTests.cs" />
