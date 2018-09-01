@@ -24,7 +24,7 @@ namespace _5051.Backend
         {
             // generate random number
             var randObj = new Random();
-            ForcedRandomNumber = randObj.Next(0, 100);
+            ForcedRandomNumber = randObj.Next(0, 30);
             isSetForcedNumber = true;
         }
         public static int GetRandomNumber()
