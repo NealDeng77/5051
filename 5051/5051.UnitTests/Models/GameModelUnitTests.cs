@@ -75,7 +75,6 @@ namespace _5051.UnitTests.Models
             expect.TimeIteration = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 hr 1 minute
             expect.Income = 100;
             expect.Outcome = 50;
-            expect.Profit = expect.Income - expect.Outcome;
 
             var result  = new GameModel();
 
@@ -90,7 +89,6 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect.TimeIteration, result.TimeIteration, "TimeIteration" + TestContext.TestName);
             Assert.AreEqual(expect.Income, result.Income, "Income " + TestContext.TestName);
             Assert.AreEqual(expect.Outcome, result.Outcome, "Outcome" + TestContext.TestName);
-            Assert.AreEqual(expect.Profit, result.Profit, "Profit" + TestContext.TestName);
         }
         #endregion Update
     }

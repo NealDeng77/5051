@@ -42,8 +42,6 @@ namespace _5051.Models
 
         public int Outcome { get; set; }
 
-        public int Profit { get; set; }
-
         public List<TransactionModel> BusinessList { get; set; }
 
 
@@ -57,7 +55,6 @@ namespace _5051.Models
             TruckName = "My Truck";
             Income = 0;
             Outcome = 0;
-            Profit = Income - Outcome;
             BusinessList = new List<TransactionModel>();
 
             Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;

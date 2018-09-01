@@ -50,8 +50,6 @@ namespace _5051.Models
         [Display(Name = "Outcome", Description = "Outcome")]
         public int Outcome { get; set; }
 
-        [Display(Name = "Profit", Description = "Profit")]
-        public int Profit { get; set; }
 
 
 
@@ -72,7 +70,6 @@ namespace _5051.Models
             RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);    // default to 1 minute
             Income = 0;
             Outcome = 0;
-            Profit = Income - Outcome;
         }
 
         /// <summary>
@@ -115,7 +112,6 @@ namespace _5051.Models
             RefreshRate = data.RefreshRate;
             Income = data.Income;
             Outcome = data.Outcome;
-            Profit = data.Profit;
         }
     }
 }

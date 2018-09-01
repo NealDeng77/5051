@@ -1284,7 +1284,6 @@ namespace _5051.Tests.Controllers
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
             var expectIncome = myStudent.Truck.Income;
             var expectOutcome = myStudent.Truck.Outcome;
-            var expectProfit = myStudent.Truck.Profit;
             var expectBusinessList = myStudent.Truck.BusinessList;
 
             var result = controller.BusinessReport(data.Id) as ViewResult;
@@ -1293,7 +1292,6 @@ namespace _5051.Tests.Controllers
             //// Assert
             Assert.AreEqual(expectIncome, myStudent2.Truck.Income, TestContext.TestName);
             Assert.AreEqual(expectOutcome, myStudent2.Truck.Outcome, TestContext.TestName);
-            Assert.AreEqual(expectProfit, myStudent2.Truck.Profit, TestContext.TestName);
             Assert.AreEqual(expectBusinessList, myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 

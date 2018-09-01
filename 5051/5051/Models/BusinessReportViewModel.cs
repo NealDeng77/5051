@@ -13,7 +13,6 @@ namespace _5051.Models
         /// </summary>
         public int income;
         public int outcome;
-        public int profit;
         public List<TransactionModel> BusinessList;
 
     }
