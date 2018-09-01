@@ -19,12 +19,11 @@
 <h2>UserList</h2>
 
 @{
-    var idbackend = new IdentityBackend();
+    var studentList = IdentityDataSourceTable.Instance.ListAllStudentUsers();
+    var teacherList = IdentityDataSourceTable.Instance.ListAllTeacherUsers();
+    var supportList = IdentityDataSourceTable.Instance.ListAllSupportUsers();
+    var userList = IdentityDataSourceTable.Instance.ListAllUsers();
 
-    var studentList = idbackend.ListAllStudentUsers();
-    var teacherList = idbackend.ListAllTeacherUsers();
-    var supportList = idbackend.ListAllSupportUsers();
-    var userList = idbackend.ListAllUsers();
 
     <h4>Students</h4>
     <ul>

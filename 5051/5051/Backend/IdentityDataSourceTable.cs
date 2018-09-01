@@ -34,7 +34,6 @@ namespace _5051.Backend
                     {
                         instance = new IdentityDataSourceTable();
                         instance.DataSetDefault();
-                        //instance.Reset();
                     }
                 }
 
@@ -71,6 +70,11 @@ namespace _5051.Backend
                 ClaimType = "SupportUser",
                 ClaimValue = "True"
             });
+            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True"
+            });
 
             DataList.Add(user);
 
@@ -93,17 +97,19 @@ namespace _5051.Backend
             //fill in all fields needed
             var user = new ApplicationUser { UserName = teacherName, Email = teacherName + "@seattleu.edu", Id = teacherId };
 
-            //var result = idBackend.UserManager.Create(user, teacherPassword);
+            //need to add claims
+            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = "TeacherUser",
+                ClaimValue = "True"
+            });
 
-            //if (!result.Succeeded)
-            //{
-            //    return null;
-            //}
+            DataList.Add(user);
 
-            //var claimResult = AddClaimToUser(user.Id, "TeacherUser", "True");
-            //claimResult = AddClaimToUser(user.Id, "TeacherID", teacherId);
+            //add to storage
+            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
 
-            return user;
+            return myResult;
         }
 
         /// <summary>
@@ -120,7 +126,26 @@ namespace _5051.Backend
             //fill in all fields needed
             var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
 
-            return user;
+            var createResult = StudentBackend.Instance.Create(student);
+
+            if (createResult == null)
+            {
+                return null;
+            }
+
+            //need to add claims
+            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = "StudentUser",
+                ClaimValue = "True"
+            });
+
+            DataList.Add(user);
+
+            //add to storage
+            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
+
+            return myResult;
         }
 
 
@@ -137,12 +162,12 @@ namespace _5051.Backend
                 return false;
             }
 
-            //var findResult = FindUserByID(student.Id);
+            var findResult = FindUserByID(student.Id);
 
-            //if (findResult == null)
-            //{
-            //    return false;
-            //}
+            if (findResult == null)
+            {
+                return false;
+            }
 
             ////update all fields in db to match given student record
             //findResult.UserName = student.Name;
@@ -161,9 +186,14 @@ namespace _5051.Backend
         /// <returns></returns>
         public ApplicationUser FindUserByUserName(string userName)
         {
-            //var findResult = idBackend.UserManager.FindByName(userName);
+            foreach (var item in DataList)
+            {
+                if (item.UserName == userName)
+                {
+                    return item;
+                }
+            }
 
-            //return findResult;
             return null;
         }
 
@@ -175,9 +205,14 @@ namespace _5051.Backend
         /// <returns></returns>
         public ApplicationUser FindUserByID(string id)
         {
-            //var findResult = idBackend.UserManager.FindById(id);
+            foreach (var item in DataList)
+            {
+                if(item.Id == id)
+                {
+                    return item;
+                }
+            }
 
-            //return findResult;
             return null;
         }
 
@@ -210,19 +245,17 @@ namespace _5051.Backend
         /// <returns></returns>
         public List<ApplicationUser> ListAllStudentUsers()
         {
-            //var userList = ListAllUsers();
-            //var studentList = new List<ApplicationUser>();
+            var myReturn = new List<ApplicationUser>() { };
 
-            //foreach (var user in userList)
-            //{
-            //    if (UserHasClaimOfValue(user.Id, "StudentUser", "True"))
-            //    {
-            //        studentList.Add(user);
-            //    }
-            //}
+            foreach (var user in DataList)
+            {
+                if(UserHasClaimOfValue(user.Id, "StudentUser", "True"))
+                {
+                    myReturn.Add(user);
+                }
+            }
 
-            //return studentList;
-            return DataList;
+            return myReturn;
         }
 
         /// <summary>
@@ -231,19 +264,17 @@ namespace _5051.Backend
         /// <returns></returns>
         public List<ApplicationUser> ListAllTeacherUsers()
         {
-            //var userList = ListAllUsers();
-            //var teacherList = new List<ApplicationUser>();
+            var myReturn = new List<ApplicationUser>() { };
 
-            //foreach (var user in userList)
-            //{
-            //    if (UserHasClaimOfValue(user.Id, "TeacherUser", "True"))
-            //    {
-            //        teacherList.Add(user);
-            //    }
-            //}
+            foreach (var user in DataList)
+            {
+                if (UserHasClaimOfValue(user.Id, "TeacherUser", "True"))
+                {
+                    myReturn.Add(user);
+                }
+            }
 
-            //return teacherList;
-            return DataList;
+            return myReturn;
         }
 
 
@@ -253,19 +284,17 @@ namespace _5051.Backend
         /// <returns></returns>
         public List<ApplicationUser> ListAllSupportUsers()
         {
-            //var userList = ListAllUsers();
-            //var supportList = new List<ApplicationUser>();
+            var myReturn = new List<ApplicationUser>() { };
 
-            //foreach (var user in userList)
-            //{
-            //    if (UserHasClaimOfValue(user.Id, "SupportUser", "True"))
-            //    {
-            //        supportList.Add(user);
-            //    }
-            //}
+            foreach (var user in DataList)
+            {
+                if (UserHasClaimOfValue(user.Id, "SupportUser", "True"))
+                {
+                    myReturn.Add(user);
+                }
+            }
 
-            //return supportList;
-            return DataList;
+            return myReturn;
         }
 
         /// <summary>
@@ -278,23 +307,19 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool UserHasClaimOfValue(string userID, string claimType, string claimValue)
         {
-            var user = FindUserByID(userID);
-
-            if (user == null)
+            var findResult = FindUserByID(userID);
+            if (findResult == null)
             {
                 return false;
             }
 
-            var claims = user.Claims.ToList();
+            var claims = findResult.Claims.ToList();
 
             foreach (var item in claims)
             {
-                if (item.ClaimType == claimType)
+                if (item.ClaimType == claimType && item.ClaimValue == claimValue)
                 {
-                    if (item.ClaimValue == claimValue)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
@@ -311,22 +336,29 @@ namespace _5051.Backend
         /// <returns></returns>
         public ApplicationUser AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
         {
-            //var findResult = FindUserByID(userID);
+            var findResult = FindUserByID(userID);
 
-            //if (findResult == null)
-            //{
-            //    return null;
-            //}
+            if(findResult == null)
+            {
+                return null;
+            }
 
-            //var claimAddResult = idBackend.UserManager.AddClaim(userID, new Claim(claimTypeToAdd, claimValueToAdd));
+            findResult.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = claimTypeToAdd,
+                ClaimValue =claimValueToAdd
+            });
 
-            //if (!claimAddResult.Succeeded)
-            //{
-            //    return null;
-            //}
 
-            //return findResult;
-            return null;
+            //storage update
+            var updateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userID, findResult);
+
+            if (updateResult == null)
+            {
+                return null;
+            }
+
+            return findResult;
         }
 
         /// <summary>
@@ -338,24 +370,32 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
         {
-            //var claims = idBackend.UserManager.GetClaims(userID);
+            var findResult = FindUserByID(userID);
 
-            //if (claims == null)
-            //{
-            //    return false;
-            //}
+            var claims = findResult.Claims.ToList();
 
-            //var lastAccessedClaim = claims.FirstOrDefault(t => t.Type == claimTypeToRemove);
+            if (claims == null)
+            {
+                return false;
+            }
 
-            //var resultDelete = (lastAccessedClaim == null) ? null : idBackend.UserManager.RemoveClaim(userID, lastAccessedClaim);
+            var lastAccessedClaim = claims.FirstOrDefault(t => t.ClaimType == claimTypeToRemove);
 
-            //if (!resultDelete.Succeeded)
-            //{
-            //    return false;
-            //}
+            var resultDelete = findResult.Claims.Remove(lastAccessedClaim);
 
-            //return true;
-            return false;
+            if (!resultDelete)
+            {
+                return false;
+            }
+
+            var updateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userID, findResult);
+
+            if(updateResult == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

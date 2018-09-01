@@ -59,48 +59,48 @@ namespace _5051.Controllers
         // GET: Support
         public ActionResult Index()
         {
-                return View();
+            return View();
         }
 
         //GET lists all the users
         public ActionResult UserList()
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
-                var userList = identityBackend.ListAllUsers();
+            var userList = IdentityDataSourceTable.Instance.ListAllUsers();
 
-                return View(userList);
+            return View(userList);
         }
 
 
         //GET Support/UserInfo/userID
         public ActionResult UserInfo(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
-                var myUserInfo = identityBackend.FindUserByID(id);
+            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
-                return View(myUserInfo);
+            return View(myUserInfo);
             
         }
 
         //GET support/togglestudent/userID
         public ActionResult ToggleStudent(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
-                var myUserInfo = identityBackend.FindUserByID(id);
+            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
-                return View(myUserInfo);
+            return View(myUserInfo);
         }
 
         //toggles whether or not given user is a student
@@ -109,36 +109,35 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser studentUser)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(studentUser.Id, "StudentUser", "True"))
             {
-                return RedirectToAction("Index", "Home");
+                IdentityDataSourceTable.Instance.RemoveClaimFromUser(studentUser.Id, "StudentUser");
+            }
+            else
+            {
+                IdentityDataSourceTable.Instance.AddClaimToUser(studentUser.Id, "StudentUser", "True");
             }
 
-                if (identityBackend.UserHasClaimOfValue(studentUser.Id, "StudentUser", "True"))
-                {
-                    identityBackend.RemoveClaimFromUser(studentUser.Id, "StudentUser");
-                }
-                else
-                {
-                    identityBackend.AddClaimToUser(studentUser.Id, "StudentUser", "True");
-                }
-
-                return RedirectToAction("UserList", "Support");
+            return RedirectToAction("UserList", "Support");
 
         }
 
         //GET support/toggleTeacher/userID
         public ActionResult ToggleTeacher(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
+            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
-                var myUserInfo = identityBackend.FindUserByID(id);
-
-                return View(myUserInfo);
+            return View(myUserInfo);
 
         }
 
@@ -148,18 +147,18 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser teacherUser)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
-            if (identityBackend.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
             {
-                identityBackend.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
+                IdentityDataSourceTable.Instance.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
             }
             else
             {
-                identityBackend.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
+                IdentityDataSourceTable.Instance.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
             }
 
             return RedirectToAction("UserList", "Support");
@@ -168,15 +167,14 @@ namespace _5051.Controllers
         //GET support/ToggleSupport/userID
         public ActionResult ToggleSupport(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
+            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
-                var myUserInfo = identityBackend.FindUserByID(id);
-
-                return View(myUserInfo);
+            return View(myUserInfo);
         }
 
         //toggles whether or not user is a support user
@@ -185,23 +183,21 @@ namespace _5051.Controllers
                                                 "Id,"+
                                                 "")] ApplicationUser supportUser)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(supportUser.Id, "SupportUser", "True"))
             {
-                return RedirectToAction("Index", "Home");
+                IdentityDataSourceTable.Instance.RemoveClaimFromUser(supportUser.Id, "SupportUser");
+            }
+            else
+            {
+                IdentityDataSourceTable.Instance.AddClaimToUser(supportUser.Id, "SupportUser", "True");
             }
 
-
-                if (identityBackend.UserHasClaimOfValue(supportUser.Id, "SupportUser", "True"))
-                {
-                    identityBackend.RemoveClaimFromUser(supportUser.Id, "SupportUser");
-                }
-                else
-                {
-                    identityBackend.AddClaimToUser(supportUser.Id, "SupportUser", "True");
-                }
-
-                return RedirectToAction("UserList", "Support");
-
+            return RedirectToAction("UserList", "Support");
         }
 
         //GET
@@ -254,12 +250,13 @@ namespace _5051.Controllers
             var newStudent = new StudentModel();
 
             newStudent.Name = user.Email;
+            newStudent.Password = user.Password;
 
-            var createResult = StudentBackend.Instance.Create(newStudent);
+            var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
 
-            if (createResult == null)
+            if(createUserResult == null)
             {
-                ModelState.AddModelError("", "Invalid Create Attempt");
+                ModelState.AddModelError("", "Invalid create user attempt");
             }
 
             return RedirectToAction("UserList", "Support");
@@ -279,7 +276,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var createResult = identityBackend.CreateNewTeacher(user.Email, user.Password, user.Email);
+            var createResult = IdentityDataSourceTable.Instance.CreateNewTeacher(user.Email, user.Password, user.Email);
 
             if(createResult == null)
             {
@@ -303,7 +300,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var createResult = identityBackend.CreateNewSupportUser(user.Email, user.Password, user.Email);
+            var createResult = IdentityDataSourceTable.Instance.CreateNewSupportUser(user.Email, user.Password, user.Email);
 
             if (createResult == null)
             {
@@ -316,7 +313,7 @@ namespace _5051.Controllers
         //GET
         public ActionResult DeleteUser(string id = null)
         {
-            var findResult = identityBackend.FindUserByID(id);
+            var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
             if(findResult == null)
             {
                 return RedirectToAction("UserList", "Support");
@@ -330,13 +327,13 @@ namespace _5051.Controllers
                                              "Id," +
                                              "")] ApplicationUser user)
         {
-            var findResult = identityBackend.FindUserByID(user.Id);
+            var findResult = IdentityDataSourceTable.Instance.FindUserByID(user.Id);
             if (findResult == null)
             {
                 return View(user);
             }
 
-            var deleteResult = identityBackend.DeleteUser(findResult);
+            var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult);
             if(!deleteResult)
             {
                 ModelState.AddModelError("", "Invalid Delete Attempt.");
@@ -348,10 +345,10 @@ namespace _5051.Controllers
 
         public ActionResult Settings()
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return View();
         }
@@ -363,10 +360,10 @@ namespace _5051.Controllers
         // GET: Reset
         public ActionResult Reset()
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             DataSourceBackend.Instance.Reset();
             return RedirectToAction("Index", "Support");
@@ -379,10 +376,10 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSourceSet(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             if (string.IsNullOrEmpty(id))
             {
@@ -417,10 +414,10 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSource(string id = null)
         {
-            if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             if (string.IsNullOrEmpty(id))
             {

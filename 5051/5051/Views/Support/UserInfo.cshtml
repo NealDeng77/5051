@@ -7,8 +7,6 @@
 <h2>UserInfo</h2>
 
 @{
-    var idback = new IdentityBackend();
-
     if (Model == null)
     {
         <p>No valid user given</p>
@@ -17,7 +15,7 @@
     {
         <h4>@Model.UserName</h4>
 
-        if (idback.UserHasClaimOfValue(Model.Id, "StudentUser", "True"))
+        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "StudentUser", "True"))
         {
             <h5>User is a Student</h5>
         }
@@ -29,7 +27,7 @@
         <br />
         <br />
 
-        if (idback.UserHasClaimOfValue(Model.Id, "TeacherUser", "True"))
+        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "TeacherUser", "True"))
         {
             <h5>User is a Teacher</h5>
         }
@@ -41,7 +39,7 @@
         <br />
         <br />
 
-        if (idback.UserHasClaimOfValue(Model.Id, "SupportUser", "True"))
+        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "SupportUser", "True"))
         {
             <h5>User is a Support User</h5>
         }
