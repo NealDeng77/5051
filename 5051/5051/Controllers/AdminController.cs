@@ -364,5 +364,33 @@ namespace _5051.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+
+        //GET
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
+            if (!loginResult)
+            {
+                ModelState.AddModelError("", "Invalid Login Attempt");
+                return View(user);
+            }
+
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }

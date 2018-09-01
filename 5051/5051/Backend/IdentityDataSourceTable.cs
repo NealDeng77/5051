@@ -586,7 +586,7 @@ namespace _5051.Backend
             CreateNewSupportUser("su5051", "su5051", "su5051ID");
 
             //create teacher user
-            CreateNewTeacher("Teacher", "Teacher", "TeacherID");
+            CreateNewTeacher("teacher", "teacher", "teacherID");
 
             //create the student users
 
