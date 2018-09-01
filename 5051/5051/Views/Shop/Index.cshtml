@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Shop";
 }
-<div class="row"><br /></div>
 
 <div class="row no-gutters justify-content-center">
     <div class="row container-fluid GameButtonsBox justify-content-center">
@@ -37,12 +36,6 @@
                 <div><span id="StoreStatus"></span></div>
             </div>
 
-            <div class="FeedBar FontSizeSmall">
-                <div class="row justify-content-around FontSizeMedium">
-                    Game Data: <span id="TransactionList"></span>
-                </div>
-            </div>
-
             <div class="AvatarImageBox">
                 <img class="PeopleItem" id="PeopleItem" src="~/Content/avatar/AvatarFull.png" alt="Shopper">
             </div>
@@ -75,6 +68,15 @@
 
     </div>
 
+</div>
+<div class="row"><br /></div>
+
+<div class="row container">
+    <div class="FeedBar FontSizeSmall">
+        <div class="row justify-content-around FontSizeMedium">
+            Game Data: <span id="TransactionList"></span>
+        </div>
+    </div>
 </div>
 
 <script>

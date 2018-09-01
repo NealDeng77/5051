@@ -258,7 +258,7 @@ function ShowTransactionList() {
     el.empty();
     // Add the Latest Transactions to display
     for (var item of ShopData.TransactionList) {
-        el.append("<span>" + item.Name + "</span> &nbsp;");
+        el.append(" &nbsp; <span>" + item.Name + "</span> &nbsp;");
         if (item.Uri != null) {
             el.append("<img class=\"ProductBoughtBar\" id = \"ProductBought\" src = \"/Content/shop/" + item.Uri + "\" alt = \"ProductBought\" /> &nbsp;");
         }
