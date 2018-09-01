@@ -62,7 +62,7 @@ namespace _5051.Backend
         /// <param name="SetEnum"></param>
         public static void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
         {
-            SchoolCalendarDataSourceMock.Instance.LoadDataSet(SetEnum);
+            DataSource.LoadDataSet(SetEnum);
         }
 
         /// <summary>
