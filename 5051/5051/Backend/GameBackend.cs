@@ -380,8 +380,8 @@ namespace _5051.Backend
             var studentPoints = (int)Math.Ceiling((passByPercent + levelExtra) * 100);
 
             // generate random number
-            RandomHelper.SetForcedNumber();
-            var criterion = RandomHelper.GetRandomNumber();
+            //RandomHelper.Instance.SetForcedNumber();
+            var criterion = RandomHelper.Instance.GetRandomNumber(30);
 
             // show pass by message            
             if (studentPoints >= criterion)
@@ -408,8 +408,8 @@ namespace _5051.Backend
             var studentPoints = (int)Math.Ceiling((passByPercent + levelExtra) * 100);
 
             // generate random number
-            RandomHelper.SetForcedNumber();
-            var criterion = RandomHelper.GetRandomNumber();
+            //RandomHelper.SetForcedNumber();
+            var criterion = RandomHelper.Instance.GetRandomNumber(30);
 
             // show pass by message
             if (studentPoints >= criterion)

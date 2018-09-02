@@ -39,16 +39,19 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = RandomHelper.Instance;
+            var expect = 6;
+            RandomHelper.Instance.EnableForcedNumber(true);
+            RandomHelper.Instance.SetForcedNumber(expect);
 
             // Act
-            var expect = true;
-            RandomHelper.SetForcedNumber();
+            var result = RandomHelper.Instance.GetRandomNumber(30);
 
             //Reset
             DataSourceBackend.Instance.Reset();
+            RandomHelper.Instance.EnableForcedNumber(false);
 
             // Assert
-            Assert.AreEqual(expect, RandomHelper.isSetForcedNumber, TestContext.TestName);
+            Assert.AreEqual(expect, result, TestContext.TestName);
         }
         #endregion SetForcedNumber
 
@@ -60,31 +63,35 @@ namespace _5051.UnitTests.Backend
             var backend = RandomHelper.Instance;
 
             // Act
-            RandomHelper.SetForcedNumber();
-            var expect = RandomHelper.GetRandomNumber();
-
-            //Reset
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.IsNotNull(expect, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Backend_RandomHelper_GetRandomNumber_Data_Is_Not_Valid_Should_Fail()
-        {
-            // Arrange
-            var backend = RandomHelper.Instance;
-
-            // Act
-            var result = RandomHelper.GetRandomNumber();
-            var expect = -1;
+            int expect = 2;
+            RandomHelper.Instance.SetForcedNumber(expect);
+            var result = RandomHelper.Instance.GetRandomNumber(10);
 
             //Reset
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_RandomHelper_GetRandomNumber_Data_Valid_Random_Should_Pass()
+        {
+            /// Random turned on, should yield a number between 0 and max
+            // Arrange
+            var backend = RandomHelper.Instance;
+            var max = 10;
+
+            // Act
+            var result = RandomHelper.Instance.GetRandomNumber(max);
+
+            //Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsTrue(result<=max, TestContext.TestName);
+            Assert.IsTrue(result >=0, TestContext.TestName);
+
         }
         #endregion GetRandomNumber
     }

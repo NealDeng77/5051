@@ -202,6 +202,27 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
+
+
+        [TestMethod]
+        public void Backend_StudentDataSourceTable_Delete_Invalid_ID_Bogus_Should_Fail()
+        {
+            // Arrange
+            var backend = StudentDataSourceTable.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectStudent = studentBackend.GetDefault();
+            var expect = false;
+
+            // Act
+            var result = backend.Delete("bogus");
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+            //studentBackend.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
         #endregion delete
 
         #region DataSet
