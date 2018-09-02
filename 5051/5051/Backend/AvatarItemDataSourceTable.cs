@@ -188,9 +188,6 @@ namespace _5051.Backend
             // Storage Load all rows
             var DataSetList = DataSourceBackendTable.Instance.LoadAll<AvatarItemModel>(tableName, partitionKey);
 
-            // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by timespamp instead
-            DataSetList = DataSetList.OrderBy(x => x.TimeStamp).ToList();
-
             foreach (var item in DataSetList)
             {
                 DataList.Add(item);
@@ -201,6 +198,10 @@ namespace _5051.Backend
             {
                 CreateDataSetDefault();
             }
+
+            // Order the set by TimeStamp
+            DataSetList = DataSetList.OrderBy(x => x.TimeStamp).ToList();
+
         }
 
         /// <summary>
