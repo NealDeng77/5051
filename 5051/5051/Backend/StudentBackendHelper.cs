@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using _5051.Models;
 
 namespace _5051.Backend
@@ -13,9 +14,9 @@ namespace _5051.Backend
         /// </summary>
         public static void CreateDemoStudent()
         {
-            StudentBackend.Instance.Create(new StudentModel("Mike", null));
             StudentBackend.Instance.Create(new StudentModel("Doug", null));
             StudentBackend.Instance.Create(new StudentModel("Jea", null));
+            StudentBackend.Instance.Create(new StudentModel("Mike", null));
             StudentBackend.Instance.Create(new StudentModel("Sue", null));
             StudentBackend.Instance.Create(new StudentModel("Stan", null));
         }
@@ -39,18 +40,21 @@ namespace _5051.Backend
                 dateEnd = yesterday;
             }
 
+            var tempStudentList = StudentBackend.Instance.Index().ToList<StudentModel>();
+            tempStudentList = tempStudentList.OrderBy(x => x.TimeStamp).ToList();
+
             //Generate attendance records for 5 student personas
             //The scenario of this demo data:
             //Student at index 0 has perfect attendance: always arrive on time and stay
-            GenerateAttendance(0, dateStart, dateEnd);
+            GenerateAttendance(tempStudentList[0].Id,0, dateStart, dateEnd);
             //Student at index 1 has good attendance: on average has 1 day late and 1 day leave early out of every 5 days
-            GenerateAttendance(1, dateStart, dateEnd);
+            GenerateAttendance(tempStudentList[1].Id,1, dateStart, dateEnd);
             //Student at index 2 has average attendance: on average has 1 day late, 1 day leave early and 1 day absent out of every 5 days
-            GenerateAttendance(2, dateStart, dateEnd);
+            GenerateAttendance(tempStudentList[2].Id,2, dateStart, dateEnd);
             //Student at index 3 has bad attendance: on average has 1 day late, 2 days very late, 1 day leave early and 2 days absent out of every 5 days
-            GenerateAttendance(3, dateStart, dateEnd);
+            GenerateAttendance(tempStudentList[3].Id,3, dateStart, dateEnd);
             //Student at index 4 has no attendance: always absent
-            GenerateAttendance(4, dateStart, dateEnd);
+            GenerateAttendance(tempStudentList[4].Id,4, dateStart, dateEnd);
             //To do: create scenario for multiple check-ins
 
             StudentBackend.Instance.ResetStatusAndProcessNewAttendance();
@@ -62,9 +66,9 @@ namespace _5051.Backend
         /// <param name="index">The index of the student in studentBackend index</param>
         /// <param name="dateStart"></param>
         /// <param name="dateEnd"></param>
-        private static void GenerateAttendance(int index, DateTime dateStart, DateTime dateEnd)
+        private static void GenerateAttendance(string studentId, int StudentType, DateTime dateStart, DateTime dateEnd)
         {
-            var myStudent = StudentBackend.Instance.Index()[index];
+            var myStudent = StudentBackend.Instance.Read(studentId);
 
             // Set current date to be 1 less than the start day, because will get added in the for loop
             DateTime currentDate = dateStart;
@@ -74,8 +78,6 @@ namespace _5051.Backend
 
             while (currentDate.CompareTo(dateEnd) < 0)
             {
-
-
 
                 // Create an attendance model for this student
                 var temp = new AttendanceModel
@@ -93,7 +95,7 @@ namespace _5051.Backend
                     //generate a random number 0-4 inclusive, use this to randomly generate 5 scenarios
                     int rn = r.Next(0, 5);
 
-                    switch (index)
+                    switch (StudentType)
                     {
                         case 0: //Perfect
                             temp.In = InGood(currentDate, r);

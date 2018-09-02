@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using _5051.Models;
 
 namespace _5051.Backend
@@ -40,7 +42,7 @@ namespace _5051.Backend
         /// <summary>
         /// The Data for the Students
         /// </summary>
-        private List<StudentModel> StudentList = new List<StudentModel>();
+        private List<StudentModel> DataSetList = new List<StudentModel>();
 
         /// <summary>
         /// Makes a new Student
@@ -55,7 +57,7 @@ namespace _5051.Backend
             //    identityBackend.CreateNewStudent(data);
             //}
 
-            StudentList.Add(data);
+            DataSetList.Add(data);
 
             return data;
         }
@@ -72,7 +74,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var myReturn = StudentList.Find(n => n.Id == id);
+            var myReturn = DataSetList.Find(n => n.Id == id);
             return myReturn;
         }
 
@@ -87,7 +89,7 @@ namespace _5051.Backend
             {
                 return null;
             }
-            var myReturn = StudentList.Find(n => n.Id == data.Id);
+            var myReturn = DataSetList.Find(n => n.Id == data.Id);
             if (myReturn == null)
             {
                 return null;
@@ -110,8 +112,8 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = StudentList.Find(n => n.Id == Id);
-            var myReturn = StudentList.Remove(myData);
+            var myData = DataSetList.Find(n => n.Id == Id);
+            var myReturn = DataSetList.Remove(myData);
             return myReturn;
         }
 
@@ -121,7 +123,7 @@ namespace _5051.Backend
         /// <returns>List of Students</returns>
         public List<StudentModel> Index()
         {
-            return StudentList;
+            return DataSetList;
         }
 
         /// <summary>
@@ -145,7 +147,7 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetClear()
         {
-            StudentList.Clear();
+            DataSetList.Clear();
         }
 
         /// <summary>
@@ -161,6 +163,9 @@ namespace _5051.Backend
                 Create(item);
             }
 
+            // Order the set by Name
+            DataSetList = DataSetList.OrderBy(x => x.Name).ToList();
+
         }
 
         /// <summary>
@@ -170,6 +175,10 @@ namespace _5051.Backend
         {
             DataSetClear();
             StudentBackendHelper.CreateDemoStudent();
+
+            // Order the set by Name
+            DataSetList = DataSetList.OrderBy(x => x.Name).ToList();
+
             StudentBackendHelper.CreateDemoAttendance();     
         }
 

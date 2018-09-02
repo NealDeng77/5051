@@ -199,10 +199,15 @@ namespace _5051.UnitTests.Backend
                 Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(12)),
             };
 
-            studentList[0].Attendance.Add(attendanceMon);
+            var student1 = studentList.Where<StudentModel>(x => x.Name == "Doug").FirstOrDefault();
+            student1.Attendance.Add(attendanceMon);
+            StudentBackend.Instance.Update(student1);
 
-            studentList[1].Attendance.Add(attendanceMon);
-            studentList[1].Attendance.Add(attendanceTue);
+            var student2 = studentList.Where<StudentModel>(x => x.Name == "Jea").FirstOrDefault();
+            student2.Attendance.Add(attendanceMon);
+            student2.Attendance.Add(attendanceTue);
+            StudentBackend.Instance.Update(student2);
+
             //act
             var result = ReportBackend.Instance.GenerateLeaderboard();
 
@@ -210,10 +215,8 @@ namespace _5051.UnitTests.Backend
             StudentBackend.Instance.Reset();
 
             //assert
-            Assert.AreEqual(result[0].Name, studentList[1].Name, TestContext.TestName);
-            Assert.AreEqual(result[1].Name, studentList[0].Name, TestContext.TestName);
+            Assert.AreEqual(student1.Name, result[1].Name, TestContext.TestName);
+            Assert.AreEqual(student2.Name, result[0].Name, TestContext.TestName);
         }
-
-
     }
 }
