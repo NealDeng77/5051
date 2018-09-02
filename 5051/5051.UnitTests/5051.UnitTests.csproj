@@ -140,6 +140,7 @@
     <Compile Include="Backend\GameDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\GameBackendUnitTests.cs" />
     <Compile Include="Backend\IdentityBackendUnitTests.cs" />
+    <Compile Include="Backend\RandomHelperUnitTests.cs" />
     <Compile Include="Backend\ReportBackendUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarBackendUnitTests.cs" />
     <Compile Include="Backend\FactoryInventoryBackendUnitTests.cs" />

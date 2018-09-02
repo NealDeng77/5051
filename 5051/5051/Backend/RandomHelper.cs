@@ -14,7 +14,29 @@ namespace _5051.Backend
         private static int ForcedRandomNumber;
         private static bool isSetForcedNumber;
 
-        public RandomHelper ()
+        private RandomHelper() { }
+
+        public static RandomHelper Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new RandomHelper();
+                            instance.Initialize();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
+
+        public void Initialize()
         {
             ForcedRandomNumber = -1;
             isSetForcedNumber = false;
