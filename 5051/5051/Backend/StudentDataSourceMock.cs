@@ -239,5 +239,11 @@ namespace _5051.Backend
                     break;
             }
         }
+
+        public static bool SetTestingMode(bool mode)
+        {
+            isTestingMode = mode;
+            return isTestingMode;
+        }
     }
 }
