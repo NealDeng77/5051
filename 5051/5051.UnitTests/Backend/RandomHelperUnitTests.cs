@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace _5051.UnitTests.Backend
 {
-    class RandomHelperUnitTests
+    [TestClass]
+    public class RandomHelperUnitTests
     {
         public TestContext TestContext { get; set; }
 
@@ -25,7 +26,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
