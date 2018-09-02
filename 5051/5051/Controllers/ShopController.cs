@@ -177,7 +177,7 @@ namespace _5051.Controllers
 
             // Add info into businessList
             TransactionModel myTransaction = new TransactionModel();
-            myTransaction.Name = "Buy " + myItem.Name + "by spending " + myItem.Tokens;
+            myTransaction.Name = "Buy " + myItem.Name + " by spending " + myItem.Tokens;
             myTransaction.Uri = null;
             myStudent.Truck.BusinessList.Add(myTransaction);
 
