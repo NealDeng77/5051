@@ -228,6 +228,9 @@ namespace _5051.Backend
                 // Look to the next day
                 currentDate = currentDate.AddDays(1);
             }
+
+            // Update the data
+            StudentBackend.Instance.Update(myStudent);
         }
 
         /// <summary>

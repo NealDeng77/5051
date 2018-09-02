@@ -165,7 +165,6 @@ namespace _5051.Backend
 
             // Order the set by Name
             DataSetList = DataSetList.OrderBy(x => x.Name).ToList();
-
         }
 
         /// <summary>
@@ -173,8 +172,8 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetDemo()
         {
-            DataSetClear();
-            StudentBackendHelper.CreateDemoStudent();
+            // Clears and loads the same data set as the Default
+            DataSetDefault();
 
             // Order the set by Name
             DataSetList = DataSetList.OrderBy(x => x.Name).ToList();
