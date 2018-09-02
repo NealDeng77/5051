@@ -106,9 +106,21 @@ namespace _5051.Controllers
             var myDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
             //the school day model
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myDate);
+            DateTime defaultStart;
+            DateTime defaultEnd;
 
-            var defaultStart = myDate.Add(schoolDay.TimeStart);
-            var defaultEnd = myDate.Add(schoolDay.TimeEnd);
+            if (schoolDay == null)
+            {
+                defaultStart = myDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().StartNormal);
+                defaultEnd = myDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal);
+            }
+            else
+            {
+                defaultStart = myDate.Add(schoolDay.TimeStart);
+                defaultEnd = myDate.Add(schoolDay.TimeEnd);
+            }
+
+
 
             var myData = new AttendanceModel
             {
