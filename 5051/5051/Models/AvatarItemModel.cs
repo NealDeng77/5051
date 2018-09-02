@@ -8,6 +8,9 @@ namespace _5051.Models
     /// </summary>
     public class AvatarItemModel
     {
+        // When the record was created, used for Table Storage
+        public DateTime TimeStamp { get; set; }
+
         [Display(Name = "Id", Description = "AvatarItem Id")]
         [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
@@ -32,7 +35,6 @@ namespace _5051.Models
 
         public bool IsLimitSupply { get; set; }
 
-
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -42,6 +44,7 @@ namespace _5051.Models
             Tokens = 1;
             Quantities = 10;
             IsLimitSupply = false;
+            TimeStamp = DateTime.UtcNow;
         }
 
         /// <summary>
