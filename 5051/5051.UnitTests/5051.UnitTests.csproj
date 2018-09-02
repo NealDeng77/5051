@@ -146,6 +146,7 @@
     <Compile Include="Backend\AvatarBackendUnitTests.cs" />
     <Compile Include="Backend\DataSourceBackendUnitTests.cs" />
     <Compile Include="Backend\KioskSettingsBackendUnitTests.cs" />
+    <Compile Include="Backend\SchoolCalendarDataSourceTableUnitTests.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsBackendUnitTests.cs" />
     <Compile Include="Backend\FactoryInventoryDataSourceMockUnitTests.cs" />
     <Compile Include="Backend\SchoolDismissalSettingsDataSourceTableUnitTests.cs" />
