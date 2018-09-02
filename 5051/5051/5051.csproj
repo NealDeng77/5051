@@ -758,6 +758,7 @@
     <Content Include="Views\Portal\MonthlyReport.cshtml" />
     <Content Include="Views\Portal\SemesterReport.cshtml" />
     <Content Include="Views\Portal\QuarterReport.cshtml" />
+    <Content Include="Views\Portal\OverallReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
