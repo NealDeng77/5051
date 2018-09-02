@@ -351,13 +351,62 @@ namespace _5051.Controllers
             return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
         }
 
+        // GET: WeeklyReport
         /// <summary>
-        /// My Attendance Reports
+        /// Returns an individual weekly report for a student
         /// </summary>
-        /// <param name="id">Student Id</param>
-        /// <returns>Student Record as a Student View Model</returns>
-        // GET: Portal
-        public ActionResult Report(string id = null)
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult WeeklyReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myReport = new WeeklyReportViewModel()
+            {
+                StudentId = id,
+                SelectedWeekId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateWeeklyReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the WeeklyReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult WeeklyReport([Bind(Include=
+            "StudentId,"+
+            "SelectedWeekId"+
+            "")] WeeklyReportViewModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateWeeklyReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: Report
+        /// <summary>
+        /// Returns an individual monthly report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult MonthlyReport(string id = null)
         {
             var myStudent = StudentBackend.Instance.Read(id);
 
@@ -367,18 +416,194 @@ namespace _5051.Controllers
             }
 
 
-            //var myReport = new StudentReportViewModel
-            //{
-            //    StudentId = id,
-            //    Year = DateTime.UtcNow.Year,
-            //    Month = DateTime.UtcNow.Month
-            //};
+            var myReport = new MonthlyReportViewModel()
+            {
+                StudentId = id,
+                SelectedMonthId = 1
+            };
 
-            //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
+            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
 
-            return RedirectToAction("Index", "Portal", new { id = myStudent.Id });
-
-            // return RedirectToAction("MonthlyReport", "Admin", new { id });
+            return View(myReturn);
         }
+        /// <summary>
+        /// Generate report using the StudentReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MonthlyReport([Bind(Include=
+            "StudentId,"+
+            "SelectedMonthId"+
+            "")] MonthlyReportViewModel data)
+        {
+
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateMonthlyReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: SemesterReport
+        /// <summary>
+        /// Returns an individual semester report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult SemesterReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new SemesterReportViewModel()
+            {
+                StudentId = id,
+                SelectedSemesterId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateSemesterReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the SemesterReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SemesterReport([Bind(Include=
+            "StudentId,"+
+            "SelectedSemesterId"+
+            "")] SemesterReportViewModel data)
+        {
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateSemesterReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: QuarterReport
+        /// <summary>
+        /// Returns an individual quarter report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult QuarterReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new QuarterReportViewModel()
+            {
+                StudentId = id,
+                SelectedQuarterId = 1
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateQuarterReport(myReport);
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// Generate report using the QuarterReportViewModel passed in
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult QuarterReport([Bind(Include=
+            "StudentId,"+
+            "SelectedQuarterId"+
+            "")] QuarterReportViewModel data)
+        {
+            if (data == null)
+            {
+                // Send to error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //generate the report
+            var myReturn = ReportBackend.Instance.GenerateQuarterReport(data);
+
+            return View(myReturn);
+        }
+
+        // GET: Report
+        /// <summary>
+        /// Returns an individual overall report for a student
+        /// </summary>
+        /// <param name="id">Student ID to generate Report for</param>
+        /// <returns>Report data</returns>
+        public ActionResult OverallReport(string id = null)
+        {
+            var myStudent = StudentBackend.Instance.Read(id);
+
+            if (myStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            var myReport = new SchoolYearReportViewModel()
+            {
+                StudentId = id,
+            };
+
+            var myReturn = ReportBackend.Instance.GenerateOverallReport(myReport);
+
+            return View(myReturn);
+        }
+
+        ///// <summary>
+        ///// My Attendance Reports
+        ///// </summary>
+        ///// <param name="id">Student Id</param>
+        ///// <returns>Student Record as a Student View Model</returns>
+        //// GET: Portal
+        //public ActionResult Report(string id = null)
+        //{
+        //    var myStudent = StudentBackend.Instance.Read(id);
+
+        //    if (myStudent == null)
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+
+
+        //    //var myReport = new StudentReportViewModel
+        //    //{
+        //    //    StudentId = id,
+        //    //    Year = DateTime.UtcNow.Year,
+        //    //    Month = DateTime.UtcNow.Month
+        //    //};
+
+        //    //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);
+
+        //    return RedirectToAction("Index", "Portal", new { id = myStudent.Id });
+
+        //    // return RedirectToAction("MonthlyReport", "Admin", new { id });
+        //}
     }
 }
