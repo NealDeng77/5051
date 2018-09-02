@@ -105,6 +105,7 @@ namespace _5051.Backend
 
                             myStudent.Attendance.Add(temp);
                             break;
+
                         case 1: //Good
                             {
                                 switch (rn)
@@ -117,6 +118,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     case 1:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
@@ -125,6 +127,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
@@ -148,8 +151,10 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     case 1:
                                         break;
+
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
@@ -158,6 +163,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     case 3:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
@@ -166,6 +172,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     default:
                                         temp.In = InGood(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
@@ -189,6 +196,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     case 1:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutEarly(currentDate, r);
@@ -197,6 +205,7 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                     case 2:
                                         temp.In = InLate(currentDate, r);
                                         temp.Out = OutAuto(currentDate);
@@ -205,9 +214,11 @@ namespace _5051.Backend
 
                                         myStudent.Attendance.Add(temp);
                                         break;
+
                                 }
                             }
                             break;
+
                         case 4: //None
                             break;
                     }
