@@ -3,81 +3,97 @@
     ViewBag.Title = "Shop";
 }
 
-<div class="row no-gutters justify-content-center">
-    <div class="row container-fluid GameButtonsBox justify-content-center">
-        @*&nbsp;&nbsp;*@
-        @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-        @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-        @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-        @Html.ActionLink("Business Report", "BusinessReport", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
 
-        @{
-            //&nbsp; &nbsp;
-            //@Html.ActionLink("Celebrity Poster", "CelebrityPoster", "Shop", new { id = Model.Id }, new { @class = "btn btn-primary" })
-        }
-    </div>
+<br />
+<div class="row justify-content-center">
 
-    <div class="row TruckNameBox justify-content-center text-center" id="TruckNameBox">
-        <span id="TruckName">@Model.Truck.TruckName</span>&nbsp;
-    </div>
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="row justify-content-center">
 
-    <div class="row TruckBoxLarge justify-content-center" id="ImageBox">
-        @{
-            // StudentId needs to be in the Dom
-            <div>
-                @Html.Hidden("StudentId", Model.Id)
+            <div class="FontSizeLarge text-center">
+                <span class="FontSizeLarger FontBold">@Model.Truck.TruckName</span>
             </div>
 
-            <div class="grid-container justify-content-around FontBold FontSizeSmall">
+        </div>
+        <br />
+        <div class="row justify-content-center">
+
+            <div class="text-center">
+                @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                @Html.ActionLink("Business Report", "BusinessReport", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+
+            </div>
+
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-1"></div>
+    <div class="col lightTransparentBox">
+
+        <div class="row justify-content-center">
+
+            <div class="col-sm-8">
+                <div class="TruckBoxMedium">
+                    <div>
+                        @Html.Hidden("StudentId", Model.Id)
+                    </div>
+
+                    <div class="AvatarImageBox">
+                        <img class="PeopleItem" id="PeopleItem" src="~/Content/avatar/AvatarFull.png" alt="Shopper">
+                    </div>
+                    <div class="WorkerImageBox">
+                        <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
+                    </div>
+
+                    <img class="TruckItemBase BackgroundItem" id="Background" src="~/Content/shop/Background1.png" alt="Background">
+
+                    <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
+                    <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/placeholder.png" alt="Sign">
+                    <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/placeholder.png" alt="Truck">
+                    <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/placeholder.png" alt="Menu">
+                    <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/placeholder.png" alt="Wheels">
+                    <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/placeholder.png" alt="Trailer">
+                    <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/placeholder.png" alt="Trailer">
+                    <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/placeholder.png" alt="Trailer">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col btn1 btn-light grid-container justify-content-around FontBold FontSizeSmall">
                 <div>Lvl <span id="levelValue">@Model.AvatarLevel</span></div>
                 <div><span id="ExperienceValue">@Model.ExperiencePoints</span> XP</div>
                 <div><span id="TokensValue">@Model.Tokens</span> Tokens</div>
                 <div><span>Customers:&nbsp;&nbsp;</span><span id="CustomersValue">10</span></div>
                 <div><span id="StoreStatus"></span></div>
             </div>
-
-            <div class="AvatarImageBox">
-                <img class="PeopleItem" id="PeopleItem" src="~/Content/avatar/AvatarFull.png" alt="Shopper">
-            </div>
-            <div class="WorkerImageBox">
-                <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
-            </div>
-        }
-
-        <img class="TruckItemBase BackgroundItem" id="Background" src="~/Content/shop/Background1.png" alt="Background">
-
-        <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/placeholder.png" alt="Topper">
-        <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/placeholder.png" alt="Sign">
-        <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/placeholder.png" alt="Truck">
-        <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/placeholder.png" alt="Menu">
-        <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/placeholder.png" alt="Wheels">
-        <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/placeholder.png" alt="Trailer">
-        <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/placeholder.png" alt="Trailer">
-        <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/placeholder.png" alt="Trailer">
-
-        @*<div class="PeopleBox" id="PeopleBox">
-                <img class="PeopleItem" id="PeopleItem" src="~/Content/shop/placeholder.png" alt="Shopper">
-            </div>*@
-
-        @*<div class="WorkerBox" id="WorkerBox">
-                <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
-            </div>
-
-            <div class="WorkerBoxLeft" id="WorkerBoxLeft"></div>
-            <div class="WorkerBoxRight" id="WorkerBoxRight"></div>*@
-
-    </div>
-
-</div>
-<div class="row"><br /></div>
-
-<div class="row container">
-    <div class="FeedBar FontSizeSmall">
-        <div class="row justify-content-around FontSizeMedium">
-            Game Data: <span id="TransactionList"></span>
         </div>
+
+        <div class="FeedBar FontSizeSmall">
+            <div class="row justify-content-around FontSizeMedium">
+                Game Data: <span id="TransactionList"></span>
+            </div>
+        </div>
+
     </div>
+    <div class="col-1"></div>
+
 </div>
+
 
 <script>
     // Clear the background image
@@ -86,3 +102,4 @@
 
 <script src="~/Scripts/Game.js"></script>
 <script src="~/Scripts/People.js"></script>
+
