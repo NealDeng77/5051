@@ -754,6 +754,7 @@
     <Content Include="Views\Support\CreateTeacher.cshtml" />
     <Content Include="Views\Support\CreateSupport.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Portal\WeeklyReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
