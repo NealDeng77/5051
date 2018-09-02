@@ -309,6 +309,9 @@ namespace _5051.Controllers
             // Shop Name
             // Truck Items
 
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -326,9 +329,6 @@ namespace _5051.Controllers
             }
            
             var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
-
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = studentdata.Id;
 
             //Return Truck Data
             return View(data);
