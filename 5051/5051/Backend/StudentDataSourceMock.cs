@@ -15,9 +15,6 @@ namespace _5051.Backend
         private static volatile StudentDataSourceMock instance;
         private static object syncRoot = new Object();
 
-        private static bool isTestingMode = false;
-        //IdentityBackend identityBackend = new IdentityBackend();
-
         private StudentDataSourceMock() { }
 
         public static StudentDataSourceMock Instance
@@ -240,10 +237,5 @@ namespace _5051.Backend
             }
         }
 
-        public static bool SetTestingMode(bool mode)
-        {
-            isTestingMode = mode;
-            return isTestingMode;
-        }
     }
 }
