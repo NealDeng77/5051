@@ -69,6 +69,23 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(expect, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_RandomHelper_GetRandomNumber_Data_Is_Not_Valid_Should_Fail()
+        {
+            // Arrange
+            var backend = RandomHelper.Instance;
+
+            // Act
+            var result = RandomHelper.GetRandomNumber();
+            var expect = -1;
+
+            //Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
         #endregion GetRandomNumber
     }
 }
