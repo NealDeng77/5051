@@ -154,37 +154,13 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            StudentModel data;
 
-            // Mike has Full Truck and Tokens
-            data = new StudentModel("Mike", null);
-            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
-            data.Tokens = 1000;
-            Create(data);
+            var dataSet = StudentDataSourceHelper.Instance.GetDefaultDataSet();
+            foreach (var item in dataSet)
+            {
+                Create(item);
+            }
 
-            // Doug has full truck, but no Tokens
-            data = new StudentModel("Doug", null);
-            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
-            data.Tokens = 0;
-            Create(data);
-
-            // Jea has No truck, and Tokens
-            data = new StudentModel("Jea", null);
-            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
-            data.Tokens = 1000;
-            Create(data);
-
-            // Jea has No truck, and No Tokens
-            data = new StudentModel("Sue", null);
-            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
-            data.Tokens = 0;
-            Create(data);
-
-            // Mike has Full Truck and 1 Token
-            data = new StudentModel("Stan", null);
-            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
-            data.Tokens = 1;
-            Create(data);
         }
 
         /// <summary>

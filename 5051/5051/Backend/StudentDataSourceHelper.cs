@@ -52,11 +52,38 @@ namespace _5051.Backend
         {
             DataList.Clear();
 
-            DataList.Add(new StudentModel("Mike", null));
-            DataList.Add(new StudentModel("Doug", null));
-            DataList.Add(new StudentModel("Jea", null));
-            DataList.Add(new StudentModel("Sue", null));
-            DataList.Add(new StudentModel("Stan", null));
+            StudentModel data;
+
+
+            // Mike has Full Truck and Tokens
+            data = new StudentModel("Mike", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
+            data.Tokens = 1000;
+            DataList.Add(data);
+
+            // Doug has full truck, but no Tokens
+            data = new StudentModel("Doug", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
+            data.Tokens = 0;
+            DataList.Add(data);
+
+            // Jea has No truck, and Tokens
+            data = new StudentModel("Jea", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
+            data.Tokens = 1000;
+            DataList.Add(data);
+
+            // Jea has No truck, and No Tokens
+            data = new StudentModel("Sue", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultEmptyTruck(data);
+            data.Tokens = 0;
+            DataList.Add(data);
+
+            // Mike has Full Truck and 1 Token
+            data = new StudentModel("Stan", null);
+            data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
+            data.Tokens = 1;
+            DataList.Add(data);
 
             return DataList;
         }
