@@ -160,7 +160,7 @@ namespace _5051.Backend
             currentDate = dateStart;
 
             // For every day from the start of the school year, until the end of the school year or now...
-            while (currentDate.CompareTo(dateEnd) < 0)
+            while (currentDate.CompareTo(dateEnd) <= 0)
             {
                 var temp = new SchoolCalendarModel(currentDate);
 
