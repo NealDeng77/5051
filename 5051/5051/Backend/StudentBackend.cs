@@ -203,14 +203,23 @@ namespace _5051.Backend
                 Emotion = data.EmotionCurrent
             };
 
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(temp.In).Date;
+
             //the school day model
-            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(temp.In));
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
-            //set auto check-out time
-            var currentDate = new DateTime(temp.In.Year, temp.In.Month, temp.In.Day);
-            var defaultOut = currentDate.Add(schoolDay.TimeEnd);
-            temp.Out = UTCConversionsBackend.KioskTimeToUtc(defaultOut);
+            //set auto punch-out time        
+            if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
+            {
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(
+                    currentDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal));
 
+            } 
+            else
+            {
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(schoolDay.TimeEnd));
+            }
+            
             data.Attendance.Add(temp);
 
         }
