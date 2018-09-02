@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _5051.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace _5051.Backend
 {
@@ -186,6 +187,9 @@ namespace _5051.Backend
             
             // Storage Load all rows
             var DataSetList = DataSourceBackendTable.Instance.LoadAll<AvatarItemModel>(tableName, partitionKey);
+
+            // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by timespamp instead
+            DataSetList = DataSetList.OrderBy(x => x.TimeStamp).ToList();
 
             foreach (var item in DataSetList)
             {
