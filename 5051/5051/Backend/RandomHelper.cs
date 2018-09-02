@@ -11,9 +11,6 @@ namespace _5051.Backend
         private static volatile RandomHelper instance;
         private static object syncRoot = new Object();
 
-        private static int ForcedRandomNumber;
-        private static bool isSetForcedNumber;
-
         private RandomHelper() { }
 
         public static RandomHelper Instance
@@ -35,6 +32,9 @@ namespace _5051.Backend
                 return instance;
             }
         }
+
+        private static int ForcedRandomNumber;
+        public static bool isSetForcedNumber;
 
         public void Initialize()
         {

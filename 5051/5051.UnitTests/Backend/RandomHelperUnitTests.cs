@@ -31,7 +31,25 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
-
         #endregion Instantiate
+
+        #region SetForcedNumber
+        [TestMethod]
+        public void Backend_RandomHelper_SetForcedNumber_Should_Pass()
+        {
+            // Arrange
+            var backend = RandomHelper.Instance;
+
+            // Act
+            var expect = true;
+            RandomHelper.SetForcedNumber();
+
+            //Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, RandomHelper.isSetForcedNumber, TestContext.TestName);
+        }
+        #endregion SetForcedNumber
     }
 }
