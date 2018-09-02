@@ -15,6 +15,9 @@ namespace _5051.Models
     /// </summary>
     public class StudentModel
     {
+        // When the record was created, used for Table Storage
+        public DateTime TimeStamp { get; set; }
+
         /// <summary>
         /// The ID for the Student, this is the key, and a required field
         /// </summary>
@@ -118,6 +121,7 @@ namespace _5051.Models
         /// </summary>
         public void Initialize()
         {
+            TimeStamp = DateTime.UtcNow;
             Id = Guid.NewGuid().ToString();
             Tokens = 10;
             AvatarLevel = 1;
