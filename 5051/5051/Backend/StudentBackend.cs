@@ -473,17 +473,5 @@ namespace _5051.Backend
             var myReturn = DataSource.Index().First();
             return myReturn;
         }
-
-        public bool GetTestingMode()
-        {
-            return isTestingMode;
-        }
-
-        public bool SetTestingMode(bool mode)
-        {
-            isTestingMode = mode;
-
-            return isTestingMode;
-        }
     }
 }

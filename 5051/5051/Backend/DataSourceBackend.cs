@@ -149,7 +149,7 @@ namespace _5051.Backend
             isTestingMode = mode;
 
             //set the testing mode for other backends
-            Backend.StudentDataSourceMock.SetTestingMode(mode);
+            DataSourceBackend.SetTestingMode(mode);
 
             return isTestingMode;
         }
