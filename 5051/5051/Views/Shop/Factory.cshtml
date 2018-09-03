@@ -1,141 +1,185 @@
 ﻿@model _5051.Models.SelectedFactoryInventoryForStudentViewModel
 @{
     ViewBag.Title = "Factory Inventory";
+    var disabledOn = "";
+    var BoxHover = "BoxWithHighlightHover";
+    var ActiveTab = "";
+    var TabCount = 0;
+    var DisplayText = "";
+}
 
+
+<br />
+
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Factory
+            </span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+@{
     if (Model == null || Model.Student == null || Model.FactoryInventoryCategoryList == null || !Model.FactoryInventoryCategoryList.Any())
     {
-        <br />
-        <h2>No Data to show</h2>
-    }
+        <div class="row justify-content-center">
 
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center">
+                    No data to show.
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
     else
     {
-        <br />
-        <h2 class="text-left">See something cool?</h2>
-        <h4 class="text-left">Use your tokens to Purchase items</h4>
-        <br />
 
-        <p>Tokens Available: @Model.Student.Tokens </p>
-        <hr />
+        <div class="row justify-content-around">
+            <div class="col-1 "></div>
 
-        var disabledOn = "";
-        var BoxHover = "BoxWithHighlightHover";
-        var ActiveTab = "";
-        var TabCount = 0;
-        var DisplayText = "";
+            <div class="col">
 
+                <div class="FontSizeMedium">
+                    <br />
+                    <span class="FontSizeLarge">See something cool?</span><br />
+                    <span>
+                        You have @Model.Student.Tokens Tokens Available
+                    </span>
+                    <br />
+                    <hr />
+                </div>
 
-        <ul class="nav nav-tabs">
-            @{
-                TabCount = 0;
-                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
-                {
-                    ActiveTab = "";
+                <ul class="nav nav-tabs FontSizeSmall FontColorBlack FontBold">
+                    @{
+                        TabCount = 0;
+                        foreach (var CurrentList in Model.FactoryInventoryCategoryList)
+                        {
+                            ActiveTab = "";
 
-                    if (CurrentList == null)
-                    {
-                        continue;
+                            if (CurrentList == null)
+                            {
+                                continue;
+                            }
+
+                            TabCount++;
+                            if (TabCount == 1)
+                            {
+                                ActiveTab = "active";
+                            }
+
+                            <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category.GetDisplayName()</a></li>
+                        }
                     }
-
-                    TabCount++;
-                    if (TabCount == 1)
-                    {
-                        ActiveTab = "active";
-                    }
-
-                    <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category</a></li>
-                }
-            }
-        </ul>
+                </ul>
 
 
-        <div class="tab-content">
+                <div class="tab-content">
 
-            @{
-                TabCount = 0;
-                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
-                {
-                    ActiveTab = "";
-                    if (CurrentList == null)
-                    {
-                        continue;
-                    }
+                    @{
+                        TabCount = 0;
+                        foreach (var CurrentList in Model.FactoryInventoryCategoryList)
+                        {
+                            ActiveTab = "";
+                            if (CurrentList == null)
+                            {
+                                continue;
+                            }
 
-                    TabCount++;
-                    if (TabCount == 1)
-                    {
-                        ActiveTab = "active";
-                    }
+                            TabCount++;
+                            if (TabCount == 1)
+                            {
+                                ActiveTab = "active";
+                            }
 
-                    <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
-                        <br />
-                        <h3>@CurrentList.Category</h3>
-                        <div class="row">
-                            @{
-                                // If no items, the skip
-                                if (!CurrentList.FactoryInventoryList.Any())
-                                {
-                                    <br />
-                                    <div>No Items</div>
-                                    continue;
-                                }
+                            <div id="@CurrentList.Category" class="tab-pane @ActiveTab">
+                                <br />
+                                <div class="row justify-content-start">
+                                    @{
+                                        // If no items, the skip
 
-                                //AvatarViewModel outputAvatar = new AvatarViewModel();
-                                foreach (var item in CurrentList.FactoryInventoryList)
-                                {
-                                    using (Html.BeginForm())
-                                    {
-                                        @Html.Hidden("StudentId", Model.Student.Id);
-                                        @Html.Hidden("ItemId", item.Id);
-
-                                        var picturURI = "/Content/shop/" + item.Uri;
-
-                                        disabledOn = "";
-                                        BoxHover = "BoxWithHighlightHover";
-                                        DisplayText = "";
-
-                                        // Check if the user owns the item, if so disable it.
-                                        var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
-                                        if (ItemAlreadyExists)
+                                        if (!CurrentList.FactoryInventoryList.Any())
                                         {
-                                            // Already own it.
-                                            disabledOn = "disabled";
-                                            BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
-                                            DisplayText = "Purchased";
-
+                                            <br />
+                                            <div class="FontSizeLarge">No Items</div>
+                                            continue;
                                         }
 
-                                        <div class="col-sm-2">
-                                            <div class="@BoxHover">
-                                                <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
-                                                <br />
-                                                <span class="text-center">
-                                                    @item.Name
+                                        //AvatarViewModel outputAvatar = new AvatarViewModel();
+                                        foreach (var item in CurrentList.FactoryInventoryList)
+                                        {
+                                            using (Html.BeginForm())
+                                            {
+                                                @Html.Hidden("StudentId", Model.Student.Id);
+                                                @Html.Hidden("ItemId", item.Id);
+
+                                                var picturURI = "/Content/shop/" + item.Uri;
+
+                                                disabledOn = "";
+                                                BoxHover = "BoxWithHighlightHover";
+                                                DisplayText = "Available";
+
+                                                // Check if the user owns the item, if so disable it.
+                                                var ItemAlreadyExists = Model.Student.AvatarInventory.Exists(m => m.Id == item.Id);
+                                                if (ItemAlreadyExists)
+                                                {
+                                                    // Already own it.
+                                                    disabledOn = "disabled";
+                                                    BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
+                                                    DisplayText = "Purchased";
+
+                                                }
+
+
+                                                <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover">
                                                     <br />
-                                                    <span>Tokens: </span>@item.Tokens
-                                                    <br />
-                                                    <span>
-                                                        @{
-                                                            if (@item.IsLimitSupply)
-                                                            {
-                                                                <span>Quantities: @item.Quantities</span>
+
+                                                    <div class="row no-gutters justify-content-center">                                                        
+                                                        <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                    </div>
+
+                                                    <div class="row no-gutters justify-content-center">
+                                                        <div class="text-center FontSizeSmall">
+                                                            <br />
+                                                            @item.Name<br />
+                                                            @item.Description<br />
+                                                            <br />
+                                                            Tokens: @item.Tokens<br />
+                                                            @{
+                                                                if (@item.IsLimitSupply)
+                                                                {
+                                                                    <span>Quantity: @item.Quantities</span>
+                                                                }
+                                                                <br />
                                                             }
-                                                        }
-                                                    </span>
-                                                    <br />
-                                                    @DisplayText
-                                                </span>
-                                            </div>
-                                        </div>
+                                                            <br />
+                                                            @DisplayText
+                                                            <br />
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        </div>
-                    </div>
-
-                }
-            }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
         </div>
-
     }
 }
+
+<br />
