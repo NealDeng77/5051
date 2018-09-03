@@ -80,7 +80,6 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(testAttendance.Id, result.Attendance.Id, TestContext.TestName);
 
             Assert.IsNotNull(result.AvatarComposite, TestContext.TestName);
-            Assert.IsNotNull(result.AvatarId, TestContext.TestName);
             Assert.IsNotNull(result.Name, TestContext.TestName);
         }
 

@@ -36,32 +36,15 @@ namespace _5051.UnitTests.Models
         public void Models_StudentModel_Instantiate_Valid_Data_Should_Pass()
         {
             // Arrange
-            var avatarId = "avatarid";
             var name = "name";
 
-            var expect = avatarId;
+            var expect = name;
 
             // Act
-            var result = new StudentModel(name, avatarId);
+            var result = new StudentModel(name);
 
             // Assert
-            Assert.AreEqual(expect,result.AvatarId, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Models_StudentModel_Instantiate_InValid_Data_Should_Fail()
-        {
-            // Arrange
-            string avatarId = null;
-            var name = "name";
-
-            var expect = AvatarBackend.Instance.GetFirstAvatarId();
-
-            // Act
-            var result = new StudentModel(name, avatarId);
-
-            // Assert
-            Assert.AreEqual(expect, result.AvatarId, TestContext.TestName);
+            Assert.AreEqual(expect,result.Name, TestContext.TestName);
         }
 
         [TestMethod]
