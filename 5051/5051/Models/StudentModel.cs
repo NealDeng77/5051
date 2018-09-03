@@ -123,7 +123,7 @@ namespace _5051.Models
         {
             TimeStamp = DateTime.UtcNow;
             Id = Guid.NewGuid().ToString();
-            Tokens = 10;
+            Tokens = 20;
             AvatarLevel = 1;
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
