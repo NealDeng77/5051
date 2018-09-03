@@ -67,11 +67,6 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            if (!isTestingMode)
-            {
-                IdentityDataSourceTable.Instance.Reset();
-            }
-
             GameBackend.Reset();
             KioskSettingsBackend.Reset();
             SchoolCalendarBackend.Reset();
@@ -80,6 +75,11 @@ namespace _5051.Backend
 
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
+
+            if (!isTestingMode)
+            {
+                IdentityDataSourceTable.Instance.Reset();
+            }
 
             SetTestingMode(false);
         }
@@ -100,12 +100,12 @@ namespace _5051.Backend
 
             AvatarItemBackend.SetDataSource(dataSourceEnum);
 
+            StudentBackend.SetDataSource(dataSourceEnum);
+
             if (!isTestingMode)
             {
                 IdentityBackend.SetDataSource(dataSourceEnum);
             }
-
-            StudentBackend.SetDataSource(dataSourceEnum);
         }
 
         /// <summary>
