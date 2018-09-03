@@ -128,6 +128,41 @@ namespace _5051.UnitTests.Models
             // Assert
             Assert.AreEqual(expect, result.EmotionUri, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Get_Set_MonthlyAttendanceScore_Should_Pass()
+        {
+            // Arrange
+            var expect = 123;
+            var data = new StudentDisplayViewModel();
+            data.MonthlyAttendanceScore = expect;
+
+            // Act
+            var result = data.MonthlyAttendanceScore;
+
+            // Reset
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_StudentDisplayViewModel_Get_Set_WeeklyAttendanceScore_Should_Pass()
+        {
+            // Arrange
+            var expect = 123;
+            var data = new StudentDisplayViewModel();
+            data.WeeklyAttendanceScore = expect;
+
+            // Act
+            var result = data.WeeklyAttendanceScore;
+
+            // Reset
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
         #endregion Instantiate
     }
 }
