@@ -56,8 +56,8 @@ namespace _5051.Backend
             DataList.Add(new AvatarItemModel("Accessory1.png", "Glasses", "Horn-Rimmed", AvatarItemCategoryEnum.Accessory, 5, 10, false));
             DataList.Add(new AvatarItemModel("Accessory2.png", "Glasses", "Round", AvatarItemCategoryEnum.Accessory, 10, 10, false));
             DataList.Add(new AvatarItemModel("Accessory3.png", "Glasses", "Rectangle", AvatarItemCategoryEnum.Accessory, 20, 10, false));
-            DataList.Add(new AvatarItemModel("Accessory4.png", "Earrings", "Stud", AvatarItemCategoryEnum.Accessory, 40, 10, false));
-            DataList.Add(new AvatarItemModel("Accessory5.png", "Earrings", "Hoop", AvatarItemCategoryEnum.Accessory, 80, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory4.png", "Earrings", "Studs", AvatarItemCategoryEnum.Accessory, 40, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory5.png", "Earrings", "Hoops", AvatarItemCategoryEnum.Accessory, 80, 10, false));
 
             DataList.Add(new AvatarItemModel("Cheeks0.png", "None", "None", AvatarItemCategoryEnum.Cheeks, 1, 10, false));
             DataList.Add(new AvatarItemModel("Cheeks1.png", "Blush", "Light", AvatarItemCategoryEnum.Cheeks, 5, 10, false));
