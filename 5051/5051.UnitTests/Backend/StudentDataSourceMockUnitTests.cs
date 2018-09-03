@@ -114,7 +114,6 @@ namespace _5051.UnitTests.Backend
             var expectStudent = studentBackend.GetDefault();
             var expectId = "GoodID";
             var expectName = "Billy";
-            var expectAvatarID = "GoodAvatarID";
             var expectAvatarLevel = 7;
             var expectExperiencePoints = 100;
             var expectTokens = 100;
@@ -126,7 +125,6 @@ namespace _5051.UnitTests.Backend
             // Act
             expectStudent.Id = expectId;
             expectStudent.Name = expectName;
-            expectStudent.AvatarId = expectAvatarID;
             expectStudent.AvatarLevel = expectAvatarLevel;
             expectStudent.ExperiencePoints = expectExperiencePoints;
             expectStudent.Tokens = expectTokens;
@@ -145,7 +143,6 @@ namespace _5051.UnitTests.Backend
             Assert.AreEqual(expectStudent, resultUpdate, TestContext.TestName);
             Assert.AreEqual(expectId, resultUpdate.Id, TestContext.TestName);
             Assert.AreEqual(expectName, resultUpdate.Name, TestContext.TestName);
-            Assert.AreEqual(expectAvatarID, resultUpdate.AvatarId, TestContext.TestName);
             Assert.AreEqual(expectAvatarLevel, resultUpdate.AvatarLevel, TestContext.TestName);
             Assert.AreEqual(expectExperiencePoints, resultUpdate.ExperiencePoints, TestContext.TestName);
             Assert.AreEqual(expectTokens, resultUpdate.Tokens, TestContext.TestName);

@@ -61,37 +61,14 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_StudentDisplayViewModel_Default_Instantiate_With_Invalid_Data_AvatarID_Null_Should_Fail()
+        public void Models_StudentDisplayViewModel_Default_Instantiate_With_Invalid_Data_Avatar_Null_Should_Fail()
         {
             // Arrange
             var data = new StudentModel();
             data.Id = "hi";
-            data.AvatarId = null;
             
             // Act
             var result = new StudentDisplayViewModel(data);
-
-            // Assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Models_StudentDisplayViewModel_Default_Instantiate_With_Valid_Data_Should_Pass()
-        {
-            // Arrange
-
-            var dataAvatar = new AvatarModel();
-            DataSourceBackend.Instance.AvatarBackend.Create(dataAvatar);
-
-            var data = new StudentModel();
-            data.Id = "hi";
-            data.AvatarId = dataAvatar.Id;
-
-            // Act
-            var result = new StudentDisplayViewModel(data);
-
-
-            DataSourceBackend.Instance.AvatarBackend.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -104,15 +81,9 @@ namespace _5051.UnitTests.Models
             var result = new StudentDisplayViewModel();
 
             //act
-            var expectUri = result.AvatarUri;
-            var expectAvatarName = result.AvatarName;
-            var expectAvatarDesc = result.AvatarDescription;
             var expectLastDateTime = result.LastDateTime;
 
             // Assert
-            Assert.AreEqual(expectUri, result.AvatarUri, TestContext.TestName);
-            Assert.AreEqual(expectAvatarName, result.AvatarName, TestContext.TestName);
-            Assert.AreEqual(expectAvatarDesc, result.AvatarDescription, TestContext.TestName);
             Assert.AreEqual(expectLastDateTime, result.LastDateTime, TestContext.TestName);
         }
 

@@ -11,8 +11,6 @@ namespace _5051.Backend
         /// <summary>
         /// Hold one of each of the DataSources as an instance to the datasource
         /// </summary>
-        public AvatarBackend AvatarBackend = AvatarBackend.Instance;
-
         public AvatarItemBackend AvatarItemBackend = AvatarItemBackend.Instance;
         public StudentBackend StudentBackend = StudentBackend.Instance;
         public FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
@@ -34,10 +32,9 @@ namespace _5051.Backend
 
         private DataSourceBackend()
         {
-            // Avatar must be before Student, because Student needs the default avatarID
-            AvatarBackend = AvatarBackend.Instance;
-
+            // Avatar must be before Student, because Student needs the default avatar
             AvatarItemBackend = AvatarItemBackend.Instance;
+
             StudentBackend = StudentBackend.Instance;
             FactoryInventoryBackend = FactoryInventoryBackend.Instance;
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
@@ -81,8 +78,6 @@ namespace _5051.Backend
             SchoolDismissalSettingsBackend.Reset();
             FactoryInventoryBackend.Reset();
 
-            AvatarBackend.Reset();
-
             AvatarItemBackend.Reset();
             StudentBackend.Reset();
 
@@ -101,8 +96,7 @@ namespace _5051.Backend
 
             FactoryInventoryBackend.SetDataSource(dataSourceEnum);
 
-            // Avatar must be reset before Student, because Student needs the default avatarID
-            AvatarBackend.SetDataSource(dataSourceEnum);
+            // Avatar must be reset before Student, because Student needs the default avatar
 
             AvatarItemBackend.SetDataSource(dataSourceEnum);
 
@@ -126,8 +120,7 @@ namespace _5051.Backend
             SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
             FactoryInventoryBackend.SetDataSourceDataSet(SetEnum);
 
-            // Avatar must be reset before Student, because Student needs the default avatarID
-            AvatarBackend.SetDataSourceDataSet(SetEnum);
+            // Avatar must be reset before Student, because Student needs the default avatar
 
             AvatarItemBackend.SetDataSourceDataSet(SetEnum);
             StudentBackend.SetDataSourceDataSet(SetEnum);

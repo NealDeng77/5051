@@ -199,7 +199,6 @@ namespace _5051.Controllers
                                         "Id,"+
                                         "Name,"+
                                         "Description,"+
-                                        "AvatarId,"+
                                         "Uri,"+
                                         "Status,"+
                                         "Tokens,"+

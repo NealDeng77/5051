@@ -65,7 +65,7 @@
                 {
                     using (Html.BeginForm())
                     {
-                        //Send up the AvatarId, and the StudentId to associated the Avatar with.
+                        //Send up the Avatar, and the StudentId to associated the Avatar with.
                         @Html.Hidden("StudentId", Model.Student.Id);
                         @Html.Hidden("ItemId", InventoryItem.Id);
                         @Html.Hidden("Position", Model.data.Item.Category);

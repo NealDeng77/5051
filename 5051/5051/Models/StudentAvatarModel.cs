@@ -13,13 +13,6 @@ namespace _5051.Models
     public class StudentAvatarModel
     {
         /// <summary>
-        /// The Avatar ID to assign to the student
-        /// </summary>
-        [Display(Name = "AvatarId", Description = "Avatar Id")]
-        [Required(ErrorMessage = "Id is required")]
-        public string AvatarId { get; set; }
-
-        /// <summary>
         /// The Student ID to receive the Avatar
         /// </summary>
         [Display(Name = "StudentId", Description = "Student Id")]

@@ -16,24 +16,6 @@ namespace _5051.Models
     public class StudentDisplayViewModel : StudentModel
     {
         /// <summary>
-        /// The path to the local image for the avatar
-        /// </summary>
-        [Display(Name = "Avatar Picture", Description = "Avatar Picture to Show")]
-        public string AvatarUri { get; set; }
-
-        /// <summary>
-        /// Display name for the Avatar on the student information (Friendly Police etc.)
-        /// </summary>
-        [Display(Name = "Avatar Name", Description = "Avatar Name")]
-        public string AvatarName { get; set; }
-
-        /// <summary>
-        /// Description of the Avatar to show on the student information
-        /// </summary>
-        [Display(Name = "Avatar Description", Description = "Avatar Description")]
-        public string AvatarDescription { get; set; }
-
-        /// <summary>
         /// DateTime of last transaction recorded, used for login and logout
         /// </summary>
         [Display(Name = "Date", Description = "Date and Time")]
@@ -66,7 +48,6 @@ namespace _5051.Models
             Name = data.Name;
             Tokens = data.Tokens;
             AvatarLevel = data.AvatarLevel;
-            AvatarId = data.AvatarId;
             AvatarComposite = data.AvatarComposite;
 
             Status = data.Status;
@@ -76,17 +57,6 @@ namespace _5051.Models
             Attendance = data.Attendance;
             EmotionCurrent = data.EmotionCurrent;
             EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
-
-            var myDataAvatar = AvatarBackend.Instance.Read(AvatarId);
-            if (myDataAvatar == null)
-            {
-                // Nothing to convert
-                return;
-            }
-
-            AvatarName = myDataAvatar.Name;
-            AvatarDescription = myDataAvatar.Description;
-            AvatarUri = myDataAvatar.Uri;
         }
     }
 }

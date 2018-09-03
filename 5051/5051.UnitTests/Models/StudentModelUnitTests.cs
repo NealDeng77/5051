@@ -51,40 +51,20 @@ namespace _5051.UnitTests.Models
         public void Models_StudentModel_Instantiate_Valid_Model_Data_Should_Pass()
         {
             // Arrange
+            var expect = "test";
             var data = new StudentDisplayViewModel();
-            data.AvatarId = "avatarID";
-            var expect = "avatarID";
+            data.Name = expect;
                 
             // Act
             var result = new StudentModel(data);
 
             // Assert
-            Assert.AreEqual(expect, result.AvatarId, TestContext.TestName);
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
         }
 
         #endregion Instantiate
 
         #region Update
-        [TestMethod]
-        public void Models_StudentModel_Update_With_Valid_Data_Should_Pass()
-        {
-            // Arrange
-            var expect = "test";
-
-            var data = new StudentModel();
-            data.AvatarId = "bogus";
-
-            var test = new StudentModel();
-            test.AvatarId = "test";
-
-            // Act
-            data.Update(test);
-            var result = data.AvatarId;
-
-            // Assert
-            Assert.AreEqual(expect, result, TestContext.TestName);
-        }
-
         [TestMethod]
         public void Models_StudentModel_Update_Check_All_Fields_Should_Pass()
         {
@@ -102,7 +82,6 @@ namespace _5051.UnitTests.Models
             test.ExperiencePoints = 1000;
             test.EmotionCurrent = EmotionStatusEnum.Happy;
 
-            test.AvatarId = "AvatarId";
             test.AvatarLevel = 10;
 
             var tempAttendance = new AttendanceModel();
@@ -128,7 +107,6 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(test.Tokens, data.Tokens, "Tokens " + TestContext.TestName);
             Assert.AreEqual(test.ExperiencePoints, data.ExperiencePoints, "ExperiencePoints " + TestContext.TestName);
             Assert.AreEqual(test.EmotionCurrent, data.EmotionCurrent, "EmotionCurrent " + TestContext.TestName);
-            Assert.AreEqual(test.AvatarId, data.AvatarId, "AvatarId " + TestContext.TestName);
             Assert.AreEqual(test.AvatarLevel, data.AvatarLevel, "AvatarLevel " + TestContext.TestName);
             Assert.AreEqual(test.Attendance.Count, data.Attendance.Count, "Attendance " + TestContext.TestName);
             Assert.AreEqual(test.Inventory.Count, data.Inventory.Count, "Inventory " + TestContext.TestName);

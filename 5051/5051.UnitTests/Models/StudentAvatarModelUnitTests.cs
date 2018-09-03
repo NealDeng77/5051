@@ -19,15 +19,12 @@ namespace _5051.UnitTests.Models
         {
             //arrange
             var result = new StudentAvatarModel();
-            var expectAvatarId = "GoodAvatarId1";
             var expectStudentId = "GoodStudentId1";
 
             // Act
-            result.AvatarId = expectAvatarId;
             result.StudentId = expectStudentId;
 
             // Assert
-            Assert.AreEqual(expectAvatarId, result.AvatarId, TestContext.TestName);
             Assert.AreEqual(expectStudentId, result.StudentId, TestContext.TestName);
         }
         #endregion Instantiate
