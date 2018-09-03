@@ -42,7 +42,7 @@ namespace _5051.Backend
         /// <summary>
         /// The FactoryInventory List
         /// </summary>
-        private List<FactoryInventoryModel> FactoryInventoryList = new List<FactoryInventoryModel>();
+        private List<FactoryInventoryModel> DataSet = new List<FactoryInventoryModel>();
 
         /// <summary>
         /// Makes a new FactoryInventory
@@ -51,7 +51,7 @@ namespace _5051.Backend
         /// <returns>FactoryInventory Passed In</returns>
         public FactoryInventoryModel Create(FactoryInventoryModel data)
         {
-            FactoryInventoryList.Add(data);
+            DataSet.Add(data);
             return data;
         }
 
@@ -67,7 +67,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var myReturn = FactoryInventoryList.Find(n => n.Id == id);
+            var myReturn = DataSet.Find(n => n.Id == id);
             return myReturn;
         }
 
@@ -82,7 +82,7 @@ namespace _5051.Backend
             {
                 return null;
             }
-            var myReturn = FactoryInventoryList.Find(n => n.Id == data.Id);
+            var myReturn = DataSet.Find(n => n.Id == data.Id);
             if (myReturn == null)
             {
                 return null;
@@ -105,8 +105,8 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = FactoryInventoryList.Find(n => n.Id == Id);
-            var myReturn = FactoryInventoryList.Remove(myData);
+            var myData = DataSet.Find(n => n.Id == Id);
+            var myReturn = DataSet.Remove(myData);
             return myReturn;
         }
 
@@ -116,7 +116,7 @@ namespace _5051.Backend
         /// <returns>List of FactoryInventorys</returns>
         public List<FactoryInventoryModel> Index()
         {
-            return FactoryInventoryList;
+            return DataSet;
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetClear()
         {
-            FactoryInventoryList.Clear();
+            DataSet.Clear();
         }
 
         /// <summary>
@@ -155,6 +155,9 @@ namespace _5051.Backend
             {
                 Create(item);
             }
+
+            // Order the set by TimeStamp
+            // TODO DataSet = DataSet.OrderBy(x => x.TimeStamp).ToList();
         }
 
         /// <summary>
