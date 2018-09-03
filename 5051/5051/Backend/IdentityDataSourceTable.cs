@@ -583,10 +583,10 @@ namespace _5051.Backend
         private void CreateDataSetDefault()
         {
             //create support user
-            CreateNewSupportUser("su5051", "su5051", "su5051ID");
+            var supportResult = CreateNewSupportUser("su5051", "su5051", "su5051ID");
 
             //create teacher user
-            CreateNewTeacher("teacher", "teacher", "teacherID");
+            var teacherResult = CreateNewTeacher("teacher", "teacher", "teacherID");
 
             //create the student users
 
