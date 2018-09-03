@@ -118,6 +118,21 @@ namespace _5051.Controllers
                 myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
             }
 
+            var myWeeklyReport = new WeeklyReportViewModel()
+            {
+                StudentId = id,
+                SelectedWeekId = 1
+            };
+
+            var myMonthlyReport = new MonthlyReportViewModel()
+            {
+                StudentId = id,
+                SelectedMonthId = 1
+            };
+
+            myReturn.WeeklyAttendanceScore = ReportBackend.Instance.GenerateWeeklyReport(myWeeklyReport).Stats.PercAttendedHours;
+            myReturn.MonthlyAttendanceScore = ReportBackend.Instance.GenerateMonthlyReport(myMonthlyReport).Stats.PercAttendedHours;
+
             return View(myReturn);
         }
 
