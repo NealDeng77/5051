@@ -21,12 +21,6 @@ namespace _5051.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// The ID of the Avatar the student is associated with, this will convert to an avatar picture
-        /// </summary>
-        [Display(Name = "AvatarId", Description = "Avatar")]
-        public string AvatarId { get; set; }
-
-        /// <summary>
         ///  The composite for the Avatar
         /// </summary>
         public AvatarCompositeModel AvatarComposite { get; set; }
@@ -78,7 +72,7 @@ namespace _5051.Models
                     IsNew = attendanceData.IsNew
                 },
                 Name = student.Name,
-                AvatarId = student.AvatarId,
+                
                 AvatarComposite = student.AvatarComposite
             };
 
