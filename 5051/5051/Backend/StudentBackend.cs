@@ -376,10 +376,13 @@ namespace _5051.Backend
                     //calculate tokens
                     var effectiveDuration = CalculateEffectiveDuration(attendance);
 
-                    //todo: since hours attended is rounded up, need to prevent the case where consecutive check-ins in a short period
-                    //todo: of time could add 1 tokens everytime
-                    var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
-                    item.Tokens += collectedTokens;
+                    //if the effective duration of this check-in is too short, do not add tokens, 
+                    //only add tokens is the duration is longer than 5 minutes.             
+                    if (effectiveDuration.CompareTo(new TimeSpan(0, 5, 0)) > 0)
+                    {
+                        var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
+                        item.Tokens += collectedTokens;
+                    }
 
                     //mark it as old attendance
                     attendance.IsNew = false;
