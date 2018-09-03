@@ -53,34 +53,34 @@ namespace _5051.Backend
             DataList.Clear();
 
             #region Food
-            DataList.Add(new FactoryInventoryModel("GChocolate.png", "Chocolate", "Chocolate Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("GCoffee.png", "Coffee", "Coffee Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
-            DataList.Add(new FactoryInventoryModel("GCookiedough.png", "Cookie Dough", "Cookie Dough Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
-            DataList.Add(new FactoryInventoryModel("GMintChip.png", "Mint Chip", "Mint Chip Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            DataList.Add(new FactoryInventoryModel("GChocolate.png", "Chocolate", "Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("GCoffee.png", "Coffee", "Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            DataList.Add(new FactoryInventoryModel("GCookiedough.png", "Cookie Dough", "Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
+            DataList.Add(new FactoryInventoryModel("GMintChip.png", "Mint Chip", "Ice Cream", FactoryInventoryCategoryEnum.Food, 20, 10, true));
             DataList.Add(new FactoryInventoryModel("GSherbert.png", "Sherbert", "Sherbert", FactoryInventoryCategoryEnum.Food, 20, 10, true));
-            DataList.Add(new FactoryInventoryModel("GStrawberry.png", "Strawberry", "Strawberry Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("GStrawberry.png", "Strawberry", "Ice Cream", FactoryInventoryCategoryEnum.Food, 10, 10, false));
 
-            DataList.Add(new FactoryInventoryModel("Cheese.png", "Cheese", "Cheese", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Avacadoes.png", "Avacadoes", "Avacadoes", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Cilantro.png", "Cilantro", "Cilantro", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Onions.png", "Onions", "Onions", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Cheese.png", "Cheese", "Dairy", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Avacadoes.png", "Avacadoes", "Fruit", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Cilantro.png", "Cilantro", "Herb", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Onions.png", "Onions", "Veg", FactoryInventoryCategoryEnum.Food, 10, 10, false));
             DataList.Add(new FactoryInventoryModel("Meat.png", "Meat", "Meat", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Lime.png", "Lime", "Lime", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Tomatoes.png", "Tomatoes", "Tomatoes", FactoryInventoryCategoryEnum.Food, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Tortillas.png", "Tortillas", "Tortillas", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Lime.png", "Lime", "Fruit", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Tomatoes.png", "Tomatoes", "Veg", FactoryInventoryCategoryEnum.Food, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Tortillas.png", "Tortillas", "Shell", FactoryInventoryCategoryEnum.Food, 10, 10, false));
             #endregion Food
 
             #region Truck
-            DataList.Add(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Slick Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, false));
 
-            DataList.Add(new FactoryInventoryModel("Trailer1.png", "Slick", "Slick Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Truck1.png", "Slick", "Slick Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Trailer1.png", "Slick", "Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Truck1.png", "Slick", "Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false));
 
-            DataList.Add(new FactoryInventoryModel("Trailer2.png", "Fire", "Fire Trailer", FactoryInventoryCategoryEnum.Trailer, 15, 10, false));
-            DataList.Add(new FactoryInventoryModel("Truck2.png", "Fire", "Fire Truck", FactoryInventoryCategoryEnum.Truck, 15, 10, false));
+            DataList.Add(new FactoryInventoryModel("Trailer2.png", "Fire", "Trailer", FactoryInventoryCategoryEnum.Trailer, 15, 10, false));
+            DataList.Add(new FactoryInventoryModel("Truck2.png", "Fire", "Truck", FactoryInventoryCategoryEnum.Truck, 15, 10, false));
 
-            DataList.Add(new FactoryInventoryModel("Trailer3.png", "Bubble", "Bubble Trailer", FactoryInventoryCategoryEnum.Trailer, 20, 10, false));
-            DataList.Add(new FactoryInventoryModel("Truck3.png", "Bubble", "Bubble Truck", FactoryInventoryCategoryEnum.Truck, 20, 10, false));
+            DataList.Add(new FactoryInventoryModel("Trailer3.png", "Bubble", "Trailer", FactoryInventoryCategoryEnum.Trailer, 20, 10, false));
+            DataList.Add(new FactoryInventoryModel("Truck3.png", "Bubble", "Truck", FactoryInventoryCategoryEnum.Truck, 20, 10, false));
             #endregion Truck
 
             #region MenuTopperSign
