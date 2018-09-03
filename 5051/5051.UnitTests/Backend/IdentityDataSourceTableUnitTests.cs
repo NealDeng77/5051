@@ -86,7 +86,35 @@ namespace _5051.UnitTests.Backend
 
         #endregion
 
+        #region ListUsers
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ListAllSupportUsers_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectNumSupportUsers = 1;
 
+            //act
+            var result = backend.ListAllSupportUsers();
+
+            //assert
+            Assert.AreEqual(expectNumSupportUsers, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ListAllTeacherUsers_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectNumTeacherUsers = 2;
+
+            //act
+            var result = backend.ListAllTeacherUsers();
+
+            //assert
+            Assert.AreEqual(expectNumTeacherUsers, result.Count, TestContext.TestName);
+        }
+        #endregion
 
         #region LoadDataSet
         [TestMethod]
