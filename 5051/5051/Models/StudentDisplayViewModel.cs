@@ -46,6 +46,18 @@ namespace _5051.Models
         public DateTime LastLogIn { get; set; }
 
         /// <summary>
+        /// Percentage attended this week
+        /// </summary>
+        [Display(Name = "Weekly Attendance Score", Description = "Weekly Attendance Score")]
+        public int WeeklyAttendanceScore { get; set; }
+
+        /// <summary>
+        /// Percentage attended this month
+        /// </summary>
+        [Display(Name = "Monthly Attendance Score", Description = "Monthly Attendance Score")]
+        public int MonthlyAttendanceScore { get; set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public StudentDisplayViewModel() { }
