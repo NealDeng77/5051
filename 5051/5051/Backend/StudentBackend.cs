@@ -200,7 +200,8 @@ namespace _5051.Backend
             var temp = new AttendanceModel
             {
                 In = DateTime.UtcNow,
-                Emotion = data.EmotionCurrent
+                Emotion = data.EmotionCurrent,
+                StudentId = data.Id
             };
 
             var currentDate = UTCConversionsBackend.UtcToKioskTime(temp.In).Date;
