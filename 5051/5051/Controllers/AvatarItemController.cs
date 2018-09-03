@@ -2,6 +2,7 @@
 using System.Linq;
 using _5051.Models;
 using _5051.Backend;
+using System;
 
 namespace _5051.Controllers
 {
@@ -23,10 +24,29 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            // Load the list of data into the AvatarItemList
-            AvatarItemViewModel.AvatarItemList = AvatarItemBackend.Index();
 
-            return View(AvatarItemViewModel);
+            // Load the list of data into the AvatarItemList
+            var myData = new AvatarItemListViewModel();
+
+            // Get the Inventory
+            var InventoryList = AvatarItemBackend.Index();
+
+            // Sort the Inventory into List per Category
+            // Load the ones
+            foreach (var item in Enum.GetValues(typeof(AvatarItemCategoryEnum)))
+            {
+                var temp = new AvatarItemViewModel();
+                temp.Category = (AvatarItemCategoryEnum)item;
+                temp.AvatarItemList = InventoryList.Where(m => m.Category == (AvatarItemCategoryEnum)item).ToList();
+
+                if (temp.AvatarItemList.Any())
+                {
+                    // todo, tag the ones that are already owned
+                    myData.AvatarItemCategoryList.Add(temp);
+                }
+            }
+
+            return View(myData);
         }
 
         /// <summary>
