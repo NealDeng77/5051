@@ -37,8 +37,6 @@ namespace _5051.Backend
 
         bool DeleteUser(string id);
 
-        bool LogUserIn(ApplicationUser user, string password);
-
         bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role);
 
         bool LogUserOut();

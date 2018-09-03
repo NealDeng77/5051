@@ -434,7 +434,10 @@ namespace _5051.Backend
         {
             //the school day model, will use the school day's start time and end time later
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
-
+            if (schoolDay == null)
+            {
+                return TimeSpan.Zero;
+            }
 
             var start = schoolDay.TimeStart.Add(-SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow); //the time from which duration starts to count
 
