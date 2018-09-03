@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using _5051.Models;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -198,6 +199,9 @@ namespace _5051.Backend
             {
                 CreateDataSetDefault();
             }
+
+            // Order the set by TimeStamp
+            DataList = DataList.OrderBy(x => x.TimeStamp).ToList();
         }
 
         /// <summary>
