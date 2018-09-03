@@ -267,18 +267,18 @@ namespace _5051.Backend
             ToggleStatus(myData);
         }
 
-        // </summary> Uses an attendance id to fetch attendance data and then student data to create a viewmodel </summary>
-        public AttendanceDetailsViewModel GetAttendanceDetailsViewModel(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                return null;
-            }
+        //// </summary> Uses an attendance id to fetch attendance data and then student data to create a viewmodel </summary>
+        //public AttendanceDetailsViewModel GetAttendanceDetailsViewModel(string id)
+        //{
+        //    if (string.IsNullOrEmpty(id))
+        //    {
+        //        return null;
+        //    }
 
-            var ret = new AttendanceDetailsViewModel(id);
+        //    var ret = new AttendanceDetailsViewModel(id);
 
-            return ret;
-        }
+        //    return ret;
+        //}
 
         /// <summary>
         /// Use the ID to toggle the status

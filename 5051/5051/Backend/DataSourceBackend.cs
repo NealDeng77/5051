@@ -162,7 +162,7 @@ namespace _5051.Backend
                 return false; // all OK
             }
 
-            var IdentityBackend = new IdentityDataSourceMock();
+            var IdentityBackend = IdentityDataSourceTable.Instance;
 
             if (IdentityBackend.UserHasClaimOfValue(userID, role, "True"))
             {

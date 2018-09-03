@@ -378,10 +378,7 @@ namespace _5051.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel user)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(user);
-            }
+            user.Email = "teacher";
 
             var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
             if (!loginResult)

@@ -13,6 +13,9 @@ namespace _5051.Models
     /// </summary>
     public class FactoryInventoryModel
     {
+        // When the record was created, used for Table Storage
+        public DateTime TimeStamp { get; set; }
+
         [Display(Name = "Id", Description = "FactoryInventory Id")]
         [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
@@ -40,10 +43,8 @@ namespace _5051.Models
         [Display(Name = "Quantities", Description = "FactoryInventory Quantities")]
         [Required(ErrorMessage = "Quantities is required")]
         public int Quantities { get; set; }
-
-
+        
         public bool IsLimitSupply { get; set; }
-
 
         /// <summary>
         /// Create the default values
@@ -54,6 +55,7 @@ namespace _5051.Models
             Tokens = 1;
             Quantities = 10;
             IsLimitSupply = true;
+            TimeStamp = DateTime.UtcNow;
         }
 
         /// <summary>

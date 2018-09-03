@@ -9,7 +9,7 @@ namespace _5051.Backend
 
         ApplicationUser CreateNewTeacher(string teacherName, string teacherPassword, string teacherId);
 
-        ApplicationUser CreateNewStudent(StudentModel student);
+        StudentModel CreateNewStudent(StudentModel student);
 
         bool UpdateStudent(StudentModel student);
 

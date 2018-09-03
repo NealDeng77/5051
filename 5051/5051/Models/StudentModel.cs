@@ -123,7 +123,7 @@ namespace _5051.Models
         {
             TimeStamp = DateTime.UtcNow;
             Id = Guid.NewGuid().ToString();
-            Tokens = 10;
+            Tokens = 20;
             AvatarLevel = 1;
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
@@ -184,18 +184,11 @@ namespace _5051.Models
         /// </summary>
         /// <param name="name">The Name to call the student</param>
         /// <param name="avatarId">The avatar to use, if not specified, will call the backend to get an ID</param>
-        public StudentModel(string name, string avatarId)
+        public StudentModel(string name)
         {
             Initialize();
 
             Name = name;
-
-            // If no avatar ID is sent in, then go and get the first avatar ID from the backend data as the default to use.
-            if (string.IsNullOrEmpty(avatarId))
-            {
-                avatarId = AvatarBackend.Instance.GetFirstAvatarId();
-            }
-            AvatarId = avatarId;
         }
 
         /// <summary>

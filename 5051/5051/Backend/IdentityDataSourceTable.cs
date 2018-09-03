@@ -131,7 +131,7 @@ namespace _5051.Backend
         /// <param name="studentPassword"></param>
         /// <param name="studentId"></param>
         /// <returns></returns>
-        public ApplicationUser CreateNewStudent(StudentModel student)
+        public StudentModel CreateNewStudent(StudentModel student)
         {
             //fill in all fields needed
             var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
@@ -155,7 +155,7 @@ namespace _5051.Backend
             //add to storage
             var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
 
-            return myResult;
+            return createResult;
         }
 
 
