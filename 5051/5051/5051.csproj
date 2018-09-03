@@ -256,7 +256,6 @@
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\SchoolDismissalSettingsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\AvatarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KioskController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -650,11 +649,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Kiosk\Index.cshtml" />
-    <Content Include="Views\Avatar\Index.cshtml" />
-    <Content Include="Views\Avatar\Update.cshtml" />
-    <Content Include="Views\Avatar\Delete.cshtml" />
-    <Content Include="Views\Avatar\Read.cshtml" />
-    <Content Include="Views\Avatar\Create.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Read.cshtml" />
