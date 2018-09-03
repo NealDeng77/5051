@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace _5051.UnitTests.Backend
 {
@@ -48,7 +47,6 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
-
         #endregion Instantiate
 
         #region read
@@ -70,6 +68,27 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryDataSourceTable_Read_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = FactoryInventoryDataSourceTable.Instance;
+            var shopBackend = FactoryInventoryBackend.Instance;
+            var expectShopItem = shopBackend.GetFirstFactoryInventoryId();
+
+            // Act
+            var result = backend.Read(expectShopItem);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
         #endregion read
 
         #region update
@@ -90,6 +109,64 @@ namespace _5051.UnitTests.Backend
 
             // Assert
             Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryDataSourceTable_Update_Invalid_Data_Shop_Item_Does_Not_Exist_Should_Fail()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = FactoryInventoryDataSourceTable.Instance;
+            var expectShopModel = new FactoryInventoryModel();
+
+            // Act
+            var result = backend.Update(expectShopModel);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryDataSourceTable_Update_Valid_Data_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = FactoryInventoryDataSourceTable.Instance;
+            var shopBackend = FactoryInventoryBackend.Instance;
+            var expectShopItemId = shopBackend.GetFirstFactoryInventoryId();
+            var expectShopModel = backend.Read(expectShopItemId);
+            var expectId = "GoodID";
+            var expectUri = "GoodUri";
+            var expectName = "Shop Item";
+            var expectDescription = "A good description of the item";
+            var expectTokens = 1000;
+
+            // Act
+            expectShopModel.Id = expectId;
+            expectShopModel.Uri = expectUri;
+            expectShopModel.Name = expectName;
+            expectShopModel.Description = expectDescription;
+            expectShopModel.Tokens = expectTokens;
+
+            var resultUpdate = backend.Update(expectShopModel);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(expectShopModel, resultUpdate, TestContext.TestName);
+            Assert.AreEqual(expectId, resultUpdate.Id, TestContext.TestName);
+            Assert.AreEqual(expectUri, resultUpdate.Uri, TestContext.TestName);
+            Assert.AreEqual(expectName, resultUpdate.Name, TestContext.TestName);
+            Assert.AreEqual(expectDescription, resultUpdate.Description, TestContext.TestName);
+            Assert.AreEqual(expectTokens, resultUpdate.Tokens, TestContext.TestName);
         }
         #endregion update
 
@@ -125,6 +202,31 @@ namespace _5051.UnitTests.Backend
 
             // Act
             var result = backend.Delete("bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(false);
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_FactoryInventoryDataSourceTable_Delete_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            DataSourceBackend.SetTestingMode(true);
+
+            var backend = FactoryInventoryDataSourceTable.Instance;
+
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Local);
+            var shopBackend = DataSourceBackend.Instance.FactoryInventoryBackend;
+
+            var expectShopItem = shopBackend.GetFirstFactoryInventoryId();
+            var expect = true;
+
+            // Act
+            var result = backend.Delete(expectShopItem);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -179,7 +281,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Backend_AvatarItemDataSourceMock_LoadDataSet_Twice_Valid_Enum_UnitTest_Should_Pass()
+        public void Backend_FactoryInventoryDataSourceMock_LoadDataSet_Twice_Valid_Enum_UnitTest_Should_Pass()
         {
             // Arrange
             var backend = FactoryInventoryDataSourceTable.Instance;
@@ -199,7 +301,6 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
-
         #endregion DataSet
     }
 }
