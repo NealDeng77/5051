@@ -126,7 +126,7 @@ namespace _5051.UnitTests.Backend
             data.Description = "Good Test Description";
             data.Uri = "GoodTestUri";
             data.Tokens = 100;
-            data.Category = FactoryInventoryCategoryEnum.Music;
+            data.Category = FactoryInventoryCategoryEnum.Food;
 
             var expect = data;
 

@@ -111,7 +111,7 @@ namespace _5051.UnitTests.Backend
             var expectUri = "GoodUri";
             var expectName = "Shop Item";
             var expectDescription = "A good description of the item";
-            var expectCatagory = _5051.Models.FactoryInventoryCategoryEnum.Entertainment;
+            var expectCatagory = _5051.Models.FactoryInventoryCategoryEnum.Food;
             var expectTokens = 1000;
 
             // Act

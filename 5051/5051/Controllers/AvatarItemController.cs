@@ -24,7 +24,6 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-
             // Load the list of data into the AvatarItemList
             var myData = new AvatarItemListViewModel();
 
