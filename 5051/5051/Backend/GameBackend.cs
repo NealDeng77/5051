@@ -302,6 +302,7 @@ namespace _5051.Backend
             {
                 // quit iteration calculation
             }
+
         }
 
         public void PayRentPerDay(StudentModel student)
