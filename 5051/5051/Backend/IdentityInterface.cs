@@ -33,8 +33,6 @@ namespace _5051.Backend
 
         bool RemoveClaimFromUser(string userID, string claimTypeToRemove);
 
-        bool DeleteUser(ApplicationUser user);
-
         bool DeleteUser(string id);
 
         bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role);

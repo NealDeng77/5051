@@ -409,31 +409,6 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Deletes the given user
-        /// returns false if delete fails
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public bool DeleteUser(ApplicationUser user)
-        {
-            if (string.IsNullOrEmpty(user.Id))
-            {
-                return false;
-            }
-
-            var myData = DataList.Find(n => n.Id == user.Id);
-            if (DataList.Remove(myData) == false)
-            {
-                return false;
-            }
-
-            // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<ApplicationUser>(tableName, partitionKey, myData.Id, myData);
-
-            return myReturn;
-        }
-
-        /// <summary>
         /// Deletes the user with the given id
         /// returns false if delete fails
         /// </summary>

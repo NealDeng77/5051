@@ -49,6 +49,45 @@ namespace _5051.UnitTests.Backend
         }
         #endregion Instantiate
 
+        #region Delete
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Delete_Invalid_ID_Null_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            // Act
+            var result = backend.DeleteUser(null);
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Delete_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var testDefault = backend.ListAllUsers().FirstOrDefault();
+            var expectId = testDefault.Id;
+
+            // Act
+            var result = backend.DeleteUser(expectId);
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        #endregion
+
+
+
         #region LoadDataSet
         [TestMethod]
         public void Backend_IdentityDataSourceTable_LoadDataSet_Demo_Data_Should_Pass()
