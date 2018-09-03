@@ -303,6 +303,7 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(myStudent2.Truck.BusinessList, TestContext.TestName);
         }
 
+
         [TestMethod]
         public void Controller_Shop_Factory_Data_InValid_Quantities_Not_Enough_Should_Fail()
         {
@@ -314,7 +315,8 @@ namespace _5051.Tests.Controllers
             data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
 
             // Get the Student Record and Add some Tokens to it.
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);          
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId); myStudent.Tokens = 1000;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value
             var myInventory = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
