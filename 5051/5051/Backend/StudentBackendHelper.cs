@@ -10,18 +10,6 @@ namespace _5051.Backend
     public static class StudentBackendHelper
     {
         /// <summary>
-        /// Create demo student
-        /// </summary>
-        public static void CreateDemoStudent()
-        {
-            StudentBackend.Instance.Create(new StudentModel("Doug", null));
-            StudentBackend.Instance.Create(new StudentModel("Jea", null));
-            StudentBackend.Instance.Create(new StudentModel("Mike", null));
-            StudentBackend.Instance.Create(new StudentModel("Sue", null));
-            StudentBackend.Instance.Create(new StudentModel("Stan", null));
-        }
-
-        /// <summary>
         /// Create demo attendance
         /// </summary>
         public static void CreateDemoAttendance()
