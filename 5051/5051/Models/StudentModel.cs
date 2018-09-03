@@ -33,12 +33,6 @@ namespace _5051.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// The ID of the Avatar the student is associated with, this will convert to an avatar picture
-        /// </summary>
-        [Display(Name = "AvatarId", Description = "Avatar")]
-        public string AvatarId { get; set; }
-
-        /// <summary>
         ///  The composite for the Avatar
         /// </summary>
         public AvatarCompositeModel AvatarComposite { get; set; }
@@ -183,7 +177,6 @@ namespace _5051.Models
         /// Constructor for Student.  Call this when making a new student
         /// </summary>
         /// <param name="name">The Name to call the student</param>
-        /// <param name="avatarId">The avatar to use, if not specified, will call the backend to get an ID</param>
         public StudentModel(string name)
         {
             Initialize();
@@ -200,7 +193,6 @@ namespace _5051.Models
             Id = data.Id;
             Name = data.Name;
 
-            AvatarId = data.AvatarId;
             AvatarComposite = data.AvatarComposite;
             AvatarInventory = data.AvatarInventory;
 
@@ -240,7 +232,6 @@ namespace _5051.Models
 
             Name = data.Name;
 
-            AvatarId = data.AvatarId;
             AvatarComposite = data.AvatarComposite;
             AvatarInventory = data.AvatarInventory;
 

@@ -91,7 +91,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Backend_AvatarDataSourceMock_Update_With_Invalid_Data_AvatarID_Should_Fail()
+        public void Backend_AvatarDataSourceMock_Update_With_Invalid_Data_ID_Should_Fail()
         {
             //arrange
             var backend = AvatarDataSourceMock.Instance;
@@ -164,20 +164,6 @@ namespace _5051.UnitTests.Backend
             Assert.IsNull(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Backend_AvatarDataSourceMock_Read_With_Valid_ID_Should_Pass()
-        {
-            //arrange
-            var backend = AvatarDataSourceMock.Instance;
-            var testAvatarModel = AvatarBackend.Instance;
-            var testID = testAvatarModel.GetFirstAvatarId();
-
-            //act
-            var result = backend.Read(testID);
-
-            //assert
-            Assert.IsNotNull(result, TestContext.TestName);
-        }
         #endregion read
 
         #region DataSet

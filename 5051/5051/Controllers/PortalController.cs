@@ -53,7 +53,6 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "AvatarId,"+
                                         "AvatarLevel,"+
                                         "Tokens,"+
                                         "Status,"+
@@ -119,6 +118,21 @@ namespace _5051.Controllers
                 myReturn.LastLogIn = UTCConversionsBackend.UtcToKioskTime(myReturn.Attendance.OrderByDescending(m => m.In).FirstOrDefault().In);
             }
 
+            var myWeeklyReport = new WeeklyReportViewModel()
+            {
+                StudentId = id,
+                SelectedWeekId = 1
+            };
+
+            var myMonthlyReport = new MonthlyReportViewModel()
+            {
+                StudentId = id,
+                SelectedMonthId = 1
+            };
+
+            myReturn.WeeklyAttendanceScore = ReportBackend.Instance.GenerateWeeklyReport(myWeeklyReport).Stats.PercAttendedHours;
+            myReturn.MonthlyAttendanceScore = ReportBackend.Instance.GenerateMonthlyReport(myMonthlyReport).Stats.PercAttendedHours;
+
             return View(myReturn);
         }
 
@@ -173,105 +187,7 @@ namespace _5051.Controllers
 
             return View(myReturn);
         }
-
-
-        ///// <summary>
-        ///// Student's Avatar page
-        ///// </summary>
-        ///// <returns></returns>
-        //// Post: Portal
-        //[HttpPost]
-        //public ActionResult Avatar([Bind(Include=
-        //                                "AvatarId,"+
-        //                                "StudentId,"+
-        //                                "")] StudentAvatarModel data)
-        //{
-        //    // If data passed up is not valid, go back to the Index page so the user can try again
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Send back for edit, with Error Message
-        //        return View(data);
-        //    }
-
-        //    // If the Avatar Id is blank, error out
-        //    if (string.IsNullOrEmpty(data.AvatarId))
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    // If the Student Id is black, error out
-        //    if (string.IsNullOrEmpty(data.StudentId))
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    // Lookup the student id, will just replace the Avatar Id on it if it is valid
-        //    var myStudent = StudentBackend.Instance.Read(data.StudentId);
-        //    if (myStudent == null)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    // Set the Avatar ID on the Student and update in data store
-        //    myStudent.AvatarId = data.AvatarId;
-        //    StudentBackend.Instance.Update(myStudent);
-
-        //    // Editing is done, so go back to the Student Portal
-        //    return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
-        //}
-
-        ///// <summary>
-        ///// Student's Avatar page
-        ///// </summary>
-        ///// <param name="id">Student Id</param>
-        ///// <returns>Selected Avatar View Model</returns>
-        //// GET: Portal
-        //public ActionResult Avatar(string id = null)
-        //{
-        //    // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-        //    ViewBag.StudentId = id;
-
-        //    // var currentUser = User.Identity.GetUserName();
-        //    //var currentUserId = User.Identity.GetUserId();
-
-        //    var myStudent = StudentBackend.Instance.Read(id);
-        //    if (myStudent == null)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    var myAvatar = AvatarBackend.Instance.Read(myStudent.AvatarId);
-        //    if (myAvatar == null)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-
-        //    var SelectedAvatarViewModel = new SelectedAvatarForStudentViewModel();
-
-        //    // Populate the Values to use
-        //    SelectedAvatarViewModel.AvatarList = AvatarBackend.Instance.Index();
-
-        //    // Build up the List of AvatarLevels, each list holds the avatar of that level.
-        //    SelectedAvatarViewModel.MaxLevel = SelectedAvatarViewModel.AvatarList.Aggregate((i1, i2) => i1.Level > i2.Level ? i1 : i2).Level;
-
-        //    SelectedAvatarViewModel.AvatarLevelList = new List<AvatarViewModel>();
-        //    // populate each list at the level
-        //    for (var i = 1; i <= SelectedAvatarViewModel.MaxLevel; i++)
-        //    {
-        //        var tempList = SelectedAvatarViewModel.AvatarList.Where(m => m.Level == i).ToList();
-        //        var tempAvatarList = new AvatarViewModel();
-        //        tempAvatarList.AvatarList = new List<AvatarModel>();
-        //        tempAvatarList.AvatarList.AddRange(tempList);
-        //        tempAvatarList.ListLevel = i;
-        //        SelectedAvatarViewModel.AvatarLevelList.Add(tempAvatarList);
-        //    }
-
-        //    SelectedAvatarViewModel.SelectedAvatar = myAvatar;
-        //    SelectedAvatarViewModel.Student = myStudent;
         
-        //    return View(SelectedAvatarViewModel);
-        //}
-
         /// <summary>
         ///  My Settings
         /// </summary>
@@ -307,7 +223,6 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "AvatarId,"+
                                         "AvatarLevel,"+
                                         "Tokens,"+
                                         "Status,"+
@@ -322,12 +237,6 @@ namespace _5051.Controllers
             {
                 // Send back for edit, with Error Message
                 return View(data);
-            }
-
-            // If the Avatar Id is blank, error out
-            if (string.IsNullOrEmpty(data.AvatarId))
-            {
-                return RedirectToAction("Error", "Home");
             }
 
             // If the Student Id is black, error out

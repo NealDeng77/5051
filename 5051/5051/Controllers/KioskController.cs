@@ -264,7 +264,6 @@ namespace _5051.Controllers
                                         "Name,"+
                                         "Description,"+
                                         "Uri,"+
-                                        "AvatarId,"+
                                         "Status,"+
                                         "Tokens,"+
                                         "ExperiencePoints,"+

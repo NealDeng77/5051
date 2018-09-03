@@ -437,16 +437,12 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
-            //Check that the DataSourceSet is set to Default using avatar count
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
@@ -472,8 +468,6 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
@@ -481,8 +475,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
             //Check that the DataSourceSet is set to Demo using avatar count, Demo set not implemented yet, set to Default
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -508,8 +500,6 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
@@ -517,7 +507,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
             //Check that the DataSourceSet is set to UnitTest using avatar count, UnitTest set not implemented yet, set to Default
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         #endregion DataSourceSetRegion
@@ -599,8 +588,6 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
@@ -608,8 +595,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
             //Check that the DataSource is set to Mock using avatar count
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -635,16 +620,11 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
@@ -670,16 +650,11 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
@@ -705,16 +680,11 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
@@ -740,16 +710,11 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         [TestMethod]
@@ -775,9 +740,6 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(myId);
 
-            var resultAvatarCount = AvatarBackend.Instance.Index().Count;
-
-
             //Reset the data source backend
             DataSourceBackend.Instance.Reset();
 
@@ -785,7 +747,6 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
 
             //Check that the DataSource is set to unknown using avatar count, unknown DataSource not implemented yet, set to Mock
-            Assert.AreEqual(resultAvatarCount, 10, TestContext.TestName);
         }
 
         #endregion DataSourceRegion
