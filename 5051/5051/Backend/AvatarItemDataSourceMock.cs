@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using System.Collections.Generic;
 
 using _5051.Models;
@@ -40,7 +42,7 @@ namespace _5051.Backend
         /// <summary>
         /// The AvatarItem List
         /// </summary>
-        private List<AvatarItemModel> AvatarItemList = new List<AvatarItemModel>();
+        private List<AvatarItemModel> DataList = new List<AvatarItemModel>();
 
         /// <summary>
         /// Makes a new AvatarItem
@@ -49,7 +51,7 @@ namespace _5051.Backend
         /// <returns>AvatarItem Passed In</returns>
         public AvatarItemModel Create(AvatarItemModel data)
         {
-            AvatarItemList.Add(data);
+            DataList.Add(data);
             return data;
         }
 
@@ -65,7 +67,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var myReturn = AvatarItemList.Find(n => n.Id == id);
+            var myReturn = DataList.Find(n => n.Id == id);
             return myReturn;
         }
 
@@ -80,7 +82,7 @@ namespace _5051.Backend
             {
                 return null;
             }
-            var myReturn = AvatarItemList.Find(n => n.Id == data.Id);
+            var myReturn = DataList.Find(n => n.Id == data.Id);
             if (myReturn == null)
             {
                 return null;
@@ -103,8 +105,8 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = AvatarItemList.Find(n => n.Id == Id);
-            var myReturn = AvatarItemList.Remove(myData);
+            var myData = DataList.Find(n => n.Id == Id);
+            var myReturn = DataList.Remove(myData);
             return myReturn;
         }
 
@@ -114,7 +116,7 @@ namespace _5051.Backend
         /// <returns>List of AvatarItems</returns>
         public List<AvatarItemModel> Index()
         {
-            return AvatarItemList;
+            return DataList;
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace _5051.Backend
         /// </summary>
         private void DataSetClear()
         {
-            AvatarItemList.Clear();
+            DataList.Clear();
         }
 
         /// <summary>
@@ -153,6 +155,9 @@ namespace _5051.Backend
             {
                 Create(item);
             }
+
+            // Order the set by TimeStamp
+            DataList = DataList.OrderBy(x => x.TimeStamp).ToList();
         }
 
         /// <summary>
