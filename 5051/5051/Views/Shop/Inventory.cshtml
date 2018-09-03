@@ -1,134 +1,97 @@
 ﻿@model _5051.Models.SelectedFactoryInventoryForStudentViewModel
 @{
     ViewBag.Title = "Inventory";
+}
 
+<br />
+<div class="row justify-content-center">
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold">
+                Your Inventory of Truck Components
+            </span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
+
+@{
     if (Model == null || Model.Student == null || Model.FactoryInventoryCategoryList == null || !Model.FactoryInventoryCategoryList.Any())
     {
-        <br />
-        <h2>There is nothing in your Inventory</h2>
-        <h3>Go to factory to buy something</h3>
-    }
+        <div class="row justify-content-center">
 
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center">
+                    There is nothing in your Inventory. Go to factory to buy something.
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
+    }
     else
     {
-        <br />
-        <h2 class="text-left">Select your item</h2>
-        <br />
-
-        <hr />
-
-        var disabledOn = "";
-        var BoxHover = "BoxWithHighlightHover";
-        var ActiveTab = "";
-        var TabCount = 0;
-        var DisplayText = "";
-
-
-        <ul class="nav nav-tabs">
-            @{
-                TabCount = 0;
-                foreach (var CurrentList in Model.FactoryInventoryCategoryList)
-                {
-                    ActiveTab = "";
-
-                    if (CurrentList == null)
-                    {
-                        continue;
-                    }
-
-                    TabCount++;
-                    if (TabCount == 1)
-                    {
-                        ActiveTab = "active";
-                    }
-
-                    <li class="nav-item"><a class="nav-link @ActiveTab" data-toggle="tab" href="#@CurrentList.Category">@CurrentList.Category</a></li>
-                }
-            }
-        </ul>
-
-
-        <div class="tab-content">
-
+        <div class="row justify-content-around">
+            <div class="col-1 "></div>
+            <div class="col">
                 @{
-                    TabCount = 0;
-                    foreach (var CurrentList in Model.FactoryInventoryCategoryList)
+                    foreach (var currentCategory in Model.FactoryInventoryCategoryList)
                     {
-                        ActiveTab = "";
-                        if (CurrentList == null)
-                        {
-                            continue;
-                        }
 
-                        TabCount++;
-                        if (TabCount == 1)
-                        {
-                            ActiveTab = "active";
-                        }
+                        <div class="row justify-content-start">
+                            <div class="col align-self-center">
+                                <br />
+                                <hr />
+                                <span class="FontSizeLarge">
+                                    @currentCategory.Category.GetDisplayName()
+                                    <br />
+                                </span>
+                            </div>
+                        </div>
 
-                        <div id="@CurrentList.Category" class="tab-pane container @ActiveTab">
-                            <br />
-                            <h3>@CurrentList.Category</h3>
-                            <div class="row">
-                                @{
-                                     //If no items, then skip
-                                    if (!CurrentList.FactoryInventoryList.Any())
-                                    {
-                                        <br />
-                                        <div>No Items</div>
-                                        continue;
-                                    }
+                        <div class="row justify-content-start">
 
-                                    //AvatarViewModel outputAvatar = new AvatarViewModel();
-                                    foreach (var item in CurrentList.FactoryInventoryList)
-                                    {
-                                        using (Html.BeginForm())
+                            <div class="col">
+                                <div class="row justify-content-start">
+
+                                    @{
+                                        foreach (var item in currentCategory.FactoryInventoryList)
                                         {
-                                            @Html.Hidden("StudentId", Model.Student.Id);
-                                            @Html.Hidden("ItemId", item.Id);
+                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
 
-                                            var picturURI = "/Content/shop/" + item.Uri;
+                                                <div class="row no-gutters justify-content-center">
+                                                    <img src="~/Content/shop/@item.Uri" class="AvatarSize1" />
+                                                </div>
 
-                                            disabledOn = "";
-                                            BoxHover = "BoxWithHighlightHover";
-                                            DisplayText = "";
-
-                                            //// Check if the user owns the item, if so disable it.
-                                            //var ItemAlreadyExists = Model.Student.Inventory.Exists(m => m.Id == item.Id);
-                                            //if (ItemAlreadyExists)
-                                            //{
-                                            //    // Already own it.
-                                            //    disabledOn = "disabled";
-                                            //    BoxHover = "BoxWithHighlightHoverOff";    //don't show the hover effect
-                                            //    DisplayText = "Purchased";
-
-                                            //}
-
-                                            <div class="col-sm-2">
-                                                <div class="">
-                                                    @{
-                                                        // <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
-                                                    }
-                                                    <img src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1"/>
-                                                    <br />
-                                                    <span class="text-center">
-                                                        @item.Name
+                                                <div class="row no-gutters justify-content-center">
+                                                    <div class="text-center FontSizeSmall">
                                                         <br />
-                                                        @DisplayText
-                                                    </span>
+                                                        @item.Name<br />
+                                                        @item.Description<br />
+                                                        <br />
+                                                    </div>
                                                 </div>
                                             </div>
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-
                     }
-            }
-        </div>
+                }
+            </div>
+            <div class="col-1 "></div>
 
+        </div>
     }
 }
-
-
