@@ -236,7 +236,7 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = SchoolCalendarDataSourceMock.Instance;
-            var expectDate = new DateTime(2018, 1, 1);
+            var expectDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;
 
             // Act
             var result = backend.ReadDate(expectDate);
