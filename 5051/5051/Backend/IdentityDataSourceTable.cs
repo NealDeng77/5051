@@ -155,9 +155,28 @@ namespace _5051.Backend
             //add to storage
             var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
 
-            return createResult;
+            return student;
         }
 
+        public StudentModel CreateNewStudentIdRecordOnly(StudentModel student)
+        {
+            //fill in all fields needed
+            var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
+
+            //need to add claims
+            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
+            {
+                ClaimType = "StudentUser",
+                ClaimValue = "True"
+            });
+
+            DataList.Add(user);
+
+            //add to storage
+            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
+
+            return student;
+        }
 
         /// <summary>
         /// updates all fields in the database except the id
@@ -416,6 +435,12 @@ namespace _5051.Backend
             }
 
             var myData = DataList.Find(n => n.Id == Id);
+            if(UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
+            {
+                //delete the student from student table as well
+                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
+            }
+
             if (DataList.Remove(myData) == false)
             {
                 return false;
@@ -536,6 +561,16 @@ namespace _5051.Backend
             var teacherResult = CreateNewTeacher("teacher", "teacher", "teacherID");
 
             //create the student users
+            var studentBackend = StudentBackend.Instance;
+
+            studentBackend.Reset();
+
+            var studentList = studentBackend.Index();
+
+            foreach (var item in studentList)
+            {
+                var studentResult = CreateNewStudentIdRecordOnly(item);
+            }
 
         }
 

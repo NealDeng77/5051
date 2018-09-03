@@ -239,6 +239,7 @@ namespace _5051.Backend
             result.IsClosed = StudentData.Truck.IsClosed;
             result.IterationNumber = GetDefault().IterationNumber;
             result.CustomersTotal = StudentData.Truck.CustomersTotal;
+
             // display recent 5 messages
             if (StudentData.Truck.TransactionList.Count <= 5)
             {
@@ -302,7 +303,8 @@ namespace _5051.Backend
             {
                 // quit iteration calculation
             }
-
+            var leaderBoard = new List<LeaderBoardModel>();
+            leaderBoard = UpdatedLeaderBoard();
         }
 
         public void PayRentPerDay(StudentModel student)
@@ -472,6 +474,20 @@ namespace _5051.Backend
             }
 
             return;
+        }
+
+        public List<LeaderBoardModel> UpdatedLeaderBoard()
+        {
+            var board = new List<LeaderBoardModel>();
+            var data = StudentBackend.Instance.Index();
+
+            // Get Student
+            for (int i = 0; i < data.Count; i++)
+            {
+                // select the properly algorithm to get the top 3 students
+                // To do
+            }
+            return board;
         }
        
     }
