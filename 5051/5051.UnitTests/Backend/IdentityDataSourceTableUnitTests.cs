@@ -154,5 +154,46 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region FindUser
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserById_Null_ID_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            //act
+            var result = backend.FindUserByID(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserByName_Null_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            //act
+            var result = backend.FindUserByUserName(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserByName_Valid_Name_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var name = backend.ListAllUsers().FirstOrDefault().UserName;
+
+            //act
+            var result = backend.FindUserByUserName(name);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
     }
 }
