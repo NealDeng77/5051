@@ -542,23 +542,362 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
-        //#region ReportRegion
-        
+        #region ReportRegion
 
-        //[TestMethod]
-        //public void Controller_Portal_Report_Default_should_Pass()
-        //{
-        //    // Arrange
-        //    PortalController controller = new PortalController();
-        //    StudentModel data = new StudentModel();
-        //    string id = Backend.StudentBackend.Instance.GetDefault().Id;
 
-        //    // Act
-        //    var result = controller.Report(id) as RedirectToRouteResult;
+        [TestMethod]
+        public void Controller_Admin_Weekly_Report_DeFault_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
 
-        //    // Assert
-        //    Assert.AreEqual(result.RouteValues["Controller"], "Admin",TestContext.TestName);
-        //}
-        //#endregion
+            // Act
+            var result = (RedirectToRouteResult)controller.WeeklyReport();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Weekly_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.WeeklyReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Weekly_Report_Incorrect_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.WeeklyReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Weekly_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            WeeklyReportViewModel data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.WeeklyReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Post_Selected_ID_Is_2_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new WeeklyReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedWeekId = 2
+            };
+
+            // Act
+            var result = controller.WeeklyReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Monthly_Report_DeFault_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.WeeklyReport();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Monthly_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.MonthlyReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Monthly_Report_Incorrect_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.MonthlyReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Monthly_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            MonthlyReportViewModel data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.MonthlyReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Monthly_Report_Post_Data_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            MonthlyReportViewModel data = new MonthlyReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedMonthId = 2
+            };
+
+            // Act
+            var result = controller.MonthlyReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_DeFault_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.SemesterReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Incorrect_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            SemesterReportViewModel data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.SemesterReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Semester_Report_Post_Data_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new SemesterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedSemesterId = 2
+            };
+
+            // Act
+            var result = controller.SemesterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_DeFault_Should_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.QuarterReport();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Valid_Id_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.QuarterReport(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Incorrect_Id_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = "bogus";
+            // Act
+            var result = (RedirectToRouteResult)controller.QuarterReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            QuarterReportViewModel data = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.QuarterReport(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_2_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new QuarterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedQuarterId = 2
+            };
+
+            // Act
+            var result = controller.QuarterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_3_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new QuarterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedQuarterId = 3
+            };
+
+            // Act
+            var result = controller.QuarterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Quarter_Report_Post_Selected_ID_Is_4_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var data = new QuarterReportViewModel()
+            {
+                StudentId = StudentBackend.Instance.GetDefault().Id,
+                SelectedQuarterId = 4
+            };
+
+            // Act
+            var result = controller.QuarterReport(data);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Overall_Report_Id_Is_Valid_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = StudentBackend.Instance.GetDefault().Id;
+
+            // Act
+            var result = controller.OverallReport(id);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Overall_ReportId_Is_Not_Valid_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            string id = "abc";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.OverallReport(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+        #endregion
     }
 }
