@@ -89,9 +89,15 @@
 
                         case "Support":
                         case "support":
-                            <li class="nav-item">
-                                @Html.ActionLink("temp", "temp", "temp", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                            </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Support Home", "Index", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("User List", "UserList", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Support Settings", "Settings", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                </li>
                             break;
 
                         case "Home":
