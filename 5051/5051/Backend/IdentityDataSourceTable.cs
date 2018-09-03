@@ -363,11 +363,6 @@ namespace _5051.Backend
             //storage update
             var updateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userID, findResult);
 
-            if (updateResult == null)
-            {
-                return null;
-            }
-
             return findResult;
         }
 
@@ -381,6 +376,10 @@ namespace _5051.Backend
         public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
         {
             var findResult = FindUserByID(userID);
+            if(findResult == null)
+            {
+                return false;
+            }
 
             var claims = findResult.Claims.ToList();
 
@@ -399,11 +398,6 @@ namespace _5051.Backend
             }
 
             var updateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userID, findResult);
-
-            if(updateResult == null)
-            {
-                return false;
-            }
 
             return true;
         }
