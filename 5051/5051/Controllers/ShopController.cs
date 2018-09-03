@@ -531,6 +531,8 @@ namespace _5051.Controllers
 
         public ActionResult BusinessReport(string id = null)
         {
+            ViewBag.StudentId = id;
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
