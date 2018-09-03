@@ -200,8 +200,7 @@ namespace _5051.Backend
             }
 
             // Order the set by TimeStamp
-            DataSetList = DataSetList.OrderBy(x => x.TimeStamp).ToList();
-
+            DataList = DataList.OrderBy(x => x.TimeStamp).ToList();
         }
 
         /// <summary>
