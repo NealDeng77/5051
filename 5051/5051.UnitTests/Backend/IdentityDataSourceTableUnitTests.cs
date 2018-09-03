@@ -49,5 +49,43 @@ namespace _5051.UnitTests.Backend
         }
         #endregion Instantiate
 
+        #region LoadDataSet
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_LoadDataSet_Demo_Data_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.Demo;
+
+            // Act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_LoadDataSet_UnitTest_Data_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
+
+            // Act
+            backend.LoadDataSet(expectEnum);
+            var result = backend;
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
+
     }
 }

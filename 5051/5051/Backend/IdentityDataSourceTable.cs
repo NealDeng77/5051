@@ -459,28 +459,6 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Logs the user in with the given password
-        /// returns false if login fails
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public bool LogUserIn(ApplicationUser user, string password)
-        {
-            //var result = idBackend.SignInManager.PasswordSignIn(user.UserName, password, isPersistent: false, shouldLockout: false);
-
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return true;
-            //    case SignInStatus.Failure:
-            //    default:
-            //        return false;
-            //}
-            return false;
-        }
-
-        /// <summary>
         /// Logs the user in using the given password
         /// returns false if login fails
         /// </summary>
