@@ -326,7 +326,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult);
+            var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult.Id);
             if(!deleteResult)
             {
                 ModelState.AddModelError("", "Invalid Delete Attempt.");

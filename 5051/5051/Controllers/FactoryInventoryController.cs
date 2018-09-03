@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
+using System;
+using System.Linq;
 
 namespace _5051.Controllers
 {
@@ -23,8 +25,27 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             // Load the list of data into the FactoryInventoryList
-            FactoryInventoryViewModel.FactoryInventoryList = FactoryInventoryBackend.Index();
-            return View(FactoryInventoryViewModel);
+            var myData = new FactoryInventoryListViewModel();
+
+            // Get the Inventory
+            var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
+
+            // Sort the Inventory into List per Category
+            // Load the ones
+            foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
+            {
+                var temp = new FactoryInventoryViewModel();
+                temp.Category = (FactoryInventoryCategoryEnum)item;
+                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+
+                if (temp.FactoryInventoryList.Any())
+                {
+                    // todo, tag the ones that are already owned
+                    myData.FactoryInventoryCategoryList.Add(temp);
+                }
+            }
+
+            return View(myData);
         }
 
         /// <summary>

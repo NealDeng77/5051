@@ -32,7 +32,7 @@ namespace _5051.UnitTests.Models
             var uri = "uri";
             var name = "name";
             var description = "description";
-            FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Music;
+            FactoryInventoryCategoryEnum category = FactoryInventoryCategoryEnum.Food;
             int tokens = 10;
             int quantities = 10;
             bool isLimitSupply = true;

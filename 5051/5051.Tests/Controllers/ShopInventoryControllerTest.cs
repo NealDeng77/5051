@@ -43,7 +43,7 @@ namespace _5051.Tests.Controllers
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
-            var resultFactoryInventoryViewModel = result.Model as FactoryInventoryViewModel;
+            var resultFactoryInventoryViewModel = result.Model as FactoryInventoryListViewModel;
 
             // Assert
             Assert.IsNotNull(resultFactoryInventoryViewModel, TestContext.TestName);

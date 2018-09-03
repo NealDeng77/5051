@@ -1,4 +1,4 @@
-﻿@model _5051.Models.AvatarItemViewModel
+﻿@model _5051.Models.AvatarItemListViewModel
 @{
     ViewBag.Title = "Edit Avatar Items";
 }
@@ -25,7 +25,7 @@
 </div>
 
 @{
-    if (Model.AvatarItemList == null || !Model.AvatarItemList.Any())
+    if (Model.AvatarItemCategoryList == null || !Model.AvatarItemCategoryList.Any())
     {
         <div class="row justify-content-center">
 
@@ -42,35 +42,60 @@
     }
     else
     {
+
         <div class="row justify-content-around FontColorWhite">
             <div class="col-1 "></div>
 
             <div class="col">
-                <div class="row justify-content-start">
-                    @{
-                        foreach (var item in Model.AvatarItemList)
-                        {
-                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                @{
+                    foreach (var category in Model.AvatarItemCategoryList)
+                    {
 
-                                <div class="row no-gutters text-center justify-content-center">
-                                    <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
-                                        <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
-                                                              
-                                        <div class="text-center FontSizeSmall">
-                                            @item.Name<br />
-                                            @item.Description<br />
-                                            @item.Category<br />
-                                            <br />
-                                        </div>
-                                    </a>
+                        <div class="row justify-content-start">
+                            <div class="col align-self-center">
+                                <br />
+                                <hr />
+                                <span class="FontSizeLarge">
+                                    @category.Category.GetDisplayName()
+                                    <br />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+
+                            <div class="col">
+                                <div class="row justify-content-start">
+
+                                    @{
+                                        foreach (var item in category.AvatarItemList)
+                                        {
+                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
+                                                <a id="@item.Id" href="~/AvatarItem/Read/@item.Id">
+                                                    <div class="row no-gutters justify-content-center">
+                                                        <img src="~/Content/avatar/@item.Uri" class="AvatarSize1" />
+                                                    </div>
+
+                                                    <div class="row no-gutters justify-content-center">
+                                                        <div class="text-center FontSizeSmall">
+                                                            <br />
+                                                            @item.Name<br />
+                                                            @item.Description<br />
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
-                        }
+                        </div>
                     }
-                </div>
+                }
             </div>
-            <div class="col-1 "></div>
 
+            <div class="col-1 "></div>
         </div>
     }
 }

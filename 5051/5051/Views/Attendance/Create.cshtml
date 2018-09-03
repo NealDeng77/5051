@@ -90,11 +90,14 @@
             <br />
             <hr />
             <br />
-            <div class="row justify-content-around DispalyBoxWithMargin">
-                <div class="col  text-center DispalyBoxWithMargin">
+            <div class="row justify-content-center">
+                <div class="col-auto  text-center DispalyBoxWithMargin">
                     @Html.ActionLink("Cancel", "Read", new { id = Model.StudentId }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                 </div>
-                <div class="col  text-center DispalyBoxWithMargin">
+
+                <div class="col-1"></div>
+
+                <div class="col-auto text-center DispalyBoxWithMargin">
                     <input disabled id="StudentLoginButton" type="submit" value="Create" class="btn btn1 btn-light DispalyBoxWithMargin">
                 </div>
             </div>

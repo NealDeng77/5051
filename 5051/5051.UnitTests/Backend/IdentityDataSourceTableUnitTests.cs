@@ -49,6 +49,73 @@ namespace _5051.UnitTests.Backend
         }
         #endregion Instantiate
 
+        #region Delete
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Delete_Invalid_ID_Null_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            // Act
+            var result = backend.DeleteUser(null);
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Delete_Valid_ID_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var testDefault = backend.ListAllUsers().FirstOrDefault();
+            var expectId = testDefault.Id;
+
+            // Act
+            var result = backend.DeleteUser(expectId);
+
+            //Reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        #endregion
+
+        #region ListUsers
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ListAllSupportUsers_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectNumSupportUsers = 1;
+
+            //act
+            var result = backend.ListAllSupportUsers();
+
+            //assert
+            Assert.AreEqual(expectNumSupportUsers, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ListAllTeacherUsers_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectNumTeacherUsers = 2;
+
+            //act
+            var result = backend.ListAllTeacherUsers();
+
+            //assert
+            Assert.AreEqual(expectNumTeacherUsers, result.Count, TestContext.TestName);
+        }
+        #endregion
+
         #region LoadDataSet
         [TestMethod]
         public void Backend_IdentityDataSourceTable_LoadDataSet_Demo_Data_Should_Pass()
@@ -87,5 +154,46 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region FindUser
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserById_Null_ID_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            //act
+            var result = backend.FindUserByID(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserByName_Null_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            //act
+            var result = backend.FindUserByUserName(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindUserByName_Valid_Name_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var name = backend.ListAllUsers().FirstOrDefault().UserName;
+
+            //act
+            var result = backend.FindUserByUserName(name);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
     }
 }

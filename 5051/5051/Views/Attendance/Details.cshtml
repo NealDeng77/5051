@@ -86,23 +86,23 @@
                         @Model.Emotion
                         &nbsp;
 
-                        <img src="@Model.EmotionUri" class="EmotionSize" alt="@Model.Emotion"/>
+                        <img src="@Model.EmotionUri" class="EmotionSizeLarge" alt="@Model.Emotion"/>
                     </div>
                 </div>
 
                 <br />
                 <hr />
 
-                <div class="row justify-content-around DispalyBoxWithMargin">
-                    <div class="col text-center DispalyBoxWithMargin">
+                <div class="row justify-content-center">
+                    <div class="col-auto text-center DispalyBoxWithMargin">
                         @Html.ActionLink("Cancel", "Read", new { id = Model.StudentId }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
 
-                    <div class="col text-center DispalyBoxWithMargin">
+                    <div class="col-auto text-center DispalyBoxWithMargin">
                         @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
 
-                    <div class="col text-center DispalyBoxWithMargin">
+                    <div class="col-auto text-center DispalyBoxWithMargin">
                         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                 </div>
