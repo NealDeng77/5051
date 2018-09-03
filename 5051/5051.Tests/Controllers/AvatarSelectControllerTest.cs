@@ -360,6 +360,8 @@ namespace _5051.Tests.Controllers
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
+            myStudent.Tokens = 1000;
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value
             var myInventory = DataSourceBackend.Instance.AvatarItemBackend.Read(data.ItemId);
