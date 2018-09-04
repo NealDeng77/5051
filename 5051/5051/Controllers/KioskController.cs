@@ -269,7 +269,6 @@ namespace _5051.Controllers
                                         "Tokens,"+
                                         "ExperiencePoints,"+
                                         "AvatarLevel,"+
-                                        "Password," +
                                         "")] StudentModel data)
         {
             if (!ModelState.IsValid)
@@ -291,8 +290,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            //StudentBackend.Create(data);
-            IdentityDataSourceTable.Instance.CreateNewStudent(data);
+            StudentBackend.Create(data);
 
             return RedirectToAction("Index");
         }
