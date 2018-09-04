@@ -461,7 +461,7 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             // Act
-            var result = controller.Login(loginViewModel) as ViewResult;
+            var result = controller.Login(loginViewModel) as ActionResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -476,6 +476,27 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.Login(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_Login_Post_loginResult_True_Should_Pass()
+        {
+            // Arrange
+            var controller = new AdminController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            var idBackend = IdentityDataSourceTable.Instance;
+            var expectUserName = idBackend.teacherUserName;
+            var expectPass = idBackend.teacherPass;
+
+            loginViewModel.Email = expectUserName;
+            loginViewModel.Password = expectPass;
+
+            // Act
+            var result = controller.Login(loginViewModel) as ActionResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
