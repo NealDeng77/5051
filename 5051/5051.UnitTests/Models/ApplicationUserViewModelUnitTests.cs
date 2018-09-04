@@ -25,8 +25,8 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserView_Instantiate_Should_Pass()
         {
             // Arange
-            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            var field = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(field);
 
             // Act
             var result = new ApplicationUserViewModel(userInfo);
@@ -36,6 +36,22 @@ namespace _5051.UnitTests.Models
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_ApplicationUserView_Invalid_User_Should_Fail()
+        {
+            // Arange
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName("bogus");
+
+            // Act
+            var result = new ApplicationUserViewModel(userInfo);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result.Student, TestContext.TestName);
         }
         #endregion Instantiate
     }
