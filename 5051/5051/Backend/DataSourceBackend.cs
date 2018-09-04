@@ -12,12 +12,15 @@ namespace _5051.Backend
         /// Hold one of each of the DataSources as an instance to the datasource
         /// </summary>
         public AvatarItemBackend AvatarItemBackend = AvatarItemBackend.Instance;
-        public StudentBackend StudentBackend = StudentBackend.Instance;
         public FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
+
+        public GameBackend GameBackend = GameBackend.Instance;
+        public KioskSettingsBackend KioskSettingsBackend = KioskSettingsBackend.Instance;
+
         public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
         public SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
-        public KioskSettingsBackend KioskSettingsBackend = KioskSettingsBackend.Instance;
-        public GameBackend GameBackend = GameBackend.Instance;
+
+        public StudentBackend StudentBackend = StudentBackend.Instance;
 
         // Set the Mock System as the default DataSource
         public DataSourceEnum DataSourceEnum = DataSourceEnum.Mock;
@@ -34,13 +37,16 @@ namespace _5051.Backend
         {
             // Avatar must be before Student, because Student needs the default avatar
             AvatarItemBackend = AvatarItemBackend.Instance;
-
-            StudentBackend = StudentBackend.Instance;
             FactoryInventoryBackend = FactoryInventoryBackend.Instance;
+
+            GameBackend = GameBackend.Instance;
+
+            KioskSettingsBackend = KioskSettingsBackend.Instance;
+
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
             SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
-            KioskSettingsBackend = KioskSettingsBackend.Instance;
-            GameBackend = GameBackend.Instance;
+
+            StudentBackend = StudentBackend.Instance;
         }
 
         public static DataSourceBackend Instance
@@ -67,13 +73,16 @@ namespace _5051.Backend
         /// </summary>
         public void Reset()
         {
-            GameBackend.Reset();
-            KioskSettingsBackend.Reset();
-            SchoolCalendarBackend.Reset();
-            SchoolDismissalSettingsBackend.Reset();
+            AvatarItemBackend.Reset();
             FactoryInventoryBackend.Reset();
 
-            AvatarItemBackend.Reset();
+            GameBackend.Reset();
+
+            KioskSettingsBackend.Reset();
+
+            SchoolCalendarBackend.Reset();
+            SchoolDismissalSettingsBackend.Reset();
+
             StudentBackend.Reset();
 
             if (!isTestingMode)
@@ -89,16 +98,16 @@ namespace _5051.Backend
         /// </summary>
         public void SetDataSource(DataSourceEnum dataSourceEnum)
         {
-            GameBackend.SetDataSource(dataSourceEnum);
-            KioskSettingsBackend.SetDataSource(dataSourceEnum);
-            SchoolDismissalSettingsBackend.SetDataSource(dataSourceEnum);
-            SchoolCalendarBackend.SetDataSource(dataSourceEnum);
-
-            FactoryInventoryBackend.SetDataSource(dataSourceEnum);
-
             // Avatar must be reset before Student, because Student needs the default avatar
 
             AvatarItemBackend.SetDataSource(dataSourceEnum);
+            FactoryInventoryBackend.SetDataSource(dataSourceEnum);
+
+            GameBackend.SetDataSource(dataSourceEnum);
+            KioskSettingsBackend.SetDataSource(dataSourceEnum);
+
+            SchoolDismissalSettingsBackend.SetDataSource(dataSourceEnum);
+            SchoolCalendarBackend.SetDataSource(dataSourceEnum);
 
             StudentBackend.SetDataSource(dataSourceEnum);
 
@@ -114,15 +123,17 @@ namespace _5051.Backend
         /// <param name="SetEnum"></param>
         public void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
         {
-            GameBackend.SetDataSourceDataSet(SetEnum);
-            KioskSettingsBackend.SetDataSourceDataSet(SetEnum);
-            SchoolDismissalSettingsBackend.SetDataSourceDataSet(SetEnum);
-            SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
-            FactoryInventoryBackend.SetDataSourceDataSet(SetEnum);
-
             // Avatar must be reset before Student, because Student needs the default avatar
 
             AvatarItemBackend.SetDataSourceDataSet(SetEnum);
+            FactoryInventoryBackend.SetDataSourceDataSet(SetEnum);
+
+            GameBackend.SetDataSourceDataSet(SetEnum);
+            KioskSettingsBackend.SetDataSourceDataSet(SetEnum);
+
+            SchoolDismissalSettingsBackend.SetDataSourceDataSet(SetEnum);
+            SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
+
             StudentBackend.SetDataSourceDataSet(SetEnum);
         }
 
