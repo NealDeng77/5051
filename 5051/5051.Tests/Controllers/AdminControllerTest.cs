@@ -431,232 +431,56 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+
+        #region LoginRegion
         [TestMethod]
-        public void Controller_Admin_Reset_DeFault_Should_Return_Index_Page()
+        public void Controller_Admin_Login_Default_Should_Pass()
         {
             // Arrange
-            AdminController controller = new AdminController();
+            var controller = new AdminController();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Reset();
+            var result = controller.Login() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion LoginRegion
+
+        #region LoginPostRegion
+
+        [TestMethod]
+        public void Controller_Admin_Login_Post_ModelIsInvalid_Should_Pass()
+        {
+            // Arrange
+            var controller = new AdminController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.Login(loginViewModel) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Is_Null_Should_Return_Index_Page()
+        public void Controller_Admin_Login_Post_loginResult_False_Should_Pass()
         {
             // Arrange
-            AdminController controller = new AdminController();
+            var controller = new AdminController();
+            LoginViewModel loginViewModel = new LoginViewModel();
 
             // Act
-            var result = (RedirectToRouteResult)controller.DataSourceSet(null);
+            var result = controller.Login(loginViewModel) as ViewResult;
 
             // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
-
-        [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Is_Empty_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSourceSet("");
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_DeFault_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "Default";
-            
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_Demo_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "Demo";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSourceSet_Id_Equals_UnitTest_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "UnitTest";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSourceSet(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Is_Null_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(null);
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Is_Empty_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource("");
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_Mock_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "Mock";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_SQL_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "SQL";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_Local_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "Local";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_ServerTest_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "ServerTest";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_ServerLive_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "ServerLive";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            //Check that the DataSource is set to SQL using avatar count, SQL DataSource not implemented yet, set to Mock
-        }
-
-        [TestMethod]
-        public void Controller_Admin_DataSource_Id_Equals_Unknown_Should_Return_Index_Page()
-        {
-            // Arrange
-            AdminController controller = new AdminController();
-            var myId = "unknown";
-
-            // Act
-            var result = (RedirectToRouteResult)controller.DataSource(myId);
-
-            //Reset the data source backend
-            DataSourceBackend.Instance.Reset();
-
-            // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-
-            //Check that the DataSource is set to unknown using avatar count, unknown DataSource not implemented yet, set to Mock
-        }
+        #endregion LoginPostRegion
 
     }
 }
