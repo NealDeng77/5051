@@ -71,10 +71,10 @@ namespace _5051.Backend
             #endregion Food
 
             #region Truck
-            DataList.Add(new FactoryInventoryModel("Wheels1.png", "Slick Wheel", "Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Wheels1.png", "Wheel", "Wheels", FactoryInventoryCategoryEnum.Wheels, 10, 10, false, true)); // Default
 
-            DataList.Add(new FactoryInventoryModel("Trailer1.png", "Slick", "Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false));
-            DataList.Add(new FactoryInventoryModel("Truck1.png", "Slick", "Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false));
+            DataList.Add(new FactoryInventoryModel("Trailer1.png", "Slick", "Trailer", FactoryInventoryCategoryEnum.Trailer, 10, 10, false, true)); // Default
+            DataList.Add(new FactoryInventoryModel("Truck1.png", "Slick", "Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false, true)); // Default
 
             DataList.Add(new FactoryInventoryModel("Trailer2.png", "Fire", "Trailer", FactoryInventoryCategoryEnum.Trailer, 15, 10, false));
             DataList.Add(new FactoryInventoryModel("Truck2.png", "Fire", "Truck", FactoryInventoryCategoryEnum.Truck, 15, 10, false));
@@ -84,9 +84,9 @@ namespace _5051.Backend
             #endregion Truck
 
             #region MenuTopperSign
-            DataList.Add(new FactoryInventoryModel("Menu0.png", "No Menu", "No Menu", FactoryInventoryCategoryEnum.Menu, 1, 1, false));
-            DataList.Add(new FactoryInventoryModel("Topper0.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1, false));
-            DataList.Add(new FactoryInventoryModel("Sign0.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1, false));
+            DataList.Add(new FactoryInventoryModel("Menu0.png", "No Menu", "No Menu", FactoryInventoryCategoryEnum.Menu, 1, 1, false, true)); // Default
+            DataList.Add(new FactoryInventoryModel("Topper0.png", "No Topper", "No Topper", FactoryInventoryCategoryEnum.Topper, 1, 1, false, true)); // Default
+            DataList.Add(new FactoryInventoryModel("Sign0.png", "No Sign", "No Sign", FactoryInventoryCategoryEnum.Sign, 1, 1, false, true)); // Default
 
             DataList.Add(new FactoryInventoryModel("Menu1.png", "Ice Cream", "Ice Cream Menu", FactoryInventoryCategoryEnum.Menu, 10, 10, false));
             DataList.Add(new FactoryInventoryModel("Topper1.png", "Ice Cream", "Ice Cream Topper", FactoryInventoryCategoryEnum.Topper, 10, 10, false));
@@ -100,6 +100,5 @@ namespace _5051.Backend
 
             return DataList;
         }
-
     }
 }
