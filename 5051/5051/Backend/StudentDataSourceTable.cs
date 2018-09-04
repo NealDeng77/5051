@@ -67,6 +67,8 @@ namespace _5051.Backend
             // Add to Storage
             var myResult = DataSourceBackendTable.Instance.Create<StudentModel>(tableName, partitionKey, data.Id, data);
 
+            DataList = DataList.OrderBy(x => x.Name).ToList();
+
             return data;
         }
 
@@ -108,6 +110,8 @@ namespace _5051.Backend
 
             // Update Storage
             var myResult = DataSourceBackendTable.Instance.Create<StudentModel>(tableName, partitionKey, data.Id, data);
+
+            DataList = DataList.OrderBy(x => x.Name).ToList();
 
             return data;
         }
@@ -199,7 +203,6 @@ namespace _5051.Backend
 
             // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by Name instead
             DataList = DataList.OrderBy(x => x.Name).ToList();
-
         }
 
         /// <summary>
