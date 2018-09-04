@@ -482,11 +482,31 @@ namespace _5051.Backend
             var data = StudentBackend.Instance.Index();
 
             // Get Student
-            for (int i = 0; i < data.Count; i++)
+            foreach(var student in data)
             {
-                // select the properly algorithm to get the top 3 students
-                // To do
+                var temp = new LeaderBoardModel();
+                temp.Id = student.Id;
+                temp.Name = student.Name;
+                temp.Profit = student.Truck.Income - student.Truck.Outcome;
+                board.Add(temp);
             }
+
+            // Sort
+            int max = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                max = i;
+                for (int j = i + 1; j < board.Count; j++)
+                {
+                    if (board[j].Profit > board[i].Profit)
+                    {
+                        var temp = board[i];
+                        board[i] = board[j];
+                        board[j] = temp;
+                    }
+                }
+            }
+
             return board;
         }
        
