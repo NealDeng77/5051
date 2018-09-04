@@ -42,46 +42,6 @@
 
         <br />
         <div class="FontSizeMedium text-left FontColorWhite">
-            Configure Source Data Set
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Default Data", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Default }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Demo Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.Demo }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Unit Test Data Set", "DataSourceSet", "Admin", new { id = _5051.Models.DataSourceDataSetEnum.UnitTest }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <br />
-        </div>
-
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
-            Configure Data Source
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Mock Database", "DataSource", "Admin", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            @*<div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("SQL Database", "DataSource", "Admin", new { id = _5051.Models.DataSourceEnum.SQL }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>*@
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Local Database", "DataSource", "Admin", new { id = _5051.Models.DataSourceEnum.Local }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Server Test Database", "DataSource", "Admin", new { id = _5051.Models.DataSourceEnum.ServerTest }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Server Live Database", "DataSource", "Admin", new { id = _5051.Models.DataSourceEnum.ServerLive }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <br />
-        </div>
-
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
             System Settings
         </div>
         <div class="row justify-content-around DispalyBoxWithMargin">
@@ -117,7 +77,7 @@
         </div>
         <div class="row justify-content-around DispalyBoxWithMargin">
             <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Login Portal", "Login", "Support", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Support", "Login", "Support", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
             <div class="col text-left DispalyBoxWithMargin">
             </div>
