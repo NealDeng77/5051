@@ -104,7 +104,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<T> LoadAll<T>(string tableName, string pk)
+        public List<T> LoadAll<T>(string tableName, string pk, bool convert=true)
         {
             var myReturnList = new List<T>();
 
@@ -124,10 +124,10 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            return LoadAllDirect<T>(tableName, pk);
+            return LoadAllDirect<T>(tableName, pk,convert);
         }
 
-        public List<T> LoadAllDirect<T>(string tableName, string pk)
+        public List<T> LoadAllDirect<T>(string tableName, string pk, bool convert=true)
         {
             var myReturnList = new List<T>();
 
@@ -165,7 +165,14 @@ namespace _5051.Backend
 
                 foreach (var item in result)
                 {
-                    myReturnList.Add(ConvertFromEntity<T>(item));
+                    if (convert)
+                    {
+                        myReturnList.Add(ConvertFromEntity<T>(item));
+                    }
+                    else
+                    {
+                        myReturnList.Add((T)((Object)item));
+                    }
                 }
             }
             catch (Exception ex) { }
