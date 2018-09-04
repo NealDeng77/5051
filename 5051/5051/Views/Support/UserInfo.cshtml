@@ -129,6 +129,12 @@
                             <br />
                             @Html.ActionLink("Delete", "DeleteUser", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "DeleteUserBtn" })
                             <span>Delete this user?</span>
+
+                            <br />
+                            <br />
+
+                            @Html.ActionLink("Change Password", "ChangeUserPassword", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "ChangeUserPasswordBtn" })
+                            <span>Change this users password?</span>
                         }
                     </div>
                 </div>
