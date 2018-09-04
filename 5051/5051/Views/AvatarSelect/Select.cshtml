@@ -140,10 +140,10 @@
                                                 }
 
 
-                                                <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover">
+                                                <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover" onclick="document.getElementById('@item.Id').click()">
 
                                                     <div class="row no-gutters justify-content-center">
-                                                        <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" @disabledOn />
+                                                        <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" id="@item.Id" @disabledOn />
                                                     </div>
 
                                                     <div class="row no-gutters justify-content-center">
