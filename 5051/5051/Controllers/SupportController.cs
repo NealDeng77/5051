@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
-using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using _5051.Controllers;
 using Microsoft.AspNet.Identity.Owin;
-using System.Security.Principal;
+using System;
 
 namespace _5051.Controllers
 {
@@ -130,118 +121,91 @@ namespace _5051.Controllers
 
             var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
-            return View(myUserInfo);
+            var data = new ApplicationUserViewModel(myUserInfo);
 
+            return View(data);
         }
 
         //GET support/togglestudent/userID
-        public ActionResult ToggleStudent(string id = null)
+        public ActionResult ToggleUser(string id = null, string item = null)
         {
             //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             //{
             //    return RedirectToAction("Index", "Home");
             //}
 
-            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
-            return View(myUserInfo);
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            if (myUserInfo == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var RoleEnum = (UserRoleEnum)Enum.Parse(typeof(UserRoleEnum), item, true);
+
+            var myReturn = new ApplicationUserInputModel(myUserInfo);
+            myReturn.Id = myUserInfo.Id;
+            myReturn.Role = RoleEnum;
+            myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
+
+            return View(myReturn);
         }
 
         //toggles whether or not given user is a student
         [HttpPost]
-        public ActionResult ToggleStudent([Bind(Include =
+        public ActionResult ToggleUser([Bind(Include =
                                                 "Id,"+
-                                                "")] ApplicationUser studentUser)
+                                                "State,"+
+                                                "Role,"+
+                                                "")] ApplicationUserInputModel data)
         {
             //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
             //{
             //    return RedirectToAction("Index", "Home");
             //}
 
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(studentUser.Id, "StudentUser", "True"))
+            if (!ModelState.IsValid)
             {
-                IdentityDataSourceTable.Instance.RemoveClaimFromUser(studentUser.Id, "StudentUser");
+                // Send back for edit
+                return View(data);
+            }
+
+            if (data == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (data.Role == UserRoleEnum.Unknown)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(data.Id, data.Role.ToString(), "True"))
+            {
+                IdentityDataSourceTable.Instance.RemoveClaimFromUser(data.Id, data.Role.ToString());
             }
             else
             {
-                IdentityDataSourceTable.Instance.AddClaimToUser(studentUser.Id, "StudentUser", "True");
+                IdentityDataSourceTable.Instance.AddClaimToUser(data.Id, data.Role.ToString(), "True");
             }
 
             return RedirectToAction("UserList", "Support");
 
-        }
-
-        //GET support/toggleTeacher/userID
-        public ActionResult ToggleTeacher(string id = null)
-        {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
-
-            return View(myUserInfo);
-
-        }
-
-        //toggles whether or not user is a teacher
-        [HttpPost]
-        public ActionResult ToggleTeacher([Bind(Include =
-                                                "Id,"+
-                                                "")] ApplicationUser teacherUser)
-        {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(teacherUser.Id, "TeacherUser", "True"))
-            {
-                IdentityDataSourceTable.Instance.RemoveClaimFromUser(teacherUser.Id, "TeacherUser");
-            }
-            else
-            {
-                IdentityDataSourceTable.Instance.AddClaimToUser(teacherUser.Id, "TeacherUser", "True");
-            }
-
-            return RedirectToAction("UserList", "Support");
-        }
-
-        //GET support/ToggleSupport/userID
-        public ActionResult ToggleSupport(string id = null)
-        {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
-
-            return View(myUserInfo);
-        }
-
-        //toggles whether or not user is a support user
-        [HttpPost]
-        public ActionResult ToggleSupport([Bind(Include =
-                                                "Id,"+
-                                                "")] ApplicationUser supportUser)
-        {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(supportUser.Id, "SupportUser", "True"))
-            {
-                IdentityDataSourceTable.Instance.RemoveClaimFromUser(supportUser.Id, "SupportUser");
-            }
-            else
-            {
-                IdentityDataSourceTable.Instance.AddClaimToUser(supportUser.Id, "SupportUser", "True");
-            }
-
-            return RedirectToAction("UserList", "Support");
         }
 
         //GET

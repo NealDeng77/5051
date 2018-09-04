@@ -263,6 +263,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminReportIndexViewModel.cs" />
+    <Compile Include="Models\ApplicationUserInputModel.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\AttendanceReportViewModel.cs" />
     <Compile Include="Models\AttendanceDetailsViewModel.cs" />
@@ -272,11 +273,13 @@
     <Compile Include="Models\AvatarItemShopViewModel.cs" />
     <Compile Include="Models\AvatarSelectShopViewModel.cs" />
     <Compile Include="Models\DataSourceBackendTableEntity.cs" />
+    <Compile Include="Models\Enums\UserRoleEnum.cs" />
     <Compile Include="Models\Enums\AvatarItemCategoryEnum.cs" />
     <Compile Include="Models\AvatarItemViewModel.cs" />
     <Compile Include="Models\BusinessReportViewModel.cs" />
     <Compile Include="Models\Enums\EnumHelper.cs" />
     <Compile Include="Models\LeaderBoardModel.cs" />
+    <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />
@@ -727,9 +730,6 @@
     <Content Include="Views\Support\Index.cshtml" />
     <Content Include="Views\Support\UserList.cshtml" />
     <Content Include="Views\Support\UserInfo.cshtml" />
-    <Content Include="Views\Support\ToggleStudent.cshtml" />
-    <Content Include="Views\Support\ToggleTeacher.cshtml" />
-    <Content Include="Views\Support\ToggleSupport.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
     <Content Include="Views\Attendance\Read.cshtml" />
     <Content Include="Views\Attendance\Update.cshtml" />
@@ -753,6 +753,7 @@
     <Content Include="Views\Portal\SemesterReport.cshtml" />
     <Content Include="Views\Portal\QuarterReport.cshtml" />
     <Content Include="Views\Portal\OverallReport.cshtml" />
+    <Content Include="Views\Support\ToggleUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

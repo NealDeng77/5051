@@ -1,57 +1,150 @@
-﻿@using _5051.Backend
-@model _5051.Models.ApplicationUser
+﻿@using _5051.Backend;
+@using _5051.Models.Enums;
+@model _5051.Models.ApplicationUserViewModel
 @{
-    ViewBag.Title = "UserInfo";
+    ViewBag.Title = "User Info";
 }
+
 <br />
-<h2>UserInfo</h2>
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <br />
+        <div class="FontSizeLarge text-center">
+            <span class="FontSizeLarger FontBold FontColorWhite">User Information</span>
+        </div>
+        <br />
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<div class="row">
+    <br />
+    <br />
+</div>
 
 @{
     if (Model == null)
     {
-        <p>No valid user given</p>
+        <div class="row justify-content-center">
+
+            <div class="col-1 "></div>
+            <div class="col lightTransparentBox">
+                <br />
+                <div class="FontSizeLarge text-center FontColorWhite">
+                    No Information
+                </div>
+                <br />
+            </div>
+            <div class="col-1"></div>
+        </div>
     }
+
     else
     {
-        <h4>@Model.UserName</h4>
+        <div class="row justify-content-center">
+            <div class="col-1 "></div>
 
-        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "StudentUser", "True"))
-        {
-            <h5>User is a Student</h5>
-        }
-        else
-        {
-            <h5>User is not a Student</h5>
-        }
-        @Html.ActionLink("Toggle Student", "ToggleStudent", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary" , id = "StudentToggleBtn" });
-        <br />
-        <br />
+            <div class="col lightTransparentBox">
+                <div class="row justify-content-start">
 
-        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "TeacherUser", "True"))
-        {
-            <h5>User is a Teacher</h5>
-        }
-        else
-        {
-            <h5>User is not a Teacher</h5>
-        }
-        @Html.ActionLink("Toggle Teacher", "ToggleTeacher", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary", id = "TeacherToggleBtn" });
-        <br />
-        <br />
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-2 lightTransparentBox DispalyBoxWithMargin">
+                                <div class="row justify-content-center">
+                                    <div class="AvatarBoxNormal align-self-sm-center" id="AvatarBox">
+                                        <div class="AvatarCircle"></div>
+                                        <img class="AvatarItemBase AvatarHairBack" src="@Model.Student.AvatarComposite.AvatarHairBackUri" />
+                                        <img class="AvatarItemBase AvatarHead" src="@Model.Student.AvatarComposite.AvatarHeadUri" />
+                                        <img class="AvatarItemBase AvatarShirt" src="@Model.Student.AvatarComposite.AvatarShirtShortUri" />
+                                        <img class="AvatarItemBase AvatarExpression" src="@Model.Student.AvatarComposite.AvatarExpressionUri" />
+                                        <img class="AvatarItemBase AvatarCheeks" src="@Model.Student.AvatarComposite.AvatarCheeksUri" />
+                                        <img class="AvatarItemBase AvatarHairFront" src="@Model.Student.AvatarComposite.AvatarHairFrontUri" />
+                                        <img class="AvatarItemBase AvatarAccessory" src="@Model.Student.AvatarComposite.AvatarAccessoryUri" />
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around">
+                                    <span class="col FontSizeLarge text-center">
+                                        @Model.Student.Name<br />
+                                        <span class="FontSizeSmall">
+                                            @{
+                                                foreach (var item in Model.UserRole)
+                                                {
+                                                    <span>@item.GetDisplayName()&nbsp;&nbsp;</span>
+                                                }
+                                            }
+                                        </span>
+                                    </span>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(Model.Id, "SupportUser", "True"))
-        {
-            <h5>User is a Support User</h5>
-        }
-        else
-        {
-            <h5>User is not a Support User</h5>
-        }
-        @Html.ActionLink("Toggle Support User", "ToggleSupport", "Support", routeValues: new { id = Model.Id }, htmlAttributes: new {@class="btn btn-primary", id = "SupportToggleBtn" });
-        <br />
-        <br />
+                <div class="row">
+                    <br />
+                    <br />
+                </div>
 
-        <h5>Delete this user?</h5>
-        @Html.ActionLink("Delete the user", "DeleteUser", "Support", routeValues: new { id = Model.Id}, htmlAttributes: new { @class="btn btn-primary", id = "DeleteUserBtn"})
+                <div class="row justify-content-center FontSizeMedium">
+                    <div class="col">
+                        @{
+                            var displayString = string.Empty;
+                            _5051.Models.UserRoleEnum currentRole;
+
+                            displayString = "User is ";
+                            currentRole = _5051.Models.UserRoleEnum.StudentUser;
+                            if (!Model.UserRole.Contains(currentRole))
+                            {
+                                displayString += "not ";
+                            }
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "StudentToggleBtn" });
+                            <span>@displayString a @currentRole.GetDisplayName()</span>
+
+                            <br />
+                            <br />
+                            displayString = "User is ";
+                            currentRole = _5051.Models.UserRoleEnum.TeacherUser;
+                            if (!Model.UserRole.Contains(currentRole))
+                            {
+                                displayString += "not ";
+                            }
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "TeacherToggleBtn" });
+                            <span>@displayString a @currentRole.GetDisplayName()</span>
+
+                            <br />
+                            <br />
+                            displayString = "User is ";
+                            currentRole = _5051.Models.UserRoleEnum.SupportUser;
+                            if (!Model.UserRole.Contains(currentRole))
+                            {
+                                displayString += "not ";
+                            }
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "SupportToggleBtn" });
+                            <span>@displayString a @currentRole.GetDisplayName()</span>
+
+                            <br />
+                            <br />
+                            @Html.ActionLink("Delete", "DeleteUser", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "DeleteUserBtn" })
+                            <span>Delete this user?</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <br />
+                    <br />
+                </div>
+
+            </div>
+            <div class="col-1 "></div>
+        </div>
+
+        <div class="row">
+            <br />
+            <br />
+        </div>
     }
 }
