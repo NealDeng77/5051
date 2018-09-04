@@ -85,7 +85,8 @@ namespace _5051.Controllers
             if (myStudent == null)
             {
                 // Send to Error Page
-                return RedirectToAction("Error", "Home");
+                //return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
@@ -257,6 +258,14 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
+
+            ////if the student name already exists in db, if does, return for edits
+            //var idFindResult = IdentityDataSourceTable.Instance.FindUserByUserName(data.Name);
+            //if(idFindResult != null)
+            //{
+            //    ModelState.AddModelError("", "User name already taken");
+            //    return View(data);
+            //}
 
             // Set the Avatar ID on the Student and update in data store
             myStudent.Name = data.Name;
