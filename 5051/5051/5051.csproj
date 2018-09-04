@@ -327,6 +327,27 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\avatar\Hair2_blondegreen.png" />
+    <Content Include="Content\avatar\Hair2_kinky_BlackBlue.png" />
+    <Content Include="Content\avatar\Hair2_kinky_BlackGreen.png" />
+    <Content Include="Content\avatar\Hair2_kinky_BlackViolet.png" />
+    <Content Include="Content\avatar\Hair2_kinky_BlondeOmbre.png" />
+    <Content Include="Content\avatar\Hair2_kinky_BrownOmbre.png" />
+    <Content Include="Content\avatar\Hair2_long_blackblue.png" />
+    <Content Include="Content\avatar\Hair2_long_blackgreen.png" />
+    <Content Include="Content\avatar\Hair2_long_blackviolet.png" />
+    <Content Include="Content\avatar\Hair2_long_BlondeOmbre.png" />
+    <Content Include="Content\avatar\Hair2_long_blondepink.png" />
+    <Content Include="Content\avatar\Hair2_long_blondeviolet.png" />
+    <Content Include="Content\avatar\Hair2_long_BrownOmbre.png" />
+    <Content Include="Content\avatar\Hair2_short_BlackBlue.png" />
+    <Content Include="Content\avatar\Hair2_short_BlackGreen.png" />
+    <Content Include="Content\avatar\Hair2_short_BlackViolet.png" />
+    <Content Include="Content\avatar\Hair2_short_BlondeGreen.png" />
+    <Content Include="Content\avatar\Hair2_short_BlondeOmbre.png" />
+    <Content Include="Content\avatar\Hair2_short_BlondePink.png" />
+    <Content Include="Content\avatar\Hair2_short_BlondeViolet.png" />
+    <Content Include="Content\avatar\Hair2_short_BrownOmbre.png" />
     <Content Include="Content\avatar\Head3.png" />
     <Content Include="Content\avatar\placeholder.png" />
     <Content Include="Content\avatar\Shirt_black.png" />
