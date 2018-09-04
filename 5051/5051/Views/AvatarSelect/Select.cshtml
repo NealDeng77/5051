@@ -25,6 +25,10 @@
     <div class="col-1"></div>
 </div>
 
+<div class="row">
+    <br />
+    <br />
+</div>
 @{
     if (Model == null || Model.Student == null || Model.AvatarItemCategoryList == null || !Model.AvatarItemCategoryList.Any())
     {
@@ -43,11 +47,10 @@
     }
     else
     {
-
         <div class="row justify-content-around">
             <div class="col-1 "></div>
 
-            <div class="col">
+            <div class="col lightTransparentBox">
 
                 <div class="FontSizeMedium">
                     <br />
@@ -140,33 +143,33 @@
                                                 }
 
 
-                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover" onclick="document.getElementById('@item.Id').click()">
-                                                <br />
+                                                <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover" onclick="document.getElementById('@item.Id').click()">
+                                                    <br />
 
-                                                <div class="row no-gutters justify-content-center">
-                                                    <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1 darkBox" id="@item.Id" @disabledOn />
-                                                </div>
+                                                    <div class="row no-gutters justify-content-center">
+                                                        <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1 darkBox" id="@item.Id" @disabledOn />
+                                                    </div>
 
-                                                <div class="row no-gutters justify-content-center">
-                                                    <div class="text-center FontSizeSmall">
-                                                        <br />
-                                                        @item.Name<br />
-                                                        @item.Description<br />
-                                                        <br />
-                                                        Tokens: @item.Tokens<br />
-                                                        @{
-                                                            if (@item.IsLimitSupply)
-                                                            {
-                                                                <span>Quantity: @item.Quantities</span>
+                                                    <div class="row no-gutters justify-content-center">
+                                                        <div class="text-center FontSizeSmall">
+                                                            <br />
+                                                            @item.Name<br />
+                                                            @item.Description<br />
+                                                            <br />
+                                                            Tokens: @item.Tokens<br />
+                                                            @{
+                                                                if (@item.IsLimitSupply)
+                                                                {
+                                                                    <span>Quantity: @item.Quantities</span>
+                                                                }
                                                             }
-                                                        }
-                                                        <br />
-                                                        @DisplayText
-                                                        <br />
-                                                        <br />
+                                                            <br />
+                                                            @DisplayText
+                                                            <br />
+                                                            <br />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             }
                                         }
                                     }
@@ -176,6 +179,8 @@
                     }
                 </div>
             </div>
+
+            <div class="col-1 "></div>
         </div>
     }
 }
