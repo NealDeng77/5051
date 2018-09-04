@@ -173,6 +173,17 @@ namespace _5051.Models
             Initialize();
         }
 
+
+        /// <summary>
+        /// Constructor for Student.  make a copy of one passed in.
+        /// </summary>
+        /// <param name="name">The Name to call the student</param>
+        public StudentModel(StudentModel data)
+        {
+            Initialize();
+            Update(data);
+        }
+
         /// <summary>
         /// Constructor for Student.  Call this when making a new student
         /// </summary>
