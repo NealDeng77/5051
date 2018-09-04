@@ -170,10 +170,10 @@ namespace _5051.Backend
             DataList.Add(new AvatarItemModel("Hair2_long_blackblue.png", "Black Blue", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair2_long_blackgreen.png", "Black Green", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair2_long_blackviolet.png", "Black Violet", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondeombre.png", "Blone OmbreBlue", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondepink.png", "Blone Pink", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondeviolet.png", "Blone Violet", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondegreen.png", "Blone Green", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondeombre.png", "Blonde Ombre", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondepink.png", "Blonde Pink", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondeviolet.png", "Blonde Violet", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondegreen.png", "Blonde Green", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair2_long_brownombre.png", "Brown Ombre", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
             #endregion BackHair
 
