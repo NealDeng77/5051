@@ -737,6 +737,22 @@ namespace _5051.Tests.Controllers
 
         #endregion DataSourceRegion
 
+        #region ChangeUserPassword
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Id_Null_Should_Return_UserList_Page()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            string expect = null;
+
+            //act
+            var result = controller.ChangeUserPassword(expect) as ActionResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
+
         [TestMethod]
         public void Controller_Support_Reset_DeFault_Should_Return_Index_Page()
         {

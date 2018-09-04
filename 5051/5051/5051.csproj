@@ -754,6 +754,7 @@
     <Content Include="Views\Portal\QuarterReport.cshtml" />
     <Content Include="Views\Portal\OverallReport.cshtml" />
     <Content Include="Views\Support\ToggleUser.cshtml" />
+    <Content Include="Views\Support\ChangeUserPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -458,5 +458,65 @@ namespace _5051.Controllers
 
             return RedirectToAction("Index", "Support");
         }
+
+        //GET
+        public ActionResult ChangeUserPassword(string id = null)
+        {
+            var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
+            if (findResult == null)
+            {
+                return RedirectToAction("UserList", "Support");
+            }
+
+            var passModel = new ChangePasswordViewModel();
+            passModel.UserID = findResult.Id;
+
+
+            return View(passModel);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeUserPassword([Bind(Include =
+                                             "UserID," +
+                                             "NewPassword," +
+                                             "")] ChangePasswordViewModel model)
+        {
+            var backend = IdentityDataSourceTable.Instance;
+            var findResult = backend.FindUserByID(model.UserID);
+            if (findResult == null)
+            {
+                return View(model);
+            }
+
+            if (backend.UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+            {
+                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Support);
+                if (!changePassResult)
+                {
+                    ModelState.AddModelError("", "Invalid Change Password Attempt.");
+                    return View(model);
+                }
+            }
+            else if (backend.UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+            {
+                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+                if (!changePassResult)
+                {
+                    ModelState.AddModelError("", "Invalid Change Password Attempt.");
+                    return View(model);
+                }
+            }
+            else
+            {
+                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Student);
+                if (!changePassResult)
+                {
+                    ModelState.AddModelError("", "Invalid Change Password Attempt.");
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("UserList", "Support");
+        }
     }
 }

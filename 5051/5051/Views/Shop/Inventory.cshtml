@@ -95,3 +95,30 @@
         </div>
     }
 }
+
+<div class="row justify-content-start">
+
+    <div class="col-1 "></div>
+
+    <div class="col text-left">
+        <br />
+        <br />
+
+        <div class="row justify-content-start">
+
+            <div class="col-auto text-center">
+                @Html.ActionLink("Back to Store", "Index", new { id = Model.Student.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+
+            <div class="col-auto text-center">
+                @Html.ActionLink("Go to Factory", "Factory", new { id = Model.Student.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+    </div>
+
+    <div class="col-1 "></div>
+</div>
