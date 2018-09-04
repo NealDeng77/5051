@@ -256,12 +256,24 @@ function DrawEmptyTruckItems() {
 function ShowTransactionList() {
     var el = $('#TransactionList');
     el.empty();
-    // Add the Latest Transactions to display
-    for (var item of ShopData.TransactionList) {
+    var max = ShopData.TransactionList.length - 10;
+    if (max < 0) {
+        max = 0;
+    }
+    for (var i = ShopData.TransactionList.length - 1; i > max; i--) {
+        var item = ShopData.TransactionList[i];
         el.append(" &nbsp; <span>" + item.Name + "</span> &nbsp;");
         if (item.Uri != null) {
             el.append("<img class=\"ProductBoughtBar\" id = \"ProductBought\" src = \"/Content/shop/" + item.Uri + "\" alt = \"ProductBought\" /> &nbsp;");
         }
     }
+    // Add the Latest Transactions to display
+    //for (var item of ShopData.TransactionList)
+    //{
+    //    el.append(" &nbsp; <span>" + item.Name + "</span> &nbsp;");
+    //    if (item.Uri != null) {
+    //        el.append("<img class=\"ProductBoughtBar\" id = \"ProductBought\" src = \"/Content/shop/" + item.Uri + "\" alt = \"ProductBought\" /> &nbsp;");
+    //    }
+    //}
 }
 //# sourceMappingURL=game.js.map

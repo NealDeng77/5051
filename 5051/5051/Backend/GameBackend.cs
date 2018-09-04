@@ -240,22 +240,24 @@ namespace _5051.Backend
             result.IterationNumber = GetDefault().IterationNumber;
             result.CustomersTotal = StudentData.Truck.CustomersTotal;
 
+            result.TransactionList = StudentData.Truck.TransactionList;
+
             // display recent 5 messages
-            if (StudentData.Truck.TransactionList.Count <= 5)
-            {
-                result.TransactionList = StudentData.Truck.TransactionList;
-            } else
-            {
-                var RecentFiveMessagesList = new List<TransactionModel>();
-                for (int i = StudentData.Truck.TransactionList.Count - 5; i < StudentData.Truck.TransactionList.Count; i++)
-                {
-                    RecentFiveMessagesList.Add(StudentData.Truck.TransactionList[i]);
-                }
-                result.TransactionList = RecentFiveMessagesList;
-            }           
-           
+            //if (StudentData.Truck.TransactionList.Count <= 5)
+            //{
+            //    result.TransactionList = StudentData.Truck.TransactionList;
+            //} else
+            //{
+            //    var RecentFiveMessagesList = new List<TransactionModel>();
+            //    for (int i = StudentData.Truck.TransactionList.Count - 5; i < StudentData.Truck.TransactionList.Count; i++)
+            //    {
+            //        RecentFiveMessagesList.Add(StudentData.Truck.TransactionList[i]);
+            //    }
+            //    result.TransactionList = RecentFiveMessagesList;
+            //}           
+
             // Clear the Student TransactionList
-            StudentData.Truck.TransactionList = new List<TransactionModel>();
+            //StudentData.Truck.TransactionList = new List<TransactionModel>();
             DataSourceBackend.Instance.StudentBackend.Update(StudentData);
 
             return result;
