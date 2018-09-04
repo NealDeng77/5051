@@ -271,6 +271,34 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
+        public void Backend_IdentityDataSourceTable_Valid_User_Teacher_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectUsername = "teacher";
+
+            //act
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Valid_User_Student_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectUsername = StudentBackend.Instance.GetDefault().Name;
+
+            //act
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Student);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_IdentityDataSourceTable_Null_User_Should_Fail()
         {
             //arrange
@@ -284,7 +312,7 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
-        public void Backend_IdentityDataSourceTable_Invalid_Password_Should_Fail()
+        public void Backend_IdentityDataSourceTable_Invalid_Password_Support_Should_Fail()
         {
             //arrange
             var backend = IdentityDataSourceTable.Instance;
@@ -293,6 +321,36 @@ namespace _5051.UnitTests.Backend
 
             //act
             var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Support);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Invalid_Password_Teacher_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectUsername = "teacher";
+            var badPassword = "bogus";
+
+            //act
+            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Invalid_Password_Student_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectUsername = StudentBackend.Instance.GetDefault().Name;
+            var badPassword = "bogus";
+
+            //act
+            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Student);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -312,15 +370,43 @@ namespace _5051.UnitTests.Backend
             Assert.IsFalse(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Invalid_Teacher_Role_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectUsername = "Mike";
+
+            //act
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Invalid_Username_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var badName = "bogus";
+
+            //act
+            var result = backend.LogUserIn(badName, badName, IdentityDataSourceTable.IdentityRole.Student);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
         //[TestMethod]
-        //public void Backend_IdentityDataSourceTable_Invalid_Teacher_Role_Should_Fail()
+        //public void Backend_IdentityDataSourceTable_Invalid_Student_Should_Fail()
         //{
         //    //arrange
         //    var backend = IdentityDataSourceTable.Instance;
-        //    var expectUsername = "testStudent";
+        //    var expectName = StudentBackend.Instance.GetDefault().Name;
 
         //    //act
-        //    var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher);
+        //    var result = backend.LogUserIn(expectName, expectName, IdentityDataSourceTable.IdentityRole.Student);
 
         //    //assert
         //    Assert.IsFalse(result, TestContext.TestName);
