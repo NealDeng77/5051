@@ -62,6 +62,24 @@ namespace _5051.UnitTests.Models
             Assert.AreEqual(expect, result.Name, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Models_StudentModel_Instantiate_Valid_StudentModel_Data_Should_Pass()
+        {
+            // Arrange
+            var expect = "test";
+            var data = new StudentModel();
+            data.Name = expect;
+
+            // Act
+            var result = new StudentModel(data);
+            data.Name = "bogus";
+
+            // Reset
+
+            // Assert
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
+        }
+
         #endregion Instantiate
 
         #region Update
