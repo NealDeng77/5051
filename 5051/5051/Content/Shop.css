@@ -431,6 +431,10 @@
     position: relative;
 }
 
+.Transactions {
+    white-space: nowrap;
+}
+
 .FeedBar {
     position: absolute;
     top: 110%;
