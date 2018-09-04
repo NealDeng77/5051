@@ -501,7 +501,7 @@ namespace _5051.Controllers
                 // Send back for Edit
                 return RedirectToAction("Index", "Shop", new { id});
             }
-            
+
             return View(data);
         }
 
@@ -510,8 +510,11 @@ namespace _5051.Controllers
         /// </summary>
         /// <param name="id">Student Id</param>
         /// <returns>Shop of the student passed in</returns>
-        public ActionResult VisitShop(string id = null)
+        public ActionResult VisitShop(string id = null, string item = null)
         {
+            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
+            ViewBag.StudentId = id;
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -521,6 +524,12 @@ namespace _5051.Controllers
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
+            }
+
+            ViewBag.OtherStudent = Backend.StudentBackend.Instance.Read(item); ;
+            if (ViewBag.OtherStudent == null)
+            {
+                ViewBag.OtherStudent = Backend.StudentBackend.Instance.Read(id); ;
             }
 
             //Todo, return the shop information for the student.
