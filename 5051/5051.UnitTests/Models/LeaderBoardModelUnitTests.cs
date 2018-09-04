@@ -43,16 +43,16 @@ namespace _5051.UnitTests.Models
 
         #region Update
         [TestMethod]
-        public void Models_TransactionModel_Update_With_Valid_Data_Should_Pass()
+        public void Models_LeaderBoardModel_Update_With_Valid_Data_Should_Pass()
         {
             // Arrange
-            var expectUri = "uri";
+            var expectProfit = 0;
             var expectName = "Name";
 
-            var data = new TransactionModel();
+            var data = new LeaderBoardModel();
 
-            var test = new TransactionModel();
-            test.Uri = expectUri;
+            var test = new LeaderBoardModel();
+            test.Profit = expectProfit;
             test.Name = expectName;
 
             // Act
@@ -60,7 +60,7 @@ namespace _5051.UnitTests.Models
             var result = data;
 
             // Assert
-            Assert.AreEqual(expectUri, result.Uri, "Uri " + TestContext.TestName);
+            Assert.AreEqual(expectProfit, result.Profit, "Profit " + TestContext.TestName);
             Assert.AreEqual(expectName, result.Name, "Name " + TestContext.TestName);
         }
 
