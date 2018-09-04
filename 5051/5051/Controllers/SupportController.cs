@@ -70,9 +70,53 @@ namespace _5051.Controllers
             //    return RedirectToAction("Index", "Home");
             //}
 
-            var userList = IdentityDataSourceTable.Instance.ListAllUsers();
+            // Get the List of Users, and convert them to Student Display Views so they get an avatar.  
+            // Because the ID may not be a student ID, use the Identity ID
+            // Because the Name may be null, use the Identity Name
 
-            return View(userList);
+            var myReturn = new UserListViewModel();
+
+            var data = IdentityDataSourceTable.Instance.ListAllStudentUsers();
+            foreach (var item in data)
+            {
+                var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
+                var temp = new StudentDisplayViewModel(user);
+                temp.Name = item.UserName;
+                temp.Id = item.Id;
+                myReturn.StudentList.Add(temp);
+            }
+
+            data = IdentityDataSourceTable.Instance.ListAllTeacherUsers();
+            foreach (var item in data)
+            {
+                var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
+                var temp = new StudentDisplayViewModel(user);
+                temp.Name = item.UserName;
+                temp.Id = item.Id;
+                myReturn.TeacherList.Add(temp);
+            }
+
+            data = IdentityDataSourceTable.Instance.ListAllSupportUsers();
+            foreach (var item in data)
+            {
+                var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
+                var temp = new StudentDisplayViewModel(user);
+                temp.Name = item.UserName;
+                temp.Id = item.Id;
+                myReturn.SupportList.Add(temp);
+            }
+
+            data = IdentityDataSourceTable.Instance.ListAllUsers();
+            foreach (var item in data)
+            {
+                var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
+                var temp = new StudentDisplayViewModel(user);
+                temp.Name = item.UserName;
+                temp.Id = item.Id;
+                myReturn.UserList.Add(temp);
+            }
+
+            return View(myReturn);
         }
 
 
@@ -87,7 +131,7 @@ namespace _5051.Controllers
             var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
 
             return View(myUserInfo);
-            
+
         }
 
         //GET support/togglestudent/userID
@@ -211,7 +255,7 @@ namespace _5051.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel user)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(user);
             }
@@ -235,7 +279,7 @@ namespace _5051.Controllers
         [HttpPost]
         public ActionResult CreateStudent(LoginViewModel user)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(user);
             }
@@ -247,7 +291,7 @@ namespace _5051.Controllers
 
             var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
 
-            if(createUserResult == null)
+            if (createUserResult == null)
             {
                 ModelState.AddModelError("", "Invalid create user attempt");
             }
@@ -271,7 +315,7 @@ namespace _5051.Controllers
 
             var createResult = IdentityDataSourceTable.Instance.CreateNewTeacher(user.Email, user.Password, user.Email);
 
-            if(createResult == null)
+            if (createResult == null)
             {
                 ModelState.AddModelError("", "Invalid Create Attempt");
             }
@@ -307,7 +351,7 @@ namespace _5051.Controllers
         public ActionResult DeleteUser(string id = null)
         {
             var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
-            if(findResult == null)
+            if (findResult == null)
             {
                 return RedirectToAction("UserList", "Support");
             }
@@ -327,7 +371,7 @@ namespace _5051.Controllers
             }
 
             var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult.Id);
-            if(!deleteResult)
+            if (!deleteResult)
             {
                 ModelState.AddModelError("", "Invalid Delete Attempt.");
                 return View(user);
