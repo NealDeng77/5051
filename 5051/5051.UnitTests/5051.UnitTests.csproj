@@ -234,6 +234,7 @@
     <Compile Include="Models\BaseReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceDetailsViewModelUnitTests.cs" />
     <Compile Include="Models\TransactionModelUnitTests.cs" />
+    <Compile Include="Models\UserListViewModelUnitTests.cs" />
     <Compile Include="Models\VerifyCodeViewModelUnitTests.cs" />
     <Compile Include="Models\VerifyPhoneNumberViewModelUnitTests.cs" />
     <Compile Include="Models\WeeklyReportViewModelUnitTests.cs" />
