@@ -107,6 +107,7 @@ namespace _5051.Models
             Quantities = data.Quantities;
             Category = data.Category;
             IsLimitSupply = data.IsLimitSupply;
+            IsDefault = data.IsDefault;
         }
     }
 }

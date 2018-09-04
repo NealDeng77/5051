@@ -46,6 +46,9 @@ namespace _5051.Models
         
         public bool IsLimitSupply { get; set; }
 
+        // Track if the item is a default item
+        public bool IsDefault { get; set; }
+
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -82,7 +85,7 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">FactoryInventory Name</param>
         /// <param name="description">FactoryInventory Description</param>
-        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities, bool isLimitSupply)
+        public FactoryInventoryModel(string uri, string name, string description, FactoryInventoryCategoryEnum category, int tokens, int quantities, bool isLimitSupply, bool isDefault = false)
         {
             Initialize();
          
@@ -93,6 +96,7 @@ namespace _5051.Models
             Tokens = tokens;
             Quantities = quantities;
             IsLimitSupply = isLimitSupply;
+            IsDefault = IsDefault;
         }
 
         /// <summary>
@@ -114,6 +118,7 @@ namespace _5051.Models
             Quantities = data.Quantities;
             Category = data.Category;
             IsLimitSupply = data.IsLimitSupply;
+            IsDefault = data.IsDefault;
         }
     }
 }
