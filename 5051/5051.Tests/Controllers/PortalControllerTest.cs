@@ -127,7 +127,7 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
         }
 
         [TestMethod]
