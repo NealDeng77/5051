@@ -278,6 +278,27 @@ namespace _5051.UnitTests.Backend
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefault_IsDefault_False_Valid_Should_Pass()
+        {
+            //arrange
+            var test = FactoryInventoryBackend.Instance;
+
+            // Remove Default Accessory
+            var data = test.GetDefault(FactoryInventoryCategoryEnum.Truck);
+            FactoryInventoryBackend.Instance.Delete(data.Id);
+
+            // Add it back, but don't set the default
+            FactoryInventoryBackend.Instance.Create(new FactoryInventoryModel("Truck1.png", "Slick", "Truck", FactoryInventoryCategoryEnum.Truck, 10, 10, false, false)); // Default
+
+
+            //act
+            var result = test.GetDefault(FactoryInventoryCategoryEnum.Truck);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
         #endregion GetDefault
 
         #region GetShopTruckViewModel

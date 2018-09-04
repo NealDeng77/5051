@@ -278,6 +278,39 @@ namespace _5051.UnitTests.Backend
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefault_IsDefault_Valid_Should_Pass()
+        {
+            //arrange
+            var test = AvatarItemBackend.Instance;
+
+            //act
+            var result = test.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_AvatarItemBackend_GetDefault_IsDefault_False_Valid_Should_Pass()
+        {
+            //arrange
+            var test = AvatarItemBackend.Instance;
+
+            // Remove Default Accessory
+            var data = test.GetDefault(AvatarItemCategoryEnum.Accessory);
+            AvatarItemBackend.Instance.Delete(data.Id);
+
+            // Add it back, but don't set the default
+            AvatarItemBackend.Instance.Create(new AvatarItemModel("Accessory0.png", "None", "None", AvatarItemCategoryEnum.Accessory, 1, 10, false, false));  
+
+            //act
+            var result = test.GetDefault(AvatarItemCategoryEnum.Accessory);
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
         #endregion GetDefault
 
         #region SetDataSource
