@@ -145,7 +145,7 @@
                                                 selectedItem = "";
                                             }
 
-                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin" style="@selectedItem">
+                                            <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin" style="@selectedItem" onclick="document.getElementById('@InventoryItem.Id').click()">
 
                                                 <div class="row no-gutters justify-content-center">
                                                     <input type="image" src="@picturURI"  name="submit" alt="@InventoryItem.Name" id="@InventoryItem.Id" class="AvatarSize1" />
