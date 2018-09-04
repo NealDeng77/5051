@@ -65,13 +65,13 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
-        public void Models_TransactionModel_Update_With_Invalid_Data_Null_Should_Fail()
+        public void Models_LeaderBoardModel_Update_With_Invalid_Data_Null_Should_Fail()
         {
             // Arrange
 
             var expect = "test";
 
-            var data = new TransactionModel();
+            var data = new LeaderBoardModel();
             data.Id = "test";
 
             // Act
