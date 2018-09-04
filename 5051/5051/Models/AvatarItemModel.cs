@@ -35,6 +35,9 @@ namespace _5051.Models
 
         public bool IsLimitSupply { get; set; }
 
+        // Is the item a default selection item
+        public bool IsDefault;
+
         /// <summary>
         /// Create the default values
         /// </summary>
@@ -71,7 +74,7 @@ namespace _5051.Models
         /// <param name="uri">The Picture path</param>
         /// <param name="name">AvatarItem Name</param>
         /// <param name="description">AvatarItem Description</param>
-        public AvatarItemModel(string uri, string name, string description, AvatarItemCategoryEnum category, int tokens, int quantities, bool isLimitSupply)
+        public AvatarItemModel(string uri, string name, string description, AvatarItemCategoryEnum category, int tokens, int quantities, bool isLimitSupply, bool isDefault=false)
         {
             Initialize();
          
@@ -82,6 +85,7 @@ namespace _5051.Models
             Tokens = tokens;
             Quantities = quantities;
             IsLimitSupply = isLimitSupply;
+            IsDefault = isDefault;
         }
 
         /// <summary>
