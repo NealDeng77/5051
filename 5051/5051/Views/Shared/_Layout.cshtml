@@ -77,7 +77,7 @@
 
                     @Html.ActionLink("AttendanceStar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "AvatarAttendanceLinkNavBar" })
                     break;
-            } 
+            }
         }
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -89,15 +89,15 @@
 
                         case "Support":
                         case "support":
-                <li class="nav-item">
-                    @Html.ActionLink("Support Home", "Index", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("User List", "UserList", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Support Settings", "Settings", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
-                </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Support Home", "Index", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("User List", "UserList", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Support Settings", "Settings", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                            </li>
                             break;
 
                         case "Home":
@@ -146,6 +146,9 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Inventory", "Index", "FactoryInventory", null, new { @class = "nav-link", id = "FactoryInventoryLinkNavBar" })
                             </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Support", "Login", "Support", null, new { @class = "nav-link", id = "HomeLinkNavBar" })
+                            </li>
                             break;
 
                         default:
@@ -163,8 +166,8 @@
                                             @Html.ActionLink("Home", "Index", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
                                         </li>
                                         @*<li class="nav-item">
-                                            @Html.ActionLink("Reports", "Report", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
-                                        </li>*@
+                                                @Html.ActionLink("Reports", "Report", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AdminMonthlyReportLinkNavBar" })
+                                            </li>*@
                                         <li class="nav-item">
                                             @Html.ActionLink("Attendance", "Attendance", "Portal", new { id = StudentId }, new { @class = "nav-link", id = "AttendancePortalLinkNavBar" })
                                         </li>
@@ -238,8 +241,8 @@
                                     @Html.ActionLink("FAQ's", "FAQ", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "FAQLinkFooter" })
                                 </div>
                                 @*<div class="col">
-                                    @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "UserGuideLinkFooter" })
-                                </div>*@
+                                        @Html.ActionLink("User Guide", "Guide", "Home", new { controller = "Home" }, new { @class = "btn btn-link FooterText FooterLink", id = "UserGuideLinkFooter" })
+                                    </div>*@
                             </div>
                         </div>
 
