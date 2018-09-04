@@ -3,9 +3,6 @@
     // Temporary using the Student Model, until the list of Student Shops can be sent down
     ViewBag.Title = "Visit";
 
-    string TruckClosed = "";
-    string WorkerPresent = "";
-
 }
 
 <br />
@@ -36,25 +33,9 @@
                 {
                     _5051.Backend.GameBackend.Instance.GetResult(item.Id);
 
-                    if (item.Truck.IsClosed)
-                    {
-                        TruckClosed = "<img class='TruckItemBase TruckClosedSignItem' id='TruckClosedSign' src='/Content/shop/ClosedSign.png' alt='closed'>";
-                        WorkerPresent = "/Content/shop/placeholder.png";
-                    }
-                    else
-                    {
-                        TruckClosed = "";
-                        WorkerPresent = "/Content/avatar/AvatarHalf.png";
-                    }
-
                     <div class="col-sm-3 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
                         <div class="TruckBoxMedium">
-                            <div class="Trucks" data-topper="/Content/shop/@item.TruckItems.Topper"
-                                 data-sign="/Content/shop/@item.TruckItems.Sign" data-truck="/Content/shop/@item.TruckItems.Truck"
-                                 data-menu="/Content/shop/@item.TruckItems.Menu" data-wheels="/Content/shop/@item.TruckItems.Wheels"
-                                 data-trailer="/Content/shop/@item.TruckItems.Trailer" data-closed="@TruckClosed" data-worker="@WorkerPresent"
-                                 data-truckname="@item.Truck.TruckName" data-studentname="@item.Name">
-
+                            <a href="/Shop/VisitShop/@ViewBag.StudentId/@item.Id">
                                 <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.TruckItems.Topper" alt="Topper">
                                 <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.TruckItems.Sign" alt="Sign">
                                 <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.TruckItems.Truck" alt="Truck">
@@ -66,12 +47,8 @@
                                 {
                                     <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="closed">
                                 }
-
-                                <br />
-                                @*<span class="text-center FontColor1 PeopleBox FontBold justify-content-around">
-                                        @item.Name
-                                    </span>*@
-                            </div>
+                            </a>
+                          
                         </div>
                         <div class="row justify-content-around">
                             <span class="col FontSizeMedium FontBold text-center">
@@ -86,61 +63,3 @@
     </div>
     <div class="col-1"></div>
 </div>
-
-<div class="row no-gutters justify-content-center">
-    @*<div class="row TruckNameBox text-center justify-content-center" id="TruckNameBox">
-        <span id="TruckName"></span>&nbsp;
-    </div>*@
-
-    <div class="row TruckBoxLarge" id="Single" style="display: none">
-
-        <img class="TruckItemBase BackgroundItem" id="Background" src="~/Content/shop/Background1.png" alt="Background">
-
-        <div class="WorkerImageBox">
-            <img class="WorkerItem" id="Worker" src="~/Content/shop/placeholder.png" alt="Worker">
-        </div>
-
-        <img class="TruckItemBase TopperItem" id="SingleTopper" src="" alt="Topper">
-        <img class="TruckItemBase SignItem" id="SingleSign" src="" alt="Sign">
-        <img class="TruckItemBase TruckItem" id="SingleTruck" src="" alt="Truck">
-        <img class="TruckItemBase MenuItem" id="SingleMenu" src="" alt="Menu">
-        <img class="TruckItemBase TruckItemBase WheelsItem" id="SingleWheels" src="" alt="Wheels">
-        <img class="TruckItemBase TrailerItem" id="SingleTrailer" src="" alt="Trailer">
-        <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
-
-        <div class="AvatarImageBox">
-            <img class="PeopleItem" id="PeopleItem" src="~/Content/avatar/AvatarFull.png" alt="Shopper">
-        </div>
-
-    </div>
-</div>
-
-
-<script>
-
-    $(document).ready(function () {
-        $(".Trucks").click(function () {
-            $("#BodyBackgroundImageId").removeClass();
-
-            document.getElementById("AllTrucks").style.display = "none";
-
-            document.getElementById("PageTitle").innerHTML = "Visiting " + $(this).data('studentname') + "'s Shop : "+$(this).data('truckname');
-            //document.getElementById("TruckName").innerHTML = $(this).data('truckname');
-
-            $("#SingleTopper").attr('src', $(this).data('topper'));
-            $("#SingleSign").attr('src', $(this).data('sign'));
-            $("#SingleTruck").attr('src', $(this).data('truck'));
-            $("#SingleMenu").attr('src', $(this).data('menu'));
-            $("#SingleWheels").attr('src', $(this).data('wheels'));
-            $("#SingleTrailer").attr('src', $(this).data('trailer'));
-            $("#Worker").attr('src', $(this).data('worker'));
-
-            $("#Single").append($(this).data('closed'));
-
-
-            document.getElementById("Single").style.display = "block";
-
-        });
-    });
-
-</script>
