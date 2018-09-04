@@ -29,6 +29,9 @@ namespace _5051.Backend
             Support = 2
         }
 
+        public string supportUserName = "su5051";
+        public string teacherUserName = "teacher";
+
         private static volatile IdentityDataSourceTable instance;
         private static object syncRoot = new Object();
 
@@ -461,41 +464,55 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool LogUserIn(string userName, string password, IdentityRole role)
         {
-            if(userName == null || password == null)
+            if(userName == null && password == null)
             {
                 return false;
             }
 
-            foreach (var item in DataList)
+            var findResult = FindUserByUserName(userName);
+            if(findResult == null)
             {
-                //check if user is in DataList
-                if (item.UserName != userName)
+                return false;
+            }
+
+            //check that role is correct
+            if (role == IdentityRole.Support)
+            {
+                if (!UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
                 {
-                    continue;
+                    return false;
                 }
 
-                //check that role is correct
-                if (role == IdentityRole.Support)
-                {
-                    if (!UserHasClaimOfValue(item.Id, "SupportUser", "True"))
-                    {
-                        return false;
-                    }
-                }
-
-                if (role == IdentityRole.Teacher)
-                {
-                    if (!UserHasClaimOfValue(item.Id, "TeacherUser", "True"))
-                    {
-                        return false;
-                    }
-                }
-
-                //check that password is correct
-                if (item.UserName == password)
+                if(password == "su5051")
                 {
                     return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            if (role == IdentityRole.Teacher)
+            {
+                if (!UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+                {
+                    return false;
+                }
+
+                if(password == "teacher")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            var student = StudentBackend.Instance.Read(findResult.Id);
+            if (student != null && student.Password == password)
+            {               
+                return true;
             }
 
             return false;
