@@ -46,6 +46,16 @@ hr {
     padding: 0;
 }
 
+.darkBox {
+    background-color: darkgrey;
+    border-radius: 20px;
+}
+
+.lightBox {
+    background-color: lightgrey;
+    border-radius: 20px;
+}
+
 .darkTransparentBox {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
