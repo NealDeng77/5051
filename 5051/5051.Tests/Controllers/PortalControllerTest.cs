@@ -135,21 +135,42 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel student = new StudentModel("Peter");
-            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            //StudentModel student = new StudentModel("Peter");
+            //student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            //var data = new StudentDisplayViewModel(student);
+            var student = Backend.StudentBackend.Instance.GetDefault();
+            var expectName = student.Name;
             var data = new StudentDisplayViewModel(student);
+            data.Password = expectName;
+            data.Name = expectName;
 
             // Act
-            var result = (RedirectToRouteResult)controller.Login(data);
-
-            var resultStudent = StudentBackend.Instance.Read(data.Id);
+            var result = (ActionResult)controller.Login(data);
 
             // Reset StudentBackend
             StudentBackend.Instance.Reset();
 
             // Assert
-            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
-            Assert.AreEqual(data.Id, resultStudent.Id, TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_Login_Attempt_Should_Return_Login_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            StudentModel student = new StudentModel("Peter");
+            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            var data = new StudentDisplayViewModel(student);
+
+            // Act
+            ViewResult result = controller.Login(data) as ViewResult;
+
+            // Reset StudentBackend
+            StudentBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion
 
