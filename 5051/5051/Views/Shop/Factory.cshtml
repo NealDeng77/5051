@@ -144,7 +144,7 @@
                                                 <div class="col-auto lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin @BoxHover" onclick="document.getElementById('@item.Id').click()">
                                                     <br />
 
-                                                    <div class="row no-gutters justify-content-center">                                                        
+                                                    <div class="row no-gutters justify-content-center">
                                                         <input type="image" name="submit" src="@picturURI" border="0" alt="@item.Name" class="AvatarSize1" id="@item.Id" @disabledOn />
                                                     </div>
 
@@ -181,5 +181,29 @@
         </div>
     }
 }
+
+<div class="row justify-content-start">
+
+    <div class="col-1 "></div>
+
+    <div class="col text-left">
+        <br />
+        <br />
+
+        <div class="row justify-content-start">
+
+            <div class="col-auto text-center">
+                @Html.ActionLink("Back to Store", "Index", new { id = Model.Student.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+
+        </div>
+
+        <br />
+        <br />
+
+    </div>
+
+    <div class="col-1 "></div>
+</div>
 
 <br />
