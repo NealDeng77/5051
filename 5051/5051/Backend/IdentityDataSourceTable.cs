@@ -30,7 +30,9 @@ namespace _5051.Backend
         }
 
         public string supportUserName = "su5051";
+        public string supportPass = "su5051";
         public string teacherUserName = "teacher";
+        public string teacherPass = "teacher";
 
         private static volatile IdentityDataSourceTable instance;
         private static object syncRoot = new Object();
@@ -201,12 +203,52 @@ namespace _5051.Backend
                 return false;
             }
 
-            ////update all fields in db to match given student record
-            //findResult.UserName = student.Name;
-
-            //var updateResult = idBackend.UserManager.Update(findResult);
+            var udpateResult = StudentBackend.Instance.Update(student);
+            if(udpateResult == null)
+            {
+                return false;
+            }
 
             return true;
+        }
+
+        public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
+        {
+            var findResult = FindUserByUserName(userName);
+            if(findResult == null)
+            {
+                return false;
+            }
+
+            if(role == IdentityRole.Teacher && UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+            {
+                teacherPass = newPass;
+                return true;
+            }
+
+            if (role == IdentityRole.Support && UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+            {
+                supportPass = newPass;
+                return true;
+            }
+
+            if(role == IdentityRole.Student)
+            {
+                var student = StudentBackend.Instance.Read(findResult.Id);
+
+                if(student == null)
+                {
+                    return false;
+                }
+                student.Password = newPass;
+                var updateResult = UpdateStudent(student);
+                if (updateResult)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 
@@ -483,7 +525,7 @@ namespace _5051.Backend
                     return false;
                 }
 
-                if(password == "su5051")
+                if(password == supportPass)
                 {
                     return true;
                 }
@@ -499,7 +541,7 @@ namespace _5051.Backend
                     return false;
                 }
 
-                if(password == "teacher")
+                if(password == teacherPass)
                 {
                     return true;
                 }
@@ -538,8 +580,13 @@ namespace _5051.Backend
 
             foreach (var item in DataSetList)
             {
-                var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
+               var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
             }
+
+            supportUserName = "su5051";
+            supportPass = "su5051";
+            teacherUserName = "teacher";
+            teacherPass = "teacher";
 
             LoadDataSet(DataSourceDataSetEnum.Default);
         }
@@ -572,10 +619,10 @@ namespace _5051.Backend
         private void CreateDataSetDefault()
         {
             //create support user
-            var supportResult = CreateNewSupportUser("su5051", "su5051", "su5051ID");
+            var supportResult = CreateNewSupportUser(supportUserName, supportPass, supportUserName);
 
             //create teacher user
-            var teacherResult = CreateNewTeacher("teacher", "teacher", "teacherID");
+            var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
 
             //create the student users
             var studentBackend = StudentBackend.Instance;
