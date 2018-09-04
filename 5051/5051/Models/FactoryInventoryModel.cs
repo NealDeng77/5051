@@ -96,7 +96,7 @@ namespace _5051.Models
             Tokens = tokens;
             Quantities = quantities;
             IsLimitSupply = isLimitSupply;
-            IsDefault = IsDefault;
+            IsDefault = isDefault;
         }
 
         /// <summary>
