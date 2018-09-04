@@ -224,9 +224,19 @@ namespace _5051.Backend
         /// <returns></returns>
         public FactoryInventoryModel GetDefault(FactoryInventoryCategoryEnum category)
         {
-            var data = Index().Where(m => m.Category == category).FirstOrDefault();
+            // If there is a category item, check to see if there is a IsDefault for one as well.
 
-            return data;
+            var dataTemp = Index().Where(m => m.Category == category).ToList();
+            if (dataTemp.Any())
+            {
+                var dataDefault = dataTemp.Where(m => m.IsDefault == true).ToList();
+                if (dataDefault.Any())
+                {
+                    return dataDefault.FirstOrDefault();
+                }
+            }
+
+            return dataTemp.FirstOrDefault();
         }
 
         public FactoryInventoryModel GetDefaultTruckFullItem(FactoryInventoryCategoryEnum category)
@@ -242,11 +252,12 @@ namespace _5051.Backend
             if (TruckSet.Count > 1)
             {
                 data = TruckSet[1];
-            } else
+            }
+            else
             {
                 data = GetDefault(category);
             }
-            
+
             return data;
         }
 
@@ -346,15 +357,15 @@ namespace _5051.Backend
         {
             var data = new ShopTruckViewModel();
 
-                data.StudentId = studentData.Id;
+            data.StudentId = studentData.Id;
 
-                // Load the data set for each type
-                data.TruckItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Truck);
-                data.WheelsItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Wheels);
-                data.TopperItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Topper);
-                data.TrailerItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Trailer);
-                data.MenuItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Menu);
-                data.SignItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Sign);
+            // Load the data set for each type
+            data.TruckItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Truck);
+            data.WheelsItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Wheels);
+            data.TopperItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Topper);
+            data.TrailerItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Trailer);
+            data.MenuItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Menu);
+            data.SignItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Sign);
 
             return data;
         }
