@@ -24,17 +24,20 @@ namespace _5051.UnitTests.Models
             var ExpectConfirmPassword = "123";
             var ExpectNewPassword = "abc";
             var ExpectOldPassword = "xyz";
+            var ExpectUserId = "123";
 
 
             //act
             test.ConfirmPassword = "123";
             test.NewPassword = "abc";
             test.OldPassword = "xyz";
+            test.UserID = "123";
 
             //assert
             Assert.AreEqual(ExpectConfirmPassword, test.ConfirmPassword, "Confirm " + TestContext.TestName);
             Assert.AreEqual(ExpectNewPassword, test.NewPassword, "New " + TestContext.TestName);
             Assert.AreEqual(ExpectOldPassword, test.OldPassword, "Old " + TestContext.TestName);
+            Assert.AreEqual(ExpectUserId, test.UserID, "UserID " + TestContext.TestName);
         }
         #endregion Instantiate
 
