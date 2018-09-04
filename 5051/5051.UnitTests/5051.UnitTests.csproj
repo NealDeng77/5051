@@ -176,6 +176,7 @@
     <Compile Include="Models\AvatarItemListViewModelUnitTests.cs" />
     <Compile Include="Models\AvatarItemInputModelUnitTests.cs" />
     <Compile Include="Models\BusinessReportViewModelUnitTests.cs" />
+    <Compile Include="Models\Enums\UserRoleEnumUnitTests.cs" />
     <Compile Include="Models\ShopTruckInputModelUnitTests.cs" />
     <Compile Include="Models\AvatarCompositeModelUnitTests.cs" />
     <Compile Include="Models\AvatarSelectShopViewModelUnitTests.cs" />
