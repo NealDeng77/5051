@@ -225,12 +225,19 @@ namespace _5051.Backend
         /// <returns></returns>
         public AvatarItemModel GetDefault(AvatarItemCategoryEnum category)
         {
-            var data = Index().Where(
-                m => m.Category == category && 
-                m.IsDefault==true
-                ).FirstOrDefault();
+            // If there is a category item, check to see if there is a IsDefault for one as well.
 
-            return data;
+            var dataTemp = Index().Where(m => m.Category == category).ToList();
+            if (dataTemp.Any())
+            {
+                var dataDefault = dataTemp.Where(m => m.IsDefault == true).ToList();
+                if (dataDefault.Any())
+                {
+                    return dataDefault.FirstOrDefault();
+                }
+            }
+
+            return dataTemp.FirstOrDefault();
         }
 
         public List<AvatarItemModel> GetAllAvatarItem(AvatarItemCategoryEnum category)
