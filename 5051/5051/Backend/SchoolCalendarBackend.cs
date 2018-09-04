@@ -250,9 +250,9 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Returns the First Student in the system
+        /// mark a day as not a school day if no attendance on the day
         /// </summary>
-        /// <returns>Null or valid data</returns>
+        /// <returns></returns>
         public void AutoSetNoSchool()
         {
             var myData = DataSource.Index();
@@ -262,6 +262,8 @@ namespace _5051.Backend
                 if (item.Date.CompareTo(currentDate) < 0 && item.HasAttendance == false)
                 {
                     item.SchoolDay = false;
+
+                    item.HasAttendance = true; //set it to true so that the system doesn't set its SchoolDay to false on every call.
                 }
             }
         }
