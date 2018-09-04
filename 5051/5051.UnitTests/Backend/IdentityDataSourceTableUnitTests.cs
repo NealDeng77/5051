@@ -296,14 +296,17 @@ namespace _5051.UnitTests.Backend
         [TestMethod]
         public void Backend_IdentityDataSourceTable_Login_Valid_User_Student_Should_Pass()
         {
-            //arrange
+            // Arrange
             var backend = IdentityDataSourceTable.Instance;
             var expectUsername = StudentBackend.Instance.GetDefault().Name;
 
-            //act
+            // Act
             var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Student);
 
-            //assert
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
             Assert.IsTrue(result, TestContext.TestName);
         }
 
