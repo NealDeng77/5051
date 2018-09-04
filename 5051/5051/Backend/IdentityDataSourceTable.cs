@@ -203,10 +203,18 @@ namespace _5051.Backend
                 return false;
             }
 
-            var udpateResult = StudentBackend.Instance.Update(student);
-            if(udpateResult == null)
+            var updateResult = StudentBackend.Instance.Update(student);
+            if(updateResult == null)
             {
                 return false;
+            }
+          
+            if(student.Name != findResult.UserName)
+            {
+                findResult.UserName = student.Name;
+
+                var tableUpdateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, findResult.Id, findResult);
+                return true;
             }
 
             return true;

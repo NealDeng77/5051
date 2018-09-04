@@ -260,7 +260,8 @@ namespace _5051.Controllers
 
             // Set the Avatar ID on the Student and update in data store
             myStudent.Name = data.Name;
-            StudentBackend.Instance.Update(myStudent);
+            //StudentBackend.Instance.Update(myStudent);
+            IdentityDataSourceTable.Instance.UpdateStudent(myStudent);
 
             // Editing is done, so go back to the Student Portal and pass the Student Id
             return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });
