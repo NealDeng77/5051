@@ -19,6 +19,11 @@ namespace _5051.Models
 
         public ApplicationUserInputModel(ApplicationUser User)
         {
+            if (User == null)
+            {
+                return;
+            }
+
             ApplicationUser = new ApplicationUserViewModel(User);
 
             Student = DataSourceBackend.Instance.StudentBackend.Read(User.Id);

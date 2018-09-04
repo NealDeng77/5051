@@ -31,39 +31,72 @@ namespace _5051.UnitTests.Models
 
             // Reset
             DataSourceBackend.Instance.Reset();
+            IdentityDataSourceTable.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Models_ApplicationUserInput_Instantiate_Get_Set_Should_Pass()
-        //{
-        //    // Arange
+        [TestMethod]
+        public void Models_ApplicationUserInputModel_Instantiate_Should_Pass()
+        {
+            // Arange
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
 
-        //    var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-        //    var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            // Act
+            var result = new ApplicationUserInputModel(userInfo);
 
-        //    var RoleEnum = UserRoleEnum.StudentUser;
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            IdentityDataSourceTable.Instance.Reset();
 
-        //    // Act
-        //    var myReturn = new ApplicationUserInputModel(myUserInfo);
-        //    myReturn.Id = myUserInfo.Id;
-        //    myReturn.Role = RoleEnum;
-        //    myReturn.State = true;
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
 
-        //    // Reset
-        //    DataSourceBackend.Instance.Reset();
+        [TestMethod]
+        public void Models_ApplicationUserInputModel_Get_Set_Should_Pass()
+        {
+            // Arange
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
 
-        //    // Assert
-        //    Assert.IsNotNull(myReturn, TestContext.TestName);
-        //    Assert.AreEqual(id, myReturn.Id, TestContext.TestName);
-        //    Assert.AreEqual(id, myReturn.Student.Id, TestContext.TestName);
+            // Act
+            var result = new ApplicationUserInputModel(userInfo);
+            result.Id = "123";
+            result.Role = UserRoleEnum.StudentUser;
+            result.Student = Student;
+            result.State = true;
 
-        //    Assert.AreEqual(RoleEnum, myReturn.Role, TestContext.TestName);
-        //    Assert.AreEqual(true, myReturn.State, TestContext.TestName);
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            IdentityDataSourceTable.Instance.Reset();
 
-        //}
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(result.Id, result.Id, TestContext.TestName);
+            Assert.AreEqual(result.Role, result.Role, TestContext.TestName);
+            Assert.AreEqual(result.Student, result.Student, TestContext.TestName);
+            Assert.AreEqual(result.State, result.State, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_ApplicationUserInput_Invalid_User_Should_Fail()
+        {
+            // Arange
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName("bogus");
+
+            // Act
+            var result = new ApplicationUserInputModel(userInfo);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            IdentityDataSourceTable.Instance.Reset();
+
+            // Assert
+            Assert.IsNull(result.Student, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
