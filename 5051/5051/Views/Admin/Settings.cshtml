@@ -25,65 +25,27 @@
 <div class="row justify-content-center">
     <div class="col-1 "></div>
     <div class="col lightTransparentBox">
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
-            What settings do you want to change?
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("Reset Data", "Reset", "Admin", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <br />
-        </div>
+        <div class="row justify-content-center FontSizeMedium FontColorWhite">
 
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
-            System Settings
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
+            <div class="col-auto text-center DispalyBoxWithMargin">
+                Kiosk Settings<br />
                 @Html.ActionLink("Kiosk", "Read", "KioskSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
-            <div class="col text-left DispalyBoxWithMargin">
-                @Html.ActionLink("School Dismissal Settings", "Read", "SchoolDismissalSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <br />
-        </div>
 
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
-            Game Settings
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
+            <div class="col-auto text-center DispalyBoxWithMargin">
+                School Dismissal<br />
+                @Html.ActionLink("Dismissal", "Read", "SchoolDismissalSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+
+            <div class="col-auto text-center DispalyBoxWithMargin">
+                Game Settings<br />
                 @Html.ActionLink("Game", "Read", "GameSettings", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <br />
-        </div>
 
-        <br />
-        <div class="FontSizeMedium text-left FontColorWhite">
-            Support Users
-        </div>
-        <div class="row justify-content-around DispalyBoxWithMargin">
-            <div class="col text-left DispalyBoxWithMargin">
+            <div class="col-auto text-center DispalyBoxWithMargin">
+                Support Users<br />
                 @Html.ActionLink("Support", "Login", "Support", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <div class="col text-left DispalyBoxWithMargin">
-            </div>
-            <br />
         </div>
     </div>
     <div class="col-1 "></div>
