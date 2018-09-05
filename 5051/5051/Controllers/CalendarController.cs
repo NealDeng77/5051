@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using _5051.Backend;
 
 namespace _5051.Controllers
 {
@@ -29,7 +30,7 @@ namespace _5051.Controllers
             var myData = new SchoolCalendarViewModel
             {
                 SchoolDays = mySchoolDaysData,
-                CurrentDate = DateTime.UtcNow,
+                CurrentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow)
             };
 
             myData.FirstDay = myData.SchoolDays.First().Date;
