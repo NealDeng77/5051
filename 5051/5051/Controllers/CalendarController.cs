@@ -48,10 +48,10 @@ namespace _5051.Controllers
 
             DateTime currentDate = new DateTime();
 
-            currentDate = myData.FirstDay;
+            currentDate = dateStart;
 
             // For every day from the start of the school year, until the end of the school year or now...
-            while (currentDate.CompareTo(myData.LastDay) <= 0)
+            while (currentDate.CompareTo(dateEnd) < 0)
             {
                 if (currentDate.Day == 1)
                 {
