@@ -33,14 +33,17 @@ namespace _5051.Controllers
                 CurrentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow)
             };
 
-            myData.FirstDay = myData.SchoolDays.First().Date;
-            myData.LastDay = myData.SchoolDays.Last().Date;
+            myData.FirstDay = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;
+            myData.LastDay = SchoolDismissalSettingsBackend.Instance.GetDefault().DayLast;
 
             //Get the First and last month, and set the dates to the first of those months.
-            var dateStart = DateTime.Parse(myData.SchoolDays.First().Date.Month.ToString() + "/01/" + myData.SchoolDays.First().Date.Year.ToString());
+            var dateStart = DateTime.Parse(myData.FirstDay.Month.ToString() + "/01/" +
+                                           myData.FirstDay.Year.ToString());
 
             // Go to the month after the last date
-            var dateEnd = DateTime.Parse((myData.SchoolDays.Last().Date.Month + 1).ToString() + "/01/" + myData.SchoolDays.Last().Date.Year.ToString());
+            var dateEnd = DateTime.Parse((myData.LastDay.Month + 1).ToString() + "/01/" +
+                                         myData.LastDay.Year.ToString());
+
             dateEnd.AddDays(-1); // Back up 1 day to be the last day of the month
 
             DateTime currentDate = new DateTime();
