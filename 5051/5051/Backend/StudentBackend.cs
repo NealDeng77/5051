@@ -17,8 +17,6 @@ namespace _5051.Backend
         private static volatile StudentBackend instance;
         private static object syncRoot = new Object();
 
-        private bool isTestingMode = false;
-
         private StudentBackend() { }
 
         public static StudentBackend Instance
@@ -209,8 +207,6 @@ namespace _5051.Backend
             //the school day model
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
-
-
             //set auto punch-out time        
             if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
             {
@@ -226,7 +222,6 @@ namespace _5051.Backend
             }
 
             data.Attendance.Add(temp);
-
         }
 
         /// <summary>
@@ -393,8 +388,6 @@ namespace _5051.Backend
                 }
 
             }
-
-
         }
 
         ///// <summary>
