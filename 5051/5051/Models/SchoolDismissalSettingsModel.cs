@@ -198,20 +198,20 @@ namespace _5051.Models
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
 
-            MonStartType = data.MonStartType;
-            MonEndType = data.MonEndType;
-            TueStartType = data.TueStartType;
-            TueEndType = data.TueEndType;
-            WedStartType = data.WedStartType;
-            WedEndType = data.WedEndType;
-            ThuStartType = data.ThuStartType;
-            ThuEndType = data.ThuEndType;
-            FriStartType = data.FriStartType;
-            FriEndType = data.FriEndType;
-            SatStartType = data.SatStartType;
-            SatEndType = data.SatEndType;
-            SunStartType = data.SunStartType;
-            SunEndType = data.SunEndType;
+            MonStartType = setType(MonStartSelected);
+            MonEndType = setType(MonEndSelected);
+            TueStartType = setType(TueStartSelected);
+            TueEndType = setType(TueEndSelected);
+            WedStartType = setType(WedStartSelected);
+            WedEndType = setType(WedEndSelected);
+            ThuStartType = setType(ThuStartSelected);
+            ThuEndType = setType(ThuEndSelected);
+            FriStartType = setType(FriStartSelected);
+            FriEndType = setType(FriEndSelected);
+            SatStartType = setType(SatStartSelected);
+            SatEndType = setType(SatEndSelected);
+            SunStartType = setType(SunStartSelected);
+            SunEndType = setType(SunEndSelected);
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
@@ -304,13 +304,9 @@ namespace _5051.Models
             SunEndType = SchoolCalendarDismissalEnum.Unknown;
 
             var Year = DateTime.UtcNow.Year;
-            if (DateTime.UtcNow.Month > 1)
-            {
-                Year--;
-            }
 
-            DayFirst = DateTime.Parse("10/01/" + Year);
-            DayLast = DateTime.Parse("09/30/" + (Year + 1));
+            DayFirst = DateTime.Parse("09/01/" + Year);
+            DayLast = DateTime.Parse("08/31/" + (Year + 1));
 
             //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
@@ -374,20 +370,20 @@ namespace _5051.Models
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
 
-            MonStartType = data.MonStartType;
-            MonEndType = data.MonEndType;
-            TueStartType = data.TueStartType;
-            TueEndType = data.TueEndType;
-            WedStartType = data.WedStartType;
-            WedEndType = data.WedEndType;
-            ThuStartType = data.ThuStartType;
-            ThuEndType = data.ThuEndType;
-            FriStartType = data.FriStartType;
-            FriEndType = data.FriEndType;
-            SatStartType = data.SatStartType;
-            SatEndType = data.SatEndType;
-            SunStartType = data.SunStartType;
-            SunEndType = data.SunEndType;
+            MonStartType = setType(MonStartSelected);
+            MonEndType = setType(MonEndSelected);
+            TueStartType = setType(TueStartSelected);
+            TueEndType = setType(TueEndSelected);
+            WedStartType = setType(WedStartSelected);
+            WedEndType = setType(WedEndSelected);
+            ThuStartType = setType(ThuStartSelected);
+            ThuEndType = setType(ThuEndSelected);
+            FriStartType = setType(FriStartSelected);
+            FriEndType = setType(FriEndSelected);
+            SatStartType = setType(SatStartSelected);
+            SatEndType = setType(SatEndSelected);
+            SunStartType = setType(SunStartSelected);
+            SunEndType = setType(SunEndSelected);
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
@@ -406,6 +402,28 @@ namespace _5051.Models
             Goal = data.Goal;
             EarlyWindow = data.EarlyWindow;
             LateWindow = data.LateWindow;
+        }
+
+        /// <summary>
+        /// set dismissal type according to selectedId
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
+        private SchoolCalendarDismissalEnum setType(int selectedId)
+        {
+            switch (selectedId)
+            {
+                case 0:
+                    return SchoolCalendarDismissalEnum.Unknown;
+                case 1:
+                    return SchoolCalendarDismissalEnum.Normal;
+                case 2:
+                    return SchoolCalendarDismissalEnum.Early;
+                case 3:
+                    return SchoolCalendarDismissalEnum.Late;
+                default:
+                    return SchoolCalendarDismissalEnum.Normal;
+            }
         }
     }
 }
