@@ -403,5 +403,27 @@ namespace _5051.Models
             EarlyWindow = data.EarlyWindow;
             LateWindow = data.LateWindow;
         }
+
+        /// <summary>
+        /// set dismissal type according to selectedId
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
+        private SchoolCalendarDismissalEnum setType(int selectedId)
+        {
+            switch (selectedId)
+            {
+                case 0:
+                    return SchoolCalendarDismissalEnum.Unknown;
+                case 1:
+                    return SchoolCalendarDismissalEnum.Normal;
+                case 2:
+                    return SchoolCalendarDismissalEnum.Early;
+                case 3:
+                    return SchoolCalendarDismissalEnum.Late;
+                default:
+                    return SchoolCalendarDismissalEnum.Normal;
+            }
+        }
     }
 }
