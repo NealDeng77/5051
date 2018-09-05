@@ -208,22 +208,18 @@ namespace _5051.Backend
         /// </summary>
         private void CreateDataSetDefault()
         {
-            DateTime currentDate = new DateTime();
-            DateTime dateStart = new DateTime();
-            DateTime dateEnd = new DateTime();
+            var startDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;  //school year start date
+            var endDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayLast;  //school year end date
+            var currentDate = startDate;  //loop variable
 
-            dateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;
-            dateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
-
-            currentDate = dateStart;
-
-            // For every day from the start of the school year, until the end of the school year or now...
-            while (currentDate.CompareTo(dateEnd) < 0)
+            while (currentDate.CompareTo(endDate) <= 0)
             {
-                var temp = new SchoolCalendarModel(currentDate);
 
-                //Add the new date to the list of dates
-                Create(temp);
+                var newCalendarModel = new SchoolCalendarModel(currentDate);
+                Create(newCalendarModel);
+
+                SchoolCalendarBackendHelper.SetDefault(newCalendarModel);  //use default settings
+                Update(newCalendarModel);
 
                 currentDate = currentDate.AddDays(1);
             }
