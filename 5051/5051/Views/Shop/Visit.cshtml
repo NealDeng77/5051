@@ -20,8 +20,53 @@
 
 <div class="row">
     <br />
-    <br />
 </div>
+
+<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col lightTransparentBox">
+        <div class="row justify-content-center mb-3">
+            <div class="FontSizeMedium FontBold">Leaderboard</div>
+        </div>
+
+        @{
+            var leaderboard = _5051.Backend.GameBackend.Instance.UpdatedLeaderBoard();
+        }
+
+        <div class="row justify-content-center">
+            <div class="col-2"></div>
+            <div class="col-2 FontSizeSmall FontBold">
+                Place
+            </div>
+            <div class="col-3 FontSizeSmall FontBold">
+                Name
+            </div>
+            <div class="col-3 FontSizeSmall FontBold">
+                Profit
+            </div>
+        </div>
+
+
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="row justify-content-center">
+                <div class="col-2"></div>
+                <div class="col-2 FontSizeSmall">
+                    @(i + 1)
+                </div>
+                <div class="col-3 FontSizeSmall">
+                    @leaderboard[i].Name
+                </div>
+                <div class="col-3 FontSizeSmall">
+                    @leaderboard[i].Profit
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-1"></div>
+</div>
+<br />
 
 <div class="row justify-content-around">
     <div class="col-1"></div>
@@ -48,7 +93,7 @@
                                     <img class="TruckItemBase TruckClosedSignItem" id="TruckClosedSign" src="~/Content/shop/ClosedSign.png" alt="closed">
                                 }
                             </a>
-                          
+
                         </div>
                         <div class="row justify-content-around">
                             <span class="col FontSizeMedium FontBold text-center">
