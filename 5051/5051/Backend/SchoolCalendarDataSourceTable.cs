@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using _5051.Models;
 
 namespace _5051.Backend
@@ -66,6 +66,9 @@ namespace _5051.Backend
             // Add to Storage
             var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data);
 
+            //sort by date
+            DataList = DataList.OrderBy(x => x.Date).ToList();
+
             return data;
         }
 
@@ -107,6 +110,9 @@ namespace _5051.Backend
 
             // Update Storage
             var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data);
+
+            //sort by date
+            DataList = DataList.OrderBy(x => x.Date).ToList();
 
             return data;
         }
@@ -221,6 +227,10 @@ namespace _5051.Backend
 
                 currentDate = currentDate.AddDays(1);
             }
+
+            //sort by date
+            DataList = DataList.OrderBy(x => x.Date).ToList();
+
         }
 
         /// <summary>
