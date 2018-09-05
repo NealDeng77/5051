@@ -171,14 +171,14 @@ namespace _5051.Backend
                 if (currentCalendarModel == null)
                 {
                     currentCalendarModel = new SchoolCalendarModel(currentDate);
-                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);
+                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
                     Create(currentCalendarModel);
                 }
 
                 //if the calendar model for that date is not modified, and is after today, reset to default
                 if (!currentCalendarModel.Modified && currentDate.CompareTo(today) > 0)
                 {
-                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);
+                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
                     Update(currentCalendarModel);
                 }
 
@@ -213,8 +213,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            // Clear modified flag on date
-            myData.Modified = false;
+            SchoolCalendarBackendHelper.SetDefault(myData);  //use current default settings
 
             var myReturn = DataSource.Update(myData);
 
