@@ -655,7 +655,8 @@ namespace _5051.Backend
             var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
 
             //create the student users
-            var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            var studentList = StudentBackend.Instance.Index();
 
             foreach (var item in studentList)
             {

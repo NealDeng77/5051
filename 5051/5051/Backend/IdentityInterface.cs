@@ -11,6 +11,8 @@ namespace _5051.Backend
 
         StudentModel CreateNewStudent(StudentModel student);
 
+        StudentModel CreateNewStudentIdRecordOnly(StudentModel student);
+
         bool UpdateStudent(StudentModel student);
 
         ApplicationUser FindUserByUserName(string userName);

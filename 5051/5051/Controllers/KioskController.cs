@@ -291,8 +291,8 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            //StudentBackend.Create(data);
-            IdentityDataSourceTable.Instance.CreateNewStudent(data);
+            StudentBackend.Create(data);
+            //IdentityDataSourceTable.Instance.CreateNewStudent(data);
 
             return RedirectToAction("Index");
         }

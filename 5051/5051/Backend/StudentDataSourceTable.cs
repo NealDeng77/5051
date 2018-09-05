@@ -113,6 +113,8 @@ namespace _5051.Backend
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
+            var idCreateResult = IdentityDataSourceTable.Instance.CreateNewStudentIdRecordOnly(data);
+
             return data;
         }
 

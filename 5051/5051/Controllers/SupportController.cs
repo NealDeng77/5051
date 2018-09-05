@@ -253,7 +253,8 @@ namespace _5051.Controllers
             newStudent.Name = user.Email;
             newStudent.Password = user.Password;
 
-            var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
+            //var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
+            var createUserResult = StudentBackend.Instance.Create(newStudent);
 
             if (createUserResult == null)
             {
