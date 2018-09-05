@@ -196,24 +196,36 @@ namespace _5051.Backend
                 return false;
             }
 
-            var findResult = FindUserByID(student.Id);
+            var idFindResult = FindUserByID(student.Id);
 
-            if (findResult == null)
+            if (idFindResult == null)
             {
                 return false;
             }
 
-            var updateResult = StudentBackend.Instance.Update(student);
+            var findStudent = GetStudentById(student.Id);
+            if(findStudent == null)
+            {
+                return false;
+            }
+
+            findStudent.Name = student.Name;
+            if(student.Password != null)
+            {
+                findStudent.Password = student.Password;
+            }
+
+            var updateResult = DataSourceBackendTable.Instance.Update("studentmodel", "student", idFindResult.Id, findStudent);
             if(updateResult == null)
             {
                 return false;
             }
           
-            if(student.Name != findResult.UserName)
+            if(student.Name != idFindResult.UserName)
             {
-                findResult.UserName = student.Name;
+                idFindResult.UserName = student.Name;
 
-                var tableUpdateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, findResult.Id, findResult);
+                var tableUpdateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, idFindResult.Id, idFindResult);
                 return true;
             }
 
@@ -242,7 +254,8 @@ namespace _5051.Backend
 
             if(role == IdentityRole.Student)
             {
-                var student = StudentBackend.Instance.Read(findResult.Id);
+                //var student = StudentBackend.Instance.Read(findResult.Id);
+                var student = GetStudentById(findResult.Id);
 
                 if(student == null)
                 {
@@ -300,16 +313,25 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            var studentBackend = StudentBackend.Instance;
+            //var studentBackend = StudentBackend.Instance;
 
-            var studentResult = studentBackend.Read(id);
+            //var studentResult = studentBackend.Read(id);
 
-            if (studentResult == null)
+            //if (studentResult == null)
+            //{
+            //    return null;
+            //}
+
+            var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            foreach (var item in studentList)
             {
-                return null;
+                if(id == item.Id)
+                {
+                    return item;
+                }
             }
 
-            return studentResult;
+            return null;
         }
 
         /// <summary>
@@ -559,9 +581,9 @@ namespace _5051.Backend
                 }
             }
 
-            var student = StudentBackend.Instance.Read(findResult.Id);
-            if (student != null && student.Password == password)
-            {               
+            var student = GetStudentById(findResult.Id);
+            if(student != null && student.Password == password)
+            {
                 return true;
             }
 
@@ -633,11 +655,7 @@ namespace _5051.Backend
             var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
 
             //create the student users
-            var studentBackend = StudentBackend.Instance;
-
-            studentBackend.Reset();
-
-            var studentList = studentBackend.Index();
+            var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
 
             foreach (var item in studentList)
             {

@@ -293,22 +293,48 @@ namespace _5051.UnitTests.Backend
             Assert.IsTrue(result, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void Backend_IdentityDataSourceTable_Login_Valid_User_Student_Should_Pass()
-        {
-            // Arrange
-            var backend = IdentityDataSourceTable.Instance;
-            var expectUsername = StudentBackend.Instance.GetDefault().Name;
+        //[TestMethod]
+        //public void Backend_IdentityDataSourceTable_Login_Valid_User_Student_Should_Pass()
+        //{
+        //    // Arrange
+        //    var backend = IdentityDataSourceTable.Instance;
+        //    var studentTableBackend = StudentDataSourceTable.Instance;
+        //    var studentBackend = StudentBackend.Instance;
+        //    var expectStudent = studentBackend.GetDefault();
+        //    var expectId = "GoodID";
+        //    var expectName = "Billy";
+        //    var expectAvatarLevel = 7;
+        //    var expectExperiencePoints = 100;
+        //    var expectTokens = 100;
+        //    var expectStatus = _5051.Models.StudentStatusEnum.Out;
+        //    var expectPassword = "passWORD23!";
+        //    var expectEmotionCurrent = _5051.Models.EmotionStatusEnum.Happy;
+        //    var expectAvatarComposite = new AvatarCompositeModel();
 
-            // Act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Student);
+        //    expectStudent.Id = expectId;
+        //    expectStudent.Name = expectName;
+        //    expectStudent.AvatarLevel = expectAvatarLevel;
+        //    expectStudent.ExperiencePoints = expectExperiencePoints;
+        //    expectStudent.Tokens = expectTokens;
+        //    expectStudent.Status = expectStatus;
+        //    expectStudent.Password = expectPassword;
+        //    expectStudent.EmotionCurrent = expectEmotionCurrent;
+        //    expectStudent.AvatarComposite = expectAvatarComposite;
 
-            // Reset
-            DataSourceBackend.Instance.Reset();
+        //    var resultStudentUpdate = studentTableBackend.Update(expectStudent);
+        //    var resultIDUpdate = backend.CreateNewStudent(expectStudent);
 
-            // Assert
-            Assert.IsTrue(result, TestContext.TestName);
-        }
+        //    // Act
+        //    var result = backend.LogUserIn(expectName, expectPassword, IdentityDataSourceTable.IdentityRole.Student);
+
+        //    //reset
+        //    backend.Reset();
+        //    studentTableBackend.Reset();
+        //    studentBackend.Reset();
+
+        //    // Assert
+        //    Assert.IsTrue(result, TestContext.TestName);
+        //}
 
         [TestMethod]
         public void Backend_IdentityDataSourceTable_Login_Null_User_Should_Fail()
