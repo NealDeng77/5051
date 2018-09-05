@@ -80,8 +80,8 @@ namespace _5051.Models
             HasAttendance = false;
             Date = date;
 
-            SetDefault();
-            SetSchoolDay();
+            //SetDefault();
+            //SetSchoolDay();
         }
 
         /// <summary>
@@ -100,92 +100,92 @@ namespace _5051.Models
             Initialize(date);
         }
 
-        /// <summary>
-        /// Sets the Default Values 
-        /// </summary>
-        public void SetDefault()
-        {
-            // Date = DateTime.UtcNow;  // Date is not set in the default.  
-            DayEnd = SchoolCalendarDismissalEnum.Normal;
-            DayStart = SchoolCalendarDismissalEnum.Normal;
-            SetSchoolDay();
-            SetSchoolTime();
+        ///// <summary>
+        ///// Sets the Default Values 
+        ///// </summary>
+        //public void SetDefault()
+        //{
+        //    // Date = DateTime.UtcNow;  // Date is not set in the default.  
+        //    DayEnd = SchoolCalendarDismissalEnum.Normal;
+        //    DayStart = SchoolCalendarDismissalEnum.Normal;
+        //    SetSchoolDay();
+        //    SetSchoolTime();
 
-            // If not school day reset times
-            SetNoSchoolDayTimes();
-        }
+        //    // If not school day reset times
+        //    SetNoSchoolDayTimes();
+        //}
 
-        /// <summary>
-        /// Sets if the school should be in sesson or not based on the school rules
-        /// </summary>
-        public void SetSchoolDay()
-        {
-            // todo, change this out to be a structure on the settings for each day.  Show if the school is in session, or start, end different
-            // Then walk each of the days of the week and apply those settings.
-            switch (Date.DayOfWeek)
-            {
-                case DayOfWeek.Saturday:
-                    SchoolDay = false;
-                    break;
+        ///// <summary>
+        ///// Sets if the school should be in sesson or not based on the school rules
+        ///// </summary>
+        //public void SetSchoolDay()
+        //{
+        //    // todo, change this out to be a structure on the settings for each day.  Show if the school is in session, or start, end different
+        //    // Then walk each of the days of the week and apply those settings.
+        //    switch (Date.DayOfWeek)
+        //    {
+        //        case DayOfWeek.Saturday:
+        //            SchoolDay = false;
+        //            break;
 
-                case DayOfWeek.Sunday:
-                    SchoolDay = false;
-                    break;
+        //        case DayOfWeek.Sunday:
+        //            SchoolDay = false;
+        //            break;
 
-                case DayOfWeek.Wednesday:
-                    DayEnd = SchoolCalendarDismissalEnum.Early;
-                    break;
-            }
-        }
+        //        case DayOfWeek.Wednesday:
+        //            DayEnd = SchoolCalendarDismissalEnum.Early;
+        //            break;
+        //    }
+        //}
 
-        /// <summary>
-        /// Based on the day of the school, decide the start and stop times
-        /// </summary>
-        public void SetSchoolTime()
-        {
+        ///// <summary>
+        ///// Based on the day of the school, decide the start and stop times
+        ///// </summary>
+        //public void SetSchoolTime()
+        //{
             
-            switch (DayStart)
-            {
-                case SchoolCalendarDismissalEnum.Early:
-                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartEarly;
-                    break;
-                case SchoolCalendarDismissalEnum.Late:
-                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
-                    break;
-                case SchoolCalendarDismissalEnum.Normal:
-                    TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
-                    break;
-            }
+        //    switch (DayStart)
+        //    {
+        //        case SchoolCalendarDismissalEnum.Early:
+        //            TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartEarly;
+        //            break;
+        //        case SchoolCalendarDismissalEnum.Late:
+        //            TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartLate;
+        //            break;
+        //        case SchoolCalendarDismissalEnum.Normal:
+        //            TimeStart = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().StartNormal;
+        //            break;
+        //    }
 
-            switch (DayEnd)
-            {
-                case SchoolCalendarDismissalEnum.Early:
-                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
-                    break;
-                case SchoolCalendarDismissalEnum.Late:
-                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndLate;
-                    break;
-                case SchoolCalendarDismissalEnum.Normal:
-                    TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
-                    break;
-            }
+        //    switch (DayEnd)
+        //    {
+        //        case SchoolCalendarDismissalEnum.Early:
+        //            TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndEarly;
+        //            break;
+        //        case SchoolCalendarDismissalEnum.Late:
+        //            TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndLate;
+        //            break;
+        //        case SchoolCalendarDismissalEnum.Normal:
+        //            TimeEnd = Backend.DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().EndNormal;
+        //            break;
+        //    }
 
-            TimeDuration = TimeEnd.Subtract(TimeStart);
-        }
+        //    TimeDuration = TimeEnd.Subtract(TimeStart);
+        //}
 
-        /// <summary>
-        /// No School day, so turn it off, and zero out the times.
-        /// </summary>
-        public void SetNoSchoolDayTimes()
-        {
-            // If there is no school, then set everything to zero
-            if (SchoolDay == false)
-            {
-                //TimeEnd = TimeSpan.Zero;
-                //TimeStart = TimeSpan.Zero;
-                TimeDuration = TimeSpan.Zero;
-            }
-        }
+        ///// <summary>
+        ///// No School day, so turn it off, and zero out the times.
+        ///// </summary>
+        //public void SetNoSchoolDayTimes()
+        //{
+        //    // If there is no school, then set everything to zero
+        //    if (SchoolDay == false)
+        //    {
+        //        //TimeEnd = TimeSpan.Zero;
+        //        //TimeStart = TimeSpan.Zero;
+        //        TimeDuration = TimeSpan.Zero;
+        //    }
+        //}
 
         /// <summary>
         /// Make an SchoolCalendar from values passed in
