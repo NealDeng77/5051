@@ -98,22 +98,25 @@ namespace _5051.Backend
         /// </summary>
         public void SetDataSource(DataSourceEnum dataSourceEnum)
         {
+            // Set the Global DataSourceEnum Value
+            SystemGlobalsModel.SetDataSourceEnum(dataSourceEnum);
+
             // Avatar must be reset before Student, because Student needs the default avatar
 
-            AvatarItemBackend.SetDataSource(dataSourceEnum);
-            FactoryInventoryBackend.SetDataSource(dataSourceEnum);
+            AvatarItemBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
+            FactoryInventoryBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
-            GameBackend.SetDataSource(dataSourceEnum);
-            KioskSettingsBackend.SetDataSource(dataSourceEnum);
+            GameBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
+            KioskSettingsBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
-            SchoolDismissalSettingsBackend.SetDataSource(dataSourceEnum);
-            SchoolCalendarBackend.SetDataSource(dataSourceEnum);
+            SchoolDismissalSettingsBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
+            SchoolCalendarBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
-            StudentBackend.SetDataSource(dataSourceEnum);
+            StudentBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
             if (!isTestingMode)
             {
-                IdentityBackend.SetDataSource(dataSourceEnum);
+                IdentityBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
             }
         }
 
