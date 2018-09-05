@@ -25,6 +25,7 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserView_Instantiate_Should_Pass()
         {
             // Arange
+            DataSourceBackend.Instance.StudentBackend.Index();
             var field = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
             var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(field);
 
@@ -35,6 +36,8 @@ namespace _5051.UnitTests.Models
             DataSourceBackend.Instance.Reset();
 
             // Assert
+            Assert.IsNotNull(field, TestContext.TestName);
+            Assert.IsNotNull(userInfo, TestContext.TestName);
             Assert.IsNotNull(result, TestContext.TestName);
         }
 

@@ -41,6 +41,7 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Instantiate_Should_Pass()
         {
             // Arange
+            DataSourceBackend.Instance.StudentBackend.Index();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
 
@@ -52,6 +53,8 @@ namespace _5051.UnitTests.Models
             IdentityDataSourceTable.Instance.Reset();
 
             // Assert
+            Assert.IsNotNull(Student, TestContext.TestName);
+            Assert.IsNotNull(userInfo, TestContext.TestName);
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
