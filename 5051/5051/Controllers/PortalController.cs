@@ -78,7 +78,7 @@ namespace _5051.Controllers
             if (string.IsNullOrEmpty(data.Id))
             {
                 // Send back for Edit
-                return View(data);
+                return RedirectToAction("Error", "Home");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
@@ -89,10 +89,14 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+            // When not in testing mode try the password
+            if (!DataSourceBackend.GetTestingMode())
             {
-                ModelState.AddModelError("", "Invalid password");
-                return View(data);
+                if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+                {
+                    ModelState.AddModelError("", "Invalid password");
+                    return View(data);
+                }
             }
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
@@ -246,7 +250,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            // If the Student Id is black, error out
+            // If the Student Id is blank, error out
             if (string.IsNullOrEmpty(data.Id))
             {
                 return RedirectToAction("Error", "Home");

@@ -113,6 +113,45 @@ namespace _5051.Tests.Controllers
         }
 
         [TestMethod]
+        public void Controller_Portal_Login_Post_Invalid_Id_Null_Return_ErrorPage()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var data = new StudentDisplayViewModel(student);
+            data.Id= null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Login(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Login_Post_Valid_TestMode_false_Return_Error()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var data = new StudentDisplayViewModel(student);
+            data.Password = data.Name;
+
+            DataSourceBackend.SetTestingMode(false);
+
+            // Act
+            var result = controller.Login(data);
+
+            // Reset
+            DataSourceBackend.SetTestingMode(true);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Controller_Portal_Login_Post_Invalid_StudentModelIsNull_Should_Return_ErrorPage()
         {
             // Arrange
@@ -164,7 +203,7 @@ namespace _5051.Tests.Controllers
             var data = new StudentDisplayViewModel(student);
 
             // Act
-            ViewResult result = controller.Login(data) as ViewResult;
+            var result = controller.Login(data);
 
             // Reset StudentBackend
             StudentBackend.Instance.Reset();
@@ -560,6 +599,58 @@ namespace _5051.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Invalid_Id_Null_Should_Fail()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+            data.Id = null;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Invalid_Id_Bogus_Should_Fail()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            StudentDisplayViewModel data = new StudentDisplayViewModel();
+            data.Id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Settings(data);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_Settings_Post_Valid_Should_Fail()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            string expect = "hi";
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            StudentDisplayViewModel data = new StudentDisplayViewModel(student);
+            data.Name = expect;
+
+            // Act
+            controller.Settings(data);
+            var result = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+
+            // Assert
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
         }
         #endregion
 
