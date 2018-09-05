@@ -281,6 +281,8 @@ namespace _5051.Backend
         /// <returns></returns>
         public ApplicationUser FindUserByUserName(string userName)
         {
+            //var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey);
+
             foreach (var item in DataList)
             {
                 if (item.UserName == userName)
@@ -300,6 +302,8 @@ namespace _5051.Backend
         /// <returns></returns>
         public ApplicationUser FindUserByID(string id)
         {
+            //var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey);
+
             foreach (var item in DataList)
             {
                 if(item.Id == id)
@@ -322,7 +326,36 @@ namespace _5051.Backend
             //    return null;
             //}
 
-            var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            //var studentList = StudentBackend.Instance.Index();
+
+            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            //foreach (var item in studentList)
+            //{
+            //    if (id == item.Id)
+            //    {
+            //        return item;
+            //    }
+            //}
+
+            //foreach (var item in DataList)
+            //{
+            //    if(id == item.Id)
+            //    {
+            //        var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
+            //        foreach (var student in studentList)
+            //        {
+            //            if(id == student.Id)
+            //            {
+            //                return student;
+            //            }
+            //        }
+            //        //return item;
+            //    }
+            //}
+
+            var studentList = StudentBackend.Instance.Index();
+
             foreach (var item in studentList)
             {
                 if(id == item.Id)
