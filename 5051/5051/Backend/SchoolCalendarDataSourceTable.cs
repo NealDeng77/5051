@@ -201,6 +201,9 @@ namespace _5051.Backend
             {
                 CreateDataSetDefault();
             }
+
+            //sort by date
+            DataList = DataList.OrderBy(x => x.Date).ToList();
         }
 
         /// <summary>
