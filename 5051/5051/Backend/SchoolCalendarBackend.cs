@@ -133,8 +133,6 @@ namespace _5051.Backend
 
             // See if the updates make it match default, if so, need to clear the modified flag...
             var myDefault = new SchoolCalendarModel(data.Date);
-            myDefault.SetDefault();
-            myDefault.SetSchoolDay();
 
             if (myDefault.TimeEnd == data.TimeEnd && myDefault.TimeStart == data.TimeStart)
             {
@@ -191,8 +189,6 @@ namespace _5051.Backend
             {
                 return null;
             }
-
-            myData.SetDefault();
 
             // Clear modified flag on date
             myData.Modified = false;
