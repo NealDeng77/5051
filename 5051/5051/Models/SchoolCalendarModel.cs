@@ -77,6 +77,7 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
             Modified = false;
             SchoolDay = true;
+            HasAttendance = false;
             Date = date;
 
             SetDefault();
