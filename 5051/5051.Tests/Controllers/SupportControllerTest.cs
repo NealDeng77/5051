@@ -284,6 +284,39 @@ namespace _5051.Tests.Controllers
 
         #endregion CreateSupportPostRegion
 
+        #region DeleteUserRegion
+        [TestMethod]
+        public void Controller_Support_Delete_Id_Null_Should_Return_UserList()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            string id = null;
+
+            //act
+            var result = controller.DeleteUser(id) as ActionResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DeleteUserRegion
+
+        #region DeleteUserPostRegion
+        [TestMethod]
+        public void Controller_Support_Delete_Post_Id_Null_Should_Pass()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ApplicationUser app = new ApplicationUser();
+            app.Id = null;
+
+            //act
+            var result = controller.DeleteUser(app) as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion DeleteUserPostRegion
+
         #region SettingsRegion
 
         [TestMethod]
@@ -752,6 +785,23 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion
+
+        #region ChangeUserPasswordPostRegion
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Post_Id_Null_Should_Pass()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
+            viewModel.UserID = null;
+
+            //act
+            var result = controller.ChangeUserPassword(viewModel) as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion ChangeUserPasswordPostRegion
 
         [TestMethod]
         public void Controller_Support_Reset_DeFault_Should_Return_Index_Page()
