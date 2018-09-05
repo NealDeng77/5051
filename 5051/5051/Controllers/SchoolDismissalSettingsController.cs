@@ -132,6 +132,9 @@ namespace _5051.Controllers
 
             SchoolDismissalSettingsBackend.Update(data);
 
+            //apply the change to calendar
+            DataSourceBackend.Instance.SchoolCalendarBackend.ResetDefaults();
+
             return RedirectToAction("Read", "SchoolDismissalSettings");
         }
     }
