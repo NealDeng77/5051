@@ -43,6 +43,11 @@
         <div class="row justify-content-center FontSizeMedium FontColorWhite">
 
             <div class="col-auto text-center DispalyBoxWithMargin">
+
+                <div class="FontSizeLarge">
+                    @_5051.Models.SystemGlobalsModel.Instance.DataSourceValue
+                </div>
+
                 Configure Data Source<br />
                 @Html.ActionLink("Mock Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.Mock }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })<br />
                 @Html.ActionLink("Local Database", "DataSource", "Support", new { id = _5051.Models.DataSourceEnum.Local }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })<br />
