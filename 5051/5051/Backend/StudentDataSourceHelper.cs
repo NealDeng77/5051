@@ -54,7 +54,6 @@ namespace _5051.Backend
 
             StudentModel data;
 
-
             // Mike has Full Truck and Tokens
             data = new StudentModel("Mike");
             data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
@@ -83,7 +82,7 @@ namespace _5051.Backend
             data.Password = data.Name;
             DataList.Add(data);
 
-            // Mike has Full Truck and 1 Token
+            // Stan has Full Truck and 1 Token
             data = new StudentModel("Stan");
             data = FactoryInventoryBackend.Instance.GetDefaultFullTruck(data);
             data.Tokens = 1;

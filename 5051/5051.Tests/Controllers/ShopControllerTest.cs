@@ -236,6 +236,7 @@ namespace _5051.Tests.Controllers
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
             myStudent.Tokens = 1000;
+            myStudent.Inventory.Clear();    //Clear inventory
             DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             // Get the Item Record and Set the Token Value

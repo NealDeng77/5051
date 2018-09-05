@@ -511,7 +511,7 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.Instance.Reset();
 
             //assert
-            Assert.IsNull(result, TestContext.TestName);
+            Assert.IsNull(result.Name, TestContext.TestName);
         }
         #endregion GetDefaultTruckFullItem
     }

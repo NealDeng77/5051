@@ -620,7 +620,8 @@ namespace _5051.UnitTests.Backend
             item.Id = FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
 
             // act
-            student.Inventory.Remove(item);
+            //student.Inventory.Remove(item);
+            student.Inventory.Clear();
             DataSourceBackend.Instance.StudentBackend.Update(student);
 
             test.CustomerPurchase(student);

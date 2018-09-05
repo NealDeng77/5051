@@ -241,21 +241,17 @@ namespace _5051.Backend
 
         public FactoryInventoryModel GetDefaultTruckFullItem(FactoryInventoryCategoryEnum category)
         {
-            var TruckSet = Index().Where(m => m.Category == category).ToList();
-            if (TruckSet.Count() == 0)
-            {
-                return GetDefault(category);
-            }
-
-            // Get the 2nd in the set, the 1st is blanks.
             var data = new FactoryInventoryModel();
-            if (TruckSet.Count > 1)
+
+            // Return the next item that is NOT the default
+            var TruckSet = Index().Where(m => m.Category == category).ToList();
+            if (TruckSet.Any())
             {
-                data = TruckSet[1];
-            }
-            else
-            {
-                data = GetDefault(category);
+                var dataDefault = TruckSet.Where(m => m.IsDefault == false).ToList();
+                if (dataDefault.Any())
+                {
+                    data = dataDefault.FirstOrDefault();
+                }
             }
 
             return data;
@@ -276,33 +272,69 @@ namespace _5051.Backend
 
             //Truck
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Truck);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Truck = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Truck = Item.Id;
+            }
 
             //Wheels
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Wheels);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Wheels = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Wheels = Item.Id;
+            }
 
             // Topper
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Topper);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Topper = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Topper = Item.Id;
+            }
 
             // Menu
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Menu);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Menu = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Menu = Item.Id;
+            }
 
             // Sign
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Sign);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Sign = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Sign = Item.Id;
+            }
 
             // Trialer
             Item = GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Trailer);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Trailer = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Trailer = Item.Id;
+            }
 
             return studentData;
         }
@@ -320,35 +352,85 @@ namespace _5051.Backend
         {
             FactoryInventoryModel Item;
 
+            // Food
+            Item = GetDefault(FactoryInventoryCategoryEnum.Food);
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+            }
+
             //Truck
             Item = GetDefault(FactoryInventoryCategoryEnum.Truck);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Truck = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Truck = Item.Id;
+            }
 
             //Wheels
             Item = GetDefault(FactoryInventoryCategoryEnum.Wheels);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Wheels = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+                studentData.Truck.Wheels = Item.Id;
+            }
 
             // Topper
             Item = GetDefault(FactoryInventoryCategoryEnum.Topper);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Topper = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+
+                studentData.Truck.Topper = Item.Id;
+            }
 
             // Menu
             Item = GetDefault(FactoryInventoryCategoryEnum.Menu);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Menu = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+
+                studentData.Truck.Menu = Item.Id;
+            }
 
             // Sign
             Item = GetDefault(FactoryInventoryCategoryEnum.Sign);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Sign = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+
+                studentData.Truck.Sign = Item.Id;
+            }
 
             // Trialer
             Item = GetDefault(FactoryInventoryCategoryEnum.Trailer);
-            studentData.Inventory.Add(Item);
-            studentData.Truck.Trailer = Item.Id;
+            if (!string.IsNullOrEmpty(Item.Name))
+            {
+                if (studentData.Inventory.Where(x => x.Id == Item.Id).FirstOrDefault() == null)
+                {
+                    studentData.Inventory.Add(Item);
+                }
+
+                studentData.Truck.Trailer = Item.Id;
+            }
 
             return studentData;
         }
