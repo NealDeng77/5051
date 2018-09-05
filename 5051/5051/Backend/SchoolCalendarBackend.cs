@@ -133,6 +133,7 @@ namespace _5051.Backend
 
             // See if the updates make it match default, if so, need to clear the modified flag...
             var myDefault = new SchoolCalendarModel(data.Date);
+            SchoolCalendarBackendHelper.SetDefault(myDefault);
 
             if (myDefault.TimeEnd == data.TimeEnd && myDefault.TimeStart == data.TimeStart)
             {
