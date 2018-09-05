@@ -44,6 +44,8 @@ namespace _5051.Models
         [Required(ErrorMessage = "Quantities is required")]
         public int Quantities { get; set; }
         
+        [Display(Name = "Limited Supply", Description ="FactoryInventory IsLimitSupply")]
+
         public bool IsLimitSupply { get; set; }
 
         // Track if the item is a default item
