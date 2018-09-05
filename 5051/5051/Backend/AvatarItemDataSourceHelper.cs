@@ -53,26 +53,26 @@ namespace _5051.Backend
             DataList.Clear();
 
             DataList.Add(new AvatarItemModel("Accessory0.png", "None", "None", AvatarItemCategoryEnum.Accessory, 1, 10, false, true));  // Default
-            DataList.Add(new AvatarItemModel("Accessory1.png", "Glasses", "Horn-Rimmed", AvatarItemCategoryEnum.Accessory, 5, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory1.png", "Glasses", "Horn-Rimmed", AvatarItemCategoryEnum.Accessory, 10, 10, false));
             DataList.Add(new AvatarItemModel("Accessory2.png", "Glasses", "Round", AvatarItemCategoryEnum.Accessory, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Accessory3.png", "Glasses", "Rectangle", AvatarItemCategoryEnum.Accessory, 20, 10, false));
-            DataList.Add(new AvatarItemModel("Accessory4.png", "Earrings", "Studs", AvatarItemCategoryEnum.Accessory, 40, 10, false));
-            DataList.Add(new AvatarItemModel("Accessory5.png", "Earrings", "Hoops", AvatarItemCategoryEnum.Accessory, 80, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory3.png", "Glasses", "Rectangle", AvatarItemCategoryEnum.Accessory, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory4.png", "Earrings", "Studs", AvatarItemCategoryEnum.Accessory, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Accessory5.png", "Earrings", "Hoops", AvatarItemCategoryEnum.Accessory, 15, 10, false));
 
             DataList.Add(new AvatarItemModel("Cheeks0.png", "None", "None", AvatarItemCategoryEnum.Cheeks, 1, 10, false,true)); // Default
-            DataList.Add(new AvatarItemModel("Cheeks1.png", "Blush", "Light", AvatarItemCategoryEnum.Cheeks, 5, 10, false));
+            DataList.Add(new AvatarItemModel("Cheeks1.png", "Blush", "Light", AvatarItemCategoryEnum.Cheeks, 10, 10, false));
             DataList.Add(new AvatarItemModel("Cheeks2.png", "Blush", "Dark", AvatarItemCategoryEnum.Cheeks, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Cheeks3.png", "Blush", "Darker", AvatarItemCategoryEnum.Cheeks, 20, 10, false));
-            DataList.Add(new AvatarItemModel("Cheeks4.png", "Freckles", "Dark", AvatarItemCategoryEnum.Cheeks, 40, 10, false));
-            DataList.Add(new AvatarItemModel("Cheeks5.png", "Freckles", "Light", AvatarItemCategoryEnum.Cheeks, 80, 10, false));
+            DataList.Add(new AvatarItemModel("Cheeks3.png", "Blush", "Darker", AvatarItemCategoryEnum.Cheeks, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Cheeks4.png", "Freckles", "Dark", AvatarItemCategoryEnum.Cheeks, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Cheeks5.png", "Freckles", "Light", AvatarItemCategoryEnum.Cheeks, 15, 10, false));
 
             // DataList.Add(new AvatarItemModel("Expression0.png", "None", "None", AvatarItemCategoryEnum.Expression, 1, 10, false));
             DataList.Add(new AvatarItemModel("Expression1.png", "Smile", "Happy", AvatarItemCategoryEnum.Expression, 1, 10, false, true)); // Default
             DataList.Add(new AvatarItemModel("Expression2.png", "Smile", "Lashy", AvatarItemCategoryEnum.Expression, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Expression3.png", "Eyes", "Femme Smile", AvatarItemCategoryEnum.Expression, 20, 10, false));
-            DataList.Add(new AvatarItemModel("Expression4.png", "Eyes", "Smiley", AvatarItemCategoryEnum.Expression, 40, 10, false));
-            DataList.Add(new AvatarItemModel("Expression5.png", "Meh", "Moody", AvatarItemCategoryEnum.Expression, 80, 10, false));
-            DataList.Add(new AvatarItemModel("Expression6.png", "Meh", "Feeme Moody", AvatarItemCategoryEnum.Expression, 100, 10, false));
+            DataList.Add(new AvatarItemModel("Expression3.png", "Eyes", "Femme Smile", AvatarItemCategoryEnum.Expression, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Expression4.png", "Eyes", "Smiley", AvatarItemCategoryEnum.Expression, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Expression5.png", "Meh", "Moody", AvatarItemCategoryEnum.Expression, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Expression6.png", "Meh", "Feeme Moody", AvatarItemCategoryEnum.Expression, 15, 10, false));
 
             DataList.Add(new AvatarItemModel("Head0.png", "Head", "None", AvatarItemCategoryEnum.Head, 1, 10, false, true)); // Default
             DataList.Add(new AvatarItemModel("Head1.png", "Head", "Light", AvatarItemCategoryEnum.Head, 1, 10, false));
@@ -82,11 +82,11 @@ namespace _5051.Backend
             DataList.Add(new AvatarItemModel("Head5.png", "Head", "Darker", AvatarItemCategoryEnum.Head, 1, 10, false));
 
             DataList.Add(new AvatarItemModel("Shirt_white.png", "Shirt", "White", AvatarItemCategoryEnum.ShirtFull, 1, 10, false, true)); // Default
-            DataList.Add(new AvatarItemModel("Shirt_black.png", "Shirt", "Black", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            DataList.Add(new AvatarItemModel("Shirt_blue.png", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            DataList.Add(new AvatarItemModel("Shirt_green.png", "Shirt", "Green", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            DataList.Add(new AvatarItemModel("Shirt_orange.png", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
-            DataList.Add(new AvatarItemModel("Shirt_red.png", "Shirt", "Red", AvatarItemCategoryEnum.ShirtFull, 50, 10, false));
+            DataList.Add(new AvatarItemModel("Shirt_black.png", "Shirt", "Black", AvatarItemCategoryEnum.ShirtFull, 20, 10, false));
+            DataList.Add(new AvatarItemModel("Shirt_blue.png", "Shirt", "Blue", AvatarItemCategoryEnum.ShirtFull, 20, 10, false));
+            DataList.Add(new AvatarItemModel("Shirt_green.png", "Shirt", "Green", AvatarItemCategoryEnum.ShirtFull, 20, 10, false));
+            DataList.Add(new AvatarItemModel("Shirt_orange.png", "Shirt", "Orange", AvatarItemCategoryEnum.ShirtFull, 20, 10, false));
+            DataList.Add(new AvatarItemModel("Shirt_red.png", "Shirt", "Red", AvatarItemCategoryEnum.ShirtFull, 20, 10, false));
 
             DataList.Add(new AvatarItemModel("Pants.png", "Pants", "Blue", AvatarItemCategoryEnum.Pants, 1, 10, false, true)); // Default
 
@@ -94,19 +94,19 @@ namespace _5051.Backend
 
             DataList.Add(new AvatarItemModel("placeholder.png", "Shaved", "Bald", AvatarItemCategoryEnum.HairFront, 1, 30, false, true)); // Default
 
-            DataList.Add(new AvatarItemModel("Hair1_straight_white.png", "White", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_straight_black.png", "Black", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_straight_Blonde.png", "Blonde", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_straight_brown.png", "Brown", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_straight_chestnut.png", "Chestnut", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_straight_red.png", "Red", "Straight", AvatarItemCategoryEnum.HairFront, 1, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_white.png", "White", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_black.png", "Black", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_Blonde.png", "Blonde", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_brown.png", "Brown", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_chestnut.png", "Chestnut", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_straight_red.png", "Red", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
 
-            DataList.Add(new AvatarItemModel("Hair1_short_white.png", "White", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
-            DataList.Add(new AvatarItemModel("Hair1_short_black.png", "Black", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
-            DataList.Add(new AvatarItemModel("Hair1_short_Blonde.png", "Blonde", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
-            DataList.Add(new AvatarItemModel("Hair1_short_brown.png", "Brown", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
-            DataList.Add(new AvatarItemModel("Hair1_short_chestnut.png", "Chestnut", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
-            DataList.Add(new AvatarItemModel("Hair1_short_red.png", "Red", "Crew Cut", AvatarItemCategoryEnum.HairFront, 20, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_white.png", "White", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_black.png", "Black", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_Blonde.png", "Blonde", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_brown.png", "Brown", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_chestnut.png", "Chestnut", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
+            DataList.Add(new AvatarItemModel("Hair1_short_red.png", "Red", "Crew Cut", AvatarItemCategoryEnum.HairFront, 10, 20, false));
 
             DataList.Add(new AvatarItemModel("Hair1_hairline_black.png", "Black", "Shaved", AvatarItemCategoryEnum.HairFront, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair1_hairline_Blonde.png", "Blonde", "Shaved", AvatarItemCategoryEnum.HairFront, 10, 10, false));
@@ -122,12 +122,12 @@ namespace _5051.Backend
             DataList.Add(new AvatarItemModel("Hair1_loose_red.png", "Red", "Loose", AvatarItemCategoryEnum.HairFront, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair1_loose_white.png", "White", "Loose", AvatarItemCategoryEnum.HairFront, 10, 10, false));
 
-            DataList.Add(new AvatarItemModel("Hair1_swept_black.png", "Black", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_swept_Blonde.png", "Blonde", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_swept_brown.png", "Brown", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_swept_chestnut.png", "Chestnut", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_swept_red.png", "Red", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
-            DataList.Add(new AvatarItemModel("Hair1_swept_white.png", "White", "Swept", AvatarItemCategoryEnum.HairFront, 30, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_black.png", "Black", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_Blonde.png", "Blonde", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_brown.png", "Brown", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_chestnut.png", "Chestnut", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_red.png", "Red", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_swept_white.png", "White", "Swept", AvatarItemCategoryEnum.HairFront, 15, 30, false));
 
             #endregion FrontHair
 
@@ -161,20 +161,20 @@ namespace _5051.Backend
             DataList.Add(new AvatarItemModel("Hair2_kinky_BlondeOmbre.png", "Blonde Ombre", "Fluffy", AvatarItemCategoryEnum.HairBack, 10, 10, false));
             DataList.Add(new AvatarItemModel("Hair2_kinky_BrownOmbre.png", "Brown Ombre", "Fluffy", AvatarItemCategoryEnum.HairBack, 10, 10, false));
 
-            DataList.Add(new AvatarItemModel("Hair2_long_black.png", "Black", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blonde.png", "Blonde", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_brown.png", "Brown", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_chestnut.png", "Chestnut", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_red.png", "Red", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_white.png", "White", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_blackblue.png", "Black Blue", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_blackgreen.png", "Black Green", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_blackviolet.png", "Black Violet", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondeombre.png", "Blonde Ombre", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondepink.png", "Blonde Pink", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondeviolet.png", "Blonde Violet", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_Blondegreen.png", "Blonde Green", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
-            DataList.Add(new AvatarItemModel("Hair2_long_brownombre.png", "Brown Ombre", "Long", AvatarItemCategoryEnum.HairBack, 10, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_black.png", "Black", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blonde.png", "Blonde", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_brown.png", "Brown", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_chestnut.png", "Chestnut", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_red.png", "Red", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_white.png", "White", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_blackblue.png", "Black Blue", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_blackgreen.png", "Black Green", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_blackviolet.png", "Black Violet", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondeombre.png", "Blonde Ombre", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondepink.png", "Blonde Pink", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondeviolet.png", "Blonde Violet", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_Blondegreen.png", "Blonde Green", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
+            DataList.Add(new AvatarItemModel("Hair2_long_brownombre.png", "Brown Ombre", "Long", AvatarItemCategoryEnum.HairBack, 15, 10, false));
             #endregion BackHair
 
             return DataList;
