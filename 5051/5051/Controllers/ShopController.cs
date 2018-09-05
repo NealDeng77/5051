@@ -514,22 +514,26 @@ namespace _5051.Controllers
         {
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
+            ViewBag.OtherStudent = string.Empty;
+
+            if (!string.IsNullOrEmpty(item))
+            {
+                ViewBag.OtherStudent = DataSourceBackend.Instance.StudentBackend.Read(item);
+                if (ViewBag.OtherStudent == null)
+                {
+                    ViewBag.OtherStudent = id;
+                }
+            }
 
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
-            }
-
-            ViewBag.OtherStudent = Backend.StudentBackend.Instance.Read(item); ;
-            if (ViewBag.OtherStudent == null)
-            {
-                ViewBag.OtherStudent = Backend.StudentBackend.Instance.Read(id); ;
             }
 
             //Todo, return the shop information for the student.

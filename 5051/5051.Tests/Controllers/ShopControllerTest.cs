@@ -574,6 +574,21 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
 
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Invalid_ID_Item_Should_Fail()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            string id = "bogus";
+
+            //// Act
+            var result = (RedirectToRouteResult)controller.VisitShop(id,"bogus");
+
+            //// Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
         [TestMethod]
         public void Controller_Shop_Visit_Valid_Id_Should_Pass()
         {
@@ -584,6 +599,39 @@ namespace _5051.Tests.Controllers
 
             //// Act
             var resultCall = controller.VisitShop(data.Id) as ViewResult;
+            var result = (StudentModel)resultCall.Model;
+
+            //// Assert
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
+        }
+
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Valid_Id_Item_Should_Pass()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            var data = Backend.StudentBackend.Instance.GetDefault();
+            var expect = data.Name;
+
+            //// Act
+            var resultCall = controller.VisitShop(data.Id,data.Id) as ViewResult;
+            var result = (StudentModel)resultCall.Model;
+
+            //// Assert
+            Assert.AreEqual(expect, result.Name, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Shop_Visit_Valid_Id_Invalid_Item_Should_Pass()
+        {
+            //// Arrange
+            ShopController controller = new ShopController();
+            var data = Backend.StudentBackend.Instance.GetDefault();
+            var expect = data.Name;
+
+            //// Act
+            var resultCall = controller.VisitShop(data.Id, "bogus") as ViewResult;
             var result = (StudentModel)resultCall.Model;
 
             //// Assert
