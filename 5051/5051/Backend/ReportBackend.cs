@@ -199,29 +199,32 @@ namespace _5051.Backend
             //initialize the drop down list
             report.Semesters = new List<SelectListItem>();
 
-            var spring = new SelectListItem { Value = "1", Text = "Spring semester 2018" };
+            var fall = new SelectListItem { Value = "1", Text = "Fall semester" };
+
+            //add to the select list
+            report.Semesters.Add(fall);
+
+            if (report.SelectedSemesterId == 1)
+            {
+                //set the first and last day of fall semester according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
+            }
+
+
+            var spring = new SelectListItem { Value = "2", Text = "Spring semester" };
 
             //add to the select list
             report.Semesters.Add(spring);
 
-            if (report.SelectedSemesterId == 1)
+            if (report.SelectedSemesterId == 2)
             {
                 //set the first and last day of spring semester according to school dismissal settings
                 report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringFirstClassDay;
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringLastClassDay;
             }
 
-            var fall = new SelectListItem { Value = "2", Text = "Fall semester 2017" };
 
-            //add to the select list
-            report.Semesters.Add(fall);
-
-            if (report.SelectedSemesterId == 2)
-            {
-                //set the first and last day of fall semester according to school dismissal settings
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallFirstClassDay;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallLastClassDay;
-            }
 
 
 
@@ -246,52 +249,52 @@ namespace _5051.Backend
 
             report.Quarters = new List<SelectListItem>();
 
-            var summer = new SelectListItem { Value = "1", Text = "Summer quarter 2018" };
+            var fall = new SelectListItem { Value = "1", Text = "Fall quarter" };
 
             //add to the select list
-            report.Quarters.Add(summer);
+            report.Quarters.Add(fall);
 
             if (report.SelectedQuarterId == 1)
             {
                 //set the first and last day of this quarter according to school dismissal settings
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterFirstClassDay.Date;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterLastClassDay.Date;
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterLastClassDay.Date;
             }
 
-            var spring = new SelectListItem { Value = "2", Text = "Spring quarter 2018" };
-
-            //add to the select list
-            report.Quarters.Add(spring);
-
-            if (report.SelectedQuarterId == 2)
-            {
-                //set the first and last day of this quarter according to school dismissal settings
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterFirstClassDay.Date;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterLastClassDay.Date;
-            }
-
-            var winter = new SelectListItem { Value = "3", Text = "Winter quarter 2018" };
+            var winter = new SelectListItem { Value = "2", Text = "Winter quarter" };
 
             //add to the select list
             report.Quarters.Add(winter);
 
-            if (report.SelectedQuarterId == 3)
+            if (report.SelectedQuarterId == 2)
             {
                 //set the first and last day of this quarter according to school dismissal settings
                 report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterFirstClassDay.Date;
                 report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().WinterQuarterLastClassDay.Date;
             }
 
-            var fall = new SelectListItem { Value = "4", Text = "Fall quarter 2017" };
+            var spring = new SelectListItem { Value = "3", Text = "Spring quarter" };
 
             //add to the select list
-            report.Quarters.Add(fall);
+            report.Quarters.Add(spring);
+
+            if (report.SelectedQuarterId == 3)
+            {
+                //set the first and last day of this quarter according to school dismissal settings
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SpringQuarterLastClassDay.Date;
+            }
+
+            var summer = new SelectListItem { Value = "4", Text = "Summer quarter" };
+
+            //add to the select list
+            report.Quarters.Add(summer);
 
             if (report.SelectedQuarterId == 4)
             {
                 //set the first and last day of this quarter according to school dismissal settings
-                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterFirstClassDay.Date;
-                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().FallQuarterLastClassDay.Date;
+                report.DateStart = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterFirstClassDay.Date;
+                report.DateEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().SummerQuarterLastClassDay.Date;
             }
 
             //Generate report for this semester
