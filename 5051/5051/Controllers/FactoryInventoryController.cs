@@ -86,6 +86,8 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "Tokens,"+
                                         "Category,"+
+                                        "Quantities," +
+                                        "IsLimitSupply," +
                                         "")] FactoryInventoryModel data)
         {
             if (!ModelState.IsValid)
@@ -137,6 +139,8 @@ namespace _5051.Controllers
                                         "Uri,"+
                                         "Tokens,"+
                                         "Category,"+
+                                        "Quantities," +
+                                        "IsLimitSupply," +
                                         "")] FactoryInventoryModel data)
         {
             if (!ModelState.IsValid)

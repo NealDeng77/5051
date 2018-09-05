@@ -122,6 +122,31 @@
 
                     <div class="row justify-content-center">
                         <div class="col-sm text-sm-center text-md-right" id="xpName">
+                            @Html.DisplayNameFor(m => m.Quantities)
+                        </div>
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col-sm text-left" id="xpValue">
+                            @Html.EditorFor(m => m.Quantities)
+                            @Html.ValidationMessageFor(m => m.Quantities)
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-sm text-sm-center text-md-right" id="xpName">
+                            @Html.DisplayNameFor(m => m.IsLimitSupply)
+                        </div>
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col-sm text-left" id="xpValue">
+                            @Html.CheckBoxFor(m => m.IsLimitSupply)
+                           
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-sm text-sm-center text-md-right" id="xpName">
                             @Html.DisplayNameFor(m => m.Category)
                         </div>
                         <div class="col-1">
