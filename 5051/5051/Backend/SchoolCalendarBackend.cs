@@ -151,18 +151,40 @@ namespace _5051.Backend
             return myReturn;
         }
 
-        // todo: Not ready yet, need to work out how to reset the calendar properly
 
-        ///// <summary>
-        ///// Walks each existing date in the calendar, and resets the dates based on the defaults.
-        ///// </summary>
-        //public void ResetDefaults()
-        //{
-        //    foreach (var item in instance.Index())
-        //    {
-        //        Update(item);
-        //    }
-        //}
+        /// <summary>
+        /// Walks each existing date in the calendar, and resets the dates based on the defaults.
+        /// </summary>
+        public void ResetDefaults()
+        {
+            var startDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;  //school year start date
+            var endDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayLast;  //school year end date
+            var today = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+
+            var currentDate = startDate;  //loop variable
+
+            while (currentDate.CompareTo(endDate) <= 0)
+            {
+                var currentCalendarModel = ReadDate(currentDate);
+
+                //if the calendar model for that date does not exit yet, create a new one
+                if (currentCalendarModel == null)
+                {
+                    currentCalendarModel = new SchoolCalendarModel(currentDate);
+                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);
+                    Create(currentCalendarModel);
+                }
+
+                //if the calendar model for that date is not modified, and is after today, reset to default
+                if (!currentCalendarModel.Modified && currentDate.CompareTo(today) > 0)
+                {
+                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);
+                    Update(currentCalendarModel);
+                }
+
+                currentDate = currentDate.AddDays(1);
+            }
+        }
 
         /// <summary>
         /// Returns the First record
