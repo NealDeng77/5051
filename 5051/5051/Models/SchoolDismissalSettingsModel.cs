@@ -304,13 +304,9 @@ namespace _5051.Models
             SunEndType = SchoolCalendarDismissalEnum.Unknown;
 
             var Year = DateTime.UtcNow.Year;
-            if (DateTime.UtcNow.Month > 1)
-            {
-                Year--;
-            }
 
-            DayFirst = DateTime.Parse("10/01/" + Year);
-            DayLast = DateTime.Parse("09/30/" + (Year + 1));
+            DayFirst = DateTime.Parse("09/01/" + Year);
+            DayLast = DateTime.Parse("08/31/" + (Year + 1));
 
             //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/20/" + Year);
