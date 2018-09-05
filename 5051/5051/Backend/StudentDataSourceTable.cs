@@ -320,6 +320,7 @@ namespace _5051.Backend
                 TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckModel>(tableName, "truck", temp.RowKey );
 
                 var newData = new StudentModel(TempData);
+                newData.Id = temp.RowKey;   //Set the ID to the item loaded
                 DataList.Add(newData);
             }
 

@@ -52,6 +52,10 @@ namespace _5051.Backend
         public SchoolCalendarModel Create(SchoolCalendarModel data)
         {
             SchoolCalendarList.Add(data);
+
+            //sort by date
+            SchoolCalendarList = SchoolCalendarList.OrderBy(x => x.Date).ToList();
+
             return data;
         }
 
@@ -89,6 +93,9 @@ namespace _5051.Backend
             }
 
             myReturn.Update(data);
+
+            //sort by date
+            SchoolCalendarList = SchoolCalendarList.OrderBy(x => x.Date).ToList();
 
             return myReturn;
         }
@@ -169,6 +176,9 @@ namespace _5051.Backend
 
                 currentDate = currentDate.AddDays(1);
             }
+
+            //sort by date
+            SchoolCalendarList = SchoolCalendarList.OrderBy(x => x.Date).ToList();
         }
 
         /// <summary>
