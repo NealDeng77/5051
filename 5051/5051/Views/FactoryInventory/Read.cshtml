@@ -111,6 +111,30 @@
                     </div>
 
                     <div class="row justify-content-around">
+                        <div class="col text-right" id="currentStatusName">
+                            @Html.DisplayNameFor(m => m.Quantities)
+                        </div>
+                        <div class="col-1">
+                            &nbsp;:&nbsp;
+                        </div>
+                        <div class="col text-left" id="currentStatusValue">
+                            @Html.DisplayFor(m => m.Quantities)
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
+                        <div class="col text-right" id="currentStatusName">
+                            @Html.DisplayNameFor(m => m.IsLimitSupply)
+                        </div>
+                        <div class="col-1">
+                            &nbsp;:&nbsp;
+                        </div>
+                        <div class="col text-left" id="currentStatusValue">
+                            @Html.DisplayFor(m => m.IsLimitSupply)
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
                         <div class="col text-right" id="currentEmotionName">
                             @Html.DisplayNameFor(m => m.Category)
                         </div>
