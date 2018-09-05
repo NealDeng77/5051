@@ -305,19 +305,19 @@ namespace _5051.Models
 
             var Year = DateTime.UtcNow.Year;
 
-            DayFirst = DateTime.Parse("09/01/" + Year);
-            DayLast = DateTime.Parse("08/31/" + (Year + 1));
+            DayFirst = DateTime.Parse("09/05/" + Year);
+            DayLast = DateTime.Parse("08/30/" + (Year + 1));
 
             //The following specifies the start and end date of semesters
             FallFirstClassDay = DateTime.Parse("09/05/" + Year);
-            FallLastClassDay = DateTime.Parse("01/31/" + (Year + 1));
+            FallLastClassDay = DateTime.Parse("01/29/" + (Year + 1));
 
-            SpringFirstClassDay = DateTime.Parse("02/01/" + (Year + 1));
-            SpringLastClassDay = DateTime.Parse("08/31/" + (Year + 1));
+            SpringFirstClassDay = DateTime.Parse("01/30/" + (Year + 1));
+            SpringLastClassDay = DateTime.Parse("08/30/" + (Year + 1));
 
             //The following specifies the start and end date of quarters
             FallQuarterFirstClassDay = DateTime.Parse("09/05/" + Year);
-            FallQuarterLastClassDay = DateTime.Parse("12/1/" + Year);
+            FallQuarterLastClassDay = DateTime.Parse("11/07/" + Year);
 
             WinterQuarterFirstClassDay = DateTime.Parse("01/08/" + (Year + 1));
             WinterQuarterLastClassDay = DateTime.Parse("03/19/" + (Year + 1));
