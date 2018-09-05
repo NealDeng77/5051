@@ -231,6 +231,7 @@ namespace _5051.Models
             DayEnd = data.DayEnd;
             Modified = data.Modified;
             SchoolDay = data.SchoolDay;
+            HasAttendance = data.HasAttendance;
 
             // The time in school is the delta of end - start
             TimeDuration = data.TimeEnd.Subtract(TimeStart);
