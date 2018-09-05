@@ -208,6 +208,7 @@ namespace _5051.Models
             DayEnd = data.DayEnd;
             Modified = data.Modified;
             SchoolDay = data.SchoolDay;
+            HasAttendance = data.HasAttendance;
 
             TimeDuration = data.TimeEnd.Subtract(TimeStart);
         }
