@@ -234,8 +234,15 @@ namespace _5051.Models
             SchoolDay = data.SchoolDay;
             HasAttendance = data.HasAttendance;
 
-            // The time in school is the delta of end - start
-            TimeDuration = data.TimeEnd.Subtract(TimeStart);
+            if (SchoolDay)
+            {
+                // The time in school is the delta of end - start
+                TimeDuration = data.TimeEnd.Subtract(TimeStart);
+            }
+            else
+            {
+                TimeDuration = TimeSpan.Zero;
+            }
 
 
             //// Check to make sure not set as early or late, if the time time is changed
