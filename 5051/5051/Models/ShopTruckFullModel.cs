@@ -63,9 +63,6 @@ namespace _5051.Models
         // Experience
         public int Experience { get; set; }
 
-        // LeaderBoard
-        public List<LeaderBoardModel> LeaderBoard { get; set; }
-
         // Iteration Number
         public int IterationNumber { get; set; }
 
@@ -81,7 +78,6 @@ namespace _5051.Models
             Income = 0;
             Outcome = 0;
             BusinessList = new List<TransactionModel>();
-            LeaderBoard = new List<LeaderBoardModel>();
 
             Truck = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetDefault(FactoryInventoryCategoryEnum.Truck).Id;
 
@@ -102,13 +98,6 @@ namespace _5051.Models
             TrailerUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Trailer);
             SignUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Sign);
             MenuUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Menu);
-
-
-            //// only for test:
-            //TransactionModel myTransaction = new TransactionModel();
-            //myTransaction.Name = "Nothing to show";
-            //myTransaction.Uri = null;
-            //BusinessList.Add(myTransaction);
         }
     }
 }

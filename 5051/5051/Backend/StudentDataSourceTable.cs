@@ -161,7 +161,7 @@ namespace _5051.Backend
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id , temp);
+            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id, temp);
 
 
             // Sub components
@@ -169,11 +169,11 @@ namespace _5051.Backend
             tempData.Id = data.Id;
 
             // Now store each of the Sub Structures as independent rows
-            DataSourceBackendTable.Instance.Create<AvatarCompositeModel>(tableName, "composite", tempData.Id , tempData.AvatarComposite);
+            DataSourceBackendTable.Instance.Create<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite);
 
-            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id , tempData.AvatarInventory);
+            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id, tempData.AvatarInventory);
 
-            DataSourceBackendTable.Instance.Create<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id , tempData.Inventory);
+            DataSourceBackendTable.Instance.Create<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id, tempData.Inventory);
 
             DataSourceBackendTable.Instance.Create<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
 
@@ -214,7 +214,7 @@ namespace _5051.Backend
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", data.Id , temp);
+            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", data.Id, temp);
 
             // Sub components
             var tempData = new StudentModel(data);
@@ -222,14 +222,14 @@ namespace _5051.Backend
 
             // Now store each of the Sub Structures as independent rows
             DataSourceBackendTable.Instance.Delete<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite);
-            
-            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id  , tempData.AvatarInventory);
 
-            DataSourceBackendTable.Instance.Delete<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id , tempData.Inventory);
+            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id, tempData.AvatarInventory);
 
-            DataSourceBackendTable.Instance.Delete<List<AttendanceModel>>(tableName, "attendance", tempData.Id  , tempData.Attendance);
+            DataSourceBackendTable.Instance.Delete<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id, tempData.Inventory);
 
-            DataSourceBackendTable.Instance.Delete<ShopTruckFullModel>(tableName, "truck", tempData.Id , tempData.Truck);
+            DataSourceBackendTable.Instance.Delete<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
+
+            DataSourceBackendTable.Instance.Delete<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck);
 
             return true;
         }
@@ -285,36 +285,44 @@ namespace _5051.Backend
             // Storage Load all rows
 
             // Make a call to LoadAll, and pass false for convert, this will return the raw object
-            var DataSetList = DataSourceBackendTable.Instance.LoadAll<DataSourceBackendTableEntity>(tableName, "student",false);
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<DataSourceBackendTableEntity>(tableName, "student", false);
 
             // Loop through each DataSetList, and reload them with the sub fields
             foreach (var temp in DataSetList)
             {
                 // Only parse the Student items
-                if (!temp.PartitionKey.Contains("student") )
+                if (!temp.PartitionKey.Contains("student"))
                 {
-                    continue;   
+                    continue;
                 }
 
                 // Now store each of the Sub Structures as independent rows
 
                 var TempData = new StudentModel();
 
-                TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
+                try
+                {
 
-                TempData.AvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey );
+                    TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
 
-                TempData.AvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey );
+                    TempData.AvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
 
-                TempData.Inventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey );
+                    TempData.AvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey);
 
-                TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey );
+                    TempData.Inventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey);
 
-                TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey );
+                    TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
 
-                var newData = new StudentModel(TempData);
-                newData.Id = temp.RowKey;   //Set the ID to the item loaded
-                DataList.Add(newData);
+                    TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey);
+
+                    var newData = new StudentModel(TempData);
+                    newData.Id = temp.RowKey;   //Set the ID to the item loaded
+                    DataList.Add(newData);
+                }
+                catch (Exception ex)
+                {
+                    throw new NotSupportedException();
+                }
             }
 
 

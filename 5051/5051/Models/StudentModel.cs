@@ -213,9 +213,6 @@ namespace _5051.Models
             Truck.TrailerUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
             Truck.SignUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
             Truck.MenuUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
-
-            Truck.LeaderBoard = Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
-
         }
 
         /// <summary>
@@ -253,8 +250,6 @@ namespace _5051.Models
             Truck.TrailerUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
             Truck.SignUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
             Truck.MenuUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
-
-            Truck.LeaderBoard = Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
 
             return true;
         }

@@ -22,71 +22,6 @@
     <br />
 </div>
 
-<div class="row justify-content-center">
-
-    <div class="col-1 "></div>
-    <div class="col lightTransparentBox">
-        <div class="row justify-content-center mb-3">
-            <div class="FontSizeMedium FontBold">Leaderboard</div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-2"></div>
-            <div class="col-2 FontSizeSmall FontBold">
-                Place
-            </div>
-            <div class="col-3 FontSizeSmall FontBold">
-                Name
-            </div>
-            <div class="col-3 FontSizeSmall FontBold">
-                Profit
-            </div>
-        </div>
-
-
-        @{
-            var student = Model[0];
-            var count = 0;
-
-            IEnumerable<_5051.Models.LeaderBoardModel> query = student.Truck.LeaderBoard.OrderByDescending(x => x.Profit);
-
-            foreach (var element in query)
-            {
-                <div class="row justify-content-center">
-                    <div class="col-2"></div>
-                    <div class="col-2 FontSizeSmall">
-                        @(count + 1)
-                    </div>
-                    <div class="col-3 FontSizeSmall">
-                        @element.Name
-                    </div>
-                    <div class="col-3 FontSizeSmall">
-                        @element.Profit
-                    </div>
-                </div>
-            }
-
-            @*for (int i = 0; i < student.Truck.LeaderBoard.Count; i++)
-            {
-                <div class="row justify-content-center">
-                    <div class="col-2"></div>
-                    <div class="col-2 FontSizeSmall">
-                        @(i + 1)
-                    </div>
-                    <div class="col-3 FontSizeSmall">
-                        @student.Truck.LeaderBoard[i].Name
-                    </div>
-                    <div class="col-3 FontSizeSmall">
-                        @student.Truck.LeaderBoard[i].Profit
-                    </div>
-                </div>
-            }*@
-        }
-
-    </div>
-    <div class="col-1"></div>
-</div>
-<br />
 
 <div class="row justify-content-around">
     <div class="col-1"></div>
@@ -116,8 +51,13 @@
                         </div>
                         <div class="row justify-content-around">
                             <span class="col FontSizeMedium FontBold text-center">
-                                @item.Name
+                                @item.Name<br />
                             </span>
+                        </div>
+
+                        <div class="row">
+                            <br />
+                            <br />
                         </div>
                     </div>
                 }
@@ -127,3 +67,69 @@
     </div>
     <div class="col-1"></div>
 </div>
+
+@*<div class="row justify-content-center">
+
+    <div class="col-1 "></div>
+    <div class="col-auto lightTransparentBox">
+        <div class="row justify-content-center">
+            <div class="col">
+                @{
+                    var Board = _5051.Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
+                    var query = Board.OrderByDescending(x => x.Profit).ToList();
+
+                    <div class="row justify-content-center">
+                        <div class="FontSizeMedium FontBold text-center">
+                            Leader board
+                        </div>
+                    </div>
+
+                    for (int i = 0; i < query.Count; i++)
+                    {
+                        <div class="row justify-content-center">
+
+                            <div class="col-1 FontSizeSmall text-center">
+                                @{
+                                    if (i == 0)
+                                    {
+                                        <span class="FontBold">Rank</span><br /><br />
+                                    }
+                                    <span>
+                                        @(i + 1)
+                                    </span>
+                                }
+                            </div>
+
+                            <div class="col-1 FontSizeSmall text-center">
+                                @{
+                                    if (i == 0)
+                                    {
+                                        <span class="FontBold">Profit</span><br /><br />
+                                    }
+                                    <span>
+                                        @query[i].Profit
+                                    </span>
+                                }
+                            </div>
+
+                            <div class="col-3 FontSizeSmall text-left">
+                                @{
+                                    if (i == 0)
+                                    {
+                                        <span class="FontBold">Name</span><br /><br />
+                                    }
+                                    <span>
+                                        @query[i].Name
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<br />*@
+
