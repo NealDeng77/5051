@@ -159,7 +159,7 @@
                     <div class="col-sm-5">
                         <div class="lightTransparentBox m-1 p-2">
                             <div class="FontSizeMedium text-center FontColorWhite">
-                                Semester Settings
+                                School Year Settings
                             </div>
                             <div class="row justify-content-center mt-2">
                                 <div class="col text-right">
@@ -179,106 +179,55 @@
                             </div>
                             <div class="row justify-content-center mt-2">
                                 <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                                    @Html.DisplayNameFor(m => m.S1Start)
                                 </div>
                                 <div class="col text-left">
-                                    @Model.FallFirstClassDay.ToShortDateString()
+                                    @Model.S1Start.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.FallLastClassDay)
+                                    @Html.DisplayNameFor(m => m.S2Start)
                                 </div>
                                 <div class="col text-left">
-                                    @Model.FallLastClassDay.ToShortDateString()
+                                    @Model.S2Start.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center mt-2">
                                 <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                                    @Html.DisplayNameFor(m => m.Q1Start)
                                 </div>
                                 <div class="col text-left">
-                                    @Model.SpringFirstClassDay.ToShortDateString()
+                                    @Model.Q1Start.ToShortDateString()
                                 </div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                                    @Html.DisplayNameFor(m => m.Q2Start)
                                 </div>
                                 <div class="col text-left">
-                                    @Model.SpringLastClassDay.ToShortDateString()
+                                    @Model.Q2Start.ToShortDateString()
                                 </div>
                             </div>
+                            <div class="row justify-content-center">
+                                <div class="col text-right">
+                                    @Html.DisplayNameFor(m => m.Q3Start)
+                                </div>
+                                <div class="col text-left">
+                                    @Model.Q3Start.ToShortDateString()
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col text-right">
+                                    @Html.DisplayNameFor(m => m.Q4Start)
+                                </div>
+                                <div class="col text-left">
+                                    @Model.Q4Start.ToShortDateString()
+                                </div>
+                            </div>
+                     
                         </div>
-                        <div class="lightTransparentBox m-1 p-2">
-                            <div class="FontSizeMedium text-center FontColorWhite">
-                                Quarter Settings
-                            </div>
-                            <div class="row justify-content-center mt-2">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.FallQuarterFirstClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.FallQuarterLastClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center mt-2">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.WinterQuarterFirstClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.WinterQuarterLastClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center mt-2">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.SpringQuarterFirstClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.SpringQuarterLastClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center mt-2">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.SummerQuarterFirstClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col text-right">
-                                    @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
-                                </div>
-                                <div class="col text-left">
-                                    @Model.SummerQuarterLastClassDay.ToShortDateString()
-                                </div>
-                            </div>
-                        </div>
+                    
                         <div class="lightTransparentBox m-1 p-2">
                             <div class="FontSizeMedium text-center FontColorWhite">
                                 Report Settings
