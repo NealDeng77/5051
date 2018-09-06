@@ -86,6 +86,10 @@ namespace _5051.Backend
                 {
                     calendar.SchoolDay = false;
                 }
+                else
+                {
+                    calendar.SchoolDay = true;
+                }
 
                 switch (calendar.DayStart)
                 {
