@@ -39,8 +39,8 @@ namespace _5051.Models
         // The Enum to use for the current data source
         // Default to Mock
         private static DataSourceEnum _DataSourceValue;
-        private static HttpContext _HttpContext;
-        private static HttpContext _DefaultHttpContext;
+        //private static HttpContext _HttpContext;
+        //private static HttpContext _DefaultHttpContext;
 
         //The current date
         public DateTime CurrentDate = DateTime.MinValue;
@@ -48,18 +48,23 @@ namespace _5051.Models
         //The Target Site
 
         public DataSourceEnum DataSourceValue => _DataSourceValue;
-        public HttpContext HttpContext  => _HttpContext;
-        public HttpContext DefaultHttpContext => _DefaultHttpContext;
+        //public HttpContext HttpContext  => _HttpContext;
+        //public HttpContext DefaultHttpContext => _DefaultHttpContext;
 
-        public static void SetHttpContext(HttpContext httpContext)
-        {
-            _HttpContext = httpContext;
-        }
+        //public static void SetDefaultHttpContext(HttpContext context)
+        //{
+        //    _DefaultHttpContext = context;
+        //}
 
-        public static void RestoreDefaultHttpContext()
-        {
-            _HttpContext = _DefaultHttpContext;
-        }
+        //public static void SetHttpContext(HttpContext context)
+        //{
+        //    _HttpContext = context;
+        //}
+
+        //public static void RestoreDefaultHttpContext()
+        //{
+        //    _HttpContext = _DefaultHttpContext;
+        //}
 
         public static void Initialize()
         {
@@ -70,21 +75,24 @@ namespace _5051.Models
                 return;
             }
 
-            string host = System.Web.HttpContext.Current.Request.Url.Host;
-            if (host.Contains("mchs.azurewebsites.net"))
-            {
-                SetDataSourceEnum(DataSourceEnum.ServerLive);
-                return;
-            }
-
-            if (host.Contains("azurewebsites.net"))
-            {
-                SetDataSourceEnum(DataSourceEnum.ServerTest);
-                return;
-            }
-
-            SetDataSourceEnum(DataSourceEnum.Mock);
+            SetDataSourceEnum(SelectDataSourceEnum(HttpContext.Current.Request.Url.Host));
             return;
+        }
+
+        public static DataSourceEnum SelectDataSourceEnum(string choice)
+        {
+            var myReturn = DataSourceEnum.Mock;
+
+            if (choice.Contains("mchs.azurewebsites.net"))
+            {
+                myReturn = DataSourceEnum.ServerLive;
+            }
+            else if (choice.Contains("azurewebsites.net"))
+            {
+                myReturn = DataSourceEnum.ServerTest;
+            }
+
+            return myReturn;
         }
 
         public static void SetDataSourceEnum(DataSourceEnum SetDataSourceValue)
