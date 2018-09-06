@@ -84,7 +84,7 @@ namespace _5051.Controllers
                                         "TueStartSelected," +
                                         "TueEndSelected," +
                                         "WedStartSelected," +
-                                        "WedEndSelecte," +
+                                        "WedEndSelected," +
                                         "ThuStartSelected," +
                                         "ThuEndSelected," +
                                         "FriStartSelected," +
