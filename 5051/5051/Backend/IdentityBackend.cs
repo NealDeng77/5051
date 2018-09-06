@@ -62,7 +62,7 @@ namespace _5051.Backend
                 case DataSourceEnum.Mock:
                 default:
                     // Default is to use the Mock
-                    DataSource = null;
+                    DataSource = IdentityDataSourceMockV2.Instance;
                     break;
             }
 
@@ -75,5 +75,66 @@ namespace _5051.Backend
             return result;
         }
 
+        public StudentModel CreateNewStudentUser(StudentModel student)
+        {
+            var myReturn = DataSource.CreateNewStudent(student);
+            return myReturn;
+        }
+
+        public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student)
+        {
+            var myReturn = DataSource.CreateNewStudentIdRecordOnly(student);
+            return myReturn;
+        }
+
+        public List<ApplicationUser> ListAllStudentUsers()
+        {
+            var result = DataSource.ListAllStudentUsers();
+            return result;
+        }
+
+        public List<ApplicationUser> ListAllTeacherUsers()
+        {
+            return DataSource.ListAllTeacherUsers();
+        }
+
+        public List<ApplicationUser> ListAllSupportUsers()
+        {
+            return DataSource.ListAllSupportUsers();
+        }
+
+        public List<ApplicationUser> ListAllUsers()
+        {
+            return DataSource.ListAllUsers();
+        }
+
+        public ApplicationUser FindUserByID(string id)
+        {
+            var findResult = DataSource.FindUserByID(id);
+            return findResult;
+        }
+
+        public bool UserHasClaimOfValue(string userID, string claimType, string claimValue)
+        {
+            var myReturn = DataSource.UserHasClaimOfValue(userID, claimType, claimValue);
+            return myReturn;
+        }
+
+        public bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role)
+        {
+            var myReturn = DataSource.LogUserIn(userName, password, role);
+            return myReturn;
+        }
+
+        public bool ChangeUserName(string userId, string newName)
+        {
+
+            return DataSource.ChangeUserName(userId, newName);
+        }
+
+        public void Reset()
+        {
+            DataSource.Reset();
+        }
     }
 }

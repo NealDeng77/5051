@@ -89,15 +89,16 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            //// When not in testing mode try the password
-            //if (!DataSourceBackend.GetTestingMode())
-            //{
-            //    if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
-            //    {
-            //        ModelState.AddModelError("", "Invalid password");
-            //        return View(data);
-            //    }
-            //}
+            // When not in testing mode try the password
+            if (!DataSourceBackend.GetTestingMode())
+            {
+                //if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+                if(!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+                {
+                    ModelState.AddModelError("", "Invalid password");
+                    return View(data);
+                }
+            }
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
@@ -272,9 +273,10 @@ namespace _5051.Controllers
             //}
 
             // Set the Avatar ID on the Student and update in data store
-            myStudent.Name = data.Name;
+            //myStudent.Name = data.Name;
             //StudentBackend.Instance.Update(myStudent);
-            IdentityDataSourceTable.Instance.UpdateStudent(myStudent);
+            //IdentityDataSourceTable.Instance.ChangeUserName(myStudent.Id, data.Name);
+            IdentityBackend.Instance.ChangeUserName(myStudent.Id, data.Name);
 
             // Editing is done, so go back to the Student Portal and pass the Student Id
             return RedirectToAction("Index", "Portal", new { Id = myStudent.Id });

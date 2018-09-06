@@ -56,8 +56,15 @@ namespace _5051.Backend
             //    var identityBackend = new IdentityBackend();
             //    identityBackend.CreateNewStudent(data);
             //}
+            StudentBackend.SetDataSource(DataSourceEnum.Mock);
+            var idBackend = IdentityBackend.Instance;
 
             DataSet.Add(data);
+
+            //IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data);
+            //var idResult = IdentityDataSourceMockV2.Instance.CreateNewStudentIdRecordOnly(data);
+            
+            var idResult = idBackend.CreateNewStudentUserIdRecordOnly(data);
 
             DataSet = DataSet.OrderBy(x => x.Name).ToList();
 

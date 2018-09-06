@@ -183,54 +183,96 @@ namespace _5051.Backend
             return student;
         }
 
-        /// <summary>
-        /// updates all fields in the database except the id
-        /// returns false if update fails
-        /// </summary>
-        /// <param name="student"></param>
-        /// <returns></returns>
-        public bool UpdateStudent(StudentModel student)
-        {
-            if (student == null)
-            {
-                return false;
-            }
+        ///// <summary>
+        ///// updates all fields in the database except the id
+        ///// returns false if update fails
+        ///// </summary>
+        ///// <param name="student"></param>
+        ///// <returns></returns>
+        //public bool UpdateStudent(StudentModel student)
+        //{
+        //    if (student == null)
+        //    {
+        //        return false;
+        //    }
 
-            var idFindResult = FindUserByID(student.Id);
+        //    var idFindResult = FindUserByID(student.Id);
 
-            if (idFindResult == null)
-            {
-                return false;
-            }
+        //    if (idFindResult == null)
+        //    {
+        //        return false;
+        //    }
 
-            var findStudent = GetStudentById(student.Id);
-            if(findStudent == null)
-            {
-                return false;
-            }
+        //    var findStudent = GetStudentById(student.Id);
+        //    if(findStudent == null)
+        //    {
+        //        return false;
+        //    }
 
-            findStudent.Name = student.Name;
-            if(student.Password != null)
-            {
-                findStudent.Password = student.Password;
-            }
+        //    findStudent.Name = student.Name;
+        //    if(student.Password != null)
+        //    {
+        //        findStudent.Password = student.Password;
+        //    }
 
-            var updateResult = DataSourceBackendTable.Instance.Update("studentmodel", "student", idFindResult.Id, findStudent);
-            if(updateResult == null)
-            {
-                return false;
-            }
+        //    var updateResult = DataSourceBackendTable.Instance.Update("studentmodel", "student", idFindResult.Id, findStudent);
+        //    if(updateResult == null)
+        //    {
+        //        return false;
+        //    }
           
-            if(student.Name != idFindResult.UserName)
-            {
-                idFindResult.UserName = student.Name;
+        //    if(student.Name != idFindResult.UserName)
+        //    {
+        //        idFindResult.UserName = student.Name;
 
-                var tableUpdateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, idFindResult.Id, idFindResult);
-                return true;
+        //        var tableUpdateResult = DataSourceBackendTable.Instance.Update(tableName, partitionKey, idFindResult.Id, idFindResult);
+        //        return true;
+        //    }
+
+        //    return true;
+        //}
+
+        public bool ChangeUserName(string userId, string newName)
+        {
+            if(userId == null || newName == null)
+            {
+                return false;
+            }
+
+            var idFind = FindUserByID(userId);
+            if(idFind == null)
+            {
+                return false;
+            }
+
+            var studentFind = GetStudentById(userId);
+            if(studentFind == null)
+            {
+                return false;
+            }
+
+            studentFind.Name = newName;            
+
+            //update List
+            DataList.Remove(idFind);
+            idFind.UserName = newName;
+            DataList.Add(idFind);
+
+            //update id and student storage
+            var studentTableUpdate = DataSourceBackendTable.Instance.Update("studentmodel", "student", userId, studentFind);
+            if (studentTableUpdate == null)
+            {
+                return false;
+            }
+            var idTableUpdate = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userId, idFind);
+            if(idFind == null)
+            {
+                return false;
             }
 
             return true;
         }
+
 
         public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
         {
@@ -262,8 +304,9 @@ namespace _5051.Backend
                     return false;
                 }
                 student.Password = newPass;
-                var updateResult = UpdateStudent(student);
-                if (updateResult)
+                //var updateResult = UpdateStudent(student);
+                var updateResult = StudentBackend.Instance.Update(student);
+                if (updateResult != null)
                 {
                     return true;
                 }
@@ -317,54 +360,14 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            //var studentBackend = StudentBackend.Instance;
+            var studentResult = StudentBackend.Instance.Read(id);
 
-            //var studentResult = studentBackend.Read(id);
-
-            //if (studentResult == null)
-            //{
-            //    return null;
-            //}
-
-            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
-            //var studentList = StudentBackend.Instance.Index();
-
-            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
-            //foreach (var item in studentList)
-            //{
-            //    if (id == item.Id)
-            //    {
-            //        return item;
-            //    }
-            //}
-
-            //foreach (var item in DataList)
-            //{
-            //    if(id == item.Id)
-            //    {
-            //        var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
-            //        foreach (var student in studentList)
-            //        {
-            //            if(id == student.Id)
-            //            {
-            //                return student;
-            //            }
-            //        }
-            //        //return item;
-            //    }
-            //}
-
-            var studentList = StudentBackend.Instance.Index();
-
-            foreach (var item in studentList)
+            if (studentResult == null)
             {
-                if(id == item.Id)
-                {
-                    return item;
-                }
+                return null;
             }
 
-            return null;
+            return studentResult;
         }
 
         /// <summary>
