@@ -48,6 +48,17 @@ namespace _5051.UnitTests.Models
             Assert.IsNotNull(result.Income, "Income" + TestContext.TestName);
             Assert.IsNotNull(result.Outcome, "Outcome" + TestContext.TestName);
             Assert.IsNotNull(result.BusinessList, "BusinessList" + TestContext.TestName);
+
+            Assert.IsNotNull(result.TruckUri, "TruckUri " + TestContext.TestName);
+            Assert.IsNotNull(result.MenuUri, "MenuUri " + TestContext.TestName);
+            Assert.IsNotNull(result.SignUri, "SignUri " + TestContext.TestName);
+            Assert.IsNotNull(result.TrailerUri, "TrailerUri " + TestContext.TestName);
+            Assert.IsNotNull(result.TopperUri, "TopperUri " + TestContext.TestName);
+            Assert.IsNotNull(result.WheelsUri, "WheelsUri " + TestContext.TestName);
+            Assert.IsNotNull(result.Tokens, "Tokens " + TestContext.TestName);
+            Assert.IsNotNull(result.Experience, "Experience " + TestContext.TestName);
+            Assert.IsNotNull(result.IterationNumber, "IterationNumber " + TestContext.TestName);
+
         }
 
         #endregion Instantiate

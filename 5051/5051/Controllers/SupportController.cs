@@ -11,6 +11,7 @@ namespace _5051.Controllers
     {
         private IdentityDataSourceMock identityBackend = new IdentityDataSourceMock();
         private DataSourceBackend DataSourceBackend = DataSourceBackend.Instance;
+        private StudentBackend StudentBackend = StudentBackend.Instance;
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -67,7 +68,8 @@ namespace _5051.Controllers
 
             var myReturn = new UserListViewModel();
 
-            var data = IdentityDataSourceTable.Instance.ListAllStudentUsers();
+            //var data = IdentityDataSourceTable.Instance.ListAllStudentUsers();
+            var data = IdentityBackend.Instance.ListAllStudentUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -77,7 +79,8 @@ namespace _5051.Controllers
                 myReturn.StudentList.Add(temp);
             }
 
-            data = IdentityDataSourceTable.Instance.ListAllTeacherUsers();
+            //data = IdentityDataSourceTable.Instance.ListAllTeacherUsers();
+            data = IdentityBackend.Instance.ListAllTeacherUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -87,7 +90,8 @@ namespace _5051.Controllers
                 myReturn.TeacherList.Add(temp);
             }
 
-            data = IdentityDataSourceTable.Instance.ListAllSupportUsers();
+            //data = IdentityDataSourceTable.Instance.ListAllSupportUsers();
+            data = IdentityBackend.Instance.ListAllSupportUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -97,7 +101,8 @@ namespace _5051.Controllers
                 myReturn.SupportList.Add(temp);
             }
 
-            data = IdentityDataSourceTable.Instance.ListAllUsers();
+            //data = IdentityDataSourceTable.Instance.ListAllUsers();
+            data = IdentityBackend.Instance.ListAllSupportUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -119,7 +124,8 @@ namespace _5051.Controllers
             //    return RedirectToAction("Index", "Home");
             //}
 
-            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            //var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            var myUserInfo = IdentityBackend.Instance.FindUserByID(id);
 
             var data = new ApplicationUserViewModel(myUserInfo);
 
@@ -144,7 +150,8 @@ namespace _5051.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            //var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
+            var myUserInfo = IdentityBackend.Instance.FindUserByID(id);
             if (myUserInfo == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -155,7 +162,8 @@ namespace _5051.Controllers
             var myReturn = new ApplicationUserInputModel(myUserInfo);
             myReturn.Id = myUserInfo.Id;
             myReturn.Role = RoleEnum;
-            myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
+            //myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
+            myReturn.State = IdentityBackend.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
 
             return View(myReturn);
         }
@@ -224,7 +232,8 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support);
+            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support);
+            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -254,12 +263,13 @@ namespace _5051.Controllers
             newStudent.Password = user.Password;
 
             //var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
-            var createUserResult = StudentBackend.Instance.Create(newStudent);
+            //var createUserResult = StudentBackend.Instance.Create(newStudent);
 
-            if (createUserResult == null)
-            {
-                ModelState.AddModelError("", "Invalid create user attempt");
-            }
+            //if (createUserResult == null)
+            //{
+            //    ModelState.AddModelError("", "Invalid create user attempt");
+            //}
+            StudentBackend.Create(newStudent);
 
             return RedirectToAction("UserList", "Support");
         }

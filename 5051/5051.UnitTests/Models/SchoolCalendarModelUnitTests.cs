@@ -58,6 +58,23 @@ namespace _5051.UnitTests.Models
         }
         #endregion Instantiate
 
+        #region Update
+        [TestMethod]
+        public void Models_SchoolCalendarModel_Update_Invalid_Null_Should_Fail()
+        {
+            // Arrange
+            var expect = DateTime.Now;
+            var data = new SchoolCalendarModel();
+            data.Date = expect;
+
+            // Act
+            data.Update((SchoolCalendarModel)null);
+
+            // Assert
+            Assert.AreEqual(expect, data.Date, TestContext.TestName);
+        }
+        #endregion Update
+
         //#region SetSchoolTime
         //[TestMethod]
         //public void Models_SchoolCalendarModel_SetSchoolTime_Start_Early_Should_Pass()
@@ -90,7 +107,7 @@ namespace _5051.UnitTests.Models
         //    // Assert
         //    Assert.AreEqual(expect, result, TestContext.TestName);
         //}
-        
+
         //[TestMethod]
         //public void Models_SchoolCalendarModel_SetSchoolTime_Start_Normal_Should_Pass()
         //{
@@ -179,7 +196,7 @@ namespace _5051.UnitTests.Models
 
         //    //Reset
         //    DataSourceBackend.Instance.Reset();
-            
+
         //    // Assert
         //    Assert.AreEqual(expect, result, TestContext.TestName);
         //}

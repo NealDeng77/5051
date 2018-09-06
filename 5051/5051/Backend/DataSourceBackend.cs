@@ -87,7 +87,8 @@ namespace _5051.Backend
 
             if (!isTestingMode)
             {
-                IdentityDataSourceTable.Instance.Reset();
+                //IdentityDataSourceTable.Instance.Reset();
+                IdentityBackend.Instance.Reset();
             }
 
             SetTestingMode(false);
