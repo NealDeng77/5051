@@ -210,10 +210,10 @@ namespace _5051.Backend
             //set auto punch-out time        
             if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
             {
-                temp.Out = UTCConversionsBackend.KioskTimeToUtc(
-                    currentDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal));
+                var defaultEndTime = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;  
 
-            } 
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(defaultEndTime));
+            }
             else
             {
                 temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(schoolDay.TimeEnd));
