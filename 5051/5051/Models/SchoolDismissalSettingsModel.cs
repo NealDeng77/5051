@@ -198,20 +198,20 @@ namespace _5051.Models
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
 
-            MonStartType = setType(MonStartSelected);
-            MonEndType = setType(MonEndSelected);
-            TueStartType = setType(TueStartSelected);
-            TueEndType = setType(TueEndSelected);
-            WedStartType = setType(WedStartSelected);
-            WedEndType = setType(WedEndSelected);
-            ThuStartType = setType(ThuStartSelected);
-            ThuEndType = setType(ThuEndSelected);
-            FriStartType = setType(FriStartSelected);
-            FriEndType = setType(FriEndSelected);
-            SatStartType = setType(SatStartSelected);
-            SatEndType = setType(SatEndSelected);
-            SunStartType = setType(SunStartSelected);
-            SunEndType = setType(SunEndSelected);
+            MonStartType = (SchoolCalendarDismissalEnum)MonStartSelected;
+            MonEndType = (SchoolCalendarDismissalEnum)MonEndSelected;
+            TueStartType = (SchoolCalendarDismissalEnum)TueStartSelected;
+            TueEndType = (SchoolCalendarDismissalEnum)TueEndSelected;
+            WedStartType = (SchoolCalendarDismissalEnum)WedStartSelected;
+            WedEndType = (SchoolCalendarDismissalEnum)WedEndSelected;
+            ThuStartType = (SchoolCalendarDismissalEnum)ThuStartSelected;
+            ThuEndType = (SchoolCalendarDismissalEnum)ThuEndSelected;
+            FriStartType = (SchoolCalendarDismissalEnum)FriStartSelected;
+            FriEndType = (SchoolCalendarDismissalEnum)FriEndSelected;
+            SatStartType = (SchoolCalendarDismissalEnum)SatStartSelected;
+            SatEndType = (SchoolCalendarDismissalEnum)SatEndSelected;
+            SunStartType = (SchoolCalendarDismissalEnum)SunStartSelected;
+            SunEndType = (SchoolCalendarDismissalEnum)SunEndSelected;
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
@@ -370,20 +370,20 @@ namespace _5051.Models
             SunStartSelected = data.SunStartSelected;
             SunEndSelected = data.SunEndSelected;
 
-            MonStartType = setType(MonStartSelected);
-            MonEndType = setType(MonEndSelected);
-            TueStartType = setType(TueStartSelected);
-            TueEndType = setType(TueEndSelected);
-            WedStartType = setType(WedStartSelected);
-            WedEndType = setType(WedEndSelected);
-            ThuStartType = setType(ThuStartSelected);
-            ThuEndType = setType(ThuEndSelected);
-            FriStartType = setType(FriStartSelected);
-            FriEndType = setType(FriEndSelected);
-            SatStartType = setType(SatStartSelected);
-            SatEndType = setType(SatEndSelected);
-            SunStartType = setType(SunStartSelected);
-            SunEndType = setType(SunEndSelected);
+            MonStartType = (SchoolCalendarDismissalEnum)MonStartSelected;
+            MonEndType = (SchoolCalendarDismissalEnum)MonEndSelected;
+            TueStartType = (SchoolCalendarDismissalEnum)TueStartSelected;
+            TueEndType = (SchoolCalendarDismissalEnum)TueEndSelected;
+            WedStartType = (SchoolCalendarDismissalEnum)WedStartSelected;
+            WedEndType = (SchoolCalendarDismissalEnum)WedEndSelected;
+            ThuStartType = (SchoolCalendarDismissalEnum)ThuStartSelected;
+            ThuEndType = (SchoolCalendarDismissalEnum)ThuEndSelected;
+            FriStartType = (SchoolCalendarDismissalEnum)FriStartSelected;
+            FriEndType = (SchoolCalendarDismissalEnum)FriEndSelected;
+            SatStartType = (SchoolCalendarDismissalEnum)SatStartSelected;
+            SatEndType = (SchoolCalendarDismissalEnum)SatEndSelected;
+            SunStartType = (SchoolCalendarDismissalEnum)SunStartSelected;
+            SunEndType = (SchoolCalendarDismissalEnum)SunEndSelected;
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
@@ -402,28 +402,6 @@ namespace _5051.Models
             Goal = data.Goal;
             EarlyWindow = data.EarlyWindow;
             LateWindow = data.LateWindow;
-        }
-
-        /// <summary>
-        /// set dismissal type according to selectedId
-        /// </summary>
-        /// <param name="selectedId"></param>
-        /// <returns></returns>
-        private SchoolCalendarDismissalEnum setType(int selectedId)
-        {
-            switch (selectedId)
-            {
-                case 0:
-                    return SchoolCalendarDismissalEnum.Unknown;
-                case 1:
-                    return SchoolCalendarDismissalEnum.Normal;
-                case 2:
-                    return SchoolCalendarDismissalEnum.Early;
-                case 3:
-                    return SchoolCalendarDismissalEnum.Late;
-                default:
-                    return SchoolCalendarDismissalEnum.Normal;
-            }
         }
     }
 }
