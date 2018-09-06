@@ -11,17 +11,17 @@ namespace _5051
         {
             ConfigureAuth(app);
 
-            AvatarItemBackend.Instance.Index();
-            FactoryInventoryBackend.Instance.Index();
+            //AvatarItemBackend.Instance.Index();
+            //FactoryInventoryBackend.Instance.Index();
 
-            GameBackend.Instance.Index();
+            //GameBackend.Instance.Index();
 
-            KioskSettingsBackend.Instance.Reset();
+            //KioskSettingsBackend.Instance.Reset();
 
-            SchoolCalendarBackend.Instance.Reset();
-            SchoolDismissalSettingsBackend.Instance.Reset();
+            //SchoolCalendarBackend.Instance.Reset();
+            //SchoolDismissalSettingsBackend.Instance.Reset();
 
-            StudentBackend.Instance.Reset();
+            //StudentBackend.Instance.Reset();
         }
     }
 }
