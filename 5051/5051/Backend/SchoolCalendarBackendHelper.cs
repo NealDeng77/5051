@@ -82,42 +82,45 @@ namespace _5051.Backend
             {
                 var startType = calendar.DayStart;
                 var endType = calendar.DayEnd;
+                //if not a school day
                 if (startType == SchoolCalendarDismissalEnum.Unknown || endType == SchoolCalendarDismissalEnum.Unknown)
                 {
                     calendar.SchoolDay = false;
+                    calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartNormal;
+                    calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;
+                    calendar.TimeDuration = TimeSpan.Zero;                    
                 }
-                else
+                else  //if it is a school day
                 {
                     calendar.SchoolDay = true;
-                }
+                    switch (calendar.DayStart)
+                    {
+                        case SchoolCalendarDismissalEnum.Early:
+                            calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartEarly;
+                            break;
+                        case SchoolCalendarDismissalEnum.Late:
+                            calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartLate;
+                            break;
+                        default:
+                            calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartNormal;
+                            break;
+                    }
 
-                switch (calendar.DayStart)
-                {
-                    case SchoolCalendarDismissalEnum.Early:
-                        calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartEarly;
-                        break;
-                    case SchoolCalendarDismissalEnum.Late:
-                        calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartLate;
-                        break;
-                    default:
-                        calendar.TimeStart = SchoolDismissalSettingsBackend.Instance.GetDefault().StartNormal;
-                        break;
-                }
+                    switch (calendar.DayEnd)
+                    {
+                        case SchoolCalendarDismissalEnum.Early:
+                            calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndEarly;
+                            break;
+                        case SchoolCalendarDismissalEnum.Late:
+                            calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndLate;
+                            break;
+                        default:
+                            calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;
+                            break;
+                    }
 
-                switch (calendar.DayEnd)
-                {
-                    case SchoolCalendarDismissalEnum.Early:
-                        calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndEarly;
-                        break;
-                    case SchoolCalendarDismissalEnum.Late:
-                        calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndLate;
-                        break;
-                    default:
-                        calendar.TimeEnd = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;
-                        break;
+                    calendar.TimeDuration = calendar.TimeEnd.Subtract(calendar.TimeStart);
                 }
-
-                calendar.TimeDuration = calendar.TimeEnd.Subtract(calendar.TimeStart);
             }
         }
     }
