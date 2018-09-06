@@ -95,18 +95,12 @@ namespace _5051.Controllers
                                         "SunEndSelected," +
                                         "DayFirst," +
                                         "DayLast," +
-                                        "FallFirstClassDay," +
-                                        "FallLastClassDay," +
-                                        "SpringFirstClassDay," +
-                                        "SpringLastClassDay," +
-                                        "FallQuarterFirstClassDay," +
-                                        "FallQuarterLastClassDay," +
-                                        "WinterQuarterFirstClassDay," +
-                                        "WinterQuarterLastClassDay," +
-                                        "SpringQuarterFirstClassDay," +
-                                        "SpringQuarterLastClassDay," +
-                                        "SummerQuarterFirstClassDay," +
-                                        "SummerQuarterLastClassDay," +
+                                        "S1Start," +
+                                        "S2Start," +
+                                        "Q1Start," +
+                                        "Q2Start," +
+                                        "Q3Start," +
+                                        "Q4Start," +
                                         "Goal," +
                                         "EarlyWindow," +
                                         "LateWindow," +
