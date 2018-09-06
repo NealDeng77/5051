@@ -105,7 +105,7 @@
 
                                             @Html.Raw(newRow)
 
-                                            if (dayItem.Date.Day == 1)
+                                            if (dayItem == MonthItem.First())
                                             {
                                                 // Catch up the number of columns, day of week 0 is sunday, so columns 1 - 6 + 0
                                                 // Don't include the column to show, so just the previous columns
