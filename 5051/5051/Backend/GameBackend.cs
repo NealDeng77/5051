@@ -205,11 +205,11 @@ namespace _5051.Backend
         /// <summary>
         /// Simulation Results
         /// </summary>
-        public GameResultViewModel GetResult(string id = null)
+        public ShopTruckFullModel GetResult(string id = null)
         {
             // Get the Store results for this student
             // Return the Student Results
-            var result = new GameResultViewModel();
+            var result = new ShopTruckFullModel();
 
             var StudentData = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (StudentData == null)
@@ -217,16 +217,18 @@ namespace _5051.Backend
                 return result;
             }
 
-            result.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Truck).Uri;
-            result.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Trailer).Uri;
-            result.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Wheels).Uri;
-            result.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Topper).Uri;
-            result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
-            result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
+            DataSourceBackend.Instance.StudentBackend.Update(StudentData);
 
-            result.Tokens = StudentData.Tokens;
-            result.Experience = StudentData.ExperiencePoints;
-            result.TruckName = StudentData.Truck.TruckName;
+            //result.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Truck).Uri;
+            //result.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Trailer).Uri;
+            //result.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Wheels).Uri;
+            //result.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Topper).Uri;
+            //result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
+            //result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
+
+            //result.Tokens = StudentData.Tokens;
+            //result.Experience = StudentData.ExperiencePoints;
+            //result.TruckName = StudentData.Truck.TruckName;
 
             if (StudentData.Tokens < 1)
             {
@@ -236,11 +238,14 @@ namespace _5051.Backend
                 StudentData.Truck.IsClosed = false;
             }
 
-            result.IsClosed = StudentData.Truck.IsClosed;
-            result.IterationNumber = GetDefault().IterationNumber;
-            result.CustomersTotal = StudentData.Truck.CustomersTotal;
-
+            result = StudentData.Truck;
             result.TransactionList = StudentData.Truck.TransactionList;
+
+            //result.IsClosed = StudentData.Truck.IsClosed;
+            //result.IterationNumber = GetDefault().IterationNumber;
+            //result.CustomersTotal = StudentData.Truck.CustomersTotal;
+
+            //result.TransactionList = StudentData.Truck.TransactionList;
 
             // display recent 5 messages
             //if (StudentData.Truck.TransactionList.Count <= 5)
@@ -494,20 +499,20 @@ namespace _5051.Backend
             }
 
             // Sort
-            int max = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                max = i;
-                for (int j = i + 1; j < board.Count; j++)
-                {
-                    if (board[j].Profit > board[i].Profit)
-                    {
-                        var temp = board[i];
-                        board[i] = board[j];
-                        board[j] = temp;
-                    }
-                }
-            }
+            //int max = 0;
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    max = i;
+            //    for (int j = i + 1; j < board.Count; j++)
+            //    {
+            //        if (board[j].Profit > board[i].Profit)
+            //        {
+            //            var temp = board[i];
+            //            board[i] = board[j];
+            //            board[j] = temp;
+            //        }
+            //    }
+            //}
 
             return board;
         }

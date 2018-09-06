@@ -198,6 +198,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Backend\IdentityDataSourceMockV2.cs" />
     <Compile Include="Backend\SchoolCalendarBackendHelper.cs" />
     <Compile Include="Backend\StudentDataSourceHelper.cs" />
     <Compile Include="Backend\SchoolCalendarDataSourceTable.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Models\Enums\EnumHelper.cs" />
     <Compile Include="Models\LeaderBoardModel.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
+    <Compile Include="Models\ShopTruckFullModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />

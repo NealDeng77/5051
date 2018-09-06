@@ -85,7 +85,6 @@ namespace _5051.Backend
             temp.AvatarInventory = null;
             temp.Inventory = null;
             temp.Attendance = null;
-            temp.TruckItems = null;
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
@@ -107,9 +106,7 @@ namespace _5051.Backend
 
             DataSourceBackendTable.Instance.Create<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
 
-            DataSourceBackendTable.Instance.Create<GameResultViewModel>(tableName, "truckitems", tempData.Id, tempData.TruckItems);
-
-            DataSourceBackendTable.Instance.Create<ShopTruckModel>(tableName, "truck", tempData.Id, tempData.Truck);
+            DataSourceBackendTable.Instance.Create<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck);
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
@@ -161,7 +158,6 @@ namespace _5051.Backend
             temp.AvatarInventory = null;
             temp.Inventory = null;
             temp.Attendance = null;
-            temp.TruckItems = null;
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
@@ -181,9 +177,7 @@ namespace _5051.Backend
 
             DataSourceBackendTable.Instance.Create<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
 
-            DataSourceBackendTable.Instance.Create<GameResultViewModel>(tableName, "truckitems", tempData.Id, tempData.TruckItems);
-
-            DataSourceBackendTable.Instance.Create<ShopTruckModel>(tableName, "truck", tempData.Id, tempData.Truck);
+            DataSourceBackendTable.Instance.Create<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck);
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
@@ -217,7 +211,6 @@ namespace _5051.Backend
             temp.AvatarInventory = null;
             temp.Inventory = null;
             temp.Attendance = null;
-            temp.TruckItems = null;
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
@@ -236,9 +229,7 @@ namespace _5051.Backend
 
             DataSourceBackendTable.Instance.Delete<List<AttendanceModel>>(tableName, "attendance", tempData.Id  , tempData.Attendance);
 
-            DataSourceBackendTable.Instance.Delete<GameResultViewModel>(tableName, "truckitems", tempData.Id , tempData.TruckItems);
-
-            DataSourceBackendTable.Instance.Delete<ShopTruckModel>(tableName, "truck", tempData.Id , tempData.Truck);
+            DataSourceBackendTable.Instance.Delete<ShopTruckFullModel>(tableName, "truck", tempData.Id , tempData.Truck);
 
             return true;
         }
@@ -319,9 +310,7 @@ namespace _5051.Backend
 
                 TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey );
 
-                TempData.TruckItems = DataSourceBackendTable.Instance.Load<GameResultViewModel>(tableName, "truckitems", temp.RowKey );
-
-                TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckModel>(tableName, "truck", temp.RowKey );
+                TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey );
 
                 var newData = new StudentModel(TempData);
                 newData.Id = temp.RowKey;   //Set the ID to the item loaded

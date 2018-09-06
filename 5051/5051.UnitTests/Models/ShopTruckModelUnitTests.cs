@@ -22,12 +22,12 @@ namespace _5051.UnitTests.Models
 
         #region Instantiate
         [TestMethod]
-        public void Models_ShopTruckModel_Default_Instantiate_Get_Set_Should_Pass()
+        public void Models_ShopTruckFullModel_Default_Instantiate_Get_Set_Should_Pass()
         {
             // Arange
 
             // Act
-            var result = new ShopTruckModel();
+            var result = new ShopTruckFullModel();
 
             // Reset
             DataSourceBackend.Instance.Reset();

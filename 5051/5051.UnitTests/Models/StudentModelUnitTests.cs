@@ -108,7 +108,7 @@ namespace _5051.UnitTests.Models
             var tempInventory = new FactoryInventoryModel();
             test.Inventory.Add(tempInventory);
 
-            test.Truck = new ShopTruckModel();
+            test.Truck = new ShopTruckFullModel();
 
             // Act
             data.Update(test);
