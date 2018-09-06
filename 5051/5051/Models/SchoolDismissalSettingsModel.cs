@@ -84,6 +84,7 @@ namespace _5051.Models
         public SchoolCalendarDismissalEnum SunStartType { get; set; }
         public SchoolCalendarDismissalEnum SunEndType { get; set; }
 
+
         // First day of school
         [Display(Name = "First Day", Description = "First Day of School")]
         public DateTime DayFirst { get; set; }
@@ -92,55 +93,25 @@ namespace _5051.Models
         [Display(Name = "Last Day", Description = "Last Day of School")]
         public DateTime DayLast { get; set; }
 
-        // Fall First Class Day
-        [Display(Name = "Fall Semester First Class Day", Description = "Fall Semester First Class Day")]
-        public DateTime FallFirstClassDay { get; set; }
 
-        // Fall Last Class Day
-        [Display(Name = "Fall Semester Last Class Day", Description = "Fall Semester Last Class Day")]
-        public DateTime FallLastClassDay { get; set; }
+        [Display(Name = "Semester 1 First Class Day", Description = "Semester 1 First Class Day")]
+        public DateTime S1Start { get; set; }
 
+        [Display(Name = "Semester 2 First Class Day", Description = "Semester 2 First Class Day")]
+        public DateTime S2Start { get; set; }
 
-        // Spring First Class Day
-        [Display(Name = "Spring Semester First Class Day", Description = "Spring Semester First Class Day")]
-        public DateTime SpringFirstClassDay { get; set; }
+        [Display(Name = "Quarter 1 First Class Day", Description = "Quarter 1 First Class Day")]
+        public DateTime Q1Start { get; set; }
 
-        // Spring Last Class Day
-        [Display(Name = "Spring Semester Last Class Day", Description = "Spring Semester Last Class Day")]
-        public DateTime SpringLastClassDay { get; set; }
+        [Display(Name = "Quarter 2 First Class Day", Description = "Quarter 2 First Class Day")]
+        public DateTime Q2Start { get; set; }
 
-        // Fall Quarter First Class Day
-        [Display(Name = "Fall Quarter First Class Day", Description = "Fall Quarter First Class Day")]
-        public DateTime FallQuarterFirstClassDay { get; set; }
+        [Display(Name = "Quarter 3 First Class Day", Description = "Quarter 3 First Class Day")]
+        public DateTime Q3Start { get; set; }
 
-        // Fall Quarter Last Class Day
-        [Display(Name = "Fall Quarter Last Class Day", Description = "Fall Quarter Last Class Day")]
-        public DateTime FallQuarterLastClassDay { get; set; }
+        [Display(Name = "Quarter 4 First Class Day", Description = "Quarter 4 First Class Day")]
+        public DateTime Q4Start { get; set; }
 
-        // Winter Quarter First Class Day
-        [Display(Name = "Winter Quarter First Class Day", Description = "Winter Quarter First Class Day")]
-        public DateTime WinterQuarterFirstClassDay { get; set; }
-
-        // Winter Quarter Last Class Day
-        [Display(Name = "Winter Quarter Last Class Day", Description = "Winter Quarter Last Class Day")]
-        public DateTime WinterQuarterLastClassDay { get; set; }
-
-
-        // Spring Quarter First Class Day
-        [Display(Name = "Spring Quarter First Class Day", Description = "Spring Quarter First Class Day")]
-        public DateTime SpringQuarterFirstClassDay { get; set; }
-
-        // Spring Quarter Last Class Day
-        [Display(Name = "Spring Quarter Last Class Day", Description = "Spring Quarter Last Class Day")]
-        public DateTime SpringQuarterLastClassDay { get; set; }
-
-        // Summer Quarter First Class Day
-        [Display(Name = "Summer Quarter First Class Day", Description = "Summer Quarter First Class Day")]
-        public DateTime SummerQuarterFirstClassDay { get; set; }
-
-        // Summer Quarter Last Class Day
-        [Display(Name = "Summer Quarter Last Class Day", Description = "Summer Quarter Last Class Day")]
-        public DateTime SummerQuarterLastClassDay { get; set; }
 
         // The current setting for goal percentage
         [Display(Name = "Attendance Goal Percentage", Description = "Attendance Goal Percentage")]
@@ -216,18 +187,13 @@ namespace _5051.Models
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
 
-            FallFirstClassDay = data.FallFirstClassDay;
-            FallLastClassDay = data.FallLastClassDay;
-            SpringFirstClassDay = data.SpringFirstClassDay;
-            SpringLastClassDay = data.SpringLastClassDay;
-            FallQuarterFirstClassDay = data.FallQuarterFirstClassDay;
-            FallQuarterLastClassDay = data.FallQuarterLastClassDay;
-            WinterQuarterFirstClassDay = data.WinterQuarterFirstClassDay;
-            WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
-            SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
-            SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
-            SummerQuarterLastClassDay = data.SummerQuarterFirstClassDay;
-            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+            S1Start = data.S1Start;
+            S2Start = data.S2Start;
+
+            Q1Start = data.Q1Start;
+            Q2Start = data.Q2Start;
+            Q3Start = data.Q3Start;
+            Q4Start = data.Q4Start;
 
             Goal = data.Goal;
             EarlyWindow = data.EarlyWindow;
@@ -303,31 +269,20 @@ namespace _5051.Models
             SunStartType = SchoolCalendarDismissalEnum.Unknown;
             SunEndType = SchoolCalendarDismissalEnum.Unknown;
 
-            var Year = DateTime.UtcNow.Year;
+            //School year settings
+            DayFirst = DateTime.Parse("09/05/2018");
+            DayLast = DateTime.Parse("06/20/2019");
 
-            DayFirst = DateTime.Parse("09/05/" + Year);
-            DayLast = DateTime.Parse("08/30/" + (Year + 1));
+            S1Start = DateTime.Parse("09/05/2018");
+            S2Start = DateTime.Parse("01/30/2019");
 
-            //The following specifies the start and end date of semesters
-            FallFirstClassDay = DateTime.Parse("09/05/" + Year);
-            FallLastClassDay = DateTime.Parse("01/29/" + (Year + 1));
+            Q1Start = DateTime.Parse("09/05/2018");
+            Q2Start = DateTime.Parse("11/08/2018");
+            Q3Start = DateTime.Parse("01/30/2019");
+            Q4Start = DateTime.Parse("04/18/2019");
 
-            SpringFirstClassDay = DateTime.Parse("01/30/" + (Year + 1));
-            SpringLastClassDay = DateTime.Parse("08/30/" + (Year + 1));
 
-            //The following specifies the start and end date of quarters
-            FallQuarterFirstClassDay = DateTime.Parse("09/05/" + Year);
-            FallQuarterLastClassDay = DateTime.Parse("11/07/" + Year);
-
-            WinterQuarterFirstClassDay = DateTime.Parse("01/08/" + (Year + 1));
-            WinterQuarterLastClassDay = DateTime.Parse("03/19/" + (Year + 1));
-
-            SpringQuarterFirstClassDay= DateTime.Parse("04/03/" + (Year + 1));
-            SpringQuarterLastClassDay = DateTime.Parse("06/11/" + (Year + 1));
-
-            SummerQuarterFirstClassDay = DateTime.Parse("06/19/" + (Year + 1));
-            SummerQuarterLastClassDay = DateTime.Parse("08/26/" + (Year + 1));
-
+            //Report settings
             Goal = 85;
             EarlyWindow = new TimeSpan(0, 30, 0);
             LateWindow = new TimeSpan(0, 30, 0);
@@ -387,18 +342,15 @@ namespace _5051.Models
 
             DayFirst = data.DayFirst;
             DayLast = data.DayLast;
-            FallFirstClassDay = data.FallFirstClassDay;
-            FallLastClassDay = data.FallLastClassDay;
-            SpringFirstClassDay = data.SpringFirstClassDay;
-            SpringLastClassDay = data.SpringLastClassDay;
-            FallQuarterFirstClassDay = data.FallQuarterFirstClassDay;
-            FallQuarterLastClassDay = data.FallQuarterLastClassDay;
-            WinterQuarterFirstClassDay = data.WinterQuarterFirstClassDay;
-            WinterQuarterLastClassDay = data.WinterQuarterLastClassDay;
-            SpringQuarterFirstClassDay = data.SpringQuarterFirstClassDay;
-            SpringQuarterLastClassDay = data.SpringQuarterLastClassDay;
-            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
-            SummerQuarterLastClassDay = data.SummerQuarterLastClassDay;
+
+            S1Start = data.S1Start;
+            S2Start = data.S2Start;
+
+            Q1Start = data.Q1Start;
+            Q2Start = data.Q2Start;
+            Q3Start = data.Q3Start;
+            Q4Start = data.Q4Start;
+
             Goal = data.Goal;
             EarlyWindow = data.EarlyWindow;
             LateWindow = data.LateWindow;
