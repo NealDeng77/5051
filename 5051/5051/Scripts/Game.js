@@ -65,12 +65,12 @@ function GetIterationNumber() {
 function DataLoadGameResults(data) {
     var result = data.Data;
     ServerIterationNumber = result.IterationNumber;
-    ShopData.Topper = result.Topper;
-    ShopData.Menu = result.Menu;
-    ShopData.Wheels = result.Wheels;
-    ShopData.Sign = result.Sign;
-    ShopData.Truck = result.Truck;
-    ShopData.Trailer = result.Trailer;
+    ShopData.TopperUri = result.TopperUri;
+    ShopData.MenuUri = result.MenuUri;
+    ShopData.WheelsUri = result.WheelsUri;
+    ShopData.SignUri = result.SignUri;
+    ShopData.TruckUri = result.TruckUri;
+    ShopData.TrailerUri = result.TrailerUri;
     ShopData.IsClosed = result.IsClosed;
     ShopData.CustomersTotal = result.CustomersTotal;
     ShopData.TransactionList = result.TransactionList;
@@ -155,12 +155,12 @@ function UpdateGame() {
 }
 // Set the Default on Boot to draw, before the rest draws if no data exists
 function SetDefaultShopData() {
-    ShopData.Truck = "Truck0.png";
-    ShopData.Topper = "Topper0.png";
-    ShopData.Menu = "Menu0.png";
-    ShopData.Wheels = "Wheels0.png";
-    ShopData.Sign = "Sign0.png";
-    ShopData.Trailer = "Trailer0.png";
+    ShopData.TruckUri = "Truck0.png";
+    ShopData.TopperUri = "Topper0.png";
+    ShopData.MenuUri = "Menu0.png";
+    ShopData.WheelsUri = "Wheels0.png";
+    ShopData.SignUri = "Sign0.png";
+    ShopData.TrailerUri = "Trailer0.png";
 }
 /*
  * Application Starts Here
@@ -215,13 +215,13 @@ function RefreshGameDisplay() {
     ShowTransactionList();
     // Refesh Truck
     // If the Truck is Empty, remove all items
-    if (ShopData.Truck != "Truck0.png") {
-        $("#Truck").attr("src", BaseContentURL + ShopData.Truck);
-        $("#Topper").attr("src", BaseContentURL + ShopData.Topper);
-        $("#Menu").attr("src", BaseContentURL + ShopData.Menu);
-        $("#Wheels").attr("src", BaseContentURL + ShopData.Wheels);
-        $("#Sign").attr("src", BaseContentURL + ShopData.Sign);
-        $("#Trailer").attr("src", BaseContentURL + ShopData.Trailer);
+    if (ShopData.TruckUri != "Truck0.png") {
+        $("#Truck").attr("src", BaseContentURL + ShopData.TruckUri);
+        $("#Topper").attr("src", BaseContentURL + ShopData.TopperUri);
+        $("#Menu").attr("src", BaseContentURL + ShopData.MenuUri);
+        $("#Wheels").attr("src", BaseContentURL + ShopData.WheelsUri);
+        $("#Sign").attr("src", BaseContentURL + ShopData.SignUri);
+        $("#Trailer").attr("src", BaseContentURL + ShopData.TrailerUri);
         // If The Truck is showing, then show the inside and the Worker
         $("#TruckInside").attr("src", BaseContentURL + "TruckInside.png");
         // Worker

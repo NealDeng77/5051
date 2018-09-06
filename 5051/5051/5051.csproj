@@ -282,6 +282,7 @@
     <Compile Include="Models\Enums\EnumHelper.cs" />
     <Compile Include="Models\LeaderBoardModel.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
+    <Compile Include="Models\ShopTruckFullModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\GameResultViewModel.cs" />

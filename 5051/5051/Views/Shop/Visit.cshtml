@@ -30,10 +30,6 @@
             <div class="FontSizeMedium FontBold">Leaderboard</div>
         </div>
 
-        @{
-            var leaderboard = _5051.Backend.GameBackend.Instance.UpdatedLeaderBoard();
-        }
-
         <div class="row justify-content-center">
             <div class="col-2"></div>
             <div class="col-2 FontSizeSmall FontBold">
@@ -48,21 +44,45 @@
         </div>
 
 
-        @for (int i = 0; i < 3; i++)
-        {
-            <div class="row justify-content-center">
-                <div class="col-2"></div>
-                <div class="col-2 FontSizeSmall">
-                    @(i + 1)
+        @{
+            var student = Model[0];
+            var count = 0;
+
+            IEnumerable<_5051.Models.LeaderBoardModel> query = student.Truck.LeaderBoard.OrderByDescending(x => x.Profit);
+
+            foreach (var element in query)
+            {
+                <div class="row justify-content-center">
+                    <div class="col-2"></div>
+                    <div class="col-2 FontSizeSmall">
+                        @(count + 1)
+                    </div>
+                    <div class="col-3 FontSizeSmall">
+                        @element.Name
+                    </div>
+                    <div class="col-3 FontSizeSmall">
+                        @element.Profit
+                    </div>
                 </div>
-                <div class="col-3 FontSizeSmall">
-                    @leaderboard[i].Name
+            }
+
+            @*for (int i = 0; i < student.Truck.LeaderBoard.Count; i++)
+            {
+                <div class="row justify-content-center">
+                    <div class="col-2"></div>
+                    <div class="col-2 FontSizeSmall">
+                        @(i + 1)
+                    </div>
+                    <div class="col-3 FontSizeSmall">
+                        @student.Truck.LeaderBoard[i].Name
+                    </div>
+                    <div class="col-3 FontSizeSmall">
+                        @student.Truck.LeaderBoard[i].Profit
+                    </div>
                 </div>
-                <div class="col-3 FontSizeSmall">
-                    @leaderboard[i].Profit
-                </div>
-            </div>
+            }*@
         }
+
     </div>
     <div class="col-1"></div>
 </div>
@@ -76,17 +96,16 @@
             @{
                 foreach (var item in Model)
                 {
-                    _5051.Backend.GameBackend.Instance.GetResult(item.Id);
 
                     <div class="col-sm-3 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
                         <div class="TruckBoxMedium">
                             <a href="/Shop/VisitShop/@ViewBag.StudentId/@item.Id">
-                                <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.TruckItems.Topper" alt="Topper">
-                                <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.TruckItems.Sign" alt="Sign">
-                                <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.TruckItems.Truck" alt="Truck">
-                                <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/@item.TruckItems.Menu" alt="Menu">
-                                <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.TruckItems.Wheels" alt="Wheels">
-                                <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.TruckItems.Trailer" alt="Trailer">
+                                <img class="TruckItemBase TopperItem" id="Topper" src="~/Content/shop/@item.Truck.TopperUri" alt="Topper">
+                                <img class="TruckItemBase SignItem" id="Sign" src="~/Content/shop/@item.Truck.SignUri" alt="Sign">
+                                <img class="TruckItemBase TruckItem" id="Truck" src="~/Content/shop/@item.Truck.TruckUri" alt="Truck">
+                                <img class="TruckItemBase MenuItem" id="Menu" src="~/Content/shop/@item.Truck.MenuUri" alt="Menu">
+                                <img class="TruckItemBase TruckItemBase WheelsItem" id="Wheels" src="~/Content/shop/@item.Truck.WheelsUri" alt="Wheels">
+                                <img class="TruckItemBase TrailerItem" id="Trailer" src="~/Content/shop/@item.Truck.TrailerUri" alt="Trailer">
                                 <img class="TruckItemBase TruckInsideItem" id="TruckInside" src="~/Content/shop/TruckInside.png" alt="TruckInside">
                                 @if (item.Truck.IsClosed == true)
                                 {

@@ -90,14 +90,9 @@ namespace _5051.Models
         public List<FactoryInventoryModel> Inventory { get; set; }
 
         /// <summary>
-        /// The Truck Items for the student
-        /// </summary>
-        public GameResultViewModel TruckItems { get; set; }
-
-        /// <summary>
         /// The Truck settigns for the Student
         /// </summary>
-        public ShopTruckModel Truck { get; set; }
+        public ShopTruckFullModel Truck { get; set; }
 
         /// <summary>
         /// The Attendance list for the student
@@ -126,17 +121,9 @@ namespace _5051.Models
             EmotionCurrent = EmotionStatusEnum.Neutral;
             EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
 
-            Truck = new ShopTruckModel();
+            Truck = new ShopTruckFullModel();
             AvatarComposite = new AvatarCompositeModel();
 
-            TruckItems = new GameResultViewModel();
-
-            TruckItems.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
-            TruckItems.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
-            TruckItems.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
-            TruckItems.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
-            TruckItems.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
-            TruckItems.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
 
             AvatarInventory = new List<AvatarItemModel>
             {
@@ -220,14 +207,15 @@ namespace _5051.Models
 
             Truck = data.Truck;
 
-            TruckItems = new GameResultViewModel();
+            Truck.TruckUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
+            Truck.WheelsUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
+            Truck.TopperUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
+            Truck.TrailerUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
+            Truck.SignUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
+            Truck.MenuUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
 
-            TruckItems.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
-            TruckItems.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
-            TruckItems.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
-            TruckItems.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
-            TruckItems.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
-            TruckItems.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
+            Truck.LeaderBoard = Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
+
         }
 
         /// <summary>
@@ -259,12 +247,14 @@ namespace _5051.Models
 
             Truck = data.Truck;
 
-            TruckItems.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
-            TruckItems.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
-            TruckItems.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
-            TruckItems.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
-            TruckItems.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
-            TruckItems.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
+            Truck.TruckUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Truck);
+            Truck.WheelsUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Wheels);
+            Truck.TopperUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Topper);
+            Truck.TrailerUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Trailer);
+            Truck.SignUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Sign);
+            Truck.MenuUri = Backend.DataSourceBackend.Instance.FactoryInventoryBackend.GetFactoryInventoryUri(Truck.Menu);
+
+            Truck.LeaderBoard = Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
 
             return true;
         }

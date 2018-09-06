@@ -32,6 +32,8 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
+            StudentBackend.Instance.Update(myStudent);
+
             return View(myStudent);
         }
 
@@ -500,6 +502,11 @@ namespace _5051.Controllers
             {
                 // Send back for Edit
                 return RedirectToAction("Index", "Shop", new { id});
+            }
+
+            foreach (var student in DataSourceBackend.Instance.StudentBackend.Index())
+            {
+                _5051.Backend.GameBackend.Instance.GetResult(student.Id);
             }
 
             return View(data);
