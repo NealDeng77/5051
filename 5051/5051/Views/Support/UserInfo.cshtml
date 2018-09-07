@@ -47,6 +47,7 @@
             <div class="col-1 "></div>
 
             <div class="col lightTransparentBox">
+                <br />
                 <div class="row justify-content-start">
 
                     <div class="col">
@@ -89,7 +90,7 @@
                 </div>
 
                 <div class="row justify-content-center FontSizeMedium">
-                    <div class="col">
+                    <div class="col text-center">
                         @{
                             var displayString = string.Empty;
                             _5051.Models.UserRoleEnum currentRole;
@@ -100,8 +101,9 @@
                             {
                                 displayString += "not ";
                             }
-                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "StudentToggleBtn" });
                             <span>@displayString a @currentRole.GetDisplayName()</span>
+                            <br>
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "StudentToggleBtn" });
 
                             <br />
                             <br />
@@ -111,8 +113,9 @@
                             {
                                 displayString += "not ";
                             }
-                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "TeacherToggleBtn" });
                             <span>@displayString a @currentRole.GetDisplayName()</span>
+                            <br>
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "TeacherToggleBtn" });
 
                             <br />
                             <br />
@@ -122,31 +125,35 @@
                             {
                                 displayString += "not ";
                             }
-                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "SupportToggleBtn" });
                             <span>@displayString a @currentRole.GetDisplayName()</span>
+                            <br>
+                            @Html.ActionLink("Toggle", "ToggleUser", "Support", routeValues: new { id = Model.Student.Id, item = (int)currentRole }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "SupportToggleBtn" });
+
 
                             <br />
                             <br />
-                            @Html.ActionLink("Delete", "DeleteUser", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "DeleteUserBtn" })
                             <span>Delete this user?</span>
+                            <br>
+                            @Html.ActionLink("Delete", "DeleteUser", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "DeleteUserBtn" })
 
                             <br />
                             <br />
 
-                            @Html.ActionLink("Change Password", "ChangeUserPassword", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "ChangeUserPasswordBtn" })
                             <span>Change this users password?</span>
+                            <br>
+                            @Html.ActionLink("Change Password", "ChangeUserPassword", "Support", routeValues: new { id = Model.Student.Id }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin", id = "ChangeUserPasswordBtn" })
                         }
                     </div>
                 </div>
 
-                <div class="row">
-                    <br />
-                    <br />
-                </div>
+                    <div class="row">
+                        <br />
+                        <br />
+                    </div>
 
+                </div>
+                <div class="col-1 "></div>
             </div>
-            <div class="col-1 "></div>
-        </div>
 
         <div class="row">
             <br />
