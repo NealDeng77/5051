@@ -166,7 +166,7 @@
                         <div class="col-sm-5">
                             <div class="lightTransparentBox m-1 p-2">
                                 <div class="FontSizeMedium text-center FontColorWhite">
-                                    Semester Settings
+                                    School Year Settings
                                 </div>
                                 <div class="row justify-content-center mt-2">
                                     <div class="col text-right">
@@ -188,118 +188,60 @@
                                 </div>
                                 <div class="row justify-content-center mt-2">
                                     <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.FallFirstClassDay)
+                                        @Html.DisplayNameFor(m => m.S1Start)
                                     </div>
                                     <div class="col text-left">
-                                        @Html.EditorFor(m => m.FallFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.FallFirstClassDay)
+                                        @Html.EditorFor(m => m.S1Start, new { htmlAttributes = new { @Value = @Model.S1Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.S1Start)
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.FallLastClassDay)
+                                        @Html.DisplayNameFor(m => m.S2Start)
                                     </div>
                                     <div class="col text-left">
-                                        @Html.EditorFor(m => m.FallLastClassDay, new { htmlAttributes = new { @Value = @Model.FallLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.FallLastClassDay)
+                                        @Html.EditorFor(m => m.S2Start, new { htmlAttributes = new { @Value = @Model.S2Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.S2Start)
                                     </div>
                                 </div>
                                 <div class="row justify-content-center mt-2">
                                     <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SpringFirstClassDay)
+                                        @Html.DisplayNameFor(m => m.Q1Start)
                                     </div>
                                     <div class="col text-left">
-                                        @Html.EditorFor(m => m.SpringFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SpringFirstClassDay)
+                                        @Html.EditorFor(m => m.Q1Start, new { htmlAttributes = new { @Value = @Model.Q1Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.Q1Start)
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SpringLastClassDay)
+                                        @Html.DisplayNameFor(m => m.Q2Start)
                                     </div>
                                     <div class="col text-left">
-                                        @Html.EditorFor(m => m.SpringLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SpringLastClassDay)
+                                        @Html.EditorFor(m => m.Q2Start, new { htmlAttributes = new { @Value = @Model.Q2Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.Q2Start)
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col text-right">
+                                        @Html.DisplayNameFor(m => m.Q3Start)
+                                    </div>
+                                    <div class="col text-left">
+                                        @Html.EditorFor(m => m.Q3Start, new { htmlAttributes = new { @Value = @Model.Q3Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.Q3Start)
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col text-right">
+                                        @Html.DisplayNameFor(m => m.Q4Start)
+                                    </div>
+                                    <div class="col text-left">
+                                        @Html.EditorFor(m => m.Q4Start, new { htmlAttributes = new { @Value = @Model.Q4Start.ToShortDateString() } })
+                                        @Html.ValidationMessageFor(m => m.Q4Start)
                                     </div>
                                 </div>
                             </div>
-                            <div class="lightTransparentBox m-1 p-2">
-                                <div class="FontSizeMedium text-center FontColorWhite">
-                                    Quarter Settings
-                                </div>
-                                <div class="row justify-content-center mt-2">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.FallQuarterFirstClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.FallQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.FallQuarterFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.FallQuarterFirstClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.FallQuarterLastClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.FallQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.FallQuarterLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.FallQuarterLastClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center mt-2">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.WinterQuarterFirstClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.WinterQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.WinterQuarterFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.WinterQuarterFirstClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.WinterQuarterLastClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.WinterQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.WinterQuarterLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.WinterQuarterLastClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center mt-2">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SpringQuarterFirstClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.SpringQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.SpringQuarterFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SpringQuarterFirstClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SpringQuarterLastClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.SpringQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.SpringQuarterLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SpringQuarterLastClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center mt-2">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SummerQuarterFirstClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.SummerQuarterFirstClassDay, new { htmlAttributes = new { @Value = @Model.SummerQuarterFirstClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SummerQuarterFirstClassDay)
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col text-right">
-                                        @Html.DisplayNameFor(m => m.SummerQuarterLastClassDay)
-                                    </div>
-                                    <div class="col text-left">
-                                        @Html.EditorFor(m => m.SummerQuarterLastClassDay, new { htmlAttributes = new { @Value = @Model.SummerQuarterLastClassDay.ToShortDateString() } })
-                                        @Html.ValidationMessageFor(m => m.SummerQuarterLastClassDay)
-                                    </div>
-                                </div>
-                            </div>
+                   
                             <div class="lightTransparentBox m-1 p-2">
                                 <div class="FontSizeMedium text-center FontColorWhite">
                                     Report Settings
