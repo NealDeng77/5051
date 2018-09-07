@@ -68,6 +68,14 @@ namespace _5051.Backend
 
         }
 
+        /// <summary>
+        /// Switch the data set between Demo, Default and Unit Test
+        /// </summary>
+        /// <param name="SetEnum"></param>
+        public static void SetDataSourceDataSet(DataSourceDataSetEnum SetEnum)
+        {
+            DataSource.LoadDataSet(SetEnum);
+        }
 
         public ApplicationUser CreateNewSupportUser(string userName, string password, string id)
         {
