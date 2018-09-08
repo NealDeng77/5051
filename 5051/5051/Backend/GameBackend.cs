@@ -226,9 +226,11 @@ namespace _5051.Backend
             //result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
             //result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
 
-            //result.Tokens = StudentData.Tokens;
-            //result.Experience = StudentData.ExperiencePoints;
-            //result.TruckName = StudentData.Truck.TruckName;
+            result = StudentData.Truck;
+
+            result.Tokens = StudentData.Tokens;
+            result.Experience = StudentData.ExperiencePoints;
+            result.TruckName = StudentData.Truck.TruckName;
 
             if (StudentData.Tokens < 1)
             {
@@ -238,12 +240,11 @@ namespace _5051.Backend
                 StudentData.Truck.IsClosed = false;
             }
 
-            result = StudentData.Truck;
             result.TransactionList = StudentData.Truck.TransactionList;
 
-            //result.IsClosed = StudentData.Truck.IsClosed;
-            //result.IterationNumber = GetDefault().IterationNumber;
-            //result.CustomersTotal = StudentData.Truck.CustomersTotal;
+            result.IsClosed = StudentData.Truck.IsClosed;
+            result.IterationNumber = GetDefault().IterationNumber;
+            result.CustomersTotal = StudentData.Truck.CustomersTotal;
 
             //result.TransactionList = StudentData.Truck.TransactionList;
 
