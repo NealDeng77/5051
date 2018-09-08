@@ -271,6 +271,28 @@ namespace _5051.UnitTests.Backend
         }
 
         [TestMethod]
+        public void Backend_GameBackend_GetResults_More_Tokens_Should_Pass()
+        {
+            //arrange
+            var test = GameBackend.Instance;
+
+            StudentModel studentModel = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            studentModel.Tokens = 5;
+
+            DataSourceBackend.Instance.StudentBackend.Update(studentModel);
+            var id = studentModel.Id;
+
+            //act
+            var result = test.GetResult(id);
+
+            // Reset
+            DataSourceBackend.Instance.StudentBackend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Backend_GameBackend_GetResults_Default_Should_Pass()
         {
             //arrange
