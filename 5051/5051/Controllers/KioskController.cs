@@ -35,6 +35,7 @@ namespace _5051.Controllers
             if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
             {             
                 StudentBackend.ResetStatusAndProcessNewAttendance();
+                SchoolCalendarBackend.Instance.AutoSetNoSchool();
                 SystemGlobalsModel.Instance.CurrentDate = currentDate;
             }
 
