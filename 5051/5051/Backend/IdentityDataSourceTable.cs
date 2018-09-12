@@ -138,9 +138,6 @@ namespace _5051.Backend
         /// <returns></returns>
         public StudentModel CreateNewStudent(StudentModel student)
         {
-            //fill in all fields needed
-            var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
-
             var createResult = StudentBackend.Instance.Create(student);
 
             if (createResult == null)
@@ -148,19 +145,9 @@ namespace _5051.Backend
                 return null;
             }
 
-            //need to add claims
-            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
-            {
-                ClaimType = "StudentUser",
-                ClaimValue = "True"
-            });
+            var idResult = CreateNewStudentIdRecordOnly(student);
 
-            DataList.Add(user);
-
-            //add to storage
-            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
-
-            return student;
+            return idResult;
         }
 
         public StudentModel CreateNewStudentIdRecordOnly(StudentModel student)
@@ -513,11 +500,6 @@ namespace _5051.Backend
 
             var claims = findResult.Claims.ToList();
 
-            if (claims == null)
-            {
-                return false;
-            }
-
             var lastAccessedClaim = claims.FirstOrDefault(t => t.ClaimType == claimTypeToRemove);
 
             var resultDelete = findResult.Claims.Remove(lastAccessedClaim);
@@ -546,15 +528,16 @@ namespace _5051.Backend
             }
 
             var myData = DataList.Find(n => n.Id == Id);
-            if(UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
-            {
-                //delete the student from student table as well
-                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
-            }
 
             if (DataList.Remove(myData) == false)
             {
                 return false;
+            }
+
+            if (UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
+            {
+                //delete the student from student table as well
+                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
             }
 
             // Storage Delete

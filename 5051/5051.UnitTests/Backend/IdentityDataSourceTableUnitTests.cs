@@ -84,6 +84,34 @@ namespace _5051.UnitTests.Backend
             Assert.IsTrue(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_Delete_Invalid_ID_Not_Found_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var badID = "bogus";
+
+            //act
+            var result = backend.DeleteUser(badID);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        //[TestMethod]
+        //public void Backend_IdentityDataSourceTabel_Delete_Student_User_Should_Pass()
+        //{
+        //    //arrange
+        //    var backend = IdentityDataSourceTable.Instance;
+        //    var student = backend.ListAllStudentUsers().FirstOrDefault();
+
+
+        //    //act
+        //    var result = backend.DeleteUser();
+
+        //    //assert
+        //    Assert.IsTrue(result, TestContext.TestName);
+        //}
         #endregion
 
         #region ListUsers
@@ -194,6 +222,20 @@ namespace _5051.UnitTests.Backend
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_FindStudentById_Invalid_Should_Return_Null()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var badID = "bogus";
+
+            //act
+            var result = backend.GetStudentById(badID);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
         #endregion
 
         #region Claims
@@ -261,6 +303,25 @@ namespace _5051.UnitTests.Backend
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_RemoveClaimFromUser_No_Claims_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var testId = backend.supportUserName;
+            var firstClaimRemove = backend.RemoveClaimFromUser(testId, "SupportUser");
+            var secondClaimRemove = backend.RemoveClaimFromUser(testId, "TeacherUser");
+
+            //act
+            var result = backend.RemoveClaimFromUser(testId, "");
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
         }
         #endregion
 
@@ -432,6 +493,19 @@ namespace _5051.UnitTests.Backend
 
             //act
             var result = backend.LogUserIn(badName, badName, IdentityDataSourceTable.IdentityRole.Student);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_LogOut_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            //act
+            var result = backend.LogUserOut();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
