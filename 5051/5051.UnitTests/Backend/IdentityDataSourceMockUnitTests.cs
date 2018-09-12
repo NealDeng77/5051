@@ -38,6 +38,67 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region ChangeUserName
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangeUserName_Valid_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectId = backend.ListAllStudentUsers().FirstOrDefault().Id;
+            var expectNewName = "testName";
+
+            //act
+            var result = backend.ChangeUserName(expectId, expectNewName);
+            var resultName = backend.FindUserByID(expectId).UserName;
+            var resultStudentName = studentBackend.Read(expectId).Name;            
+
+            //reset
+            studentBackend.Reset();
+            backend.Reset();
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNewName, resultName, TestContext.TestName);
+            Assert.AreEqual(expectNewName, resultStudentName, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangeUserName_Invalid_Null_New_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectId = backend.ListAllSupportUsers().FirstOrDefault().Id;
+
+            //act
+            var result = backend.ChangeUserName(expectId, null);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangeUserName_Invalid_User_Id_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectId = "badID";
+            var expectNewName = "testName";
+
+            //act
+           var result = backend.ChangeUserName(expectId, expectNewName);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
         #region Claims
         [TestMethod]
         public void Backend_IdentityDataSourceMock_UserHasClaimOfValue_Invalid_User_Should_Fail()
@@ -74,15 +135,18 @@ namespace _5051.UnitTests.Backend
             var expectClaimType = "test";
             var expectClaimValue = "True";
             var addClaimResult = backend.AddClaimToUser(expectId, expectClaimType, expectClaimValue);
+            var expectNumClaimsBefore = backend.FindUserByID(expectId).Claims.Count;
 
             //act
             var result = backend.RemoveClaimFromUser(expectId, expectClaimType);
+            var resultClaimNum = backend.FindUserByID(expectId).Claims.Count;
 
             //reset
             backend.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNumClaimsBefore-1, resultClaimNum, TestContext.TestName);
         }
 
         [TestMethod]
@@ -125,15 +189,19 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceMockV2.Instance;
             var studentBackend = StudentBackend.Instance;
             var expectUserId = backend.ListAllStudentUsers().FirstOrDefault().Id;
+            var numUsersBefore = backend.ListAllUsers().Count;
 
             // Act
             var result = backend.DeleteUser(expectUserId);
+            var numUsersAfter = backend.ListAllUsers().Count;
+
             //reset
             studentBackend.Reset();
             backend.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(numUsersBefore-1, numUsersAfter, TestContext.TestName);
         }
 
         [TestMethod]
