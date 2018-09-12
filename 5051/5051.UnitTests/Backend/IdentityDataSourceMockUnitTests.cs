@@ -38,6 +38,135 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region Claims
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_UserHasClaimOfValue_Invalid_User_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            //act
+            var result = backend.UserHasClaimOfValue(null, null, null);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_AddClaimToUser_Invalid_User_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            //act
+            var result = backend.AddClaimToUser(null, null, null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_RemoveClaimFromUser_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectId = "su5051";
+            var expectClaimType = "test";
+            var expectClaimValue = "True";
+            var addClaimResult = backend.AddClaimToUser(expectId, expectClaimType, expectClaimValue);
+
+            //act
+            var result = backend.RemoveClaimFromUser(expectId, expectClaimType);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_RemoveClaimFromUser_Invalid_user_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            //act
+            var result = backend.RemoveClaimFromUser(null, null);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_RemoveClaimFromUser_Invalid_Claim_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectId = "su5051";
+            var expectInvalidClaim = "test";
+
+            //act
+            var result = backend.RemoveClaimFromUser(expectId, expectInvalidClaim);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region Delete
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_DeleteUser_Valid_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var studentBackend = StudentBackend.Instance;
+            var expectUserId = backend.ListAllStudentUsers().FirstOrDefault().Id;
+
+            // Act
+            var result = backend.DeleteUser(expectUserId);
+            //reset
+            studentBackend.Reset();
+            backend.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_DeleteUser_Null_ID_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            // Act
+            var result = backend.DeleteUser(null);
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_DeleteUser_Id_Invalid_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserId = "bogus";
+
+            // Act
+            var result = backend.DeleteUser(expectUserId);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
         #region FindUser
         [TestMethod]
         public void Backend_IdentityDataSourceMock_FindByUserName_Valid_Should_Pass()
@@ -53,19 +182,19 @@ namespace _5051.UnitTests.Backend
             Assert.AreEqual(expectUserName, result.UserName, TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Backend_IdentityDataSourceMock_FindByUserName_Null_Name_Should_Fail()
-        //{
-        //    //arrange
-        //    var backend = IdentityDataSourceMockV2.Instance;
-        //    string expectUserName = null;
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_FindByUserName_Null_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            string expectUserName = null;
 
-        //    //act
-        //    var result = backend.FindUserByUserName(expectUserName);
+            //act
+            var result = backend.FindUserByUserName(expectUserName);
 
-        //    //assert
-        //    Assert.IsNull(result.UserName, TestContext.TestName);
-        //}
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
 
         [TestMethod]
         public void Backend_IdentityDataSourceMock_FindByUserId_Null_ID_Should_Fail()
@@ -78,6 +207,19 @@ namespace _5051.UnitTests.Backend
             var result = backend.FindUserByID(expectId);
 
             //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_GetStudentById_Invalid_Id_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            // Act
+            var result = backend.GetStudentById(null);
+
+            // Assert
             Assert.IsNull(result, TestContext.TestName);
         }
         #endregion
@@ -179,11 +321,176 @@ namespace _5051.UnitTests.Backend
         #endregion
 
         #region Login
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Valid_Support_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "su5051";
+            var expectPassword = "su5051";
 
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Support);
 
+            //reset
+            backend.Reset();
 
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
 
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Valid_Teacher_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "teacher";
+            var expectPassword = "teacher";
 
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Valid_Student_Should_Pass()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "Mike";
+            var expectPassword = "Mike";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Student);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Null_Username_Password_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+
+            // Act
+            var result = backend.LogUserIn(null, null, IdentityDataSourceTable.IdentityRole.Support);
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserInIn_Invalid_UserName_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectPassword = "test";
+
+            // Act
+            var result = backend.LogUserIn(null, expectPassword, IdentityDataSourceTable.IdentityRole.Support);
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Support_Bad_Password_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "su5051";
+            var expectPassword = "badpassword";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Support);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Support_User_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "teacher";
+            var expectPassword = "teacher";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Support);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Teacher_User_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "Mike";
+            var expectPassword = "Mike";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Teacher_Password_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "teacher";
+            var expectPassword = "badpassword";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_LogUserIn_Invalid_Student_Password_Should_Fail()
+        {
+            // Arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectUserName = "Mike";
+            var expectPassword = "badpassword";
+
+            // Act
+            var result = backend.LogUserIn(expectUserName, expectPassword, IdentityDataSourceTable.IdentityRole.Student);
+
+            //reset
+            backend.Reset();
+
+            // Assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
 
         [TestMethod]
         public void Backend_IdentityDataSourceMock_Logout_Should_Fail()
@@ -193,9 +500,6 @@ namespace _5051.UnitTests.Backend
 
             // Act
             var result = backend.LogUserOut();
-
-            //reset
-            backend.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);

@@ -293,11 +293,6 @@ namespace _5051.Backend
 
             var claims = findResult.Claims.ToList();
 
-            if (claims == null)
-            {
-                return false;
-            }
-
             var lastAccessedClaim = claims.FirstOrDefault(t => t.ClaimType == claimTypeToRemove);
 
             var resultDelete = findResult.Claims.Remove(lastAccessedClaim);
@@ -318,6 +313,11 @@ namespace _5051.Backend
             }
 
             var myData = DataList.Find(n => n.Id == Id);
+            if(myData == null)
+            {
+                return false;
+            }
+
             if (UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
             {
                 //delete the student from student table as well
