@@ -248,5 +248,22 @@ namespace _5051.Backend
             var myReturn = DataSource.Index().LastOrDefault();
             return myReturn;
         }
+
+        /// <summary>
+        /// Returns the First Student in the system
+        /// </summary>
+        /// <returns>Null or valid data</returns>
+        public void AutoSetNoSchool()
+        {
+            var myData = DataSource.Index();
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            foreach (var item in myData)
+            {
+                if (item.Date.CompareTo(currentDate) < 0 && item.HasAttendance == false)
+                {
+                    item.SchoolDay = false;
+                }
+            }
+        }
     }
 }
