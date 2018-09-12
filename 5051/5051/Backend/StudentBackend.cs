@@ -209,6 +209,8 @@ namespace _5051.Backend
             //the school day model
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
 
+
+
             //set auto punch-out time        
             if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
             {
@@ -219,8 +221,10 @@ namespace _5051.Backend
             else
             {
                 temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(schoolDay.TimeEnd));
+
+                schoolDay.HasAttendance = true;
             }
-            
+
             data.Attendance.Add(temp);
 
         }
@@ -389,6 +393,7 @@ namespace _5051.Backend
                 }
 
             }
+
 
         }
 
