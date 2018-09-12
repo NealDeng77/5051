@@ -64,6 +64,12 @@ namespace _5051.Models
         public bool SchoolDay { get; set; }
 
         /// <summary>
+        /// Set to true if the day has attendance by any student.
+        /// </summary>
+        [Display(Name = "Has Attendance", Description = "Has Attendance")]
+        public bool HasAttendance { get; set; }
+
+        /// <summary>
         /// Create the default values
         /// </summary>
         public void Initialize(DateTime date)
