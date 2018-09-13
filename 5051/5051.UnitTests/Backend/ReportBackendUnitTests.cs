@@ -199,11 +199,11 @@ namespace _5051.UnitTests.Backend
                 Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(12)),
             };
 
-            var student1 = studentList[0];
+            var student1 = studentList.Where<StudentModel>(x => x.Name == "Doug").FirstOrDefault();
             student1.Attendance.Add(attendanceMon);
             StudentBackend.Instance.Update(student1);
 
-            var student2 = studentList[1];
+            var student2 = studentList.Where<StudentModel>(x => x.Name == "Jea").FirstOrDefault();
             student2.Attendance.Add(attendanceMon);
             student2.Attendance.Add(attendanceTue);
             StudentBackend.Instance.Update(student2);
@@ -215,8 +215,8 @@ namespace _5051.UnitTests.Backend
             StudentBackend.Instance.Reset();
 
             //assert
-            Assert.AreEqual(student1.Id, result[1].Id, TestContext.TestName);
-            Assert.AreEqual(student2.Id, result[0].Id, TestContext.TestName);
+            Assert.AreEqual(student1.Name, result[1].Name, TestContext.TestName);
+            Assert.AreEqual(student2.Name, result[0].Name, TestContext.TestName);
         }
     }
 }
