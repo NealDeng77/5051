@@ -263,21 +263,23 @@ namespace _5051.Backend
         public void CalculateStudentIteration(StudentModel student)
         {
             // check if it is necessary to do the iteration 
-            if (student.Truck.IsClosed == false)
-            {                            
-                // pay rent once per day
-                PayRentPerDay(student);
+            if (student.Truck.IsClosed)
+            {
+                return;
+            }
 
-                // customer arrives
-                CustomerPassBy(student);
+            // pay rent once per day
+            PayRentPerDay(student);
 
-                // Check if customer buy something or not
-                var ifBuy = WillCustomerBuyOrNot(student);
-                if (ifBuy == true)
-                {
-                    // customer buy something
-                    CustomerPurchase(student);
-                }                                       
+            // customer arrives
+            CustomerPassBy(student);
+
+            // Check if customer buy something or not
+            var ifBuy = WillCustomerBuyOrNot(student);
+            if (ifBuy == true)
+            {
+                // customer buy something
+                CustomerPurchase(student);
             }
         }
 
@@ -290,7 +292,7 @@ namespace _5051.Backend
             var currentData = GetDefault();
 
             var RunDateTime = currentData.RunDate.AddHours(24);
-            
+
             // Get the current delta, and see if student need to pay for the rent
             var shouldPay = RunDateTime.CompareTo(timeNow);
             if (shouldPay > 0)
@@ -310,7 +312,7 @@ namespace _5051.Backend
                     shouldPay = RunDateTime.CompareTo(timeNow);
                     if (shouldPay <= 0)
                     {
-                        if(student.Tokens > 0)
+                        if (student.Tokens > 0)
                         {
                             var RentAmount = 1;
                             // the tokens of the rent is 1
@@ -332,7 +334,7 @@ namespace _5051.Backend
                             // close the truck
                             student.Truck.IsClosed = true;
                         }
-                        
+
                         // Increment the RunDate
                         currentData.RunDate = currentData.RunDate.AddHours(24);
                         Update(currentData);
@@ -340,7 +342,7 @@ namespace _5051.Backend
                 }
                 while (shouldPay < 0);
             }
-            
+
             return;
         }
 
@@ -407,7 +409,7 @@ namespace _5051.Backend
             // Sell it (-1 to quantity)
             // If quantity is 0, remove from the student inventory list
             // Calculate Tokens. Need Profit Markup factor, does student experienc help here?
-            var ProfitPercent = .1d;                                                                                    
+            var ProfitPercent = .1d;
 
             // Update Tokens for Student
             // Add a Transaction of the Sale
@@ -456,7 +458,7 @@ namespace _5051.Backend
             var data = StudentBackend.Instance.Index();
 
             // Get Student
-            foreach(var student in data)
+            foreach (var student in data)
             {
                 var temp = new LeaderBoardModel();
                 temp.Id = student.Id;
@@ -470,6 +472,6 @@ namespace _5051.Backend
 
             return board;
         }
-       
+
     }
 }
