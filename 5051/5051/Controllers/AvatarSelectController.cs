@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using _5051.Models;
 using _5051.Backend;
@@ -320,7 +318,7 @@ namespace _5051.Controllers
                 case AvatarItemCategoryEnum.Accessory:
                     myStudent.AvatarComposite.AccessoryId = myItem.Id;
                     myStudent.AvatarComposite.AccessoryUri = myItem.Uri;
-                    myStudent.AvatarComposite.AvatarAccessoryUri= AvatarBase + myItem.Uri;
+                    myStudent.AvatarComposite.AvatarAccessoryUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Cheeks:
@@ -330,25 +328,25 @@ namespace _5051.Controllers
                     break;
 
                 case AvatarItemCategoryEnum.Expression:
-                    myStudent.AvatarComposite.ExpressionId= myItem.Id;
+                    myStudent.AvatarComposite.ExpressionId = myItem.Id;
                     myStudent.AvatarComposite.ExpressionUri = myItem.Uri;
                     myStudent.AvatarComposite.AvatarExpressionUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.HairBack:
-                    myStudent.AvatarComposite.HairBackId= myItem.Id;
+                    myStudent.AvatarComposite.HairBackId = myItem.Id;
                     myStudent.AvatarComposite.HairBackUri = myItem.Uri;
                     myStudent.AvatarComposite.AvatarHairBackUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.HairFront:
-                    myStudent.AvatarComposite.HairFrontId= myItem.Id;
+                    myStudent.AvatarComposite.HairFrontId = myItem.Id;
                     myStudent.AvatarComposite.HairFrontUri = myItem.Uri;
                     myStudent.AvatarComposite.AvatarHairFrontUri = AvatarBase + myItem.Uri;
                     break;
 
                 case AvatarItemCategoryEnum.Head:
-                    myStudent.AvatarComposite.HeadId= myItem.Id;
+                    myStudent.AvatarComposite.HeadId = myItem.Id;
                     myStudent.AvatarComposite.HeadUri = myItem.Uri;
                     myStudent.AvatarComposite.AvatarHeadUri = AvatarBase + myItem.Uri;
                     break;
@@ -361,7 +359,7 @@ namespace _5051.Controllers
 
                 case AvatarItemCategoryEnum.ShirtFull:
                     myStudent.AvatarComposite.ShirtFullId = myItem.Id;
-                    myStudent.AvatarComposite.ShirtFullUri = myItem.Uri+".png";
+                    myStudent.AvatarComposite.ShirtFullUri = myItem.Uri + ".png";
                     myStudent.AvatarComposite.AvatarShirtFullUri = AvatarBase + myItem.Uri;
 
                     myStudent.AvatarComposite.ShirtShortId = myItem.Id;
@@ -372,12 +370,13 @@ namespace _5051.Controllers
 
             }
 
-    // Update Student
-    DataSourceBackend.Instance.StudentBackend.Update(myStudent);
+            // Update Student
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
-            return RedirectToAction("Index", "AvatarSelect", new { id = data.StudentId
-});
+            return RedirectToAction("Index", "AvatarSelect", new
+            {
+                id = data.StudentId
+            });
         }
-
     }
 }
