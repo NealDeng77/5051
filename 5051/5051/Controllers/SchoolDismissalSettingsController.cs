@@ -10,9 +10,6 @@ namespace _5051.Controllers
 
     public class SchoolDismissalSettingsController : BaseController
     {
-        // The Backend Data source
-        private SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
-
         /// <summary>
         /// Read information on a single SchoolDismissalSettings
         /// </summary>
@@ -21,13 +18,13 @@ namespace _5051.Controllers
         // GET: SchoolDismissalSettings/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = SchoolDismissalSettingsBackend.Read(id);
+            var myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.Read(id);
             if (myData == null)
             {
                 // If no ID is passed in, get the first one.
                 if (id == null)
                 {
-                    myData = SchoolDismissalSettingsBackend.GetDefault();
+                    myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
                 }
                 if (myData == null)
                 {
@@ -46,14 +43,14 @@ namespace _5051.Controllers
         // GET: SchoolDismissalSettings/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = SchoolDismissalSettingsBackend.Read(id);
+            var myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.Read(id);
 
             if (myData == null)
             {
                 // If no ID is passed in, get the first one.
                 if (id == null)
                 {
-                    myData = SchoolDismissalSettingsBackend.GetDefault();
+                    myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
                 }
                 if (myData == null)
                 {
@@ -124,7 +121,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            SchoolDismissalSettingsBackend.Update(data);
+            DataSourceBackend.Instance.SchoolDismissalSettingsBackend.Update(data);
 
             //apply the change to calendar
             DataSourceBackend.Instance.SchoolCalendarBackend.ResetDefaults();

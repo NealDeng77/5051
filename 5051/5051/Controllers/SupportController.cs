@@ -9,8 +9,6 @@ namespace _5051.Controllers
 {
     public class SupportController : BaseController
     {
-        private IdentityDataSourceMock identityBackend = new IdentityDataSourceMock();
-
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 

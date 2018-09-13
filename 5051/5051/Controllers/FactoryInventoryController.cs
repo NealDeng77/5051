@@ -11,11 +11,6 @@ namespace _5051.Controllers
     /// </summary>
     public class FactoryInventoryController : BaseController
     {
-        // A ViewModel used for the FactoryInventory that contains the FactoryInventoryList
-        private FactoryInventoryViewModel FactoryInventoryViewModel = new FactoryInventoryViewModel();
-
-        // The Backend Data source
-        private FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
 
         // GET: FactoryInventory
         /// <summary>
@@ -56,7 +51,7 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = FactoryInventoryBackend.Read(id);
+            var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
@@ -108,7 +103,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            FactoryInventoryBackend.Create(data);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Create(data);
 
             return RedirectToAction("Index");
         }
@@ -121,7 +116,7 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = FactoryInventoryBackend.Read(id);
+            var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
@@ -161,7 +156,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            FactoryInventoryBackend.Update(data);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Update(data);
 
             return RedirectToAction("Index");
         }
@@ -174,7 +169,7 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myData = FactoryInventoryBackend.Read(id);
+            var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
 
@@ -212,7 +207,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            FactoryInventoryBackend.Delete(data.Id);
+            DataSourceBackend.Instance.FactoryInventoryBackend.Delete(data.Id);
 
             return RedirectToAction("Index");
         }

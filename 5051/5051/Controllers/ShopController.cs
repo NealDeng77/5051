@@ -10,11 +10,6 @@ namespace _5051.Controllers
 {
     public class ShopController : BaseController
     {
-        private FactoryInventoryViewModel FactoryInventoryViewModel = new FactoryInventoryViewModel();
-
-        // The Backend Data source
-        private FactoryInventoryBackend FactoryInventoryBackend = FactoryInventoryBackend.Instance;
-
         /// <summary>
         /// Index to the Shop
         /// </summary>
@@ -57,7 +52,7 @@ namespace _5051.Controllers
             myData.Student = myStudent;
 
             // Get the Inventory
-            var InventoryList = FactoryInventoryBackend.Index();
+            var InventoryList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
 
             // Sort the Inventory into List per Category
             // Load the ones
@@ -276,7 +271,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
            
-            var data = FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
+            var data = DataSourceBackend.Instance.FactoryInventoryBackend.GetShopTruckViewModel(studentdata);
 
             //Return Truck Data
             return View(data);

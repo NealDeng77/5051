@@ -8,11 +8,6 @@ namespace _5051.Controllers
 {
     public class AvatarSelectController : BaseController
     {
-        private AvatarItemViewModel AvatarItemViewModel = new AvatarItemViewModel();
-
-        // The Backend Data source
-        private AvatarItemBackend AvatarItemBackend = AvatarItemBackend.Instance;
-
         /// <summary>
         /// Index to the AvatarSelect
         /// </summary>
@@ -55,7 +50,7 @@ namespace _5051.Controllers
             myData.Student = myStudent;
 
             // Get the Inventory
-            var InventoryList = AvatarItemBackend.Index();
+            var InventoryList = DataSourceBackend.Instance.AvatarItemBackend.Index();
 
             // Sort the Inventory into List per Category
             // Load the ones
@@ -253,7 +248,7 @@ namespace _5051.Controllers
             }
 
             // Use the Item, to populate the ShopViewModel
-            var data = AvatarItemBackend.GetAvatarShopViewModel(studentdata, myItem);
+            var data = DataSourceBackend.Instance.AvatarItemBackend.GetAvatarShopViewModel(studentdata, myItem);
 
             //Return Truck Data
             return View(data);

@@ -11,12 +11,6 @@ namespace _5051.Controllers
     /// </summary>
     public class AvatarItemController : BaseController
     {
-        // A ViewModel used for the AvatarItem that contains the AvatarItemList
-        private AvatarItemViewModel AvatarItemViewModel = new AvatarItemViewModel();
-
-        // The Backend Data source
-        private AvatarItemBackend AvatarItemBackend = AvatarItemBackend.Instance;
-
         // GET: AvatarItem
         /// <summary>
         /// Index, the page that shows all the AvatarItems
@@ -28,7 +22,7 @@ namespace _5051.Controllers
             var myData = new AvatarItemListViewModel();
 
             // Get the Inventory
-            var InventoryList = AvatarItemBackend.Index();
+            var InventoryList = DataSourceBackend.Instance.AvatarItemBackend.Index();
 
             // Sort the Inventory into List per Category
             // Load the ones
@@ -56,7 +50,7 @@ namespace _5051.Controllers
         // GET: AvatarItem/Details/5
         public ActionResult Read(string id = null)
         {
-            var myData = AvatarItemBackend.Read(id);
+            var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
 
@@ -105,7 +99,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            AvatarItemBackend.Create(data);
+            DataSourceBackend.Instance.AvatarItemBackend.Create(data);
 
             return RedirectToAction("Index");
         }
@@ -118,7 +112,7 @@ namespace _5051.Controllers
         // GET: AvatarItem/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myData = AvatarItemBackend.Read(id);
+            var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
 
@@ -157,7 +151,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            AvatarItemBackend.Update(data);
+            DataSourceBackend.Instance.AvatarItemBackend.Update(data);
 
             return RedirectToAction("Index");
         }
@@ -170,7 +164,7 @@ namespace _5051.Controllers
         // GET: AvatarItem/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myData = AvatarItemBackend.Read(id);
+            var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
 
@@ -203,7 +197,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            AvatarItemBackend.Delete(data.Id);
+            DataSourceBackend.Instance.AvatarItemBackend.Delete(data.Id);
 
             return RedirectToAction("Index");
         }

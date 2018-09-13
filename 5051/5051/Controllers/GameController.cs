@@ -10,9 +10,6 @@ namespace _5051.Controllers
 
     public class GameController : BaseController
     {
-        // The Backend Data source
-        private GameBackend GameBackend = GameBackend.Instance;
-
         /// <summary>
         /// This updates the Game based on the information posted from the udpate page
         /// </summary>
@@ -54,7 +51,7 @@ namespace _5051.Controllers
                 });
             }
 
-            var DataResult = GameBackend.Simulation();
+            var DataResult = DataSourceBackend.Instance.GameBackend.Simulation();
 
             return Json(new
             {
@@ -104,8 +101,8 @@ namespace _5051.Controllers
                 });
             }
 
-            var DataResult = GameBackend.Simulation();
-            var result = GameBackend.GetResult(data.Id);
+            var DataResult = DataSourceBackend.Instance.GameBackend.Simulation();
+            var result = DataSourceBackend.Instance.GameBackend.GetResult(data.Id);
 
             return Json(new
             {
