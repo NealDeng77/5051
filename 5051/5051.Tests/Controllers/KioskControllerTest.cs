@@ -335,7 +335,7 @@ namespace _5051.Tests.Controllers
         //        return RedirectToAction("Error", "Home");
         //    }
 
-        //    var myDataList = StudentBackend.Read(id);
+        //    var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
         //    if (myDataList == null)
         //    {
         //        return RedirectToAction("Error", "Home");
@@ -403,7 +403,7 @@ namespace _5051.Tests.Controllers
         //        return RedirectToAction("Error", "Home");
         //    }
 
-        //    var myDataList = StudentBackend.Read(id);
+        //    var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
         //    if (myDataList == null)
         //    {
         //        return RedirectToAction("Error", "Home");
@@ -417,7 +417,7 @@ namespace _5051.Tests.Controllers
         //}
 
         #region Login
-            
+
         [TestMethod]
         public void Controller_Kiosk_Login_Get_Should_Pass()
         {

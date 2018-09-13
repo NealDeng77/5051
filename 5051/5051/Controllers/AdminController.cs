@@ -10,12 +10,6 @@ namespace _5051.Controllers
     /// </summary>
     public class AdminController : BaseController
     {
-        // A ViewModel used for the Student that contains the StudentList
-        private StudentViewModel StudentViewModel = new StudentViewModel();
-
-        // The Backend Data source
-        private StudentBackend StudentBackend = StudentBackend.Instance;
-
         // GET: Admin
         public ActionResult Index()
         {
@@ -30,7 +24,7 @@ namespace _5051.Controllers
         public ActionResult Report()
         {
             // Load the list of data into the StudentList
-            var myDataList = StudentBackend.Index();
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
 
             var myReturn = new AdminReportIndexViewModel(myDataList);
 

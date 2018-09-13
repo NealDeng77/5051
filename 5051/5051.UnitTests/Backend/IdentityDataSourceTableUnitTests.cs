@@ -360,8 +360,7 @@ namespace _5051.UnitTests.Backend
         //    // Arrange
         //    var backend = IdentityDataSourceTable.Instance;
         //    var studentTableBackend = StudentDataSourceTable.Instance;
-        //    var studentBackend = StudentBackend.Instance;
-        //    var expectStudent = studentBackend.GetDefault();
+        //    var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
         //    var expectId = "GoodID";
         //    var expectName = "Billy";
         //    var expectAvatarLevel = 7;

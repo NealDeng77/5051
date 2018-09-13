@@ -203,8 +203,7 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = SchoolDismissalSettingsDataSourceTable.Instance;
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = false;
 
             // Act
@@ -212,7 +211,6 @@ namespace _5051.UnitTests.Backend
 
             //reset
             DataSourceBackend.Instance.Reset();
-            //studentBackend.Reset();
 
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);

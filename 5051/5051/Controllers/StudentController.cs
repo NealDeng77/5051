@@ -6,12 +6,6 @@ namespace _5051.Controllers
 {
     public class StudentController : BaseController
     {
-        // A ViewModel used for the Student that contains the StudentList
-        private StudentViewModel StudentViewModel = new StudentViewModel();
-
-        // The Backend Data source
-        private StudentBackend StudentBackend = StudentBackend.Instance;
-
         // GET: Student
         /// <summary>
         /// Index, the page that shows all the Students
@@ -20,7 +14,7 @@ namespace _5051.Controllers
         public ActionResult Index()
         {
             // Load the list of data into the StudentList
-            var myDataList = StudentBackend.Index();
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
         }
@@ -33,7 +27,7 @@ namespace _5051.Controllers
         // GET: Student/Details/5
         public ActionResult Read(string id = null)
         {
-            var myDataStudent = StudentBackend.Read(id);
+            var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -94,7 +88,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            StudentBackend.Create(data);
+            DataSourceBackend.Instance.StudentBackend.Create(data);
 
             return RedirectToAction("Index");
         }
@@ -107,7 +101,7 @@ namespace _5051.Controllers
         // GET: Student/Edit/5
         public ActionResult Update(string id = null)
         {
-            var myDataStudent = StudentBackend.Read(id);
+            var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -172,7 +166,7 @@ namespace _5051.Controllers
         // GET: Student/Delete/5
         public ActionResult Delete(string id = null)
         {
-            var myDataStudent = StudentBackend.Read(id);
+            var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -223,7 +217,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            StudentBackend.Delete(data.Id);
+            DataSourceBackend.Instance.StudentBackend.Delete(data.Id);
 
             return RedirectToAction("Index");
         }

@@ -204,8 +204,7 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = SchoolCalendarDataSourceTable.Instance;
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = false;
 
             // Act

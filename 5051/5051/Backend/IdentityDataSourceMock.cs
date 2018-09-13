@@ -200,9 +200,7 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            var studentBackend = StudentBackend.Instance;
-
-            var studentResult = studentBackend.Read(id);
+            var studentResult = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if(studentResult == null)
             {

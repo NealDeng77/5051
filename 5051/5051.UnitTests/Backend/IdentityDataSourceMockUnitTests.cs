@@ -44,17 +44,16 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var backend = IdentityDataSourceMockV2.Instance;
-            var studentBackend = StudentBackend.Instance;
             var expectId = backend.ListAllStudentUsers().FirstOrDefault().Id;
             var expectNewName = "testName";
 
             //act
             var result = backend.ChangeUserName(expectId, expectNewName);
             var resultName = backend.FindUserByID(expectId).UserName;
-            var resultStudentName = studentBackend.Read(expectId).Name;            
+            var resultStudentName = DataSourceBackend.Instance.StudentBackend.Read(expectId).Name;
 
             //reset
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
             backend.Reset();
 
             //assert
@@ -187,7 +186,6 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = IdentityDataSourceMockV2.Instance;
-            var studentBackend = StudentBackend.Instance;
             var expectUserId = backend.ListAllStudentUsers().FirstOrDefault().Id;
             var numUsersBefore = backend.ListAllUsers().Count;
 
@@ -196,7 +194,7 @@ namespace _5051.UnitTests.Backend
             var numUsersAfter = backend.ListAllUsers().Count;
 
             //reset
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
             backend.Reset();
 
             // Assert

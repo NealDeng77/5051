@@ -59,12 +59,10 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentDataSourceMock_Read_Valid_ID_Should_Pass()
         {
             // Arrange
-            var backend = StudentDataSourceMock.Instance;
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
             // Act
-            var result = backend.Read(expectStudent.Id);
+            var result = DataSourceBackend.Instance.StudentBackend.Read(expectStudent.Id);
 
             // Assert
             Assert.AreEqual(expectStudent, result, TestContext.TestName);
@@ -110,8 +108,7 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = StudentDataSourceMock.Instance;
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectId = "GoodID";
             var expectName = "Billy";
             var expectAvatarLevel = 7;
@@ -136,8 +133,7 @@ namespace _5051.UnitTests.Backend
             var resultUpdate = backend.Update(expectStudent);
 
             //reset
-            backend.Reset();
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(expectStudent, resultUpdate, TestContext.TestName);
@@ -177,16 +173,14 @@ namespace _5051.UnitTests.Backend
         {
             // Arrange
             var backend = StudentDataSourceMock.Instance;
-            var studentBackend = StudentBackend.Instance;
-            var expectStudent = studentBackend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = true;
 
             // Act
             var result = backend.Delete(expectStudent.Id);
 
             //reset
-            backend.Reset();
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);

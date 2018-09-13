@@ -19,7 +19,6 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void AttendanceDetailsViewModel_Initialize_Invalid_AttendanceId_Should_Fail()
         {
-            var backend = StudentBackend.Instance;
             var myAttendanceDetails = new AttendanceDetailsViewModel();
 
             var result = myAttendanceDetails.Initialize(null);
@@ -30,7 +29,6 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void AttendanceDetailsViewModel_Initialize_Invalid_AttendanceId_Does_Not_Exist_Should_Fail()
         {
-            var backend = StudentBackend.Instance;
             var myAttendanceDetails = new AttendanceDetailsViewModel();
             var testAttendance = new AttendanceModel();
 
@@ -42,17 +40,21 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void AttendanceDetailsViewModel_Initialize_Valid_AttendanceId_Should_Pass()
         {
-            var backend = StudentBackend.Instance;
+            // Arrange
             var myAttendanceDetails = new AttendanceDetailsViewModel();
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var testAttendance = new AttendanceModel();
             testAttendance.StudentId = testStudent.Id;
             testStudent.Attendance.Add(testAttendance);
-            backend.Update(testStudent);
+            DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
-
+            // Act
             var result = myAttendanceDetails.Initialize(testAttendance.Id);
 
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
             Assert.AreEqual(testStudent.Id, result.Attendance.StudentId, TestContext.TestName);
             Assert.AreEqual(testAttendance.Id, result.Attendance.Id, TestContext.TestName);
         }
@@ -61,13 +63,12 @@ namespace _5051.UnitTests.Models
         public void AttendanceDetailsViewModel_Get_Set_Should_Pass()
         {
             // Arrange
-            var backend = StudentBackend.Instance;
             var myAttendanceDetails = new AttendanceDetailsViewModel();
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var testAttendance = new AttendanceModel();
             testAttendance.StudentId = testStudent.Id;
             testStudent.Attendance.Add(testAttendance);
-            backend.Update(testStudent);
+            DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             // Act
             var result = myAttendanceDetails.Initialize(testAttendance.Id);
@@ -87,7 +88,6 @@ namespace _5051.UnitTests.Models
         public void AttendanceDetailsViewModel_Invalid_Null_Id_Should_Fail()
         {
             // Arrange
-            var backend = StudentBackend.Instance;
 
             // Act
             var result = new AttendanceDetailsViewModel(null);
@@ -104,12 +104,11 @@ namespace _5051.UnitTests.Models
         //public void AttendanceDetailsViewModel_Valid_Id_Should_Pass()
         //{
         //    // Arrange
-        //    var backend = StudentBackend.Instance;
-        //    var testStudent = backend.GetDefault();
+        //    var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
         //    var testAttendance = new AttendanceModel();
         //    testAttendance.StudentId = testStudent.Id;
         //    testStudent.Attendance.Add(testAttendance);
-        //    backend.Update(testStudent);
+        //    DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
         //    // Act
         //    var result = new AttendanceDetailsViewModel(testAttendance.StudentId);
@@ -126,7 +125,6 @@ namespace _5051.UnitTests.Models
         public void AttendanceDetailsViewModel_InValid_Id_Bogus_Should_Fail()
         {
             // Arrange
-            var backend = StudentBackend.Instance;
 
             // Act
             var result = new AttendanceDetailsViewModel("bogus");

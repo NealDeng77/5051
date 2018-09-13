@@ -274,13 +274,12 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = new IdentityDataSourceMock();
             var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            
+
             //var dataSourceBack = DataSourceBackend.Instance;
             //dataSourceBack.SetTestingMode(true);
             //var expectStudent = dataSourceBack.StudentBackend.GetDefault();
-            
-            //var studentBackend = StudentBackend.Instance;
-            //var expectStudent = studentBackend.GetDefault();
+
+            //var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
             //act
             var result = backend.GetStudentById(expectStudent.Id);

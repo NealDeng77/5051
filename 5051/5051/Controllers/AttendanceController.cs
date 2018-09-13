@@ -11,14 +11,11 @@ namespace _5051.Controllers
     //The controller that handles attendance crudi
     public class AttendanceController : Controller
     {
-        // The Backend Data source
-        private StudentBackend StudentBackend = StudentBackend.Instance;
-
         // GET: Attendance. Select a student here
         public ActionResult Index()
         {
             // Load the list of data into the StudentList
-            var myDataList = StudentBackend.Index();
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
             return View(StudentViewModel);
         }
@@ -65,7 +62,7 @@ namespace _5051.Controllers
         // Read the details of the attendance(time in, time out).
         public ActionResult Details(string id)
         {
-            var myAttendance = StudentBackend.ReadAttendance(id);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
 
             if (myAttendance == null)
             {
@@ -186,7 +183,7 @@ namespace _5051.Controllers
         // Update in and out times.
         public ActionResult Update(string id)
         {
-            var myAttendance = StudentBackend.ReadAttendance(id);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
 
             if (myAttendance == null)
             {
@@ -262,7 +259,7 @@ namespace _5051.Controllers
         // Remove the attendance
         public ActionResult Delete(string id)
         {
-            var myAttendance = StudentBackend.ReadAttendance(id);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
 
             if (myAttendance == null)
             {

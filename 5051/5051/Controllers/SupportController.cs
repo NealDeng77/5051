@@ -10,8 +10,6 @@ namespace _5051.Controllers
     public class SupportController : BaseController
     {
         private IdentityDataSourceMock identityBackend = new IdentityDataSourceMock();
-        private DataSourceBackend DataSourceBackend = DataSourceBackend.Instance;
-        private StudentBackend StudentBackend = StudentBackend.Instance;
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -269,7 +267,7 @@ namespace _5051.Controllers
             //{
             //    ModelState.AddModelError("", "Invalid create user attempt");
             //}
-            StudentBackend.Create(newStudent);
+            DataSourceBackend.Instance.StudentBackend.Create(newStudent);
 
             return RedirectToAction("UserList", "Support");
         }

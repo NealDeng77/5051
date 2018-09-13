@@ -11,10 +11,6 @@ namespace _5051.Controllers
     /// </summary>
     public class KioskController : BaseController
     {
-
-        // The Backend Data source
-        private StudentBackend StudentBackend = StudentBackend.Instance;
-
         /// <summary>
         /// Return the list of students with the status of logged in or out
         /// </summary>
@@ -24,7 +20,7 @@ namespace _5051.Controllers
         {
             //TODO: Need to add a check here to validate if the request comes from a validated login or not.
 
-            var myDataList = StudentBackend.Index();
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             //if (myDataList.Count == 0)
             //{
             //    // Send to Error Page
@@ -33,8 +29,8 @@ namespace _5051.Controllers
 
             var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
             if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
-            {             
-                StudentBackend.ResetStatusAndProcessNewAttendance();
+            {
+                DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
                 SchoolCalendarBackend.Instance.AutoSetNoSchool();
                 SystemGlobalsModel.Instance.CurrentDate = currentDate;
             }
@@ -63,7 +59,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            StudentBackend.ToggleStatusById(id);
+            DataSourceBackend.Instance.StudentBackend.ToggleStatusById(id);
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id });
         }
         *
@@ -96,7 +92,7 @@ namespace _5051.Controllers
             }
 
             // perform student log in and update data
-            StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
+            DataSourceBackend.Instance.StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
 
             return RedirectToAction("ConfirmLogin", "Kiosk", new { id=data.Id });
         }
@@ -116,7 +112,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            StudentBackend.ToggleStatusById(id);
+            DataSourceBackend.Instance.StudentBackend.ToggleStatusById(id);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id });
         }   
         *
@@ -148,7 +144,7 @@ namespace _5051.Controllers
             }
 
             // perform student log out and update data
-            StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
+            DataSourceBackend.Instance.StudentBackend.ToggleEmotionStatusById(data.Id, data.EmotionCurrent);
             return RedirectToAction("ConfirmLogout", "Kiosk", new { id = data.Id });
         }
 
@@ -164,7 +160,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myDataList = StudentBackend.Read(id);
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
             var StudentViewModel = new StudentDisplayViewModel(myDataList);
 
             StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow);
@@ -184,7 +180,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myDataList = StudentBackend.Read(id);
+            var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
             var StudentViewModel = new StudentDisplayViewModel(myDataList);
 
             //Todo, replace with actual transition time
@@ -290,7 +286,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            StudentBackend.Create(data);
+            DataSourceBackend.Instance.StudentBackend.Create(data);
             //IdentityDataSourceTable.Instance.CreateNewStudent(data);
 
             return RedirectToAction("Index");

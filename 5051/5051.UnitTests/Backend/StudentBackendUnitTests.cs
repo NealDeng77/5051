@@ -25,10 +25,9 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Read_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            var result = backend.Read(null);
+            var result = DataSourceBackend.Instance.StudentBackend.Read(null);
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -52,11 +51,10 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Read_Valid_ID_No_Attendance_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var expectStudent = backend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
             //act
-            var result = backend.Read(expectStudent.Id);
+            var result = DataSourceBackend.Instance.StudentBackend.Read(expectStudent.Id);
 
             //assert
             Assert.AreEqual(expectStudent ,result, TestContext.TestName);
@@ -66,16 +64,15 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Read_Valid_ID_Has_Attendance_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var expectStudent = backend.GetDefault();
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var tempAttendance = new AttendanceModel();
             expectStudent.Attendance.Add(tempAttendance);
 
             //act
-            var result = backend.Read(expectStudent.Id);
+            var result = DataSourceBackend.Instance.StudentBackend.Read(expectStudent.Id);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expectStudent, result, TestContext.TestName);
@@ -87,13 +84,12 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Update_Invalid_Data_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            var result = backend.Update(null);
+            var result = DataSourceBackend.Instance.StudentBackend.Update(null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -103,14 +99,13 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Update_Invalid_Data_Does_Not_Exist_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var testStudent = new StudentModel();
 
             //act
-            var result = backend.Update(testStudent);
+            var result = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -120,17 +115,16 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Update_Valid_Data_Status_Change_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var statusAfterEnum = _5051.Models.StudentStatusEnum.In;
             var testStudent = new StudentModel();
             testStudent.Status = statusAfterEnum;
-            testStudent.Id = backend.GetDefault().Id;
+            testStudent.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             //act
-            var updateResult = backend.Update(testStudent);
+            var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(updateResult, TestContext.TestName);
@@ -143,14 +137,13 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Delete_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var expect = false;
 
             //act
-            var result = backend.Delete(null);
+            var result = DataSourceBackend.Instance.StudentBackend.Delete(null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expect, result, TestContext.TestName);
@@ -160,16 +153,15 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Delete_Valid_ID_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var testStudent = new StudentModel();
-            var createResult = backend.Create(testStudent);
+            var createResult = DataSourceBackend.Instance.StudentBackend.Create(testStudent);
             var expect = true;
 
             //act
-            var deleteResult = backend.Delete(createResult.Id);
+            var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(createResult.Id);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expect, deleteResult, TestContext.TestName);
@@ -181,10 +173,9 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_Index_Valid_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            var result = backend.Index();
+            var result = DataSourceBackend.Instance.StudentBackend.Index();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -197,11 +188,10 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleStatusById_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            backend.ToggleStatusById(null);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.ToggleStatusById(null);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -226,18 +216,17 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleStatusById_Valid_Id_Case_In_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectToggleResult = _5051.Models.StudentStatusEnum.Out;
             testStudent.Status = _5051.Models.StudentStatusEnum.In;
-            var updateResult = backend.Update(testStudent);
+            var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             //act
-            backend.ToggleStatusById(testStudent.Id);
+            DataSourceBackend.Instance.StudentBackend.ToggleStatusById(testStudent.Id);
             var toggleResult = testStudent.Status;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expectToggleResult, toggleResult, TestContext.TestName);
@@ -247,12 +236,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleEmotionStatusById_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var emotion = EmotionStatusEnum.Neutral;
 
             //act
-            backend.ToggleEmotionStatusById(null, emotion);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.ToggleEmotionStatusById(null, emotion);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -262,13 +250,12 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleEmotionStatusById_Invalid_ID_Does_Not_Exist_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
             var testStudent = new StudentModel();
             var emotion = EmotionStatusEnum.Neutral;
 
             //act
-            backend.ToggleEmotionStatusById(testStudent.Id, emotion);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.ToggleEmotionStatusById(testStudent.Id, emotion);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -278,22 +265,21 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleEmotionStatusById_Valid_Id_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testStudent.Status = StudentStatusEnum.Out;
-            var updateResult = backend.Update(testStudent);
+            var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
             var emotion = EmotionStatusEnum.Neutral;
 
             var expectToggleStatus = StudentStatusEnum.In;
             var expectToggleEmotion = EmotionStatusEnum.Neutral;
-                        
+
             //act
-            backend.ToggleEmotionStatusById(testStudent.Id, emotion);
+            DataSourceBackend.Instance.StudentBackend.ToggleEmotionStatusById(testStudent.Id, emotion);
             var toggleStatus = testStudent.Status;
             var toggleEmotion = testStudent.EmotionCurrent;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expectToggleStatus, toggleStatus, TestContext.TestName);
@@ -304,18 +290,17 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleStatus_Valid_Id_Case_Out_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectToggleResult = _5051.Models.StudentStatusEnum.In;
             testStudent.Status = _5051.Models.StudentStatusEnum.Out;
-            var updateResult = backend.Update(testStudent);
+            var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             //act
-            backend.ToggleStatus(testStudent);
+            DataSourceBackend.Instance.StudentBackend.ToggleStatus(testStudent);
             var toggleResult = testStudent.Status;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expectToggleResult, toggleResult, TestContext.TestName);
@@ -325,18 +310,17 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleStatus_Valid_Id_Case_Hold_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectToggleResult = _5051.Models.StudentStatusEnum.Out;
             testStudent.Status = _5051.Models.StudentStatusEnum.Hold;
-            var updateResult = backend.Update(testStudent);
+            var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             //act
-            backend.ToggleStatus(testStudent);
+            DataSourceBackend.Instance.StudentBackend.ToggleStatus(testStudent);
             var toggleResult = testStudent.Status;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual(expectToggleResult, toggleResult, TestContext.TestName);
@@ -346,14 +330,13 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_ToggleStatus_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            backend.ToggleStatus(null);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.ToggleStatus(null);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -366,14 +349,13 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_SetLogIn_Invalid_Id_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            backend.SetLogIn(null);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.SetLogIn(null);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -383,14 +365,13 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_SetLogOut_Invalid_ID_Null_Should_Fail()
         {
             //arrange
-            var backend = StudentBackend.Instance;
 
             //act
-            backend.SetLogOut(null);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.SetLogOut(null);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -400,17 +381,16 @@ namespace _5051.UnitTests.Backend
         public void Backend_StudentBackend_SetLogOut_Valid_Data_Has_Attendance_Should_Pass()
         {
             //arrange
-            var backend = StudentBackend.Instance;
-            var testStudent = backend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var tempAttendance = new AttendanceModel();
             testStudent.Attendance.Add(tempAttendance);
 
             //act
-            backend.SetLogOut(testStudent);
-            var result = backend;
+            DataSourceBackend.Instance.StudentBackend.SetLogOut(testStudent);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -423,14 +403,13 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var sqlEnum = _5051.Models.DataSourceEnum.SQL;
-            var backend = StudentBackend.Instance;
 
             //act
-            StudentBackend.SetDataSource(sqlEnum);
-            var result = backend;
+            DataSourceBackend.Instance.SetDataSource(sqlEnum);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -441,14 +420,13 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var unitEnum = _5051.Models.DataSourceDataSetEnum.UnitTest;
-            var backend = StudentBackend.Instance;
 
             //act
-            StudentBackend.SetDataSourceDataSet(unitEnum);
-            var result = backend;
+            DataSourceBackend.Instance.SetDataSourceDataSet(unitEnum);
+            var result = DataSourceBackend.Instance.StudentBackend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);

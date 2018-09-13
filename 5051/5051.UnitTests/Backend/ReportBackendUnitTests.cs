@@ -26,8 +26,7 @@ namespace _5051.UnitTests.Backend
             //arrange
             var reportBackend = ReportBackend.Instance;
             var testReport = new MonthlyReportViewModel();
-            var studentBackend = StudentBackend.Instance;
-            var testStudent = studentBackend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
 
@@ -78,7 +77,7 @@ namespace _5051.UnitTests.Backend
             var result = reportBackend.GenerateOverallReport(testReport);
 
             //reset
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -90,8 +89,7 @@ namespace _5051.UnitTests.Backend
             //arrange
             var reportBackend = ReportBackend.Instance;
             var testReport = new MonthlyReportViewModel();
-            var studentBackend = StudentBackend.Instance;
-            var testStudent = studentBackend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
             var testStudentAttendance1 = new AttendanceModel
@@ -112,8 +110,7 @@ namespace _5051.UnitTests.Backend
             var result = reportBackend.GenerateMonthlyReport(testReport);
 
             //reset
-            //reportBackend.Reset();
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -126,8 +123,7 @@ namespace _5051.UnitTests.Backend
             //arrange
             var reportBackend = ReportBackend.Instance;
             var testReport = new MonthlyReportViewModel();
-            var studentBackend = StudentBackend.Instance;
-            var testStudent = studentBackend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
             var testStudentAttendance1 = new AttendanceModel
@@ -143,7 +139,7 @@ namespace _5051.UnitTests.Backend
             var result = reportBackend.GenerateOverallReport(testReport);
 
             //reset
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -156,8 +152,7 @@ namespace _5051.UnitTests.Backend
             //arrange
             var reportBackend = ReportBackend.Instance;
             var testReport = new MonthlyReportViewModel();
-            var studentBackend = StudentBackend.Instance;
-            var testStudent = studentBackend.GetDefault();
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
             var testStudentAttendance1 = new AttendanceModel
@@ -172,7 +167,7 @@ namespace _5051.UnitTests.Backend
             var result = reportBackend.GenerateOverallReport(testReport);
 
             //reset
-            studentBackend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
