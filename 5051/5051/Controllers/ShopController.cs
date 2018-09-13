@@ -249,58 +249,6 @@ namespace _5051.Controllers
             return View(myData);
         }
 
-        [HttpPost]
-        public ActionResult Inventory([Bind(Include=
-                                        "StudentId,"+
-                                        "ItemId,"+
-                                        "")] ShopBuyViewModel data)
-        {
-            if (!ModelState.IsValid)
-            {
-                // Send back for edit, with Error Message
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            if (data == null)
-            {
-                // Send to Error Page
-                return RedirectToAction("Error", "Home");
-            }
-
-            if (string.IsNullOrEmpty(data.StudentId))
-            {
-                // Send back for Edit
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            if (string.IsNullOrEmpty(data.ItemId))
-            {
-                // Send back for Edit
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            // Get Student
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
-            if (myStudent == null)
-            {
-                // Send back for Edit
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            // Get Item
-            var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
-            if (myItem == null)
-            {
-                // Send back for Edit
-                return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-            }
-
-            // Update Student
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
-
-            return RedirectToAction("Inventory", "Shop", new { id = data.StudentId });
-
-        }
         /// <summary>
         /// Edit The Shop Details
         /// </summary>
