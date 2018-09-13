@@ -280,6 +280,7 @@
     <Compile Include="Models\AvatarItemViewModel.cs" />
     <Compile Include="Models\BusinessReportViewModel.cs" />
     <Compile Include="Models\Enums\EnumHelper.cs" />
+    <Compile Include="Models\VisitTruckViewModel.cs" />
     <Compile Include="Models\LeaderBoardModel.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\ShopTruckFullModel.cs" />

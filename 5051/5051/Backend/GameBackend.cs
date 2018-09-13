@@ -312,7 +312,7 @@ namespace _5051.Backend
                 // quit iteration calculation
             }
             var leaderBoard = new List<LeaderBoardModel>();
-            leaderBoard = UpdatedLeaderBoard();
+            leaderBoard = GetLeaderBoard();
         }
 
         public void PayRentPerDay(StudentModel student)
@@ -484,7 +484,7 @@ namespace _5051.Backend
             return;
         }
 
-        public List<LeaderBoardModel> UpdatedLeaderBoard()
+        public List<LeaderBoardModel> GetLeaderBoard()
         {
             var board = new List<LeaderBoardModel>();
             var data = StudentBackend.Instance.Index();
@@ -499,21 +499,8 @@ namespace _5051.Backend
                 board.Add(temp);
             }
 
-            // Sort
-            //int max = 0;
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    max = i;
-            //    for (int j = i + 1; j < board.Count; j++)
-            //    {
-            //        if (board[j].Profit > board[i].Profit)
-            //        {
-            //            var temp = board[i];
-            //            board[i] = board[j];
-            //            board[j] = temp;
-            //        }
-            //    }
-            //}
+            // Sort leaderboard by profit
+            board = board.OrderByDescending(x => x.Profit).ToList();
 
             return board;
         }

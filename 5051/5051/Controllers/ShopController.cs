@@ -486,15 +486,11 @@ namespace _5051.Controllers
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
 
-            // Get the list of other students' shop
-            // it will show the name of the student's shop and its owner 
-
-            // then, once students click on the specific student's shop
-            // he/she can go visiting it
+            var data = new VisitTruckViewModel();
 
             // TODO
             // Make a List of the Student IDs for now.  Update this to a Shop Datastructure
-            var data = StudentBackend.Instance.Index();
+            //var data = StudentBackend.Instance.Index();
 
             // Get Student
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
@@ -504,10 +500,22 @@ namespace _5051.Controllers
                 return RedirectToAction("Index", "Shop", new { id});
             }
 
+            data.Student = myStudent;
+
+            // Get LeaderBoard
+            data.LeaderBoard = DataSourceBackend.Instance.GameBackend.GetLeaderBoard();
+
             foreach (var student in DataSourceBackend.Instance.StudentBackend.Index())
             {
                 _5051.Backend.GameBackend.Instance.GetResult(student.Id);
             }
+
+            // Get the list of other students' shop
+            // it will show the name of the student's shop and its owner 
+            // then, once students click on the specific student's shop
+            // he/she can go visiting it
+
+            data.StudentList = DataSourceBackend.Instance.StudentBackend.Index();
 
             return View(data);
         }

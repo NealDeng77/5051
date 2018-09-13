@@ -1,7 +1,11 @@
-﻿@model List<_5051.Models.StudentModel>
+﻿@model _5051.Models.VisitTruckViewModel
 @{
     // Temporary using the Student Model, until the list of Student Shops can be sent down
     ViewBag.Title = "Visit";
+
+    var students = Model.StudentList;
+    var student = Model.Student;
+    var leaderboard = Model.LeaderBoard;
 
 }
 
@@ -29,7 +33,7 @@
         <div class="row justify-content-around" id="AllTrucks">
 
             @{
-                foreach (var item in Model)
+                foreach (var item in students)
                 {
 
                     <div class="col-sm-3 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin">
@@ -68,68 +72,66 @@
     <div class="col-1"></div>
 </div>
 
-@*<div class="row justify-content-center">
+<br />
 
+<div class="row justify-content-center">
     <div class="col-1 "></div>
-    <div class="col-auto lightTransparentBox">
-        <div class="row justify-content-center">
-            <div class="col">
-                @{
-                    var Board = _5051.Backend.DataSourceBackend.Instance.GameBackend.UpdatedLeaderBoard();
-                    var query = Board.OrderByDescending(x => x.Profit).ToList();
+    <div class="col lightTransparentBox">
+        <br />
+        @{
 
-                    <div class="row justify-content-center">
-                        <div class="FontSizeMedium FontBold text-center">
-                            Leader board
-                        </div>
-                    </div>
-
-                    for (int i = 0; i < query.Count; i++)
-                    {
-                        <div class="row justify-content-center">
-
-                            <div class="col-1 FontSizeSmall text-center">
-                                @{
-                                    if (i == 0)
-                                    {
-                                        <span class="FontBold">Rank</span><br /><br />
-                                    }
-                                    <span>
-                                        @(i + 1)
-                                    </span>
-                                }
-                            </div>
-
-                            <div class="col-1 FontSizeSmall text-center">
-                                @{
-                                    if (i == 0)
-                                    {
-                                        <span class="FontBold">Profit</span><br /><br />
-                                    }
-                                    <span>
-                                        @query[i].Profit
-                                    </span>
-                                }
-                            </div>
-
-                            <div class="col-3 FontSizeSmall text-left">
-                                @{
-                                    if (i == 0)
-                                    {
-                                        <span class="FontBold">Name</span><br /><br />
-                                    }
-                                    <span>
-                                        @query[i].Name
-                                    </span>
-                                }
-                            </div>
-                        </div>
-                    }
-                }
+            <div class="row justify-content-center">
+                <div class="FontSizeMedium FontBold text-center">
+                    Leader board
+                </div>
             </div>
-        </div>
+            <br />
+
+            for (int i = 0; i < leaderboard.Count; i++)
+            {
+            <div class="row justify-content-center">
+
+                <div class="col-2"></div>
+
+                <div class="col-1 FontSizeSmall text-center">
+                    @{
+                        if (i == 0)
+                        {
+                            <span class="FontBold">Rank</span><br />
+                        }
+                        <span>
+                            @(i + 1)
+                        </span>
+                    }
+                </div>
+
+                <div class="col-1 FontSizeSmall text-center">
+                    @{
+                        if (i == 0)
+                        {
+                            <span class="FontBold">Profit</span><br />
+                        }
+                        <span>
+                            @leaderboard[i].Profit
+                        </span>
+                    }
+                </div>
+
+                <div class="col-3 FontSizeSmall text-left">
+                    @{
+                        if (i == 0)
+                        {
+                            <span class="FontBold">Name</span><br />
+                        }
+                        <span>
+                            @leaderboard[i].Name
+                        </span>
+                    }
+                </div>
+            </div>
+            }
+        }
+        <br />
     </div>
     <div class="col-1"></div>
 </div>
-<br />*@
-
