@@ -32,8 +32,6 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
-
             return View(myStudent);
         }
 
