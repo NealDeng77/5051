@@ -30,7 +30,7 @@ namespace _5051.Controllers
         // GET: Portal
         public ActionResult Login(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
@@ -115,7 +115,7 @@ namespace _5051.Controllers
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
 
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -159,7 +159,7 @@ namespace _5051.Controllers
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
 
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
@@ -211,7 +211,7 @@ namespace _5051.Controllers
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
             ViewBag.StudentId = id;
 
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -258,7 +258,7 @@ namespace _5051.Controllers
             }
 
             // Lookup the student id, will just replace the Avatar Id on it if it is valid
-            var myStudent = StudentBackend.Instance.Read(data.Id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -274,7 +274,7 @@ namespace _5051.Controllers
 
             // Set the Avatar ID on the Student and update in data store
             //myStudent.Name = data.Name;
-            //StudentBackend.Instance.Update(myStudent);
+            //DataSourceBackend.Instance.StudentBackend.Update(myStudent);
             //IdentityDataSourceTable.Instance.ChangeUserName(myStudent.Id, data.Name);
             IdentityBackend.Instance.ChangeUserName(myStudent.Id, data.Name);
 
@@ -290,7 +290,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult WeeklyReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -339,7 +339,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult MonthlyReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -389,7 +389,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult SemesterReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -439,7 +439,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult QuarterReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -489,7 +489,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult OverallReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -515,7 +515,7 @@ namespace _5051.Controllers
         //// GET: Portal
         //public ActionResult Report(string id = null)
         //{
-        //    var myStudent = StudentBackend.Instance.Read(id);
+        //    var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
         //    if (myStudent == null)
         //    {

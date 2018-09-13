@@ -25,7 +25,7 @@ namespace _5051.UnitTests.Models
         public void Models_IndexViewModels_Default_Instantiate_Should_Pass()
         {
             //arrange
-            var studentList = StudentBackend.Instance.Index();
+            var studentList = DataSourceBackend.Instance.StudentBackend.Index();
             var expectedLeaderBoard = new List<StudentModel>();
             var test = new AdminReportIndexViewModel(studentList);
 

@@ -48,7 +48,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult WeeklyReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -97,7 +97,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult MonthlyReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -147,7 +147,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult SemesterReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -197,7 +197,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult QuarterReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {
@@ -247,7 +247,7 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult OverallReport(string id = null)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
             {

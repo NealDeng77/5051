@@ -182,7 +182,7 @@ namespace _5051.UnitTests.Backend
         public void Backend_ReportBackend_GenerateLeaderboard_Valid_Data_Should_Pass()
         {
             //arrange
-            var studentList = StudentBackend.Instance.Index();
+            var studentList = DataSourceBackend.Instance.StudentBackend.Index();
 
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
 
@@ -201,18 +201,18 @@ namespace _5051.UnitTests.Backend
 
             var student1 = studentList.Where<StudentModel>(x => x.Name == "Doug").FirstOrDefault();
             student1.Attendance.Add(attendanceMon);
-            StudentBackend.Instance.Update(student1);
+            DataSourceBackend.Instance.StudentBackend.Update(student1);
 
             var student2 = studentList.Where<StudentModel>(x => x.Name == "Jea").FirstOrDefault();
             student2.Attendance.Add(attendanceMon);
             student2.Attendance.Add(attendanceTue);
-            StudentBackend.Instance.Update(student2);
+            DataSourceBackend.Instance.StudentBackend.Update(student2);
 
             //act
             var result = ReportBackend.Instance.GenerateLeaderboard();
 
             //reset
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             Assert.IsNotNull(result[1].Name, TestContext.TestName);
 

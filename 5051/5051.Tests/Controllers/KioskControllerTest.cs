@@ -91,8 +91,8 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Get the first Studnet from the DataSource
-            var data = StudentBackend.Instance.GetDefault();
-            var id = StudentBackend.Instance.GetDefault().Id;            
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;            
             
             // Act
             var result = (RedirectToRouteResult)controller.KioskLogin(data);            
@@ -114,14 +114,14 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Get the first Studnet from the DataSource
-            var data = StudentBackend.Instance.GetDefault();
-            var id = StudentBackend.Instance.GetDefault().Id;
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             var result = (RedirectToRouteResult)controller.KioskLogin(data);
             
             // check status change after KioskLogin
-            var resultStatus = StudentBackend.Instance.Read(id).Status;
+            var resultStatus = DataSourceBackend.Instance.StudentBackend.Read(id).Status;
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -140,14 +140,14 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Get the first Studnet from the DataSource
-            var data = StudentBackend.Instance.GetDefault();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             var result = (RedirectToRouteResult)controller.KioskLogin(data);
             
             // check status change after SetLogin
-            var resultStatus = StudentBackend.Instance.Read(id).EmotionCurrent;
+            var resultStatus = DataSourceBackend.Instance.StudentBackend.Read(id).EmotionCurrent;
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -201,8 +201,8 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Get the first Studnet from the DataSource
-            var data = StudentBackend.Instance.GetDefault();
-            var id = StudentBackend.Instance.GetDefault().Id;
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Login, so logout can happen
             controller.KioskLogin(data);
@@ -227,8 +227,8 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Get the first Studnet from the DataSource
-            var data = StudentBackend.Instance.GetDefault();
-            var id = StudentBackend.Instance.GetDefault().Id;
+            var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Login, so logout can happen
             controller.KioskLogin(data);
@@ -237,7 +237,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.KioskLogout(data);
 
             // check status change after KioskLogout
-            var resultStatus = StudentBackend.Instance.Read(id).Status;
+            var resultStatus = DataSourceBackend.Instance.StudentBackend.Read(id).Status;
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -286,7 +286,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new KioskController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.ConfirmLogin(id) as ViewResult;
@@ -354,7 +354,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new KioskController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.ConfirmLogout(id) as ViewResult;

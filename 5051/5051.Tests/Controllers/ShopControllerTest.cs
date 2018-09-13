@@ -501,7 +501,7 @@ namespace _5051.Tests.Controllers
         //{
         //    // Arrange
         //    ShopController controller = new ShopController();
-        //    var expect = Backend.StudentBackend.Instance.Index();
+        //    var expect = Backend.DataSourceBackend.Instance.StudentBackend.Index();
 
         //    //// Act
         //    var resultCall = controller.Visit() as ViewResult;
@@ -595,7 +595,7 @@ namespace _5051.Tests.Controllers
         {
             //// Arrange
             ShopController controller = new ShopController();
-            var data = Backend.StudentBackend.Instance.GetDefault();
+            var data = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = data.Name;
 
             //// Act
@@ -612,7 +612,7 @@ namespace _5051.Tests.Controllers
         {
             //// Arrange
             ShopController controller = new ShopController();
-            var data = Backend.StudentBackend.Instance.GetDefault();
+            var data = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = data.Name;
 
             //// Act
@@ -628,7 +628,7 @@ namespace _5051.Tests.Controllers
         {
             //// Arrange
             ShopController controller = new ShopController();
-            var data = Backend.StudentBackend.Instance.GetDefault();
+            var data = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expect = data.Name;
 
             //// Act
@@ -1189,7 +1189,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = Backend.StudentBackend.Instance.GetDefault();
+            var data = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
             
             // Act

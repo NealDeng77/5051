@@ -41,8 +41,8 @@ namespace _5051.UnitTests.Models
             // Act
             // Set all the fields for a BaseReportViewModel
             var test = new BaseReportViewModel();
-            test.StudentId = StudentBackend.Instance.GetDefault().Id;
-            test.Student = StudentBackend.Instance.GetDefault();
+            test.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            test.Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             test.DateStart = new DateTime(2000, 12, 30);
             test.DateEnd = new DateTime(2018, 8, 7);
             test.AttendanceList = new List<AttendanceReportViewModel>();
@@ -56,8 +56,8 @@ namespace _5051.UnitTests.Models
             test.ActualValues = "50, 100";
             test.EmotionLevelValues = "1, 3";
 
-            var expectedStudentId = StudentBackend.Instance.GetDefault().Id;
-            var expectedStudent = StudentBackend.Instance.GetDefault();
+            var expectedStudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            var expectedStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectedDateStart = new DateTime(2000, 12, 30);
             var expectedDateEnd = new DateTime(2018, 8, 7);
             var expectedGoal = 100;

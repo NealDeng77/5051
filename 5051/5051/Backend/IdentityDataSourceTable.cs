@@ -138,7 +138,7 @@ namespace _5051.Backend
         /// <returns></returns>
         public StudentModel CreateNewStudent(StudentModel student)
         {
-            var createResult = StudentBackend.Instance.Create(student);
+            var createResult = DataSourceBackend.Instance.StudentBackend.Create(student);
 
             if (createResult == null)
             {
@@ -283,7 +283,7 @@ namespace _5051.Backend
 
             if(role == IdentityRole.Student)
             {
-                //var student = StudentBackend.Instance.Read(findResult.Id);
+                //var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
                 var student = GetStudentById(findResult.Id);
 
                 if(student == null)
@@ -292,7 +292,7 @@ namespace _5051.Backend
                 }
                 student.Password = newPass;
                 //var updateResult = UpdateStudent(student);
-                var updateResult = StudentBackend.Instance.Update(student);
+                var updateResult = DataSourceBackend.Instance.StudentBackend.Update(student);
                 if (updateResult != null)
                 {
                     return true;
@@ -347,7 +347,7 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            var studentResult = StudentBackend.Instance.Read(id);
+            var studentResult = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (studentResult == null)
             {
@@ -537,7 +537,7 @@ namespace _5051.Backend
             if (UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
             {
                 //delete the student from student table as well
-                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
+                var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
             }
 
             // Storage Delete
@@ -675,7 +675,7 @@ namespace _5051.Backend
 
             //create the student users
             //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
-            var studentList = StudentBackend.Instance.Index();
+            var studentList = DataSourceBackend.Instance.StudentBackend.Index();
 
             foreach (var item in studentList)
             {

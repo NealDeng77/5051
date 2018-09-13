@@ -184,8 +184,8 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new SupportController();
             LoginViewModel loginViewModel = new LoginViewModel();
-            loginViewModel.Email = StudentBackend.Instance.GetDefault().Name;
-            loginViewModel.Password = StudentBackend.Instance.GetDefault().Password;
+            loginViewModel.Email = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
+            loginViewModel.Password = DataSourceBackend.Instance.StudentBackend.GetDefault().Password;
 
             // Act
             var result = controller.CreateStudent(loginViewModel) as RedirectToRouteResult;

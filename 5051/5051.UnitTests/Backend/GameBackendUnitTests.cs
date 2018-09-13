@@ -405,11 +405,11 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data1 = new StudentModel();
             var data2 = new StudentModel();
-            var student1 = StudentBackend.Instance.Create(data1);
-            var student2 = StudentBackend.Instance.Create(data2);
+            var student1 = DataSourceBackend.Instance.StudentBackend.Create(data1);
+            var student2 = DataSourceBackend.Instance.StudentBackend.Create(data2);
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // act
             test.RunIteration();
@@ -425,14 +425,14 @@ namespace _5051.UnitTests.Backend
             // arrange
             var test = GameBackend.Instance;
             var data = new StudentModel();
-            var student = StudentBackend.Instance.Create(data);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(data);
 
             // act         
             student.AvatarLevel = 90;
             test.CalculateStudentIteration(student);          
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // assert         
         }
@@ -443,7 +443,7 @@ namespace _5051.UnitTests.Backend
             // arrange
             var test = GameBackend.Instance;
             var data = new StudentModel();
-            var student = StudentBackend.Instance.Create(data);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(data);
             student.Truck.IsClosed = true;
 
             // act         
@@ -451,7 +451,7 @@ namespace _5051.UnitTests.Backend
             test.CalculateStudentIteration(student);
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // assert         
         }
@@ -466,7 +466,7 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             //act
             test.PayRentPerDay(student);
@@ -485,7 +485,7 @@ namespace _5051.UnitTests.Backend
             var data = test.GetDefault();
             data.RunDate = DateTime.UtcNow;
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             //act
             test.PayRentPerDay(student);
@@ -505,7 +505,7 @@ namespace _5051.UnitTests.Backend
             data.RunDate = DateTime.UtcNow.AddHours(1);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             //act   
             test.PayRentPerDay(student);
@@ -531,7 +531,7 @@ namespace _5051.UnitTests.Backend
             data.RunDate = DateTime.UtcNow.AddHours(-25);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             //act   
             var expect = student.Tokens - 1;
@@ -560,7 +560,7 @@ namespace _5051.UnitTests.Backend
             data.RunDate = DateTime.UtcNow.AddHours(-25);
             test.Update(data);
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
             student.Tokens = 0;
             //act   
             var expect = student.Tokens;
@@ -587,7 +587,7 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             //act
             student.AvatarLevel = 90;
@@ -611,7 +611,7 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
 
             // act
             student.AvatarLevel = 90;
@@ -637,7 +637,7 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
             var item = new FactoryInventoryModel();
             item.Id = FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
 
@@ -667,7 +667,7 @@ namespace _5051.UnitTests.Backend
             var test = GameBackend.Instance;
             var data = test.GetDefault();
             var studentData = new StudentModel();
-            var student = StudentBackend.Instance.Create(studentData);
+            var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
             student.Inventory = FactoryInventoryBackend.Instance.Index();
             student.Truck.CustomersTotal = 0;
 

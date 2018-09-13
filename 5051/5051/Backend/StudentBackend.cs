@@ -129,7 +129,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Null or updated data</returns>
-        public StudentModel Update(StudentModel data)
+        public StudentModel Update(StudentModel data) //, string help)
         {
             if (data == null)
             {

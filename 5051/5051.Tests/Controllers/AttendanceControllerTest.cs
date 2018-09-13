@@ -82,8 +82,8 @@ namespace _5051.Tests.Controllers
             };
 
 
-            StudentBackend.Instance.GetDefault().Attendance.Add(myAttendance1);
-            StudentBackend.Instance.GetDefault().Attendance.Add(myAttendance2);
+            DataSourceBackend.Instance.StudentBackend.GetDefault().Attendance.Add(myAttendance1);
+            DataSourceBackend.Instance.StudentBackend.GetDefault().Attendance.Add(myAttendance2);
 
             // Act
             var result = controller.Read(id) as ViewResult;
@@ -134,7 +134,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
             var myId = myAttendance.Id;
             myStudent.Attendance.Add(myAttendance);
@@ -259,7 +259,7 @@ namespace _5051.Tests.Controllers
 
             var attendanceModel = new AttendanceModel
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id
             };
 
             // Act
@@ -312,7 +312,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
             var myId = myAttendance.Id;
             myStudent.Attendance.Add(myAttendance);
@@ -388,7 +388,7 @@ namespace _5051.Tests.Controllers
         {
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
             myStudent.Attendance.Add(myAttendance);
 
@@ -408,7 +408,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
             myStudent.Attendance.Add(myAttendance);
 
@@ -459,7 +459,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
             var myId = myAttendance.Id;
             myStudent.Attendance.Add(myAttendance);
@@ -551,7 +551,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel
             {
                 StudentId = myStudent.Id,
@@ -578,7 +578,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AttendanceController();
 
-            var myStudent = StudentBackend.Instance.GetDefault();
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel
             {
                 StudentId = myStudent.Id

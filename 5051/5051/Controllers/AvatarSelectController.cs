@@ -24,7 +24,7 @@ namespace _5051.Controllers
             ViewBag.StudentId = id;
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -47,7 +47,7 @@ namespace _5051.Controllers
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -190,7 +190,7 @@ namespace _5051.Controllers
             var myData = new SelectedAvatarItemListForStudentViewModel();
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");

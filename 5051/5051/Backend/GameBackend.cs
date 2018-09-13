@@ -455,7 +455,7 @@ namespace _5051.Backend
         public List<LeaderBoardModel> GetLeaderBoard()
         {
             var board = new List<LeaderBoardModel>();
-            var data = StudentBackend.Instance.Index();
+            var data = DataSourceBackend.Instance.StudentBackend.Index();
 
             // Get Student
             foreach (var student in data)

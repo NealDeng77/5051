@@ -68,7 +68,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.WeeklyReport(id) as ViewResult;
@@ -111,7 +111,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             var data = new WeeklyReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedWeekId = 2
             };
 
@@ -140,7 +140,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = StudentBackend.Instance.GetDefault().Id; 
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id; 
 
             // Act
             ViewResult result = controller.MonthlyReport(id) as ViewResult;
@@ -183,7 +183,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             MonthlyReportViewModel data = new MonthlyReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedMonthId = 2
             };
 
@@ -214,7 +214,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.SemesterReport(id) as ViewResult;
@@ -257,7 +257,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             var data = new SemesterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedSemesterId = 2
             };
 
@@ -286,7 +286,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.QuarterReport(id) as ViewResult;
@@ -329,7 +329,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 2
             };
 
@@ -347,7 +347,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 3
             };
 
@@ -365,7 +365,7 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 4
             };
 
@@ -381,7 +381,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             var result = controller.OverallReport(id);

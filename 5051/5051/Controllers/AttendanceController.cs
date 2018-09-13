@@ -26,7 +26,7 @@ namespace _5051.Controllers
         // GET: Attendance/Read/. Read the attendance history of the student
         public ActionResult Read(string id)
         {
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -95,7 +95,7 @@ namespace _5051.Controllers
         public ActionResult Create(string id)
         {
 
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 // Send to Error Page
@@ -175,7 +175,7 @@ namespace _5051.Controllers
             };
 
             //add the attendance to the student's attendance
-            var myStudent = StudentBackend.Instance.Read(myAttendance.StudentId);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(myAttendance.StudentId);
 
             myStudent.Attendance.Add(myAttendance);
 
@@ -319,7 +319,7 @@ namespace _5051.Controllers
             }
 
             //get the student, then remove the attendance from his attendance list
-            var myStudent = StudentBackend.Instance.Read(myAttendance.StudentId);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(myAttendance.StudentId);
 
             myStudent.Attendance.Remove(myAttendance);
 

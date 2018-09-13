@@ -21,7 +21,7 @@ namespace _5051
             //SchoolCalendarBackend.Instance.Reset();
             //SchoolDismissalSettingsBackend.Instance.Reset();
 
-            //StudentBackend.Instance.Reset();
+            //DataSourceBackend.Instance.StudentBackend.Reset();
         }
     }
 }

@@ -26,13 +26,13 @@ namespace _5051.Controllers
             ViewBag.StudentId = id;
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
             }
 
-            StudentBackend.Instance.Update(myStudent);
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             return View(myStudent);
         }
@@ -51,7 +51,7 @@ namespace _5051.Controllers
             var myData = new SelectedFactoryInventoryForStudentViewModel();
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -222,7 +222,7 @@ namespace _5051.Controllers
             var myData = new SelectedFactoryInventoryForStudentViewModel();
 
             // Get the Student
-            var myStudent = StudentBackend.Instance.Read(id);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -438,7 +438,7 @@ namespace _5051.Controllers
 
             // TODO
             // Make a List of the Student IDs for now.  Update this to a Shop Datastructure
-            //var data = StudentBackend.Instance.Index();
+            //var data = DataSourceBackend.Instance.StudentBackend.Index();
 
             // Get Student
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
@@ -514,7 +514,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var myStudent = Backend.StudentBackend.Instance.Read(id);
+            var myStudent = Backend.DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");

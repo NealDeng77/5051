@@ -159,7 +159,7 @@ namespace _5051.Controllers
             myDataStudent.Status = data.Status;
             myDataStudent.ExperiencePoints = data.ExperiencePoints;
 
-            StudentBackend.Update(myDataStudent);
+            DataSourceBackend.Instance.StudentBackend.Update(myDataStudent);
 
             return RedirectToAction("Index");
         }

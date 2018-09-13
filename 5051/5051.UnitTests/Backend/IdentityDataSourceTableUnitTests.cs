@@ -445,7 +445,7 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var backend = IdentityDataSourceTable.Instance;
-            var expectUsername = StudentBackend.Instance.GetDefault().Name;
+            var expectUsername = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
             var badPassword = "bogus";
 
             //act
@@ -516,7 +516,7 @@ namespace _5051.UnitTests.Backend
         //{
         //    //arrange
         //    var backend = IdentityDataSourceTable.Instance;
-        //    var expectName = StudentBackend.Instance.GetDefault().Name;
+        //    var expectName = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
 
         //    //act
         //    var result = backend.LogUserIn(expectName, expectName, IdentityDataSourceTable.IdentityRole.Student);
@@ -533,7 +533,7 @@ namespace _5051.UnitTests.Backend
         //{
         //    //arrange
         //    var backend = IdentityDataSourceTable.Instance;
-        //    var expectStudent = StudentBackend.Instance.GetDefault();
+        //    var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
         //    var expectName = expectStudent.Name;
         //    var oldPass = expectStudent.Password;
         //    var expectNewPass = "goodPassword";
@@ -544,7 +544,7 @@ namespace _5051.UnitTests.Backend
 
         //    //Reset
         //    backend.Reset();
-        //    StudentBackend.Instance.Reset();
+        //    DataSourceBackend.Instance.StudentBackend.Reset();
 
         //    //assert
         //    Assert.IsTrue(result, TestContext.TestName);

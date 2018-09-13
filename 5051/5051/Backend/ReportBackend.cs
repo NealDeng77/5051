@@ -51,7 +51,7 @@ namespace _5051.Backend
         public WeeklyReportViewModel GenerateWeeklyReport(WeeklyReportViewModel report)
         {
             //set student
-            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            report.Student = DataSourceBackend.Instance.StudentBackend.Read(report.StudentId);
 
             //to generate week selection drop down, make a list item for every week between first and last day of school
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
@@ -125,7 +125,7 @@ namespace _5051.Backend
         public MonthlyReportViewModel GenerateMonthlyReport(MonthlyReportViewModel report)
         {
             //set student
-            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            report.Student = DataSourceBackend.Instance.StudentBackend.Read(report.StudentId);
 
             //to generate month selection drop down, make a list item for every month between first and last day of school
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
@@ -194,7 +194,7 @@ namespace _5051.Backend
         public SemesterReportViewModel GenerateSemesterReport(SemesterReportViewModel report)
         {
             //set student
-            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            report.Student = DataSourceBackend.Instance.StudentBackend.Read(report.StudentId);
 
             //settings
             var settings = SchoolDismissalSettingsBackend.Instance.GetDefault();
@@ -243,7 +243,7 @@ namespace _5051.Backend
         public QuarterReportViewModel GenerateQuarterReport(QuarterReportViewModel report)
         {
             //set student
-            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            report.Student = DataSourceBackend.Instance.StudentBackend.Read(report.StudentId);
 
             //settings
             var settings = SchoolDismissalSettingsBackend.Instance.GetDefault();
@@ -313,7 +313,7 @@ namespace _5051.Backend
         public BaseReportViewModel GenerateOverallReport(BaseReportViewModel report)
         {
             //set student
-            report.Student = StudentBackend.Instance.Read(report.StudentId);
+            report.Student = DataSourceBackend.Instance.StudentBackend.Read(report.StudentId);
 
             //set start date and end date according to school dismissal settings
             report.DateStart = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
@@ -335,7 +335,7 @@ namespace _5051.Backend
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
             var thisMonday = dayNow.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
 
-            var studentList = StudentBackend.Instance.Index();  //student list
+            var studentList = DataSourceBackend.Instance.StudentBackend.Index();  //student list
 
             foreach (var student in studentList)
             {

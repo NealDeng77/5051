@@ -62,7 +62,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            string id = Backend.DataSourceBackend.Instance.StudentBackend.Create(data).Id;
 
             // Act
             ViewResult result = controller.Login(id) as ViewResult;
@@ -70,7 +70,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -175,9 +175,9 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             //StudentModel student = new StudentModel("Peter");
-            //student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            //student.Id = Backend.DataSourceBackend.Instance.StudentBackend.Create(student).Id;
             //var data = new StudentDisplayViewModel(student);
-            var student = Backend.StudentBackend.Instance.GetDefault();
+            var student = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectName = student.Name;
             var data = new StudentDisplayViewModel(student);
             data.Password = expectName;
@@ -187,7 +187,7 @@ namespace _5051.Tests.Controllers
             var result = (ActionResult)controller.Login(data);
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -199,14 +199,14 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             StudentModel student = new StudentModel("Peter");
-            student.Id = Backend.StudentBackend.Instance.Create(student).Id;
+            student.Id = Backend.DataSourceBackend.Instance.StudentBackend.Create(student).Id;
             var data = new StudentDisplayViewModel(student);
 
             // Act
             var result = controller.Login(data);
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -234,7 +234,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            string id = Backend.DataSourceBackend.Instance.StudentBackend.Create(data).Id;
 
             // Act
             ViewResult result = controller.Index(id) as ViewResult;
@@ -242,7 +242,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -253,7 +253,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -268,7 +268,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -279,7 +279,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -294,7 +294,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -305,7 +305,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -320,7 +320,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -331,7 +331,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -346,7 +346,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -357,7 +357,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -372,7 +372,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -400,7 +400,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            string id = Backend.DataSourceBackend.Instance.StudentBackend.Create(data).Id;
 
             // Act
             ViewResult result = controller.Attendance(id) as ViewResult;
@@ -408,7 +408,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -419,7 +419,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -434,7 +434,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -445,7 +445,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -460,7 +460,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -471,7 +471,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -486,7 +486,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -497,7 +497,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -512,7 +512,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -523,7 +523,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            StudentModel data = StudentBackend.Instance.GetDefault();
+            StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
             data.Attendance = new List<AttendanceModel>();
             var myAttendance = new AttendanceModel()
             {
@@ -538,7 +538,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -567,7 +567,7 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
-            string id = Backend.StudentBackend.Instance.Create(data).Id;
+            string id = Backend.DataSourceBackend.Instance.StudentBackend.Create(data).Id;
 
             // Act
             ViewResult result = controller.Settings(id) as ViewResult;
@@ -575,7 +575,7 @@ namespace _5051.Tests.Controllers
             var resultStudentDisplayViewModel = result.Model as StudentDisplayViewModel;
 
             // Reset StudentBackend
-            StudentBackend.Instance.Reset();
+            DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
             Assert.IsNotNull(resultStudentDisplayViewModel, TestContext.TestName);
@@ -675,7 +675,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.WeeklyReport(id) as ViewResult;
@@ -718,7 +718,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var data = new WeeklyReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedWeekId = 2
             };
 
@@ -747,7 +747,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.MonthlyReport(id) as ViewResult;
@@ -790,7 +790,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             MonthlyReportViewModel data = new MonthlyReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedMonthId = 2
             };
 
@@ -821,7 +821,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.SemesterReport(id) as ViewResult;
@@ -864,7 +864,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var data = new SemesterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedSemesterId = 2
             };
 
@@ -893,7 +893,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             ViewResult result = controller.QuarterReport(id) as ViewResult;
@@ -936,7 +936,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 2
             };
 
@@ -954,7 +954,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 3
             };
 
@@ -972,7 +972,7 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var data = new QuarterReportViewModel()
             {
-                StudentId = StudentBackend.Instance.GetDefault().Id,
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 4
             };
 
@@ -988,7 +988,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             PortalController controller = new PortalController();
-            string id = StudentBackend.Instance.GetDefault().Id;
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
             // Act
             var result = controller.OverallReport(id);

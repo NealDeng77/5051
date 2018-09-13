@@ -28,7 +28,7 @@ namespace _5051.Backend
                 dateEnd = yesterday;
             }
 
-            var tempStudentList = StudentBackend.Instance.Index().ToList<StudentModel>();
+            var tempStudentList = DataSourceBackend.Instance.StudentBackend.Index().ToList<StudentModel>();
             tempStudentList = tempStudentList.OrderBy(x => x.TimeStamp).ToList();
 
             //Generate attendance records for 5 student personas
@@ -45,7 +45,7 @@ namespace _5051.Backend
             GenerateAttendance(tempStudentList[4].Id,4, dateStart, dateEnd);
             //To do: create scenario for multiple check-ins
 
-            StudentBackend.Instance.ResetStatusAndProcessNewAttendance();
+            DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace _5051.Backend
         /// <param name="dateEnd"></param>
         private static void GenerateAttendance(string studentId, int StudentType, DateTime dateStart, DateTime dateEnd)
         {
-            var myStudent = StudentBackend.Instance.Read(studentId);
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(studentId);
 
             // Set current date to be 1 less than the start day, because will get added in the for loop
             DateTime currentDate = dateStart;
@@ -218,7 +218,7 @@ namespace _5051.Backend
             }
 
             // Update the data
-            StudentBackend.Instance.Update(myStudent);
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
         }
 
         /// <summary>

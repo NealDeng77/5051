@@ -44,14 +44,14 @@ namespace _5051.Models
                 return null;
             }
 
-            var attendanceData = StudentBackend.Instance.ReadAttendance(id);
+            var attendanceData = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
             if (attendanceData == null)
             {
                 return null;
             }
 
             var studentId = attendanceData.StudentId;
-            var student = StudentBackend.Instance.Read(studentId);
+            var student = DataSourceBackend.Instance.StudentBackend.Read(studentId);
             // Not possible to be null, because ReadAttendance returns with the student Id
             //if (student == null)
             //{

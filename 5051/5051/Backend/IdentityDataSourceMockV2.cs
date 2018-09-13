@@ -99,7 +99,7 @@ namespace _5051.Backend
 
             //add to student list
             //DataSourceBackend.Instance.StudentBackend.Create(student);
-            var createResult = StudentBackend.Instance.Create(student);
+            var createResult = DataSourceBackend.Instance.StudentBackend.Create(student);
             if (createResult == null)
             {
                 return null;
@@ -147,7 +147,7 @@ namespace _5051.Backend
             //update for both student and id
             findStudent.Name = newName;           
 
-            var studentUpdateResult =  StudentBackend.Instance.Update(findStudent);
+            var studentUpdateResult =  DataSourceBackend.Instance.StudentBackend.Update(findStudent);
             if (studentUpdateResult == null)
             {
                 return false;
@@ -184,7 +184,7 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            var student = StudentBackend.Instance.Read(id);
+            var student = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (student == null)
             {
@@ -321,7 +321,7 @@ namespace _5051.Backend
             if (UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
             {
                 //delete the student from student table as well
-                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
+                var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
             }
 
             //remove from list
