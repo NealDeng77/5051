@@ -247,7 +247,8 @@ namespace _5051.Backend
         public void RunIteration()
         {
             // Run a single iteration
-            foreach (var student in StudentBackend.Instance.Index())
+            var studentList = DataSourceBackend.Instance.StudentBackend.Index();
+            foreach (var student in studentList)
             {
                 // calculate student iteration
                 CalculateStudentIteration(student);
@@ -256,7 +257,6 @@ namespace _5051.Backend
                 DataSourceBackend.Instance.StudentBackend.Update(student);
 
                 // check if need to close the store
-
             }
         }
 
