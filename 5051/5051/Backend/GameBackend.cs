@@ -217,14 +217,14 @@ namespace _5051.Backend
                 return result;
             }
 
-            DataSourceBackend.Instance.StudentBackend.Update(StudentData);
-
-            //result.Truck = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Truck).Uri;
-            //result.Trailer = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Trailer).Uri;
-            //result.Wheels = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Wheels).Uri;
-            //result.Topper = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Topper).Uri;
-            //result.Sign = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Sign).Uri;
-            //result.Menu = DataSourceBackend.Instance.FactoryInventoryBackend.Read(StudentData.Truck.Menu).Uri;
+            if (StudentData.Tokens < 1)
+            {
+                if (StudentData.Truck.IsClosed == false)
+                {
+                    StudentData.Truck.IsClosed = true;
+                    DataSourceBackend.Instance.StudentBackend.Update(StudentData);
+                }
+            }
 
             result = StudentData.Truck;
 
@@ -232,39 +232,11 @@ namespace _5051.Backend
             result.Experience = StudentData.ExperiencePoints;
             result.TruckName = StudentData.Truck.TruckName;
 
-            if (StudentData.Tokens < 1)
-            {
-                // Update the Backend, and close the store
-                StudentData.Truck.IsClosed = true;
-            } else {
-                StudentData.Truck.IsClosed = false;
-            }
-
             result.TransactionList = StudentData.Truck.TransactionList;
 
             result.IsClosed = StudentData.Truck.IsClosed;
             result.IterationNumber = GetDefault().IterationNumber;
             result.CustomersTotal = StudentData.Truck.CustomersTotal;
-
-            //result.TransactionList = StudentData.Truck.TransactionList;
-
-            // display recent 5 messages
-            //if (StudentData.Truck.TransactionList.Count <= 5)
-            //{
-            //    result.TransactionList = StudentData.Truck.TransactionList;
-            //} else
-            //{
-            //    var RecentFiveMessagesList = new List<TransactionModel>();
-            //    for (int i = StudentData.Truck.TransactionList.Count - 5; i < StudentData.Truck.TransactionList.Count; i++)
-            //    {
-            //        RecentFiveMessagesList.Add(StudentData.Truck.TransactionList[i]);
-            //    }
-            //    result.TransactionList = RecentFiveMessagesList;
-            //}           
-
-            // Clear the Student TransactionList
-            //StudentData.Truck.TransactionList = new List<TransactionModel>();
-            DataSourceBackend.Instance.StudentBackend.Update(StudentData);
 
             return result;
         }
