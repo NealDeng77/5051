@@ -279,12 +279,6 @@ namespace _5051.Backend
                     CustomerPurchase(student);
                 }                                       
             }
-            else
-            {
-                // quit iteration calculation
-            }
-            var leaderBoard = new List<LeaderBoardModel>();
-            leaderBoard = GetLeaderBoard();
         }
 
         public void PayRentPerDay(StudentModel student)
