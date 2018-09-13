@@ -68,28 +68,48 @@ namespace _5051.Models
 
         public static void Initialize()
         {
-            if (HttpContext.Current== null)
+            var myCurrentURL = GetCurrentHostURL(HttpContext.Current);
+            var myDataSoruceEnum = SelectDataSourceEnum(myCurrentURL);
+            SetDataSourceEnum(myDataSoruceEnum);
+
+            return;
+        }
+
+        public static string GetCurrentHostURL(HttpContext context)
+        {
+            string myReturn = null;
+
+            if (context == null)
             {
-                // UT
-                SetDataSourceEnum(DataSourceEnum.Mock);
-                return;
+                return myReturn;
             }
 
-            SetDataSourceEnum(SelectDataSourceEnum(HttpContext.Current.Request.Url.Host));
-            return;
+            if (string.IsNullOrEmpty(context.Request.Url.Host))
+            {
+                return myReturn;
+            }
+
+            myReturn = context.Request.Url.Host;
+            return myReturn;
         }
 
         public static DataSourceEnum SelectDataSourceEnum(string choice)
         {
             var myReturn = DataSourceEnum.Mock;
 
+            if (choice == null)
+            {
+                return myReturn;
+            }
+
             if (choice.Contains("mchs.azurewebsites.net"))
             {
-                myReturn = DataSourceEnum.ServerLive;
+                return DataSourceEnum.ServerLive;
             }
-            else if (choice.Contains("azurewebsites.net"))
+
+            if (choice.Contains("azurewebsites.net"))
             {
-                myReturn = DataSourceEnum.ServerTest;
+                return DataSourceEnum.ServerTest;
             }
 
             return myReturn;

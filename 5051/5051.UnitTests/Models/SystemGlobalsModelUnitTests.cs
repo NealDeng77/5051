@@ -44,5 +44,55 @@ namespace _5051.UnitTests.Models
         }
 
         #endregion Instantiate
+
+        #region SelectDataSourceEnum
+        [TestMethod]
+        public void Models_SystemGlobals_SelectDataSourceEnum_Null_Should_Pass()
+        {
+            // Arrange
+
+            // Act
+            var result = SystemGlobalsModel.SelectDataSourceEnum(null);
+
+            // Assert
+            Assert.AreEqual(result, DataSourceEnum.Mock, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SystemGlobals_SelectDataSourceEnum_Other_Should_Pass()
+        {
+            // Arrange
+
+            // Act
+            var result = SystemGlobalsModel.SelectDataSourceEnum("other");
+
+            // Assert
+            Assert.AreEqual(result, DataSourceEnum.Mock, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SystemGlobals_SelectDataSourceEnum_LiveSchool_Should_Pass()
+        {
+            // Arrange
+
+            // Act
+            var result = SystemGlobalsModel.SelectDataSourceEnum("mchs.azurewebsites.net");
+
+            // Assert
+            Assert.AreEqual(result, DataSourceEnum.ServerLive, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Models_SystemGlobals_SelectDataSourceEnum_LiveTest_Should_Pass()
+        {
+            // Arrange
+
+            // Act
+            var result = SystemGlobalsModel.SelectDataSourceEnum("azurewebsites.net");
+
+            // Assert
+            Assert.AreEqual(result, DataSourceEnum.ServerTest, TestContext.TestName);
+        }
+        #endregion SelectDataSourceEnum
     }
 }
