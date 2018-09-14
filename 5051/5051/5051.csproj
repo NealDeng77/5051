@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Backend\IdentityDataSourceMockV2.cs" />
+    <Compile Include="Backend\DateTimeHelper.cs" />
     <Compile Include="Backend\SchoolCalendarBackendHelper.cs" />
     <Compile Include="Backend\StudentDataSourceHelper.cs" />
     <Compile Include="Backend\SchoolCalendarDataSourceTable.cs" />
