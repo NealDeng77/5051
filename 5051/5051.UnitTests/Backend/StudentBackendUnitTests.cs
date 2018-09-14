@@ -14,11 +14,13 @@ namespace _5051.UnitTests.Backend
     {
         public TestContext TestContext { get; set; }
 
+        #region Initialize
         [TestInitialize]
         public void TestInitialize()
         {
             DataSourceBackend.SetTestingMode(true);
         }
+        #endregion Initialize
 
         #region Read
         [TestMethod]
@@ -432,5 +434,181 @@ namespace _5051.UnitTests.Backend
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion
+
+        #region ResetStatusAndProcessNewAttendance
+        [TestMethod]
+        public void Backend_StudentBackend_ResetStatusAndProcessNewAttendance_Valid_Should_Pass()
+        {
+            // Arrange
+            var expect = true;
+
+            // Act
+            DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            var result = true;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_ResetStatusAndProcessNewAttendance_InValid_IsNew_False_Should_Skip()
+        {
+            // Arrange
+            var expect = true;
+
+            // Set is New to false for all items
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            // Add an Attendance Record
+            var data = new AttendanceModel();
+            data.Out = DateTime.UtcNow;
+            data.In = data.Out.AddMinutes(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+            data.IsNew = false;
+            student.Attendance.Add(data);
+
+            var newLogins = student.Attendance.Where(m => m.IsNew);
+            foreach (var item in newLogins)
+            {
+                item.IsNew = false;
+            }
+            DataSourceBackend.Instance.StudentBackend.Update(student);
+
+            // Act
+            DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+            var result = true;
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+
+        #endregion ResetStatusAndProcessNewAttendance
+
+        #region CalculateTokens
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_InValid_Should_Fail()
+        {
+            // Arrange
+            var expect = 0;
+
+            var data = new AttendanceModel();
+            data = null;
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Attendance_Out_Earler_Than_In_Should_Fail()
+        {
+            // Arrange
+            var expect = 0;
+
+            var data = new AttendanceModel();
+            data.In = DateTime.UtcNow;
+            data.Out = data.In.AddMinutes(-1);  // Make Time out earlier than Time in, resulting in no duration
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Attendance_1Min_Should_Fail()
+        {
+            // Arrange
+            var expect = 0;
+
+            var data = new AttendanceModel();
+            data.Out = DateTime.UtcNow;
+            data.In = data.Out.AddMinutes(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Attendance_6Min_Should_Pass()
+        {
+            // Arrange
+            var expect = 1;
+
+            var data = new AttendanceModel();
+            data.Out = DateTime.UtcNow;
+            data.In = data.Out.AddMinutes(-6);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Attendance_1hr_Should_Pass()
+        {
+            // Arrange
+            var expect = 1;
+
+            var data = new AttendanceModel();
+            data.Out = DateTime.UtcNow;
+            data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Invalid_Attendance_Should_Fail()
+        {
+            // Arrange
+            var expect = 0;
+
+            var data = new AttendanceModel();
+            data.Out = DateTime.Parse("1/1/2100");  // Make date out of range, so return null
+            data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion CalculateTokens
     }
 }

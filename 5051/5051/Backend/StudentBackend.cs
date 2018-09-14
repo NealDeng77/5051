@@ -365,29 +365,43 @@ namespace _5051.Backend
 
                 //get the list of new attendances of the student, for which token amount has not been added yet,
                 //and auto check-out time has not been set yet
-                var newLogIns = item.Attendance.Where(m => m.IsNew);
+                var newLogins = item.Attendance.Where(m => m.IsNew);
 
                 //for each new attendance, set auto check-out time, then calculate effective duration and according collected tokens,
                 //add to current tokens of the student.
-                foreach (var attendance in newLogIns)
+                foreach (var attendance in newLogins)
                 {
-
-                    //calculate tokens
-                    var effectiveDuration = CalculateEffectiveDuration(attendance);
-
-                    //if the effective duration of this check-in is too short, do not add tokens, 
-                    //only add tokens is the duration is longer than 5 minutes.             
-                    if (effectiveDuration.CompareTo(new TimeSpan(0, 5, 0)) > 0)
-                    {
-                        var collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
-                        item.Tokens += collectedTokens;
-                    }
+                    item.Tokens += CalculateTokens(attendance);
 
                     //mark it as old attendance
                     attendance.IsNew = false;
                 }
 
+                // Save upated student
+                Update(item);
             }
+        }
+
+        public int CalculateTokens(AttendanceModel attendance)
+        {
+            var collectedTokens = 0;
+
+            if (attendance == null)
+            {
+                return collectedTokens;
+            }
+
+            //calculate tokens
+            var effectiveDuration = CalculateEffectiveDuration(attendance);
+
+            //if the effective duration of this check-in is too short, do not add tokens, 
+            //only add tokens is the duration is longer than 5 minutes.             
+            if (effectiveDuration.CompareTo(new TimeSpan(0, 5, 0)) > 0)
+            {
+                collectedTokens = (int)Math.Ceiling(effectiveDuration.TotalHours);
+            }
+
+            return collectedTokens;
         }
 
         ///// <summary>
