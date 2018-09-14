@@ -30,7 +30,7 @@ namespace _5051.Controllers
             var myData = new SchoolCalendarViewModel
             {
                 SchoolDays = mySchoolDaysData,
-                CurrentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow)
+                CurrentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC())
             };
 
             myData.FirstDay = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Globalization;
+using _5051.Backend;
 
 namespace _5051.Models
 {
@@ -66,7 +67,7 @@ namespace _5051.Models
             Tokens = 0;
             Experience = 0;           
             TimeIteration = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 minute
-            RunDate = DateTime.UtcNow;
+            RunDate = DateTimeHelper.Instance.GetDateTimeNowUTC();
             RefreshRate = TimeSpan.ParseExact("00:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);    // default to 1 minute
             Income = 0;
             Outcome = 0;

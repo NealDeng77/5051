@@ -526,8 +526,8 @@ namespace _5051.Controllers
         //    //var myReport = new StudentReportViewModel
         //    //{
         //    //    StudentId = id,
-        //    //    Year = DateTime.UtcNow.Year,
-        //    //    Month = DateTime.UtcNow.Month
+        //    //    Year = DateTimeHelper.Instance.GetDateTimeNowUTC().Year,
+        //    //    Month = DateTimeHelper.Instance.GetDateTimeNowUTC().Month
         //    //};
 
         //    //var myReturn = ReportBackend.Instance.GenerateMonthlyReport(myReport);

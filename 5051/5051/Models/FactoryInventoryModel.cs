@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using _5051.Backend;
 
 namespace _5051.Models
 {
@@ -60,7 +61,7 @@ namespace _5051.Models
             Tokens = 1;
             Quantities = 10;
             IsLimitSupply = true;
-            TimeStamp = DateTime.UtcNow;
+            TimeStamp = DateTimeHelper.Instance.GetDateTimeNowUTC();
         }
 
         /// <summary>

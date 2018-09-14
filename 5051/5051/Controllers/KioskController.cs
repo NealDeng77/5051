@@ -27,7 +27,7 @@ namespace _5051.Controllers
             //    return RedirectToAction("Error", "Home");
             //}
 
-            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
             if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
             {
                 DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
@@ -163,7 +163,7 @@ namespace _5051.Controllers
             var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
             var StudentViewModel = new StudentDisplayViewModel(myDataList);
 
-            StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow);
+            StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC());
 
             return View(StudentViewModel);
         }

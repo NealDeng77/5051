@@ -197,7 +197,7 @@ namespace _5051.Backend
             // Update the Attendance Log
             var temp = new AttendanceModel
             {
-                In = DateTime.UtcNow,
+                In = DateTimeHelper.Instance.GetDateTimeNowUTC(),
                 Emotion = data.EmotionCurrent,
                 StudentId = data.Id
             };
@@ -243,7 +243,7 @@ namespace _5051.Backend
                 return;
             }
 
-            myTimeData.Out = DateTime.UtcNow;
+            myTimeData.Out = DateTimeHelper.Instance.GetDateTimeNowUTC();
         }
 
         /// <summary>

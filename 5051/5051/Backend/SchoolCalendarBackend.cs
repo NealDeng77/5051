@@ -159,7 +159,7 @@ namespace _5051.Backend
         {
             var startDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;  //school year start date
             var endDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayLast;  //school year end date
-            var today = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var today = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
 
             var currentDate = startDate;  //loop variable
 
@@ -274,7 +274,7 @@ namespace _5051.Backend
         public void AutoSetNoSchool()
         {
             var myData = DataSource.Index();
-            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
             foreach (var item in myData)
             {
                 if (item.Date.CompareTo(currentDate) < 0 && item.HasAttendance == false)

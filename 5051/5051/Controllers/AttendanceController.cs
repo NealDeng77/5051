@@ -100,7 +100,7 @@ namespace _5051.Controllers
             }
 
             //current date
-            var myDate = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var myDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
             //the school day model
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(myDate);
             DateTime defaultStart;

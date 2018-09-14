@@ -165,7 +165,7 @@ namespace _5051.Backend
         public int Simulation()
         {
             // Run for each time between now and the last time ran
-            var timeNow = DateTime.UtcNow;
+            var timeNow = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
             // Get Time last Ran
             var currentData = GetDefault();
@@ -286,7 +286,7 @@ namespace _5051.Backend
         public void PayRentPerDay(StudentModel student)
         {
             // Run for each time between now and the last time ran
-            var timeNow = DateTime.UtcNow;
+            var timeNow = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
             // Get Time last Ran
             var currentData = GetDefault();

@@ -57,7 +57,7 @@ namespace _5051.Backend
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
 
-            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
 
             //The first valid week(Monday's date) for the dropdown
             var FirstWeek = dayFirst.AddDays(-((dayFirst.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //added this mod operation to make sure it's the previous monday not the next monday
@@ -131,7 +131,7 @@ namespace _5051.Backend
             var dayFirst = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst.Date;
             var dayLast = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast.Date;
 
-            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date;
+            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
 
             //The first valid month for the dropdown
             var monthFirst = new DateTime(dayFirst.Year, dayFirst.Month, 1);
@@ -332,7 +332,7 @@ namespace _5051.Backend
         /// <returns></returns>
         public List<StudentModel> GenerateLeaderboard()
         {
-            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
+            var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date; //today's date
             var thisMonday = dayNow.AddDays(-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
 
             var studentList = DataSourceBackend.Instance.StudentBackend.Index();  //student list
@@ -378,7 +378,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private void GenerateReportFromStartToEnd(BaseReportViewModel report)
         {
-            var myDateNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date in kiosk time zone
+            var myDateNow = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date; //today's date in kiosk time zone
             // Don't go beyond today
             if (report.DateEnd.CompareTo(myDateNow) > 0)
             {

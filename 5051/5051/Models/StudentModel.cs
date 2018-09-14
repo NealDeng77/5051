@@ -110,7 +110,7 @@ namespace _5051.Models
         /// </summary>
         public void Initialize()
         {
-            TimeStamp = DateTime.UtcNow;
+            TimeStamp = DateTimeHelper.Instance.GetDateTimeNowUTC();
             Id = Guid.NewGuid().ToString();
             Tokens = 20;
             AvatarLevel = 1;

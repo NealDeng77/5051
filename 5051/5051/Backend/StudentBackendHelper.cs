@@ -22,7 +22,7 @@ namespace _5051.Backend
             dateEnd = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;
 
             //Don't generate attendance for today and future days
-            DateTime yesterday = DateTime.UtcNow.AddDays(-1);
+            DateTime yesterday = DateTimeHelper.Instance.GetDateTimeNowUTC().AddDays(-1);
             if (yesterday.CompareTo(dateEnd) < 0)
             {
                 dateEnd = yesterday;

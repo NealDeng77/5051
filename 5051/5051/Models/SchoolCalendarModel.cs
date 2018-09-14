@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using _5051.Backend;
 using _5051.Models.Enums;
 
 namespace _5051.Models
@@ -89,7 +90,7 @@ namespace _5051.Models
         /// </summary>
         public SchoolCalendarModel()
         {
-            Initialize(DateTime.UtcNow);
+            Initialize(DateTimeHelper.Instance.GetDateTimeNowUTC());
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace _5051.Models
         ///// </summary>
         //public void SetDefault()
         //{
-        //    // Date = DateTime.UtcNow;  // Date is not set in the default.  
+        //    // Date = DateTimeHelper.Instance.GetDateTimeNowUTC();  // Date is not set in the default.  
         //    DayEnd = SchoolCalendarDismissalEnum.Normal;
         //    DayStart = SchoolCalendarDismissalEnum.Normal;
         //    SetSchoolDay();

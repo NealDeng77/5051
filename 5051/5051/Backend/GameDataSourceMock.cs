@@ -151,7 +151,7 @@ namespace _5051.Backend
         {
             DataSetClear();
             var temp = new GameModel();
-            temp.RunDate = DateTime.UtcNow;
+            temp.RunDate = DateTimeHelper.Instance.GetDateTimeNowUTC();
             Create(temp);
         }
 

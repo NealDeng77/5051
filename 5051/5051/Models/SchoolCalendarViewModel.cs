@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5051.Backend;
+using System;
 using System.Collections.Generic;
 
 namespace _5051.Models
@@ -26,7 +27,7 @@ namespace _5051.Models
         /// <summary>
         /// Today
         /// </summary>
-        public DateTime CurrentDate = DateTime.UtcNow;
+        public DateTime CurrentDate = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
         /// <summary>
         /// A List of Months and the Days per Month

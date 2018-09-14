@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5051.Backend;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace _5051.Models
@@ -47,7 +48,7 @@ namespace _5051.Models
             Tokens = 1;
             Quantities = 10;
             IsLimitSupply = false;
-            TimeStamp = DateTime.UtcNow;
+            TimeStamp = DateTimeHelper.Instance.GetDateTimeNowUTC();
         }
 
         /// <summary>
