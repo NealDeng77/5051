@@ -446,7 +446,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="attendance"></param>
         /// <returns></returns>
-        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance)
+        public TimeSpan CalculateEffectiveDuration(AttendanceModel attendance)
         {
             //the school day model, will use the school day's start time and end time later
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
