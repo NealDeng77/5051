@@ -133,7 +133,7 @@ namespace _5051.Backend
 
             // See if the updates make it match default, if so, need to clear the modified flag...
             var myDefault = new SchoolCalendarModel(data.Date);
-            SchoolCalendarBackendHelper.SetDefault(myDefault);
+            myDefault = SchoolCalendarBackendHelper.SetDefault(myDefault);
 
             if (myDefault.TimeEnd == data.TimeEnd && myDefault.TimeStart == data.TimeStart)
             {
@@ -171,14 +171,14 @@ namespace _5051.Backend
                 if (currentCalendarModel == null)
                 {
                     currentCalendarModel = new SchoolCalendarModel(currentDate);
-                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
+                    currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
                     Create(currentCalendarModel);
                 }
 
                 //if the calendar model for that date is not modified, and is after today, reset to default
                 if (!currentCalendarModel.Modified && currentDate.CompareTo(today) > 0)
                 {
-                    SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
+                    currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
                     Update(currentCalendarModel);
                 }
 

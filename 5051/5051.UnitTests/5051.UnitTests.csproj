@@ -145,6 +145,7 @@
     <Compile Include="Backend\DateTimeHelperUnitTests.cs" />
     <Compile Include="Backend\RandomHelperUnitTests.cs" />
     <Compile Include="Backend\ReportBackendUnitTests.cs" />
+    <Compile Include="Backend\SchoolCalendarBackendHelperUnitTests.cs" />
     <Compile Include="Backend\SchoolCalendarBackendUnitTests.cs" />
     <Compile Include="Backend\FactoryInventoryBackendUnitTests.cs" />
     <Compile Include="Backend\DataSourceBackendUnitTests.cs" />
