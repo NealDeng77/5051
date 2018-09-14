@@ -28,10 +28,11 @@ namespace _5051.Controllers
             //}
 
             var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
+
             if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
             {
                 DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
-                SchoolCalendarBackend.Instance.AutoSetNoSchool();
+                DataSourceBackend.Instance.SchoolCalendarBackend.AutoSetNoSchool(currentDate);
                 SystemGlobalsModel.Instance.CurrentDate = currentDate;
             }
 

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
 using _5051.Models.Enums;
+using System.Linq;
 
 namespace _5051.UnitTests.Backend
 {
@@ -340,5 +341,59 @@ namespace _5051.UnitTests.Backend
             //asset
         }
         #endregion SetDataSourceDataSet
+
+        #region AutoSetNoSchool
+        [TestMethod]
+        public void Backend_SchoolCalendarBackend_AutoSetNoSchool_InValid_MinValue_Should_Skip()
+        {
+            // Arrange
+            var date = DateTime.MinValue;
+
+            var DateList = DataSourceBackend.Instance.SchoolCalendarBackend.Index();
+            var expect = DateList.Where(m => m.SchoolDay == false).ToList();
+
+            // Act
+            DataSourceBackend.Instance.SchoolCalendarBackend.AutoSetNoSchool(date);
+            var result = DateList.Where(m => m.SchoolDay == false).ToList();
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect.Count, result.Count, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_SchoolCalendarBackend_AutoSetNoSchool_Valid_OneDate_Should_Pass()
+        {
+            // Arrange
+
+            var DateList = DataSourceBackend.Instance.SchoolCalendarBackend.Index();
+            var expect = DateList.Where(
+                        m => m.SchoolDay == true &&
+                        m.HasAttendance == false
+                        ).ToList();
+
+            // set first in the list to a school day with no attendance
+            var data = expect.FirstOrDefault();
+            data.SchoolDay = true;
+            data.HasAttendance = false;
+            DataSourceBackend.Instance.SchoolCalendarBackend.Update(data);
+
+            var setDate = data.Date.AddDays(1); // Add 1 day to include this day
+
+            // Act
+            DataSourceBackend.Instance.SchoolCalendarBackend.AutoSetNoSchool(setDate);
+
+            // Read that date again
+            var result = DataSourceBackend.Instance.SchoolCalendarBackend.Read(data.Id);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(false, result.SchoolDay, TestContext.TestName);
+        }
+        #endregion AutoSetNoSchool
     }
 }

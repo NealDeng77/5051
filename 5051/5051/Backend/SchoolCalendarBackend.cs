@@ -271,19 +271,32 @@ namespace _5051.Backend
         /// mark a day as not a school day if no attendance on the day
         /// </summary>
         /// <returns></returns>
-        public void AutoSetNoSchool()
+        public void AutoSetNoSchool(DateTime currentDate)
         {
             var myData = DataSource.Index();
-            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
-            foreach (var item in myData)
-            {
-                if (item.Date.CompareTo(currentDate) < 0 && item.HasAttendance == false)
-                {
-                    item.SchoolDay = false;
 
-                    item.HasAttendance = true; //set it to true so that the system doesn't set its SchoolDay to false on every call.
-                }
+            var dateList = myData.Where(m => m.HasAttendance == false &&
+            m.SchoolDay == true &&
+            m.Date.CompareTo(currentDate)<0
+            ).ToList();
+
+            foreach (var item in dateList)
+            {
+                item.SchoolDay = false;
+                Update(item);   //Save the updated Date back to the DB
             }
+
+
+            //var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
+            //foreach (var item in myData)
+            //{
+            //    if (item.Date.CompareTo(currentDate) < 0 && item.HasAttendance == false)
+            //    {
+            //        item.SchoolDay = false;
+
+            //        item.HasAttendance = true; //set it to true so that the system doesn't set its SchoolDay to false on every call.
+            //    }
+            //}
         }
     }
 }
