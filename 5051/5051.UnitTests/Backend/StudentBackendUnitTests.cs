@@ -469,11 +469,6 @@ namespace _5051.UnitTests.Backend
             data.IsNew = false;
             student.Attendance.Add(data);
 
-            var newLogins = student.Attendance.Where(m => m.IsNew);
-            foreach (var item in newLogins)
-            {
-                item.IsNew = false;
-            }
             DataSourceBackend.Instance.StudentBackend.Update(student);
 
             // Act
@@ -536,10 +531,17 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = 0;
 
+            var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
             var data = new AttendanceModel();
-            data.Out = DateTime.UtcNow;
-            data.In = data.Out.AddMinutes(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
 
+            data.Out = firstDay.Date;
+            data.In = firstDay.Date;
+
+            data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
+            data.Out = data.In.AddMinutes(1);   // Attended class for 1 min.
+
+            data.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
+            data.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
             // Act
             var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
 
@@ -556,9 +558,17 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = 1;
 
+            var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
             var data = new AttendanceModel();
-            data.Out = DateTime.UtcNow;
-            data.In = data.Out.AddMinutes(-6);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            data.Out = firstDay.Date;
+            data.In = firstDay.Date;
+
+            data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
+            data.Out = data.In.AddMinutes(6);   // Attended class for 6 min.
+
+            data.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
+            data.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
 
             // Act
             var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
@@ -576,9 +586,45 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = 1;
 
+            var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
             var data = new AttendanceModel();
-            data.Out = DateTime.UtcNow;
-            data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            data.Out = firstDay.Date;
+            data.In = firstDay.Date;
+
+            data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
+            data.Out = data.In.AddMinutes(60);   // Attended class for 60 min.
+
+            data.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
+            data.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateTokens_Attendance_2hr_Should_Pass()
+        {
+            // Arrange
+            var expect = 2;
+
+            var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
+            var data = new AttendanceModel();
+
+            data.Out = firstDay.Date;
+            data.In = firstDay.Date;
+
+            data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
+            data.Out = data.In.AddHours(2);   // Attended class for 2 hrs
+
+            data.In = UTCConversionsBackend.KioskTimeToUtc(data.In);
+            data.Out = UTCConversionsBackend.KioskTimeToUtc(data.Out);
 
             // Act
             var result = DataSourceBackend.Instance.StudentBackend.CalculateTokens(data);
