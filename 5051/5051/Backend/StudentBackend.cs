@@ -448,6 +448,11 @@ namespace _5051.Backend
         /// <returns></returns>
         public TimeSpan CalculateEffectiveDuration(AttendanceModel attendance)
         {
+            if (attendance == null)
+            {
+                return TimeSpan.Zero;
+            }
+
             //the school day model, will use the school day's start time and end time later
             var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(UTCConversionsBackend.UtcToKioskTime(attendance.In));
             if (schoolDay == null)

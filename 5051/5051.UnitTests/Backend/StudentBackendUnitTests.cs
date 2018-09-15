@@ -656,5 +656,26 @@ namespace _5051.UnitTests.Backend
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
         #endregion CalculateTokens
+
+        #region CalculateEffectiveDuration
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateEffectiveDuration_Invalid_Attendance_Null_Should_Fail()
+        {
+            // Arrange
+            var expect = TimeSpan.Zero;
+
+            var data = new AttendanceModel();
+            data = null;
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateEffectiveDuration(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
+        #endregion CalculateEffectiveDuration
     }
 }
