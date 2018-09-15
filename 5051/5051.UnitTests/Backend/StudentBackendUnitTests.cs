@@ -676,6 +676,26 @@ namespace _5051.UnitTests.Backend
             // Assert
             Assert.AreEqual(expect, result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_StudentBackend_CalculateEffectiveDuration_Invalid_Date_Bad_Range_Should_Fail()
+        {
+            // Arrange
+            var expect = TimeSpan.Zero;
+
+            var data = new AttendanceModel();
+            data.Out = DateTime.Parse("1/1/2100");  // Make date out of range, so return null
+            data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
+
+            // Act
+            var result = DataSourceBackend.Instance.StudentBackend.CalculateEffectiveDuration(data);
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual(expect, result, TestContext.TestName);
+        }
         #endregion CalculateEffectiveDuration
     }
 }
