@@ -22,18 +22,20 @@ namespace _5051.Controllers
 
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
 
-            var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
+            var previousDateUTC = DataSourceBackend.Instance.KioskSettingsBackend.GetLatestDate();
+            var previousDate = UTCConversionsBackend.UtcToKioskTime(previousDateUTC).Date;
+
+            var currentDateUTC = DateTimeHelper.Instance.GetDateTimeNowUTC();
+            var currentDate = UTCConversionsBackend.UtcToKioskTime(currentDateUTC).Date;
 
             // Compare the current date with the last saved date from KioskSettings
-            if (DateTime.Compare(
-                    DataSourceBackend.Instance.KioskSettingsBackend.GetLatestDate(),
-                    currentDate) != 0) //If date has changed
+            if (DateTime.Compare(previousDate, currentDate) != 0) //If date has changed
             {
                 DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
                 DataSourceBackend.Instance.SchoolCalendarBackend.AutoSetNoSchool(currentDate);
 
                 // Save the update date back to KioskSettings
-                DataSourceBackend.Instance.KioskSettingsBackend.UpdateLatestDate(currentDate);
+                DataSourceBackend.Instance.KioskSettingsBackend.UpdateLatestDate(currentDateUTC);
             }
 
             var myReturn = new AdminReportIndexViewModel(myDataList);
