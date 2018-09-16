@@ -35,6 +35,11 @@ namespace _5051.Models
         public int SelectedTimeZoneId { get; set; }
 
         /// <summary>
+        /// The last date the kiosk updated student login
+        /// </summary>
+        public DateTime LastProcessedDate { get; set; }
+
+        /// <summary>
         /// The collection of system time zones
         /// </summary>
         private ReadOnlyCollection<TimeZoneInfo> TzCollection { get; set; }
@@ -60,6 +65,7 @@ namespace _5051.Models
             TzCollection = data.TzCollection;
             //reload the time zone using the given id
             TimeZone = TzCollection[SelectedTimeZoneId];
+            LastProcessedDate = data.LastProcessedDate;
         }
 
         /// <summary>
@@ -94,6 +100,8 @@ namespace _5051.Models
                 TimeZones.Add(new SelectListItem { Value = "" + i, Text = TzCollection[i].DisplayName });
             }
 
+            LastProcessedDate = DateTime.MinValue;
+
         }
 
         /// <summary>
@@ -110,8 +118,10 @@ namespace _5051.Models
 
             Password = data.Password;
             SelectedTimeZoneId = data.SelectedTimeZoneId;
-            //load the time zone using seleted id
+            TzCollection = data.TzCollection;
+            //reload the time zone using the given id
             TimeZone = TzCollection[SelectedTimeZoneId];
+            LastProcessedDate = data.LastProcessedDate;
         }
     }
 }

@@ -29,6 +29,20 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
+        public void Models_KioskSettings_Instantiate_Get_LastProcessedDate_Should_Pass()
+        {
+            // Arrange
+            var expected = DateTime.UtcNow;
+
+            // Act
+            var result = new KioskSettingsModel();
+            result.LastProcessedDate = expected;
+
+            // Assert
+            Assert.AreEqual(expected, result.LastProcessedDate, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Models_KioskSettings_Instantiate_Get_ID_Should_Pass()
         {
             // Arrange
