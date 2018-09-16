@@ -204,19 +204,20 @@ namespace _5051.Backend
                 StudentId = data.Id
             };
 
+            var currentKioskDate = UTCConversionsBackend.UtcToKioskTime(currentTime).Date;
             //the school day model
-            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentTime.Date);
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentKioskDate);
 
             //set auto punch-out time        
             if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
             {
                 var defaultEndTime = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;  
 
-                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentTime.Date.Add(defaultEndTime));
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentKioskDate.Add(defaultEndTime));
             }
             else
             {
-                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentTime.Date.Add(schoolDay.TimeEnd));
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentKioskDate.Add(schoolDay.TimeEnd));
 
                 schoolDay.HasAttendance = true;
             }
