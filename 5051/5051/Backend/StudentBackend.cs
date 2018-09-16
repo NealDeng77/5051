@@ -223,6 +223,8 @@ namespace _5051.Backend
             }
 
             data.Attendance.Add(temp);
+
+            DataSource.Update(data);
         }
 
         /// <summary>
