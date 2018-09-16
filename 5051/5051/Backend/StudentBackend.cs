@@ -194,29 +194,29 @@ namespace _5051.Backend
 
             data.Status = StudentStatusEnum.In;
 
+            var currentTime = DateTimeHelper.Instance.GetDateTimeNowUTC();
+
             // Update the Attendance Log
             var temp = new AttendanceModel
             {
-                In = DateTimeHelper.Instance.GetDateTimeNowUTC(),
+                In = currentTime,
                 Emotion = data.EmotionCurrent,
                 StudentId = data.Id
             };
 
-            var currentDate = UTCConversionsBackend.UtcToKioskTime(temp.In).Date;
-
             //the school day model
-            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentDate);
+            var schoolDay = DataSourceBackend.Instance.SchoolCalendarBackend.ReadDate(currentTime.Date);
 
             //set auto punch-out time        
             if (schoolDay == null)   //if today is not a school day, use the default dismissal time as punch out time
             {
                 var defaultEndTime = SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal;  
 
-                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(defaultEndTime));
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentTime.Date.Add(defaultEndTime));
             }
             else
             {
-                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentDate.Add(schoolDay.TimeEnd));
+                temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentTime.Date.Add(schoolDay.TimeEnd));
 
                 schoolDay.HasAttendance = true;
             }
@@ -238,12 +238,14 @@ namespace _5051.Backend
             data.Status = StudentStatusEnum.Out;
 
             var myTimeData = data.Attendance.OrderByDescending(m => m.In).FirstOrDefault();
+
             if (myTimeData == null)
             {
                 return;
             }
 
             myTimeData.Out = DateTimeHelper.Instance.GetDateTimeNowUTC();
+
         }
 
         /// <summary>
