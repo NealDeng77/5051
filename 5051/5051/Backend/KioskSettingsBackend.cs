@@ -134,5 +134,21 @@ namespace _5051.Backend
             var myReturn = DataSource.Index().First();
             return myReturn;
         }
+
+        public DateTime GetLatestDate()
+        {
+            var myReturn = DataSource.Index().First();
+            return myReturn.LastProcessedDate;
+        }
+
+        public DateTime UpdateLatestDate(DateTime date)
+        {
+            var myReturn = DataSource.Index().First();
+            myReturn.LastProcessedDate = date;
+
+            var result = Update(myReturn);
+
+            return result.LastProcessedDate;
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -64,7 +64,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.Read(defaultValue.Id);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -82,7 +82,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.Update(null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -107,7 +107,7 @@ namespace _5051.UnitTests.Backend
             var resultPassword = testModel.Password;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(updateResult, TestContext.TestName);
@@ -129,7 +129,25 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_KioskSettingsBackend_SetDataSource_Local_Should_Pass()
+        {
+            //arrange
+            var expectEnum = _5051.Models.DataSourceEnum.Local;
+            var backend = KioskSettingsBackend.Instance;
+
+            //act
+            KioskSettingsBackend.SetDataSource(expectEnum);
+            var result = backend;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -147,11 +165,48 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion SetDataSource
+
+
+        #region GetLatestDate
+        [TestMethod]
+        public void Backend_KioskSettingsBackend_GetLatestDate_Should_Pass()
+        {
+            //arrange
+
+            //act
+            var result = KioskSettingsBackend.Instance.GetLatestDate();
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion GetLatestDate
+
+        #region UpdateLatestDate
+        [TestMethod]
+        public void Backend_KioskSettingsBackend_UpdateLatestDate_Should_Pass()
+        {
+            //arrange
+            var date = DateTime.Parse("01/23/2018");
+
+            //act
+            KioskSettingsBackend.Instance.UpdateLatestDate(date);
+            var result = KioskSettingsBackend.Instance.GetLatestDate();
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.AreEqual(date,result, TestContext.TestName);
+        }
+        #endregion UpdateLatestDate
     }
 }

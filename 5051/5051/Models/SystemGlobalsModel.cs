@@ -42,8 +42,8 @@ namespace _5051.Models
         //private static HttpContext _HttpContext;
         //private static HttpContext _DefaultHttpContext;
 
-        //The current date
-        public DateTime CurrentDate = DateTime.MinValue;
+        ////The current date
+        //public DateTime CurrentDate = DateTime.MinValue;
 
         //The Target Site
 

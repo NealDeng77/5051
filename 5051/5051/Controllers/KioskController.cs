@@ -21,19 +21,19 @@ namespace _5051.Controllers
             //TODO: Need to add a check here to validate if the request comes from a validated login or not.
 
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
-            //if (myDataList.Count == 0)
-            //{
-            //    // Send to Error Page
-            //    return RedirectToAction("Error", "Home");
-            //}
 
             var currentDate = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
 
-            if (DateTime.Compare(SystemGlobalsModel.Instance.CurrentDate.Date, currentDate) != 0) //If date has changed
+            // Compare the current date with the last saved date from KioskSettings
+            if (DateTime.Compare(
+                    DataSourceBackend.Instance.KioskSettingsBackend.GetLatestDate(),
+                    currentDate) != 0) //If date has changed
             {
                 DataSourceBackend.Instance.StudentBackend.ResetStatusAndProcessNewAttendance();
                 DataSourceBackend.Instance.SchoolCalendarBackend.AutoSetNoSchool(currentDate);
-                SystemGlobalsModel.Instance.CurrentDate = currentDate;
+
+                // Save the update date back to KioskSettings
+                DataSourceBackend.Instance.KioskSettingsBackend.UpdateLatestDate(currentDate);
             }
 
             var myReturn = new AdminReportIndexViewModel(myDataList);
@@ -43,7 +43,6 @@ namespace _5051.Controllers
 
             return View(myReturn);       
         }
-
 
         /*
          * 
