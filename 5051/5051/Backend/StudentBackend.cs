@@ -246,6 +246,8 @@ namespace _5051.Backend
 
             myTimeData.Out = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
+            //save the change
+            DataSource.Update(data);
         }
 
         /// <summary>
