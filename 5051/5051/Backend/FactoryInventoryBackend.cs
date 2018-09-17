@@ -147,12 +147,13 @@ namespace _5051.Backend
         {
             string myReturn = null;
 
-            var myData = DataSource.Index().ToList().FirstOrDefault();
-            if (myData != null)
+            var myData = Index().ToList().FirstOrDefault();
+            if (myData == null)
             {
-                myReturn = myData.Id;
+                return myReturn;
             }
 
+            myReturn = myData.Id;
             return myReturn;
         }
 
@@ -170,12 +171,13 @@ namespace _5051.Backend
 
             string myReturn = null;
 
-            var myData = DataSource.Read(data);
-            if (myData != null)
+            var myData = Read(data);
+            if (myData == null)
             {
-                myReturn = myData.Uri;
+                return myReturn;
             }
 
+            myReturn = myData.Uri;
             return myReturn;
         }
 
@@ -186,7 +188,7 @@ namespace _5051.Backend
         /// <returns>List of SelectListItems as a SelectList</returns>
         public List<SelectListItem> GetFactoryInventoryListItem(string id = null)
         {
-            var myDataList = DataSource.Index();
+            var myDataList = Index();
 
             //var myReturn = new SelectList(myDataList);
 
