@@ -172,14 +172,14 @@ namespace _5051.Backend
                 {
                     currentCalendarModel = new SchoolCalendarModel(currentDate);
                     currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
-                    DataSource.Create(currentCalendarModel);
+                    Create(currentCalendarModel);
                 }
 
                 //if the calendar model for that date is not modified, and is after today, reset to default
                 if (!currentCalendarModel.Modified && currentDate.CompareTo(today) > 0)
                 {
                     currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
-                    DataSource.Update(currentCalendarModel);
+                    Update(currentCalendarModel);
                 }
 
                 currentDate = currentDate.AddDays(1);
@@ -192,7 +192,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public SchoolCalendarModel GetDefault()
         {
-            var myReturn = DataSource.Index().Last();
+            var myReturn = Index().Last();
             return myReturn;
         }
 
@@ -207,7 +207,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var myData = DataSource.Read(id);
+            var myData = Read(id);
             if (myData == null)
             {
                 return null;
@@ -215,7 +215,7 @@ namespace _5051.Backend
 
             SchoolCalendarBackendHelper.SetDefault(myData);  //use current default settings
 
-            var myReturn = DataSource.Update(myData);
+            var myReturn = Update(myData);
 
             return myReturn;
         }
@@ -263,7 +263,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public SchoolCalendarModel GetToday()
         {
-            var myReturn = DataSource.Index().LastOrDefault();
+            var myReturn = Index().LastOrDefault();
             return myReturn;
         }
 
@@ -273,7 +273,7 @@ namespace _5051.Backend
         /// <returns></returns>
         public void AutoSetNoSchool(DateTime currentDate)
         {
-            var myData = DataSource.Index();
+            var myData = Index();
 
             var dateList = myData.Where(m => m.HasAttendance == false &&
             m.SchoolDay == true &&
@@ -283,7 +283,7 @@ namespace _5051.Backend
             foreach (var item in dateList)
             {
                 item.SchoolDay = false;
-                DataSource.Update(item);   //Save the updated Date back to the DB
+                Update(item);   //Save the updated Date back to the DB
             }
 
 
