@@ -545,6 +545,158 @@ namespace _5051.Tests.Controllers
         }
         #endregion
 
+        #region AttendanceUpdateRegion
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Get_Id_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.AttendanceUpdate(null, null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Get_myData_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+
+            // Act
+            var result = (RedirectToRouteResult)controller.AttendanceUpdate("bogus", "bogus");
+
+            // Reset
+            DataSourceBackend.Instance.Reset();
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+            Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Get_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new PortalController();
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var myAttendance = new AttendanceModel();
+            var myId = myAttendance.Id;
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            var result = controller.AttendanceUpdate(myStudent.Id, myId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion AttendanceUpdateRegion
+
+        #region AttendanceUpdatePostRegion
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            AttendanceModel data = new AttendanceModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.AttendanceUpdate(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.AttendanceUpdate((AttendanceModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Post_Id_Is_Null_Or_Empty_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            AttendanceModel dataNull = new AttendanceModel();
+            AttendanceModel dataEmpty = new AttendanceModel();
+
+            // Make data.Id = null
+            dataNull.Id = null;
+
+            // Make data.Id empty
+            dataEmpty.Id = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.AttendanceUpdate(dataNull);
+            var resultEmpty = (ViewResult)controller.AttendanceUpdate(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Post_Id_Is_Invalid_Should_Return_Error_Page()
+        {
+            var controller = new PortalController();
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var myAttendance = new AttendanceModel();
+            myStudent.Attendance.Add(myAttendance);
+
+            var myData = new AttendanceModel();
+            myData.StudentId = myAttendance.Id;
+            myData.Id = "bogus";
+            myData.EmotionUri = myData.Id;
+
+            // Act
+            var result = (RedirectToRouteResult)controller.AttendanceUpdate(myData);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_AttendanceUpdate_Post_Default_Should_Return_Attendance_Page()
+        {
+            // Arrange
+            var controller = new PortalController();
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var myAttendance = new AttendanceModel();
+            myAttendance.StudentId = myStudent.Id;
+            myAttendance.EmotionUri = myAttendance.Id;
+
+            myStudent.Attendance.Add(myAttendance);
+
+            // Act
+            RedirectToRouteResult result = controller.AttendanceUpdate(myAttendance) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Attendance", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion AttendanceUpdatePostRegion
 
         #region SettingsStringRegion
         [TestMethod]
