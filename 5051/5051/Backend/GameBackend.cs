@@ -137,7 +137,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public GameModel GetDefault()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             return myReturn;
         }
 
