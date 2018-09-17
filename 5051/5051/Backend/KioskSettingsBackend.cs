@@ -15,7 +15,6 @@ namespace _5051.Backend
         private static volatile KioskSettingsBackend instance;
         private static object syncRoot = new Object();
 
-
         private KioskSettingsBackend() { }
 
         public static KioskSettingsBackend Instance
@@ -77,6 +76,15 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Get all the records from the db
+        /// </summary>
+        public List<KioskSettingsModel> Index()
+        {
+            return DataSource.Index();
+        }
+
+
+        /// <summary>
         /// Helper function that resets the DataSource, and rereads it.
         /// </summary>
         public void Reset()
@@ -131,19 +139,19 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public KioskSettingsModel GetDefault()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             return myReturn;
         }
 
         public DateTime GetLatestDate()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             return myReturn.LastProcessedDate;
         }
 
         public DateTime UpdateLatestDate(DateTime date)
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             myReturn.LastProcessedDate = date;
 
             var result = Update(myReturn);
