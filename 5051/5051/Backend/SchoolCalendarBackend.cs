@@ -172,14 +172,14 @@ namespace _5051.Backend
                 {
                     currentCalendarModel = new SchoolCalendarModel(currentDate);
                     currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
-                    DataSource.Create(currentCalendarModel);
+                    Create(currentCalendarModel);
                 }
 
                 //if the calendar model for that date is not modified, and is after today, reset to default
                 if (!currentCalendarModel.Modified && currentDate.CompareTo(today) > 0)
                 {
                     currentCalendarModel = SchoolCalendarBackendHelper.SetDefault(currentCalendarModel);  //use current default settings
-                    DataSource.Update(currentCalendarModel);
+                    Update(currentCalendarModel);
                 }
 
                 currentDate = currentDate.AddDays(1);
