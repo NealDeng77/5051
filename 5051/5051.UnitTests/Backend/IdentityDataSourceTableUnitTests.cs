@@ -142,6 +142,20 @@ namespace _5051.UnitTests.Backend
             //assert
             Assert.AreEqual(expectNumTeacherUsers, result.Count, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ListAllStudentUsers_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectNumStudents = 5;
+
+            //act
+            var result = backend.ListAllStudentUsers();
+
+            //assert
+            Assert.AreEqual(expectNumStudents, result.Count, TestContext.TestName);
+        }
         #endregion
 
         #region LoadDataSet
@@ -611,6 +625,9 @@ namespace _5051.UnitTests.Backend
             Assert.IsFalse(result, TestContext.TestName);
         }
         #endregion
-        //the student create so i'll have to deal with that
+
+        #region ChangeUserName
+
+        #endregion
     }
 }

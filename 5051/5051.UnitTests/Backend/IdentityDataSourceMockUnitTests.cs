@@ -180,6 +180,31 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region Create
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_CreateNewStudent_SHould_Pass()
+        {
+            //arrange
+            var expectName = "testName";
+            var backend = IdentityDataSourceMockV2.Instance;
+            var testStudent = new StudentModel();
+            testStudent.Name = expectName;
+            var studentCountBefore = backend.ListAllStudentUsers().Count;
+
+            //act
+            var result = backend.CreateNewStudent(testStudent);
+            var studentCountAfter = backend.ListAllStudentUsers().Count;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+            backend.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+            Assert.AreEqual(expectName, result.Name, TestContext.TestName);
+        }
+        #endregion
+
         #region Delete
         [TestMethod]
         public void Backend_IdentityDataSourceMock_DeleteUser_Valid_Should_Pass()
