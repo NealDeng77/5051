@@ -21,10 +21,10 @@
         <div class="row justify-content-center">
 
             <div class="text-center">
-                @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                @Html.ActionLink("Truck Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
-                @Html.ActionLink("Business Report", "BusinessReport", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light" })
+                @Html.ActionLink("Factory", "Factory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Inventory", "Inventory", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Edit Truck", "Edit", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                @Html.ActionLink("Report", "BusinessReport", "Shop", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
 
             </div>
 
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div class="FeedBar FontSizeSmall">
+        <div class="FeedBar FontSizeSmall DispalyBoxWithMargin">
             <div class="row justify-content-around FontSizeMedium Transactions">
                 <span>
                     Game Data:

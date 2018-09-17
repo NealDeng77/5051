@@ -114,7 +114,7 @@ namespace _5051.Models
 
 
         // The current setting for goal percentage
-        [Display(Name = "Attendance Goal Percentage", Description = "Attendance Goal Percentage")]
+        [Display(Name = "Attendance Goal", Description = "Attendance Goal Percentage")]
         public int Goal { get; set; }
 
         // The period of time before school during which time attended by student is counted into attendance duration
