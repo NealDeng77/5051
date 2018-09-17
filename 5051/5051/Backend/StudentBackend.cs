@@ -224,7 +224,7 @@ namespace _5051.Backend
 
             data.Attendance.Add(temp);
 
-            DataSource.Update(data);
+            Update(data);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace _5051.Backend
             myTimeData.Out = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
             //save the change
-            DataSource.Update(data);
+            Update(data);
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace _5051.Backend
 
             }
 
-            DataSource.Update(data);
+            Update(data);
         }
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public StudentModel GetDefault()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             return myReturn;
         }
     }
