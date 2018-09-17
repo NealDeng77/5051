@@ -199,7 +199,88 @@ namespace _5051.Controllers
 
             return View(myReturn);
         }
-        
+
+        /// <summary>
+        /// AttendanceUpdate Page
+        /// </summary>
+        /// <param name="id">Attendance Id</param>
+        /// <returns>Attendance Record as a Attendance Model</returns>
+        // GET: Portal
+
+        public ActionResult AttendanceUpdate(string id)
+        {
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
+
+            if (myAttendance == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //Create a new attendance to hold converted times
+            var myReturn = new AttendanceModel
+            {
+                StudentId = myAttendance.StudentId,
+                Id = myAttendance.Id,
+                In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
+                Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
+                Emotion = myAttendance.Emotion,
+                EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion),
+
+                IsNew = myAttendance.IsNew
+            };
+
+            return View(myReturn);
+        }
+
+        /// <summary>
+        /// AttendanceUpdate page
+        /// </summary>
+        /// <returns></returns>
+        // POST: Portal
+
+        [HttpPost]
+        public ActionResult AttendanceUpdate([Bind(Include=
+            "Id,"+
+            "StudentId,"+
+            "Emotion,"+
+            "")] AttendanceModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            if (data == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
+
+            if (myAttendance == null)
+            {
+                // Send to Error Page
+                return RedirectToAction("Error", "Home");
+            }
+
+            //update the emotion
+            myAttendance.Emotion = data.Emotion;
+            myAttendance.EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion);
+
+            return RedirectToAction("Attendance", new { id = myAttendance.StudentId });
+        }
+
+
+
         /// <summary>
         ///  My Settings
         /// </summary>
