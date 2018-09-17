@@ -24,7 +24,6 @@
     <br />
 </div>
 
-
 @{
     if (Model == null)
     {
@@ -75,8 +74,11 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
-                    @Html.Hidden("Emotion", @Model.Emotion, new { @id = "EmotionCurrentId" });                   
+
+                    // Need to lie, and pass the Attendance Id, up as Emotion URI becaue the Id field name conflicts with the data model. In the controller need to fix it back.
+                    @Html.Hidden("EmotionUri", @Model.Id, new { @id = "EmotionUri" })
+                    @Html.Hidden("StudentId", @Model.StudentId, new { @id = "StudentId" })
+                    @Html.Hidden("Emotion", @Model.Emotion, new { @id = "EmotionCurrentId" })
 
                     <br />
                     <div class="row">

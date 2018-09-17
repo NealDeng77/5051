@@ -99,11 +99,11 @@
                     </div>
 
                     <div class="col-auto text-center DispalyBoxWithMargin">
-                        @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        @Html.ActionLink("Update", "Update", new { id = Model.StudentId, item=Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
 
                     <div class="col-auto text-center DispalyBoxWithMargin">
-                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.StudentId, item = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                 </div>
 

@@ -136,11 +136,12 @@ namespace _5051.Tests.Controllers
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
-            var myId = myAttendance.Id;
+            var AttendanceId = myAttendance.Id;
+            var StudentId = myStudent.Id;
             myStudent.Attendance.Add(myAttendance);
 
             // Act
-            var result = controller.Details(myId) as ViewResult;
+            var result = controller.Details(StudentId, AttendanceId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -153,7 +154,7 @@ namespace _5051.Tests.Controllers
             var controller = new AttendanceController();
 
             // Act
-            var result = controller.Details(null) as RedirectToRouteResult;
+            var result = controller.Details(null, null) as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -282,7 +283,7 @@ namespace _5051.Tests.Controllers
             AttendanceController controller = new AttendanceController();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Update((string)null);
+            var result = (RedirectToRouteResult)controller.Update(null, null);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -296,7 +297,7 @@ namespace _5051.Tests.Controllers
 
 
             // Act
-            var result = (RedirectToRouteResult)controller.Update("bogus");
+            var result = (RedirectToRouteResult)controller.Update("bogus","bogus");
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -318,7 +319,7 @@ namespace _5051.Tests.Controllers
             myStudent.Attendance.Add(myAttendance);
 
             // Act
-            var result = controller.Update(myId) as ViewResult;
+            var result = controller.Update(myStudent.Id, myId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -395,6 +396,8 @@ namespace _5051.Tests.Controllers
             var myData = new AttendanceModel();
             myData.StudentId = myAttendance.Id;
             myData.Id = "bogus";
+            myData.EmotionUri = myData.Id;
+
             // Act
             var result = (RedirectToRouteResult)controller.Update(myData);
 
@@ -410,6 +413,9 @@ namespace _5051.Tests.Controllers
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var myAttendance = new AttendanceModel();
+            myAttendance.StudentId = myStudent.Id;
+            myAttendance.EmotionUri = myAttendance.Id;
+
             myStudent.Attendance.Add(myAttendance);
 
             // Act
@@ -429,7 +435,7 @@ namespace _5051.Tests.Controllers
             AttendanceController controller = new AttendanceController();
 
             // Act
-            var result = (RedirectToRouteResult)controller.Delete((string)null);
+            var result = (RedirectToRouteResult)controller.Delete(null, null);
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -443,7 +449,7 @@ namespace _5051.Tests.Controllers
             string id = "bogus";
 
             // Act
-            var result = (RedirectToRouteResult)controller.Delete(id);
+            var result = (RedirectToRouteResult)controller.Delete(id, id);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -465,7 +471,7 @@ namespace _5051.Tests.Controllers
             myStudent.Attendance.Add(myAttendance);
 
             // Act
-            var result = controller.Delete(myId) as ViewResult;
+            var result = controller.Delete(myStudent.Id, myId) as ViewResult;
 
 
             // Reset DataSourceBackend
@@ -556,6 +562,7 @@ namespace _5051.Tests.Controllers
             {
                 StudentId = myStudent.Id,
             };
+            myAttendance.EmotionUri = myAttendance.Id;
             myStudent.Attendance.Add(myAttendance);
 
             var myData = new AttendanceModel
@@ -563,6 +570,7 @@ namespace _5051.Tests.Controllers
                 StudentId = myStudent.Id,
                 Id = "bogus"
             };
+            myData.EmotionUri = myData.Id;
             // Act
             var result = (RedirectToRouteResult)controller.Delete(myData);
 
@@ -583,6 +591,8 @@ namespace _5051.Tests.Controllers
             {
                 StudentId = myStudent.Id
             };
+            myAttendance.EmotionUri = myAttendance.Id;
+
             myStudent.Attendance.Add(myAttendance);
 
             // Act

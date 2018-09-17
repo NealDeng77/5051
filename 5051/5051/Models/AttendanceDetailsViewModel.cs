@@ -25,32 +25,49 @@ namespace _5051.Models
         /// </summary>
         public AvatarCompositeModel AvatarComposite { get; set; }
 
+        public AttendanceDetailsViewModel()
+        {
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"> Attendance Model ID</param>
-        public AttendanceDetailsViewModel(string id = null)
+        public AttendanceDetailsViewModel(string StudentId, string AttendanceId = null)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(StudentId))
             {
-                Initialize(id);
+                return;
             }
+
+            if (string.IsNullOrEmpty(AttendanceId))
+            {
+                return;
+            }
+
+            Initialize(StudentId, AttendanceId);
         }
 
-        public AttendanceDetailsViewModel Initialize(string id)
+        public AttendanceDetailsViewModel Initialize(string id, string item)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return null;
             }
 
-            var attendanceData = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
-            if (attendanceData == null)
+            if (string.IsNullOrEmpty(item))
             {
                 return null;
             }
 
-            var studentId = attendanceData.StudentId;
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
+            if (myAttendance == null)
+            {
+                return null;
+            }
+
+            var studentId = myAttendance.StudentId;
             var student = DataSourceBackend.Instance.StudentBackend.Read(studentId);
             // Not possible to be null, because ReadAttendance returns with the student Id
             //if (student == null)
@@ -62,17 +79,17 @@ namespace _5051.Models
             {
                 Attendance = new AttendanceModel
                 {
-                    StudentId = attendanceData.StudentId,
-                    Id = attendanceData.Id,
-                    In = UTCConversionsBackend.UtcToKioskTime(attendanceData.In),
-                    Out = UTCConversionsBackend.UtcToKioskTime(attendanceData.Out),
-                    Emotion = attendanceData.Emotion,
-                    EmotionUri = Emotion.GetEmotionURI(attendanceData.Emotion),
+                    StudentId = myAttendance.StudentId,
+                    Id = myAttendance.Id,
+                    In = UTCConversionsBackend.UtcToKioskTime(myAttendance.In),
+                    Out = UTCConversionsBackend.UtcToKioskTime(myAttendance.Out),
+                    Emotion = myAttendance.Emotion,
+                    EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion),
 
-                    IsNew = attendanceData.IsNew
+                    IsNew = myAttendance.IsNew
                 },
                 Name = student.Name,
-                
+
                 AvatarComposite = student.AvatarComposite
             };
 

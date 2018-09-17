@@ -342,20 +342,64 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AttendanceModel ReadAttendance(string id)
+        public AttendanceModel ReadAttendance(string StudentId, string AttendanceId)
         {
-            foreach (var student in Index())
+            if (string.IsNullOrEmpty(StudentId))
             {
-                foreach (var attendance in student.Attendance)
-                {
-                    if (attendance.Id == id)
-                    {
-                        return attendance;
-                    }
-                }
+                return null;
             }
 
-            return null;
+            if (string.IsNullOrEmpty(AttendanceId))
+            {
+                return null;
+            }
+
+            var student = Read(StudentId);
+            if (student == null)
+            {
+                return null;
+            }
+
+            var record = student.Attendance.Find(m => m.Id == AttendanceId);
+            if (record == null)
+            {
+                return null;
+            }
+
+            return record;
+        }
+
+        /// <summary>
+        /// Get the attendance model with given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public AttendanceModel UpdateAttendance(AttendanceModel data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            var student = Read(data.StudentId);
+            if (student == null)
+            {
+                return null;
+            }
+
+            var record = student.Attendance.Find(m => m.Id == data.Id);
+            if (record == null)
+            {
+                return null;
+            }
+
+            // Update the attendance record directly
+            record.Update(data);
+
+            // Update the Student in the DB of which the attendance record is part of
+            Update(student);
+                
+            return data;
         }
 
         /// <summary>

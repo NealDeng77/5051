@@ -76,7 +76,7 @@
                         @Html.DisplayFor(m => m.Out)
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="row">
                     <div class="col-5 text-right" id="tokensName">
                         @Html.DisplayNameFor(m => m.Emotion)
@@ -117,19 +117,21 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
+                    // Need to lie, and pass the Attendance Id, up as Emotion URI becaue the Id field name conflicts with the data model. In the controller need to fix it back.
+                    @Html.Hidden("EmotionUri", @Model.Id, new { @id = "EmotionUri" })
+                    @Html.Hidden("StudentId", @Model.StudentId, new { @id = "StudentId" })
 
-                <div class="row justify-content-center">
-                    <div class="col-auto text-center DispalyBoxWithMargin">
-                        @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                    <div class="row justify-content-center">
+                        <div class="col-auto text-center DispalyBoxWithMargin">
+                            @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        </div>
+
+                        <div class="col-1"></div>
+
+                        <div class="col-auto text-center DispalyBoxWithMargin">
+                            <input type="submit" value="Delete" class="btn btn1 btn-light DispalyBoxWithMargin">
+                        </div>
                     </div>
-
-                    <div class="col-1"></div>
-
-                    <div class="col-auto text-center DispalyBoxWithMargin">
-                        <input type="submit" value="Delete" class="btn btn1 btn-light DispalyBoxWithMargin">
-                    </div>
-                </div>
                 }
 
                 <br />

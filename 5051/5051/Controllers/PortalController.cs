@@ -185,7 +185,8 @@ namespace _5051.Controllers
                     //deep copy the AttendanceModel and convert time zone
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
                     Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
-
+                    Id = item.Id,
+                    StudentId = myStudent.Id,
                     Emotion = item.Emotion,
                     EmotionUri = Emotion.GetEmotionURI(item.Emotion)
                 };
@@ -207,10 +208,20 @@ namespace _5051.Controllers
         /// <returns>Attendance Record as a Attendance Model</returns>
         // GET: Portal
 
-        public ActionResult AttendanceUpdate(string id)
+        public ActionResult AttendanceUpdate(string id, string item)
         {
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -243,6 +254,7 @@ namespace _5051.Controllers
             "Id,"+
             "StudentId,"+
             "Emotion,"+
+            "EmotionUri,"+
             "")] AttendanceModel data)
         {
             if (!ModelState.IsValid)
@@ -257,14 +269,21 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            if (string.IsNullOrEmpty(data.Id))
+            // The emotionURI is passed in as the AttendanceID because of conflicts with the model, it is then converted
+            if (string.IsNullOrEmpty(data.EmotionUri))
             {
                 // Send back for edit
                 return View(data);
             }
+            data.Id = data.EmotionUri;  //copy the ID back to Data.Id
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                return View(data);
+            }
 
             //get the attendance with given id
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.StudentId,data.Id);
 
             if (myAttendance == null)
             {
@@ -275,11 +294,10 @@ namespace _5051.Controllers
             //update the emotion
             myAttendance.Emotion = data.Emotion;
             myAttendance.EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion);
+            DataSourceBackend.Instance.StudentBackend.UpdateAttendance(myAttendance);
 
-            return RedirectToAction("Attendance", new { id = myAttendance.StudentId });
+            return RedirectToAction("Attendance", new { id = myAttendance.StudentId, item = myAttendance.Id });
         }
-
-
 
         /// <summary>
         ///  My Settings

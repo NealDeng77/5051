@@ -43,7 +43,8 @@ namespace _5051.Controllers
                     //deep copy the AttendanceModel and convert time zone
                     In = UTCConversionsBackend.UtcToKioskTime(item.In),
                     Out = UTCConversionsBackend.UtcToKioskTime(item.Out),
-
+                    Id = item.Id,
+                    StudentId = myStudent.Id,
                     Emotion = item.Emotion,
                     EmotionUri = Emotion.GetEmotionURI(item.Emotion)
                 };
@@ -60,10 +61,20 @@ namespace _5051.Controllers
 
         // GET: Attendance/Detail
         // Read the details of the attendance(time in, time out).
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, string item)
         {
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -84,8 +95,6 @@ namespace _5051.Controllers
 
             return View(myReturn);
         }
-
-
 
         // GET: Attendance/Create
         //Create a new attendance
@@ -118,8 +127,6 @@ namespace _5051.Controllers
                 defaultStart = myDate.Add(schoolDay.TimeStart);
                 defaultEnd = myDate.Add(schoolDay.TimeEnd);
             }
-
-
 
             var myData = new AttendanceModel
             {
@@ -183,10 +190,20 @@ namespace _5051.Controllers
 
         // GET: Attendance/Update
         // Update in and out times.
-        public ActionResult Update(string id)
+        public ActionResult Update(string id, string item)
         {
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -217,6 +234,7 @@ namespace _5051.Controllers
             "Out,"+
             "Emotion,"+
             "IsNew,"+
+            "EmotionUri,"+
             "")] AttendanceModel data)
         {
             if (!ModelState.IsValid)
@@ -231,14 +249,21 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            if (string.IsNullOrEmpty(data.Id))
+            // The emotionURI is passed in as the AttendanceID because of conflicts with the model, it is then converted
+            if (string.IsNullOrEmpty(data.EmotionUri))
             {
                 // Send back for edit
                 return View(data);
             }
+            data.Id = data.EmotionUri;  //copy the ID back to Data.Id
+
+            if (string.IsNullOrEmpty(data.StudentId))
+            {
+                return View(data);
+            }
 
             //get the attendance with given id
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.StudentId, data.Id);
 
             if (myAttendance == null)
             {
@@ -253,16 +278,27 @@ namespace _5051.Controllers
             //update the emotion
             myAttendance.Emotion = data.Emotion;
             myAttendance.EmotionUri = Emotion.GetEmotionURI(myAttendance.Emotion);
+            DataSourceBackend.Instance.StudentBackend.UpdateAttendance(myAttendance);
 
-            return RedirectToAction("Details", new { id = myAttendance.Id });
+            return RedirectToAction("Details", new { id=myAttendance.StudentId, item = myAttendance.Id });
         }
 
         // GET: Attendance/Delete/5
         // Remove the attendance
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string item)
         {
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
+            if (string.IsNullOrEmpty(item))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            //get the attendance with given id
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -287,7 +323,9 @@ namespace _5051.Controllers
         // POST: Attendance/Delete/5
         [HttpPost]
         public ActionResult Delete([Bind(Include =
+            "StudentId,"+
             "Id," +
+            "EmotionUri,"+
             "")] AttendanceModel data)
         {
             if (!ModelState.IsValid)
@@ -302,15 +340,22 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            if (string.IsNullOrEmpty(data.Id))
+            // The emotionURI is passed in as the AttendanceID because of conflicts with the model, it is then converted
+            if (string.IsNullOrEmpty(data.EmotionUri))
+            {
+                // Send back for edit
+                return View(data);
+            }
+
+            data.Id = data.EmotionUri;  //copy the ID back to Data.Id
+            if (string.IsNullOrEmpty(data.StudentId))
             {
                 // Send back for edit
                 return View(data);
             }
 
             //get the attendance with given id
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.Id);
-
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(data.StudentId, data.Id);
             if (myAttendance == null)
             {
                 // Send to Error Page
@@ -321,6 +366,7 @@ namespace _5051.Controllers
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(myAttendance.StudentId);
 
             myStudent.Attendance.Remove(myAttendance);
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             return RedirectToAction("Read", new { id = myAttendance.StudentId });
         }

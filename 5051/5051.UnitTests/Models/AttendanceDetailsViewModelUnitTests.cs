@@ -21,7 +21,7 @@ namespace _5051.UnitTests.Models
         {
             var myAttendanceDetails = new AttendanceDetailsViewModel();
 
-            var result = myAttendanceDetails.Initialize(null);
+            var result = myAttendanceDetails.Initialize(null,null);
 
             Assert.IsNull(result, TestContext.TestName);
         }
@@ -32,7 +32,7 @@ namespace _5051.UnitTests.Models
             var myAttendanceDetails = new AttendanceDetailsViewModel();
             var testAttendance = new AttendanceModel();
 
-            var result = myAttendanceDetails.Initialize(testAttendance.Id);
+            var result = myAttendanceDetails.Initialize("bogus",testAttendance.Id);
 
             Assert.IsNull(result, TestContext.TestName);
         }
@@ -49,7 +49,7 @@ namespace _5051.UnitTests.Models
             DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             // Act
-            var result = myAttendanceDetails.Initialize(testAttendance.Id);
+            var result = myAttendanceDetails.Initialize(testStudent.Id, testAttendance.Id);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -71,7 +71,7 @@ namespace _5051.UnitTests.Models
             DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
             // Act
-            var result = myAttendanceDetails.Initialize(testAttendance.Id);
+            var result = myAttendanceDetails.Initialize(testStudent.Id, testAttendance.Id);
 
             // Reset
             DataSourceBackend.Instance.Reset();

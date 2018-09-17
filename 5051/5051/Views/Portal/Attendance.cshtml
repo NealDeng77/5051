@@ -45,7 +45,7 @@
                     foreach (var item in Model.Attendance)
                     { 
                     <div class="col-sm-2 lightTransparentBox BoxWithHighlightHover DispalyBoxWithMargin FontSizeSmall">
-                        <a href="~/Portal/AttendanceUpdate/@item.Id">
+                        <a href="~/Portal/AttendanceUpdate/@item.StudentId/@item.Id">
                             <div class="row justify-content-around">
                                 <div class="col text-center">
                                     @item.In.ToShortDateString()

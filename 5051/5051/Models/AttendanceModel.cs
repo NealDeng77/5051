@@ -45,5 +45,23 @@ namespace _5051.Models
             Id = Guid.NewGuid().ToString();
         }
 
+        public AttendanceModel Update(AttendanceModel data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            Id = data.Id;
+            StudentId = data.StudentId;
+            In = data.In;
+            Out = data.Out;
+            Emotion = data.Emotion;
+            EmotionUri = data.EmotionUri;
+            IsNew = data.IsNew;
+
+            return data;
+        }
+
     }
 }
