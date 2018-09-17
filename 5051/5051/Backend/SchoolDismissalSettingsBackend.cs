@@ -76,6 +76,15 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Get Index
+        /// </summary>
+        /// <returns></returns>
+        public List<SchoolDismissalSettingsModel> Index()
+        {
+            return DataSource.Index();
+        }
+
+        /// <summary>
         /// Helper function that resets the DataSource, and rereads it.
         /// </summary>
         public void Reset()
@@ -130,7 +139,7 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public SchoolDismissalSettingsModel GetDefault()
         {
-            var myReturn = DataSource.Index().First();
+            var myReturn = Index().First();
             return myReturn;
         }
     }
