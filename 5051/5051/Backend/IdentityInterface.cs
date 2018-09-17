@@ -16,6 +16,8 @@ namespace _5051.Backend
         //bool UpdateStudent(StudentModel student);
         bool ChangeUserName(string userId, string newName);
 
+        bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role);
+
         ApplicationUser FindUserByUserName(string userName);
 
         ApplicationUser FindUserByID(string id);

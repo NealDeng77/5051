@@ -469,7 +469,8 @@ namespace _5051.Controllers
         //GET
         public ActionResult ChangeUserPassword(string id = null)
         {
-            var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
+            //var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
+            var findResult = IdentityBackend.Instance.FindUserByID(id);
             if (findResult == null)
             {
                 return RedirectToAction("UserList", "Support");
@@ -488,7 +489,7 @@ namespace _5051.Controllers
                                              "NewPassword," +
                                              "")] ChangePasswordViewModel model)
         {
-            var backend = IdentityDataSourceTable.Instance;
+            var backend = IdentityBackend.Instance;
             var findResult = backend.FindUserByID(model.UserID);
             if (findResult == null)
             {
@@ -497,7 +498,7 @@ namespace _5051.Controllers
 
             if (backend.UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
             {
-                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Support);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Support);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
@@ -506,7 +507,7 @@ namespace _5051.Controllers
             }
             else if (backend.UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
             {
-                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Teacher);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
@@ -515,7 +516,7 @@ namespace _5051.Controllers
             }
             else
             {
-                var changePassResult = IdentityDataSourceTable.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Student);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, IdentityDataSourceTable.IdentityRole.Student);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");

@@ -140,6 +140,11 @@ namespace _5051.Backend
             return DataSource.ChangeUserName(userId, newName);
         }
 
+        public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
+        {
+            return DataSource.ChangeUserPassword(userName, newPass, role);
+        }
+
         public void Reset()
         {
             DataSource.Reset();

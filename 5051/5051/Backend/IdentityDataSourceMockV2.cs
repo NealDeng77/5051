@@ -38,10 +38,10 @@ namespace _5051.Backend
 
         private List<ApplicationUser> DataList = new List<ApplicationUser>();
 
-        private string supportUserName = "su5051";
-        private string supportPass = "su5051";
-        private string teacherUserName = "teacher";
-        private string teacherPass = "teacher";
+        public string supportUserName = "su5051";
+        public string supportPass = "su5051";
+        public string teacherUserName = "teacher";
+        public string teacherPass = "teacher";
 
         public ApplicationUser CreateNewSupportUser(string userName, string password, string supportId)
         {
@@ -158,6 +158,47 @@ namespace _5051.Backend
             DataList.Add(idFindStudent);
 
             return true;
+        }
+
+        public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
+        {
+            var findResult = FindUserByUserName(userName);
+            if (findResult == null)
+            {
+                return false;
+            }
+
+            if (role == IdentityDataSourceTable.IdentityRole.Teacher && UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+            {
+                teacherPass = newPass;
+                return true;
+            }
+
+            if (role == IdentityDataSourceTable.IdentityRole.Support && UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+            {
+                supportPass = newPass;
+                return true;
+            }
+
+            if (role == IdentityDataSourceTable.IdentityRole.Student)
+            {
+                //var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
+                var student = GetStudentById(findResult.Id);
+
+                if (student == null)
+                {
+                    return false;
+                }
+                student.Password = newPass;
+                //var updateResult = UpdateStudent(student);
+                var updateResult = DataSourceBackend.Instance.StudentBackend.Update(student);
+                if (updateResult != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public ApplicationUser FindUserByUserName(string userName)
@@ -413,6 +454,11 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
+
+            supportUserName = "su5051";
+            supportPass = "su5051";
+            teacherUserName = "teacher";
+            teacherPass = "teacher";
 
             //create support user
             var supportResult = CreateNewSupportUser(supportUserName, supportPass, supportUserName);

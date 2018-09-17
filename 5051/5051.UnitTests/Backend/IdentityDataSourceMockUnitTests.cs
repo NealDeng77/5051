@@ -98,6 +98,90 @@ namespace _5051.UnitTests.Backend
         }
         #endregion
 
+        #region ChangePassword
+        //right now this test isn't reseting properly
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangePassword_Valid_Student_Should_Pass()
+        {
+            //arrange
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectName = expectStudent.Name;
+            var expectNewPass = "goodPassword";
+
+            //act
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Student);
+            var passwordResult = expectStudent.Password;
+
+            //Reset
+            DataSourceBackend.Instance.StudentBackend.Reset();
+            backend.Reset();
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNewPass, passwordResult, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangePassword_Valid_Teacher_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectName = backend.teacherUserName;
+            var expectNewPass = "goodPassword";
+
+            //act
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Teacher);
+            var passwordResult = backend.teacherPass;
+
+            //Reset
+            backend.Reset();
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNewPass, passwordResult, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangePassword_Valid_Support_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectName = backend.supportUserName;
+            var expectNewPass = "goodPassword";
+
+            //act
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Support);
+            var passwordResult = backend.supportPass;
+
+            //Reset
+            backend.Reset();
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNewPass, passwordResult, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceMock_ChangePassword_Invalid_User_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceMockV2.Instance;
+            var expectName = "badName";
+            var expectNewPass = "goodPassword";
+
+            //act
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Support);
+            var passwordResult = backend.supportPass;
+
+            //Reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
         #region Claims
         [TestMethod]
         public void Backend_IdentityDataSourceMock_UserHasClaimOfValue_Invalid_User_Should_Fail()
@@ -596,5 +680,7 @@ namespace _5051.UnitTests.Backend
             Assert.IsFalse(result, TestContext.TestName);
         }
         #endregion
+
+
     }
 }
