@@ -283,7 +283,7 @@ namespace _5051.Backend
             foreach (var item in dateList)
             {
                 item.SchoolDay = false;
-                DataSource.Update(item);   //Save the updated Date back to the DB
+                Update(item);   //Save the updated Date back to the DB
             }
 
 
