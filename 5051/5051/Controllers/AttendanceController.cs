@@ -106,10 +106,12 @@ namespace _5051.Controllers
             DateTime defaultStart;
             DateTime defaultEnd;
 
+            var myDefaultDismissalSettings = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault();
+
             if (schoolDay == null)
             {
-                defaultStart = myDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().StartNormal);
-                defaultEnd = myDate.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().EndNormal);
+                defaultStart = myDate.Add(myDefaultDismissalSettings.StartNormal);
+                defaultEnd = myDate.Add(myDefaultDismissalSettings.EndNormal);
             }
             else
             {
