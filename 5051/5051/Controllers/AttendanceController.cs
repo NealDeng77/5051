@@ -184,6 +184,7 @@ namespace _5051.Controllers
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(myAttendance.StudentId);
 
             myStudent.Attendance.Add(myAttendance);
+            DataSourceBackend.Instance.StudentBackend.Update(myStudent);
 
             return RedirectToAction("Read", new { id = myAttendance.StudentId });
         }
