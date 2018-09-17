@@ -186,7 +186,7 @@ namespace _5051.Controllers
             var StudentViewModel = new StudentDisplayViewModel(myDataList);
 
             //Todo, replace with actual transition time
-            StudentViewModel.LastDateTime = DateTime.Now;
+            StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC());
 
             return View(StudentViewModel);
         }
