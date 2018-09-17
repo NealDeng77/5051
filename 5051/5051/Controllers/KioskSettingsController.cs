@@ -11,7 +11,7 @@ namespace _5051.Controllers
     public class KioskSettingsController : BaseController
     {
         // The Backend Data source
-        private KioskSettingsBackend KioskSettingsBackend = KioskSettingsBackend.Instance;
+        private KioskSettingsBackend KioskSettingsBackend = DataSourceBackend.Instance.KioskSettingsBackend;
 
         /// <summary>
         /// Read information on a single KioskSettings
