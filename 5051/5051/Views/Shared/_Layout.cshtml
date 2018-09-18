@@ -41,13 +41,21 @@
             break;
 
         case "KioskSettings":
+        case "kiosksettings":
         case "Attendance":
+        case "attendance":
         case "SchoolDismissalSettings":
+        case "schooldismissalsettings":
         case "FactoryInventory":
+        case "factoryinventory":
         case "AvatarItem":
+        case "avataritem":
         case "Calendar":
+        case "calendar":
         case "Student":
+        case "student":
         case "Admin":
+        case "admin":
             background = "IncludeBackgroundImageNight";
             backgroundColor = "IncludeBackgroundColorNight";
             break;
@@ -125,27 +133,42 @@
                         case "Calendar":
                         case "Student":
                         case "Admin":
-                            <li class="nav-item">
-                                @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Reports", "Report", "Admin", null, new { @class = "nav-link", id = "AdminReportLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Students", "Index", "Student", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Calendar", "Index", "Calendar", null, new { @class = "nav-link", id = "CalendarLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Avatars", "Index", "AvatarItem", null, new { @class = "nav-link", id = "AvatarLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Settings", "Settings", "Admin", null, new { @class = "nav-link", id = "AdminSettingsLinkNavBar" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Inventory", "Index", "FactoryInventory", null, new { @class = "nav-link", id = "FactoryInventoryLinkNavBar" })
-                            </li>
+                            {
+                                var routePath = Url.RequestContext.RouteData.Values["action"].ToString();
+
+                                switch (routePath)
+                                {
+                                    case "Login":
+                                    case "Roster":
+                                        break;
+
+                                    default:
+                                        {
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "nav-link", id = "AdminLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Reports", "Report", "Admin", null, new { @class = "nav-link", id = "AdminReportLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Students", "Index", "Student", null, new { @class = "nav-link", id = "StudentLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Calendar", "Index", "Calendar", null, new { @class = "nav-link", id = "CalendarLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Avatars", "Index", "AvatarItem", null, new { @class = "nav-link", id = "AvatarLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Settings", "Settings", "Admin", null, new { @class = "nav-link", id = "AdminSettingsLinkNavBar" })
+                                            </li>
+                                            <li class="nav-item">
+                                                @Html.ActionLink("Inventory", "Index", "FactoryInventory", null, new { @class = "nav-link", id = "FactoryInventoryLinkNavBar" })
+                                            </li>
+                                            break;
+                                        }
+                                }
+                            }
                             break;
 
                         default:
