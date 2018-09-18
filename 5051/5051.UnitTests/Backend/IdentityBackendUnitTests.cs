@@ -814,26 +814,35 @@ namespace _5051.UnitTests.Backend
         #endregion
 
 
-        //[TestMethod]
-        //public void Backend_IdentityBackend_GetIsTeacherUser_Should_Pass()
-        //{
-        //    //var mocks = new MockRepository();
-        //    //IPrincipal mockPrincipal = mocks.CreateMock<IPrincipal>();
-        //    //IIdentity mockIdentity = mocks.CreateMock<IIdentity>();
-        //    //ApplicationContext.User = mockPrincipal;
-        //    //using (mocks.Record())
-        //    //{
-        //    //    Expect.Call(mockPrincipal.IsInRole(Roles.ROLE_MAN_PERSON)).Return(true);
-        //    //    Expect.Call(mockIdentity.Name).Return("ju");
-        //    //    Expect.Call(mockPrincipal.Identity).Return(mockIdentity);
-        //    //}
-        //    var mockIdentity = new Mock<IIdentity>();
 
-        //    //act
-        //    var result = mockIdentity.Object.GetIsTeacherUser();
 
-        //    //assert
-        //    Assert.IsTrue(result, TestContext.TestName);
-        //}
+        #region FindUsers
+        [TestMethod]
+        public void Backend_IdentityBackend_FindUserById_Null_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityBackend.Instance;
+
+            //act
+            var result = backend.FindUserByID(null);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityBackend_FindUserById_Should_Pass()
+        {
+            //arrange
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var backend = IdentityBackend.Instance;
+
+            //act
+            var result = backend.FindUserByID(expectStudent.Id);
+
+            //assert
+            Assert.AreEqual(expectStudent.Name , result.UserName, TestContext.TestName);
+        }
+        #endregion
     }
 }

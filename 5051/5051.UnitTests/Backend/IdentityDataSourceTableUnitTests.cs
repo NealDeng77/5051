@@ -540,29 +540,27 @@ namespace _5051.UnitTests.Backend
         #endregion
 
         #region ChangePassword
-        //right now this test isn't reseting properly
-        //[TestMethod]
-        //public void Backend_IdentityDataSourceTable_ChangePassword_Valid_Student_Should_Pass()
-        //{
-        //    //arrange
-        //    var backend = IdentityDataSourceTable.Instance;
-        //    var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-        //    var expectName = expectStudent.Name;
-        //    var oldPass = expectStudent.Password;
-        //    var expectNewPass = "goodPassword";
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ChangePassword_Valid_Student_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            var expectName = expectStudent.Name;
+            var expectNewPass = "goodPassword";
 
-        //    //act
-        //    var result = backend.ChangeUserPassword(expectName, oldPass, expectNewPass, IdentityDataSourceTable.IdentityRole.Student);
-        //    var passwordResult = expectStudent.Password;
+            //act
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Student);
+            var passwordResult = expectStudent.Password;
 
-        //    //Reset
-        //    backend.Reset();
-        //    DataSourceBackend.Instance.StudentBackend.Reset();
+            //Reset
+            DataSourceBackend.Instance.StudentBackend.Reset();
+            backend.Reset();
 
-        //    //assert
-        //    Assert.IsTrue(result, TestContext.TestName);
-        //    Assert.AreEqual(expectNewPass, passwordResult, TestContext.TestName);
-        //}
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+            Assert.AreEqual(expectNewPass, passwordResult, TestContext.TestName);
+        }
 
         [TestMethod]
         public void Backend_IdentityDataSourceTable_ChangePassword_Valid_Teacher_Should_Pass()
@@ -570,7 +568,6 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceTable.Instance;
             var expectName = backend.teacherUserName;
-            var oldPass = backend.teacherPass;
             var expectNewPass = "goodPassword";
 
             //act
@@ -591,7 +588,6 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceTable.Instance;
             var expectName = backend.supportUserName;
-            var oldPass = backend.supportPass;
             var expectNewPass = "goodPassword";
 
             //act
@@ -627,7 +623,40 @@ namespace _5051.UnitTests.Backend
         #endregion
 
         #region ChangeUserName
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ChangeUserName_Invalid_Null_New_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectId = backend.ListAllSupportUsers().FirstOrDefault().Id;
 
+            //act
+            var result = backend.ChangeUserName(expectId, null);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_ChangeUserName_Invalid_User_Id_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectId = "badID";
+            var expectNewName = "testName";
+
+            //act
+            var result = backend.ChangeUserName(expectId, expectNewName);
+
+            //reset
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
         #endregion
     }
 }
