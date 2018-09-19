@@ -71,6 +71,31 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region UserInfoRegion
+
+        [TestMethod]
+        public void Controller_Support_UserInfo_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+
+            string id = supportUser.Id;
+
+            // Act
+            var result = controller.UserInfo(id) as ViewResult;
+
+            // Reset
+            Backend.IdentityBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UserInfoRegion
+
         #region ToggleUserRegion
 
         [TestMethod]
