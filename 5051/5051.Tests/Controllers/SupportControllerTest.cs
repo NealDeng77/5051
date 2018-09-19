@@ -111,6 +111,8 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new SupportController();
 
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+
             string id = "id";
             string item = "item";
 
