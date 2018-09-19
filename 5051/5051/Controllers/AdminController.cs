@@ -337,6 +337,7 @@ namespace _5051.Controllers
 
             if(!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher))
             {
+                ModelState.AddModelError("", "Invalid Old Password.");
                 return View(data);
             }
 
