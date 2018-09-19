@@ -93,7 +93,7 @@ namespace _5051.Controllers
             //if (!DataSourceBackend.GetTestingMode())
             //{
             //    //if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
-            //    if(!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+            //    if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
             //    {
             //        ModelState.AddModelError("", "Invalid password");
             //        return View(data);
@@ -635,5 +635,62 @@ namespace _5051.Controllers
 
         //    // return RedirectToAction("MonthlyReport", "Admin", new { id });
         //}
+
+        //GET
+        /// <summary>
+        /// Changes the Password for the given student
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ChangePassword(string id = null)
+        {
+            //var findResult = IdentityBackend.Instance.FindUserByID(id);
+            var findResult = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (findResult == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var passModel = new ChangePasswordViewModel();
+            passModel.UserID = findResult.Id;
+
+            return View(passModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ChangePassword([Bind(Include =
+                                             "UserID," +
+                                             "NewPassword," +
+                                             "OldPassword," +
+                                             "ConfirmPassword," +
+                                             "")] ChangePasswordViewModel data)
+        {
+            if (data == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+
+            var user = IdentityBackend.Instance.FindUserByID(data.UserID);
+            if (user == null)
+            {
+                return View(data);
+            }
+
+            if (!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Student))
+            {
+                ModelState.AddModelError("", "Invalid Old Password.");
+                return View(data);
+            }
+
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, IdentityDataSourceTable.IdentityRole.Student);
+
+            return RedirectToAction("Settings", "Portal", new { Id = user.Id });
+        }
     }
 }

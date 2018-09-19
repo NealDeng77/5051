@@ -1163,5 +1163,154 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
         #endregion
+
+        #region ChangePasswordRegion
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Get_Id_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword((string)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Get_findResult_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword(id);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Get_Default_Should_Pass()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+            var id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            // Act
+            ViewResult result = controller.ChangePassword(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
+
+        #region ChangePassWordPostRegion
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            ChangePasswordViewModel data = new ChangePasswordViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.ChangePassword(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword((ChangePasswordViewModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Post_Id_Is_Null_Or_Empty_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            ChangePasswordViewModel dataNull = new ChangePasswordViewModel();
+            ChangePasswordViewModel dataEmpty = new ChangePasswordViewModel();
+
+            // Make data.Id = null
+            dataNull.UserID = null;
+
+            // Make data.Id empty
+            dataEmpty.UserID = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.ChangePassword(dataNull);
+            var resultEmpty = (ViewResult)controller.ChangePassword(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Post_OldPassword_Is_Wrong_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            var backend = DataSourceBackend.Instance;
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+            model.UserID = student.Id;
+            model.ConfirmPassword = "test";
+            model.OldPassword = "bogus";
+            model.NewPassword = "test";
+
+            // Act
+            ViewResult result = (ViewResult)controller.ChangePassword(model);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Portal_ChangePassword_Post_Default_Should_Return_Settings_Page()
+        {
+            // Arrange
+            PortalController controller = new PortalController();
+
+            var backend = DataSourceBackend.Instance;
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+            model.UserID = student.Id;
+            model.ConfirmPassword = student.Password;
+            model.OldPassword = student.Password;
+            model.NewPassword = student.Password;
+
+            // Act
+            RedirectToRouteResult result = controller.ChangePassword(model) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
+        }
+        #endregion UpdatePostRegion
     }
 }

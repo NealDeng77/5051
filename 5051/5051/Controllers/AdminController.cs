@@ -294,7 +294,10 @@ namespace _5051.Controllers
         }
 
         //GET
-
+        /// <summary>
+        /// Changes the Password for the Admin User
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ChangePassword(string id = null)
         {
