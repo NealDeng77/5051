@@ -333,6 +333,26 @@ namespace _5051.Tests.Controllers
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Support_Delete_Post_Default_Should_Return_UserList_Page()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ApplicationUser app = new ApplicationUser();
+
+            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
+            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+
+            app.Id = supportUser.Id;
+
+            //act
+            var result = controller.DeleteUser(app) as RedirectToRouteResult;
+
+            //assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion DeleteUserPostRegion
 
         #region SettingsRegion
