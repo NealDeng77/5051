@@ -268,19 +268,25 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
-        //[TestMethod]
-        //public void Controller_Support_CreateSupport_Post_Default_Should_Pass()
-        //{
-        //    // Arrange
-        //    var controller = new SupportController();
-        //    LoginViewModel loginViewModel = new LoginViewModel();
+        [TestMethod]
+        public void Controller_Support_CreateSupport_Post_Default_Should_Return_UserList_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
 
-        //    // Act
-        //    var result = controller.CreateSupport(loginViewModel) as RedirectToRouteResult;
+            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
+            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
 
-        //    // Assert
-        //    Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
-        //}
+            loginViewModel.Email = supportUser.Email;
+            loginViewModel.Password = supportUser.PasswordHash;
+
+            // Act
+            var result = controller.CreateSupport(loginViewModel) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
 
         #endregion CreateSupportPostRegion
 
