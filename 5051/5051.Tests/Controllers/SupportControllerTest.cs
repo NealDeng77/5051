@@ -298,6 +298,24 @@ namespace _5051.Tests.Controllers
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Support_Delete_Default_Should_Pass()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+
+            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
+            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+
+            string id = supportUser.Id;
+
+            //act
+            var result = controller.DeleteUser(id) as ActionResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
         #endregion DeleteUserRegion
 
         #region DeleteUserPostRegion
