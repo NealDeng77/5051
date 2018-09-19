@@ -71,6 +71,58 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region ToggleUserRegion
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Id_Null_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            string id = null;
+            string item = "item";
+
+            // Act
+            var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Item_Null_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            string id = "id";
+            string item = null;
+
+            // Act
+            var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_UserNotFound_Should_Return_Index_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            string id = "id";
+            string item = "item";
+
+            // Act
+            var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion ToggleUserRegion
+
         #region LoginRegion
         [TestMethod]
         public void Controller_Support_Login_Default_Should_Pass()
