@@ -801,6 +801,40 @@ namespace _5051.Tests.Controllers
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Post_StudentUser_Should_Pass()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
+            viewModel.UserID = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            //act
+            var result = controller.ChangeUserPassword(viewModel) as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Post_isSupportUser_Should_Return_UserList_Page()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
+
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+            viewModel.UserID = supportUser.Id;
+
+            //act
+            var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
+
+            //assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion ChangeUserPasswordPostRegion
 
         [TestMethod]
