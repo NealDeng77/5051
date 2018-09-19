@@ -71,6 +71,28 @@ namespace _5051.Tests.Controllers
 
         #endregion IndexRegion
 
+        #region UserListRegion
+
+        [TestMethod]
+        public void Controller_Support_UserList_Default_Should_Pass()
+        {
+            // Arrange
+            var controller = new SupportController();
+
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+
+            // Act
+            var result = controller.UserList() as ViewResult;
+
+            // Reset
+            Backend.IdentityBackend.Instance.Reset();
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UserListRegion
+
         #region UserInfoRegion
 
         [TestMethod]
