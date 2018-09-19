@@ -1115,8 +1115,26 @@ namespace _5051.Tests.Controllers
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
 
             Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
-            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+            var supportUser = Backend.IdentityBackend.Instance.ListAllSupportUsers()[0];
             viewModel.UserID = supportUser.Id;
+
+            //act
+            var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
+
+            //assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Post_isTeacherUser_Should_Return_UserList_Page()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
+
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+
+            viewModel.UserID = "teacher";
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
