@@ -43,6 +43,11 @@
             </div>
 
             <div class="col-auto text-center DispalyBoxWithMargin">
+                Admin Settings<br />
+                @Html.ActionLink("Change Password", "ChangePassword", "Admin", routeValues: new { id = "teacher" }, htmlAttributes: new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+            </div>
+
+            <div class="col-auto text-center DispalyBoxWithMargin">
                 Support Users<br />
                 @Html.ActionLink("Support", "Login", "Support", null, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
             </div>

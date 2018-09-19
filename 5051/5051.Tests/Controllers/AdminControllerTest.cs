@@ -503,5 +503,155 @@ namespace _5051.Tests.Controllers
         }
         #endregion LoginPostRegion
 
+        #region ChangePasswordRegion
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Get_Id_Is_Null_Should_Return_Settings_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword((string)null);
+
+            // Assert
+            Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Get_findResult_Is_Null_Should_Return_Settings_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            string id = "bogus";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword(id);
+
+            // Assert
+            Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Get_Default_Should_Pass()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+            var id = "teacher";
+
+            // Act
+            ViewResult result = controller.ChangePassword(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        #endregion UpdateRegion
+
+        #region ChangePassWordPostRegion
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Post_Model_Is_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            ChangePasswordViewModel data = new ChangePasswordViewModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            ViewResult result = controller.ChangePassword(data) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Post_Data_Is_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.ChangePassword((ChangePasswordViewModel)null);
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Post_Id_Is_Null_Or_Empty_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            ChangePasswordViewModel dataNull = new ChangePasswordViewModel();
+            ChangePasswordViewModel dataEmpty = new ChangePasswordViewModel();
+
+            // Make data.Id = null
+            dataNull.UserID = null;
+
+            // Make data.Id empty
+            dataEmpty.UserID = "";
+
+            // Act
+            var resultNull = (ViewResult)controller.ChangePassword(dataNull);
+            var resultEmpty = (ViewResult)controller.ChangePassword(dataEmpty);
+
+            // Assert
+            Assert.IsNotNull(resultNull, TestContext.TestName);
+            Assert.IsNotNull(resultEmpty, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Post_OldPassword_Is_Wrong_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            var backend = DataSourceBackend.Instance;
+
+            var teacher = IdentityBackend.Instance.FindUserByID("teacher");
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+            model.UserID = "teacher";
+            model.ConfirmPassword = "teacher";
+            model.OldPassword = "bogus";
+            model.NewPassword = "teacher";
+
+            // Act
+            ViewResult result = (ViewResult)controller.ChangePassword(model);
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Admin_ChangePassword_Post_Default_Should_Return_Settings_Page()
+        {
+            // Arrange
+            AdminController controller = new AdminController();
+
+            var backend = DataSourceBackend.Instance;
+
+            var teacher = IdentityBackend.Instance.FindUserByID("teacher");
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+            model.UserID = "teacher";
+            model.ConfirmPassword = "teacher";
+            model.OldPassword = "teacher";
+            model.NewPassword = "teacher";
+
+            // Act
+            RedirectToRouteResult result = controller.ChangePassword(model) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Settings", result.RouteValues["action"], TestContext.TestName);
+        }
+        #endregion UpdatePostRegion
+
     }
 }

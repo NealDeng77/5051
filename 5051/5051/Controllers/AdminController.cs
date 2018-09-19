@@ -292,5 +292,58 @@ namespace _5051.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+
+        //GET
+
+        [AllowAnonymous]
+        public ActionResult ChangePassword(string id = null)
+        {
+            var findResult = IdentityBackend.Instance.FindUserByID(id);
+            if (findResult == null)
+            {
+                return RedirectToAction("Settings", "Admin");
+            }
+
+            var passModel = new ChangePasswordViewModel();
+            passModel.UserID = findResult.Id;
+
+            return View(passModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ChangePassword([Bind(Include =
+                                             "UserID," +
+                                             "NewPassword," +
+                                             "OldPassword," +
+                                             "ConfirmPassword," +
+                                             "")] ChangePasswordViewModel data)
+        {
+            if(data == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return View(data);
+            }
+
+            var user = IdentityBackend.Instance.FindUserByID(data.UserID);
+            if(user == null)
+            {
+                return View(data);
+            }
+
+            if(!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher))
+            {
+                return View(data);
+            }
+
+            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+
+            return RedirectToAction("Settings", "Admin");
+        }
     }
 }
