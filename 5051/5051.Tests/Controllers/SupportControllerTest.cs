@@ -257,6 +257,26 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Post_AddClaimValue_Should_Return_UserList_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var app = new ApplicationUserInputModel();
+
+            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
+            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+
+            app.Id = supportUser.Id;
+            app.Role = UserRoleEnum.StudentUser;
+
+            // Act
+            var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion ToggleUserPostRegion
 
         #region LoginRegion
