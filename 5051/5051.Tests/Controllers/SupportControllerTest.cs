@@ -784,6 +784,24 @@ namespace _5051.Tests.Controllers
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
+
+        [TestMethod]
+        public void Controller_Support_ChangeUserPassword_Default_Should_Pass()
+        {
+            //arrange
+            SupportController controller = new SupportController();
+
+            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+
+            string expect = supportUser.Id;
+
+            //act
+            var result = controller.ChangeUserPassword(expect) as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
         #endregion
 
         #region ChangeUserPasswordPostRegion
