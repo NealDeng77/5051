@@ -172,6 +172,73 @@ namespace _5051.Tests.Controllers
 
         #endregion ToggleUserRegion
 
+        #region ToggleUserPostRegion
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Post_Model_Invalid_Should_Send_Back_For_Edit()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var app = new ApplicationUserInputModel();
+
+            // Make ModelState Invalid
+            controller.ModelState.AddModelError("test", "test");
+
+            // Act
+            var result = controller.ToggleUser(app) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Post_data_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var app = new ApplicationUserInputModel();
+            app = null;
+
+            // Act
+            var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Post_id_Null_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var app = new ApplicationUserInputModel();
+            app.Id = null;
+
+            // Act
+            var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Controller_Support_ToggleUser_Post_Role_Unknown_Should_Return_Error_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            var app = new ApplicationUserInputModel();
+            app.Id = "id";
+            app.Role = UserRoleEnum.Unknown;
+
+            // Act
+            var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
+        }
+
+        #endregion ToggleUserPostRegion
+
         #region LoginRegion
         [TestMethod]
         public void Controller_Support_Login_Default_Should_Pass()
