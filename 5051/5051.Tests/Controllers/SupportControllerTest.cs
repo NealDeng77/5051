@@ -231,6 +231,26 @@ namespace _5051.Tests.Controllers
             Assert.IsNotNull(result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Controller_Support_CreateTeacher_Post_Default_Should_Return_UserList_Page()
+        {
+            // Arrange
+            var controller = new SupportController();
+            LoginViewModel loginViewModel = new LoginViewModel();
+
+            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
+            var teacherUser = Backend.IdentityDataSourceTable.Instance.ListAllTeacherUsers()[0];
+
+            loginViewModel.Email = teacherUser.Email;
+            loginViewModel.Password = teacherUser.PasswordHash;
+
+            // Act
+            var result = controller.CreateTeacher(loginViewModel) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
+        }
+
         #endregion CreateTeacherPostRegion
 
         #region CreateSupportRegion
