@@ -332,6 +332,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\avatar\Hair1_shortfringe_black.png" />
+    <Content Include="Content\avatar\Hair1_shortfringe_brown.png" />
+    <Content Include="Content\avatar\Hair1_shortfringe_chestnut.png" />
+    <Content Include="Content\avatar\Hair1_shortfringe_grey.png" />
+    <Content Include="Content\avatar\Hair1_shortfringe_red.png" />
+    <Content Include="Content\avatar\Hair1_shortfringe_blonde.png" />
     <Content Include="Content\avatar\Hair2_blondegreen.png" />
     <Content Include="Content\avatar\Hair2_kinky_BlackBlue.png" />
     <Content Include="Content\avatar\Hair2_kinky_BlackGreen.png" />

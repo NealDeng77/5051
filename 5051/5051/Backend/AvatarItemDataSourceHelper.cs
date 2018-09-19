@@ -94,6 +94,14 @@ namespace _5051.Backend
 
             DataList.Add(new AvatarItemModel("placeholder.png", "Shaved", "Bald", AvatarItemCategoryEnum.HairFront, 1, 30, false, true)); // Default
 
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_grey.png", "Grey", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_chestnut.png", "Chestnut", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_blonde.png", "Blonde", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_black.png", "Black", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_brown.png", "Brown", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+            DataList.Add(new AvatarItemModel("Hair1_shortfringe_red.png", "Red", "Short", AvatarItemCategoryEnum.HairFront, 10, 30, false));
+
+
             DataList.Add(new AvatarItemModel("Hair1_straight_white.png", "White", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
             DataList.Add(new AvatarItemModel("Hair1_straight_black.png", "Black", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
             DataList.Add(new AvatarItemModel("Hair1_straight_Blonde.png", "Blonde", "Straight", AvatarItemCategoryEnum.HairFront, 10, 30, false));
