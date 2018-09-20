@@ -220,6 +220,9 @@ namespace _5051.Backend
                 temp.Out = UTCConversionsBackend.KioskTimeToUtc(currentKioskDate.Add(schoolDay.TimeEnd));
 
                 schoolDay.HasAttendance = true;
+
+                //Save the school calendar change
+                DataSourceBackend.Instance.SchoolCalendarBackend.Update(schoolDay);
             }
 
             data.Attendance.Add(temp);
