@@ -133,6 +133,18 @@
                         </div>
                     </div>
 
+                    <div class="row justify-content-around">
+                        <div class="col text-right" id="truckName">
+                            @Html.DisplayNameFor(m => m.Truck.TruckName)
+                        </div>
+                        <div class="col-1">
+                            &nbsp;:&nbsp;
+                        </div>
+                        <div class="col text-left" id="truckNameValue">
+                            @Html.DisplayFor(x => x.Truck.TruckName)
+                        </div>
+                    </div>
+
                     <br />
 
                     <hr />
