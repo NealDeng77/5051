@@ -125,6 +125,7 @@ namespace _5051.Controllers
                                         "Tokens,"+
                                         "Status,"+
                                         "ExperiencePoints,"+
+                                        "Truck,"+
                                         "")] StudentDisplayViewModel data)
         {
             if (!ModelState.IsValid)
@@ -152,6 +153,7 @@ namespace _5051.Controllers
             myDataStudent.Tokens = data.Tokens;
             myDataStudent.Status = data.Status;
             myDataStudent.ExperiencePoints = data.ExperiencePoints;
+            myDataStudent.Truck.TruckName = data.Truck.TruckName;
 
             DataSourceBackend.Instance.StudentBackend.Update(myDataStudent);
 
