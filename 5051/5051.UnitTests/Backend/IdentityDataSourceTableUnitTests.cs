@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _5051.Models;
 using _5051.Backend;
+using System.Web;
+using Moq;
 
 namespace _5051.UnitTests.Backend
 {
@@ -348,7 +350,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "su5051";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support, null);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -362,7 +364,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "teacher";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher);
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher, null);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -417,7 +419,7 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
 
             //act
-            var result = backend.LogUserIn(null, null, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.LogUserIn(null, null, IdentityDataSourceTable.IdentityRole.Support, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -432,7 +434,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Support, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -447,7 +449,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Teacher, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -462,7 +464,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Student);
+            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Student, null);
 
 
             //assert
@@ -477,7 +479,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "teacher";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -491,7 +493,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "Mike";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher);
+            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -505,7 +507,7 @@ namespace _5051.UnitTests.Backend
             var badName = "bogus";
 
             //act
-            var result = backend.LogUserIn(badName, badName, IdentityDataSourceTable.IdentityRole.Student);
+            var result = backend.LogUserIn(badName, badName, IdentityDataSourceTable.IdentityRole.Student, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -516,12 +518,35 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var backend = IdentityDataSourceTable.Instance;
+            var testCookieName = "id";
+            var testCookieValue = "testID";
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
 
-            //act
-            var result = backend.LogUserOut();
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
 
-            //assert
-            Assert.IsFalse(result, TestContext.TestName);
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            // Act
+            var result = backend.LogUserOut(context.Object);
+
+            // Assert
+            Assert.IsTrue(result, TestContext.TestName);
         }
 
         //[TestMethod]
@@ -548,9 +573,10 @@ namespace _5051.UnitTests.Backend
             var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectName = expectStudent.Name;
             var expectNewPass = "goodPassword";
+            var expectOldPass = expectStudent.Password;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Student);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Student);
             var passwordResult = expectStudent.Password;
 
             //Reset
@@ -569,9 +595,10 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var expectName = backend.teacherUserName;
             var expectNewPass = "goodPassword";
+            var expectOldPass = backend.teacherPass;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Teacher);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Teacher);
             var passwordResult = backend.teacherPass;
             
             //Reset
@@ -589,9 +616,10 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var expectName = backend.supportUserName;
             var expectNewPass = "goodPassword";
+            var expectOldPass = backend.supportPass;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass,IdentityDataSourceTable.IdentityRole.Support);
             var passwordResult = backend.supportPass;
 
             //Reset
@@ -609,9 +637,10 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var expectName = "badName";
             var expectNewPass = "goodPassword";
+            var expectOldPass = "bad";
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Support);
             var passwordResult = backend.supportPass;
 
             //Reset
@@ -653,6 +682,362 @@ namespace _5051.UnitTests.Backend
 
             //reset
             backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region GetCurrentStudentID
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_GetCurrentStudentID_Should_Pass()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            var testCookieName = "id";
+            var testCookieValue = "testID";
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            //act
+            var result = backend.GetCurrentStudentID(context.Object);
+
+            //assert
+            Assert.AreEqual(testCookieValue, result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_GetCurrentStudentID_No_Cookie_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            var testCookieName = "id";
+            var testCookieValue = "testID";
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            //act
+            var result = backend.GetCurrentStudentID(context.Object);
+
+            //assert
+            Assert.IsNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region BlockAccess
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_Should_Pass()
+        {
+            //arrange
+            var dataSourceBackend = DataSourceBackend.Instance;
+            var backend = IdentityDataSourceTable.Instance;
+
+            var student = dataSourceBackend.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = student.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            //act
+            var result = backend.BlockAccess(testCookieValue, testCookieValue, context.Object);
+
+            //reset
+            dataSourceBackend.Reset();
+            backend.Reset();
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_RequestId_Null_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            string expectReqId = null;
+            string expectUserId = null;
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, null);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_RequestId_Invalid_Should_Fail()
+        {
+            //arrange
+
+            var backend = IdentityDataSourceTable.Instance;
+            var expectReqId = "bogus";
+            string expectUserId = null;
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, null);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_UserId_Null_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectReqId = backend.ListAllStudentUsers().FirstOrDefault().Id;
+            string expectUserId = null;
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, null);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_UserId_Invalid_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var expectReqId = backend.ListAllStudentUsers().FirstOrDefault().Id;
+            var expectUserId = "bogus";
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, null);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_UserId_Not_RequestedId_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var studentList = backend.ListAllStudentUsers();
+            var expectReqId = studentList.FirstOrDefault().Id;
+            var expectUserId = studentList.Last().Id;
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, null);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_No_User_Logged_In_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var studentList = backend.ListAllStudentUsers();
+            var expectReqId = studentList.FirstOrDefault().Id;
+            var expectUserId = expectReqId;
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, context.Object);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_BlockAccess_Invalid_User_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+            var studentList = backend.ListAllStudentUsers();
+            var expectReqId = studentList.FirstOrDefault().Id;
+            var expectUserId = expectReqId;
+
+            var testCookieName = "id";
+            var testCookieValue = studentList.Last().Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, context.Object);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        #endregion
+
+        #region CreateCookie
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_CreateCookie_CookieValue_Is_Null_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            var testCookieName = "id";
+            string testCookieValue = null;
+
+            //act
+            var result = backend.CreateCookie(testCookieName, testCookieValue, null);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_CreateCookie_CookieName_Is_Null_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            string testCookieName = null;
+            var testCookieValue = "bogus";
+
+            //act
+            var result = backend.CreateCookie(testCookieName, testCookieValue, null);
+
+            //assert
+            Assert.IsFalse(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region DeleteCookie
+        [TestMethod]
+        public void Backend_IdentityDataSourceTable_DeleteCookie_Invalid_Cookie_Name_Should_Fail()
+        {
+            //arrange
+            var backend = IdentityDataSourceTable.Instance;
+
+            string testCookieName = null;
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            //act
+            var result = backend.DeleteCookie(testCookieName, context.Object);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);

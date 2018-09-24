@@ -261,7 +261,7 @@ namespace _5051.Backend
         }
 
 
-        public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
+        public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
         {
             var findResult = FindUserByUserName(userName);
             if(findResult == null)
@@ -290,6 +290,11 @@ namespace _5051.Backend
                 {
                     return false;
                 }
+                if (oldPass != student.Password)
+                {
+                    return false;
+                }
+
                 student.Password = newPass;
                 //var updateResult = UpdateStudent(student);
                 var updateResult = DataSourceBackend.Instance.StudentBackend.Update(student);
@@ -553,7 +558,7 @@ namespace _5051.Backend
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool LogUserIn(string userName, string password, IdentityRole role)
+        public bool LogUserIn(string userName, string password, IdentityRole role, HttpContextBase context)
         {
             if(userName == null && password == null)
             {
@@ -603,6 +608,10 @@ namespace _5051.Backend
             var student = GetStudentById(findResult.Id);
             if(student != null && student.Password == password)
             {
+                var logOutResult = LogUserOut(context);
+
+                var cookieResult = CreateCookie("id", student.Id, context);
+
                 return true;
             }
 
@@ -610,15 +619,127 @@ namespace _5051.Backend
         }
 
         /// <summary>
+        /// Uses cookies to determine if the user id has access to a requested id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool BlockAccess(string userId, string requestedId, HttpContextBase context)
+        {
+            if (string.IsNullOrEmpty(requestedId))
+            {
+                return true;
+            }
+
+            var requestedFindResult = FindUserByID(requestedId);
+            if (requestedFindResult == null)
+            {
+                return true;
+            }
+
+            if (userId == null)
+            {
+                return true;
+            }
+
+            var userFindResult = FindUserByID(userId);
+            if (userFindResult == null)
+            {
+                return true;
+            }
+
+            if (userId != requestedId)
+            {
+                return true;
+            }
+
+            var cookieId = ReadCookieValue("id", context);
+
+            if (cookieId == null)
+            {
+                return true;
+            }
+
+            if (cookieId != userId)
+            {
+                return true;
+            }
+
+            //if made it this far, valid user
+            return false;
+        }
+
+        /// <summary>
+        /// get the ID of the currently logged in student
+        /// returns null if no student logged in
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentStudentID(HttpContextBase context)
+        {
+            var cookieId = ReadCookieValue("id", context);
+
+            if (cookieId == null)
+            {
+                return null;
+            }
+
+            return cookieId;
+        }
+
+        /// <summary>
         /// logs the currently logged in user out
         /// </summary>
         /// <returns></returns>
-        public bool LogUserOut()
+        public bool LogUserOut(HttpContextBase context)
         {
-            //idBackend.SignInManager.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            string cookieName = "id";
 
-            //return true;
-            return false;
+            var result = DeleteCookie(cookieName, context);
+
+            return result;
+        }
+
+        public bool CreateCookie(string cookieName, string cookieValue, HttpContextBase context)
+        {
+            if (cookieName == null || cookieValue == null)
+            {
+                return false;
+            }
+
+            HttpCookie aCookie = new HttpCookie(cookieName);
+            aCookie.Value = cookieValue;
+            aCookie.Expires = DateTime.Now.AddDays(1);
+            context.Response.Cookies.Add(aCookie);
+
+            return true;
+        }
+        public string ReadCookieValue(string cookieName, HttpContextBase context)
+        {
+            if (context.Request.Cookies[cookieName] == null)
+            {
+                return null;
+            }
+
+            HttpCookie aCookie = context.Request.Cookies[cookieName];
+            var cookieValue = context.Server.HtmlEncode(aCookie.Value);
+
+            return cookieValue;
+        }
+
+        public bool DeleteCookie(string cookieName, HttpContextBase context)
+        {
+            if (context.Request.Cookies[cookieName] == null)
+            {
+                return false;
+            }
+
+            HttpCookie aCookie = context.Request.Cookies[cookieName];
+            var cookieId = context.Server.HtmlEncode(aCookie.Value);
+            //delete the cookie with id info
+            aCookie = new HttpCookie(cookieName);
+            aCookie.Expires = DateTime.Now.AddDays(-1);
+            context.Response.Cookies.Add(aCookie);
+
+            return true;
         }
 
         public void Reset()

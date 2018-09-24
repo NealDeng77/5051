@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using _5051.Models;
 
 namespace _5051.Backend
@@ -16,7 +17,7 @@ namespace _5051.Backend
         //bool UpdateStudent(StudentModel student);
         bool ChangeUserName(string userId, string newName);
 
-        bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role);
+        bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role);
 
         ApplicationUser FindUserByUserName(string userName);
 
@@ -40,9 +41,19 @@ namespace _5051.Backend
 
         bool DeleteUser(string id);
 
-        bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role);
+        bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role, HttpContextBase context);
 
-        bool LogUserOut();
+        bool BlockAccess(string userId, string requestedId, HttpContextBase context);
+
+        string GetCurrentStudentID(HttpContextBase context);
+
+        bool LogUserOut(HttpContextBase context);
+
+        bool CreateCookie(string cookieName, string cookieValue, HttpContextBase context);
+
+        string ReadCookieValue(string cookieName, HttpContextBase context);
+
+        bool DeleteCookie(string cookiename, HttpContextBase context);
 
         void Reset();
 

@@ -128,10 +128,28 @@ namespace _5051.Backend
             return myReturn;
         }
 
-        public bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role)
+        public bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role, HttpContextBase context)
         {
-            var myReturn = DataSource.LogUserIn(userName, password, role);
+            var myReturn = DataSource.LogUserIn(userName, password, role, context);
             return myReturn;
+        }
+
+        public bool BlockAccess(string userId, string requestedId, HttpContextBase context)
+        {
+            var result = DataSource.BlockAccess(userId, requestedId, context);
+            return result;
+        }
+
+        public string GetCurrentStudentID(HttpContextBase context)
+        {
+            var result = DataSource.GetCurrentStudentID(context);
+            return result;
+        }
+
+        public bool LogUserOut(HttpContextBase context)
+        {
+            var result = DataSource.LogUserOut(context);
+            return result;
         }
 
         public bool ChangeUserName(string userId, string newName)
@@ -140,9 +158,9 @@ namespace _5051.Backend
             return DataSource.ChangeUserName(userId, newName);
         }
 
-        public bool ChangeUserPassword(string userName, string newPass, IdentityDataSourceTable.IdentityRole role)
+        public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
         {
-            return DataSource.ChangeUserPassword(userName, newPass, role);
+            return DataSource.ChangeUserPassword(userName, newPass, oldPass, role);
         }
 
         public void Reset()

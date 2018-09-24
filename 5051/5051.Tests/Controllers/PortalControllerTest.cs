@@ -10,6 +10,9 @@ using _5051.Controllers;
 using _5051.Models;
 using System.Diagnostics;
 using _5051.Backend;
+using System.Web;
+using System.Web.Routing;
+using Moq;
 
 namespace _5051.Tests.Controllers
 {
@@ -209,6 +212,48 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.StudentBackend.Reset();
 
             // Assert
+            Assert.IsNotNull(result, TestContext.TestName);
+        }
+        #endregion
+
+        #region LogoutPostRegion
+        [TestMethod]
+        public void Controller_Portal_Logout_Should_Pass()
+        {
+            //arrange
+            PortalController controller = new PortalController();
+            var backend = DataSourceBackend.Instance;
+
+            var testCookieName = "id";
+            var testCookieValue = "testID";
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            //act
+            var result = (RedirectToRouteResult)controller.LogOff();
+
+            //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
         #endregion

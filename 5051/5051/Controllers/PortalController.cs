@@ -92,8 +92,7 @@ namespace _5051.Controllers
             //// When not in testing mode try the password
             //if (!DataSourceBackend.GetTestingMode())
             //{
-            //    //if (!IdentityDataSourceTable.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
-            //    if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student))
+            //    if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student, HttpContext))
             //    {
             //        ModelState.AddModelError("", "Invalid password");
             //        return View(data);
@@ -102,6 +101,14 @@ namespace _5051.Controllers
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        { 
+            IdentityBackend.Instance.LogUserOut(HttpContext);
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -121,6 +128,12 @@ namespace _5051.Controllers
             {
                 return RedirectToAction("Roster", "Portal");
             }
+
+            //uncommet to block access to all but the logged in user
+            //if (IdentityBackend.Instance.BlockAccess(id, id, HttpContext))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             var myReturn = new StudentDisplayViewModel(myStudent);
 
@@ -682,13 +695,12 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            if (!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Student))
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, IdentityDataSourceTable.IdentityRole.Student);
+            if(!changeResult)
             {
                 ModelState.AddModelError("", "Invalid Old Password.");
                 return View(data);
             }
-
-            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, IdentityDataSourceTable.IdentityRole.Student);
 
             return RedirectToAction("Settings", "Portal", new { Id = user.Id });
         }

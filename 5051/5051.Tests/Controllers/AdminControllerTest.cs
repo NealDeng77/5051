@@ -614,13 +614,15 @@ namespace _5051.Tests.Controllers
 
             var backend = DataSourceBackend.Instance;
 
-            var teacher = IdentityBackend.Instance.FindUserByID("teacher");
+            //var teacher = IdentityBackend.Instance.FindUserByID("teacher");
+
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
             ChangePasswordViewModel model = new ChangePasswordViewModel();
-            model.UserID = "teacher";
-            model.ConfirmPassword = "teacher";
+            model.UserID = student.Id;
+            model.ConfirmPassword = student.Password;
             model.OldPassword = "bogus";
-            model.NewPassword = "teacher";
+            model.NewPassword = student.Password;
 
             // Act
             ViewResult result = (ViewResult)controller.ChangePassword(model);

@@ -283,7 +283,7 @@ namespace _5051.Controllers
             user.Email = "teacher";
 
             //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
+            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher, null);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -338,14 +338,19 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            if(!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher))
+            //if(!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher))
+            //{
+            //    ModelState.AddModelError("", "Invalid Old Password.");
+            //    return View(data);
+            //}
+
+            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+            if (!changeResult)
             {
                 ModelState.AddModelError("", "Invalid Old Password.");
                 return View(data);
             }
-
-            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, IdentityDataSourceTable.IdentityRole.Teacher);
 
             return RedirectToAction("Settings", "Admin");
         }
