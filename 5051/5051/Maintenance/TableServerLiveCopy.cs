@@ -15,47 +15,21 @@ namespace _5051.Backend
     /// </summary>
     public class TablesCopy
     {
-        /// <summary>
-        /// Make into a Singleton
-        /// </summary>
-        private static volatile TablesCopy instance;
-        private static object syncRoot = new Object();
 
-        private TablesCopy() { }
-
-        public static TablesCopy Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (syncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new TablesCopy();
-                        }
-                    }
-                }
-
-                return instance;
-            }
-        }
-
-
-        public bool CopyFromServerLive(DataSourceEnum dataSourceServerMode)
+        // Will copy all the data from the Live Server to designated location
+        public bool CopyFromServerLive(DataSourceEnum DestinationDataSourceEnum)
         {
             var connectionString = string.Empty;
             var StorageConnectionString = string.Empty;
 
-            switch (dataSourceServerMode)
+            switch (DestinationDataSourceEnum)
             {
                 case DataSourceEnum.Local:
                     StorageConnectionString = "StorageConnectionStringLocal";
                     break;
 
                 case DataSourceEnum.ServerLive:
-                    StorageConnectionString = "StorageConnectionStringServerLive";
+                    return false;  // Can't copy from live to live
                     break;
 
                 case DataSourceEnum.ServerTest:
@@ -63,6 +37,7 @@ namespace _5051.Backend
                     StorageConnectionString = "StorageConnectionStringServerTest";
                     break;
             }
+
 
             return true;
         }
