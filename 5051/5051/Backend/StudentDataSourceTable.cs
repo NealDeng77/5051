@@ -249,6 +249,7 @@ namespace _5051.Backend
         public void Reset()
         {
             Initialize();
+            IdentityDataSourceTable.Instance.Reset();
         }
 
         /// <summary>

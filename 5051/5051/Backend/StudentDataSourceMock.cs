@@ -143,6 +143,7 @@ namespace _5051.Backend
         public void Reset()
         {
             Initialize();
+            IdentityDataSourceMockV2.Instance.Reset();
         }
 
         /// <summary>

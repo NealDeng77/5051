@@ -41,9 +41,11 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Instantiate_Should_Pass()
         {
             // Arange
+            IdentityDataSourceTable.Instance.Reset();
             DataSourceBackend.Instance.StudentBackend.Index();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
+            //var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
+            var userInfo = IdentityDataSourceTable.Instance.FindUserByID(Student.Id);
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
@@ -62,6 +64,7 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Get_Set_Should_Pass()
         {
             // Arange
+            IdentityDataSourceTable.Instance.Reset();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
 

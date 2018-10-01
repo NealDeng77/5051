@@ -723,6 +723,10 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Edit(data.Id) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+            IdentityBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
             Assert.AreEqual("Home", result.RouteValues["controller"], TestContext.TestName);
@@ -1078,6 +1082,8 @@ namespace _5051.Tests.Controllers
         public void Controller_Shop_EditName_Data_Valid_Should_Pass()
         {
             // Arrange
+            //IdentityBackend.Instance.Reset();
+            IdentityDataSourceMockV2.Instance.Reset();
             ShopController controller = new ShopController();
             var data = new ShopTruckInputModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;

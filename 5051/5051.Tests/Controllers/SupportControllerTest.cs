@@ -1081,6 +1081,7 @@ namespace _5051.Tests.Controllers
         public void Controller_Support_ChangeUserPassword_Post_Id_Null_Should_Pass()
         {
             //arrange
+            var dataBackend = DataSourceBackend.Instance;
             SupportController controller = new SupportController();
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
             viewModel.UserID = null;
@@ -1096,12 +1097,17 @@ namespace _5051.Tests.Controllers
         public void Controller_Support_ChangeUserPassword_Post_StudentUser_Should_Pass()
         {
             //arrange
+            IdentityBackend.Instance.Reset();
             SupportController controller = new SupportController();
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
-            viewModel.UserID = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            viewModel.UserID = student.Id;
+            viewModel.NewPassword = student.Password;
+            viewModel.ConfirmPassword = student.Password;
+            viewModel.OldPassword = student.Password;
 
             //act
-            var result = controller.ChangeUserPassword(viewModel) as ViewResult;
+            var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
