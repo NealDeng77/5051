@@ -22,9 +22,6 @@ namespace _5051.Backend
 
         public StudentBackend StudentBackend = StudentBackend.Instance;
 
-        // Set the Mock System as the default DataSource
-        public DataSourceEnum DataSourceEnum = DataSourceEnum.Mock;
-
         /// <summary>
         /// Make into a Singleton
         /// </summary>

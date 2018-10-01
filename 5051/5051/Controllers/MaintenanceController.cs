@@ -61,7 +61,7 @@ namespace _5051.Controllers
                 return RedirectToAction("BackupData", "Maintenance");
             }
 
-            if (DataSourceBackend.Instance.DataSourceEnum == DataSourceEnum.Mock)
+            if (SystemGlobalsModel.Instance.DataSourceValue == DataSourceEnum.Mock)
             {
                 return RedirectToAction("BackupData", "Maintenance");
             }
@@ -70,7 +70,7 @@ namespace _5051.Controllers
 
             DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "AvatarItemModel");
 
-            return RedirectToAction("Maintenance", "Support");
+            return RedirectToAction("Index", "Maintenance");
         }
 
     }

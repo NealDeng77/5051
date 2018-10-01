@@ -110,7 +110,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true)
+        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true, CloudTableClient TableClient = null)
         {
             var myReturnList = new List<T>();
 
@@ -130,10 +130,13 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            return LoadAllDirect<T>(tableName, pk, convert);
+            return LoadAllDirect<T>(tableName, pk, TableClient, convert);
         }
 
-        public List<T> LoadAllDirect<T>(string tableName, string pk, bool convert = true)
+        public List<T> LoadAllDirect<T>(string tableName, 
+                                        string pk,
+                                        CloudTableClient TableClient,
+                                        bool convert = true)
         {
             var myReturnList = new List<T>();
 
@@ -147,10 +150,16 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
+            // If not Table Client is passed in, then assume the global one.
+            if (TableClient == null)
+            {
+                TableClient = tableClient;
+            }
+
             try
             {
 
-                var Table = tableClient.GetTableReference(tableName);
+                var Table = TableClient.GetTableReference(tableName);
                 Table.CreateIfNotExists();
 
                 var result = new List<DataSourceBackendTableEntity>();
@@ -367,7 +376,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Delete<T>(string tableName, string pk, string rk, T data)
+        public bool Delete<T>(string tableName, string pk, string rk, T data, CloudTableClient TableClient = null)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -503,7 +512,7 @@ namespace _5051.Backend
             var pk = tableName.ToLower();
 
             // Read all the records from the Source using current database defaults
-            var SourceData = LoadAllDirect<T>(tableName, pk);
+            var SourceData = LoadAllDirect<T>(tableName, pk,null,true);
             if (!SourceData.Any())
             {
                 return false;
@@ -523,8 +532,15 @@ namespace _5051.Backend
             var DestinationTable = DestinationTableClient.GetTableReference(tableName);
             DestinationTable.CreateIfNotExists();
 
-            // Empty out Destination Table
             // TODO
+            // Empty out Destination Table
+            // Get all rows in the destination Table
+            // Walk and delete each item, because delete table takes too long...
+            var SourceDataAll = LoadAllDirect<T>(tableName, pk, DestinationTableClient,true);
+            foreach (var data in SourceDataAll)
+            {
+
+            }
 
             // Load new Data into it
             foreach (var data in SourceData)
