@@ -157,8 +157,8 @@ namespace _5051.Backend
         /// </summary>
         public void ResetDefaults()
         {
-            var startDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayFirst;  //school year start date
-            var endDate = SchoolDismissalSettingsBackend.Instance.GetDefault().DayLast;  //school year end date
+            var startDate = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayFirst;  //school year start date
+            var endDate = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.GetDefault().DayLast;  //school year end date
             var today = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC()).Date;
 
             var currentDate = startDate;  //loop variable
