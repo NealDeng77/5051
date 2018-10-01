@@ -46,7 +46,7 @@ namespace _5051.Backend
         /// </summary>
         private List<AvatarItemModel> DataList = new List<AvatarItemModel>();
 
-        private const string ClassName = "AvatarItemModel";
+        public const string ClassName = "AvatarItemModel";
         /// <summary>
         /// Table Name used for data storage
         /// </summary>

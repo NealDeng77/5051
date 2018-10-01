@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _5051.Models;
 
 using Microsoft.Azure;
@@ -50,8 +51,20 @@ namespace _5051.Backend
         public bool SetDataSourceServerMode(DataSourceEnum dataSourceServerMode)
         {
             var connectionString = string.Empty;
-            var StorageConnectionString = string.Empty;
+            var StorageConnectionString = GetDataSourceConnectionString(dataSourceServerMode);
 
+            // If under Test, return True;
+            if (DataSourceBackend.GetTestingMode())
+            {
+                return true;
+            }
+
+            return SetDataSourceServerModeDirect(StorageConnectionString);
+        }
+
+        public string GetDataSourceConnectionString(DataSourceEnum dataSourceServerMode)
+        {
+            var StorageConnectionString = string.Empty;
             switch (dataSourceServerMode)
             {
                 case DataSourceEnum.Local:
@@ -67,14 +80,7 @@ namespace _5051.Backend
                     StorageConnectionString = "StorageConnectionStringServerTest";
                     break;
             }
-
-            // If under Test, return True;
-            if (DataSourceBackend.GetTestingMode())
-            {
-                return true;
-            }
-
-            return SetDataSourceServerModeDirect(StorageConnectionString);
+            return StorageConnectionString;
         }
 
         public bool SetDataSourceServerModeDirect(string StorageConnectionString)
@@ -104,7 +110,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<T> LoadAll<T>(string tableName, string pk, bool convert=true)
+        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true)
         {
             var myReturnList = new List<T>();
 
@@ -124,10 +130,10 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            return LoadAllDirect<T>(tableName, pk,convert);
+            return LoadAllDirect<T>(tableName, pk, convert);
         }
 
-        public List<T> LoadAllDirect<T>(string tableName, string pk, bool convert=true)
+        public List<T> LoadAllDirect<T>(string tableName, string pk, bool convert = true)
         {
             var myReturnList = new List<T>();
 
@@ -484,5 +490,57 @@ namespace _5051.Backend
             return myReturn;
         }
 
+        /// <summary>
+        ///  Call this method to copy from one data source to another, this does the write of the copy
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataSourceServerMode"></param>
+        /// <param name="tableName"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public bool CopyDataDirect<T>(DataSourceEnum dataSourceServerMode, string tableName)
+        {
+            var pk = tableName.ToLower();
+
+            // Read all the records from the Source using current database defaults
+            var SourceData = LoadAllDirect<T>(tableName, pk);
+            if (!SourceData.Any())
+            {
+                return false;
+            }
+
+            // Write all the records to the destination
+            // Set the path to the destination
+
+            CloudTableClient DestinationTableClient;
+
+            var DestinationStorageConnectionString = GetDataSourceConnectionString(dataSourceServerMode);
+
+            CloudStorageAccount DestinationStorageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting(DestinationStorageConnectionString));
+
+            DestinationTableClient = DestinationStorageAccount.CreateCloudTableClient();
+            var DestinationTable = DestinationTableClient.GetTableReference(tableName);
+            DestinationTable.CreateIfNotExists();
+
+            // Empty out Destination Table
+            // TODO
+
+            // Load new Data into it
+            foreach (var data in SourceData)
+            {
+
+                var rkObject  = data.GetType().GetProperty("Id").GetValue(data, null);
+                var rk = rkObject.ToString();
+
+                // Add to Storage
+                var entity = ConvertToEntity<T>(data, pk, rk);
+
+                var updateOperation = TableOperation.InsertOrReplace(entity);
+                var query = DestinationTable.Execute(updateOperation);
+            }
+
+            return true;
+        }
     }
 }

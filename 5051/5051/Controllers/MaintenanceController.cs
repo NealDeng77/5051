@@ -7,7 +7,7 @@ using System;
 
 namespace _5051.Controllers
 {
-    public class MaintenanceController: BaseController
+    public class MaintenanceController : BaseController
     {
         // GET: Support
         public ActionResult Index()
@@ -37,8 +37,10 @@ namespace _5051.Controllers
 
         [HttpPost]
         public ActionResult BackupData([Bind(Include =
-                                             "DataSourceEnum," +
-                                             "")] DataSourceEnum DestinationDataSourceEnum)
+                                            "Destination," +
+                                            "Confirm," +
+                                            "Password," +
+                                             "")] BackupDataInputModel BackupData)
         {
             // Todo: 
             // Check for Valid User
@@ -46,8 +48,27 @@ namespace _5051.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("BackupData", "Maintenance");
             }
+
+            if (BackupData.Destination != BackupData.Confirm)
+            {
+                return RedirectToAction("BackupData", "Maintenance");
+            }
+
+            if (string.IsNullOrEmpty(BackupData.Password))
+            {
+                return RedirectToAction("BackupData", "Maintenance");
+            }
+
+            if (DataSourceBackend.Instance.DataSourceEnum == DataSourceEnum.Mock)
+            {
+                return RedirectToAction("BackupData", "Maintenance");
+            }
+
+            var DestinationDataSource = BackupData.Destination;
+
+            DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "AvatarItemModel");
 
             return RedirectToAction("Maintenance", "Support");
         }
