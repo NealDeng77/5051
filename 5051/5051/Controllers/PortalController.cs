@@ -89,15 +89,15 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            //// When not in testing mode try the password
-            //if (!DataSourceBackend.GetTestingMode())
-            //{
-            //    if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student, HttpContext))
-            //    {
-            //        ModelState.AddModelError("", "Invalid password");
-            //        return View(data);
-            //    }
-            //}
+            // When not in testing mode try the password
+            if (!DataSourceBackend.GetTestingMode())
+            {
+                if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student, HttpContext))
+                {
+                    ModelState.AddModelError("", "Invalid password");
+                    return View(data);
+                }
+            }
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
@@ -117,12 +117,25 @@ namespace _5051.Controllers
         /// <param name="id">Student Id</param>
         /// <returns>Student Record as a Student View Model</returns>
         // GET: Portal
-        public ActionResult Index(string id = null)
+        public ActionResult Index(string id=null)
         {
-            // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = id;
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
 
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
 
             if (myStudent == null)
             {
@@ -145,13 +158,13 @@ namespace _5051.Controllers
 
             var myWeeklyReport = new WeeklyReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedWeekId = 1
             };
 
             var myMonthlyReport = new MonthlyReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedMonthId = 1
             };
 

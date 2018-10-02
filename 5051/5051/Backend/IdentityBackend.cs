@@ -167,5 +167,28 @@ namespace _5051.Backend
         {
             DataSource.Reset();
         }
+
+        public bool BlockExecptForRole(string CurrentId, UserRoleEnum userRole)
+        {
+            if (DataSourceBackend.GetTestingMode())
+            {
+                // Allow anyone in for testing...
+                return false; 
+            }
+
+            // Check that the passed in ID, is in the roll specified...
+            var data = DataSource.FindUserByID(CurrentId);
+
+            var result = DataSource.UserHasClaimOfValue(CurrentId, "StudentUser", "True");
+
+            // If the user has the claim, then they blocked, else they are OK.
+            if (result)
+            {
+                return false;
+            }
+
+            // User does not have the claim, so return true...
+            return true;
+        }
     }
 }

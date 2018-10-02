@@ -1,5 +1,6 @@
 ﻿using _5051.Models;
 using System;
+using System.Web;
 
 namespace _5051.Backend
 {
@@ -176,6 +177,11 @@ namespace _5051.Backend
                 return false;
             }
             return true; // Not in role, so error
+        }
+
+        public object CreateCookie(string testCookieName, string testCookieValue, HttpContextBase @object)
+        {
+            throw new NotImplementedException();
         }
     }
 }

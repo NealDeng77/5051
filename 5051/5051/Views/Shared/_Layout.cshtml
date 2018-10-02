@@ -15,9 +15,13 @@
 </head>
 
 @{
-
     var StudentId = "";
-    if (!string.IsNullOrEmpty(ViewBag.StudentId))
+
+    var wrapper = new HttpContextWrapper(HttpContext.Current);
+    var temp = _5051.Backend.DataSourceBackend.Instance;
+    StudentId = _5051.Backend.IdentityBackend.Instance.GetCurrentStudentID(wrapper);
+    if (string.IsNullOrEmpty(StudentId) ||
+        !string.IsNullOrEmpty(ViewBag.StudentId))
     {
         StudentId = ViewBag.StudentId;
     }

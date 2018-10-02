@@ -32,7 +32,42 @@ namespace _5051.Tests.Controllers
         public void Controller_Portal_Roster_Should_Return_NewModel()
         {
             // Arrange
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
             PortalController controller = new PortalController();
+
+
+            var testCookieName = "id";
+            var testCookieValue = Student.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Roster() as ViewResult;
@@ -225,7 +260,7 @@ namespace _5051.Tests.Controllers
             var backend = DataSourceBackend.Instance;
 
             var testCookieName = "id";
-            var testCookieValue = "testID";
+            var testCookieValue = "123";
             HttpCookie testCookie = new HttpCookie(testCookieName);
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
@@ -247,6 +282,11 @@ namespace _5051.Tests.Controllers
 
             var mockedResponse = Mock.Get(context.Object.Response);
             mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
 
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
