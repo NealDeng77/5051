@@ -179,6 +179,40 @@ namespace _5051.Tests.Controllers
 
             DataSourceBackend.SetTestingMode(false);
 
+            //will replace this line once identity is in the DataSourceBackend
+            var idBackend = IdentityDataSourceMockV2.Instance;
+
+            var testCookieName = "id";
+            var testCookieValue = "123";
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+            testCookie.Value = testCookieValue;
+            testCookie.Expires = DateTime.Now.AddSeconds(30);
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var createResult = idBackend.CreateCookie(testCookieName, testCookieValue, context.Object);
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             var result = controller.Login(data);
 
@@ -259,6 +293,9 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var backend = DataSourceBackend.Instance;
 
+            //will replace this line once identity is in the DataSourceBackend
+            var idBackend = IdentityDataSourceMockV2.Instance;
+
             var testCookieName = "id";
             var testCookieValue = "123";
             HttpCookie testCookie = new HttpCookie(testCookieName);
@@ -283,7 +320,7 @@ namespace _5051.Tests.Controllers
             var mockedResponse = Mock.Get(context.Object.Response);
             mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
 
-            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+            var createResult = idBackend.CreateCookie(testCookieName, testCookieValue, context.Object);
 
             var mockedServer = Mock.Get(context.Object.Server);
             mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
@@ -300,17 +337,55 @@ namespace _5051.Tests.Controllers
 
         #region IndexStringRegion
         [TestMethod]
-        public void Controller_Portal_Index_IDIsNull_Should_Return_RosterPage()
+        //public void Controller_Portal_Index_IDIsNull_Should_Return_RosterPage()
+        public void Controller_Portal_Index_IDIsNull_Should_Return_Index_Page()
         {
             // Arrange
             PortalController controller = new PortalController();
             string id = null;
 
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+
+            var testCookieName = "id";
+            var testCookieValue = Student.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
-            var result = (RedirectToRouteResult)controller.Index(id);
+            //var result = (RedirectToRouteResult)controller.Index(id);
+            var result = controller.Index(id) as ViewResult;
 
             // Assert
-            Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
+            //Assert.AreEqual("Roster", result.RouteValues["action"], TestContext.TestName);
+            Assert.IsNotNull(result, TestContext.TestName);
         }
 
         [TestMethod]
@@ -320,6 +395,41 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             StudentModel data = new StudentModel();
             string id = Backend.DataSourceBackend.Instance.StudentBackend.Create(data).Id;
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+
+            var testCookieName = "id";
+            var testCookieValue = id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Index(id) as ViewResult;
@@ -347,6 +457,41 @@ namespace _5051.Tests.Controllers
                 Emotion = EmotionStatusEnum.VeryHappy
             };
             data.Attendance.Add(myAttendance);
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = data.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index(data.Id) as ViewResult;
 
@@ -373,6 +518,41 @@ namespace _5051.Tests.Controllers
                 Emotion = EmotionStatusEnum.Happy
             };
             data.Attendance.Add(myAttendance);
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = data.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index(data.Id) as ViewResult;
 
@@ -399,6 +579,41 @@ namespace _5051.Tests.Controllers
                 Emotion = EmotionStatusEnum.Neutral
             };
             data.Attendance.Add(myAttendance);
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = data.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index(data.Id) as ViewResult;
 
@@ -425,6 +640,41 @@ namespace _5051.Tests.Controllers
                 Emotion = EmotionStatusEnum.Sad
             };
             data.Attendance.Add(myAttendance);
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = data.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index(data.Id) as ViewResult;
 
@@ -451,6 +701,41 @@ namespace _5051.Tests.Controllers
                 Emotion = EmotionStatusEnum.VerySad
             };
             data.Attendance.Add(myAttendance);
+
+            var temp = DataSourceBackend.Instance;
+            var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
+
+            var testCookieName = "id";
+            var testCookieValue = data.Id;
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            context.Object.Request.Cookies.Add(testCookie);
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedServer = Mock.Get(context.Object.Server);
+            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index(data.Id) as ViewResult;
 
