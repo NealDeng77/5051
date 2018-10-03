@@ -223,13 +223,13 @@
     <Compile Include="Models\ShopBuyViewModelUnitTests.cs" />
     <Compile Include="Models\StudentAvatarModelUnitTests.cs" />
     <Compile Include="Models\StudentModelUnitTests.cs" />
-    <Compile Include="Models\ShopInventoryModelUnitTests.cs" />
+    <Compile Include="Models\FactoryInventoryModelUnitTests.cs" />
     <Compile Include="Models\SchoolDismissalSettingsModelUnitTests.cs" />
     <Compile Include="Models\SelectedShopInventoryForStudentViewModelUnitTests.cs" />
     <Compile Include="Models\SchoolCalendarViewModelUnitTests.cs" />
     <Compile Include="Models\SchoolCalendarModelUnitTests.cs" />
-    <Compile Include="Models\ShopInventoryListViewModelUnitTests.cs" />
-    <Compile Include="Models\ShopInventoryViewModelUnitTests.cs" />
+    <Compile Include="Models\FactoryInventoryListViewModelUnitTests.cs" />
+    <Compile Include="Models\FactoryInventoryViewModelUnitTests.cs" />
     <Compile Include="Models\StudentReportStatsModelUnitTests.cs" />
     <Compile Include="Models\MonthlyReportViewModelUnitTests.cs" />
     <Compile Include="Models\AttendanceModelUnitTests.cs" />
