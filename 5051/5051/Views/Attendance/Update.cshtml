@@ -94,7 +94,7 @@
                             <div class="row">
                                 @{
                                     // list emotion icons
-                                    foreach (var emotion in Enum.GetValues(typeof(_5051.Models.EmotionStatusEnum)))
+                                    foreach (var emotion in Model.Emotion.GetDisplayName())
                                     {
                                         var srcData = "/Content/img/Emotion" + emotion + ".png";
                                         var emotionId = emotion + "Id";
