@@ -1,14 +1,25 @@
-﻿namespace _5051.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _5051.Models
 {
     /// <summary>
     /// Emotion Status
     /// </summary>
     public enum EmotionStatusEnum
     {
+        [Display(Name = "VeryHappy")]
         VeryHappy = 5,
+
+        [Display(Name = "Happy")]
         Happy = 4,
+
+        [Display(Name = "Neutral")]
         Neutral = 3,
+
+        [Display(Name = "Sad")]
         Sad = 2,
+
+        [Display(Name = "VerySad")]
         VerySad = 1,
     }
 
