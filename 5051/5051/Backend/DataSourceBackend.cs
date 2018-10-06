@@ -163,7 +163,7 @@ namespace _5051.Backend
             return isTestingMode;
         }
 
-        public bool IsUserNotInRole(string userID, string role)
+        public bool IsUserNotInRole(string userID, _5051.Models.UserRoleEnum role)
         {
             if (isTestingMode)
             {

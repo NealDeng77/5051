@@ -17,7 +17,7 @@ namespace _5051.Backend
         //bool UpdateStudent(StudentModel student);
         bool ChangeUserName(string userId, string newName);
 
-        bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role);
+        bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role);
 
         ApplicationUser FindUserByUserName(string userName);
 
@@ -33,7 +33,7 @@ namespace _5051.Backend
 
         List<ApplicationUser> ListAllSupportUsers();
 
-        bool UserHasClaimOfType(string userID, string claimType);
+        bool UserHasClaimOfType(string userID, _5051.Models.UserRoleEnum role);
 
         ApplicationUser AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd);
 
@@ -41,7 +41,7 @@ namespace _5051.Backend
 
         bool DeleteUser(string id);
 
-        bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role, HttpContextBase context);
+        bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context);
 
         bool BlockAccess(string userId, string requestedId, HttpContextBase context);
 

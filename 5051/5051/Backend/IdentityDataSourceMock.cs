@@ -83,8 +83,8 @@ namespace _5051.Backend
                 return null;
             }
 
-            var claimResult = AddClaimToUser(user.Id, "TeacherUser", "True");
-            claimResult = AddClaimToUser(user.Id, "SupportUser", "True");
+            var claimResult = AddClaimToUser(user.Id, _5051.Models.UserRoleEnum.TeacherUser.ToString(), "True");
+            claimResult = AddClaimToUser(user.Id, _5051.Models.UserRoleEnum.SupportUser.ToString(), "True");
 
             return claimResult;
         }
@@ -109,7 +109,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var claimResult = AddClaimToUser(user.Id, "TeacherUser", "True");
+            var claimResult = AddClaimToUser(user.Id, _5051.Models.UserRoleEnum.TeacherUser.ToString(), "True");
             claimResult = AddClaimToUser(user.Id, "TeacherID", teacherId);
 
             return claimResult;
@@ -136,7 +136,7 @@ namespace _5051.Backend
                 return null;
             }
 
-            var claimResult = AddClaimToUser(user.Id, "StudentUser", "True");
+            var claimResult = AddClaimToUser(user.Id, _5051.Models.UserRoleEnum.StudentUser.ToString(), "True");
             claimResult = AddClaimToUser(user.Id, "StudentID", student.Id);
 
             return claimResult;
@@ -232,7 +232,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if (UserHasClaimOfValue(user.Id, "StudentUser", "True"))
+                if (UserHasClaimOfValue(user.Id, _5051.Models.UserRoleEnum.StudentUser.ToString(), "True"))
                 {
                     studentList.Add(user);
                 }
@@ -252,7 +252,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if (UserHasClaimOfValue(user.Id, "TeacherUser", "True"))
+                if (UserHasClaimOfValue(user.Id, _5051.Models.UserRoleEnum.TeacherUser.ToString(), "True"))
                 {
                     teacherList.Add(user);
                 }
@@ -273,7 +273,7 @@ namespace _5051.Backend
 
             foreach (var user in userList)
             {
-                if(UserHasClaimOfValue(user.Id, "SupportUser", "True"))
+                if(UserHasClaimOfValue(user.Id, _5051.Models.UserRoleEnum.SupportUser.ToString(), "True"))
                 {
                     supportList.Add(user);
                 }
@@ -494,7 +494,7 @@ namespace _5051.Backend
 
             // return new ManageController().IsUserTeacherUser(userId);
 
-            var claim = ((ClaimsIdentity)identity).FindFirst("TeacherUser");
+            var claim = ((ClaimsIdentity)identity).FindFirst(_5051.Models.UserRoleEnum.TeacherUser.ToString());
             // Test for null to avoid issues during local testing
 
             if (claim == null)
@@ -519,7 +519,7 @@ namespace _5051.Backend
 
             // return new ManageController().IsUserTeacherUser(userId);
 
-            var claim = ((ClaimsIdentity)identity).FindFirst("SupportUser");
+            var claim = ((ClaimsIdentity)identity).FindFirst(_5051.Models.UserRoleEnum.SupportUser.ToString());
             // Test for null to avoid issues during local testing
 
             if (claim == null)

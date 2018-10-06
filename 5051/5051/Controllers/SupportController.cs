@@ -159,7 +159,7 @@ namespace _5051.Controllers
             myReturn.Id = myUserInfo.Id;
             myReturn.Role = RoleEnum;
             //myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
-            myReturn.State = IdentityBackend.Instance.UserHasClaimOfType(myUserInfo.Id, RoleEnum.ToString());
+            myReturn.State = IdentityBackend.Instance.UserHasClaimOfType(myUserInfo.Id, RoleEnum);
 
             return View(myReturn);
         }
@@ -199,7 +199,7 @@ namespace _5051.Controllers
             }
 
 
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfType(data.Id, data.Role.ToString()))
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfType(data.Id, data.Role))
             {
                 IdentityDataSourceTable.Instance.RemoveClaimFromUser(data.Id, data.Role.ToString());
             }
@@ -229,7 +229,7 @@ namespace _5051.Controllers
             }
 
             //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support);
-            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support, null);
+            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.SupportUser, null);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -496,18 +496,18 @@ namespace _5051.Controllers
                 return View(model);
             }
 
-            if (backend.UserHasClaimOfType(findResult.Id, "SupportUser"))
+            if (backend.UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.SupportUser))
             {
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, IdentityDataSourceTable.IdentityRole.Support);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.SupportUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
                     return View(model);
                 }
             }
-            else if (backend.UserHasClaimOfType(findResult.Id, "TeacherUser"))
+            else if (backend.UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
             {
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
@@ -518,7 +518,7 @@ namespace _5051.Controllers
             {
                 var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
 
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, student.Password, IdentityDataSourceTable.IdentityRole.Student);
+                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, student.Password, _5051.Models.UserRoleEnum.StudentUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");

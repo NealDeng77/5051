@@ -16,19 +16,6 @@ namespace _5051.Backend
 {
     public class IdentityDataSourceTable : IIdentityInterface
     {
-
-        public enum IdentityRole
-        {
-            // Not specified
-            Student = 0,
-
-            // Mock Dataset
-            Teacher = 1,
-
-            // SQL Dataset
-            Support = 2
-        }
-
         public string supportUserName = "su5051";
         public string supportPass = "su5051";
         public string teacherUserName = "teacher";
@@ -82,12 +69,12 @@ namespace _5051.Backend
             //need to add claims
             user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
             {
-                ClaimType = "SupportUser",
+                ClaimType = _5051.Models.UserRoleEnum.SupportUser.ToString(),
                 ClaimValue = "True"
             });
             user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True"
             });
 
@@ -115,7 +102,7 @@ namespace _5051.Backend
             //need to add claims
             user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True"
             });
 
@@ -158,7 +145,7 @@ namespace _5051.Backend
             //need to add claims
             user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
             {
-                ClaimType = "StudentUser",
+                ClaimType = _5051.Models.UserRoleEnum.StudentUser.ToString(),
                 ClaimValue = "True"
             });
 
@@ -261,7 +248,7 @@ namespace _5051.Backend
         }
 
 
-        public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
+        public bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role)
         {
             var findResult = FindUserByUserName(userName);
             if(findResult == null)
@@ -269,19 +256,19 @@ namespace _5051.Backend
                 return false;
             }
 
-            if(role == IdentityRole.Teacher && UserHasClaimOfType(findResult.Id, "TeacherUser"))
+            if(role == _5051.Models.UserRoleEnum.TeacherUser && UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
             {
                 teacherPass = newPass;
                 return true;
             }
 
-            if (role == IdentityRole.Support && UserHasClaimOfType(findResult.Id, "SupportUser"))
+            if (role == _5051.Models.UserRoleEnum.SupportUser && UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.SupportUser))
             {
                 supportPass = newPass;
                 return true;
             }
 
-            if(role == IdentityRole.Student)
+            if(role == _5051.Models.UserRoleEnum.StudentUser)
             {
                 //var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
                 var student = GetStudentById(findResult.Id);
@@ -381,7 +368,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if(UserHasClaimOfType(user.Id, "StudentUser"))
+                if(UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.StudentUser))
                 {
                     myReturn.Add(user);
                 }
@@ -400,7 +387,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if (UserHasClaimOfType(user.Id, "TeacherUser"))
+                if (UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.TeacherUser))
                 {
                     myReturn.Add(user);
                 }
@@ -420,7 +407,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if (UserHasClaimOfType(user.Id, "SupportUser"))
+                if (UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.SupportUser))
                 {
                     myReturn.Add(user);
                 }
@@ -437,7 +424,7 @@ namespace _5051.Backend
         /// <param name="claimType"></param>
         /// <param name="claimValue"></param>
         /// <returns></returns>
-        public bool UserHasClaimOfType(string userID, string claimType)
+        public bool UserHasClaimOfType(string userID, _5051.Models.UserRoleEnum role)
         {
             var findResult = FindUserByID(userID);
             if (findResult == null)
@@ -446,6 +433,7 @@ namespace _5051.Backend
             }
 
             var claims = findResult.Claims.ToList();
+            var claimType = role.ToString();
 
             foreach (var item in claims)
             {
@@ -539,7 +527,7 @@ namespace _5051.Backend
                 return false;
             }
 
-            if (UserHasClaimOfType(myData.Id, "StudentUser"))
+            if (UserHasClaimOfType(myData.Id, _5051.Models.UserRoleEnum.StudentUser))
             {
                 //delete the student from student table as well
                 var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
@@ -558,7 +546,7 @@ namespace _5051.Backend
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool LogUserIn(string userName, string password, IdentityRole role, HttpContextBase context)
+        public bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context)
         {
             if(userName == null && password == null)
             {
@@ -572,9 +560,9 @@ namespace _5051.Backend
             }
 
             //check that role is correct
-            if (role == IdentityRole.Support)
+            if (role == _5051.Models.UserRoleEnum.SupportUser)
             {
-                if (!UserHasClaimOfType(findResult.Id, "SupportUser"))
+                if (!UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.SupportUser))
                 {
                     return false;
                 }
@@ -588,9 +576,9 @@ namespace _5051.Backend
                     return false;
                 }
             }
-            if (role == IdentityRole.Teacher)
+            if (role == _5051.Models.UserRoleEnum.TeacherUser)
             {
-                if (!UserHasClaimOfType(findResult.Id, "TeacherUser"))
+                if (!UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
                 {
                     return false;
                 }

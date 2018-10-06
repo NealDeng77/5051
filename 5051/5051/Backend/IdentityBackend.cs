@@ -122,13 +122,13 @@ namespace _5051.Backend
             return findResult;
         }
 
-        public bool UserHasClaimOfType(string userID, string claimType)
+        public bool UserHasClaimOfType(string userID, _5051.Models.UserRoleEnum role)
         {
-            var myReturn = DataSource.UserHasClaimOfType(userID, claimType);
+            var myReturn = DataSource.UserHasClaimOfType(userID, role);
             return myReturn;
         }
 
-        public bool LogUserIn(string userName, string password, IdentityDataSourceTable.IdentityRole role, HttpContextBase context)
+        public bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context)
         {
             var myReturn = DataSource.LogUserIn(userName, password, role, context);
             return myReturn;
@@ -158,7 +158,8 @@ namespace _5051.Backend
             return DataSource.ChangeUserName(userId, newName);
         }
 
-        public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
+        //public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
+        public bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role)
         {
             return DataSource.ChangeUserPassword(userName, newPass, oldPass, role);
         }
@@ -179,7 +180,7 @@ namespace _5051.Backend
             // Check that the passed in ID, is in the roll specified...
             var data = DataSource.FindUserByID(CurrentId);
 
-            var result = DataSource.UserHasClaimOfType(CurrentId, "StudentUser");
+            var result = DataSource.UserHasClaimOfType(CurrentId, userRole);
 
             // If the user has the claim, then they blocked, else they are OK.
             if (result)

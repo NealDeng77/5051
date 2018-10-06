@@ -262,7 +262,7 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
 
             //act
-            var result = backend.UserHasClaimOfType(null, null);
+            var result = backend.UserHasClaimOfType(null, _5051.Models.UserRoleEnum.Unknown);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -327,8 +327,8 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceTable.Instance;
             var testId = backend.supportUserName;
-            var firstClaimRemove = backend.RemoveClaimFromUser(testId, "SupportUser");
-            var secondClaimRemove = backend.RemoveClaimFromUser(testId, "TeacherUser");
+            var firstClaimRemove = backend.RemoveClaimFromUser(testId, _5051.Models.UserRoleEnum.SupportUser.ToString());
+            var secondClaimRemove = backend.RemoveClaimFromUser(testId, _5051.Models.UserRoleEnum.TeacherUser.ToString());
 
             //act
             var result = backend.RemoveClaimFromUser(testId, "");
@@ -350,7 +350,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "su5051";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -364,7 +364,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "teacher";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -419,7 +419,7 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
 
             //act
-            var result = backend.LogUserIn(null, null, IdentityDataSourceTable.IdentityRole.Support, null);
+            var result = backend.LogUserIn(null, null, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -434,7 +434,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Support, null);
+            var result = backend.LogUserIn(expectUsername, badPassword, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -449,7 +449,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Teacher, null);
+            var result = backend.LogUserIn(expectUsername, badPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -464,7 +464,7 @@ namespace _5051.UnitTests.Backend
             var badPassword = "bogus";
 
             //act
-            var result = backend.LogUserIn(expectUsername, badPassword, IdentityDataSourceTable.IdentityRole.Student, null);
+            var result = backend.LogUserIn(expectUsername, badPassword, _5051.Models.UserRoleEnum.StudentUser, null);
 
 
             //assert
@@ -479,7 +479,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "teacher";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Support, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -493,7 +493,7 @@ namespace _5051.UnitTests.Backend
             var expectUsername = "Mike";
 
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, IdentityDataSourceTable.IdentityRole.Teacher, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -507,7 +507,7 @@ namespace _5051.UnitTests.Backend
             var badName = "bogus";
 
             //act
-            var result = backend.LogUserIn(badName, badName, IdentityDataSourceTable.IdentityRole.Student, null);
+            var result = backend.LogUserIn(badName, badName, _5051.Models.UserRoleEnum.StudentUser, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -562,7 +562,7 @@ namespace _5051.UnitTests.Backend
             var expectOldPass = expectStudent.Password;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Student);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, _5051.Models.UserRoleEnum.StudentUser);
             var passwordResult = expectStudent.Password;
 
             //Reset
@@ -584,7 +584,7 @@ namespace _5051.UnitTests.Backend
             var expectOldPass = backend.teacherPass;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Teacher);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, _5051.Models.UserRoleEnum.TeacherUser);
             var passwordResult = backend.teacherPass;
             
             //Reset
@@ -605,7 +605,7 @@ namespace _5051.UnitTests.Backend
             var expectOldPass = backend.supportPass;
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass,IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, _5051.Models.UserRoleEnum.SupportUser);
             var passwordResult = backend.supportPass;
 
             //Reset
@@ -626,7 +626,7 @@ namespace _5051.UnitTests.Backend
             var expectOldPass = "bad";
 
             //act
-            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, IdentityDataSourceTable.IdentityRole.Support);
+            var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, _5051.Models.UserRoleEnum.SupportUser);
             var passwordResult = backend.supportPass;
 
             //Reset

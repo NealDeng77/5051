@@ -92,7 +92,7 @@ namespace _5051.Controllers
             // When not in testing mode try the password
             if (!DataSourceBackend.GetTestingMode())
             {
-                if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, IdentityDataSourceTable.IdentityRole.Student, HttpContext))
+                if (!IdentityBackend.Instance.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
                 {
                     ModelState.AddModelError("", "Invalid password");
                     return View(data);
@@ -121,14 +121,14 @@ namespace _5051.Controllers
         {
             var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
 
-            // Todo: Remove when identity is fully hooked up
-            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
-            if (string.IsNullOrEmpty(CurrentId))
-            {
-                CurrentId = id;
-            }
+            //// Todo: Remove when identity is fully hooked up
+            //// Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            //if (string.IsNullOrEmpty(CurrentId))
+            //{
+            //    CurrentId = id;
+            //}
 
-            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+            //ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
 
             if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
@@ -708,7 +708,7 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, IdentityDataSourceTable.IdentityRole.Student);
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, _5051.Models.UserRoleEnum.StudentUser);
             if(!changeResult)
             {
                 ModelState.AddModelError("", "Invalid Old Password.");

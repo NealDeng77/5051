@@ -283,7 +283,7 @@ namespace _5051.Controllers
             user.Email = "teacher";
 
             //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher, null);
+            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.TeacherUser, null);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -345,7 +345,7 @@ namespace _5051.Controllers
             //}
 
             //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher);
+            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
             if (!changeResult)
             {
                 ModelState.AddModelError("", "Invalid Old Password.");

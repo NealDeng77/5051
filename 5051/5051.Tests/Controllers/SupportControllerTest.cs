@@ -599,7 +599,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -629,7 +629,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -661,7 +661,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -687,7 +687,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -714,7 +714,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -745,7 +745,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -777,7 +777,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -812,7 +812,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -838,7 +838,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -865,7 +865,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -897,7 +897,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -927,7 +927,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -957,7 +957,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -987,7 +987,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
@@ -1017,7 +1017,7 @@ namespace _5051.Tests.Controllers
 
             var userMock = new Mock<IPrincipal>();
             userMock.SetupGet(p => p.Identity.Name).Returns("name");
-            userMock.Setup(p => p.IsInRole("SupportUser")).Returns(true);
+            userMock.Setup(p => p.IsInRole(_5051.Models.UserRoleEnum.SupportUser.ToString())).Returns(true);
 
             var contextMock = new Mock<HttpContextBase>();
             contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);

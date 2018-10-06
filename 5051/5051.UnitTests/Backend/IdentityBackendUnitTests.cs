@@ -45,12 +45,12 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "SupportUser",
+                ClaimType = _5051.Models.UserRoleEnum.SupportUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
 
@@ -120,7 +120,7 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
@@ -199,7 +199,7 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "StudentUser",
+                ClaimType = _5051.Models.UserRoleEnum.StudentUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
@@ -426,12 +426,12 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "StudentUser",
+                ClaimType = _5051.Models.UserRoleEnum.StudentUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
             {
-                ClaimType = "StudentUser",
+                ClaimType = _5051.Models.UserRoleEnum.StudentUser.ToString(),
                 ClaimValue = "False",
             };
 
@@ -483,12 +483,12 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "False",
             };
 
@@ -540,17 +540,17 @@ namespace _5051.UnitTests.Backend
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
             {
-                ClaimType = "SupportUser",
+                ClaimType = _5051.Models.UserRoleEnum.SupportUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity3 = new IdentityUserClaim()
             {
-                ClaimType = "SupportUser",
+                ClaimType = _5051.Models.UserRoleEnum.SupportUser.ToString(),
                 ClaimValue = "False",
             };
 
@@ -665,18 +665,18 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var testUsername = "testUser";
-            var claimToRemove = "TeacherUser";
+            var claimToRemove = _5051.Models.UserRoleEnum.TeacherUser.ToString();
             IList<Claim> claimsList = new List<Claim>()
             {
-                new Claim("TeacherUser", "True"),
-                new Claim("SupportUser", "True"),
+                new Claim(_5051.Models.UserRoleEnum.TeacherUser.ToString(), "True"),
+                new Claim(_5051.Models.UserRoleEnum.SupportUser.ToString(), "True"),
             };
 
             var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
@@ -715,12 +715,12 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var testUsername = "testUser";
-            var claimToRemove = "TeacherUser";
+            var claimToRemove = _5051.Models.UserRoleEnum.TeacherUser.ToString();
             var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
 
             var claimIdentity1 = new IdentityUserClaim()
             {
-                ClaimType = "TeacherUser",
+                ClaimType = _5051.Models.UserRoleEnum.TeacherUser.ToString(),
                 ClaimValue = "True",
             };
             var claimIdentity2 = new IdentityUserClaim()
