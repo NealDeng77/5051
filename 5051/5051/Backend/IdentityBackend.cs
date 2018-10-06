@@ -122,9 +122,9 @@ namespace _5051.Backend
             return findResult;
         }
 
-        public bool UserHasClaimOfValue(string userID, string claimType, string claimValue)
+        public bool UserHasClaimOfType(string userID, string claimType)
         {
-            var myReturn = DataSource.UserHasClaimOfValue(userID, claimType, claimValue);
+            var myReturn = DataSource.UserHasClaimOfType(userID, claimType);
             return myReturn;
         }
 
@@ -179,7 +179,7 @@ namespace _5051.Backend
             // Check that the passed in ID, is in the roll specified...
             var data = DataSource.FindUserByID(CurrentId);
 
-            var result = DataSource.UserHasClaimOfValue(CurrentId, "StudentUser", "True");
+            var result = DataSource.UserHasClaimOfType(CurrentId, "StudentUser");
 
             // If the user has the claim, then they blocked, else they are OK.
             if (result)

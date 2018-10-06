@@ -23,7 +23,7 @@ namespace _5051.Models
             foreach (UserRoleEnum RoleEnum in Enum.GetValues(typeof(UserRoleEnum)))
             {
                 //if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(User.Id, RoleEnum.ToString(), "True"))
-                if(IdentityBackend.Instance.UserHasClaimOfValue(User.Id, RoleEnum.ToString(), "True"))
+                if(IdentityBackend.Instance.UserHasClaimOfType(User.Id, RoleEnum.ToString()))
                 {
                     UserRole.Add(RoleEnum);
                 }

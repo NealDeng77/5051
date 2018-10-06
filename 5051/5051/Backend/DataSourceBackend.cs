@@ -172,7 +172,7 @@ namespace _5051.Backend
 
             var IdentityBackend = IdentityDataSourceTable.Instance;
 
-            if (IdentityBackend.UserHasClaimOfValue(userID, role, "True"))
+            if (IdentityBackend.UserHasClaimOfType(userID, role))
             {
                 return false;
             }

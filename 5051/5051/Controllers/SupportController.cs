@@ -159,7 +159,7 @@ namespace _5051.Controllers
             myReturn.Id = myUserInfo.Id;
             myReturn.Role = RoleEnum;
             //myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
-            myReturn.State = IdentityBackend.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
+            myReturn.State = IdentityBackend.Instance.UserHasClaimOfType(myUserInfo.Id, RoleEnum.ToString());
 
             return View(myReturn);
         }
@@ -199,7 +199,7 @@ namespace _5051.Controllers
             }
 
 
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(data.Id, data.Role.ToString(), "True"))
+            if (IdentityDataSourceTable.Instance.UserHasClaimOfType(data.Id, data.Role.ToString()))
             {
                 IdentityDataSourceTable.Instance.RemoveClaimFromUser(data.Id, data.Role.ToString());
             }
@@ -496,7 +496,7 @@ namespace _5051.Controllers
                 return View(model);
             }
 
-            if (backend.UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+            if (backend.UserHasClaimOfType(findResult.Id, "SupportUser"))
             {
                 var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, IdentityDataSourceTable.IdentityRole.Support);
                 if (!changePassResult)
@@ -505,7 +505,7 @@ namespace _5051.Controllers
                     return View(model);
                 }
             }
-            else if (backend.UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+            else if (backend.UserHasClaimOfType(findResult.Id, "TeacherUser"))
             {
                 var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher);
                 if (!changePassResult)

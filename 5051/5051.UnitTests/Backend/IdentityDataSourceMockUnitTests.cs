@@ -196,7 +196,7 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceMockV2.Instance;
 
             //act
-            var result = backend.UserHasClaimOfValue(null, null, null);
+            var result = backend.UserHasClaimOfType(null, null);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);

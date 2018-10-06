@@ -168,13 +168,13 @@ namespace _5051.Backend
                 return false;
             }
 
-            if (role == IdentityDataSourceTable.IdentityRole.Teacher && UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+            if (role == IdentityDataSourceTable.IdentityRole.Teacher && UserHasClaimOfType(findResult.Id, "TeacherUser"))
             {
                 teacherPass = newPass;
                 return true;
             }
 
-            if (role == IdentityDataSourceTable.IdentityRole.Support && UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+            if (role == IdentityDataSourceTable.IdentityRole.Support && UserHasClaimOfType(findResult.Id, "SupportUser"))
             {
                 supportPass = newPass;
                 return true;
@@ -251,7 +251,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if (UserHasClaimOfValue(user.Id, "StudentUser", "True"))
+                if (UserHasClaimOfType(user.Id, "StudentUser"))
                 {
                     myReturn.Add(user);
                 }
@@ -266,7 +266,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if (UserHasClaimOfValue(user.Id, "TeacherUser", "True"))
+                if (UserHasClaimOfType(user.Id, "TeacherUser"))
                 {
                     myReturn.Add(user);
                 }
@@ -281,7 +281,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if (UserHasClaimOfValue(user.Id, "SupportUser", "True"))
+                if (UserHasClaimOfType(user.Id, "SupportUser"))
                 {
                     myReturn.Add(user);
                 }
@@ -290,7 +290,7 @@ namespace _5051.Backend
             return myReturn;
         }
 
-        public bool UserHasClaimOfValue(string userID, string claimType, string claimValue)
+        public bool UserHasClaimOfType(string userID, string claimType)
         {
             var findResult = FindUserByID(userID);
             if (findResult == null)
@@ -302,7 +302,8 @@ namespace _5051.Backend
 
             foreach (var item in claims)
             {
-                if (item.ClaimType == claimType && item.ClaimValue == claimValue)
+                //if (item.ClaimType == claimType && item.ClaimValue == claimValue)
+                if(item.ClaimType == claimType)
                 {
                     return true;
                 }
@@ -364,7 +365,7 @@ namespace _5051.Backend
                 return false;
             }
 
-            if (UserHasClaimOfValue(myData.Id, "StudentUser", "True"))
+            if (UserHasClaimOfType(myData.Id, "StudentUser"))
             {
                 //delete the student from student table as well
                 var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
@@ -395,7 +396,7 @@ namespace _5051.Backend
             //check that role is correct
             if (role == IdentityDataSourceTable.IdentityRole.Support)
             {
-                if (!UserHasClaimOfValue(findResult.Id, "SupportUser", "True"))
+                if (!UserHasClaimOfType(findResult.Id, "SupportUser"))
                 {
                     return false;
                 }
@@ -411,7 +412,7 @@ namespace _5051.Backend
             }
             if (role == IdentityDataSourceTable.IdentityRole.Teacher)
             {
-                if (!UserHasClaimOfValue(findResult.Id, "TeacherUser", "True"))
+                if (!UserHasClaimOfType(findResult.Id, "TeacherUser"))
                 {
                     return false;
                 }

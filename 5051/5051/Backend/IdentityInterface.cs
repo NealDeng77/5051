@@ -33,7 +33,7 @@ namespace _5051.Backend
 
         List<ApplicationUser> ListAllSupportUsers();
 
-        bool UserHasClaimOfValue(string userID, string claimType, string claimValue);
+        bool UserHasClaimOfType(string userID, string claimType);
 
         ApplicationUser AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd);
 
