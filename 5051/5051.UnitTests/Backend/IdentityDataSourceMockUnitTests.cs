@@ -737,37 +737,21 @@ namespace _5051.UnitTests.Backend
         #region cookies
         [TestMethod]
         public void Backend_IdentityDataSourceMock_DeleteCookie_Should_Pass()
-        {
-            HttpContext.Current = new HttpContext(new HttpRequest(null, "http://tempuri.org", null), new HttpResponse(null));        
-
+        {     
             var testCookieName = "id";
             var testCookieValue = "Value";
             HttpCookie testCookie = new HttpCookie(testCookieName);
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-            context.Object.Request.Cookies.Add(testCookie);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
-
             var backend = IdentityDataSourceMockV2.Instance;
 
+            var context = CreateMoqSetupForCookie();
+
+            context.Request.Cookies.Add(testCookie);
+
             //act
-            var result = backend.DeleteCookie(testCookieName, context.Object);
+            var result = backend.DeleteCookie(testCookieName, context);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -779,23 +763,10 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceMockV2.Instance;
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            //context.Setup(x => x.Request.Cookies[testCookieName]).Returns(testCookie);
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.DeleteCookie(null, context.Object);
+            var result = backend.DeleteCookie(null, context);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -809,22 +780,10 @@ namespace _5051.UnitTests.Backend
             var testCookieName = "test";
             var testCookieValue = "value";
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+            var result = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -838,22 +797,10 @@ namespace _5051.UnitTests.Backend
             string testCookieName = null;
             var testCookieValue = "value";
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+            var result = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -867,22 +814,10 @@ namespace _5051.UnitTests.Backend
             var testCookieName = "test";
             string testCookieValue = null;
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+            var result = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -899,31 +834,14 @@ namespace _5051.UnitTests.Backend
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
+            var context = CreateMoqSetupForCookie(testCookieValue);
 
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
+            context.Request.Cookies.Add(testCookie);
 
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-            context.Object.Request.Cookies.Add(testCookie);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
-
-            var mockedServer = Mock.Get(context.Object.Server);
-            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //act
-            var result = backend.ReadCookieValue(testCookieName, context.Object);
+            var result = backend.ReadCookieValue(testCookieName, context);
 
             //assert
             Assert.AreEqual(testCookieValue, result, TestContext.TestName);
@@ -935,10 +853,6 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceMockV2.Instance;
             var testCookieName = "test";
-            var testCookieValue = "value";
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
 
             var context = new Mock<HttpContextBase>();
             var request = new Mock<HttpRequestBase>();
@@ -976,31 +890,14 @@ namespace _5051.UnitTests.Backend
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
+            var context = CreateMoqSetupForCookie(testCookieValue);
 
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
+            context.Request.Cookies.Add(testCookie);
 
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-            context.Object.Request.Cookies.Add(testCookie);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
-
-            var mockedServer = Mock.Get(context.Object.Server);
-            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //act
-            var result = backend.GetCurrentStudentID(context.Object);
+            var result = backend.GetCurrentStudentID(context);
 
             //assert
             Assert.AreEqual(testCookieValue, result, TestContext.TestName);
@@ -1012,34 +909,10 @@ namespace _5051.UnitTests.Backend
             //arrange
             var backend = IdentityDataSourceMockV2.Instance;
 
-            var testCookieName = "id";
-            var testCookieValue = "testID";
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
-
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var mockedServer = Mock.Get(context.Object.Server);
-            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.GetCurrentStudentID(context.Object);
+            var result = backend.GetCurrentStudentID(context);
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -1062,31 +935,14 @@ namespace _5051.UnitTests.Backend
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
+            var context = CreateMoqSetupForCookie(testCookieValue);
 
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
+            context.Request.Cookies.Add(testCookie);
 
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-            context.Object.Request.Cookies.Add(testCookie);
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
-
-            var mockedServer = Mock.Get(context.Object.Server);
-            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context);
 
             //act
-            var result = backend.BlockAccess(testCookieValue, testCookieValue, context.Object);
+            var result = backend.BlockAccess(student.Id, student.Id, context);
 
             //reset
             dataSourceBackend.Reset();
@@ -1182,25 +1038,10 @@ namespace _5051.UnitTests.Backend
             var expectReqId = studentList.FirstOrDefault().Id;
             var expectUserId = expectReqId;
 
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-
-            context.Setup(ctx => ctx.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Response).Returns(response.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            context.Setup(ctx => ctx.Server).Returns(server.Object);
-
-            var mockedRequest = Mock.Get(context.Object.Request);
-            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-
-            var mockedResponse = Mock.Get(context.Object.Response);
-            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+            var context = CreateMoqSetupForCookie();
 
             //act
-            var result = backend.BlockAccess(expectUserId, expectReqId, context.Object);
+            var result = backend.BlockAccess(expectUserId, expectReqId, context);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -1222,6 +1063,31 @@ namespace _5051.UnitTests.Backend
             testCookie.Value = testCookieValue;
             testCookie.Expires = DateTime.Now.AddSeconds(30);
 
+            var context = CreateMoqSetupForCookie(testCookieValue);
+            context.Request.Cookies.Add(testCookie);
+
+            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context);
+
+            //act
+            var result = backend.BlockAccess(expectUserId, expectReqId, context);
+
+            //assert
+            Assert.IsTrue(result, TestContext.TestName);
+        }
+
+        #endregion
+
+
+
+        //move this to a helper folder in the main project and have the other test project and this test project tuse that
+        //this is just for testing
+
+            /// <summary>
+            /// sets up a moq for http context so that a code dealing with cookeis can be tested
+            /// returns a moqed context object
+            /// </summary>
+        public HttpContextBase CreateMoqSetupForCookie(string cookieValue = null)
+        {
             var context = new Mock<HttpContextBase>();
             var request = new Mock<HttpRequestBase>();
             var response = new Mock<HttpResponseBase>();
@@ -1235,23 +1101,17 @@ namespace _5051.UnitTests.Backend
 
             var mockedRequest = Mock.Get(context.Object.Request);
             mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
-            context.Object.Request.Cookies.Add(testCookie);
 
             var mockedResponse = Mock.Get(context.Object.Response);
             mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
 
-            var createResult = backend.CreateCookie(testCookieName, testCookieValue, context.Object);
+            if(!string.IsNullOrEmpty(cookieValue))
+            {
+                var mockedServer = Mock.Get(context.Object.Server);
+                mockedServer.Setup(x => x.HtmlEncode(cookieValue)).Returns(cookieValue);
+            }
 
-            var mockedServer = Mock.Get(context.Object.Server);
-            mockedServer.Setup(x => x.HtmlEncode(testCookieValue)).Returns(testCookieValue);
-
-            //act
-            var result = backend.BlockAccess(expectUserId, expectReqId, context.Object);
-
-            //assert
-            Assert.IsTrue(result, TestContext.TestName);
+            return context.Object;
         }
-
-        #endregion
     }
 }
