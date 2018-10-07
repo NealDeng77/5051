@@ -79,7 +79,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset StudentBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultFactoryInventoryModel, TestContext.TestName);
@@ -98,7 +98,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreNotEqual(null, resultFactoryInventoryModel.Id, TestContext.TestName);
@@ -120,7 +120,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Create(data) as ViewResult;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -135,10 +135,10 @@ namespace _5051.Tests.Controllers
             data = null;
 
             // Act
-            var result = (RedirectToRouteResult)controller. Create(data);
+            var result = (RedirectToRouteResult)controller.Create(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -149,7 +149,7 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
-            FactoryInventoryModel data = new FactoryInventoryModel();          
+            FactoryInventoryModel data = new FactoryInventoryModel();
             data.Id = null;
 
             // Act
@@ -157,7 +157,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultFactoryInventoryModel.Description, TestContext.TestName);
@@ -168,14 +168,14 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
-            FactoryInventoryModel data = new FactoryInventoryModel();         
+            FactoryInventoryModel data = new FactoryInventoryModel();
 
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
             var resultFactoryInventoryModel = FactoryInventoryBackend.Instance.Create(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -194,7 +194,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Update() as ViewResult;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(null, result.Model, TestContext.TestName);
@@ -214,7 +214,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultFactoryInventoryModel, TestContext.TestName);
@@ -236,7 +236,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Update(data) as ViewResult;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -254,7 +254,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Update(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -273,7 +273,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultFactoryInventoryModel.Description, TestContext.TestName);
@@ -291,7 +291,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = FactoryInventoryBackend.Instance.Create(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -310,7 +310,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Delete() as ViewResult;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(null, result.Model, TestContext.TestName);
@@ -329,7 +329,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(resultFactoryInventoryModel, TestContext.TestName);
@@ -351,7 +351,7 @@ namespace _5051.Tests.Controllers
             ViewResult result = controller.Delete(data) as ViewResult;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -369,7 +369,7 @@ namespace _5051.Tests.Controllers
             var result = (RedirectToRouteResult)controller.Delete(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -388,7 +388,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(data.Description, resultFactoryInventoryModel.Description, TestContext.TestName);
@@ -406,7 +406,7 @@ namespace _5051.Tests.Controllers
             var resultFactoryInventoryModel = FactoryInventoryBackend.Instance.Create(data);
 
             // Reset FactoryInventoryBackend
-            FactoryInventoryBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
