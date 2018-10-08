@@ -110,7 +110,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true, CloudTableClient TableClient = null)
+        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true, CloudTable Table = null)
         {
             var myReturnList = new List<T>();
 
@@ -130,12 +130,12 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            return LoadAllDirect<T>(tableName, pk, TableClient, convert);
+            return LoadAllDirect<T>(tableName, pk, Table, convert);
         }
 
         public List<T> LoadAllDirect<T>(string tableName, 
                                         string pk,
-                                        CloudTableClient TableClient,
+                                        CloudTable Table,
                                         bool convert = true)
         {
             var myReturnList = new List<T>();
@@ -150,17 +150,13 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            // If not Table Client is passed in, then assume the global one.
-            if (TableClient == null)
-            {
-                TableClient = tableClient;
-            }
-
             try
             {
-
-                var Table = TableClient.GetTableReference(tableName);
-                Table.CreateIfNotExists();
+                // If not Table Client is passed in, then assume the global one.
+                if (Table == null)
+                {
+                    Table = GetTable(DataSourceServerMode, tableName);
+                }
 
                 var result = new List<DataSourceBackendTableEntity>();
                 var query =
@@ -536,7 +532,7 @@ namespace _5051.Backend
             // Empty out Destination Table
             // Get all rows in the destination Table
             // Walk and delete each item, because delete table takes too long...
-            var SourceDataAll = LoadAllDirect<T>(tableName, pk, DestinationTableClient,true);
+            var SourceDataAll = LoadAllDirect<T>(tableName, pk, DestinationTable,true);
             foreach (var data in SourceDataAll)
             {
 
@@ -557,6 +553,24 @@ namespace _5051.Backend
             }
 
             return true;
+        }
+
+        public CloudTable GetTable(DataSourceEnum dataSourceServerMode, string tableName)
+        {
+            CloudTableClient DestinationTableClient;
+
+            var DestinationStorageConnectionString = GetDataSourceConnectionString(dataSourceServerMode);
+
+            var Connection = CloudConfigurationManager.GetSetting(DestinationStorageConnectionString);
+
+            CloudStorageAccount DestinationStorageAccount = CloudStorageAccount.Parse(Connection
+            );
+
+            DestinationTableClient = DestinationStorageAccount.CreateCloudTableClient();
+            var DestinationTable = DestinationTableClient.GetTableReference(tableName);
+            DestinationTable.CreateIfNotExists();
+
+            return DestinationTable;
         }
     }
 }
