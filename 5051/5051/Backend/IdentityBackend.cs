@@ -169,6 +169,15 @@ namespace _5051.Backend
             DataSource.Reset();
         }
 
+
+        /// <summary>
+        /// checks if the provided id should be blocked from access based on the input role
+        /// if the id is in the role, block access and return true
+        /// if the id is not in the role, don't block access and return true
+        /// </summary>
+        /// <param name="CurrentId"></param>
+        /// <param name="userRole"></param>
+        /// <returns></returns>
         public bool BlockExecptForRole(string CurrentId, UserRoleEnum userRole)
         {
             if (DataSourceBackend.GetTestingMode())

@@ -142,12 +142,6 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            //uncommet to block access to all but the logged in user
-            //if (IdentityBackend.Instance.BlockAccess(id, id, HttpContext))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
             var myReturn = new StudentDisplayViewModel(myStudent);
 
             //Set the last log in time and emotion status img uri
@@ -183,9 +177,25 @@ namespace _5051.Controllers
         public ActionResult Attendance(string id = null)
         {
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = id;
+            //ViewBag.StudentId = id;
 
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
             if (myStudent == null)
             {
                 return RedirectToAction("Roster", "Portal");
@@ -236,6 +246,22 @@ namespace _5051.Controllers
 
         public ActionResult AttendanceUpdate(string id, string item)
         {
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -247,7 +273,7 @@ namespace _5051.Controllers
             }
 
             //get the attendance with given id
-            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(id, item);
+            var myAttendance = DataSourceBackend.Instance.StudentBackend.ReadAttendance(CurrentId, item);
             if (myAttendance == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -334,9 +360,25 @@ namespace _5051.Controllers
         public ActionResult Settings(string id = null)
         {
             // Temp hold the Student Id for the Nav, until the Nav can call for Identity.
-            ViewBag.StudentId = id;
+            //ViewBag.StudentId = id;
 
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -415,7 +457,23 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult WeeklyReport(string id = null)
         {
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
             if (myStudent == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -423,7 +481,7 @@ namespace _5051.Controllers
 
             var myReport = new WeeklyReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedWeekId = 1
             };
 
@@ -464,7 +522,23 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult MonthlyReport(string id = null)
         {
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
 
             if (myStudent == null)
             {
@@ -474,7 +548,7 @@ namespace _5051.Controllers
 
             var myReport = new MonthlyReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedMonthId = 1
             };
 
@@ -514,7 +588,23 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult SemesterReport(string id = null)
         {
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
 
             if (myStudent == null)
             {
@@ -524,7 +614,7 @@ namespace _5051.Controllers
 
             var myReport = new SemesterReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedSemesterId = 1
             };
 
@@ -564,7 +654,23 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult QuarterReport(string id = null)
         {
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
 
             if (myStudent == null)
             {
@@ -574,7 +680,7 @@ namespace _5051.Controllers
 
             var myReport = new QuarterReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
                 SelectedQuarterId = 1
             };
 
@@ -614,7 +720,23 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult OverallReport(string id = null)
         {
-            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
 
             if (myStudent == null)
             {
@@ -624,7 +746,7 @@ namespace _5051.Controllers
 
             var myReport = new SchoolYearReportViewModel()
             {
-                StudentId = id,
+                StudentId = CurrentId,
             };
 
             var myReturn = ReportBackend.Instance.GenerateOverallReport(myReport);
@@ -670,8 +792,24 @@ namespace _5051.Controllers
         [AllowAnonymous]
         public ActionResult ChangePassword(string id = null)
         {
+            var CurrentId = IdentityBackend.Instance.GetCurrentStudentID(HttpContext);
+
+            // Todo: Remove when identity is fully hooked up
+            // Hack, to keep the current system working, while the identity system is slowly hooked up everywhere.  If the user is not logged in, then the passed in user will work, if the user is logged in, then the passed in user is ignored.
+            if (string.IsNullOrEmpty(CurrentId))
+            {
+                CurrentId = id;
+            }
+
+            ViewBag.StudentId = CurrentId;  //TODO: Remove this when identity is fully hooked up
+
+            if (IdentityBackend.Instance.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             //var findResult = IdentityBackend.Instance.FindUserByID(id);
-            var findResult = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var findResult = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
             if (findResult == null)
             {
                 return RedirectToAction("Error", "Home");
