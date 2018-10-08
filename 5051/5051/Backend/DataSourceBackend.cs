@@ -170,6 +170,7 @@ namespace _5051.Backend
                 return false; // all OK
             }
 
+            // todo:  Troy, Why is this IdentityDataSourceTable, not IdentityBackend?
             var IdentityBackend = IdentityDataSourceTable.Instance;
 
             if (IdentityBackend.UserHasClaimOfType(userID, role))

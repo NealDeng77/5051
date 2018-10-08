@@ -432,7 +432,7 @@ namespace _5051.Controllers
             }
 
             ////if the student name already exists in db, if does, return for edits
-            //var idFindResult = IdentityDataSourceTable.Instance.FindUserByUserName(data.Name);
+            //var idFindResult = IdentityBackend.Instance.FindUserByUserName(data.Name);
             //if(idFindResult != null)
             //{
             //    ModelState.AddModelError("", "User name already taken");

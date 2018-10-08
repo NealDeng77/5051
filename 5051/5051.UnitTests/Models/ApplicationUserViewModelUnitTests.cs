@@ -27,7 +27,7 @@ namespace _5051.UnitTests.Models
             // Arange
             DataSourceBackend.Instance.StudentBackend.Index();
             var field = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(field);
+            var userInfo = IdentityBackend.Instance.FindUserByUserName(field);
 
             // Act
             var result = new ApplicationUserViewModel(userInfo);
@@ -45,7 +45,7 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserView_Invalid_User_Should_Fail()
         {
             // Arange
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName("bogus");
+            var userInfo = IdentityBackend.Instance.FindUserByUserName("bogus");
 
             // Act
             var result = new ApplicationUserViewModel(userInfo);

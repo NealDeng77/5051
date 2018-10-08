@@ -198,7 +198,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-
+            // Todo:  Troy, why is this IdentityDataSourceTable, not IdentityBackend?
             if (IdentityDataSourceTable.Instance.UserHasClaimOfType(data.Id, data.Role))
             {
                 IdentityDataSourceTable.Instance.RemoveClaimFromUser(data.Id, data.Role.ToString());
@@ -284,6 +284,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
+            // Todo: Troy, why is this not IdentityBackend?
             var createResult = IdentityDataSourceTable.Instance.CreateNewTeacher(user.Email, user.Password, user.Email);
 
             if (createResult == null)
@@ -308,6 +309,8 @@ namespace _5051.Controllers
                 return View(user);
             }
 
+            // Todo: Troy, why is this not IdentityBackend?
+
             var createResult = IdentityDataSourceTable.Instance.CreateNewSupportUser(user.Email, user.Password, user.Email);
 
             if (createResult == null)
@@ -321,6 +324,8 @@ namespace _5051.Controllers
         //GET
         public ActionResult DeleteUser(string id = null)
         {
+            // Todo: Troy, why is this not IdentityBackend?
+
             var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
             if (findResult == null)
             {
@@ -335,11 +340,15 @@ namespace _5051.Controllers
                                              "Id," +
                                              "")] ApplicationUser user)
         {
+            // Todo: Troy, why is this not IdentityBackend?
+
             var findResult = IdentityDataSourceTable.Instance.FindUserByID(user.Id);
             if (findResult == null)
             {
                 return View(user);
             }
+
+            // Todo: Troy, why is this not IdentityBackend?
 
             var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult.Id);
             if (!deleteResult)

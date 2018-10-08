@@ -31,7 +31,7 @@ namespace _5051.UnitTests.Models
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityDataSourceTable.Instance.Reset();
+            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -41,18 +41,16 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Instantiate_Should_Pass()
         {
             // Arange
-            IdentityDataSourceTable.Instance.Reset();
             DataSourceBackend.Instance.StudentBackend.Index();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            //var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByID(Student.Id);
+            var userInfo = IdentityBackend.Instance.FindUserByID(Student.Id);
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityDataSourceTable.Instance.Reset();
+            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(Student, TestContext.TestName);
@@ -64,9 +62,8 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Get_Set_Should_Pass()
         {
             // Arange
-            IdentityDataSourceTable.Instance.Reset();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName(Student.Name);
+            var userInfo = IdentityBackend.Instance.FindUserByUserName(Student.Name);
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
@@ -77,7 +74,7 @@ namespace _5051.UnitTests.Models
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityDataSourceTable.Instance.Reset();
+            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -90,15 +87,16 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Models_ApplicationUserInput_Invalid_User_Should_Fail()
         {
+
             // Arange
-            var userInfo = IdentityDataSourceTable.Instance.FindUserByUserName("bogus");
+            var userInfo = IdentityBackend.Instance.FindUserByUserName("bogus");
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityDataSourceTable.Instance.Reset();
+            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNull(result.Student, TestContext.TestName);
