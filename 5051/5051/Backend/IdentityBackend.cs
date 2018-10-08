@@ -200,5 +200,16 @@ namespace _5051.Backend
             // User does not have the claim, so return true...
             return true;
         }
+
+        public ApplicationUser FindUserByUserName(string userName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                return null;
+            }
+
+            var myReturn = DataSource.FindUserByUserName(userName);
+            return myReturn;
+        }
     }
 }
