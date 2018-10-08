@@ -68,7 +68,22 @@ namespace _5051.Controllers
 
             var DestinationDataSource = BackupData.Destination;
 
-            DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "AvatarItemModel");
+            DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "avataritemmodel");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<FactoryInventoryModel>(DestinationDataSource, "factoryinventorymodel");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<ApplicationUser>(DestinationDataSource, "identitymodel");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<SchoolCalendarModel>(DestinationDataSource, "schoolcalendarmodel");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<SchoolDismissalSettingsModel>(DestinationDataSource, "schooldismissalsettingsmodel");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<StudentModel>(DestinationDataSource, "studentmodel");
+
+
+
+            // TODO  Why does this fail?
+            //DataSourceBackendTable.Instance.CopyDataDirect<KioskSettingsModel>(DestinationDataSource, "kiosksettingsmodel");
 
             return RedirectToAction("Index", "Maintenance");
         }
