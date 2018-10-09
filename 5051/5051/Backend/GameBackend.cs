@@ -417,15 +417,15 @@ namespace _5051.Backend
 
             var Item = student.Inventory.FirstOrDefault(m => m.Category == FactoryInventoryCategoryEnum.Food);
 
-            // check if the item is limited or not, if it is, the profit will be .2
-            // if not, the profit still be .1
-            if (Item.IsLimitSupply == true)
-            {
-                ProfitPercent = .2d;
-            }
-
             if (Item != null)
             {
+                // check if the item is limited or not, if it is, the profit will be .2
+                // if not, the profit still be .1
+                if (Item.IsLimitSupply == true)
+                {
+                    ProfitPercent = .2d;
+                }
+                
                 // Sell Item
                 Item.Quantities--;
 
