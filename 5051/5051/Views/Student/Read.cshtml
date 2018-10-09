@@ -159,10 +159,13 @@
                         @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                     <div class="col text-center DispalyBoxWithMargin">
+                        @Html.ActionLink("Reset Password", "ResetPassword", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                    </div>
+                    <div class="col text-center DispalyBoxWithMargin">
                         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                     <div class="col text-center DispalyBoxWithMargin">
-                        @Html.ActionLink("Attendance", "Read", new { controller="Attendance", id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
+                        @Html.ActionLink("Attendance", "Read", new { controller = "Attendance", id = Model.Id }, new { @class = "btn btn1 btn-light DispalyBoxWithMargin" })
                     </div>
                 </div>
 

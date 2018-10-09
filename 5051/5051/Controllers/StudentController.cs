@@ -223,5 +223,77 @@ namespace _5051.Controllers
 
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// shows the student whose password is to be reset
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ResetPassword(string id = null)
+        {
+            var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
+            if (myDataStudent == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var myData = new StudentDisplayViewModel(myDataStudent);
+            // null not possible
+            //if (myData == null)
+            //{
+            //    RedirectToAction("Error", "Home");
+            //}
+
+            return View(myData);
+        }
+
+        /// <summary>
+        /// This resets the students password to their name
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        // POST: Student/Delete/5
+        [HttpPost]
+        public ActionResult ResetPassword([Bind(Include=
+                                        "Id,"+
+                                        "Name,"+
+                                        "Description,"+
+                                        "Uri,"+
+                                        "Status,"+
+                                        "Tokens,"+
+                                        "ExperiencePoints,"+
+                                        "AvatarLevel,"+
+                                        "")] StudentDisplayViewModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Send back for edit
+                return View(data);
+            }
+            if (data == null)
+            {
+                // Send to Error page
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (string.IsNullOrEmpty(data.Id))
+            {
+                // Send back for Edit
+                return View(data);
+            }
+
+            var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(data.Id);
+            var student = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
+
+            var changeResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(student.Name, student.Name, student.Password, _5051.Models.UserRoleEnum.StudentUser);
+            if (!changeResult)
+            {
+                ModelState.AddModelError("", "Password Reset resulted in error.");
+                return View(data);
+            }
+
+
+            return RedirectToAction("Index");
+        }
     }
 }
