@@ -417,6 +417,13 @@ namespace _5051.Backend
 
             var Item = student.Inventory.FirstOrDefault(m => m.Category == FactoryInventoryCategoryEnum.Food);
 
+            // check if the item is limited or not, if it is, the profit will be .2
+            // if not, the profit still be .1
+            if (Item.IsLimitSupply == true)
+            {
+                ProfitPercent = .2d;
+            }
+
             if (Item != null)
             {
                 // Sell Item
@@ -424,9 +431,9 @@ namespace _5051.Backend
 
                 // Add Tokens to the Student
                 var profit = (int)Math.Ceiling(Item.Tokens * ProfitPercent);
-                student.Tokens += Item.Tokens + profit;
+                student.Tokens += profit;
                 // increase income
-                student.Truck.Income += Item.Tokens + profit;
+                student.Truck.Income += profit;
 
                 student.Truck.CustomersTotal++;
 
@@ -463,7 +470,7 @@ namespace _5051.Backend
                 var temp = new LeaderBoardModel();
                 temp.Id = student.Id;
                 temp.Name = student.Name;
-                temp.Profit = student.Truck.Income - student.Truck.Outcome;
+                temp.Profit = student.Truck.Income;
                 board.Add(temp);
             }
 
