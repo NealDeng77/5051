@@ -46,7 +46,7 @@ namespace _5051.Backend
         public CloudStorageAccount storageAccount;
         public CloudTableClient tableClient;
         public int takeCount = 1000;
-        public DataSourceEnum DataSourceServerMode = DataSourceEnum.Local;
+        //public DataSourceEnum DataSourceServerMode = DataSourceEnum.Local;
 
         public bool SetDataSourceServerMode(DataSourceEnum dataSourceServerMode)
         {
@@ -155,10 +155,11 @@ namespace _5051.Backend
                 // If not Table Client is passed in, then assume the global one.
                 if (Table == null)
                 {
-                    Table = GetTable(DataSourceServerMode, tableName);
+                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
                 }
 
                 var result = new List<DataSourceBackendTableEntity>();
+
                 var query =
                     new TableQuery<DataSourceBackendTableEntity>().Where(
                         TableQuery.GenerateFilterCondition(
@@ -503,9 +504,12 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool CopyDataDirect<T>(DataSourceEnum dataSourceServerMode, string tableName)
+        public bool CopyDataDirect<T>(DataSourceEnum dataSourceServerMode, string tableName, string pk = null)
         {
-            var pk = tableName.ToLower();
+            if (string.IsNullOrEmpty(pk))
+            {
+                pk = tableName.ToLower();
+            }
 
             // Read all the records from the Source using current database defaults
             var SourceData = LoadAllDirect<T>(tableName, pk,null,true);
@@ -516,17 +520,7 @@ namespace _5051.Backend
 
             // Write all the records to the destination
             // Set the path to the destination
-
-            CloudTableClient DestinationTableClient;
-
-            var DestinationStorageConnectionString = GetDataSourceConnectionString(dataSourceServerMode);
-
-            CloudStorageAccount DestinationStorageAccount = CloudStorageAccount.Parse(
-            CloudConfigurationManager.GetSetting(DestinationStorageConnectionString));
-
-            DestinationTableClient = DestinationStorageAccount.CreateCloudTableClient();
-            var DestinationTable = DestinationTableClient.GetTableReference(tableName);
-            DestinationTable.CreateIfNotExists();
+            var DestinationTable = GetTable(dataSourceServerMode, tableName);
 
             // TODO
             // Empty out Destination Table

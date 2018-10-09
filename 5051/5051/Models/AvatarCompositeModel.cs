@@ -3,6 +3,8 @@ namespace _5051.Models
 {
     public class AvatarCompositeModel
     {
+        // TODO, Mike.  Need to add ID here, and then fix up the existing data
+
         public string AvatarHeadUri;
         public string AvatarAccessoryUri;
         public string AvatarCheeksUri;

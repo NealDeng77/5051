@@ -4,6 +4,7 @@ using _5051.Models;
 using _5051.Backend;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Collections.Generic;
 
 namespace _5051.Controllers
 {
@@ -78,9 +79,19 @@ namespace _5051.Controllers
 
             DataSourceBackendTable.Instance.CopyDataDirect<SchoolDismissalSettingsModel>(DestinationDataSource, "schooldismissalsettingsmodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<StudentModel>(DestinationDataSource, "studentmodel");
+//            DataSourceBackendTable.Instance.CopyDataDirect<StudentModel>(DestinationDataSource, "studentmodel");
 
+            DataSourceBackendTable.Instance.CopyDataDirect<StudentModel>(DestinationDataSource, "studentmodel", "student");
 
+            DataSourceBackendTable.Instance.CopyDataDirect<List<AvatarItemModel>>(DestinationDataSource,"studentmodel", "avatarinventory");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<List<FactoryInventoryModel>>(DestinationDataSource,"studentmodel", "inventory");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<List<AttendanceModel>>(DestinationDataSource,"studentmodel", "attendance");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<ShopTruckFullModel>(DestinationDataSource,"studentmodel", "truck");
+
+            DataSourceBackendTable.Instance.CopyDataDirect<AvatarCompositeModel>(DestinationDataSource, "studentmodel", "composite");
 
             // TODO  Why does this fail?
             //DataSourceBackendTable.Instance.CopyDataDirect<KioskSettingsModel>(DestinationDataSource, "kiosksettingsmodel");
