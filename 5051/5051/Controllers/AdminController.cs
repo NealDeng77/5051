@@ -282,8 +282,7 @@ namespace _5051.Controllers
         {
             user.Email = "teacher";
 
-            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.TeacherUser, null);
+            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.TeacherUser, null);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -301,7 +300,7 @@ namespace _5051.Controllers
         [AllowAnonymous]
         public ActionResult ChangePassword(string id = null)
         {
-            var findResult = IdentityBackend.Instance.FindUserByID(id);
+            var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {
                 return RedirectToAction("Settings", "Admin");
@@ -332,20 +331,13 @@ namespace _5051.Controllers
                 return View(data);
             }
 
-            var user = IdentityBackend.Instance.FindUserByID(data.UserID);
+            var user = DataSourceBackend.Instance.IdentityBackend.FindUserByID(data.UserID);
             if(user == null)
             {
                 return View(data);
             }
 
-            //if(!IdentityBackend.Instance.LogUserIn(user.UserName, data.OldPassword, IdentityDataSourceTable.IdentityRole.Teacher))
-            //{
-            //    ModelState.AddModelError("", "Invalid Old Password.");
-            //    return View(data);
-            //}
-
-            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Teacher);
-            var changeResult = IdentityBackend.Instance.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
+            var changeResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(user.UserName, data.NewPassword, data.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
             if (!changeResult)
             {
                 ModelState.AddModelError("", "Invalid Old Password.");

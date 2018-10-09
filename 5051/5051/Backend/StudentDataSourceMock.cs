@@ -51,20 +51,11 @@ namespace _5051.Backend
         /// <returns>Student Passed In</returns>
         public StudentModel Create(StudentModel data)
         {
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityBackend();
-            //    identityBackend.CreateNewStudent(data);
-            //}
             StudentBackend.SetDataSource(DataSourceEnum.Mock);
-            var idBackend = IdentityBackend.Instance;
 
             DataSet.Add(data);
 
-            //IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data);
-            //var idResult = IdentityDataSourceMockV2.Instance.CreateNewStudentIdRecordOnly(data);
-            
-            var idResult = idBackend.CreateNewStudentUserIdRecordOnly(data);
+            var idResult = IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data);
 
             DataSet = DataSet.OrderBy(x => x.Name).ToList();
 
@@ -143,7 +134,6 @@ namespace _5051.Backend
         public void Reset()
         {
             Initialize();
-            IdentityDataSourceMockV2.Instance.Reset();
         }
 
         /// <summary>
@@ -207,15 +197,6 @@ namespace _5051.Backend
         /// <param name="setEnum"></param>
         public void LoadDataSet(DataSourceDataSetEnum setEnum)
         {
-            //if (!isTestingMode)
-            //{
-            //    var identityBackend = new IdentityBackend();
-            //    identityBackend.Reset();
-            //    //create support user
-            //    identityBackend.CreateNewSupportUser("su5051", "su5051", "su5051");
-            //    //create teacher user
-            //    identityBackend.CreateNewTeacher("testTeacher", "teacherTest", "testTeacherID");
-            //}
             switch (setEnum)
             {
                 case DataSourceDataSetEnum.Demo:

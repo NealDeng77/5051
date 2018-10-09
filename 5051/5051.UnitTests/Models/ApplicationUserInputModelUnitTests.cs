@@ -31,7 +31,6 @@ namespace _5051.UnitTests.Models
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -41,16 +40,15 @@ namespace _5051.UnitTests.Models
         public void Models_ApplicationUserInputModel_Instantiate_Should_Pass()
         {
             // Arange
-            DataSourceBackend.Instance.StudentBackend.Index();
+            //DataSourceBackend.Instance.StudentBackend.Index();
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var userInfo = IdentityBackend.Instance.FindUserByID(Student.Id);
+            var userInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByID(Student.Id);
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(Student, TestContext.TestName);
@@ -63,7 +61,7 @@ namespace _5051.UnitTests.Models
         {
             // Arange
             var Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var userInfo = IdentityBackend.Instance.FindUserByUserName(Student.Name);
+            var userInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByUserName(Student.Name);
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
@@ -74,7 +72,6 @@ namespace _5051.UnitTests.Models
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -89,14 +86,13 @@ namespace _5051.UnitTests.Models
         {
 
             // Arange
-            var userInfo = IdentityBackend.Instance.FindUserByUserName("bogus");
+            var userInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByUserName("bogus");
 
             // Act
             var result = new ApplicationUserInputModel(userInfo);
 
             // Reset
             DataSourceBackend.Instance.Reset();
-            IdentityBackend.Instance.Reset();
 
             // Assert
             Assert.IsNull(result.Student, TestContext.TestName);

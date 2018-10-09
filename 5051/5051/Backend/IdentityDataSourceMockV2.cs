@@ -84,32 +84,20 @@ namespace _5051.Backend
 
         public StudentModel CreateNewStudent(StudentModel student)
         {
-            //fill in all fields needed
-            var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
-
-            //need to add claims
-            user.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
-            {
-                ClaimType = _5051.Models.UserRoleEnum.StudentUser.ToString(),
-                ClaimValue = "True"
-            });
-
-            //add to id datalist
-            DataList.Add(user);
-
             //add to student list
-            //DataSourceBackend.Instance.StudentBackend.Create(student);
-            var createResult = DataSourceBackend.Instance.StudentBackend.Create(student);
-            if (createResult == null)
+            var createStudent = StudentBackend.Instance.Create(student);
+
+            if (createStudent == null)
             {
                 return null;
             }
 
+            var createId = CreateNewStudentUserIdRecordOnly(student);
 
             return student;
         }
 
-        public StudentModel CreateNewStudentIdRecordOnly(StudentModel student)
+        public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student)
         {
             //fill in all fields needed
             var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
@@ -145,9 +133,9 @@ namespace _5051.Backend
             }
 
             //update for both student and id
-            findStudent.Name = newName;           
+            findStudent.Name = newName;
 
-            var studentUpdateResult =  DataSourceBackend.Instance.StudentBackend.Update(findStudent);
+            var studentUpdateResult = StudentBackend.Instance.Update(findStudent);
             if (studentUpdateResult == null)
             {
                 return false;
@@ -195,8 +183,7 @@ namespace _5051.Backend
                 }
 
                 student.Password = newPass;
-                //var updateResult = UpdateStudent(student);
-                var updateResult = DataSourceBackend.Instance.StudentBackend.Update(student);
+                var updateResult = StudentBackend.Instance.Update(student);
                 if (updateResult != null)
                 {
                     return true;
@@ -230,7 +217,7 @@ namespace _5051.Backend
 
         public StudentModel GetStudentById(string id)
         {
-            var student = DataSourceBackend.Instance.StudentBackend.Read(id);
+            var student = StudentBackend.Instance.Read(id);
 
             if (student == null)
             {
@@ -369,7 +356,31 @@ namespace _5051.Backend
             if (UserHasClaimOfType(myData.Id, _5051.Models.UserRoleEnum.StudentUser))
             {
                 //delete the student from student table as well
-                var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
+                var deleteResult = StudentBackend.Instance.Delete(myData.Id);
+
+                return true;
+            }
+
+            //remove from list
+            if (DataList.Remove(myData) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool DeleteUserIdRecordOnly(string Id)
+        {
+            if (string.IsNullOrEmpty(Id))
+            {
+                return false;
+            }
+
+            var myData = DataList.Find(n => n.Id == Id);
+            if (myData == null)
+            {
+                return false;
             }
 
             //remove from list
@@ -600,12 +611,6 @@ namespace _5051.Backend
 
             //create teacher user
             var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
-
-            var dataSet = DataSourceBackend.Instance.StudentBackend.Index();
-            foreach (var item in dataSet)
-            {
-                var studentResult = CreateNewStudentIdRecordOnly(item);
-            }
         }
 
 

@@ -289,7 +289,6 @@ namespace _5051.Controllers
             }
 
             DataSourceBackend.Instance.StudentBackend.Create(data);
-            //IdentityDataSourceTable.Instance.CreateNewStudent(data);
 
             return RedirectToAction("Index");
         }

@@ -12,9 +12,8 @@ namespace _5051.Backend
 
         StudentModel CreateNewStudent(StudentModel student);
 
-        StudentModel CreateNewStudentIdRecordOnly(StudentModel student);
+        StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student);
 
-        //bool UpdateStudent(StudentModel student);
         bool ChangeUserName(string userId, string newName);
 
         bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role);
@@ -40,6 +39,8 @@ namespace _5051.Backend
         bool RemoveClaimFromUser(string userID, string claimTypeToRemove);
 
         bool DeleteUser(string id);
+
+        bool DeleteUserIdRecordOnly(string Id);
 
         bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context);
 

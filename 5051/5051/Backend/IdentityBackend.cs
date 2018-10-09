@@ -83,6 +83,13 @@ namespace _5051.Backend
             return result;
         }
 
+        public ApplicationUser CreateNewTeacher(string teacherName, string teacherPassword, string teacherId)
+        {
+            var myReturn = DataSource.CreateNewTeacher(teacherName, teacherPassword, teacherId);
+            return myReturn;
+        }
+
+
         public StudentModel CreateNewStudentUser(StudentModel student)
         {
             var myReturn = DataSource.CreateNewStudent(student);
@@ -91,7 +98,7 @@ namespace _5051.Backend
 
         public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student)
         {
-            var myReturn = DataSource.CreateNewStudentIdRecordOnly(student);
+            var myReturn = DataSource.CreateNewStudentUserIdRecordOnly(student);
             return myReturn;
         }
 
@@ -128,6 +135,31 @@ namespace _5051.Backend
             return myReturn;
         }
 
+        public ApplicationUser AddClaimToUser(string userID, string claimTypeToAdd, string claimValueToAdd)
+        {
+            var myReturn = DataSource.AddClaimToUser(userID, claimTypeToAdd, claimValueToAdd);
+            return myReturn;
+        }
+
+
+        public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
+        {
+            var myReturn = DataSource.RemoveClaimFromUser(userID, claimTypeToRemove);
+            return myReturn;
+        }
+
+        public bool DeleteUser(string Id)
+        {
+            var myReturn = DataSource.DeleteUser(Id);
+            return myReturn;
+        }
+
+        public bool DeleteUserIdRecordOnly(string Id)
+        {
+            var myReturn = DataSource.DeleteUserIdRecordOnly(Id);
+            return myReturn;
+        }
+
         public bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context)
         {
             var myReturn = DataSource.LogUserIn(userName, password, role, context);
@@ -158,7 +190,6 @@ namespace _5051.Backend
             return DataSource.ChangeUserName(userId, newName);
         }
 
-        //public bool ChangeUserPassword(string userName, string newPass, string oldPass, IdentityDataSourceTable.IdentityRole role)
         public bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role)
         {
             return DataSource.ChangeUserPassword(userName, newPass, oldPass, role);

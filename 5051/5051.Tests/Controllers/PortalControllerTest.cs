@@ -151,8 +151,8 @@ namespace _5051.Tests.Controllers
 
             DataSourceBackend.SetTestingMode(false);
 
-            //will replace this line once identity is in the DataSourceBackend
-            var idBackend = IdentityDataSourceMockV2.Instance;
+            var dataBackend = DataSourceBackend.Instance;
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
 
             var context = CreateMoqSetupForCookie("123");
 
@@ -238,8 +238,8 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
             var backend = DataSourceBackend.Instance;
 
-            //will replace this line once identity is in the DataSourceBackend
-            var idBackend = IdentityDataSourceMockV2.Instance;
+            var dataBackend = DataSourceBackend.Instance;
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
 
             var context = CreateMoqSetupForCookie("123");
 

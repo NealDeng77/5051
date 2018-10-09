@@ -168,6 +168,9 @@ namespace _5051.Backend
             }
 
             var myReturn = DataSource.Delete(Id);
+            //delete the identity side as well
+            var idDeleteResult = DataSourceBackend.Instance.IdentityBackend.DeleteUserIdRecordOnly(Id);
+
             return myReturn;
         }
 

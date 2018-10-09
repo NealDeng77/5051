@@ -488,8 +488,6 @@ namespace _5051.Tests.Controllers
             var controller = new AdminController();
             LoginViewModel loginViewModel = new LoginViewModel();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
             var idBackend = IdentityDataSourceTable.Instance;
             var expectUserName = idBackend.teacherUserName;
             var expectPass = idBackend.teacherPass;
@@ -641,7 +639,7 @@ namespace _5051.Tests.Controllers
 
             var backend = DataSourceBackend.Instance;
 
-            var teacher = IdentityBackend.Instance.FindUserByID("teacher");
+            var teacher = DataSourceBackend.Instance.IdentityBackend.FindUserByID("teacher");
 
             ChangePasswordViewModel model = new ChangePasswordViewModel();
             model.UserID = "teacher";

@@ -21,7 +21,11 @@ namespace _5051.Backend
         public SchoolCalendarBackend SchoolCalendarBackend = SchoolCalendarBackend.Instance;
         public SchoolDismissalSettingsBackend SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
 
+        public IdentityBackend IdentityBackend = IdentityBackend.Instance;
+
         public StudentBackend StudentBackend = StudentBackend.Instance;
+
+
 
         /// <summary>
         /// Make into a Singleton
@@ -44,7 +48,11 @@ namespace _5051.Backend
             SchoolCalendarBackend = SchoolCalendarBackend.Instance;
             SchoolDismissalSettingsBackend = SchoolDismissalSettingsBackend.Instance;
 
+            IdentityBackend = IdentityBackend.Instance;
+
             StudentBackend = StudentBackend.Instance;
+
+
         }
 
         public static DataSourceBackend Instance
@@ -81,13 +89,10 @@ namespace _5051.Backend
             SchoolCalendarBackend.Reset();
             SchoolDismissalSettingsBackend.Reset();
 
+            IdentityBackend.Reset();
+
             StudentBackend.Reset();
 
-            if (!isTestingMode)
-            {
-                //IdentityDataSourceTable.Instance.Reset();
-                IdentityBackend.Instance.Reset();
-            }
 
             SetTestingMode(false);
         }
@@ -111,12 +116,11 @@ namespace _5051.Backend
             SchoolDismissalSettingsBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
             SchoolCalendarBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
+            IdentityBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
+
             StudentBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
-            if (!isTestingMode)
-            {
-                IdentityBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
-            }
+
         }
 
         /// <summary>
@@ -136,9 +140,11 @@ namespace _5051.Backend
             SchoolDismissalSettingsBackend.SetDataSourceDataSet(SetEnum);
             SchoolCalendarBackend.SetDataSourceDataSet(SetEnum);
 
+            IdentityBackend.SetDataSourceDataSet(SetEnum);
+
             StudentBackend.SetDataSourceDataSet(SetEnum);
 
-            IdentityBackend.SetDataSourceDataSet(SetEnum);
+            
         }
 
         //public static void ResetTestingModes(DataSourceDataSetEnum dataSourceDataSetEnum)
@@ -169,9 +175,6 @@ namespace _5051.Backend
             {
                 return false; // all OK
             }
-
-            // todo:  Troy, Why is this IdentityDataSourceTable, not IdentityBackend?
-            var IdentityBackend = IdentityDataSourceTable.Instance;
 
             if (IdentityBackend.UserHasClaimOfType(userID, role))
             {

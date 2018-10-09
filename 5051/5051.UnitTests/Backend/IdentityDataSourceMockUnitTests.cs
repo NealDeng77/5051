@@ -33,7 +33,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -56,7 +56,6 @@ namespace _5051.UnitTests.Backend
 
             //reset
             DataSourceBackend.Instance.Reset();
-            backend.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -75,7 +74,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.ChangeUserName(expectId, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -93,7 +92,7 @@ namespace _5051.UnitTests.Backend
            var result = backend.ChangeUserName(expectId, expectNewName);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -117,8 +116,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = expectStudent.Password;
 
             //Reset
-            DataSourceBackend.Instance.StudentBackend.Reset();
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -139,7 +137,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = backend.teacherPass;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -160,7 +158,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = backend.supportPass;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -181,7 +179,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = backend.supportPass;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -231,7 +229,7 @@ namespace _5051.UnitTests.Backend
             var resultClaimNum = backend.FindUserByID(expectId).Claims.Count;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -263,7 +261,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.RemoveClaimFromUser(expectId, expectInvalidClaim);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -287,7 +285,6 @@ namespace _5051.UnitTests.Backend
 
             //reset
             DataSourceBackend.Instance.Reset();
-            backend.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -300,6 +297,8 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityDataSourceMock_DeleteUser_Valid_Should_Pass()
         {
             // Arrange
+            var dataBackend = DataSourceBackend.Instance;
+            var studentBackend = dataBackend.StudentBackend;
             var backend = IdentityDataSourceMockV2.Instance;
             var expectUserId = backend.ListAllStudentUsers().FirstOrDefault().Id;
             var numUsersBefore = backend.ListAllUsers().Count;
@@ -310,7 +309,6 @@ namespace _5051.UnitTests.Backend
 
             //reset
             DataSourceBackend.Instance.Reset();
-            backend.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -341,7 +339,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.DeleteUser(expectUserId);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -418,7 +416,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -436,7 +434,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -448,6 +446,8 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityDataSourceMock_ListAllUsers_Should_Pass()
         {
             //arrange
+            DataSourceBackend.Instance.Reset();
+            var dataBackend = DataSourceBackend.Instance;
             var backend = IdentityDataSourceMockV2.Instance;
             var expectNumUsers = 7;
 
@@ -514,7 +514,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -532,7 +532,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -574,7 +574,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.StudentUser, context.Object);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -619,7 +619,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -637,7 +637,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.SupportUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -655,7 +655,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -673,7 +673,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -691,7 +691,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -946,7 +946,6 @@ namespace _5051.UnitTests.Backend
 
             //reset
             dataSourceBackend.Reset();
-            backend.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -987,6 +986,8 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityDataSourceMock_BlockAccess_UserId_Null_Should_Fail()
         {
             //arrange
+            var dataBackend = DataSourceBackend.Instance;
+            var studentBackend = dataBackend.StudentBackend;
             var backend = IdentityDataSourceMockV2.Instance;
             var expectReqId = backend.ListAllStudentUsers().FirstOrDefault().Id;
             string expectUserId = null;
@@ -1002,6 +1003,8 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityDataSourceMock_BlockAccess_UserId_Invalid_Should_Fail()
         {
             //arrange
+            var dataBackend = DataSourceBackend.Instance;
+            var studentBackend = dataBackend.StudentBackend;
             var backend = IdentityDataSourceMockV2.Instance;
             var expectReqId = backend.ListAllStudentUsers().FirstOrDefault().Id;
             var expectUserId = "bogus";

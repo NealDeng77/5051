@@ -110,7 +110,7 @@ namespace _5051.Backend
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
-            var idCreateResult = IdentityDataSourceTable.Instance.CreateNewStudentIdRecordOnly(data);
+            var idResult = IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data);
 
             return data;
         }
@@ -181,8 +181,6 @@ namespace _5051.Backend
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
-            //var idUpdateResult = IdentityDataSourceTable.Instance.UpdateStudent(data);
-
             return data;
         }
 
@@ -249,7 +247,6 @@ namespace _5051.Backend
         public void Reset()
         {
             Initialize();
-            IdentityDataSourceTable.Instance.Reset();
         }
 
         /// <summary>

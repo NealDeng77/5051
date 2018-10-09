@@ -821,7 +821,7 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityBackend_FindUserById_Null_Should_Fail()
         {
             //arrange
-            var backend = IdentityBackend.Instance;
+            var backend = DataSourceBackend.Instance.IdentityBackend;
 
             //act
             var result = backend.FindUserByID(null);
@@ -834,8 +834,9 @@ namespace _5051.UnitTests.Backend
         public void Backend_IdentityBackend_FindUserById_Should_Pass()
         {
             //arrange
-            var expectStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var backend = IdentityBackend.Instance;
+            var dataBackend = DataSourceBackend.Instance;
+            var expectStudent = dataBackend.StudentBackend.GetDefault();
+            var backend = DataSourceBackend.Instance.IdentityBackend;
 
             //act
             var result = backend.FindUserByID(expectStudent.Id);

@@ -725,7 +725,7 @@ namespace _5051.Tests.Controllers
 
             //reset
             DataSourceBackend.Instance.Reset();
-            IdentityBackend.Instance.Reset();
+
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -1082,8 +1082,7 @@ namespace _5051.Tests.Controllers
         public void Controller_Shop_EditName_Data_Valid_Should_Pass()
         {
             // Arrange
-            //IdentityBackend.Instance.Reset();
-            IdentityDataSourceMockV2.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
             ShopController controller = new ShopController();
             var data = new ShopTruckInputModel();
             data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;

@@ -64,8 +64,7 @@ namespace _5051.Controllers
 
             var myReturn = new UserListViewModel();
 
-            //var data = IdentityDataSourceTable.Instance.ListAllStudentUsers();
-            var data = IdentityBackend.Instance.ListAllStudentUsers();
+            var data = DataSourceBackend.Instance.IdentityBackend.ListAllStudentUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -75,8 +74,7 @@ namespace _5051.Controllers
                 myReturn.StudentList.Add(temp);
             }
 
-            //data = IdentityDataSourceTable.Instance.ListAllTeacherUsers();
-            data = IdentityBackend.Instance.ListAllTeacherUsers();
+            data = DataSourceBackend.Instance.IdentityBackend.ListAllTeacherUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -86,8 +84,7 @@ namespace _5051.Controllers
                 myReturn.TeacherList.Add(temp);
             }
 
-            //data = IdentityDataSourceTable.Instance.ListAllSupportUsers();
-            data = IdentityBackend.Instance.ListAllSupportUsers();
+            data = DataSourceBackend.Instance.IdentityBackend.ListAllSupportUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -97,8 +94,7 @@ namespace _5051.Controllers
                 myReturn.SupportList.Add(temp);
             }
 
-            //data = IdentityDataSourceTable.Instance.ListAllUsers();
-            data = IdentityBackend.Instance.ListAllSupportUsers();
+            data = DataSourceBackend.Instance.IdentityBackend.ListAllSupportUsers();
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
@@ -120,8 +116,7 @@ namespace _5051.Controllers
             //    return RedirectToAction("Index", "Home");
             //}
 
-            //var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
-            var myUserInfo = IdentityBackend.Instance.FindUserByID(id);
+            var myUserInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
 
             var data = new ApplicationUserViewModel(myUserInfo);
 
@@ -146,8 +141,7 @@ namespace _5051.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            //var myUserInfo = IdentityDataSourceTable.Instance.FindUserByID(id);
-            var myUserInfo = IdentityBackend.Instance.FindUserByID(id);
+            var myUserInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (myUserInfo == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -158,8 +152,7 @@ namespace _5051.Controllers
             var myReturn = new ApplicationUserInputModel(myUserInfo);
             myReturn.Id = myUserInfo.Id;
             myReturn.Role = RoleEnum;
-            //myReturn.State = IdentityDataSourceTable.Instance.UserHasClaimOfValue(myUserInfo.Id, RoleEnum.ToString(), "True");
-            myReturn.State = IdentityBackend.Instance.UserHasClaimOfType(myUserInfo.Id, RoleEnum);
+            myReturn.State = DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(myUserInfo.Id, RoleEnum);
 
             return View(myReturn);
         }
@@ -198,14 +191,13 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            // Todo:  Troy, why is this IdentityDataSourceTable, not IdentityBackend?
-            if (IdentityDataSourceTable.Instance.UserHasClaimOfType(data.Id, data.Role))
+            if(DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(data.Id, data.Role))
             {
-                IdentityDataSourceTable.Instance.RemoveClaimFromUser(data.Id, data.Role.ToString());
+                DataSourceBackend.Instance.IdentityBackend.RemoveClaimFromUser(data.Id, data.Role.ToString());
             }
             else
             {
-                IdentityDataSourceTable.Instance.AddClaimToUser(data.Id, data.Role.ToString(), "True");
+                DataSourceBackend.Instance.IdentityBackend.AddClaimToUser(data.Id, data.Role.ToString(), "True");
             }
 
             return RedirectToAction("UserList", "Support");
@@ -228,8 +220,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            //var loginResult = IdentityDataSourceTable.Instance.LogUserIn(user.Email, user.Password, IdentityDataSourceTable.IdentityRole.Support);
-            var loginResult = IdentityBackend.Instance.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.SupportUser, null);
+            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.SupportUser, null);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -258,13 +249,6 @@ namespace _5051.Controllers
             newStudent.Name = user.Email;
             newStudent.Password = user.Password;
 
-            //var createUserResult = IdentityDataSourceTable.Instance.CreateNewStudent(newStudent);
-            //var createUserResult = DataSourceBackend.Instance.StudentBackend.Create(newStudent);
-
-            //if (createUserResult == null)
-            //{
-            //    ModelState.AddModelError("", "Invalid create user attempt");
-            //}
             DataSourceBackend.Instance.StudentBackend.Create(newStudent);
 
             return RedirectToAction("UserList", "Support");
@@ -284,8 +268,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            // Todo: Troy, why is this not IdentityBackend?
-            var createResult = IdentityDataSourceTable.Instance.CreateNewTeacher(user.Email, user.Password, user.Email);
+            var createResult = DataSourceBackend.Instance.IdentityBackend.CreateNewTeacher(user.Email, user.Password, user.Email);
 
             if (createResult == null)
             {
@@ -309,9 +292,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            var createResult = IdentityDataSourceTable.Instance.CreateNewSupportUser(user.Email, user.Password, user.Email);
+            var createResult = DataSourceBackend.Instance.IdentityBackend.CreateNewSupportUser(user.Email, user.Password, user.Email);
 
             if (createResult == null)
             {
@@ -324,9 +305,7 @@ namespace _5051.Controllers
         //GET
         public ActionResult DeleteUser(string id = null)
         {
-            // Todo: Troy, why is this not IdentityBackend?
-
-            var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
+            var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {
                 return RedirectToAction("UserList", "Support");
@@ -340,17 +319,13 @@ namespace _5051.Controllers
                                              "Id," +
                                              "")] ApplicationUser user)
         {
-            // Todo: Troy, why is this not IdentityBackend?
-
-            var findResult = IdentityDataSourceTable.Instance.FindUserByID(user.Id);
+            var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(user.Id);
             if (findResult == null)
             {
                 return View(user);
             }
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            var deleteResult = IdentityDataSourceTable.Instance.DeleteUser(findResult.Id);
+            var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(findResult.Id);
             if (!deleteResult)
             {
                 ModelState.AddModelError("", "Invalid Delete Attempt.");
@@ -478,8 +453,7 @@ namespace _5051.Controllers
         //GET
         public ActionResult ChangeUserPassword(string id = null)
         {
-            //var findResult = IdentityDataSourceTable.Instance.FindUserByID(id);
-            var findResult = IdentityBackend.Instance.FindUserByID(id);
+            var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {
                 return RedirectToAction("UserList", "Support");
@@ -498,7 +472,7 @@ namespace _5051.Controllers
                                              "NewPassword," +
                                              "")] ChangePasswordViewModel model)
         {
-            var backend = IdentityBackend.Instance;
+            var backend = DataSourceBackend.Instance.IdentityBackend;
             var findResult = backend.FindUserByID(model.UserID);
             if (findResult == null)
             {
@@ -507,7 +481,7 @@ namespace _5051.Controllers
 
             if (backend.UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.SupportUser))
             {
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.SupportUser);
+                var changePassResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.SupportUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
@@ -516,7 +490,7 @@ namespace _5051.Controllers
             }
             else if (backend.UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
             {
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
+                var changePassResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(findResult.UserName, model.NewPassword, model.OldPassword, _5051.Models.UserRoleEnum.TeacherUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");
@@ -527,7 +501,7 @@ namespace _5051.Controllers
             {
                 var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
 
-                var changePassResult = IdentityBackend.Instance.ChangeUserPassword(findResult.UserName, model.NewPassword, student.Password, _5051.Models.UserRoleEnum.StudentUser);
+                var changePassResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(findResult.UserName, model.NewPassword, student.Password, _5051.Models.UserRoleEnum.StudentUser);
                 if (!changePassResult)
                 {
                     ModelState.AddModelError("", "Invalid Change Password Attempt.");

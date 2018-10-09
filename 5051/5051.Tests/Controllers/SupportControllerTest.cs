@@ -19,6 +19,7 @@ namespace _5051.Tests.Controllers
         [TestInitialize]
         public void TestInitialize()
         {
+
             DataSourceBackend.SetTestingMode(true);
         }
 
@@ -31,6 +32,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.GetType();
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual(result, new SupportController().GetType(), TestContext.TestName);
@@ -49,6 +53,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.GetType();
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual(result, new SupportController().GetType(), TestContext.TestName);
         }
@@ -65,6 +72,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Index() as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -79,13 +89,13 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new SupportController();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
 
             // Act
             var result = controller.UserList() as ViewResult;
 
             // Reset
-            Backend.IdentityBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -101,8 +111,8 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new SupportController();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
-            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = DataSourceBackend.Instance.IdentityBackend.CreateNewSupportUser("user", "password", "id");
 
             string id = supportUser.Id;
 
@@ -110,7 +120,7 @@ namespace _5051.Tests.Controllers
             var result = controller.UserInfo(id) as ViewResult;
 
             // Reset
-            Backend.IdentityBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -132,6 +142,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
@@ -148,6 +161,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
@@ -158,13 +174,16 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new SupportController();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
 
             string id = "id";
             string item = "item";
 
             // Act
             var result = controller.ToggleUser(id, item) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -187,6 +206,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.ToggleUser(app) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -202,6 +224,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -216,6 +241,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
@@ -233,6 +261,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Error", result.RouteValues["action"], TestContext.TestName);
         }
@@ -244,16 +275,17 @@ namespace _5051.Tests.Controllers
             var controller = new SupportController();
             var app = new ApplicationUserInputModel();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
+            var supportUser = idBackend.ListAllSupportUsers()[0];
 
             app.Id = supportUser.Id;
             app.Role = UserRoleEnum.SupportUser;
 
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -266,16 +298,17 @@ namespace _5051.Tests.Controllers
             var controller = new SupportController();
             var app = new ApplicationUserInputModel();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
+            var supportUser = idBackend.ListAllSupportUsers()[0];
 
             app.Id = supportUser.Id;
             app.Role = UserRoleEnum.StudentUser;
 
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -292,6 +325,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.Login() as ViewResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -314,6 +350,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Login(loginViewModel) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -327,6 +366,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.Login(loginViewModel) as ViewResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -364,6 +406,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.CreateStudent() as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -385,6 +430,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.CreateStudent(loginViewModel) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -402,6 +450,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.CreateStudent(loginViewModel) as RedirectToRouteResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
         }
@@ -417,6 +468,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.CreateTeacher() as ViewResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -439,6 +493,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.CreateTeacher(loginViewModel) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -450,16 +507,17 @@ namespace _5051.Tests.Controllers
             var controller = new SupportController();
             LoginViewModel loginViewModel = new LoginViewModel();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var teacherUser = Backend.IdentityDataSourceTable.Instance.ListAllTeacherUsers()[0];
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
+            var teacherUser = idBackend.ListAllTeacherUsers()[0];
 
             loginViewModel.Email = teacherUser.Email;
             loginViewModel.Password = teacherUser.PasswordHash;
 
             // Act
             var result = controller.CreateTeacher(loginViewModel) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -476,6 +534,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.CreateSupport() as ViewResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -498,6 +559,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.CreateSupport(loginViewModel) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -509,16 +573,17 @@ namespace _5051.Tests.Controllers
             var controller = new SupportController();
             LoginViewModel loginViewModel = new LoginViewModel();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
+            var supportUser = idBackend.ListAllSupportUsers()[0];
 
             loginViewModel.Email = supportUser.Email;
             loginViewModel.Password = supportUser.PasswordHash;
 
             // Act
             var result = controller.CreateSupport(loginViewModel) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -537,6 +602,9 @@ namespace _5051.Tests.Controllers
             //act
             var result = controller.DeleteUser(id) as ActionResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -547,15 +615,16 @@ namespace _5051.Tests.Controllers
             //arrange
             SupportController controller = new SupportController();
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
+            var idBackend = DataSourceBackend.Instance.IdentityBackend;
+            var supportUser = idBackend.ListAllSupportUsers()[0];
 
             string id = supportUser.Id;
 
             //act
             var result = controller.DeleteUser(id) as ActionResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -574,6 +643,9 @@ namespace _5051.Tests.Controllers
             //act
             var result = controller.DeleteUser(app) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -582,18 +654,19 @@ namespace _5051.Tests.Controllers
         public void Controller_Support_Delete_Post_Default_Should_Return_UserList_Page()
         {
             //arrange
+            DataSourceBackend.Instance.Reset();
             SupportController controller = new SupportController();
             ApplicationUser app = new ApplicationUser();
+            
+            var studentUser = DataSourceBackend.Instance.IdentityBackend.ListAllStudentUsers()[0];
 
-            // Todo: Troy, why is this not IdentityBackend?
-
-            Backend.IdentityDataSourceTable.Instance.LoadDataSet(DataSourceDataSetEnum.Default);
-            var supportUser = Backend.IdentityDataSourceTable.Instance.ListAllSupportUsers()[0];
-
-            app.Id = supportUser.Id;
+            app.Id = studentUser.Id;
 
             //act
             var result = controller.DeleteUser(app) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -625,6 +698,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = controller.Settings() as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -654,6 +730,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = controller.Reset() as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -687,6 +766,9 @@ namespace _5051.Tests.Controllers
             // Act
             var resultPage = (RedirectToRouteResult)controller.DataSourceSet(null);
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", resultPage.RouteValues["action"], TestContext.TestName);
         }
@@ -712,6 +794,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.DataSourceSet("");
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -838,6 +923,9 @@ namespace _5051.Tests.Controllers
             // Act
             var result = (RedirectToRouteResult)controller.DataSource(null);
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
@@ -863,6 +951,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.DataSource("");
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
@@ -1065,6 +1156,9 @@ namespace _5051.Tests.Controllers
             //act
             var result = controller.ChangeUserPassword(expect) as ActionResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -1075,13 +1169,16 @@ namespace _5051.Tests.Controllers
             //arrange
             SupportController controller = new SupportController();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
-            var supportUser = Backend.IdentityBackend.Instance.CreateNewSupportUser("user", "password", "id");
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = DataSourceBackend.Instance.IdentityBackend.CreateNewSupportUser("user", "password", "id");
 
             string expect = supportUser.Id;
 
             //act
             var result = controller.ChangeUserPassword(expect) as ViewResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -1101,6 +1198,9 @@ namespace _5051.Tests.Controllers
             //act
             var result = controller.ChangeUserPassword(viewModel) as ViewResult;
 
+            //reset
+            DataSourceBackend.Instance.Reset();
+
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
         }
@@ -1109,9 +1209,9 @@ namespace _5051.Tests.Controllers
         public void Controller_Support_ChangeUserPassword_Post_StudentUser_Should_Pass()
         {
             //arrange
-            IdentityBackend.Instance.Reset();
+            DataSourceBackend.Instance.Reset();
             SupportController controller = new SupportController();
-            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();           
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             viewModel.UserID = student.Id;
             viewModel.NewPassword = student.Password;
@@ -1120,6 +1220,9 @@ namespace _5051.Tests.Controllers
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -1132,12 +1235,15 @@ namespace _5051.Tests.Controllers
             SupportController controller = new SupportController();
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
-            var supportUser = Backend.IdentityBackend.Instance.ListAllSupportUsers()[0];
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
+            var supportUser = DataSourceBackend.Instance.IdentityBackend.ListAllSupportUsers()[0];
             viewModel.UserID = supportUser.Id;
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -1150,12 +1256,15 @@ namespace _5051.Tests.Controllers
             SupportController controller = new SupportController();
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
 
-            Backend.IdentityBackend.SetDataSource(DataSourceEnum.Mock);
+            DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
 
             viewModel.UserID = "teacher";
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.AreEqual("UserList", result.RouteValues["action"], TestContext.TestName);
@@ -1171,6 +1280,9 @@ namespace _5051.Tests.Controllers
 
             // Act
             var result = (RedirectToRouteResult)controller.Reset();
+
+            //reset
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);

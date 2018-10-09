@@ -125,19 +125,19 @@ namespace _5051.Backend
         /// <returns></returns>
         public StudentModel CreateNewStudent(StudentModel student)
         {
-            var createResult = DataSourceBackend.Instance.StudentBackend.Create(student);
+            var createResult = StudentBackend.Instance.Create(student);
 
             if (createResult == null)
             {
                 return null;
             }
 
-            var idResult = CreateNewStudentIdRecordOnly(student);
+            var idResult = CreateNewStudentUserIdRecordOnly(student);
 
             return idResult;
         }
 
-        public StudentModel CreateNewStudentIdRecordOnly(StudentModel student)
+        public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student)
         {
             //fill in all fields needed
             var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };
@@ -539,6 +539,26 @@ namespace _5051.Backend
             return myReturn;
         }
 
+        public bool DeleteUserIdRecordOnly(string Id)
+        {
+            if (string.IsNullOrEmpty(Id))
+            {
+                return false;
+            }
+
+            var myData = DataList.Find(n => n.Id == Id);
+
+            if (DataList.Remove(myData) == false)
+            {
+                return false;
+            }
+
+            // Storage Delete
+            var myReturn = DataSourceBackendTable.Instance.Delete<ApplicationUser>(tableName, partitionKey, myData.Id, myData);
+
+            return myReturn;
+        }
+
         /// <summary>
         /// Logs the user in using the given password
         /// returns false if login fails
@@ -783,13 +803,7 @@ namespace _5051.Backend
             var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
 
             //create the student users
-            //var studentList = DataSourceBackendTable.Instance.LoadAll<StudentModel>("studentmodel", "student");
-            var studentList = DataSourceBackend.Instance.StudentBackend.Index();
 
-            foreach (var item in studentList)
-            {
-                var studentResult = CreateNewStudentIdRecordOnly(item);
-            }
 
         }
 

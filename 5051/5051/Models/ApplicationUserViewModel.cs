@@ -22,8 +22,7 @@ namespace _5051.Models
             UserRole = new List<UserRoleEnum>();
             foreach (UserRoleEnum RoleEnum in Enum.GetValues(typeof(UserRoleEnum)))
             {
-                //if (IdentityDataSourceTable.Instance.UserHasClaimOfValue(User.Id, RoleEnum.ToString(), "True"))
-                if(IdentityBackend.Instance.UserHasClaimOfType(User.Id, RoleEnum))
+                if(DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(User.Id, RoleEnum))
                 {
                     UserRole.Add(RoleEnum);
                 }

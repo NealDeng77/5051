@@ -44,7 +44,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -62,7 +62,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.DeleteUser(null);
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -80,7 +80,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.DeleteUser(expectId);
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -173,7 +173,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -191,7 +191,7 @@ namespace _5051.UnitTests.Backend
             var result = backend;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);
@@ -279,7 +279,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.AddClaimToUser(null, null, null);
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsNull(result, TestContext.TestName);
@@ -296,7 +296,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.RemoveClaimFromUser(null, null);
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -315,7 +315,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.RemoveClaimFromUser(testUserId, testClaim);
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -334,7 +334,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.RemoveClaimFromUser(testId, "");
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -566,8 +566,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = expectStudent.Password;
 
             //Reset
-            DataSourceBackend.Instance.StudentBackend.Reset();
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -586,9 +585,9 @@ namespace _5051.UnitTests.Backend
             //act
             var result = backend.ChangeUserPassword(expectName, expectNewPass, expectOldPass, _5051.Models.UserRoleEnum.TeacherUser);
             var passwordResult = backend.teacherPass;
-            
+
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -609,7 +608,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = backend.supportPass;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -630,7 +629,7 @@ namespace _5051.UnitTests.Backend
             var passwordResult = backend.supportPass;
 
             //Reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -649,7 +648,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.ChangeUserName(expectId, null);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -667,7 +666,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.ChangeUserName(expectId, expectNewName);
 
             //reset
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
@@ -748,8 +747,7 @@ namespace _5051.UnitTests.Backend
             var result = backend.BlockAccess(testCookieValue, testCookieValue, context);
 
             //reset
-            dataSourceBackend.Reset();
-            backend.Reset();
+            DataSourceBackend.Instance.Reset();
 
             //assert
             Assert.IsFalse(result, TestContext.TestName);
