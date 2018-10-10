@@ -137,7 +137,7 @@ namespace _5051.Backend
             return idResult;
         }
 
-        public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student)
+        public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             //fill in all fields needed
             var user = new ApplicationUser { UserName = student.Name, Email = student.Name + "@seattleu.edu", Id = student.Id };

@@ -28,8 +28,24 @@ namespace _5051.Models
         /// Confirm
         /// </summary>
         [Key]
-        [Display(Name = "Confirm", Description = "Confirm")]
+        [Display(Name = "Confirm Destination", Description = "Confirm Destination")]
         [Required(ErrorMessage = "Required")]
-        public DataSourceEnum Confirm { get; set; }
+        public DataSourceEnum ConfirmDestination { get; set; }
+
+        /// <summary>
+        /// Destination
+        /// </summary>
+        [Key]
+        [Display(Name = "Destination", Description = "Destination")]
+        [Required(ErrorMessage = "Required")]
+        public DataSourceEnum Source { get; set; }
+
+        /// <summary>
+        /// Confirm
+        /// </summary>
+        [Key]
+        [Display(Name = "Confirm Source", Description = "Confirm Source")]
+        [Required(ErrorMessage = "Required")]
+        public DataSourceEnum ConfirmSource { get; set; }
     }
 }

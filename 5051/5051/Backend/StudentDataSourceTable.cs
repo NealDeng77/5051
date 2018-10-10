@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using _5051.Models;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace _5051.Backend
 {
@@ -75,9 +76,13 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Student Passed In</returns>
-        public StudentModel Create(StudentModel data)
+        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum=DataSourceEnum.Unknown)
         {
-            DataList.Add(data);
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                DataList.Add(data);
+            }
 
             var temp = new StudentModel(data);
             temp.Id = data.Id;
@@ -88,29 +93,29 @@ namespace _5051.Backend
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", data.Id, temp);
+            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", data.Id, temp,dataSourceEnum);
 
             // Sub Components
             var tempData = new StudentModel(data);
             tempData.Id = data.Id;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id, temp);
+            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id, temp, dataSourceEnum);
 
             // Now store each of the Sub Structures as independent rows
-            DataSourceBackendTable.Instance.Create<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite);
+            DataSourceBackendTable.Instance.Create<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite, dataSourceEnum);
 
-            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id, tempData.AvatarInventory);
+            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id, tempData.AvatarInventory, dataSourceEnum);
 
-            DataSourceBackendTable.Instance.Create<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id, tempData.Inventory);
+            DataSourceBackendTable.Instance.Create<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id, tempData.Inventory, dataSourceEnum);
 
-            DataSourceBackendTable.Instance.Create<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
+            DataSourceBackendTable.Instance.Create<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance, dataSourceEnum);
 
-            DataSourceBackendTable.Instance.Create<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck);
+            DataSourceBackendTable.Instance.Create<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck, dataSourceEnum);
 
             DataList = DataList.OrderBy(x => x.Name).ToList();
 
-            var idResult = IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data);
+            var idResult = IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data, dataSourceEnum);
 
             return data;
         }
@@ -148,8 +153,6 @@ namespace _5051.Backend
             {
                 return null;
             }
-
-            myReturn.Update(data);
 
             // Update Storage
             var temp = new StudentModel(data);
@@ -189,7 +192,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -197,14 +200,23 @@ namespace _5051.Backend
             }
 
             var data = DataList.Find(n => n.Id == Id);
-            if (DataList.Remove(data) == false)
+            if (data == null)
             {
                 return false;
             }
 
-            // Storage Delete
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                if (DataList.Remove(data) == false)
+                {
+                    return false;
+                }
+            }
 
-            var temp = new StudentModel(data);
+                // Storage Delete
+
+                var temp = new StudentModel(data);
             temp.AvatarComposite = null;
             temp.AvatarInventory = null;
             temp.Inventory = null;
@@ -212,7 +224,7 @@ namespace _5051.Backend
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", data.Id, temp);
+            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", data.Id, temp, dataSourceEnum);
 
             // Sub components
             var tempData = new StudentModel(data);
@@ -281,9 +293,25 @@ namespace _5051.Backend
         {
 
             // Storage Load all rows
+            DataList = LoadAll();
+
+            // If Storage is Empty, then Create.
+            if (DataList.Count < 1)
+            {
+                CreateDataSetDefault();
+            }
+
+            // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by Name instead
+            DataList = DataList.OrderBy(x => x.Name).ToList();
+        }
+
+        public List<StudentModel> LoadAll(DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        {
+
+            var tempDataList = new List<StudentModel>();
 
             // Make a call to LoadAll, and pass false for convert, this will return the raw object
-            var DataSetList = DataSourceBackendTable.Instance.LoadAll<DataSourceBackendTableEntity>(tableName, "student", false);
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<DataSourceBackendTableEntity>(tableName, "student", false, dataSourceEnum);
 
             // Loop through each DataSetList, and reload them with the sub fields
             foreach (var temp in DataSetList)
@@ -300,7 +328,6 @@ namespace _5051.Backend
 
                 try
                 {
-
                     TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
 
                     TempData.AvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
@@ -315,7 +342,7 @@ namespace _5051.Backend
 
                     var newData = new StudentModel(TempData);
                     newData.Id = temp.RowKey;   //Set the ID to the item loaded
-                    DataList.Add(newData);
+                    tempDataList.Add(newData);
                 }
                 catch (Exception ex)
                 {
@@ -323,15 +350,7 @@ namespace _5051.Backend
                 }
             }
 
-
-            // If Storage is Empty, then Create.
-            if (DataList.Count < 1)
-            {
-                CreateDataSetDefault();
-            }
-
-            // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by Name instead
-            DataList = DataList.OrderBy(x => x.Name).ToList();
+            return tempDataList;
         }
 
         /// <summary>
@@ -383,6 +402,39 @@ namespace _5051.Backend
                     DataSetDefault();
                     break;
             }
+        }
+
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            // Read all the records from the Source using current database defaults
+
+            var DataAllSource = LoadAll(dataSourceSource);
+            if (DataAllSource == null || !DataAllSource.Any())
+            {
+                return false;
+            }
+
+            // Empty out Destination Table
+            // Get all rows in the destination Table
+            // Walk and delete each item, because delete table takes too long...
+            var DataAllDestination = LoadAll(dataSourceDestination);
+            if (DataAllDestination == null || !DataAllDestination.Any())
+            {
+                return false;
+            }
+
+            foreach (var data in DataAllDestination)
+            {
+                Delete(data.Id, dataSourceDestination);
+            }
+
+            // Write the data to the destination
+            foreach (var data in DataAllSource)
+            {
+                Create(data, dataSourceDestination);
+            }
+
+            return true;
         }
     }
 }

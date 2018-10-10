@@ -82,9 +82,9 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Student Passed In</returns>
-        public StudentModel Create(StudentModel data)
+        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            DataSource.Create(data);
+            DataSource.Create(data,dataSourceEnum);
             return data;
         }
 
@@ -160,14 +160,14 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
                 return false;
             }
 
-            var myReturn = DataSource.Delete(Id);
+            var myReturn = DataSource.Delete(Id,dataSourceEnum);
             //delete the identity side as well
             var idDeleteResult = DataSourceBackend.Instance.IdentityBackend.DeleteUserIdRecordOnly(Id);
 
@@ -560,8 +560,14 @@ namespace _5051.Backend
         /// <returns>Null or valid data</returns>
         public StudentModel GetDefault()
         {
-            var myReturn = Index().First();
+            var myReturn = Index().FirstOrDefault();
             return myReturn;
+        }
+
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            var result = DataSource.BackupData(dataSourceSource, dataSourceDestination);
+            return result;
         }
     }
 }

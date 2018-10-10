@@ -37,9 +37,36 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="col">
+
                 <div class="row justify-content-around">
                     <div class="col-2 FontSizeMedium FontBold">
-                        Desitnation
+                        Source
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col">
+                        @Html.EnumDropDownListFor(m => m.Source)
+                        @Html.ValidationMessageFor(m => m.Source)
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+
+                <div class="row justify-content-around">
+                    <div class="col-2 FontSizeMedium FontBold">
+                        Confirm Source
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col">
+                        @Html.EnumDropDownListFor(m => m.ConfirmSource)
+                        @Html.ValidationMessageFor(m => m.ConfirmSource)
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+
+                <hr />
+
+                <div class="row justify-content-around">
+                    <div class="col-2 FontSizeMedium FontBold">
+                        Destination
                     </div>
                     <div class="col-1"></div>
                     <div class="col">
@@ -53,17 +80,19 @@
 
                 <div class="row justify-content-around">
                     <div class="col-2 FontSizeMedium FontBold">
-                        Confirm
+                        Confirm Destination
                     </div>
                     <div class="col-1"></div>
                     <div class="col">
-                        @Html.EnumDropDownListFor(m => m.Confirm)
-                        @Html.ValidationMessageFor(m => m.Confirm)
+                        @Html.EnumDropDownListFor(m => m.ConfirmDestination)
+                        @Html.ValidationMessageFor(m => m.ConfirmDestination)
                     </div>
                     <div class="col-1"></div>
                 </div>
 
                 <br />
+
+                <hr />
 
                 <div class="row justify-content-around">
                     <div class="col-2">
@@ -88,7 +117,7 @@
                         @Html.ActionLink("Cancel", "Index", new { Controller = "Home" }, new { @class = "btn btn1 btn-light" })
                     </div>
                     <div class="col DispalyBoxWithMargin">
-                        <input id="LogInButton" type="submit" name="submit" value="Log In" class="btn btn1 btn-light" />
+                        <input id="BackupButtonId" type="submit" name="submit" value="Backup" class="btn btn1 btn-light" />
                         <br />
                         <br />
                     </div>

@@ -49,7 +49,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Student Passed In</returns>
-        public StudentModel Create(StudentModel data)
+        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             StudentBackend.SetDataSource(DataSourceEnum.Mock);
 
@@ -107,7 +107,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -180,7 +180,7 @@ namespace _5051.Backend
             // Order the set by Name
             DataSet = DataSet.OrderBy(x => x.Name).ToList();
 
-            StudentBackendHelper.CreateDemoAttendance();     
+            StudentBackendHelper.CreateDemoAttendance();
         }
 
         /// <summary>
@@ -212,6 +212,17 @@ namespace _5051.Backend
                     DataSetDefault();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Not implemented for Mock
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            return true;
         }
 
     }

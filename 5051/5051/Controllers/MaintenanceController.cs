@@ -28,8 +28,12 @@ namespace _5051.Controllers
 
             var data = new BackupDataInputModel
             {
+                Source = SystemGlobalsModel.Instance.DataSourceValue,
+                ConfirmSource = DataSourceEnum.Unknown,
+
                 Destination = DataSourceEnum.Unknown,
-                Confirm = DataSourceEnum.Unknown,
+                ConfirmDestination = DataSourceEnum.Unknown,
+
                 Password = ""
             };
 
@@ -38,8 +42,10 @@ namespace _5051.Controllers
 
         [HttpPost]
         public ActionResult BackupData([Bind(Include =
+                                            "Source," +
+                                            "ConfirmSource," +
                                             "Destination," +
-                                            "Confirm," +
+                                            "ConfirmDestination," +
                                             "Password," +
                                              "")] BackupDataInputModel BackupData)
         {
@@ -52,36 +58,40 @@ namespace _5051.Controllers
                 return RedirectToAction("BackupData", "Maintenance");
             }
 
-            if (BackupData.Destination != BackupData.Confirm)
+            if (BackupData.Destination != BackupData.ConfirmDestination)
             {
                 return RedirectToAction("BackupData", "Maintenance");
             }
+
+            if (BackupData.Source != BackupData.ConfirmSource)
+            {
+                return RedirectToAction("BackupData", "Maintenance");
+            }
+
 
             if (string.IsNullOrEmpty(BackupData.Password))
             {
                 return RedirectToAction("BackupData", "Maintenance");
             }
 
-            if (SystemGlobalsModel.Instance.DataSourceValue == DataSourceEnum.Mock)
-            {
-                return RedirectToAction("BackupData", "Maintenance");
-            }
+            //if (SystemGlobalsModel.Instance.DataSourceValue == DataSourceEnum.Mock)
+            //{
+            //    return RedirectToAction("BackupData", "Maintenance");
+            //}
 
-            var DestinationDataSource = BackupData.Destination;
+            //DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "avataritemmodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "avataritemmodel");
+            //DataSourceBackendTable.Instance.CopyDataDirect<FactoryInventoryModel>(DestinationDataSource, "factoryinventorymodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<FactoryInventoryModel>(DestinationDataSource, "factoryinventorymodel");
+            //DataSourceBackendTable.Instance.CopyDataDirect<ApplicationUser>(DestinationDataSource, "identitymodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<ApplicationUser>(DestinationDataSource, "identitymodel");
+            //DataSourceBackendTable.Instance.CopyDataDirect<SchoolCalendarModel>(DestinationDataSource, "schoolcalendarmodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<SchoolCalendarModel>(DestinationDataSource, "schoolcalendarmodel");
+            //DataSourceBackendTable.Instance.CopyDataDirect<SchoolDismissalSettingsModel>(DestinationDataSource, "schooldismissalsettingsmodel");
 
-            DataSourceBackendTable.Instance.CopyDataDirect<SchoolDismissalSettingsModel>(DestinationDataSource, "schooldismissalsettingsmodel");
+            DataSourceBackend.Instance.StudentBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            // DataSourceBackendTable.Instance.CopyDataDirect<StudentModel>(DestinationDataSource, "studentmodel");
-
-            DataSourceBackendTable.Instance.CopyDataDirect<KioskSettingsModel>(DestinationDataSource, "kiosksettingsmodel");
+            //DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             return RedirectToAction("Index", "Maintenance");
         }

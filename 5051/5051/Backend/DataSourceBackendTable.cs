@@ -110,7 +110,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="pk"></param>
         /// <returns></returns>
-        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true, CloudTable Table = null)
+        public List<T> LoadAll<T>(string tableName, string pk, bool convert = true, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             var myReturnList = new List<T>();
 
@@ -130,12 +130,12 @@ namespace _5051.Backend
                 return myReturnList;
             }
 
-            return LoadAllDirect<T>(tableName, pk, Table, convert);
+            return LoadAllDirect<T>(tableName, pk, dataSourceEnum, convert);
         }
 
-        public List<T> LoadAllDirect<T>(string tableName, 
+        public List<T> LoadAllDirect<T>(string tableName,
                                         string pk,
-                                        CloudTable Table,
+                                        DataSourceEnum dataSourceEnum,
                                         bool convert = true)
         {
             var myReturnList = new List<T>();
@@ -152,11 +152,7 @@ namespace _5051.Backend
 
             try
             {
-                // If not Table Client is passed in, then assume the global one.
-                if (Table == null)
-                {
-                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
-                }
+                var Table = GetTable(dataSourceEnum, tableName);
 
                 var result = new List<DataSourceBackendTableEntity>();
 
@@ -198,9 +194,9 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public T Create<T>(string tableName, string pk, string rk, T data)
+        public T Create<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            return Update<T>(tableName, pk, rk, data);
+            return Update<T>(tableName, pk, rk, data, dataSourceEnum);
         }
 
         /// <summary>
@@ -210,7 +206,7 @@ namespace _5051.Backend
         /// <param name="pk"></param>
         /// <param name="rk"></param>
         /// <returns></returns>
-        public T Load<T>(string tableName, string pk, string rk)
+        public T Load<T>(string tableName, string pk, string rk, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             var myReturn = default(T);
 
@@ -235,10 +231,10 @@ namespace _5051.Backend
                 return myReturn;
             }
 
-            return LoadDirect<T>(tableName, pk, rk);
+            return LoadDirect<T>(tableName, pk, rk, dataSourceEnum);
         }
 
-        public T LoadDirect<T>(string tableName, string pk, string rk)
+        public T LoadDirect<T>(string tableName, string pk, string rk, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             var myReturn = default(T);
 
@@ -259,8 +255,7 @@ namespace _5051.Backend
 
             try
             {
-                var Table = tableClient.GetTableReference(tableName);
-                Table.CreateIfNotExists();
+                var Table = GetTable(dataSourceEnum, tableName);
 
                 // Retrieve
                 var retrieveOperation = TableOperation.Retrieve<DataSourceBackendTableEntity>(pk, rk);
@@ -288,7 +283,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public T Update<T>(string tableName, string pk, string rk, T data)
+        public T Update<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             var myReturn = default(T);
 
@@ -318,10 +313,10 @@ namespace _5051.Backend
                 return myReturn;
             }
 
-            return UpdateDirect<T>(tableName, pk, rk, data);
+            return UpdateDirect<T>(tableName, pk, rk, data, dataSourceEnum);
         }
 
-        public T UpdateDirect<T>(string tableName, string pk, string rk, T data, CloudTable Table = null)
+        public T UpdateDirect<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             var myReturn = default(T);
 
@@ -347,11 +342,7 @@ namespace _5051.Backend
 
             try
             {
-                // If not Table Client is passed in, then assume the global one.
-                if (Table == null)
-                {
-                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
-                }
+                var Table = GetTable(dataSourceEnum, tableName);
 
                 // Add to Storage
                 var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
@@ -376,7 +367,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Delete<T>(string tableName, string pk, string rk, T data)
+        public bool Delete<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -404,10 +395,10 @@ namespace _5051.Backend
                 return true;
             }
 
-            return DeleteDirect<T>(tableName, pk, rk, data);
+            return DeleteDirect<T>(tableName, pk, rk, data, dataSourceEnum);
         }
 
-        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data, CloudTable Table = null)
+        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -431,11 +422,7 @@ namespace _5051.Backend
 
             try
             {
-                // If not Table Client is passed in, then assume the global one.
-                if (Table == null)
-                {
-                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
-                }
+                var Table = GetTable(dataSourceEnum, tableName);
 
                 // Delete
                 var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
@@ -502,64 +489,14 @@ namespace _5051.Backend
             return myReturn;
         }
 
-        /// <summary>
-        ///  Call this method to copy from one data source to another, this does the write of the copy
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dataSourceServerMode"></param>
-        /// <param name="tableName"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public bool CopyDataDirect<T>(DataSourceEnum dataSourceServerMode, string tableName, string pk = null)
-        {
-            if (string.IsNullOrEmpty(pk))
-            {
-                pk = tableName.ToLower();
-            }
-
-            // Read all the records from the Source using current database defaults
-            var SourceData = LoadAllDirect<T>(tableName, pk,null,true);
-            if (!SourceData.Any())
-            {
-                return false;
-            }
-
-            // Write all the records to the destination
-            // Set the path to the destination
-            var DestinationTable = GetTable(dataSourceServerMode, tableName);
-
-            // TODO
-            // Empty out Destination Table
-            // Get all rows in the destination Table
-            // Walk and delete each item, because delete table takes too long...
-            var SourceDataAll = LoadAllDirect<T>(tableName, pk, DestinationTable,true);
-            foreach (var data in SourceDataAll)
-            {
-                var rkObject = data.GetType().GetProperty("Id").GetValue(data, null);
-                DeleteDirect<T>(tableName, pk,rkObject.ToString(), data, DestinationTable);
-            }
-
-            // Load new Data into it
-            foreach (var data in SourceData)
-            {
-                var rkObject = data.GetType().GetProperty("Id").GetValue(data, null);
-                UpdateDirect<T>(tableName, pk, rkObject.ToString(), data, DestinationTable);
-
-                //var rkObject  = data.GetType().GetProperty("Id").GetValue(data, null);
-                //var rk = rkObject.ToString();
-
-                //// Add to Storage
-                //var entity = ConvertToEntity<T>(data, pk, rk);
-
-                //var updateOperation = TableOperation.InsertOrReplace(entity);
-                //var query = DestinationTable.Execute(updateOperation);
-            }
-
-            return true;
-        }
-
         public CloudTable GetTable(DataSourceEnum dataSourceServerMode, string tableName)
         {
+            // If the DataSource is unknown, then assume the global one
+            if (dataSourceServerMode == DataSourceEnum.Unknown)
+            {
+                dataSourceServerMode = SystemGlobalsModel.Instance.DataSourceValue;
+            }
+
             CloudTableClient DestinationTableClient;
 
             var DestinationStorageConnectionString = GetDataSourceConnectionString(dataSourceServerMode);

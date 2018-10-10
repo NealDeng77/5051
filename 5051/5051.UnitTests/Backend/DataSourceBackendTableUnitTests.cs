@@ -319,7 +319,7 @@ namespace _5051.UnitTests.Backend
             var pk = table;
 
             // Act
-            var result = backend.LoadAllDirect<AvatarItemModel>(table, pk,null);
+            var result = backend.LoadAllDirect<AvatarItemModel>(table, pk,DataSourceEnum.Unknown,false);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -340,7 +340,7 @@ namespace _5051.UnitTests.Backend
             var pk = table;
 
             // Act
-            var result = backend.LoadAllDirect<AvatarItemModel>(null, pk,null);
+            var result = backend.LoadAllDirect<AvatarItemModel>(null, pk, DataSourceEnum.Unknown, false);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -361,7 +361,7 @@ namespace _5051.UnitTests.Backend
             var pk = table;
 
             // Act
-            var result = backend.LoadAllDirect<AvatarItemModel>(table, null,null);
+            var result = backend.LoadAllDirect<AvatarItemModel>(table, null, DataSourceEnum.Unknown, false);
 
             // Reset
             DataSourceBackend.Instance.Reset();

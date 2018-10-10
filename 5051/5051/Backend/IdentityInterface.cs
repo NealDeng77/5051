@@ -12,7 +12,7 @@ namespace _5051.Backend
 
         StudentModel CreateNewStudent(StudentModel student);
 
-        StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student);
+        StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student,DataSourceEnum dataSourceEnum);
 
         bool ChangeUserName(string userId, string newName);
 
