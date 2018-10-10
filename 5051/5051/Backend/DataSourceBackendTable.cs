@@ -321,7 +321,7 @@ namespace _5051.Backend
             return UpdateDirect<T>(tableName, pk, rk, data);
         }
 
-        public T UpdateDirect<T>(string tableName, string pk, string rk, T data)
+        public T UpdateDirect<T>(string tableName, string pk, string rk, T data, CloudTable Table = null)
         {
             var myReturn = default(T);
 
@@ -347,8 +347,11 @@ namespace _5051.Backend
 
             try
             {
-                var Table = tableClient.GetTableReference(tableName);
-                Table.CreateIfNotExists();
+                // If not Table Client is passed in, then assume the global one.
+                if (Table == null)
+                {
+                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
+                }
 
                 // Add to Storage
                 var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
@@ -373,7 +376,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Delete<T>(string tableName, string pk, string rk, T data, CloudTableClient TableClient = null)
+        public bool Delete<T>(string tableName, string pk, string rk, T data)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -404,7 +407,7 @@ namespace _5051.Backend
             return DeleteDirect<T>(tableName, pk, rk, data);
         }
 
-        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data)
+        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data, CloudTable Table = null)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -428,8 +431,11 @@ namespace _5051.Backend
 
             try
             {
-                var Table = tableClient.GetTableReference(tableName);
-                Table.CreateIfNotExists();
+                // If not Table Client is passed in, then assume the global one.
+                if (Table == null)
+                {
+                    Table = GetTable(SystemGlobalsModel.Instance.DataSourceValue, tableName);
+                }
 
                 // Delete
                 var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
@@ -529,21 +535,24 @@ namespace _5051.Backend
             var SourceDataAll = LoadAllDirect<T>(tableName, pk, DestinationTable,true);
             foreach (var data in SourceDataAll)
             {
-
+                var rkObject = data.GetType().GetProperty("Id").GetValue(data, null);
+                DeleteDirect<T>(tableName, pk,rkObject.ToString(), data, DestinationTable);
             }
 
             // Load new Data into it
             foreach (var data in SourceData)
             {
+                var rkObject = data.GetType().GetProperty("Id").GetValue(data, null);
+                UpdateDirect<T>(tableName, pk, rkObject.ToString(), data, DestinationTable);
 
-                var rkObject  = data.GetType().GetProperty("Id").GetValue(data, null);
-                var rk = rkObject.ToString();
+                //var rkObject  = data.GetType().GetProperty("Id").GetValue(data, null);
+                //var rk = rkObject.ToString();
 
-                // Add to Storage
-                var entity = ConvertToEntity<T>(data, pk, rk);
+                //// Add to Storage
+                //var entity = ConvertToEntity<T>(data, pk, rk);
 
-                var updateOperation = TableOperation.InsertOrReplace(entity);
-                var query = DestinationTable.Execute(updateOperation);
+                //var updateOperation = TableOperation.InsertOrReplace(entity);
+                //var query = DestinationTable.Execute(updateOperation);
             }
 
             return true;
