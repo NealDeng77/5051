@@ -63,7 +63,11 @@ namespace _5051.Backend
         /// <returns>AvatarItem Passed In</returns>
         public SchoolDismissalSettingsModel Create(SchoolDismissalSettingsModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            DataList.Add(data);
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                DataList.Add(data);
+            }
 
             // Add to Storage
             var myResult = DataSourceBackendTable.Instance.Create<SchoolDismissalSettingsModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
@@ -125,14 +129,23 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = DataList.Find(n => n.Id == Id);
-            if (DataList.Remove(myData) == false)
+            var data = DataList.Find(n => n.Id == Id);
+            if (data == null)
             {
                 return false;
             }
 
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                if (DataList.Remove(data) == false)
+                {
+                    return false;
+                }
+            }
+
             // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolDismissalSettingsModel>(tableName, partitionKey, myData.Id, myData, dataSourceEnum);
+            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolDismissalSettingsModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
 
             return myReturn;
         }
