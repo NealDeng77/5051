@@ -12,12 +12,14 @@ namespace _5051.Backend
     /// </summary>
     public interface IKioskSettingsInterface
     {
-        KioskSettingsModel Create(KioskSettingsModel data);
+        KioskSettingsModel Create(KioskSettingsModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         KioskSettingsModel Read(string id);
         KioskSettingsModel Update(KioskSettingsModel data);
-        bool Delete(string id);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<KioskSettingsModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
     }
 }

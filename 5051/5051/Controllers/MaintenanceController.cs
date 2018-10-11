@@ -91,7 +91,7 @@ namespace _5051.Controllers
 
             DataSourceBackend.Instance.StudentBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
+            DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             return RedirectToAction("Index", "Maintenance");
         }

@@ -49,7 +49,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>KioskSettings Passed In</returns>
-        public KioskSettingsModel Create(KioskSettingsModel data)
+        public KioskSettingsModel Create(KioskSettingsModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             KioskSettingsList.Add(data);
             return data;
@@ -98,7 +98,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -193,6 +193,17 @@ namespace _5051.Backend
                     DataSetDefault();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Not implemented for Mock
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            return true;
         }
     }
 }

@@ -76,7 +76,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Student Passed In</returns>
-        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum=DataSourceEnum.Unknown)
+        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             // If using the defaul data source, use it, else just do the table operation
             if (dataSourceEnum == DataSourceEnum.Unknown)
@@ -93,7 +93,7 @@ namespace _5051.Backend
             temp.Truck = null;
 
             // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", data.Id, temp,dataSourceEnum);
+            DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", data.Id, temp, dataSourceEnum);
 
             // Sub Components
             var tempData = new StudentModel(data);
@@ -214,9 +214,9 @@ namespace _5051.Backend
                 }
             }
 
-                // Storage Delete
+            // Storage Delete
 
-                var temp = new StudentModel(data);
+            var temp = new StudentModel(data);
             temp.AvatarComposite = null;
             temp.AvatarInventory = null;
             temp.Inventory = null;
@@ -330,18 +330,41 @@ namespace _5051.Backend
                 {
                     TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
 
-                    TempData.AvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
+                    var tempAvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
+                    if (tempAvatarComposite != null)
+                    {
+                        TempData.AvatarComposite = tempAvatarComposite;
+                    }
 
-                    TempData.AvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey);
+                    var tempAvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey);
+                    if (tempAvatarInventory != null)
+                    {
+                        TempData.AvatarInventory = tempAvatarInventory;
+                    }
 
-                    TempData.Inventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey);
+                    var tempInventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey);
+                    if (tempInventory != null)
+                    {
+                        TempData.Inventory = tempInventory;
+                    }
 
-                    TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
+                    var tempAttendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
+                    if (tempAttendance != null)
+                    {
+                        TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
+                    }
 
-                    TempData.Truck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey);
+                    var tempTruck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey);
+                    if (tempTruck != null)
+                    {
+                        TempData.Truck = tempTruck;
+                    }
 
-                    var newData = new StudentModel(TempData);
-                    newData.Id = temp.RowKey;   //Set the ID to the item loaded
+                    var newData = new StudentModel(TempData)
+                    {
+                        Id = temp.RowKey   //Set the ID to the item loaded
+                    };
+
                     tempDataList.Add(newData);
                 }
                 catch (Exception ex)
@@ -404,6 +427,12 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// Backup the Data from Source to Destination
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
         public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
         {
             // Read all the records from the Source using current database defaults

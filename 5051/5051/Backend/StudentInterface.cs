@@ -11,10 +11,10 @@ namespace _5051.Backend
     /// </summary>
     public interface IStudentInterface
     {
-        StudentModel Create(StudentModel data,DataSourceEnum dataSourceEnum);
+        StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         StudentModel Read(string id);
         StudentModel Update(StudentModel data);
-        bool Delete(string id, DataSourceEnum dataSourceEnum);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<StudentModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
