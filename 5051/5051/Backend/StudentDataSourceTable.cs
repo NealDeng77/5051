@@ -326,9 +326,19 @@ namespace _5051.Backend
 
                 var TempData = new StudentModel();
 
-                try
+                //try
                 {
                     TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
+
+
+                    // Set default value incase the load below fails.
+                    TempData.AvatarComposite = new AvatarCompositeModel();
+                    TempData.AvatarInventory = new List<AvatarItemModel>();
+                    TempData.Inventory = new List<FactoryInventoryModel>();
+                    TempData.Attendance = new List<AttendanceModel>();
+                    TempData.Truck = new ShopTruckFullModel();
+
+                    // Load each sub field
 
                     var tempAvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
                     if (tempAvatarComposite != null)
@@ -367,10 +377,10 @@ namespace _5051.Backend
 
                     tempDataList.Add(newData);
                 }
-                catch (Exception ex)
-                {
-                    throw new NotSupportedException();
-                }
+                //catch (Exception ex)
+                //{
+                //    throw new NotSupportedException();
+                //}
             }
 
             return tempDataList;
@@ -447,7 +457,7 @@ namespace _5051.Backend
             // Get all rows in the destination Table
             // Walk and delete each item, because delete table takes too long...
             var DataAllDestination = LoadAll(dataSourceDestination);
-            if (DataAllDestination == null || !DataAllDestination.Any())
+            if (DataAllDestination == null)
             {
                 return false;
             }
