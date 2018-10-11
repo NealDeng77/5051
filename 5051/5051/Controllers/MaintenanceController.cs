@@ -85,7 +85,7 @@ namespace _5051.Controllers
 
             //DataSourceBackendTable.Instance.CopyDataDirect<ApplicationUser>(DestinationDataSource, "identitymodel");
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<SchoolCalendarModel>(DestinationDataSource, "schoolcalendarmodel");
+            DataSourceBackend.Instance.SchoolCalendarBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             DataSourceBackend.Instance.SchoolDismissalSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
 

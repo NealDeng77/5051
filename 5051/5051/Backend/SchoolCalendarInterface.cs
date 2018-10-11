@@ -12,14 +12,17 @@ namespace _5051.Backend
     /// </summary>
     public interface ISchoolCalendarInterface
     {
-        SchoolCalendarModel Create(SchoolCalendarModel data);
+        SchoolCalendarModel Create(SchoolCalendarModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         SchoolCalendarModel Read(string id);
         SchoolCalendarModel Update(SchoolCalendarModel data);
-        bool Delete(string id);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<SchoolCalendarModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
 
         SchoolCalendarModel ReadDate(DateTime date);
+
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
+
     }
 }
