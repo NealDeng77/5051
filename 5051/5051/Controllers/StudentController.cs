@@ -285,7 +285,7 @@ namespace _5051.Controllers
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(data.Id);
             var student = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
 
-            var changeResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(student.Name, student.Name, student.Password, _5051.Models.UserRoleEnum.StudentUser);
+            var changeResult = DataSourceBackend.Instance.IdentityBackend.ChangeUserPassword(student.Name, "abc", student.Password, _5051.Models.UserRoleEnum.StudentUser);
             if (!changeResult)
             {
                 ModelState.AddModelError("", "Password Reset resulted in error.");
