@@ -116,7 +116,7 @@ namespace _5051.Models
             AvatarLevel = 1;
             Status = StudentStatusEnum.Out;
             ExperiencePoints = 0;
-            Password = string.Empty;
+            Password = "abc";
             Attendance = new List<AttendanceModel>();
             EmotionCurrent = EmotionStatusEnum.Neutral;
             EmotionUri = Emotion.GetEmotionURI(EmotionCurrent);
