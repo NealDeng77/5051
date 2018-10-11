@@ -25,8 +25,6 @@ namespace _5051.Backend
 
         public StudentBackend StudentBackend = StudentBackend.Instance;
 
-
-
         /// <summary>
         /// Make into a Singleton
         /// </summary>
@@ -51,8 +49,6 @@ namespace _5051.Backend
             IdentityBackend = IdentityBackend.Instance;
 
             StudentBackend = StudentBackend.Instance;
-
-
         }
 
         public static DataSourceBackend Instance
@@ -93,7 +89,6 @@ namespace _5051.Backend
 
             StudentBackend.Reset();
 
-
             SetTestingMode(false);
         }
 
@@ -119,8 +114,6 @@ namespace _5051.Backend
             IdentityBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
 
             StudentBackend.SetDataSource(SystemGlobalsModel.Instance.DataSourceValue);
-
-
         }
 
         /// <summary>
@@ -143,15 +136,7 @@ namespace _5051.Backend
             IdentityBackend.SetDataSourceDataSet(SetEnum);
 
             StudentBackend.SetDataSourceDataSet(SetEnum);
-
-            
         }
-
-        //public static void ResetTestingModes(DataSourceDataSetEnum dataSourceDataSetEnum)
-        //{
-        //    SetTestingMode(false);
-        //    DataSourceBackend.Instance.s(dataSourceDataSetEnum);
-        //}
 
         public static bool GetTestingMode()
         {
