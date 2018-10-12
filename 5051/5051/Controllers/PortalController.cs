@@ -92,10 +92,12 @@ namespace _5051.Controllers
             //// When not in testing mode try the password
             //if (!DataSourceBackend.GetTestingMode())
             //{
-            //    if(!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
+            //    if (!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
             //    {
             //        ModelState.AddModelError("", "Invalid password");
-            //        return View(data);
+            //        var myReturn = new StudentDisplayViewModel(myStudent);
+
+            //        return View(myReturn);
             //    }
             //}
 
