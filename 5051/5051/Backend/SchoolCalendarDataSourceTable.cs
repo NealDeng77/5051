@@ -68,7 +68,7 @@ namespace _5051.Backend
             }
 
             // Add to Storage
-            var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data);
+            var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
 
             //sort by date
             DataList = DataList.OrderBy(x => x.Date).ToList();
@@ -149,7 +149,7 @@ namespace _5051.Backend
             }
 
             // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, data.Id, data);
+            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
 
             return myReturn;
         }
