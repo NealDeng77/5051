@@ -59,12 +59,16 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>SchoolCalendar Passed In</returns>
-        public SchoolCalendarModel Create(SchoolCalendarModel data)
+        public SchoolCalendarModel Create(SchoolCalendarModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            DataList.Add(data);
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                DataList.Add(data);
+            }
 
             // Add to Storage
-            var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data);
+            var myResult = DataSourceBackendTable.Instance.Create<SchoolCalendarModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
 
             //sort by date
             DataList = DataList.OrderBy(x => x.Date).ToList();
@@ -122,21 +126,30 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum= DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
                 return false;
             }
 
-            var myData = DataList.Find(n => n.Id == Id);
-            if (DataList.Remove(myData) == false)
+            var data = DataList.Find(n => n.Id == Id);
+            if (data == null)
             {
                 return false;
             }
 
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                if (DataList.Remove(data) == false)
+                {
+                    return false;
+                }
+            }
+
             // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, myData.Id, myData);
+            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
 
             return myReturn;
         }
@@ -186,10 +199,10 @@ namespace _5051.Backend
         /// <summary>
         /// Load the data from the server, and then default data if needed.
         /// </summary>
-        public void CreateDataSetDefaultData() { 
-            
+        public void CreateDataSetDefaultData() {
+
             // Storage Load all rows
-            var DataSetList = DataSourceBackendTable.Instance.LoadAll<SchoolCalendarModel>(tableName, partitionKey);
+            var DataSetList = LoadAll();
 
             foreach (var item in DataSetList)
             {
@@ -204,6 +217,19 @@ namespace _5051.Backend
 
             //sort by date
             DataList = DataList.OrderBy(x => x.Date).ToList();
+        }
+
+        /// <summary>
+        /// Load all the records from the datasource
+        /// </summary>
+        /// <param name="dataSourceEnum"></param>
+        /// <returns></returns>
+        public List<SchoolCalendarModel> LoadAll(DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        {
+
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<SchoolCalendarModel>(tableName, partitionKey, true, dataSourceEnum);
+
+            return DataSetList;
         }
 
         /// <summary>
@@ -281,6 +307,45 @@ namespace _5051.Backend
             // Use the short date string because only checking dd.mm.yy not time...
             var myData = DataList.Find(n => n.Date.ToShortDateString() == date.ToShortDateString());
             return myData;
+        }
+
+        /// <summary>
+        /// Backup the Data from Source to Destination
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            // Read all the records from the Source using current database defaults
+
+            var DataAllSource = LoadAll(dataSourceSource);
+            if (DataAllSource == null || !DataAllSource.Any())
+            {
+                return false;
+            }
+
+            // Empty out Destination Table
+            // Get all rows in the destination Table
+            // Walk and delete each item, because delete table takes too long...
+            var DataAllDestination = LoadAll(dataSourceDestination);
+            if (DataAllDestination == null)
+            {
+                return false;
+            }
+
+            foreach (var data in DataAllDestination)
+            {
+                Delete(data.Id, dataSourceDestination);
+            }
+
+            // Write the data to the destination
+            foreach (var data in DataAllSource)
+            {
+                Create(data, dataSourceDestination);
+            }
+
+            return true;
         }
     }
 }

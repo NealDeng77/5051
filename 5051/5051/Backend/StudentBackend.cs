@@ -82,9 +82,9 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Student Passed In</returns>
-        public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        public StudentModel Create(StudentModel data)
         {
-            DataSource.Create(data,dataSourceEnum);
+            DataSource.Create(data);
             return data;
         }
 
@@ -160,14 +160,14 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        public bool Delete(string Id)
         {
             if (string.IsNullOrEmpty(Id))
             {
                 return false;
             }
 
-            var myReturn = DataSource.Delete(Id,dataSourceEnum);
+            var myReturn = DataSource.Delete(Id);
             //delete the identity side as well
             var idDeleteResult = DataSourceBackend.Instance.IdentityBackend.DeleteUserIdRecordOnly(Id);
 

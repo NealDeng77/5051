@@ -12,12 +12,13 @@ namespace _5051.Backend
     /// </summary>
     public interface ISchoolDismissalSettingsInterface
     {
-        SchoolDismissalSettingsModel Create(SchoolDismissalSettingsModel data);
+        SchoolDismissalSettingsModel Create(SchoolDismissalSettingsModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         SchoolDismissalSettingsModel Read(string id);
         SchoolDismissalSettingsModel Update(SchoolDismissalSettingsModel data);
-        bool Delete(string id);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<SchoolDismissalSettingsModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
     }
 }

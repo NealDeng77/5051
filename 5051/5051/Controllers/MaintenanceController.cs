@@ -79,19 +79,19 @@ namespace _5051.Controllers
             //    return RedirectToAction("BackupData", "Maintenance");
             //}
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "avataritemmodel");
+            DataSourceBackend.Instance.AvatarItemBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<FactoryInventoryModel>(DestinationDataSource, "factoryinventorymodel");
+            DataSourceBackend.Instance.FactoryInventoryBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<ApplicationUser>(DestinationDataSource, "identitymodel");
+            DataSourceBackend.Instance.IdentityBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<SchoolCalendarModel>(DestinationDataSource, "schoolcalendarmodel");
+            DataSourceBackend.Instance.SchoolCalendarBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<SchoolDismissalSettingsModel>(DestinationDataSource, "schooldismissalsettingsmodel");
+            DataSourceBackend.Instance.SchoolDismissalSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             DataSourceBackend.Instance.StudentBackend.BackupData(BackupData.Source, BackupData.Destination);
 
-            //DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
+            DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             return RedirectToAction("Index", "Maintenance");
         }

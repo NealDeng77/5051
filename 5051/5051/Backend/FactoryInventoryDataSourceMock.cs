@@ -49,7 +49,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>FactoryInventory Passed In</returns>
-        public FactoryInventoryModel Create(FactoryInventoryModel data)
+        public FactoryInventoryModel Create(FactoryInventoryModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             DataSet.Add(data);
             return data;
@@ -98,7 +98,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -197,6 +197,17 @@ namespace _5051.Backend
                     DataSetDefault();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Not implemented for Mock
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            return true;
         }
     }
 }

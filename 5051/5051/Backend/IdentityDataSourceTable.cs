@@ -78,14 +78,30 @@ namespace _5051.Backend
                 ClaimValue = "True"
             });
 
-            DataList.Add(user);
-
-            //add to storage
-            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
+            var myResult = Create(user);
 
             return myResult;
         }
 
+
+        /// <summary>
+        /// Create to write the data to disk
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="dataSourceEnum"></param>
+        /// <returns></returns>
+        public ApplicationUser Create(ApplicationUser user, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        {
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                DataList.Add(user);
+            }
+
+            //add to storage
+            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user, dataSourceEnum);
+
+            return user;
+        }
 
         /// <summary>
         /// Creates a teacher user
@@ -106,10 +122,7 @@ namespace _5051.Backend
                 ClaimValue = "True"
             });
 
-            DataList.Add(user);
-
-            //add to storage
-            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
+            var myResult = Create(user);
 
             return myResult;
         }
@@ -149,10 +162,7 @@ namespace _5051.Backend
                 ClaimValue = "True"
             });
 
-            DataList.Add(user);
-
-            //add to storage
-            var myResult = DataSourceBackendTable.Instance.Create<ApplicationUser>(tableName, partitionKey, user.Id, user);
+            var myResult = Create(user);
 
             return student;
         }
@@ -194,7 +204,7 @@ namespace _5051.Backend
         //    {
         //        return false;
         //    }
-          
+
         //    if(student.Name != idFindResult.UserName)
         //    {
         //        idFindResult.UserName = student.Name;
@@ -208,24 +218,24 @@ namespace _5051.Backend
 
         public bool ChangeUserName(string userId, string newName)
         {
-            if(userId == null || newName == null)
+            if (userId == null || newName == null)
             {
                 return false;
             }
 
             var idFind = FindUserByID(userId);
-            if(idFind == null)
+            if (idFind == null)
             {
                 return false;
             }
 
             var studentFind = GetStudentById(userId);
-            if(studentFind == null)
+            if (studentFind == null)
             {
                 return false;
             }
 
-            studentFind.Name = newName;            
+            studentFind.Name = newName;
 
             //update List
             DataList.Remove(idFind);
@@ -239,7 +249,7 @@ namespace _5051.Backend
                 return false;
             }
             var idTableUpdate = DataSourceBackendTable.Instance.Update(tableName, partitionKey, userId, idFind);
-            if(idFind == null)
+            if (idFind == null)
             {
                 return false;
             }
@@ -251,12 +261,12 @@ namespace _5051.Backend
         public bool ChangeUserPassword(string userName, string newPass, string oldPass, _5051.Models.UserRoleEnum role)
         {
             var findResult = FindUserByUserName(userName);
-            if(findResult == null)
+            if (findResult == null)
             {
                 return false;
             }
 
-            if(role == _5051.Models.UserRoleEnum.TeacherUser && UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
+            if (role == _5051.Models.UserRoleEnum.TeacherUser && UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
             {
                 teacherPass = newPass;
                 return true;
@@ -268,12 +278,12 @@ namespace _5051.Backend
                 return true;
             }
 
-            if(role == _5051.Models.UserRoleEnum.StudentUser)
+            if (role == _5051.Models.UserRoleEnum.StudentUser)
             {
                 //var student = DataSourceBackend.Instance.StudentBackend.Read(findResult.Id);
                 var student = GetStudentById(findResult.Id);
 
-                if(student == null)
+                if (student == null)
                 {
                     return false;
                 }
@@ -328,7 +338,7 @@ namespace _5051.Backend
 
             foreach (var item in DataList)
             {
-                if(item.Id == id)
+                if (item.Id == id)
                 {
                     return item;
                 }
@@ -368,7 +378,7 @@ namespace _5051.Backend
 
             foreach (var user in DataList)
             {
-                if(UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.StudentUser))
+                if (UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.StudentUser))
                 {
                     myReturn.Add(user);
                 }
@@ -458,7 +468,7 @@ namespace _5051.Backend
         {
             var findResult = FindUserByID(userID);
 
-            if(findResult == null)
+            if (findResult == null)
             {
                 return null;
             }
@@ -466,7 +476,7 @@ namespace _5051.Backend
             findResult.Claims.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim
             {
                 ClaimType = claimTypeToAdd,
-                ClaimValue =claimValueToAdd
+                ClaimValue = claimValueToAdd
             });
 
 
@@ -486,7 +496,7 @@ namespace _5051.Backend
         public bool RemoveClaimFromUser(string userID, string claimTypeToRemove)
         {
             var findResult = FindUserByID(userID);
-            if(findResult == null)
+            if (findResult == null)
             {
                 return false;
             }
@@ -513,6 +523,41 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        {
+            if (string.IsNullOrEmpty(Id))
+            {
+                return false;
+            }
+
+            var data = DataList.Find(n => n.Id == Id);
+            if (data == null)
+            {
+                return false;
+            }
+
+            // If using the defaul data source, use it, else just do the table operation
+            if (dataSourceEnum == DataSourceEnum.Unknown)
+            {
+                if (DataList.Remove(data) == false)
+                {
+                    return false;
+                }
+            }
+
+            // Storage Delete
+            var myReturn = DataSourceBackendTable.Instance.Delete<ApplicationUser>(tableName, partitionKey, data.Id, data, dataSourceEnum);
+
+            return myReturn;
+        }
+
+
+        /// <summary>
+        /// Deletes the user with the given id
+        /// returns false if delete fails
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool DeleteUser(string Id)
         {
             if (string.IsNullOrEmpty(Id))
@@ -520,21 +565,19 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = DataList.Find(n => n.Id == Id);
-
-            if (DataList.Remove(myData) == false)
+            var data = DataList.Find(n => n.Id == Id);
+            if (data == null)
             {
                 return false;
             }
 
-            if (UserHasClaimOfType(myData.Id, _5051.Models.UserRoleEnum.StudentUser))
+            var myReturn = Delete(Id);
+
+            if (UserHasClaimOfType(data.Id, UserRoleEnum.StudentUser))
             {
                 //delete the student from student table as well
-                var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(myData.Id);
+                var deleteResult = DataSourceBackend.Instance.StudentBackend.Delete(data.Id);
             }
-
-            // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<ApplicationUser>(tableName, partitionKey, myData.Id, myData);
 
             return myReturn;
         }
@@ -546,15 +589,7 @@ namespace _5051.Backend
                 return false;
             }
 
-            var myData = DataList.Find(n => n.Id == Id);
-
-            if (DataList.Remove(myData) == false)
-            {
-                return false;
-            }
-
-            // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<ApplicationUser>(tableName, partitionKey, myData.Id, myData);
+            var myReturn = Delete(Id);
 
             return myReturn;
         }
@@ -568,13 +603,13 @@ namespace _5051.Backend
         /// <returns></returns>
         public bool LogUserIn(string userName, string password, _5051.Models.UserRoleEnum role, HttpContextBase context)
         {
-            if(userName == null && password == null)
+            if (userName == null && password == null)
             {
                 return false;
             }
 
             var findResult = FindUserByUserName(userName);
-            if(findResult == null)
+            if (findResult == null)
             {
                 return false;
             }
@@ -587,7 +622,7 @@ namespace _5051.Backend
                     return false;
                 }
 
-                if(password == supportPass)
+                if (password == supportPass)
                 {
                     return true;
                 }
@@ -603,7 +638,7 @@ namespace _5051.Backend
                     return false;
                 }
 
-                if(password == teacherPass)
+                if (password == teacherPass)
                 {
                     return true;
                 }
@@ -614,7 +649,7 @@ namespace _5051.Backend
             }
 
             var student = GetStudentById(findResult.Id);
-            if(student != null && student.Password == password)
+            if (student != null && student.Password == password)
             {
                 var logOutResult = LogUserOut(context);
 
@@ -758,7 +793,7 @@ namespace _5051.Backend
 
             foreach (var item in DataSetList)
             {
-               var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
+                var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
             }
 
             supportUserName = "su5051";
@@ -780,7 +815,7 @@ namespace _5051.Backend
             DataSetClear();
 
             // Storage Load all rows
-            var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey);
+            var DataSetList = LoadAll();
 
             foreach (var item in DataSetList)
             {
@@ -792,6 +827,19 @@ namespace _5051.Backend
             {
                 CreateDataSetDefault();
             }
+        }
+
+
+        /// <summary>
+        /// Load all the records from the datasource
+        /// </summary>
+        /// <param name="dataSourceEnum"></param>
+        /// <returns></returns>
+        public List<ApplicationUser> LoadAll(DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        {
+            var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey, true, dataSourceEnum);
+
+            return DataSetList;
         }
 
         private void CreateDataSetDefault()
@@ -843,5 +891,43 @@ namespace _5051.Backend
             }
         }
 
+        /// <summary>
+        /// Backup the Data from Source to Destination
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            // Read all the records from the Source using current database defaults
+
+            var DataAllSource = LoadAll(dataSourceSource);
+            if (DataAllSource == null || !DataAllSource.Any())
+            {
+                return false;
+            }
+
+            // Empty out Destination Table
+            // Get all rows in the destination Table
+            // Walk and delete each item, because delete table takes too long...
+            var DataAllDestination = LoadAll(dataSourceDestination);
+            if (DataAllDestination == null)
+            {
+                return false;
+            }
+
+            foreach (var data in DataAllDestination)
+            {
+                Delete(data.Id, dataSourceDestination);
+            }
+
+            // Write the data to the destination
+            foreach (var data in DataAllSource)
+            {
+                Create(data, dataSourceDestination);
+            }
+
+            return true;
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>SchoolCalendar Passed In</returns>
-        public SchoolCalendarModel Create(SchoolCalendarModel data)
+        public SchoolCalendarModel Create(SchoolCalendarModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             SchoolCalendarList.Add(data);
 
@@ -105,7 +105,7 @@ namespace _5051.Backend
         /// </summary>
         /// <param name="data"></param>
         /// <returns>True for success, else false</returns>
-        public bool Delete(string Id)
+        public bool Delete(string Id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -227,5 +227,17 @@ namespace _5051.Backend
             var myData = SchoolCalendarList.Find(n => n.Date.ToShortDateString() == date.ToShortDateString());
             return myData;
         }
+
+        /// <summary>
+        /// Not implemented for Mock
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            return true;
+        }
+
     }
 }

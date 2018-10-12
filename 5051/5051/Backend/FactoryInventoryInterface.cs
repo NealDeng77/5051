@@ -12,12 +12,14 @@ namespace _5051.Backend
     /// </summary>
     public interface IFactoryInventoryInterface
     {
-        FactoryInventoryModel Create(FactoryInventoryModel data);
+        FactoryInventoryModel Create(FactoryInventoryModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         FactoryInventoryModel Read(string id);
         FactoryInventoryModel Update(FactoryInventoryModel data);
-        bool Delete(string id);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<FactoryInventoryModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
     }
 }
