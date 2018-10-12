@@ -75,6 +75,52 @@ namespace _5051.UnitTests.Models
         }
         #endregion Update
 
+        #region SetGet
+        [TestMethod]
+        public void Models_SchoolCalendarModel_SetGet_Should_Pass()
+        {
+            // Arrange
+
+            var TempId = "123";
+            var TempDate = DateTime.UtcNow;
+            var TempTimeDuration = TimeSpan.FromHours(6);
+            var TempTimeStart = TimeSpan.FromHours(8);
+            var TempTimeEnd = TimeSpan.FromHours(14);
+            var TempDayStart = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            var TempDayEnd = _5051.Models.Enums.SchoolCalendarDismissalEnum.Early;
+            var TempModified = true;
+            var TempSchoolDay = true;
+            var TempHasAttendance = true;
+
+        // Act
+            var result = new SchoolCalendarModel(null);
+
+            result.Id = TempId;
+            result.Date = TempDate;
+            result.TimeDuration = TempTimeDuration;
+            result.TimeStart = TempTimeStart;
+            result.TimeEnd = TempTimeEnd;
+            result.DayStart = TempDayStart;
+            result.DayEnd = TempDayEnd;
+            result.Modified = TempModified;
+            result.SchoolDay = TempSchoolDay;
+            result.HasAttendance = TempHasAttendance;
+            
+            // Assert
+            Assert.AreEqual(TempId, result.Id, TestContext.TestName);
+            Assert.AreEqual(TempDate, result.Date, TestContext.TestName);
+            Assert.AreEqual(TempTimeDuration, result.TimeDuration, TestContext.TestName);
+            Assert.AreEqual(TempTimeStart, result.TimeStart, TestContext.TestName);
+            Assert.AreEqual(TempTimeEnd, result.TimeEnd, TestContext.TestName);
+            Assert.AreEqual(TempDayStart, result.DayStart, TestContext.TestName);
+            Assert.AreEqual(TempDayEnd, result.DayEnd, TestContext.TestName);
+            Assert.AreEqual(TempModified, result.Modified, TestContext.TestName);
+            Assert.AreEqual(TempSchoolDay, result.SchoolDay, TestContext.TestName);
+            Assert.AreEqual(TempHasAttendance, result.HasAttendance, TestContext.TestName);
+        }
+
+        #endregion SetGet
+
         //#region SetSchoolTime
         //[TestMethod]
         //public void Models_SchoolCalendarModel_SetSchoolTime_Start_Early_Should_Pass()
