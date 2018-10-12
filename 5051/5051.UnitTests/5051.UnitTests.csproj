@@ -182,6 +182,7 @@
     <Compile Include="Models\BusinessReportViewModelUnitTests.cs" />
     <Compile Include="Models\Enums\UserRoleEnumUnitTests.cs" />
     <Compile Include="Models\ApplicationUserInputModelUnitTests.cs" />
+    <Compile Include="Models\BackupDataInputModelUnitTests.cs" />
     <Compile Include="Models\VisitTruckViewModelUnitTests.cs" />
     <Compile Include="Models\ShopTruckInputModelUnitTests.cs" />
     <Compile Include="Models\AvatarCompositeModelUnitTests.cs" />
