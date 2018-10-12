@@ -79,9 +79,7 @@ namespace _5051.Controllers
             //    return RedirectToAction("BackupData", "Maintenance");
             //}
 
-            //DataSourceBackendTable.Instance.CopyDataDirect<AvatarItemModel>(DestinationDataSource, "avataritemmodel");
-
-            //DataSourceBackendTable.Instance.CopyDataDirect<FactoryInventoryModel>(DestinationDataSource, "factoryinventorymodel");
+            DataSourceBackend.Instance.AvatarItemBackend.BackupData(BackupData.Source, BackupData.Destination);
 
             DataSourceBackend.Instance.FactoryInventoryBackend.BackupData(BackupData.Source, BackupData.Destination);
 

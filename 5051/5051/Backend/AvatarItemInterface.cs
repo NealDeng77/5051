@@ -9,12 +9,14 @@ namespace _5051.Backend
     /// </summary>
     public interface IAvatarItemInterface
     {
-        AvatarItemModel Create(AvatarItemModel data);
+        AvatarItemModel Create(AvatarItemModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         AvatarItemModel Read(string id);
         AvatarItemModel Update(AvatarItemModel data);
-        bool Delete(string id);
+        bool Delete(string id, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown);
         List<AvatarItemModel> Index();
         void Reset();
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
     }
 }
