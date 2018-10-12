@@ -293,7 +293,7 @@ namespace _5051.Backend
             // Get all rows in the destination Table
             // Walk and delete each item, because delete table takes too long...
             var DataAllDestination = LoadAll(dataSourceDestination);
-            if (DataAllDestination == null || !DataAllDestination.Any())
+            if (DataAllDestination == null)
             {
                 return false;
             }
