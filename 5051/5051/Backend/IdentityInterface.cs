@@ -59,5 +59,7 @@ namespace _5051.Backend
         void Reset();
 
         void LoadDataSet(DataSourceDataSetEnum setEnum);
+
+        bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination);
     }
 }

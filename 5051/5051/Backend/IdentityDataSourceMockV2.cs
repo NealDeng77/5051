@@ -652,5 +652,16 @@ namespace _5051.Backend
                     break;
             }
         }
+
+        /// <summary>
+        /// Not implemented for Mock
+        /// </summary>
+        /// <param name="dataSourceSource"></param>
+        /// <param name="dataSourceDestination"></param>
+        /// <returns></returns>
+        public bool BackupData(DataSourceEnum dataSourceSource, DataSourceEnum dataSourceDestination)
+        {
+            return true;
+        }
     }
 }
