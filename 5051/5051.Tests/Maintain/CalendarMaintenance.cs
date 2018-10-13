@@ -36,6 +36,18 @@ namespace _5051.Tests.Maintenance
             Assert.AreEqual(result, new CalendarMaintenance().GetType(), TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Maintenance_Calendar_Reset_Default_Should_Pass()
+        {
+            // Arrange
+            var Maintenance = new CalendarMaintenance();
+
+            // Act
+            var result = Maintenance.ResetCalendar();
+
+            // Assert
+            Assert.AreEqual(true, result, TestContext.TestName);
+        }
         #endregion Instantiate
     }
 }
