@@ -147,6 +147,7 @@
     <Compile Include="Controllers\KioskControllerTest.cs" />
     <Compile Include="Controllers\AdminControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
+    <Compile Include="Maintain\AvatarItemMaintenance.cs" />
     <Compile Include="Maintain\CalendarMaintenance.cs" />
     <Compile Include="Maintain\DataBackupMaintenance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -265,6 +265,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\AvatarItemMaintenance.cs" />
     <Compile Include="Maintain\CalendarMaintenance.cs" />
     <Compile Include="Maintain\DataBackupMaintenance.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
