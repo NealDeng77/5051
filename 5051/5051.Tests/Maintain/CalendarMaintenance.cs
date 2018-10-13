@@ -12,7 +12,7 @@ using _5051.Models;
 namespace _5051.Tests.Maintenance
 {
     [TestClass]
-    public class CalendarMaintenance
+    public class CalendarMaintenanceTests
     {
         public TestContext TestContext { get; set; }
 
