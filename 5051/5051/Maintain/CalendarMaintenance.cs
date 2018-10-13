@@ -12,6 +12,7 @@ namespace _5051.Maintain
     {
         public void ResetCalendar()
         {
+
             var calendarSet = DataSourceBackend.Instance.SchoolCalendarBackend.Index();
             foreach (var item in calendarSet)
             {
