@@ -801,6 +801,7 @@
     <Content Include="Views\Maintenance\BackupData.cshtml" />
     <Content Include="Views\Student\ResetPassword.cshtml" />
     <Content Include="Views\Maintenance\ResetCalendar.cshtml" />
+    <Content Include="Views\Maintenance\RefreshAvatars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
