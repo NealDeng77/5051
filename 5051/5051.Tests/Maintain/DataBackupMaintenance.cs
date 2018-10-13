@@ -64,6 +64,18 @@ namespace _5051.Tests.Maintenance
             Assert.AreEqual(false, result, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void Maintenance_DataBackup_Default_Should_Fail()
+        {
+            // Arrange
+            var Maintenance = new DataBackupMaintenance();
+
+            // Act
+            var result = Maintenance.DataBackup(DataSourceEnum.ServerTest, DataSourceEnum.Local);
+
+            // Assert
+            Assert.AreEqual(true, result, TestContext.TestName);
+        }
         #endregion DataBackup
     }
 }
