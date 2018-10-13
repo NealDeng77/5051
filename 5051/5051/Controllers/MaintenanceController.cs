@@ -69,34 +69,16 @@ namespace _5051.Controllers
                 return RedirectToAction("BackupData", "Maintenance");
             }
 
-
             if (string.IsNullOrEmpty(BackupData.Password))
             {
                 return RedirectToAction("BackupData", "Maintenance");
             }
 
-            //if (SystemGlobalsModel.Instance.DataSourceValue == DataSourceEnum.Mock)
-            //{
-            //    return RedirectToAction("BackupData", "Maintenance");
-            //}
-
-            DataSourceBackend.Instance.AvatarItemBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.FactoryInventoryBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.IdentityBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.SchoolCalendarBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.SchoolDismissalSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.StudentBackend.BackupData(BackupData.Source, BackupData.Destination);
-
-            DataSourceBackend.Instance.KioskSettingsBackend.BackupData(BackupData.Source, BackupData.Destination);
+            var temp = new Maintain.DataBackupMaintenance();
+            temp.DataBackup(BackupData.Source, BackupData.Destination);
 
             return RedirectToAction("Index", "Maintenance");
         }
-
 
         public ActionResult ResetCalendar()
         {
@@ -156,10 +138,8 @@ namespace _5051.Controllers
              * 
              */
 
-            //var temp = new ;
-
-            //.Maintenance.CalendarMaintenance();
-
+            var temp = new Maintain.CalendarMaintenance();
+            temp.ResetCalendar();
 
             return RedirectToAction("Index", "Maintenance");
         }
