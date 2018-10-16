@@ -43,11 +43,22 @@
 
 <ul class="navbar-nav mr-auto FontBold FontColorBlack FontSizeSmall">
     @{ if (currentID != null)
+        {
+            var user = DataBackend.IdentityBackend.FindUserByID(currentID);
+            if (user != null)
+            {
+                if (DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.SupportUser))
                 {
-                    var student = DataBackend.IdentityBackend.FindUserByID(currentID);
-                    if (student != null)
-                    {
-                <li class="nav-link" style="">Hello @student.UserName!</li>
+                    @Html.ActionLink(user.UserName, "Index", "Support", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "" });
+                }
+                else if (DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.TeacherUser))
+                {
+                    @Html.ActionLink(user.UserName, "Index", "Admin", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "" });
+                }
+                else if (DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(user.Id, _5051.Models.UserRoleEnum.StudentUser))
+                {
+                    @Html.ActionLink(user.UserName, "Index", "Portal", routeValues: null, htmlAttributes: new { @class = "nav-link", style = "" });
+                }
             }
 
             <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a></li>

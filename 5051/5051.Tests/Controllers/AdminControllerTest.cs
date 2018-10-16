@@ -31,6 +31,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
@@ -43,6 +47,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Report() as ViewResult;
@@ -59,6 +67,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.WeeklyReport();
 
@@ -73,6 +85,10 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.WeeklyReport(id) as ViewResult;
 
@@ -86,6 +102,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.WeeklyReport(id);
 
@@ -99,6 +120,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             WeeklyReportViewModel data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.WeeklyReport(data);
@@ -118,6 +143,10 @@ namespace _5051.Tests.Controllers
                 SelectedWeekId = 2
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.WeeklyReport(data);
 
@@ -131,6 +160,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.WeeklyReport();
 
@@ -143,7 +176,11 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id; 
+            string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.MonthlyReport(id) as ViewResult;
@@ -157,7 +194,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
-            string id = "bogus"; 
+            string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.MonthlyReport(id); 
 
@@ -171,7 +213,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             MonthlyReportViewModel data = null;
-            
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.MonthlyReport(data);
 
@@ -190,6 +236,10 @@ namespace _5051.Tests.Controllers
                 SelectedMonthId = 2
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.MonthlyReport(data);
 
@@ -205,6 +255,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SemesterReport();
 
@@ -219,6 +273,10 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.SemesterReport(id) as ViewResult;
 
@@ -232,6 +290,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SemesterReport(id);
 
@@ -245,6 +308,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             SemesterReportViewModel data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SemesterReport(data);
@@ -264,6 +331,10 @@ namespace _5051.Tests.Controllers
                 SelectedSemesterId = 2
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.SemesterReport(data);
 
@@ -276,6 +347,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.QuarterReport();
@@ -291,6 +366,10 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.QuarterReport(id) as ViewResult;
 
@@ -304,6 +383,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.QuarterReport(id);
 
@@ -317,6 +401,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             QuarterReportViewModel data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.QuarterReport(data);
@@ -336,6 +424,10 @@ namespace _5051.Tests.Controllers
                 SelectedQuarterId = 2
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.QuarterReport(data);
 
@@ -353,6 +445,10 @@ namespace _5051.Tests.Controllers
                 StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
                 SelectedQuarterId = 3
             };
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = controller.QuarterReport(data);
@@ -372,6 +468,10 @@ namespace _5051.Tests.Controllers
                 SelectedQuarterId = 4
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.QuarterReport(data);
 
@@ -386,6 +486,10 @@ namespace _5051.Tests.Controllers
             AdminController controller = new AdminController();
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.OverallReport(id);
 
@@ -399,6 +503,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             string id = "abc";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.OverallReport(id);
@@ -426,6 +534,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Settings() as ViewResult;
@@ -518,6 +630,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.ChangePassword((string)null);
 
@@ -533,6 +649,10 @@ namespace _5051.Tests.Controllers
 
             string id = "bogus";
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.ChangePassword(id);
 
@@ -546,6 +666,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AdminController controller = new AdminController();
             var id = "teacher";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.ChangePassword(id) as ViewResult;
@@ -569,6 +693,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.ChangePassword(data) as ViewResult;
 
@@ -581,6 +709,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AdminController controller = new AdminController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.ChangePassword((ChangePasswordViewModel)null);
@@ -603,6 +735,10 @@ namespace _5051.Tests.Controllers
 
             // Make data.Id empty
             dataEmpty.UserID = "";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var resultNull = (ViewResult)controller.ChangePassword(dataNull);
@@ -631,6 +767,10 @@ namespace _5051.Tests.Controllers
             model.OldPassword = "bogus";
             model.NewPassword = student.Password;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = (ViewResult)controller.ChangePassword(model);
 
@@ -653,6 +793,10 @@ namespace _5051.Tests.Controllers
             model.ConfirmPassword = "teacher";
             model.OldPassword = "teacher";
             model.NewPassword = "teacher";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             RedirectToRouteResult result = controller.ChangePassword(model) as RedirectToRouteResult;

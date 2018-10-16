@@ -13,6 +13,13 @@ namespace _5051.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
@@ -23,6 +30,13 @@ namespace _5051.Controllers
         // GET: Report
         public ActionResult Report()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             // Load the list of data into the StudentList
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
 
@@ -42,6 +56,13 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult WeeklyReport(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
@@ -70,6 +91,12 @@ namespace _5051.Controllers
             "SelectedWeekId"+
             "")] WeeklyReportViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             if (data == null)
             {
@@ -91,6 +118,13 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult MonthlyReport(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
@@ -120,6 +154,12 @@ namespace _5051.Controllers
             "SelectedMonthId"+
             "")] MonthlyReportViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             if (data == null)
             {
@@ -141,6 +181,13 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult SemesterReport(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
@@ -171,6 +218,13 @@ namespace _5051.Controllers
             "SelectedSemesterId"+
             "")] SemesterReportViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             if (data == null)
             {
                 // Send to error page
@@ -191,6 +245,13 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult QuarterReport(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
@@ -221,6 +282,13 @@ namespace _5051.Controllers
             "SelectedQuarterId"+
             "")] QuarterReportViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             if (data == null)
             {
                 // Send to error page
@@ -241,6 +309,13 @@ namespace _5051.Controllers
         /// <returns>Report data</returns>
         public ActionResult OverallReport(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
 
             if (myStudent == null)
@@ -266,6 +341,13 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult Settings()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
@@ -300,6 +382,13 @@ namespace _5051.Controllers
         [AllowAnonymous]
         public ActionResult ChangePassword(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {
@@ -321,7 +410,14 @@ namespace _5051.Controllers
                                              "ConfirmPassword," +
                                              "")] ChangePasswordViewModel data)
         {
-            if(data == null)
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (data == null)
             {
                 return RedirectToAction("Error", "Home");
             }
