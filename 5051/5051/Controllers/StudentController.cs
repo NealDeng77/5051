@@ -149,13 +149,18 @@ namespace _5051.Controllers
             var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(data.Id);
 
             myDataStudent.EmotionCurrent = data.EmotionCurrent;
-            myDataStudent.Name = data.Name;
+            //myDataStudent.Name = data.Name;
             myDataStudent.Tokens = data.Tokens;
             myDataStudent.Status = data.Status;
             myDataStudent.ExperiencePoints = data.ExperiencePoints;
             myDataStudent.Truck.TruckName = data.Truck.TruckName;
 
             DataSourceBackend.Instance.StudentBackend.Update(myDataStudent);
+
+            if(myDataStudent.Name != data.Name)
+            {
+                DataSourceBackend.Instance.IdentityBackend.ChangeUserName(data.Id, data.Name);
+            }
 
             return RedirectToAction("Index");
         }
