@@ -282,7 +282,7 @@ namespace _5051.Controllers
         {
             user.Email = "teacher";
 
-            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.TeacherUser, null);
+            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.TeacherUser, HttpContext);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");

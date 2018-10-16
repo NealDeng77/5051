@@ -349,8 +349,10 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var expectUsername = "su5051";
 
+            var context = CreateMoqSetupForCookie();
+
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.SupportUser, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.SupportUser, context);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);
@@ -363,8 +365,10 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var expectUsername = "teacher";
 
+            var context = CreateMoqSetupForCookie();
+
             //act
-            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.TeacherUser, null);
+            var result = backend.LogUserIn(expectUsername, expectUsername, _5051.Models.UserRoleEnum.TeacherUser, context);
 
             //assert
             Assert.IsTrue(result, TestContext.TestName);

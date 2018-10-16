@@ -625,6 +625,10 @@ namespace _5051.Backend
 
                 if (password == supportPass)
                 {
+                    var logOutResult = LogUserOut(context);
+
+                    var cookieResult = CreateCookie("id", supportUserName, context);
+
                     return true;
                 }
                 else
@@ -641,6 +645,10 @@ namespace _5051.Backend
 
                 if (password == teacherPass)
                 {
+                    var logOutResult = LogUserOut(context);
+
+                    var cookieResult = CreateCookie("id", teacherUserName, context);
+
                     return true;
                 }
                 else

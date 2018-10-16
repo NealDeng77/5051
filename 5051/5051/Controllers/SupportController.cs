@@ -47,16 +47,25 @@ namespace _5051.Controllers
         // GET: Support
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
         //GET lists all the users
         public ActionResult UserList()
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             // Get the List of Users, and convert them to Student Display Views so they get an avatar.  
             // Because the ID may not be a student ID, use the Identity ID
@@ -111,10 +120,12 @@ namespace _5051.Controllers
         //GET Support/UserInfo/userID
         public ActionResult UserInfo(string id = null)
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             var myUserInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
 
@@ -126,10 +137,12 @@ namespace _5051.Controllers
         //GET support/togglestudent/userID
         public ActionResult ToggleUser(string id = null, string item = null)
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             if (string.IsNullOrEmpty(id))
             {
@@ -165,10 +178,6 @@ namespace _5051.Controllers
                                                 "Role,"+
                                                 "")] ApplicationUserInputModel data)
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
 
             if (!ModelState.IsValid)
             {
@@ -220,7 +229,7 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.SupportUser, null);
+            var loginResult = DataSourceBackend.Instance.IdentityBackend.LogUserIn(user.Email, user.Password, _5051.Models.UserRoleEnum.SupportUser, HttpContext);
             if (!loginResult)
             {
                 ModelState.AddModelError("", "Invalid Login Attempt");
@@ -233,6 +242,13 @@ namespace _5051.Controllers
         //GET
         public ActionResult CreateStudent()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
@@ -257,6 +273,13 @@ namespace _5051.Controllers
         //GET
         public ActionResult CreateTeacher()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
@@ -281,6 +304,13 @@ namespace _5051.Controllers
         //GET
         public ActionResult CreateSupport()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View();
         }
 
@@ -305,6 +335,13 @@ namespace _5051.Controllers
         //GET
         public ActionResult DeleteUser(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {
@@ -337,10 +374,12 @@ namespace _5051.Controllers
 
         public ActionResult Settings()
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             return View();
         }
@@ -352,10 +391,12 @@ namespace _5051.Controllers
         // GET: Reset
         public ActionResult Reset()
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             DataSourceBackend.Instance.Reset();
             return RedirectToAction("Index", "Support");
@@ -368,10 +409,12 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSourceSet(string id = null)
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             if (string.IsNullOrEmpty(id))
             {
@@ -406,10 +449,12 @@ namespace _5051.Controllers
         // GET: Settings
         public ActionResult DataSource(string id = null)
         {
-            //if (DataSourceBackend.IsUserNotInRole(User.Identity.GetUserId(), "SupportUser"))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             if (string.IsNullOrEmpty(id))
             {
@@ -453,6 +498,13 @@ namespace _5051.Controllers
         //GET
         public ActionResult ChangeUserPassword(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
             if (findResult == null)
             {

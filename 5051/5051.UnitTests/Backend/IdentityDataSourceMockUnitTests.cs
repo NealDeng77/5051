@@ -510,8 +510,10 @@ namespace _5051.UnitTests.Backend
             var expectUserName = "su5051";
             var expectPassword = "su5051";
 
+            var context = CreateMoqSetupForCookie();
+
             // Act
-            var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.SupportUser, null);
+            var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.SupportUser, context);
 
             //reset
             DataSourceBackend.Instance.Reset();
@@ -528,8 +530,10 @@ namespace _5051.UnitTests.Backend
             var expectUserName = "teacher";
             var expectPassword = "teacher";
 
+            var context = CreateMoqSetupForCookie();
+
             // Act
-            var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, null);
+            var result = backend.LogUserIn(expectUserName, expectPassword, _5051.Models.UserRoleEnum.TeacherUser, context);
 
             //reset
             DataSourceBackend.Instance.Reset();
