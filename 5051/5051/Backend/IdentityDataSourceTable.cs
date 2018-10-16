@@ -35,7 +35,8 @@ namespace _5051.Backend
                     lock (syncRoot)
                     {
                         instance = new IdentityDataSourceTable();
-                        instance.DataSetDefault();
+                        //instance.DataSetDefault();
+                        instance.Initialize();
                     }
                 }
 
@@ -787,22 +788,14 @@ namespace _5051.Backend
 
         public void Reset()
         {
-            DataSetClear();
+           Initialize();
+        }
 
-            var DataSetList = DataSourceBackendTable.Instance.LoadAll<ApplicationUser>(tableName, partitionKey);
-
-            foreach (var item in DataSetList)
-            {
-                var deleteResult = DataSourceBackendTable.Instance.Delete(tableName, partitionKey, item.Id, item);
-            }
-
-            supportUserName = "su5051";
-            supportPass = "su5051";
-            teacherUserName = "teacher";
-            teacherPass = "teacher";
-
+        public void Initialize()
+        {
             LoadDataSet(DataSourceDataSetEnum.Default);
         }
+
 
         private void DataSetClear()
         {
@@ -844,6 +837,11 @@ namespace _5051.Backend
 
         private void CreateDataSetDefault()
         {
+            supportUserName = "su5051";
+            supportPass = "su5051";
+            teacherUserName = "teacher";
+            teacherPass = "teacher";
+
             //create support user
             var supportResult = CreateNewSupportUser(supportUserName, supportPass, supportUserName);
 
@@ -851,7 +849,7 @@ namespace _5051.Backend
             var teacherResult = CreateNewTeacher(teacherUserName, teacherPass, teacherUserName);
 
             //create the student users
-
+            //student backend does this
 
         }
 

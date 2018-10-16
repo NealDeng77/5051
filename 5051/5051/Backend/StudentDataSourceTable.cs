@@ -300,6 +300,19 @@ namespace _5051.Backend
             {
                 CreateDataSetDefault();
             }
+            //if storage not empty, be sure identity storage matches
+            else
+            {
+                foreach (var item in DataList)
+                {
+                    var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(item.Id);
+
+                    if(findResult == null)
+                    {
+                        DataSourceBackend.Instance.IdentityBackend.CreateNewStudentUserIdRecordOnly(item);
+                    }
+                }
+            }
 
             // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by Name instead
             DataList = DataList.OrderBy(x => x.Name).ToList();
