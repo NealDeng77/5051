@@ -89,17 +89,17 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            // When not in testing mode try the password
-            if (!DataSourceBackend.GetTestingMode())
-            {
-                if (!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
-                {
-                    ModelState.AddModelError("", "Invalid password");
-                    var myReturn = new StudentDisplayViewModel(myStudent);
+            //// When not in testing mode try the password
+            //if (!DataSourceBackend.GetTestingMode())
+            //{
+            //    if (!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
+            //    {
+            //        ModelState.AddModelError("", "Invalid password");
+            //        var myReturn = new StudentDisplayViewModel(myStudent);
 
-                    return View(myReturn);
-                }
-            }
+            //        return View(myReturn);
+            //    }
+            //}
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
