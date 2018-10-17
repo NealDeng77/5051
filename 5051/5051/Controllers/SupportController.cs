@@ -492,6 +492,9 @@ namespace _5051.Controllers
 
             DataSourceBackend.Instance.SetDataSource(SetEnum);
 
+            // Load data
+            DataSourceBackend.Instance.Reset();
+
             return RedirectToAction("Index", "Support");
         }
 
