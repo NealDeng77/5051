@@ -18,6 +18,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var mySchoolDaysData = Backend.DataSourceBackend.Instance.SchoolCalendarBackend.Index();
 
             // Removed null check: the data is OK to be count=0 but not possible to be null
@@ -73,6 +80,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult SetDefault(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -98,6 +112,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult SetLateStart(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -127,6 +148,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult SetEarlyEnd(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -155,6 +183,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult SetSchoolDay(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -182,6 +217,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult SetNoSchoolDay(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -209,6 +251,13 @@ namespace _5051.Controllers
         // GET: Calendar
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (id == null)
             {
                 // Send to Error Page
@@ -238,6 +287,13 @@ namespace _5051.Controllers
                                         "TimeEnd,"+
                                         "")] SchoolCalendarModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

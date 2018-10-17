@@ -13,6 +13,13 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             // Load the list of data into the StudentList
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
@@ -27,6 +34,13 @@ namespace _5051.Controllers
         // GET: Student/Details/5
         public ActionResult Read(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
@@ -50,6 +64,13 @@ namespace _5051.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = new StudentModel();
             return View(myData);
         }
@@ -69,6 +90,13 @@ namespace _5051.Controllers
                                         "ExperiencePoints,"+
                                         "")] StudentModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -101,6 +129,13 @@ namespace _5051.Controllers
         // GET: Student/Edit/5
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
@@ -128,6 +163,13 @@ namespace _5051.Controllers
                                         "Truck,"+
                                         "")] StudentDisplayViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -173,6 +215,13 @@ namespace _5051.Controllers
         // GET: Student/Delete/5
         public ActionResult Delete(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
@@ -207,6 +256,13 @@ namespace _5051.Controllers
                                         "AvatarLevel,"+
                                         "")] StudentDisplayViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -236,6 +292,13 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult ResetPassword(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myDataStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myDataStudent == null)
             {
@@ -270,6 +333,13 @@ namespace _5051.Controllers
                                         "AvatarLevel,"+
                                         "")] StudentDisplayViewModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

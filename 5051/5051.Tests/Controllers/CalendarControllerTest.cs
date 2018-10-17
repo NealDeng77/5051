@@ -8,6 +8,9 @@ using _5051;
 using _5051.Controllers;
 using _5051.Backend;
 using _5051.Models;
+using System.Web;
+using System.Web.Routing;
+using Moq;
 
 namespace _5051.Tests.Controllers
 {
@@ -46,6 +49,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
@@ -62,6 +69,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             CalendarController controller = new CalendarController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetDefault(null);
@@ -80,6 +91,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetDefault(id);
@@ -96,6 +112,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetDefault(id);
@@ -115,6 +135,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SetEarlyEnd(null);
 
@@ -132,6 +156,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetEarlyEnd(id);
@@ -148,6 +177,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetEarlyEnd(id);
@@ -167,6 +200,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SetLateStart(null);
 
@@ -184,6 +221,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetLateStart(id);
@@ -200,6 +242,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetLateStart(id);
@@ -219,6 +265,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SetNoSchoolDay(null);
 
@@ -236,6 +286,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetNoSchoolDay(id);
@@ -252,6 +307,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetNoSchoolDay(id);
@@ -271,6 +330,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.SetSchoolDay(null);
 
@@ -288,6 +351,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetSchoolDay(id);
@@ -304,6 +372,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.SetSchoolDay(id);
@@ -323,6 +395,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             CalendarController controller = new CalendarController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Update((string)null);
 
@@ -340,6 +416,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update(id);
@@ -356,6 +437,10 @@ namespace _5051.Tests.Controllers
             CalendarController controller = new CalendarController();
 
             string id = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Update(id) as ViewResult;
@@ -379,6 +464,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -391,6 +480,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             CalendarController controller = new CalendarController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update((SchoolCalendarModel)null);
@@ -413,6 +506,10 @@ namespace _5051.Tests.Controllers
 
             // Make data.Id empty
             dataEmpty.Id = "";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var resultNull = (RedirectToRouteResult)controller.Update(dataNull);
@@ -438,6 +535,10 @@ namespace _5051.Tests.Controllers
             {
                 TimeStart = TimeSpan.FromHours(25) // greater than 24
             };
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult resultBelowMin = controller.Update(dataBelowMin) as ViewResult;
@@ -465,6 +566,10 @@ namespace _5051.Tests.Controllers
                 TimeEnd = TimeSpan.FromHours(25) // greater than 24
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult resultBelowMin = controller.Update(dataBelowMin) as ViewResult;
             ViewResult resultAboveMax = controller.Update(dataAboveMax) as ViewResult;
@@ -488,6 +593,10 @@ namespace _5051.Tests.Controllers
                 TimeEnd = TimeSpan.FromHours(2) 
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -505,6 +614,10 @@ namespace _5051.Tests.Controllers
 
             SchoolCalendarModel scm = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.Update(scm) as RedirectToRouteResult;
 
@@ -514,5 +627,49 @@ namespace _5051.Tests.Controllers
 
         #endregion UpdatePostRegion
 
+        /// <summary>
+        /// sets up a moq for http context so that a code dealing with cookeis can be tested
+        /// returns a moqed context object
+        /// pass in a cookieValue if you are trying to read a cookie, otherwise leave blank
+        /// </summary>
+        public HttpContextBase CreateMoqSetupForCookie(string cookieValue = null)
+        {
+            var testCookieName = "id";
+            var testCookieValue = cookieValue;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                testCookie.Value = testCookieValue;
+                testCookie.Expires = DateTime.Now.AddSeconds(30);
+            }
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                var mockedServer = Mock.Get(context.Object.Server);
+                mockedServer.Setup(x => x.HtmlEncode(cookieValue)).Returns(cookieValue);
+
+                context.Object.Request.Cookies.Add(testCookie);
+            }
+
+            return context.Object;
+        }
     }
 }

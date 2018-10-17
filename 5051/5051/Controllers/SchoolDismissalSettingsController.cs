@@ -18,6 +18,13 @@ namespace _5051.Controllers
         // GET: SchoolDismissalSettings/Details/5
         public ActionResult Read(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.Read(id);
             if (myData == null)
             {
@@ -43,6 +50,13 @@ namespace _5051.Controllers
         // GET: SchoolDismissalSettings/Edit/5
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.SchoolDismissalSettingsBackend.Read(id);
 
             if (myData == null)
@@ -103,6 +117,13 @@ namespace _5051.Controllers
                                         "LateWindow," +
                                         "")] SchoolDismissalSettingsModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

@@ -21,6 +21,13 @@ namespace _5051.Controllers
         // GET: KioskSettings/Details/5
         public ActionResult Read(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = KioskSettingsBackend.Read(id);
             if (myData == null)
             {
@@ -46,6 +53,13 @@ namespace _5051.Controllers
         // GET: KioskSettings/Edit/5
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = KioskSettingsBackend.Read(id);
             if (myData == null)
             {
@@ -68,6 +82,13 @@ namespace _5051.Controllers
                                         "SelectedTimeZoneId" +
                                         "")] KioskSettingsModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

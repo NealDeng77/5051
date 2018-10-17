@@ -9,6 +9,9 @@ using _5051;
 using _5051.Controllers;
 using _5051.Backend;
 using _5051.Models;
+using System.Web;
+using System.Web.Routing;
+using Moq;
 
 namespace _5051.Tests.Controllers
 {
@@ -46,6 +49,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new StudentController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.Index() as ViewResult;
 
@@ -64,6 +71,10 @@ namespace _5051.Tests.Controllers
 
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = controller.Read(id) as ViewResult;
 
@@ -76,6 +87,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = controller.Read(null) as RedirectToRouteResult;
@@ -95,6 +110,11 @@ namespace _5051.Tests.Controllers
 
             // Reset DataSourceBackend
             DataSourceBackend.Instance.Reset();
+            DataSourceBackend.SetTestingMode(true);
+
+            var context = CreateMoqSetupForCookie("teacher");
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Read(id);
@@ -113,6 +133,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = controller.Create() as ViewResult;
@@ -136,6 +160,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
 
@@ -148,6 +176,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Create((StudentModel)null);
@@ -171,6 +203,10 @@ namespace _5051.Tests.Controllers
             // Make data.Id empty
             dataEmpty.Id = "";
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var resultNull = (ViewResult)controller.Create(dataNull);
             var resultEmpty = (ViewResult)controller.Create(dataEmpty);
@@ -188,6 +224,10 @@ namespace _5051.Tests.Controllers
 
             StudentModel data = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
 
@@ -204,6 +244,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update((string)null);
@@ -224,6 +268,10 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.Reset();
             DataSourceBackend.SetTestingMode(true);
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Update(id);
 
@@ -242,6 +290,10 @@ namespace _5051.Tests.Controllers
             StudentController controller = new StudentController();
 
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Update(id) as ViewResult;
@@ -265,6 +317,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -277,6 +333,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update((StudentDisplayViewModel)null);
@@ -300,6 +360,10 @@ namespace _5051.Tests.Controllers
             // Make data.Id empty
             dataEmpty.Id = "";
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var resultNull = (ViewResult)controller.Update(dataNull);
             var resultEmpty = (ViewResult)controller.Update(dataEmpty);
@@ -317,6 +381,10 @@ namespace _5051.Tests.Controllers
 
             StudentDisplayViewModel data = new StudentDisplayViewModel(DataSourceBackend.Instance.StudentBackend.GetDefault());
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             RedirectToRouteResult result = controller.Update(data) as RedirectToRouteResult;
 
@@ -333,6 +401,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             StudentController controller = new StudentController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Delete((string)null);
 
@@ -346,6 +418,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             StudentController controller = new StudentController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Delete(id);
@@ -365,6 +441,10 @@ namespace _5051.Tests.Controllers
             StudentController controller = new StudentController();
 
             string id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
@@ -388,6 +468,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
 
@@ -400,6 +484,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Delete((StudentDisplayViewModel)null);
@@ -418,6 +506,10 @@ namespace _5051.Tests.Controllers
             // Make data.Id = null
             dataNull.Id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var resultNull = (ViewResult)controller.Delete(dataNull);
 
@@ -434,6 +526,10 @@ namespace _5051.Tests.Controllers
 
             // Make data.Id empty
             dataEmpty.Id = "";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var resultEmpty = (ViewResult)controller.Delete(dataEmpty);
@@ -452,6 +548,10 @@ namespace _5051.Tests.Controllers
             StudentModel student = DataSourceBackend.Instance.StudentBackend.GetDefault();
             StudentDisplayViewModel data = new StudentDisplayViewModel(student);
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Delete(data);
 
@@ -462,5 +562,50 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"], TestContext.TestName);
         }
         #endregion DeletePostRegion
+
+        /// <summary>
+        /// sets up a moq for http context so that a code dealing with cookeis can be tested
+        /// returns a moqed context object
+        /// pass in a cookieValue if you are trying to read a cookie, otherwise leave blank
+        /// </summary>
+        public HttpContextBase CreateMoqSetupForCookie(string cookieValue = null)
+        {
+            var testCookieName = "id";
+            var testCookieValue = cookieValue;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                testCookie.Value = testCookieValue;
+                testCookie.Expires = DateTime.Now.AddSeconds(30);
+            }
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                var mockedServer = Mock.Get(context.Object.Server);
+                mockedServer.Setup(x => x.HtmlEncode(cookieValue)).Returns(cookieValue);
+
+                context.Object.Request.Cookies.Add(testCookie);
+            }
+
+            return context.Object;
+        }
     }
 }

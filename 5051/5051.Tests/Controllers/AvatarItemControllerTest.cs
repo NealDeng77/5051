@@ -8,6 +8,9 @@ using _5051;
 using _5051.Controllers;
 using _5051.Backend;
 using _5051.Models;
+using System.Web;
+using Moq;
+using System.Web.Routing;
 
 namespace _5051.Tests.Controllers
 {
@@ -16,12 +19,22 @@ namespace _5051.Tests.Controllers
     {
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
         #region IndexRegion
         [TestMethod]
         public void Controller_Avatar_Index_Default_Should_Pass()
         {
             // Arrange
             AvatarItemController controller = new AvatarItemController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -39,6 +52,10 @@ namespace _5051.Tests.Controllers
             AvatarItemController controller = new AvatarItemController();
             string id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
 
@@ -52,6 +69,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AvatarItemController controller = new AvatarItemController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
@@ -69,6 +90,10 @@ namespace _5051.Tests.Controllers
             // Get the first Avatar from the DataSource
             string id = AvatarItemBackend.Instance.GetFirstAvatarItemId();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
 
@@ -85,6 +110,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             AvatarItemController controller = new AvatarItemController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Create() as ViewResult;
@@ -108,6 +137,10 @@ namespace _5051.Tests.Controllers
                 Uri = "picture"
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
 
@@ -130,6 +163,10 @@ namespace _5051.Tests.Controllers
                 Name = "Name",
                 Uri = "picture"
             };
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
@@ -160,6 +197,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AvatarItemController controller = new AvatarItemController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Create(null);
 
@@ -179,6 +220,10 @@ namespace _5051.Tests.Controllers
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
 
@@ -194,6 +239,10 @@ namespace _5051.Tests.Controllers
             // Arrange (from create)
             AvatarItemController controller = new AvatarItemController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             var data = new AvatarItemModel
             {
                 Description = "description",
@@ -207,7 +256,6 @@ namespace _5051.Tests.Controllers
             // Check that the item is created (from create)
             var resultAvatar = AvatarItemBackend.Instance.Read("abc");
             Assert.AreEqual(data.Id, resultAvatar.Id, TestContext.TestName);
-
 
             // Act
             var updateResult = controller.Update(data.Id) as ViewResult;
@@ -234,6 +282,10 @@ namespace _5051.Tests.Controllers
                 Uri = "picture"
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -255,6 +307,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AvatarItemController controller = new AvatarItemController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Update((AvatarItemModel)null);
 
@@ -274,6 +330,10 @@ namespace _5051.Tests.Controllers
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -292,6 +352,10 @@ namespace _5051.Tests.Controllers
             AvatarItemBackend.Instance.Create(data);
 
             data.Description = "Updated Description";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
@@ -313,6 +377,10 @@ namespace _5051.Tests.Controllers
             AvatarItemController controller = new AvatarItemController();
             string id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
 
@@ -326,6 +394,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AvatarItemController controller = new AvatarItemController();
             string id = "bogus";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
@@ -342,6 +414,10 @@ namespace _5051.Tests.Controllers
 
             // Get the first Avatar from the DataSource
             string id = AvatarItemBackend.Instance.GetFirstAvatarItemId();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
@@ -367,6 +443,10 @@ namespace _5051.Tests.Controllers
                 Uri = "picture"
             };
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
 
@@ -388,6 +468,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             AvatarItemController controller = new AvatarItemController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Delete((AvatarItemModel)null);
 
@@ -406,6 +490,10 @@ namespace _5051.Tests.Controllers
 
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
@@ -433,6 +521,10 @@ namespace _5051.Tests.Controllers
             // Make an avatar
             AvatarItemBackend.Instance.Create(data);
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
 
@@ -448,5 +540,49 @@ namespace _5051.Tests.Controllers
 
         #endregion DeleteRegion
 
+        /// <summary>
+        /// sets up a moq for http context so that a code dealing with cookeis can be tested
+        /// returns a moqed context object
+        /// pass in a cookieValue if you are trying to read a cookie, otherwise leave blank
+        /// </summary>
+        public HttpContextBase CreateMoqSetupForCookie(string cookieValue = null)
+        {
+            var testCookieName = "id";
+            var testCookieValue = cookieValue;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                testCookie.Value = testCookieValue;
+                testCookie.Expires = DateTime.Now.AddSeconds(30);
+            }
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                var mockedServer = Mock.Get(context.Object.Server);
+                mockedServer.Setup(x => x.HtmlEncode(cookieValue)).Returns(cookieValue);
+
+                context.Object.Request.Cookies.Add(testCookie);
+            }
+
+            return context.Object;
+        }
     }
 }

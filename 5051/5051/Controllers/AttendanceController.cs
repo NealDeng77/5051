@@ -14,6 +14,13 @@ namespace _5051.Controllers
         // GET: Attendance. Select a student here
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             // Load the list of data into the StudentList
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
             var StudentViewModel = new StudentViewModel(myDataList);
@@ -23,6 +30,13 @@ namespace _5051.Controllers
         // GET: Attendance/Read/. Read the attendance history of the student
         public ActionResult Read(string id)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
             {
@@ -63,6 +77,13 @@ namespace _5051.Controllers
         // Read the details of the attendance(time in, time out).
         public ActionResult Details(string id, string item)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -100,6 +121,12 @@ namespace _5051.Controllers
         //Create a new attendance
         public ActionResult Create(string id)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(id);
             if (myStudent == null)
@@ -149,6 +176,13 @@ namespace _5051.Controllers
             "IsNew,"+
             "")] AttendanceModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -193,6 +227,13 @@ namespace _5051.Controllers
         // Update in and out times.
         public ActionResult Update(string id, string item)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -238,6 +279,13 @@ namespace _5051.Controllers
             "EmotionUri,"+
             "")] AttendanceModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -288,6 +336,13 @@ namespace _5051.Controllers
         // Remove the attendance
         public ActionResult Delete(string id, string item)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Error", "Home");
@@ -329,6 +384,13 @@ namespace _5051.Controllers
             "EmotionUri,"+
             "")] AttendanceModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

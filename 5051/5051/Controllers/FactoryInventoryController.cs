@@ -19,6 +19,13 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             // Load the list of data into the FactoryInventoryList
             var myData = new FactoryInventoryListViewModel();
 
@@ -51,6 +58,13 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Details/5
         public ActionResult Read(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
@@ -62,6 +76,13 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Create
         public ActionResult Create()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = new FactoryInventoryModel();
             return View(myData);
         }
@@ -85,6 +106,13 @@ namespace _5051.Controllers
                                         "IsLimitSupply," +
                                         "")] FactoryInventoryModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit, with Error Message
@@ -116,6 +144,13 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Edit/5
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
@@ -138,6 +173,13 @@ namespace _5051.Controllers
                                         "IsLimitSupply," +
                                         "")] FactoryInventoryModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -169,6 +211,13 @@ namespace _5051.Controllers
         // GET: FactoryInventory/Delete/5
         public ActionResult Delete(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.FactoryInventoryBackend.Read(id);
             return View(myData);
         }
@@ -189,6 +238,13 @@ namespace _5051.Controllers
                                         "Category,"+
                                         "")] FactoryInventoryModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

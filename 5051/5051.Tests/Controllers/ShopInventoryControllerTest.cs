@@ -9,6 +9,9 @@ using _5051;
 using _5051.Controllers;
 using _5051.Models;
 using _5051.Backend;
+using System.Web;
+using Moq;
+using System.Web.Routing;
 
 namespace _5051.Tests.Controllers
 {
@@ -16,6 +19,13 @@ namespace _5051.Tests.Controllers
     public class FactoryInventoryControllerTest
     {
         public TestContext TestContext { get; set; }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DataSourceBackend.SetTestingMode(true);
+        }
+
 
         #region Instantiate
         [TestMethod]
@@ -40,6 +50,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
@@ -58,6 +72,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             string id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
 
@@ -72,6 +90,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             string id = Backend.FactoryInventoryBackend.Instance.Create(data).Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Read(id) as ViewResult;
@@ -92,6 +114,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Create() as ViewResult;
@@ -116,6 +142,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
 
@@ -133,6 +163,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
@@ -152,6 +186,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryModel data = new FactoryInventoryModel();
             data.Id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Create(data) as ViewResult;
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
@@ -169,6 +207,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Create(data);
@@ -190,6 +232,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update() as ViewResult;
 
@@ -207,6 +253,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             string id = Backend.FactoryInventoryBackend.Instance.Create(data).Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Update(id) as ViewResult;
@@ -232,6 +282,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
 
@@ -249,6 +303,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update(data);
@@ -268,6 +326,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryModel data = new FactoryInventoryModel();
             data.Id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Update(data) as ViewResult;
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
@@ -285,6 +347,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Update(data);
@@ -306,6 +372,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete() as ViewResult;
 
@@ -323,6 +393,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             string id = Backend.FactoryInventoryBackend.Instance.Create(data).Id;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             ViewResult result = controller.Delete(id) as ViewResult;
@@ -347,6 +421,10 @@ namespace _5051.Tests.Controllers
             // Make ModelState Invalid
             controller.ModelState.AddModelError("test", "test");
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
 
@@ -364,6 +442,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
             data = null;
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = (RedirectToRouteResult)controller.Delete(data);
@@ -383,6 +465,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryModel data = new FactoryInventoryModel();
             data.Id = null;
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             ViewResult result = controller.Delete(data) as ViewResult;
             var resultFactoryInventoryModel = result.Model as FactoryInventoryModel;
@@ -401,6 +487,10 @@ namespace _5051.Tests.Controllers
             FactoryInventoryController controller = new FactoryInventoryController();
             FactoryInventoryModel data = new FactoryInventoryModel();
 
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
             // Act
             var result = (RedirectToRouteResult)controller.Delete(data);
             var resultFactoryInventoryModel = FactoryInventoryBackend.Instance.Create(data);
@@ -413,5 +503,50 @@ namespace _5051.Tests.Controllers
             Assert.AreEqual(data.Description, resultFactoryInventoryModel.Description, TestContext.TestName);
         }
         #endregion DeletePostRegion
+
+        /// <summary>
+        /// sets up a moq for http context so that a code dealing with cookeis can be tested
+        /// returns a moqed context object
+        /// pass in a cookieValue if you are trying to read a cookie, otherwise leave blank
+        /// </summary>
+        public HttpContextBase CreateMoqSetupForCookie(string cookieValue = null)
+        {
+            var testCookieName = "id";
+            var testCookieValue = cookieValue;
+            HttpCookie testCookie = new HttpCookie(testCookieName);
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                testCookie.Value = testCookieValue;
+                testCookie.Expires = DateTime.Now.AddSeconds(30);
+            }
+
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+
+            var mockedRequest = Mock.Get(context.Object.Request);
+            mockedRequest.SetupGet(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            var mockedResponse = Mock.Get(context.Object.Response);
+            mockedResponse.Setup(r => r.Cookies).Returns(new HttpCookieCollection());
+
+            if (!string.IsNullOrEmpty(cookieValue))
+            {
+                var mockedServer = Mock.Get(context.Object.Server);
+                mockedServer.Setup(x => x.HtmlEncode(cookieValue)).Returns(cookieValue);
+
+                context.Object.Request.Cookies.Add(testCookie);
+            }
+
+            return context.Object;
+        }
     }
 }

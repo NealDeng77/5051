@@ -18,6 +18,13 @@ namespace _5051.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             // Load the list of data into the AvatarItemList
             var myData = new AvatarItemListViewModel();
 
@@ -50,6 +57,13 @@ namespace _5051.Controllers
         // GET: AvatarItem/Details/5
         public ActionResult Read(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
@@ -61,6 +75,13 @@ namespace _5051.Controllers
         // GET: AvatarItem/Create
         public ActionResult Create()
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = new AvatarItemModel();
             return View(myData);
         }
@@ -81,6 +102,13 @@ namespace _5051.Controllers
                                         "Level,"+
                                         "")] AvatarItemModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit, with Error Message
@@ -112,6 +140,13 @@ namespace _5051.Controllers
         // GET: AvatarItem/Edit/5
         public ActionResult Update(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
@@ -133,6 +168,13 @@ namespace _5051.Controllers
                                         "Quantities,"+
                                         "")] AvatarItemModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit
@@ -164,6 +206,13 @@ namespace _5051.Controllers
         // GET: AvatarItem/Delete/5
         public ActionResult Delete(string id = null)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             var myData = DataSourceBackend.Instance.AvatarItemBackend.Read(id);
             return View(myData);
         }
@@ -179,6 +228,13 @@ namespace _5051.Controllers
                                         "Id,"+
                                         "")] AvatarItemModel data)
         {
+            var CurrentId = DataSourceBackend.Instance.IdentityBackend.GetCurrentStudentID(HttpContext);
+
+            if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.TeacherUser))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
             if (!ModelState.IsValid)
             {
                 // Send back for edit

@@ -51,7 +51,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             return View();
@@ -64,7 +64,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             // Get the List of Users, and convert them to Student Display Views so they get an avatar.  
@@ -124,7 +124,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             var myUserInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
@@ -141,7 +141,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             if (string.IsNullOrEmpty(id))
@@ -246,7 +246,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             return View();
@@ -277,7 +277,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             return View();
@@ -308,7 +308,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             return View();
@@ -339,7 +339,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
@@ -378,7 +378,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             return View();
@@ -395,7 +395,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             DataSourceBackend.Instance.Reset();
@@ -413,7 +413,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             if (string.IsNullOrEmpty(id))
@@ -453,7 +453,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             if (string.IsNullOrEmpty(id))
@@ -505,7 +505,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.SupportUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Login", "Support");
             }
 
             var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(id);
