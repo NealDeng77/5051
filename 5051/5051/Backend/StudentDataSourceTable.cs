@@ -294,24 +294,16 @@ namespace _5051.Backend
 
             // Storage Load all rows
             DataList = LoadAll();
+            foreach (var item in DataList)
+            {
+                //if storage not empty, be sure identity storage matches
+                DataSourceBackend.Instance.IdentityBackend.CreateNewStudentUserIdRecordOnly(item);
+            }
 
             // If Storage is Empty, then Create.
             if (DataList.Count < 1)
             {
                 CreateDataSetDefault();
-            }
-            //if storage not empty, be sure identity storage matches
-            else
-            {
-                foreach (var item in DataList)
-                {
-                    var findResult = DataSourceBackend.Instance.IdentityBackend.FindUserByID(item.Id);
-
-                    if(findResult == null)
-                    {
-                        DataSourceBackend.Instance.IdentityBackend.CreateNewStudentUserIdRecordOnly(item);
-                    }
-                }
             }
 
             // Need to order the return, because the azure table returns based on rk, which is not helpfull. So ordering by Name instead

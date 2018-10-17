@@ -98,7 +98,14 @@ namespace _5051.Backend
 
         public StudentModel CreateNewStudentUserIdRecordOnly(StudentModel student, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            var myReturn = DataSource.CreateNewStudentUserIdRecordOnly(student, dataSourceEnum);
+            var myReturn = student;
+
+            var findResult = FindUserByID(student.Id);
+            if (findResult == null)
+            {
+                myReturn = DataSource.CreateNewStudentUserIdRecordOnly(student);
+            }
+
             return myReturn;
         }
 
