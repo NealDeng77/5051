@@ -333,7 +333,7 @@ namespace _5051.Backend
 
                 //try
                 {
-                    TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey);
+                    TempData = DataSourceBackendTable.Instance.Load<StudentModel>(tableName, "student", temp.RowKey, dataSourceEnum);
 
 
                     // Set default value incase the load below fails.
@@ -345,31 +345,31 @@ namespace _5051.Backend
 
                     // Load each sub field
 
-                    var tempAvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey);
+                    var tempAvatarComposite = DataSourceBackendTable.Instance.Load<AvatarCompositeModel>(tableName, "composite", temp.RowKey, dataSourceEnum);
                     if (tempAvatarComposite != null)
                     {
                         TempData.AvatarComposite = tempAvatarComposite;
                     }
 
-                    var tempAvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey);
+                    var tempAvatarInventory = DataSourceBackendTable.Instance.Load<List<AvatarItemModel>>(tableName, "avatarinventory", temp.RowKey, dataSourceEnum);
                     if (tempAvatarInventory != null)
                     {
                         TempData.AvatarInventory = tempAvatarInventory;
                     }
 
-                    var tempInventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey);
+                    var tempInventory = DataSourceBackendTable.Instance.Load<List<FactoryInventoryModel>>(tableName, "inventory", temp.RowKey, dataSourceEnum);
                     if (tempInventory != null)
                     {
                         TempData.Inventory = tempInventory;
                     }
 
-                    var tempAttendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
+                    var tempAttendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey, dataSourceEnum);
                     if (tempAttendance != null)
                     {
-                        TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey);
+                        TempData.Attendance = DataSourceBackendTable.Instance.Load<List<AttendanceModel>>(tableName, "attendance", temp.RowKey, dataSourceEnum);
                     }
 
-                    var tempTruck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey);
+                    var tempTruck = DataSourceBackendTable.Instance.Load<ShopTruckFullModel>(tableName, "truck", temp.RowKey, dataSourceEnum);
                     if (tempTruck != null)
                     {
                         TempData.Truck = tempTruck;
