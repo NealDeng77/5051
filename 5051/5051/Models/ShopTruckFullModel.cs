@@ -66,7 +66,7 @@ namespace _5051.Models
         // Iteration Number
         public int IterationNumber { get; set; }
 
-
+         
         public ShopTruckFullModel()
         {
             // New Models, set default data

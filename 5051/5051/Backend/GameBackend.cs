@@ -424,10 +424,7 @@ namespace _5051.Backend
                 if (Item.IsLimitSupply == true)
                 {
                     ProfitPercent = .2d;
-                }
-                
-                // Sell Item
-                Item.Quantities--;
+                }                              
 
                 // Add Tokens to the Student
                 var profit = (int)Math.Ceiling(Item.Tokens * ProfitPercent);
