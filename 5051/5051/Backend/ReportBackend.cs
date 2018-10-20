@@ -583,7 +583,7 @@ namespace _5051.Backend
         /// <returns></returns>
         private TimeSpan CalculateHoursAttended(List<Interval> intervals)
         {
-            TimeSpan result = TimeSpan.MinValue;
+            TimeSpan result = TimeSpan.Zero;
             List<Interval> merged = mergeIntervals(intervals);
             foreach (var item in merged)
             {
@@ -674,8 +674,8 @@ namespace _5051.Backend
 
             public Interval()
             {
-                start = TimeSpan.MinValue;
-                end = TimeSpan.MinValue;
+                start = TimeSpan.Zero;
+                end = TimeSpan.Zero;
             }
 
             public Interval(TimeSpan start, TimeSpan end)
