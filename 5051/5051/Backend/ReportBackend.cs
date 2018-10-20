@@ -445,17 +445,19 @@ namespace _5051.Backend
                             temp.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
                         }
 
+                        // a list containing all intervals in this day
+                        List<Interval> intervals = new List<Interval>();
+
                         //loop through all attendance records in my range
                         foreach (var item in myRange)
                         {
+                            TimeSpan timeIn = UTCConversionsBackend.UtcToKioskTime(item.In).TimeOfDay;
+                            TimeSpan timeOut = UTCConversionsBackend.UtcToKioskTime(item.Out).TimeOfDay;
+                            Interval inter = new Interval(timeIn, timeOut);
+                            intervals.Add(inter);
 
+                            //update the checkout time for this attendance report view model
                             temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
-
-                            //calculate effective duration
-                            var tempDuration = CalculateEffectiveDuration(item, myToday);
-
-                            //add the current effective duration to today's hours attended
-                            temp.HoursAttended += tempDuration;
 
                             //determine whether left early or not
                             if (temp.TimeOut.TimeOfDay < myToday.TimeEnd)
@@ -469,6 +471,9 @@ namespace _5051.Backend
                         }
 
                         report.Stats.DaysPresent++;  //increase number of days present
+
+                        //Calculate hours attended on this day
+                        temp.HoursAttended = CalculateHoursAttended(intervals);
 
                         temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);  //calculate percentage of attended time
 
@@ -571,6 +576,11 @@ namespace _5051.Backend
                 report.AttendanceList.Where(m => m.IsSchoolDay).Select(m => m.EmotionLevel).ToArray());
         }
 
+        private TimeSpan CalculateHoursAttended(List<Interval> intervals)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Calculate the effective duration, in/out status of the given attendance record
         /// </summary>
@@ -618,13 +628,13 @@ namespace _5051.Backend
             TimeSpan start;
             TimeSpan end;
 
-            Interval()
+            public Interval()
             {
                 start = TimeSpan.MinValue;
                 end = TimeSpan.MinValue;
             }
 
-            Interval(TimeSpan start, TimeSpan end)
+            public Interval(TimeSpan start, TimeSpan end)
             {
                 this.start = start;
                 this.end = end;
