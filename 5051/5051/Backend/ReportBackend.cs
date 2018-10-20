@@ -609,5 +609,27 @@ namespace _5051.Backend
 
             return duration;
         }
+
+        /// <summary>
+        /// Represents a time interval from start to end
+        /// </summary>
+        class Interval
+        {
+            TimeSpan start;
+            TimeSpan end;
+
+            Interval()
+            {
+                start = TimeSpan.MinValue;
+                end = TimeSpan.MinValue;
+            }
+
+            Interval(TimeSpan start, TimeSpan end)
+            {
+                this.start = start;
+                this.end = end;
+            }
+        }
     }
+
 }
