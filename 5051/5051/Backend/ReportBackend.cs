@@ -588,7 +588,7 @@ namespace _5051.Backend
             foreach (var item in merged)
             {
                 TimeSpan period = item.end.Add(-item.start);
-                result.Add(period);
+                result = result.Add(period);
             }
             return result;
         }
