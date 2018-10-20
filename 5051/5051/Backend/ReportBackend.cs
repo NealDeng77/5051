@@ -576,9 +576,53 @@ namespace _5051.Backend
                 report.AttendanceList.Where(m => m.IsSchoolDay).Select(m => m.EmotionLevel).ToArray());
         }
 
+        /// <summary>
+        /// calculate non overlapping hours attended using given intervals
+        /// </summary>
+        /// <param name="intervals"></param>
+        /// <returns></returns>
         private TimeSpan CalculateHoursAttended(List<Interval> intervals)
         {
-            throw new NotImplementedException();
+            TimeSpan result = TimeSpan.MinValue;
+            List<Interval> merged = mergeIntervals(intervals);
+            foreach (var item in merged)
+            {
+                TimeSpan period = item.end.Add(-item.start);
+                result.Add(period);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Merge given intervals into non-overlapping intervals
+        /// </summary>
+        /// <param name="intervals"></param>
+        /// <returns></returns>
+        private List<Interval> mergeIntervals(List<Interval> intervals)
+        {
+            //sort the intervals by start time
+            intervals.OrderBy(i => i.start);
+
+            List<Interval> result = new List<Interval>();
+            Interval last = intervals[0];
+            result.Add(last);
+
+            for (int i = 1; i < intervals.Count(); i++)
+            {
+                Interval cur = intervals[i];
+                if (cur.start <= last.end)
+                {
+                    if (cur.end > last.end)
+                    {
+                        last.end = cur.end;
+                    }
+                }
+                else {
+                    result.Add(cur);
+                    last = cur;
+                }
+            }
+            return result;
         }
 
         /// <summary>
@@ -625,8 +669,8 @@ namespace _5051.Backend
         /// </summary>
         class Interval
         {
-            TimeSpan start;
-            TimeSpan end;
+            public TimeSpan start;
+            public TimeSpan end;
 
             public Interval()
             {
