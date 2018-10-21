@@ -78,7 +78,7 @@ namespace _5051.Backend
         /// <returns>Student Passed In</returns>
         public StudentModel Create(StudentModel data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
-            // If using the defaul data source, use it, else just do the table operation
+            // If using the default data source, use it, else just do the table operation
             if (dataSourceEnum == DataSourceEnum.Unknown)
             {
                 DataList.Add(data);
@@ -113,9 +113,9 @@ namespace _5051.Backend
 
             DataSourceBackendTable.Instance.Create<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck, dataSourceEnum);
 
-            DataList = DataList.OrderBy(x => x.Name).ToList();
-
             var idResult = IdentityBackend.Instance.CreateNewStudentUserIdRecordOnly(data, dataSourceEnum);
+
+            DataList = DataList.OrderBy(x => x.Name).ToList();
 
             return data;
         }
@@ -199,15 +199,17 @@ namespace _5051.Backend
                 return false;
             }
 
-            var data = DataList.Find(n => n.Id == Id);
-            if (data == null)
-            {
-                return false;
-            }
+            StudentModel data;
 
             // If using the defaul data source, use it, else just do the table operation
             if (dataSourceEnum == DataSourceEnum.Unknown)
             {
+                data = DataList.Find(n => n.Id == Id);
+                if (data == null)
+                {
+                    return false;
+                }
+
                 if (DataList.Remove(data) == false)
                 {
                     return false;
@@ -215,31 +217,12 @@ namespace _5051.Backend
             }
 
             // Storage Delete
-
-            var temp = new StudentModel(data);
-            temp.AvatarComposite = null;
-            temp.AvatarInventory = null;
-            temp.Inventory = null;
-            temp.Attendance = null;
-            temp.Truck = null;
-
-            // Add to Storage, the smaller temp student
-            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", data.Id, temp, dataSourceEnum);
-
-            // Sub components
-            var tempData = new StudentModel(data);
-            tempData.Id = data.Id;
-
-            // Now store each of the Sub Structures as independent rows
-            DataSourceBackendTable.Instance.Delete<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite);
-
-            DataSourceBackendTable.Instance.Create<List<AvatarItemModel>>(tableName, "avatarinventory", tempData.Id, tempData.AvatarInventory);
-
-            DataSourceBackendTable.Instance.Delete<List<FactoryInventoryModel>>(tableName, "inventory", tempData.Id, tempData.Inventory);
-
-            DataSourceBackendTable.Instance.Delete<List<AttendanceModel>>(tableName, "attendance", tempData.Id, tempData.Attendance);
-
-            DataSourceBackendTable.Instance.Delete<ShopTruckFullModel>(tableName, "truck", tempData.Id, tempData.Truck);
+            DataSourceBackendTable.Instance.Delete<StudentModel>(tableName, "student", Id, dataSourceEnum);
+            DataSourceBackendTable.Instance.Delete<AvatarCompositeModel>(tableName, "composite", Id, dataSourceEnum);
+            DataSourceBackendTable.Instance.Delete<List<AvatarItemModel>>(tableName, "avatarinventory", Id, dataSourceEnum);
+            DataSourceBackendTable.Instance.Delete<List<FactoryInventoryModel>>(tableName, "inventory", Id, dataSourceEnum);
+            DataSourceBackendTable.Instance.Delete<List<AttendanceModel>>(tableName, "attendance", Id, dataSourceEnum);
+            DataSourceBackendTable.Instance.Delete<ShopTruckFullModel>(tableName, "truck", Id, dataSourceEnum);
 
             return true;
         }

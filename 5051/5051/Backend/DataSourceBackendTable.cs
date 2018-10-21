@@ -367,7 +367,7 @@ namespace _5051.Backend
         /// <param name="tableName"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Delete<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        public bool Delete<T>(string tableName, string pk, string rk, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -380,11 +380,6 @@ namespace _5051.Backend
             }
 
             if (string.IsNullOrEmpty(rk))
-            {
-                return false;
-            }
-
-            if (data == null)
             {
                 return false;
             }
@@ -395,10 +390,10 @@ namespace _5051.Backend
                 return true;
             }
 
-            return DeleteDirect<T>(tableName, pk, rk, data, dataSourceEnum);
+            return DeleteDirect<T>(tableName, pk, rk, dataSourceEnum);
         }
 
-        public bool DeleteDirect<T>(string tableName, string pk, string rk, T data, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
+        public bool DeleteDirect<T>(string tableName, string pk, string rk, DataSourceEnum dataSourceEnum = DataSourceEnum.Unknown)
         {
             if (string.IsNullOrEmpty(tableName))
             {
@@ -415,18 +410,16 @@ namespace _5051.Backend
                 return false;
             }
 
-            if (data == null)
-            {
-                return false;
-            }
-
             try
             {
                 var Table = GetTable(dataSourceEnum, tableName);
 
-                // Delete
-                var entity = DataSourceBackendTable.Instance.ConvertToEntity<T>(data, pk, rk);
-                entity.ETag = "*";
+                var entity = new DataSourceBackendTableEntity
+                {
+                    ETag = "*",
+                    PartitionKey = pk,
+                    RowKey = rk
+                };
 
                 var Operation = TableOperation.Delete(entity);
                 var query = Table.Execute(Operation);

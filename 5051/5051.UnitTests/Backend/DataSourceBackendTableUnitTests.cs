@@ -731,7 +731,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.Delete<AvatarItemModel>(null, pk, rk, data);
+            var result = backend.Delete<AvatarItemModel>(null, pk, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -754,7 +754,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.Delete<AvatarItemModel>(table, null, rk, data);
+            var result = backend.Delete<AvatarItemModel>(table, null, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -777,32 +777,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.Delete<AvatarItemModel>(table, pk, null, data);
-
-            // Reset
-            DataSourceBackend.Instance.Reset();
-            DataSourceBackend.SetTestingMode(false);
-
-            // Assert
-            Assert.AreEqual(false, result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Backend_DataSourceBackendTable_Delete_Invalid_data_Null_Should_Fail()
-        {
-            // Arrange
-            DataSourceBackend.SetTestingMode(true);
-            var backend = DataSourceBackendTable.Instance;
-
-            var data = new AvatarItemModel();
-            data = null;
-
-            var table = "AvatarItemModel".ToLower();
-            var pk = table;
-            var rk = "rk";
-
-            // Act
-            var result = backend.Delete<AvatarItemModel>(table, pk, rk, data);
+            var result = backend.Delete<AvatarItemModel>(table, pk, null);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -825,7 +800,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.Delete<AvatarItemModel>(table, pk, rk, data);
+            var result = backend.Delete<AvatarItemModel>(table, pk, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -850,7 +825,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.DeleteDirect<AvatarItemModel>(null, pk, rk, data);
+            var result = backend.DeleteDirect<AvatarItemModel>(null, pk, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -873,7 +848,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.DeleteDirect<AvatarItemModel>(table, null, rk, data);
+            var result = backend.DeleteDirect<AvatarItemModel>(table, null, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -896,32 +871,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, null, data);
-
-            // Reset
-            DataSourceBackend.Instance.Reset();
-            DataSourceBackend.SetTestingMode(false);
-
-            // Assert
-            Assert.AreEqual(false, result, TestContext.TestName);
-        }
-
-        [TestMethod]
-        public void Backend_DataSourceBackendTable_DeleteDirect_Invalid_data_Null_Should_Fail()
-        {
-            // Arrange
-            DataSourceBackend.SetTestingMode(true);
-            var backend = DataSourceBackendTable.Instance;
-
-            var data = new AvatarItemModel();
-            data = null;
-
-            var table = "AvatarItemModel".ToLower();
-            var pk = table;
-            var rk = "rk";
-
-            // Act
-            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, rk, data);
+            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, null);
 
             // Reset
             DataSourceBackend.Instance.Reset();
@@ -944,7 +894,7 @@ namespace _5051.UnitTests.Backend
             var rk = "rk";
 
             // Act
-            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, rk, data);
+            var result = backend.DeleteDirect<AvatarItemModel>(table, pk, rk);
 
             // Reset
             DataSourceBackend.Instance.Reset();

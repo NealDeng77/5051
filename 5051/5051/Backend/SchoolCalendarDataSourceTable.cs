@@ -133,15 +133,16 @@ namespace _5051.Backend
                 return false;
             }
 
-            var data = DataList.Find(n => n.Id == Id);
-            if (data == null)
-            {
-                return false;
-            }
-
             // If using the defaul data source, use it, else just do the table operation
             if (dataSourceEnum == DataSourceEnum.Unknown)
             {
+
+                var data = DataList.Find(n => n.Id == Id);
+                if (data == null)
+                {
+                    return false;
+                }
+
                 if (DataList.Remove(data) == false)
                 {
                     return false;
@@ -149,7 +150,7 @@ namespace _5051.Backend
             }
 
             // Storage Delete
-            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, data.Id, data, dataSourceEnum);
+            var myReturn = DataSourceBackendTable.Instance.Delete<SchoolCalendarModel>(tableName, partitionKey, Id, dataSourceEnum);
 
             return myReturn;
         }
