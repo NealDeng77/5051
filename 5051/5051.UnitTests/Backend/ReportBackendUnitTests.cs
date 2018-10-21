@@ -32,7 +32,7 @@ namespace _5051.UnitTests.Backend
 
             var dayNow = UTCConversionsBackend.UtcToKioskTime(DateTime.UtcNow).Date; //today's date
 
-            var thisMonday = dayNow.AddDays(-7-((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
+            var thisMonday = dayNow.AddDays(-7 - ((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
 
             var attendanceMon = new AttendanceModel
             {
@@ -216,6 +216,76 @@ namespace _5051.UnitTests.Backend
 
             //Assert.AreEqual(student1.Name, result[1].Name, TestContext.TestName);
             //Assert.AreEqual(student2.Name, result[0].Name, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void Backend_ReportBackend_Generate_Weekly_Report_Should_Pass()
+        {
+            //arrange
+            var dateTimeHelper = DateTimeHelper.Instance;
+            dateTimeHelper.EnableForced(true);
+            dateTimeHelper.SetForced(new DateTime(2018, 10, 20, 0, 0, 0));
+            var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
+
+            var reportBackend = ReportBackend.Instance;
+            var testReport = new WeeklyReportViewModel();
+            testReport.SelectedWeekId = 1;
+            var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
+            testReport.Student = testStudent;
+            testReport.StudentId = testStudent.Id;
+
+            var dayNow = dateTimeUTCNow.Date; //today's date
+
+            var thisMonday = dayNow.AddDays(-7 - ((dayNow.DayOfWeek - DayOfWeek.Monday + 7) % 7)); //this Monday's date
+
+            var attendanceMon = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(9)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddHours(12)),
+                Emotion = EmotionStatusEnum.VeryHappy
+            };
+            var attendanceTue = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(1).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(1).AddHours(12)),
+                Emotion = EmotionStatusEnum.Happy
+            };
+            var attendanceWed = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(2).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(2).AddHours(12)),
+                Emotion = EmotionStatusEnum.Neutral
+            };
+            var attendanceThu = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(3).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(3).AddHours(12)),
+                Emotion = EmotionStatusEnum.Sad
+            };
+            var attendanceFri = new AttendanceModel
+            {
+                In = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(4).AddHours(10)),
+                Out = UTCConversionsBackend.KioskTimeToUtc(thisMonday.AddDays(4).AddHours(12)),
+                Emotion = EmotionStatusEnum.VerySad
+            };
+
+            testStudent.Attendance.Add(attendanceMon);
+            testStudent.Attendance.Add(attendanceTue);
+            testStudent.Attendance.Add(attendanceWed);
+            testStudent.Attendance.Add(attendanceThu);
+            testStudent.Attendance.Add(attendanceFri);
+
+            testReport.DateEnd = dateTimeUTCNow;
+
+            //act
+            var result = reportBackend.GenerateWeeklyReport(testReport);
+
+            //reset
+            DataSourceBackend.Instance.Reset();
+
+            //assert
+            Assert.IsNotNull(result, TestContext.TestName);
+
         }
     }
 }
