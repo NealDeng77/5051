@@ -164,6 +164,17 @@ namespace _5051.Backend
         /// </summary>
         public int Simulation()
         {
+
+
+            /*
+             * TODO: Mike, Refactor of Simulator
+             * Change the Simulator to be more efficeint with the slow azure storage:
+             * Only run a set number of iterations per simulation, that way it returns to the browser faster
+             * Run per Student (add a last iteration to the student truck to track when last run)
+             * Save all the iterations at once at the end of running, rather at each update
+             */
+
+
             // Run for each time between now and the last time ran
             var timeNow = DateTimeHelper.Instance.GetDateTimeNowUTC();
 
