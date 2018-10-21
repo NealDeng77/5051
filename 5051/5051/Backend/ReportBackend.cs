@@ -250,7 +250,7 @@ namespace _5051.Backend
 
             report.Quarters = new List<SelectListItem>();
 
-            var q1 = new SelectListItem { Value = "1", Text = "Quarter 1"};
+            var q1 = new SelectListItem { Value = "1", Text = "Quarter 1" };
 
             //add to the select list
             report.Quarters.Add(q1);
@@ -354,13 +354,29 @@ namespace _5051.Backend
                             .OrderByDescending(m => m.In).ToList();
                         if (myRange.Any())
                         {
+                            // a list containing all intervals in this day
+                            List<Interval> intervals = new List<Interval>();
+
                             //loop through all attendance records in my range
                             foreach (var item in myRange)
                             {
-                                //calculate effective duration
-                                var tempDuration = CalculateEffectiveDuration(item, myToday);
-                                student.AttendedMinutesThisWeek += (int) tempDuration.TotalMinutes;
+                                TimeSpan timeIn = UTCConversionsBackend.UtcToKioskTime(item.In).TimeOfDay;
+                                TimeSpan timeOut = UTCConversionsBackend.UtcToKioskTime(item.Out).TimeOfDay;
+                                Interval inter = new Interval(timeIn, timeOut);
+                                intervals.Add(inter);                            
                             }
+
+                            var earlyWindow = SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow;
+                            var lateWindow = SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow;
+                            //the time from which duration starts to count
+                            var start = myToday.TimeStart.Add(-earlyWindow);
+                            //the time that duration counts until
+                            var end = myToday.TimeEnd.Add(lateWindow);
+
+                            //Calculate hours attended on this day
+                            var dailyTotalTime = CalculateHoursAttended(intervals, start, end);
+
+                            student.AttendedMinutesThisWeek += (int)dailyTotalTime.TotalMinutes;
                         }
                     }
                     currentDate = currentDate.AddDays(1);
@@ -386,7 +402,7 @@ namespace _5051.Backend
             }
 
             var currentDate = report.DateStart;  //loop variable
-            
+
             TimeSpan accumlatedTotalHoursExpected = TimeSpan.Zero; //current accumulated total hours expected
             TimeSpan accumlatedTotalHours = TimeSpan.Zero; //current accululated total hours attended
             int emotionLevel = 0; //current emotion level
@@ -445,17 +461,20 @@ namespace _5051.Backend
                             temp.CheckInStatus = CheckInStatusEnum.ArriveOnTime;
                         }
 
+                        // a list containing all intervals in this day
+                        List<Interval> intervals = new List<Interval>();
+
                         //loop through all attendance records in my range
                         foreach (var item in myRange)
                         {
+                            TimeSpan timeIn = UTCConversionsBackend.UtcToKioskTime(item.In).TimeOfDay;
+                            TimeSpan timeOut = UTCConversionsBackend.UtcToKioskTime(item.Out).TimeOfDay;
+                            Interval inter = new Interval(timeIn, timeOut);
 
+                            intervals.Add(inter);
+
+                            //update the checkout time for this attendance report view model
                             temp.TimeOut = UTCConversionsBackend.UtcToKioskTime(item.Out);
-
-                            //calculate effective duration
-                            var tempDuration = CalculateEffectiveDuration(item, myToday);
-
-                            //add the current effective duration to today's hours attended
-                            temp.HoursAttended += tempDuration;
 
                             //determine whether left early or not
                             if (temp.TimeOut.TimeOfDay < myToday.TimeEnd)
@@ -469,6 +488,16 @@ namespace _5051.Backend
                         }
 
                         report.Stats.DaysPresent++;  //increase number of days present
+
+                        var earlyWindow = SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow;
+                        var lateWindow = SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow;
+                        //the time from which duration starts to count
+                        var start = myToday.TimeStart.Add(-earlyWindow);
+                        //the time that duration counts until
+                        var end = myToday.TimeEnd.Add(lateWindow);
+
+                        //Calculate hours attended on this day
+                        temp.HoursAttended = CalculateHoursAttended(intervals, start, end);
 
                         temp.PercentAttended = (int)(temp.HoursAttended.TotalMinutes * 100 / temp.HoursExpected.TotalMinutes);  //calculate percentage of attended time
 
@@ -572,42 +601,90 @@ namespace _5051.Backend
         }
 
         /// <summary>
-        /// Calculate the effective duration, in/out status of the given attendance record
+        /// calculate non overlapping hours attended using given intervals
         /// </summary>
-        /// <param name="attendance"></param>
-        /// <param name="schoolDay"></param>
+        /// <param name="intervals"></param>
         /// <returns></returns>
-        private TimeSpan CalculateEffectiveDuration(AttendanceModel attendance, SchoolCalendarModel schoolDay)
+        private TimeSpan CalculateHoursAttended(List<Interval> intervals, TimeSpan start, TimeSpan end)
         {
-
-            //the time from which duration starts to count
-            var start = schoolDay.TimeStart.Add(-SchoolDismissalSettingsBackend.Instance.GetDefault().EarlyWindow);
-            //the time that duration counts until
-            var end = schoolDay.TimeEnd.Add(SchoolDismissalSettingsBackend.Instance.GetDefault().LateWindow);
-
-            var myIn = UTCConversionsBackend.UtcToKioskTime(attendance.In).TimeOfDay; //check-in time
-            var myOut = UTCConversionsBackend.UtcToKioskTime(attendance.Out).TimeOfDay; //check-in time
-
-            //trim the start time to actual arrive time only if the student is late
-            if (myIn.CompareTo(start) > 0)
+            TimeSpan result = TimeSpan.Zero;
+            List<Interval> merged = mergeIntervals(intervals);
+            foreach (var item in merged)
             {
-                start = myIn;
+                Interval trimmed = trimInterval(item, start, end);
+                TimeSpan period = trimmed.end.Add(-trimmed.start);
+                result = result.Add(period);
             }
-            //trim the end time to actual out time only if the student leave early
-            if (myOut.CompareTo(end) < 0)
+            return result;
+        }
+
+        /// <summary>
+        /// Trim the interval to be between start and end
+        /// </summary>
+        /// <param name="interv"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        private Interval trimInterval(Interval interv, TimeSpan start, TimeSpan end)
+        {
+            if (interv.start < start)
             {
-                end = myOut;
+                interv.start = start;
             }
-
-            var duration = end.Subtract(start);
-
-            //If time-in is later than time out, just return 0
-            if (duration < TimeSpan.Zero)
+            if (interv.end > end)
             {
-                return TimeSpan.Zero;
+                interv.end = end;
             }
+            return interv;
+        }
 
-            return duration;
+        /// <summary>
+        /// Merge given intervals into non-overlapping intervals
+        /// </summary>
+        /// <param name="intervals"></param>
+        /// <returns></returns>
+        private List<Interval> mergeIntervals(List<Interval> intervals)
+        {
+            //sort the intervals by start time
+            intervals.OrderBy(i => i.start);
+
+            List<Interval> result = new List<Interval>();
+            Interval last = intervals[0];
+            result.Add(last);
+
+            for (int i = 1; i < intervals.Count(); i++)
+            {
+                Interval cur = intervals[i];
+                if (cur.start <= last.end)
+                {
+                    if (cur.end > last.end)
+                    {
+                        last.end = cur.end;
+                    }
+                }
+                else
+                {
+                    result.Add(cur);
+                    last = cur;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Represents a time interval from start to end
+        /// </summary>
+        class Interval
+        {
+            public TimeSpan start;
+            public TimeSpan end;
+
+            public Interval(TimeSpan start, TimeSpan end)
+            {
+                this.start = start;
+                this.end = end;
+            }
         }
     }
+
 }
