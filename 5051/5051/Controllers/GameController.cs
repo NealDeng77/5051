@@ -101,7 +101,7 @@ namespace _5051.Controllers
                 });
             }
 
-            var DataResult = DataSourceBackend.Instance.GameBackend.Simulation();
+            //var DataResult = DataSourceBackend.Instance.GameBackend.Simulation();
             var result = DataSourceBackend.Instance.GameBackend.GetResult(data.Id);
 
             return Json(new
