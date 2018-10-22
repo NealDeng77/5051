@@ -189,24 +189,53 @@ namespace _5051.Backend
                 return currentData.IterationNumber;
             }
 
+            // Get the Number of Iterations possible to Run.
+            var MaxNumberIterations = (timeNow.Ticks - currentData.RunDate.Ticks) / currentData.TimeIteration.Ticks;
+
+            if (MaxNumberIterations > 10)
+            {
+                MaxNumberIterations = 10;
+            }
+
             lock (Lock)
             {
-                do
-                {
-                    // If time lapsed in > time Threshold, then Run Simulaton for one Cycle
-                    shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
-                    if (shouldRun < 0)
-                    {
-                        // Run Iteration
-                        RunIteration();
 
-                        // Increment the RunDate
-                        currentData.RunDate = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks);
-                        currentData.IterationNumber++;
-                        Update(currentData);
+                // For Each Student
+                // Run them the number of Possible Iterations
+                // Save the Student
+                var studentList = DataSourceBackend.Instance.StudentBackend.Index();
+                foreach (var student in studentList)
+                {
+
+                    for (var i = 0; i < MaxNumberIterations; i++)
+                    {
+                        // calculate student iteration
+                        CalculateStudentIteration(student);
                     }
+
+                    // Update Student
+                    DataSourceBackend.Instance.StudentBackend.Update(student);
                 }
-                while (shouldRun < 0);
+
+                currentData.RunDate = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks);
+                Update(currentData);
+
+                //do
+                //{
+                //    // If time lapsed in > time Threshold, then Run Simulaton for one Cycle
+                //    shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
+                //    if (shouldRun < 0)
+                //    {
+                //        // Run Iteration
+                //        RunIteration();
+
+                //        // Increment the RunDate
+                //        currentData.RunDate = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks);
+                //        currentData.IterationNumber++;
+                //        Update(currentData);
+                //    }
+                //}
+                //while (shouldRun < 0);
             }
 
             // Until Simulation Time = Current Time
