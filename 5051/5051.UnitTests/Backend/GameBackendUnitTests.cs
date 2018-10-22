@@ -367,7 +367,7 @@ namespace _5051.UnitTests.Backend
             //arrange
             var test = GameBackend.Instance;
             var data = test.GetDefault();
-            data.RunDate = DateTime.UtcNow.AddMinutes(-10); // Move it back 10 minutes in time
+            data.RunDate = DateTime.UtcNow.AddSeconds(-10); // Move it back 10 Seconds in time
             test.Update(data);
 
             var expect = test.GetDefault().IterationNumber;
@@ -379,7 +379,7 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.Instance.Reset();
 
             //assert
-            Assert.AreNotEqual(expect, result, TestContext.TestName);
+            Assert.AreEqual(expect, result, TestContext.TestName);
         }
 
         #endregion Simulation

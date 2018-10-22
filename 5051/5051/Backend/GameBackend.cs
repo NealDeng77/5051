@@ -182,7 +182,8 @@ namespace _5051.Backend
             var currentData = GetDefault();
 
             // Get the current delta, and see if anyting is needed
-            var shouldRun = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks).CompareTo(timeNow);
+            var newTime = currentData.RunDate.AddTicks(currentData.TimeIteration.Ticks);
+            var shouldRun = newTime.CompareTo(timeNow);
             if (shouldRun >= 0)
             {
                 // the number of iteration that the simulator has run
