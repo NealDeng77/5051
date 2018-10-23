@@ -89,17 +89,17 @@ namespace _5051.Controllers
                 return RedirectToAction("Roster", "Portal");
             }
 
-            //// When not in testing mode try the password
-            //if (!DataSourceBackend.GetTestingMode())
-            //{
-            //    if (!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
-            //    {
-            //        ModelState.AddModelError("", "Invalid password");
-            //        var myReturn = new StudentDisplayViewModel(myStudent);
+            // When not in testing mode try the password
+            if (!DataSourceBackend.GetTestingMode())
+            {
+                if (!DataSourceBackend.Instance.IdentityBackend.LogUserIn(myStudent.Name, data.Password, _5051.Models.UserRoleEnum.StudentUser, HttpContext))
+                {
+                    ModelState.AddModelError("", "Invalid password");
+                    var myReturn = new StudentDisplayViewModel(myStudent);
 
-            //        return View(myReturn);
-            //    }
-            //}
+                    return View(myReturn);
+                }
+            }
 
             // all is OK, so redirect to the student index page and pass in the student ID for now.
             return RedirectToAction("Index", "Portal", new { id = data.Id });
@@ -134,7 +134,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -194,7 +194,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -261,7 +261,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             if (string.IsNullOrEmpty(id))
@@ -377,7 +377,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -472,7 +472,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -537,7 +537,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -603,7 +603,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -669,7 +669,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -735,7 +735,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(CurrentId);
@@ -807,7 +807,7 @@ namespace _5051.Controllers
 
             if (DataSourceBackend.Instance.IdentityBackend.BlockExecptForRole(CurrentId, UserRoleEnum.StudentUser))
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Roster", "Portal");
             }
 
             //var findResult = IdentityBackend.Instance.FindUserByID(id);
