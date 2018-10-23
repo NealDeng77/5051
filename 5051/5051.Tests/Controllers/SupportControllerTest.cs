@@ -1371,6 +1371,13 @@ namespace _5051.Tests.Controllers
             DataSourceBackend.Instance.SetDataSource(DataSourceEnum.Mock);
 
             viewModel.UserID = "teacher";
+            viewModel.OldPassword = "teacher";
+            viewModel.NewPassword = "teacher2";
+            viewModel.ConfirmPassword = "teacher2";
+
+            var context = CreateMoqSetupForCookie();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as RedirectToRouteResult;

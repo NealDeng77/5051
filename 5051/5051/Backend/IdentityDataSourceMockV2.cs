@@ -158,6 +158,11 @@ namespace _5051.Backend
 
             if (role == _5051.Models.UserRoleEnum.TeacherUser && UserHasClaimOfType(findResult.Id, _5051.Models.UserRoleEnum.TeacherUser))
             {
+                if (oldPass != teacherPass)
+                {
+                    return false;
+                }
+
                 teacherPass = newPass;
                 return true;
             }
