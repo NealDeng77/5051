@@ -113,7 +113,8 @@ namespace _5051.Controllers
             }
 
             // Get Item
-            var myItem = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+            var item = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
+            var myItem = item;
             if (myItem == null)
             {
                 // Send back for Edit
