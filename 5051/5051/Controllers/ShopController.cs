@@ -114,7 +114,7 @@ namespace _5051.Controllers
 
             // Get Item
             var item = DataSourceBackend.Instance.FactoryInventoryBackend.Read(data.ItemId);
-            var myItem = item;
+            var myItem = new FactoryInventoryModel(item);
             if (myItem == null)
             {
                 // Send back for Edit
@@ -146,7 +146,7 @@ namespace _5051.Controllers
             }
 
             // Check to see if the student already has the item.  If so, don't buy again, only 1 item per student
-            var ItemAlreadyExists = myStudent.Inventory.Exists(m => m.Id == myItem.Id);
+            var ItemAlreadyExists = myStudent.Inventory.Exists(m => m.Name == myItem.Name);
             if (ItemAlreadyExists)
             {
                 // Already own it.
@@ -164,7 +164,7 @@ namespace _5051.Controllers
             if (myItem.IsLimitSupply == true)
             {
                 // Reduce the quantities of Item
-                myItem.Quantities -= 1;
+                item.Quantities -= 1;
             }                           
 
             // Add Item to Student Inventory
