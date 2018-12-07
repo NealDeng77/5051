@@ -25,14 +25,14 @@ namespace _5051.UnitTests.Models
         public void Models_AvatarComposite_Default_Instantiate_Get_Set_Should_Pass()
         {
             // Arange
-            string AvatarAccessoryUri = "/content/avatar/Accessory0.png";
-            string AvatarCheeksUri = "/content/avatar/Cheeks0.png";
-            string AvatarExpressionUri = "/content/avatar/Expression0.png";
-            string AvatarHairBackUri = "/content/avatar/Hair2_short_black.png";
-            string AvatarHairFrontUri = "/content/avatar/Hair1_straight_black.png";
-            string AvatarHeadUri = "/content/avatar/Head0.png";
-            string AvatarShirtShortUri = "/content/avatar/Shirt_short_white.png";
-            string AvatarShirtFullUri = "/content/avatar/Shirt_short_white.png";
+            //string AvatarAccessoryUri = "/content/avatar/Accessory0.png";
+            //string AvatarCheeksUri = "/content/avatar/Cheeks0.png";
+            //string AvatarExpressionUri = "/content/avatar/Expression0.png";
+            //string AvatarHairBackUri = "/content/avatar/Hair2_short_black.png";
+            //string AvatarHairFrontUri = "/content/avatar/Hair1_straight_black.png";
+            //string AvatarHeadUri = "/content/avatar/Head0.png";
+            //string AvatarShirtShortUri = "/content/avatar/Shirt_short_white.png";
+            //string AvatarShirtFullUri = "/content/avatar/Shirt_short_white.png";
 
             // Act
             var result = new AvatarCompositeModel();
