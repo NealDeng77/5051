@@ -98,7 +98,7 @@ namespace _5051.Backend
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -183,7 +183,7 @@ namespace _5051.Backend
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             return myReturnList;
         }
@@ -270,7 +270,7 @@ namespace _5051.Backend
                 myReturn = ConvertFromEntity<T>(data);
                 return myReturn;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 
@@ -356,7 +356,7 @@ namespace _5051.Backend
 
                 myReturn = DataSourceBackendTable.Instance.ConvertFromEntity<T>(entity);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             return myReturn;
         }
@@ -428,7 +428,7 @@ namespace _5051.Backend
                     return false;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             return true;
         }
