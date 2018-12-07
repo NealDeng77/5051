@@ -129,8 +129,10 @@ namespace _5051.Tests.Controllers
             PortalController controller = new PortalController();
 
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var data = new StudentDisplayViewModel(student);
-            data.Id= null;
+            var data = new StudentDisplayViewModel(student)
+            {
+                Id = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Login(data);
@@ -196,9 +198,11 @@ namespace _5051.Tests.Controllers
             //var data = new StudentDisplayViewModel(student);
             var student = Backend.DataSourceBackend.Instance.StudentBackend.GetDefault();
             var expectName = student.Name;
-            var data = new StudentDisplayViewModel(student);
-            data.Password = expectName;
-            data.Name = expectName;
+            var data = new StudentDisplayViewModel(student)
+            {
+                Password = expectName,
+                Name = expectName
+            };
 
             // Act
             var result = (ActionResult)controller.Login(data);
@@ -825,9 +829,11 @@ namespace _5051.Tests.Controllers
             var myAttendance = new AttendanceModel();
             myStudent.Attendance.Add(myAttendance);
 
-            var myData = new AttendanceModel();
-            myData.StudentId = myAttendance.Id;
-            myData.Id = "bogus";
+            var myData = new AttendanceModel
+            {
+                StudentId = myAttendance.Id,
+                Id = "bogus"
+            };
             myData.EmotionUri = myData.Id;
 
             // Act
@@ -844,8 +850,10 @@ namespace _5051.Tests.Controllers
             var controller = new PortalController();
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var myAttendance = new AttendanceModel();
-            myAttendance.StudentId = myStudent.Id;
+            var myAttendance = new AttendanceModel
+            {
+                StudentId = myStudent.Id
+            };
             myAttendance.EmotionUri = myAttendance.Id;
 
             myStudent.Attendance.Add(myAttendance);
@@ -930,8 +938,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
 
-            StudentDisplayViewModel data = new StudentDisplayViewModel();
-            data.Id = null;
+            StudentDisplayViewModel data = new StudentDisplayViewModel
+            {
+                Id = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Settings(data);
@@ -946,8 +956,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             PortalController controller = new PortalController();
 
-            StudentDisplayViewModel data = new StudentDisplayViewModel();
-            data.Id = "bogus";
+            StudentDisplayViewModel data = new StudentDisplayViewModel
+            {
+                Id = "bogus"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Settings(data);
@@ -965,8 +977,10 @@ namespace _5051.Tests.Controllers
             string expect = "hi";
 
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            StudentDisplayViewModel data = new StudentDisplayViewModel(student);
-            data.Name = expect;
+            StudentDisplayViewModel data = new StudentDisplayViewModel(student)
+            {
+                Name = expect
+            };
 
             // Act
             controller.Settings(data);
@@ -1553,11 +1567,13 @@ namespace _5051.Tests.Controllers
 
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
-            ChangePasswordViewModel model = new ChangePasswordViewModel();
-            model.UserID = student.Id;
-            model.ConfirmPassword = "test";
-            model.OldPassword = "bogus";
-            model.NewPassword = "test";
+            ChangePasswordViewModel model = new ChangePasswordViewModel
+            {
+                UserID = student.Id,
+                ConfirmPassword = "test",
+                OldPassword = "bogus",
+                NewPassword = "test"
+            };
 
             // Act
             ViewResult result = (ViewResult)controller.ChangePassword(model);
@@ -1576,11 +1592,13 @@ namespace _5051.Tests.Controllers
 
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
-            ChangePasswordViewModel model = new ChangePasswordViewModel();
-            model.UserID = student.Id;
-            model.ConfirmPassword = student.Password;
-            model.OldPassword = student.Password;
-            model.NewPassword = student.Password;
+            ChangePasswordViewModel model = new ChangePasswordViewModel
+            {
+                UserID = student.Id,
+                ConfirmPassword = student.Password,
+                OldPassword = student.Password,
+                NewPassword = student.Password
+            };
 
             // Act
             RedirectToRouteResult result = controller.ChangePassword(model) as RedirectToRouteResult;

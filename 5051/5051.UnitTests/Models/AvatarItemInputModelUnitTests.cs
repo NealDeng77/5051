@@ -40,16 +40,20 @@ namespace _5051.UnitTests.Models
         public void Models_AvatarItemInput_Instantiate_Get_Set_Should_Pass()
         {
             // Arange
-            var expect = new AvatarItemInputModel();
-            expect.ItemId = "item";
-            expect.Position = AvatarItemCategoryEnum.Accessory;
-            expect.StudentId = "student";
+            var expect = new AvatarItemInputModel
+            {
+                ItemId = "item",
+                Position = AvatarItemCategoryEnum.Accessory,
+                StudentId = "student"
+            };
 
             // Act
-            var result = new AvatarItemInputModel();
-            result.ItemId = expect.ItemId;
-            result.Position = expect.Position;
-            result.StudentId = expect.StudentId;
+            var result = new AvatarItemInputModel
+            {
+                ItemId = expect.ItemId,
+                Position = expect.Position,
+                StudentId = expect.StudentId
+            };
 
             // Reset
             DataSourceBackend.Instance.Reset();

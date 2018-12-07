@@ -31,9 +31,11 @@ namespace _5051.UnitTests.Models
 
             // Act
             // Set all the fields for a BaseReportViewModel
-            var test = new MonthlyReportViewModel();
-            test.SelectedMonthId = 1;
-            test.Months = new List<SelectListItem>();
+            var test = new MonthlyReportViewModel
+            {
+                SelectedMonthId = 1,
+                Months = new List<SelectListItem>()
+            };
 
             var expectedSelectedWeekId = 1;
             // Assert

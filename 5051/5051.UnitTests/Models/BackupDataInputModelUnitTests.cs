@@ -39,12 +39,14 @@ namespace _5051.UnitTests.Models
             var TempConfirmSource = DataSourceEnum.Local;
 
             // Act
-            var result = new BackupDataInputModel();
-            result.Password = TempPassword;
-            result.Destination = TempDestination;
-            result.ConfirmDestination = TempConfirmDestination;
-            result.Source = TempSource;
-            result.ConfirmSource = TempConfirmSource;
+            var result = new BackupDataInputModel
+            {
+                Password = TempPassword,
+                Destination = TempDestination,
+                ConfirmDestination = TempConfirmDestination,
+                Source = TempSource,
+                ConfirmSource = TempConfirmSource
+            };
 
             // Assert
             Assert.IsNotNull(result, TestContext.TestName);

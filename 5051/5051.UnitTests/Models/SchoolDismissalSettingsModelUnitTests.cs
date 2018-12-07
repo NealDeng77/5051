@@ -45,14 +45,16 @@ namespace _5051.UnitTests.Models
         {
 
             // Arrange
-            var data = new SchoolDismissalSettingsModel();
-            data.StartNormal = TimeSpan.Parse("1:11");
-            data.StartEarly= TimeSpan.Parse("1:12");
-            data.StartLate = TimeSpan.Parse("1:13");
+            var data = new SchoolDismissalSettingsModel
+            {
+                StartNormal = TimeSpan.Parse("1:11"),
+                StartEarly = TimeSpan.Parse("1:12"),
+                StartLate = TimeSpan.Parse("1:13"),
 
-            data.EndNormal = TimeSpan.Parse("2:11");
-            data.EndEarly = TimeSpan.Parse("2:12");
-            data.EndLate = TimeSpan.Parse("2:13");
+                EndNormal = TimeSpan.Parse("2:11"),
+                EndEarly = TimeSpan.Parse("2:12"),
+                EndLate = TimeSpan.Parse("2:13")
+            };
 
 
             var Year = DateTime.UtcNow.Year;
@@ -118,14 +120,16 @@ namespace _5051.UnitTests.Models
         {
 
             // Arrange
-            var data = new SchoolDismissalSettingsModel();
-            data.StartNormal = TimeSpan.Parse("1:11");
-            data.StartEarly = TimeSpan.Parse("1:12");
-            data.StartLate = TimeSpan.Parse("1:13");
+            var data = new SchoolDismissalSettingsModel
+            {
+                StartNormal = TimeSpan.Parse("1:11"),
+                StartEarly = TimeSpan.Parse("1:12"),
+                StartLate = TimeSpan.Parse("1:13"),
 
-            data.EndNormal = TimeSpan.Parse("2:11");
-            data.EndEarly = TimeSpan.Parse("2:12");
-            data.EndLate = TimeSpan.Parse("2:13");
+                EndNormal = TimeSpan.Parse("2:11"),
+                EndEarly = TimeSpan.Parse("2:12"),
+                EndLate = TimeSpan.Parse("2:13")
+            };
 
 
             var Year = DateTime.UtcNow.Year;

@@ -31,9 +31,11 @@ namespace _5051.UnitTests.Models
 
             // Act
             // Set all the fields for a BaseReportViewModel
-            var test = new QuarterReportViewModel();
-            test.SelectedQuarterId = 1;
-            test.Quarters = new List<SelectListItem>();
+            var test = new QuarterReportViewModel
+            {
+                SelectedQuarterId = 1,
+                Quarters = new List<SelectListItem>()
+            };
 
             var expectedSelectedSemesterId = 1;
             // Assert

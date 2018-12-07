@@ -29,9 +29,11 @@ namespace _5051.Models
             }
 
             var StudentData = DataSourceBackend.Instance.StudentBackend.Read(User.Id);
-            Student = new StudentDisplayViewModel(StudentData);
-            Student.Name = User.UserName;
-            Student.Id = User.Id;
+            Student = new StudentDisplayViewModel(StudentData)
+            {
+                Name = User.UserName,
+                Id = User.Id
+            };
         }
     }
 }

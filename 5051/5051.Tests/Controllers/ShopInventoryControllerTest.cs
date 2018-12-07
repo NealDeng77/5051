@@ -183,8 +183,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
-            FactoryInventoryModel data = new FactoryInventoryModel();
-            data.Id = null;
+            FactoryInventoryModel data = new FactoryInventoryModel
+            {
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -323,8 +325,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
-            FactoryInventoryModel data = new FactoryInventoryModel();
-            data.Id = null;
+            FactoryInventoryModel data = new FactoryInventoryModel
+            {
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -462,8 +466,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             FactoryInventoryController controller = new FactoryInventoryController();
-            FactoryInventoryModel data = new FactoryInventoryModel();
-            data.Id = null;
+            FactoryInventoryModel data = new FactoryInventoryModel
+            {
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 

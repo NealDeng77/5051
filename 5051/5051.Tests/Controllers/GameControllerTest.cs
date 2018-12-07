@@ -141,8 +141,10 @@ namespace _5051.Tests.Controllers
             controller.ModelState.AddModelError("test", "test");
 
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var studentData = new StudentInputModel();
-            studentData.Id = data.Id;
+            var studentData = new StudentInputModel
+            {
+                Id = data.Id
+            };
 
             // Act
             var result = (JsonResult)controller.GetResults(studentData);
@@ -163,8 +165,10 @@ namespace _5051.Tests.Controllers
             var controller = new GameController();
 
             var data = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var studentData = new StudentInputModel();
-            studentData.Id = data.Id;
+            var studentData = new StudentInputModel
+            {
+                Id = data.Id
+            };
 
             // Act
             var result = (JsonResult)controller.GetResults(studentData);

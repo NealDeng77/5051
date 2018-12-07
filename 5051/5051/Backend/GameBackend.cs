@@ -16,9 +16,9 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile GameBackend instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
-        private static object Lock = new Object();
+        private static readonly object Lock = new Object();
 
         private GameBackend() { }
 
@@ -361,9 +361,11 @@ namespace _5051.Backend
                             // increase outcome
                             student.Truck.Outcome += 1;
 
-                            TransactionModel myTransaction = new TransactionModel();
-                            myTransaction.Name = "Paid Rent " + RentAmount + " for " + RunDateTime.Date.ToShortDateString();
-                            myTransaction.Uri = null;
+                            TransactionModel myTransaction = new TransactionModel
+                            {
+                                Name = "Paid Rent " + RentAmount + " for " + RunDateTime.Date.ToShortDateString(),
+                                Uri = null
+                            };
                             student.Truck.TransactionList.Add(myTransaction);
                             student.Truck.BusinessList.Add(myTransaction);
 
@@ -406,9 +408,11 @@ namespace _5051.Backend
             // show pass by message            
             if (studentPoints >= criterion)
             {
-                TransactionModel myTransaction = new TransactionModel();
-                myTransaction.Name = "Customer is coming";
-                myTransaction.Uri = null;
+                TransactionModel myTransaction = new TransactionModel
+                {
+                    Name = "Customer is coming",
+                    Uri = null
+                };
                 student.Truck.TransactionList.Add(myTransaction);
             }
             return;
@@ -475,9 +479,11 @@ namespace _5051.Backend
 
                 student.Truck.CustomersTotal++;
 
-                TransactionModel myTransaction = new TransactionModel();
-                myTransaction.Name = "Sold " + Item.Name + " for profit of " + profit;
-                myTransaction.Uri = Item.Uri;
+                TransactionModel myTransaction = new TransactionModel
+                {
+                    Name = "Sold " + Item.Name + " for profit of " + profit,
+                    Uri = Item.Uri
+                };
                 student.Truck.TransactionList.Add(myTransaction);
                 student.Truck.BusinessList.Add(myTransaction);
 
@@ -488,9 +494,11 @@ namespace _5051.Backend
             }
             else
             {
-                TransactionModel myTransaction = new TransactionModel();
-                myTransaction.Name = "No Inventory to Sell";
-                myTransaction.Uri = null;
+                TransactionModel myTransaction = new TransactionModel
+                {
+                    Name = "No Inventory to Sell",
+                    Uri = null
+                };
                 student.Truck.TransactionList.Add(myTransaction);
             }
 
@@ -505,10 +513,12 @@ namespace _5051.Backend
             // Get Student
             foreach (var student in data)
             {
-                var temp = new LeaderBoardModel();
-                temp.Id = student.Id;
-                temp.Name = student.Name;
-                temp.Profit = student.Truck.Income;
+                var temp = new LeaderBoardModel
+                {
+                    Id = student.Id,
+                    Name = student.Name,
+                    Profit = student.Truck.Income
+                };
                 board.Add(temp);
             }
 

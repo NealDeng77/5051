@@ -172,8 +172,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = null;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
@@ -190,10 +192,11 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new ShopBuyViewModel();
-
-            data.StudentId = "studentID";
-            data.ItemId = null;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = "studentID",
+                ItemId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
@@ -211,9 +214,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = "bogus";
-            data.ItemId = "itemID";
+            var data = new ShopBuyViewModel
+            {
+                StudentId = "bogus",
+                ItemId = "itemID"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
@@ -231,9 +236,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = "bogus";
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = "bogus"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Select(data);
@@ -251,9 +258,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory).Id;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefault(AvatarItemCategoryEnum.Accessory).Id
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -276,9 +285,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -314,9 +325,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -354,9 +367,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -392,9 +407,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -431,9 +448,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -470,9 +489,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetFirstAvatarItemId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -718,8 +739,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new AvatarItemInputModel();
-            data.StudentId = null;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -737,9 +760,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = null;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -757,9 +782,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new AvatarItemInputModel();
-            data.StudentId = "bogus";
-            data.ItemId = "itemID";
+            var data = new AvatarItemInputModel
+            {
+                StudentId = "bogus",
+                ItemId = "itemID"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -777,9 +804,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarSelectController();
 
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = "bogus";
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = "bogus"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -796,10 +825,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Accessory).Id;
-            data.Position = AvatarItemCategoryEnum.Accessory;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Accessory).Id,
+                Position = AvatarItemCategoryEnum.Accessory
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -821,10 +852,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Cheeks).Id;
-            data.Position = AvatarItemCategoryEnum.Cheeks;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Cheeks).Id,
+                Position = AvatarItemCategoryEnum.Cheeks
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -846,10 +879,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Expression).Id;
-            data.Position = AvatarItemCategoryEnum.Expression;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Expression).Id,
+                Position = AvatarItemCategoryEnum.Expression
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -871,10 +906,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.HairBack).Id;
-            data.Position = AvatarItemCategoryEnum.HairBack;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.HairBack).Id,
+                Position = AvatarItemCategoryEnum.HairBack
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -896,10 +933,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.HairFront).Id;
-            data.Position = AvatarItemCategoryEnum.HairFront;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.HairFront).Id,
+                Position = AvatarItemCategoryEnum.HairFront
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -921,10 +960,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Head).Id;
-            data.Position = AvatarItemCategoryEnum.Head;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Head).Id,
+                Position = AvatarItemCategoryEnum.Head
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -946,10 +987,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Pants).Id;
-            data.Position = AvatarItemCategoryEnum.Pants;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.Pants).Id,
+                Position = AvatarItemCategoryEnum.Pants
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -971,10 +1014,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AvatarSelectController();
-            var data = new AvatarItemInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtFull).Id;
-            data.Position = AvatarItemCategoryEnum.ShirtFull;
+            var data = new AvatarItemInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.AvatarItemBackend.GetDefaultAvatarItemFullItem(AvatarItemCategoryEnum.ShirtFull).Id,
+                Position = AvatarItemCategoryEnum.ShirtFull
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);

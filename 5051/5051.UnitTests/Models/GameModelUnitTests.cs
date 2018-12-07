@@ -51,8 +51,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new GameModel();
-            data.Id = "test";
+            var data = new GameModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);
@@ -66,15 +68,17 @@ namespace _5051.UnitTests.Models
         public void Models_GameModel_Update_With_Valid_Data_Null_Should_Pass()
         {
             // Arrange
-            var expect = new GameModel();
-            expect.Id = "Id";
-            expect.Enabled = false;
-            expect.IterationNumber = 1000;
-            expect.RefreshRate = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 hr 1 minute
-            expect.RunDate = DateTime.Parse("01/23/2018");
-            expect.TimeIteration = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None);  // default to 1 hr 1 minute
-            expect.Income = 100;
-            expect.Outcome = 50;
+            var expect = new GameModel
+            {
+                Id = "Id",
+                Enabled = false,
+                IterationNumber = 1000,
+                RefreshRate = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None),  // default to 1 hr 1 minute
+                RunDate = DateTime.Parse("01/23/2018"),
+                TimeIteration = TimeSpan.ParseExact("01:01:00", @"hh\:mm\:ss", CultureInfo.InvariantCulture, TimeSpanStyles.None),  // default to 1 hr 1 minute
+                Income = 100,
+                Outcome = 50
+            };
 
             var result  = new GameModel();
 

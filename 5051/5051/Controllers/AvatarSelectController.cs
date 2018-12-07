@@ -56,9 +56,11 @@ namespace _5051.Controllers
             // Load the ones
             foreach (var item in Enum.GetValues(typeof(AvatarItemCategoryEnum)))
             {
-                var temp = new AvatarItemViewModel();
-                temp.Category = (AvatarItemCategoryEnum)item;
-                temp.AvatarItemList = InventoryList.Where(m => m.Category == (AvatarItemCategoryEnum)item).ToList();
+                var temp = new AvatarItemViewModel
+                {
+                    Category = (AvatarItemCategoryEnum)item,
+                    AvatarItemList = InventoryList.Where(m => m.Category == (AvatarItemCategoryEnum)item).ToList()
+                };
 
                 if (temp.AvatarItemList.Any())
                 {
@@ -196,9 +198,11 @@ namespace _5051.Controllers
 
             foreach (var item in Enum.GetValues(typeof(AvatarItemCategoryEnum)))
             {
-                var temp = new AvatarItemViewModel();
-                temp.Category = (AvatarItemCategoryEnum)item;
-                temp.AvatarItemList = InventoryList.Where(m => m.Category == (AvatarItemCategoryEnum)item).ToList();
+                var temp = new AvatarItemViewModel
+                {
+                    Category = (AvatarItemCategoryEnum)item,
+                    AvatarItemList = InventoryList.Where(m => m.Category == (AvatarItemCategoryEnum)item).ToList()
+                };
 
                 if (temp.AvatarItemList.Any())
                 {

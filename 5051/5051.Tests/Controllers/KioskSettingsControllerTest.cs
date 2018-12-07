@@ -184,10 +184,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new KioskSettingsController();
-            KioskSettingsModel dataNull = new KioskSettingsModel();
+            KioskSettingsModel dataNull = new KioskSettingsModel
+            {
 
-            // Make data.Id = null
-            dataNull.Id = null;
+                // Make data.Id = null
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -205,10 +207,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new KioskSettingsController();
-            KioskSettingsModel dataEmpty = new KioskSettingsModel();
+            KioskSettingsModel dataEmpty = new KioskSettingsModel
+            {
 
-            // Make data.Id empty
-            dataEmpty.Id = "";
+                // Make data.Id empty
+                Id = ""
+            };
 
             var context = CreateMoqSetupForCookie();
 

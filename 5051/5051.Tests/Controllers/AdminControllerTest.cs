@@ -761,11 +761,13 @@ namespace _5051.Tests.Controllers
 
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
-            ChangePasswordViewModel model = new ChangePasswordViewModel();
-            model.UserID = student.Id;
-            model.ConfirmPassword = student.Password;
-            model.OldPassword = "bogus";
-            model.NewPassword = student.Password;
+            ChangePasswordViewModel model = new ChangePasswordViewModel
+            {
+                UserID = student.Id,
+                ConfirmPassword = student.Password,
+                OldPassword = "bogus",
+                NewPassword = student.Password
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -788,11 +790,13 @@ namespace _5051.Tests.Controllers
 
             var teacher = DataSourceBackend.Instance.IdentityBackend.FindUserByID("teacher");
 
-            ChangePasswordViewModel model = new ChangePasswordViewModel();
-            model.UserID = "teacher";
-            model.ConfirmPassword = "teacher";
-            model.OldPassword = "teacher";
-            model.NewPassword = "teacher";
+            ChangePasswordViewModel model = new ChangePasswordViewModel
+            {
+                UserID = "teacher",
+                ConfirmPassword = "teacher",
+                OldPassword = "teacher",
+                NewPassword = "teacher"
+            };
 
             var context = CreateMoqSetupForCookie();
 

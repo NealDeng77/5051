@@ -64,11 +64,13 @@ namespace _5051.UnitTests.Models
             var userInfo = DataSourceBackend.Instance.IdentityBackend.FindUserByUserName(Student.Name);
 
             // Act
-            var result = new ApplicationUserInputModel(userInfo);
-            result.Id = "123";
-            result.Role = UserRoleEnum.StudentUser;
-            result.Student = Student;
-            result.State = true;
+            var result = new ApplicationUserInputModel(userInfo)
+            {
+                Id = "123",
+                Role = UserRoleEnum.StudentUser,
+                Student = Student,
+                State = true
+            };
 
             // Reset
             DataSourceBackend.Instance.Reset();

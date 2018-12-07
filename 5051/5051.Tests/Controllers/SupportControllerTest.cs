@@ -260,8 +260,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new SupportController();
-            var app = new ApplicationUserInputModel();
-            app.Id = null;
+            var app = new ApplicationUserInputModel
+            {
+                Id = null
+            };
 
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
@@ -278,9 +280,11 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new SupportController();
-            var app = new ApplicationUserInputModel();
-            app.Id = "id";
-            app.Role = UserRoleEnum.Unknown;
+            var app = new ApplicationUserInputModel
+            {
+                Id = "id",
+                Role = UserRoleEnum.Unknown
+            };
 
             // Act
             var result = controller.ToggleUser(app) as RedirectToRouteResult;
@@ -471,9 +475,11 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new SupportController();
-            LoginViewModel loginViewModel = new LoginViewModel();
-            loginViewModel.Email = DataSourceBackend.Instance.StudentBackend.GetDefault().Name;
-            loginViewModel.Password = DataSourceBackend.Instance.StudentBackend.GetDefault().Password;
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                Email = DataSourceBackend.Instance.StudentBackend.GetDefault().Name,
+                Password = DataSourceBackend.Instance.StudentBackend.GetDefault().Password
+            };
 
             // Act
             var result = controller.CreateStudent(loginViewModel) as RedirectToRouteResult;
@@ -681,8 +687,10 @@ namespace _5051.Tests.Controllers
         {
             //arrange
             SupportController controller = new SupportController();
-            ApplicationUser app = new ApplicationUser();
-            app.Id = null;
+            ApplicationUser app = new ApplicationUser
+            {
+                Id = null
+            };
 
             //act
             var result = controller.DeleteUser(app) as ViewResult;
@@ -1304,8 +1312,10 @@ namespace _5051.Tests.Controllers
             //arrange
             var dataBackend = DataSourceBackend.Instance;
             SupportController controller = new SupportController();
-            ChangePasswordViewModel viewModel = new ChangePasswordViewModel();
-            viewModel.UserID = null;
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel
+            {
+                UserID = null
+            };
 
             //act
             var result = controller.ChangeUserPassword(viewModel) as ViewResult;

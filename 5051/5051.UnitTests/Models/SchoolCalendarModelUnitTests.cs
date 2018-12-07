@@ -35,8 +35,10 @@ namespace _5051.UnitTests.Models
         [TestMethod]
         public void Models_SchoolCalendarModel_Default_Instantiate_With_Data_Should_Pass()
         {
-            var test = new SchoolCalendarModel();
-            test.Modified = true;
+            var test = new SchoolCalendarModel
+            {
+                Modified = true
+            };
 
             // Act
             var result = new SchoolCalendarModel(test);
@@ -64,8 +66,10 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             var expect = DateTime.Now;
-            var data = new SchoolCalendarModel();
-            data.Date = expect;
+            var data = new SchoolCalendarModel
+            {
+                Date = expect
+            };
 
             // Act
             data.Update((SchoolCalendarModel)null);
@@ -92,20 +96,21 @@ namespace _5051.UnitTests.Models
             var TempSchoolDay = true;
             var TempHasAttendance = true;
 
-        // Act
-            var result = new SchoolCalendarModel(null);
+            // Act
+            var result = new SchoolCalendarModel(null)
+            {
+                Id = TempId,
+                Date = TempDate,
+                TimeDuration = TempTimeDuration,
+                TimeStart = TempTimeStart,
+                TimeEnd = TempTimeEnd,
+                DayStart = TempDayStart,
+                DayEnd = TempDayEnd,
+                Modified = TempModified,
+                SchoolDay = TempSchoolDay,
+                HasAttendance = TempHasAttendance
+            };
 
-            result.Id = TempId;
-            result.Date = TempDate;
-            result.TimeDuration = TempTimeDuration;
-            result.TimeStart = TempTimeStart;
-            result.TimeEnd = TempTimeEnd;
-            result.DayStart = TempDayStart;
-            result.DayEnd = TempDayEnd;
-            result.Modified = TempModified;
-            result.SchoolDay = TempSchoolDay;
-            result.HasAttendance = TempHasAttendance;
-            
             // Assert
             Assert.AreEqual(TempId, result.Id, TestContext.TestName);
             Assert.AreEqual(TempDate, result.Date, TestContext.TestName);

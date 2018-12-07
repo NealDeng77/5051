@@ -501,10 +501,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
-            StudentDisplayViewModel dataNull = new StudentDisplayViewModel();
+            StudentDisplayViewModel dataNull = new StudentDisplayViewModel
+            {
 
-            // Make data.Id = null
-            dataNull.Id = null;
+                // Make data.Id = null
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -522,10 +524,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             StudentController controller = new StudentController();
-            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel();
+            StudentDisplayViewModel dataEmpty = new StudentDisplayViewModel
+            {
 
-            // Make data.Id empty
-            dataEmpty.Id = "";
+                // Make data.Id empty
+                Id = ""
+            };
 
             var context = CreateMoqSetupForCookie();
 

@@ -36,8 +36,10 @@ namespace _5051.UnitTests.Models
         public void Models_StudentDisplayViewModel_Default_Instantiate_With_Data_Should_Pass()
         {
             // Arrange
-            var data = new StudentModel();
-            data.Id = "hi";
+            var data = new StudentModel
+            {
+                Id = "hi"
+            };
             var expect = "hi";
 
             // Act
@@ -64,9 +66,11 @@ namespace _5051.UnitTests.Models
         public void Models_StudentDisplayViewModel_Default_Instantiate_With_Invalid_Data_Avatar_Null_Should_Fail()
         {
             // Arrange
-            var data = new StudentModel();
-            data.Id = "hi";
-            
+            var data = new StudentModel
+            {
+                Id = "hi"
+            };
+
             // Act
             var result = new StudentDisplayViewModel(data);
 
@@ -134,8 +138,10 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             var expect = 123;
-            var data = new StudentDisplayViewModel();
-            data.MonthlyAttendanceScore = expect;
+            var data = new StudentDisplayViewModel
+            {
+                MonthlyAttendanceScore = expect
+            };
 
             // Act
             var result = data.MonthlyAttendanceScore;
@@ -151,8 +157,10 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             var expect = 123;
-            var data = new StudentDisplayViewModel();
-            data.WeeklyAttendanceScore = expect;
+            var data = new StudentDisplayViewModel
+            {
+                WeeklyAttendanceScore = expect
+            };
 
             // Act
             var result = data.WeeklyAttendanceScore;

@@ -16,7 +16,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile AvatarItemBackend instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private AvatarItemBackend() { }
 
@@ -320,11 +320,12 @@ namespace _5051.Backend
 
         public AvatarSelectShopViewModel GetAvatarShopViewModel(StudentModel studentData, AvatarItemModel item)
         {
-            var data = new AvatarSelectShopViewModel();
+            var data = new AvatarSelectShopViewModel
+            {
+                Student = studentData,
 
-            data.Student = studentData;
-
-            data.data = GetAvatarItemShopViewModel(studentData.Id, item.Id);
+                data = GetAvatarItemShopViewModel(studentData.Id, item.Id)
+            };
 
             return data;
         }

@@ -467,9 +467,11 @@ namespace _5051.Tests.Controllers
             var myAttendance = new AttendanceModel();
             myStudent.Attendance.Add(myAttendance);
 
-            var myData = new AttendanceModel();
-            myData.StudentId = myAttendance.Id;
-            myData.Id = "bogus";
+            var myData = new AttendanceModel
+            {
+                StudentId = myAttendance.Id,
+                Id = "bogus"
+            };
             myData.EmotionUri = myData.Id;
 
             var context = CreateMoqSetupForCookie();
@@ -490,8 +492,10 @@ namespace _5051.Tests.Controllers
             var controller = new AttendanceController();
 
             var myStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var myAttendance = new AttendanceModel();
-            myAttendance.StudentId = myStudent.Id;
+            var myAttendance = new AttendanceModel
+            {
+                StudentId = myStudent.Id
+            };
             myAttendance.EmotionUri = myAttendance.Id;
 
             myStudent.Attendance.Add(myAttendance);

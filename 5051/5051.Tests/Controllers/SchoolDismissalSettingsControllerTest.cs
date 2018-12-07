@@ -202,10 +202,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new SchoolDismissalSettingsController();
-            SchoolDismissalSettingsModel dataNull = new SchoolDismissalSettingsModel();
+            SchoolDismissalSettingsModel dataNull = new SchoolDismissalSettingsModel
+            {
 
-            // Make data.Id = null
-            dataNull.Id = null;
+                // Make data.Id = null
+                Id = null
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -223,10 +225,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new SchoolDismissalSettingsController();
-            SchoolDismissalSettingsModel dataEmpty = new SchoolDismissalSettingsModel();
+            SchoolDismissalSettingsModel dataEmpty = new SchoolDismissalSettingsModel
+            {
 
-            // Make data.Id empty
-            dataEmpty.Id = "";
+                // Make data.Id empty
+                Id = ""
+            };
 
             var context = CreateMoqSetupForCookie();
 

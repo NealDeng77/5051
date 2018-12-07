@@ -817,8 +817,10 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var passModel = new ChangePasswordViewModel();
-            passModel.UserID = findResult.Id;
+            var passModel = new ChangePasswordViewModel
+            {
+                UserID = findResult.Id
+            };
 
             return View(passModel);
         }

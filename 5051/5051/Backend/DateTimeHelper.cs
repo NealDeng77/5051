@@ -8,7 +8,7 @@ namespace _5051.Backend
     public class DateTimeHelper
     {
         private static volatile DateTimeHelper instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private DateTimeHelper() { }
 

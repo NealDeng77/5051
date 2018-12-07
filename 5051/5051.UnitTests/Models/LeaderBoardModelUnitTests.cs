@@ -27,10 +27,11 @@ namespace _5051.UnitTests.Models
             // Arrange
             var expectProfit = 0;
             var expectName = "name";
-            var test = new LeaderBoardModel();
-
-            test.Name = expectName;
-            test.Profit = expectProfit;
+            var test = new LeaderBoardModel
+            {
+                Name = expectName,
+                Profit = expectProfit
+            };
 
             // Act
             var result = new LeaderBoardModel(test);
@@ -51,9 +52,11 @@ namespace _5051.UnitTests.Models
 
             var data = new LeaderBoardModel();
 
-            var test = new LeaderBoardModel();
-            test.Profit = expectProfit;
-            test.Name = expectName;
+            var test = new LeaderBoardModel
+            {
+                Profit = expectProfit,
+                Name = expectName
+            };
 
             // Act
             data.Update(test);
@@ -71,8 +74,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new LeaderBoardModel();
-            data.Id = "test";
+            var data = new LeaderBoardModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);

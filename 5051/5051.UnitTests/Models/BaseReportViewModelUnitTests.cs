@@ -40,21 +40,23 @@ namespace _5051.UnitTests.Models
 
             // Act
             // Set all the fields for a BaseReportViewModel
-            var test = new BaseReportViewModel();
-            test.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            test.Student = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            test.DateStart = new DateTime(2000, 12, 30);
-            test.DateEnd = new DateTime(2018, 8, 7);
-            test.AttendanceList = new List<AttendanceReportViewModel>();
-            test.Stats = new StudentReportStatsModel();
-            test.Goal = 100;
-            test.YearArray = "2018, 2018";
-            test.MonthArray = "1, 1";
-            test.DayArray = "1, 1";
-            test.PerfectValues = "100, 200";
-            test.GoalValues = "80, 160";
-            test.ActualValues = "50, 100";
-            test.EmotionLevelValues = "1, 3";
+            var test = new BaseReportViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                Student = DataSourceBackend.Instance.StudentBackend.GetDefault(),
+                DateStart = new DateTime(2000, 12, 30),
+                DateEnd = new DateTime(2018, 8, 7),
+                AttendanceList = new List<AttendanceReportViewModel>(),
+                Stats = new StudentReportStatsModel(),
+                Goal = 100,
+                YearArray = "2018, 2018",
+                MonthArray = "1, 1",
+                DayArray = "1, 1",
+                PerfectValues = "100, 200",
+                GoalValues = "80, 160",
+                ActualValues = "50, 100",
+                EmotionLevelValues = "1, 3"
+            };
 
             var expectedStudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
             var expectedStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();

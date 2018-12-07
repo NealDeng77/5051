@@ -159,8 +159,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = null;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Factory(data);
@@ -175,9 +177,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = "studentID";
-            data.ItemId = null;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = "studentID",
+                ItemId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Factory(data);
@@ -192,9 +196,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = "bogus";
-            data.ItemId = "itemID";
+            var data = new ShopBuyViewModel
+            {
+                StudentId = "bogus",
+                ItemId = "itemID"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Factory(data);
@@ -212,9 +218,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = "bogus";
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = "bogus"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Factory(data);
@@ -229,9 +237,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -267,8 +277,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id
+            };
             var ItemList = DataSourceBackend.Instance.FactoryInventoryBackend.Index();
             data.ItemId = ItemList.Find(n => n.IsLimitSupply == true).Id;
 
@@ -311,9 +323,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId); myStudent.Tokens = 1000;
@@ -347,9 +361,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -385,9 +401,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -423,9 +441,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopBuyViewModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId();
+            var data = new ShopBuyViewModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetFirstFactoryInventoryId()
+            };
 
             // Get the Student Record and Add some Tokens to it.
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -770,8 +790,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = null;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -786,9 +808,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = null;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -803,9 +827,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = "bogus";
-            data.ItemId = "itemID";
+            var data = new ShopTruckInputModel
+            {
+                StudentId = "bogus",
+                ItemId = "itemID"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -823,9 +849,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = "bogus";
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = "bogus"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Edit(data);
@@ -839,10 +867,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Truck).Id;
-            data.Position = FactoryInventoryCategoryEnum.Truck;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Truck).Id,
+                Position = FactoryInventoryCategoryEnum.Truck
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -865,10 +895,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Topper).Id;
-            data.Position = FactoryInventoryCategoryEnum.Topper;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Topper).Id,
+                Position = FactoryInventoryCategoryEnum.Topper
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -891,10 +923,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Menu).Id;
-            data.Position = FactoryInventoryCategoryEnum.Menu;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Menu).Id,
+                Position = FactoryInventoryCategoryEnum.Menu
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -917,10 +951,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Sign).Id;
-            data.Position = FactoryInventoryCategoryEnum.Sign;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Sign).Id,
+                Position = FactoryInventoryCategoryEnum.Sign
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -943,10 +979,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Wheels).Id;
-            data.Position = FactoryInventoryCategoryEnum.Wheels;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Wheels).Id,
+                Position = FactoryInventoryCategoryEnum.Wheels
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -969,10 +1007,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Trailer).Id;
-            data.Position = FactoryInventoryCategoryEnum.Trailer;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                ItemId = DataSourceBackend.Instance.FactoryInventoryBackend.GetDefaultTruckFullItem(FactoryInventoryCategoryEnum.Trailer).Id,
+                Position = FactoryInventoryCategoryEnum.Trailer
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);
@@ -1031,8 +1071,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = null;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.EditName(data);
@@ -1047,9 +1089,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.TruckName = null;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                TruckName = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.EditName(data);
@@ -1064,9 +1108,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             ShopController controller = new ShopController();
 
-            var data = new ShopTruckInputModel();
-            data.StudentId = "bogus";
-            data.TruckName = "truckName";
+            var data = new ShopTruckInputModel
+            {
+                StudentId = "bogus",
+                TruckName = "truckName"
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.EditName(data);
@@ -1084,9 +1130,11 @@ namespace _5051.Tests.Controllers
             // Arrange
             DataSourceBackend.Instance.Reset();
             ShopController controller = new ShopController();
-            var data = new ShopTruckInputModel();
-            data.StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
-            data.TruckName = DataSourceBackend.Instance.StudentBackend.GetDefault().Truck.TruckName;
+            var data = new ShopTruckInputModel
+            {
+                StudentId = DataSourceBackend.Instance.StudentBackend.GetDefault().Id,
+                TruckName = DataSourceBackend.Instance.StudentBackend.GetDefault().Truck.TruckName
+            };
 
             // Get the Student Record
             var myStudent = DataSourceBackend.Instance.StudentBackend.Read(data.StudentId);

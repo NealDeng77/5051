@@ -524,9 +524,11 @@ namespace _5051.UnitTests.Backend
             var backend = IdentityDataSourceTable.Instance;
             var testCookieName = "id";
             var testCookieValue = "testID";
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -686,9 +688,11 @@ namespace _5051.UnitTests.Backend
 
             var testCookieName = "id";
             var testCookieValue = "testID";
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
 
             var context = CreateMoqSetupForCookie(testCookieValue);
 
@@ -711,9 +715,11 @@ namespace _5051.UnitTests.Backend
 
             var testCookieName = "id";
             var testCookieValue = "testID";
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
 
             var context = CreateMoqSetupForCookie();
 
@@ -737,9 +743,11 @@ namespace _5051.UnitTests.Backend
 
             var testCookieName = "id";
             var testCookieValue = student.Id;
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
 
             var context = CreateMoqSetupForCookie(testCookieValue);
 
@@ -864,9 +872,11 @@ namespace _5051.UnitTests.Backend
 
             var testCookieName = "id";
             var testCookieValue = studentList.Last().Id;
-            HttpCookie testCookie = new HttpCookie(testCookieName);
-            testCookie.Value = testCookieValue;
-            testCookie.Expires = DateTime.Now.AddSeconds(30);
+            HttpCookie testCookie = new HttpCookie(testCookieName)
+            {
+                Value = testCookieValue,
+                Expires = DateTime.Now.AddSeconds(30)
+            };
 
             var context = CreateMoqSetupForCookie();
 

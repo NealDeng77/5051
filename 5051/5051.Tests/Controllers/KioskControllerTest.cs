@@ -177,10 +177,12 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Create StudentModel instance
-            StudentModel data = new StudentModel();
+            StudentModel data = new StudentModel
+            {
 
-            // Set student Id to null
-            data.Id = null;
+                // Set student Id to null
+                Id = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.KioskLogin(data);
@@ -267,10 +269,12 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
 
             // Create StudentModel instance
-            StudentModel data = new StudentModel();
+            StudentModel data = new StudentModel
+            {
 
-            // Set student Id to null
-            data.Id = null;
+                // Set student Id to null
+                Id = null
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.KioskLogout(data);
@@ -438,8 +442,10 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
             string Password = KioskSettingsBackend.Instance.GetDefault().Password;
 
-            var data = new KioskSettingsModel();
-            data.Password = Password;
+            var data = new KioskSettingsModel
+            {
+                Password = Password
+            };
 
             // Act
             var result = (RedirectToRouteResult)controller.Login(data);
@@ -455,8 +461,10 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
             string Password = KioskSettingsBackend.Instance.GetDefault().Password;
 
-            var data = new KioskSettingsModel();
-            data.Password = null;
+            var data = new KioskSettingsModel
+            {
+                Password = null
+            };
 
             ViewResult result = controller.Login(data) as ViewResult;
 
@@ -471,8 +479,10 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
             string Password = KioskSettingsBackend.Instance.GetDefault().Password;
 
-            var data = new KioskSettingsModel();
-            data.Password = "";
+            var data = new KioskSettingsModel
+            {
+                Password = ""
+            };
 
             // Act
             ViewResult result = controller.Login(data) as ViewResult;
@@ -488,8 +498,10 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
             string Password = KioskSettingsBackend.Instance.GetDefault().Password;
 
-            var data = new KioskSettingsModel();
-            data.Password = "bogus";
+            var data = new KioskSettingsModel
+            {
+                Password = "bogus"
+            };
 
             // Act
             ViewResult result = controller.Login(data) as ViewResult;
@@ -505,8 +517,10 @@ namespace _5051.Tests.Controllers
             var controller = new KioskController();
             string Password = KioskSettingsBackend.Instance.GetDefault().Password;
 
-            var data = new KioskSettingsModel();
-            data.Password = Password;
+            var data = new KioskSettingsModel
+            {
+                Password = Password
+            };
 
             // Make a model error then try to send it as a KioskSettings
             controller.ModelState.AddModelError("test", "test");

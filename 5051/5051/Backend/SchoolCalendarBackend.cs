@@ -13,7 +13,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile SchoolCalendarBackend instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private SchoolCalendarBackend() { }
 

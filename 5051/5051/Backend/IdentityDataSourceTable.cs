@@ -22,7 +22,7 @@ namespace _5051.Backend
         public string teacherPass = "teacher";
 
         private static volatile IdentityDataSourceTable instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private IdentityDataSourceTable() { }
 
@@ -50,9 +50,9 @@ namespace _5051.Backend
 
         private const string ClassName = "IdentityModel";
 
-        private string tableName = ClassName.ToLower();
+        private readonly string tableName = ClassName.ToLower();
 
-        private string partitionKey = ClassName.ToLower();
+        private readonly string partitionKey = ClassName.ToLower();
 
 
 
@@ -762,9 +762,11 @@ namespace _5051.Backend
                 return false;
             }
 
-            HttpCookie aCookie = new HttpCookie(cookieName);
-            aCookie.Value = cookieValue;
-            aCookie.Expires = DateTime.Now.AddDays(1);
+            HttpCookie aCookie = new HttpCookie(cookieName)
+            {
+                Value = cookieValue,
+                Expires = DateTime.Now.AddDays(1)
+            };
             context.Response.Cookies.Add(aCookie);
 
             return true;
@@ -792,8 +794,10 @@ namespace _5051.Backend
             HttpCookie aCookie = context.Request.Cookies[cookieName];
             var cookieId = context.Server.HtmlEncode(aCookie.Value);
             //delete the cookie with id info
-            aCookie = new HttpCookie(cookieName);
-            aCookie.Expires = DateTime.Now.AddDays(-1);
+            aCookie = new HttpCookie(cookieName)
+            {
+                Expires = DateTime.Now.AddDays(-1)
+            };
             context.Response.Cookies.Add(aCookie);
 
             return true;

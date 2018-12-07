@@ -88,8 +88,10 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var reportBackend = ReportBackend.Instance;
-            var testReport = new MonthlyReportViewModel();
-            testReport.SelectedMonthId = 1;
+            var testReport = new MonthlyReportViewModel
+            {
+                SelectedMonthId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -229,8 +231,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new WeeklyReportViewModel();
-            testReport.SelectedWeekId = 1;
+            var testReport = new WeeklyReportViewModel
+            {
+                SelectedWeekId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -299,8 +303,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new SemesterReportViewModel();
-            testReport.SelectedSemesterId = 1;
+            var testReport = new SemesterReportViewModel
+            {
+                SelectedSemesterId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -369,8 +375,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new SemesterReportViewModel();
-            testReport.SelectedSemesterId = 2;
+            var testReport = new SemesterReportViewModel
+            {
+                SelectedSemesterId = 2
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -439,8 +447,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new QuarterReportViewModel();
-            testReport.SelectedQuarterId = 1;
+            var testReport = new QuarterReportViewModel
+            {
+                SelectedQuarterId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -509,8 +519,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new QuarterReportViewModel();
-            testReport.SelectedQuarterId = 2;
+            var testReport = new QuarterReportViewModel
+            {
+                SelectedQuarterId = 2
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -579,8 +591,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new QuarterReportViewModel();
-            testReport.SelectedQuarterId = 3;
+            var testReport = new QuarterReportViewModel
+            {
+                SelectedQuarterId = 3
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -649,8 +663,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new QuarterReportViewModel();
-            testReport.SelectedQuarterId = 4;
+            var testReport = new QuarterReportViewModel
+            {
+                SelectedQuarterId = 4
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -719,8 +735,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new WeeklyReportViewModel();
-            testReport.SelectedWeekId = 1;
+            var testReport = new WeeklyReportViewModel
+            {
+                SelectedWeekId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;
@@ -778,8 +796,10 @@ namespace _5051.UnitTests.Backend
             var dateTimeUTCNow = dateTimeHelper.GetDateTimeNowUTC();
 
             var reportBackend = ReportBackend.Instance;
-            var testReport = new WeeklyReportViewModel();
-            testReport.SelectedWeekId = 1;
+            var testReport = new WeeklyReportViewModel
+            {
+                SelectedWeekId = 1
+            };
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
             testReport.Student = testStudent;
             testReport.StudentId = testStudent.Id;

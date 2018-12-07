@@ -27,10 +27,11 @@ namespace _5051.UnitTests.Models
             // Arrange
             var expectUri = "uri";
             var expectName = "name";
-            var test = new TransactionModel();
-
-            test.Name = expectName;
-            test.Uri = expectUri;
+            var test = new TransactionModel
+            {
+                Name = expectName,
+                Uri = expectUri
+            };
 
             // Act
             var result = new TransactionModel(test);
@@ -51,9 +52,11 @@ namespace _5051.UnitTests.Models
 
             var data = new TransactionModel();
 
-            var test = new TransactionModel();
-            test.Uri = expectUri;
-            test.Name = expectName;
+            var test = new TransactionModel
+            {
+                Uri = expectUri,
+                Name = expectName
+            };
 
             // Act
             data.Update(test);
@@ -71,8 +74,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new TransactionModel();
-            data.Id = "test";
+            var data = new TransactionModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);

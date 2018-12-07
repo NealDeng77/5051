@@ -12,7 +12,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile IdentityDataSourceMockV2 instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private IdentityDataSourceMockV2() { }
 
@@ -557,9 +557,11 @@ namespace _5051.Backend
                 return false;
             }
 
-            HttpCookie aCookie = new HttpCookie(cookieName);
-            aCookie.Value = cookieValue;
-            aCookie.Expires = DateTime.Now.AddDays(1);
+            HttpCookie aCookie = new HttpCookie(cookieName)
+            {
+                Value = cookieValue,
+                Expires = DateTime.Now.AddDays(1)
+            };
             context.Response.Cookies.Add(aCookie);
 
             return true;
@@ -588,8 +590,10 @@ namespace _5051.Backend
             HttpCookie aCookie = context.Request.Cookies[cookieName];
             var cookieId = context.Server.HtmlEncode(aCookie.Value);
             //delete the cookie with id info
-            aCookie = new HttpCookie(cookieName);
-            aCookie.Expires = DateTime.Now.AddDays(-1);
+            aCookie = new HttpCookie(cookieName)
+            {
+                Expires = DateTime.Now.AddDays(-1)
+            };
             context.Response.Cookies.Add(aCookie);
 
             return true;

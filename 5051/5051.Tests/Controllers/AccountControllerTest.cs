@@ -292,11 +292,13 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new AccountController();
-            
-            var model = new RegisterViewModel();
-            model.ConfirmPassword = "password";
-            model.Email = "test@abc.com";
-            model.Password = "password";
+
+            var model = new RegisterViewModel
+            {
+                ConfirmPassword = "password",
+                Email = "test@abc.com",
+                Password = "password"
+            };
 
             // Act
             var result = controller.Register(model);
@@ -387,8 +389,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AccountController();
 
-            var model = new ForgotPasswordViewModel();
-            model.Email = "abc@abc.com";
+            var model = new ForgotPasswordViewModel
+            {
+                Email = "abc@abc.com"
+            };
 
             // Act
             var result = controller.ForgotPassword(model);
@@ -462,8 +466,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AccountController();
 
-            var model = new ResetPasswordViewModel();
-            model.Email = "abc@abc.com";
+            var model = new ResetPasswordViewModel
+            {
+                Email = "abc@abc.com"
+            };
 
             // Act
             var result = controller.ResetPassword(model);

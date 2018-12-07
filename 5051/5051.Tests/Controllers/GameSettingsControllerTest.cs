@@ -156,10 +156,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new GameSettingsController();
-            GameModel dataNull = new GameModel();
+            GameModel dataNull = new GameModel
+            {
 
-            // Make data.Id = null
-            dataNull.Id = null;
+                // Make data.Id = null
+                Id = null
+            };
 
             // Act
             var resultNull = (ViewResult)controller.Update(dataNull);
@@ -173,10 +175,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new GameSettingsController();
-            GameModel dataEmpty = new GameModel();
+            GameModel dataEmpty = new GameModel
+            {
 
-            // Make data.Id empty
-            dataEmpty.Id = "";
+                // Make data.Id empty
+                Id = ""
+            };
 
             // Act
             var resultEmpty = (ViewResult)controller.Update(dataEmpty);

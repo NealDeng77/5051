@@ -15,7 +15,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile GameDataSourceMock instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private GameDataSourceMock() { }
 
@@ -150,8 +150,10 @@ namespace _5051.Backend
         private void DataSetDefault()
         {
             DataSetClear();
-            var temp = new GameModel();
-            temp.RunDate = DateTimeHelper.Instance.GetDateTimeNowUTC();
+            var temp = new GameModel
+            {
+                RunDate = DateTimeHelper.Instance.GetDateTimeNowUTC()
+            };
             Create(temp);
         }
 

@@ -257,9 +257,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_SchoolCalendarBackendHelper_SetSchoolTime_Start_Unknown_Should_Return_Default()
         {
             // Arrange
-            var data = new SchoolCalendarModel();
-            data.DayStart = SchoolCalendarDismissalEnum.Unknown;
-            data.DayEnd = SchoolCalendarDismissalEnum.Early;
+            var data = new SchoolCalendarModel
+            {
+                DayStart = SchoolCalendarDismissalEnum.Unknown,
+                DayEnd = SchoolCalendarDismissalEnum.Early
+            };
 
             var expect = data;
 
@@ -280,9 +282,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_SchoolCalendarBackendHelper_SetSchoolTime_End_Unknown_Should_Return_Default()
         {
             // Arrange
-            var data = new SchoolCalendarModel();
-            data.DayStart = SchoolCalendarDismissalEnum.Early;
-            data.DayEnd = SchoolCalendarDismissalEnum.Unknown;
+            var data = new SchoolCalendarModel
+            {
+                DayStart = SchoolCalendarDismissalEnum.Early,
+                DayEnd = SchoolCalendarDismissalEnum.Unknown
+            };
 
             var expect = data;
 
@@ -303,9 +307,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_SchoolCalendarBackendHelper_SetSchoolTime_DayStart_DayEnd_Normal_Should_Return_Default()
         {
             // Arrange
-            var data = new SchoolCalendarModel();
-            data.DayStart = SchoolCalendarDismissalEnum.Normal;
-            data.DayEnd = SchoolCalendarDismissalEnum.Normal;
+            var data = new SchoolCalendarModel
+            {
+                DayStart = SchoolCalendarDismissalEnum.Normal,
+                DayEnd = SchoolCalendarDismissalEnum.Normal
+            };
 
             var expect = data;
 
@@ -325,9 +331,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_SchoolCalendarBackendHelper_SetSchoolTime_DayStart_DayEnd_Early_Should_Return_Default()
         {
             // Arrange
-            var data = new SchoolCalendarModel();
-            data.DayStart = SchoolCalendarDismissalEnum.Early;
-            data.DayEnd = SchoolCalendarDismissalEnum.Early;
+            var data = new SchoolCalendarModel
+            {
+                DayStart = SchoolCalendarDismissalEnum.Early,
+                DayEnd = SchoolCalendarDismissalEnum.Early
+            };
 
             var expect = data;
 
@@ -347,9 +355,11 @@ namespace _5051.UnitTests.Backend
         public void Backend_SchoolCalendarBackendHelper_SetSchoolTime_DayStart_DayEnd_Late_Should_Return_Default()
         {
             // Arrange
-            var data = new SchoolCalendarModel();
-            data.DayStart = SchoolCalendarDismissalEnum.Late;
-            data.DayEnd = SchoolCalendarDismissalEnum.Late;
+            var data = new SchoolCalendarModel
+            {
+                DayStart = SchoolCalendarDismissalEnum.Late,
+                DayEnd = SchoolCalendarDismissalEnum.Late
+            };
 
             var expect = data;
 

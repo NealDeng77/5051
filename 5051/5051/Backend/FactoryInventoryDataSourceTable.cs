@@ -17,7 +17,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile FactoryInventoryDataSourceTable instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private FactoryInventoryDataSourceTable() { }
 
@@ -50,12 +50,12 @@ namespace _5051.Backend
         /// <summary>
         /// Table Name used for data storage
         /// </summary>
-        private string tableName = ClassName.ToLower();
+        private readonly string tableName = ClassName.ToLower();
 
         /// <summary>
         /// Partition Key used for data storage
         /// </summary>
-        private string partitionKey = ClassName.ToLower();
+        private readonly string partitionKey = ClassName.ToLower();
 
         /// <summary>
         /// Makes a new AvatarItem

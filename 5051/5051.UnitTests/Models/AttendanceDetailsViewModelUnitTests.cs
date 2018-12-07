@@ -43,8 +43,10 @@ namespace _5051.UnitTests.Models
             // Arrange
             var myAttendanceDetails = new AttendanceDetailsViewModel();
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var testAttendance = new AttendanceModel();
-            testAttendance.StudentId = testStudent.Id;
+            var testAttendance = new AttendanceModel
+            {
+                StudentId = testStudent.Id
+            };
             testStudent.Attendance.Add(testAttendance);
             DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 
@@ -65,8 +67,10 @@ namespace _5051.UnitTests.Models
             // Arrange
             var myAttendanceDetails = new AttendanceDetailsViewModel();
             var testStudent = DataSourceBackend.Instance.StudentBackend.GetDefault();
-            var testAttendance = new AttendanceModel();
-            testAttendance.StudentId = testStudent.Id;
+            var testAttendance = new AttendanceModel
+            {
+                StudentId = testStudent.Id
+            };
             testStudent.Attendance.Add(testAttendance);
             DataSourceBackend.Instance.StudentBackend.Update(testStudent);
 

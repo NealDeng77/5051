@@ -38,10 +38,12 @@ namespace _5051.Controllers
                 DataSourceBackend.Instance.KioskSettingsBackend.UpdateLatestDate(currentDateUTC);
             }
 
-            var myReturn = new AdminReportIndexViewModel(myDataList);
+            var myReturn = new AdminReportIndexViewModel(myDataList)
+            {
 
-            //top 5 leaderboard
-            myReturn.Leaderboard = ReportBackend.Instance.GenerateLeaderboard().Take(5).ToList();
+                //top 5 leaderboard
+                Leaderboard = ReportBackend.Instance.GenerateLeaderboard().Take(5).ToList()
+            };
 
             return View(myReturn);       
         }
@@ -163,9 +165,10 @@ namespace _5051.Controllers
             }
 
             var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
-            var StudentViewModel = new StudentDisplayViewModel(myDataList);
-
-            StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC());
+            var StudentViewModel = new StudentDisplayViewModel(myDataList)
+            {
+                LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC())
+            };
 
             return View(StudentViewModel);
         }
@@ -183,10 +186,12 @@ namespace _5051.Controllers
             }
 
             var myDataList = DataSourceBackend.Instance.StudentBackend.Read(id);
-            var StudentViewModel = new StudentDisplayViewModel(myDataList);
+            var StudentViewModel = new StudentDisplayViewModel(myDataList)
+            {
 
-            //Todo, replace with actual transition time
-            StudentViewModel.LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC());
+                //Todo, replace with actual transition time
+                LastDateTime = UTCConversionsBackend.UtcToKioskTime(DateTimeHelper.Instance.GetDateTimeNowUTC())
+            };
 
             return View(StudentViewModel);
         }

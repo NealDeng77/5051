@@ -75,11 +75,15 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new AvatarModel();
-            data.Uri = "bogus";
+            var data = new AvatarModel
+            {
+                Uri = "bogus"
+            };
 
-            var test = new AvatarModel();
-            test.Uri = "test";
+            var test = new AvatarModel
+            {
+                Uri = "test"
+            };
 
             // Act
             data.Update(test);
@@ -96,8 +100,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new AvatarModel();
-            data.Id = "test";
+            var data = new AvatarModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);

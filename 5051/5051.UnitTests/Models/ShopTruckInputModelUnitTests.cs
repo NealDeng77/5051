@@ -40,18 +40,22 @@ namespace _5051.UnitTests.Models
         public void Models_ShopTruckInput_Instantiate_Get_Set_Should_Pass()
         {
             // Arange
-            var expect = new ShopTruckInputModel();
-            expect.ItemId = "item";
-            expect.Position = FactoryInventoryCategoryEnum.Topper;
-            expect.StudentId = "student";
-            expect.TruckName = "truckName";
+            var expect = new ShopTruckInputModel
+            {
+                ItemId = "item",
+                Position = FactoryInventoryCategoryEnum.Topper,
+                StudentId = "student",
+                TruckName = "truckName"
+            };
 
             // Act
-            var result = new ShopTruckInputModel();
-            result.ItemId = expect.ItemId;
-            result.Position = expect.Position;
-            result.StudentId = expect.StudentId;
-            result.TruckName = expect.TruckName;
+            var result = new ShopTruckInputModel
+            {
+                ItemId = expect.ItemId,
+                Position = expect.Position,
+                StudentId = expect.StudentId,
+                TruckName = expect.TruckName
+            };
 
             // Reset
             DataSourceBackend.Instance.Reset();

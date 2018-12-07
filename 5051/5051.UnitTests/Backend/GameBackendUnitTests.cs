@@ -235,9 +235,11 @@ namespace _5051.UnitTests.Backend
 
             for (int i = 0; i < 6; i++)
             {
-                TransactionModel transaction = new TransactionModel();
-                transaction.Name = "testing";
-                transaction.Uri = null;
+                TransactionModel transaction = new TransactionModel
+                {
+                    Name = "testing",
+                    Uri = null
+                };
                 studentModel.Truck.TransactionList.Add(transaction);
             }
 
@@ -638,8 +640,10 @@ namespace _5051.UnitTests.Backend
             var data = test.GetDefault();
             var studentData = new StudentModel();
             var student = DataSourceBackend.Instance.StudentBackend.Create(studentData);
-            var item = new FactoryInventoryModel();
-            item.Id = FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId();
+            var item = new FactoryInventoryModel
+            {
+                Id = FactoryInventoryBackend.Instance.GetFirstFactoryInventoryId()
+            };
 
             // act
             //student.Inventory.Remove(item);

@@ -77,9 +77,11 @@ namespace _5051.Controllers
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
-                var temp = new StudentDisplayViewModel(user);
-                temp.Name = item.UserName;
-                temp.Id = item.Id;
+                var temp = new StudentDisplayViewModel(user)
+                {
+                    Name = item.UserName,
+                    Id = item.Id
+                };
                 myReturn.StudentList.Add(temp);
             }
 
@@ -87,9 +89,11 @@ namespace _5051.Controllers
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
-                var temp = new StudentDisplayViewModel(user);
-                temp.Name = item.UserName;
-                temp.Id = item.Id;
+                var temp = new StudentDisplayViewModel(user)
+                {
+                    Name = item.UserName,
+                    Id = item.Id
+                };
                 myReturn.TeacherList.Add(temp);
             }
 
@@ -97,9 +101,11 @@ namespace _5051.Controllers
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
-                var temp = new StudentDisplayViewModel(user);
-                temp.Name = item.UserName;
-                temp.Id = item.Id;
+                var temp = new StudentDisplayViewModel(user)
+                {
+                    Name = item.UserName,
+                    Id = item.Id
+                };
                 myReturn.SupportList.Add(temp);
             }
 
@@ -107,9 +113,11 @@ namespace _5051.Controllers
             foreach (var item in data)
             {
                 var user = DataSourceBackend.Instance.StudentBackend.Read(item.Id);
-                var temp = new StudentDisplayViewModel(user);
-                temp.Name = item.UserName;
-                temp.Id = item.Id;
+                var temp = new StudentDisplayViewModel(user)
+                {
+                    Name = item.UserName,
+                    Id = item.Id
+                };
                 myReturn.UserList.Add(temp);
             }
 
@@ -162,10 +170,12 @@ namespace _5051.Controllers
 
             var RoleEnum = (UserRoleEnum)Enum.Parse(typeof(UserRoleEnum), item, true);
 
-            var myReturn = new ApplicationUserInputModel(myUserInfo);
-            myReturn.Id = myUserInfo.Id;
-            myReturn.Role = RoleEnum;
-            myReturn.State = DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(myUserInfo.Id, RoleEnum);
+            var myReturn = new ApplicationUserInputModel(myUserInfo)
+            {
+                Id = myUserInfo.Id,
+                Role = RoleEnum,
+                State = DataSourceBackend.Instance.IdentityBackend.UserHasClaimOfType(myUserInfo.Id, RoleEnum)
+            };
 
             return View(myReturn);
         }
@@ -260,10 +270,11 @@ namespace _5051.Controllers
                 return View(user);
             }
 
-            var newStudent = new StudentModel();
-
-            newStudent.Name = user.Email;
-            newStudent.Password = user.Password;
+            var newStudent = new StudentModel
+            {
+                Name = user.Email,
+                Password = user.Password
+            };
 
             DataSourceBackend.Instance.StudentBackend.Create(newStudent);
 
@@ -514,8 +525,10 @@ namespace _5051.Controllers
                 return RedirectToAction("UserList", "Support");
             }
 
-            var passModel = new ChangePasswordViewModel();
-            passModel.UserID = findResult.Id;
+            var passModel = new ChangePasswordViewModel
+            {
+                UserID = findResult.Id
+            };
 
 
             return View(passModel);

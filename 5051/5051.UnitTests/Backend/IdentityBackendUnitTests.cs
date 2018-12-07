@@ -191,9 +191,11 @@ namespace _5051.UnitTests.Backend
             //arrange
             var testUsername = "testStudent";
             var expectedClaimCount = 2;
-            var testStudent = new StudentModel();
-            testStudent.Name = testUsername;
-            testStudent.Id = testUsername;
+            var testStudent = new StudentModel
+            {
+                Name = testUsername,
+                Id = testUsername
+            };
 
             var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
 
@@ -237,9 +239,11 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var testUsername = "testStudent";
-            var testStudent = new StudentModel();
-            testStudent.Name = "";
-            testStudent.Id = testUsername;
+            var testStudent = new StudentModel
+            {
+                Name = "",
+                Id = testUsername
+            };
 
 
             var dummyUser = new ApplicationUser() { UserName = testUsername, Email = testUsername + "@seattleu.edu", Id = testUsername };
@@ -399,9 +403,11 @@ namespace _5051.UnitTests.Backend
             var backend = new IdentityDataSourceMock(userManager, null);
 
 
-            var testStudent = new StudentModel();
-            testStudent.Id = testUserID;
-            testStudent.Name = studentNewName;
+            var testStudent = new StudentModel
+            {
+                Id = testUserID,
+                Name = studentNewName
+            };
 
             //act
             var result = backend.UpdateStudent(testStudent);

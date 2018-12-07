@@ -35,8 +35,10 @@ namespace _5051.UnitTests.Models
             var expected = DateTime.UtcNow;
 
             // Act
-            var result = new KioskSettingsModel();
-            result.LastProcessedDate = expected;
+            var result = new KioskSettingsModel
+            {
+                LastProcessedDate = expected
+            };
 
             // Assert
             Assert.AreEqual(expected, result.LastProcessedDate, TestContext.TestName);
@@ -71,11 +73,13 @@ namespace _5051.UnitTests.Models
         public void Models_KioskSettings_Instantiate_With_Data_Should_Pass()
         {
             // Arrange
-            var myModelNew = new KioskSettingsModel();
+            var myModelNew = new KioskSettingsModel
+            {
 
-            // Set values to test
-            myModelNew.Password = "bogus";
-            myModelNew.Id = "test";
+                // Set values to test
+                Password = "bogus",
+                Id = "test"
+            };
             var expect = myModelNew.Password;
 
             // Act
@@ -110,8 +114,10 @@ namespace _5051.UnitTests.Models
         public void Models_KioskSettings_SetDefault_Default_Should_Pass()
         {
             // Arrange
-            var myModel = new KioskSettingsModel();
-            myModel.Password = "bogus";
+            var myModel = new KioskSettingsModel
+            {
+                Password = "bogus"
+            };
             var expect = myModel.Password;
 
             // Act

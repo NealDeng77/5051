@@ -214,8 +214,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarItemController();
 
-            var data = new AvatarItemModel();
-            data.Description = "description";
+            var data = new AvatarItemModel
+            {
+                Description = "description"
+            };
 
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");
@@ -324,8 +326,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarItemController();
 
-            var data = new AvatarItemModel();
-            data.Description = "description";
+            var data = new AvatarItemModel
+            {
+                Description = "description"
+            };
 
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");
@@ -485,8 +489,10 @@ namespace _5051.Tests.Controllers
             // Arrange
             var controller = new AvatarItemController();
 
-            var data = new AvatarItemModel();
-            data.Description = "description";
+            var data = new AvatarItemModel
+            {
+                Description = "description"
+            };
 
             // Make a model error then try to send it as a Avatar
             controller.ModelState.AddModelError("test", "test");

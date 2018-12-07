@@ -68,12 +68,14 @@ namespace _5051.UnitTests.Models
             var expectQuantities = 2000;
             var expectCategory = FactoryInventoryCategoryEnum.Topper;
 
-            var test = new FactoryInventoryModel();
-            test.Uri = expectUri;
-            test.Description = expectDescription;
-            test.Tokens = expectTokens;
-            test.Quantities = expectQuantities;
-            test.Category = expectCategory;
+            var test = new FactoryInventoryModel
+            {
+                Uri = expectUri,
+                Description = expectDescription,
+                Tokens = expectTokens,
+                Quantities = expectQuantities,
+                Category = expectCategory
+            };
 
             // Act
             var data = new FactoryInventoryModel(test);
@@ -103,12 +105,14 @@ namespace _5051.UnitTests.Models
 
             var data = new FactoryInventoryModel();
 
-            var test = new FactoryInventoryModel();
-            test.Uri = expectUri;
-            test.Description = expectDescription;
-            test.Tokens = expectTokens;
-            test.Quantities = expectQuantities;
-            test.Category = expectCategory;
+            var test = new FactoryInventoryModel
+            {
+                Uri = expectUri,
+                Description = expectDescription,
+                Tokens = expectTokens,
+                Quantities = expectQuantities,
+                Category = expectCategory
+            };
 
             // Act
             data.Update(test);
@@ -129,8 +133,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new FactoryInventoryModel();
-            data.Id = "test";
+            var data = new FactoryInventoryModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);

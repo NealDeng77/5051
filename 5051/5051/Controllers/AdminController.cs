@@ -40,10 +40,11 @@ namespace _5051.Controllers
             // Load the list of data into the StudentList
             var myDataList = DataSourceBackend.Instance.StudentBackend.Index();
 
-            var myReturn = new AdminReportIndexViewModel(myDataList);
+            var myReturn = new AdminReportIndexViewModel(myDataList)
+            {
+                Leaderboard = ReportBackend.Instance.GenerateLeaderboard()
+            };
 
-            myReturn.Leaderboard = ReportBackend.Instance.GenerateLeaderboard();
-            
 
             return View(myReturn);
         }
@@ -395,8 +396,10 @@ namespace _5051.Controllers
                 return RedirectToAction("Settings", "Admin");
             }
 
-            var passModel = new ChangePasswordViewModel();
-            passModel.UserID = findResult.Id;
+            var passModel = new ChangePasswordViewModel
+            {
+                UserID = findResult.Id
+            };
 
             return View(passModel);
         }

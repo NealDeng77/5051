@@ -31,7 +31,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile StudentDataSourceTable instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private StudentDataSourceTable() { }
 
@@ -64,12 +64,12 @@ namespace _5051.Backend
         /// <summary>
         /// Table Name used for data storage
         /// </summary>
-        private string tableName = ClassName.ToLower();
+        private readonly string tableName = ClassName.ToLower();
 
         /// <summary>
         /// Partition Key used for data storage
         /// </summary>
-        private string partitionKey = ClassName.ToLower();
+        private readonly string partitionKey = ClassName.ToLower();
 
         /// <summary>
         /// Makes a new Student
@@ -84,20 +84,24 @@ namespace _5051.Backend
                 DataList.Add(data);
             }
 
-            var temp = new StudentModel(data);
-            temp.Id = data.Id;
-            temp.AvatarComposite = null;
-            temp.AvatarInventory = null;
-            temp.Inventory = null;
-            temp.Attendance = null;
-            temp.Truck = null;
+            var temp = new StudentModel(data)
+            {
+                Id = data.Id,
+                AvatarComposite = null,
+                AvatarInventory = null,
+                Inventory = null,
+                Attendance = null,
+                Truck = null
+            };
 
             // Add to Storage, the smaller temp student
             DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", data.Id, temp, dataSourceEnum);
 
             // Sub Components
-            var tempData = new StudentModel(data);
-            tempData.Id = data.Id;
+            var tempData = new StudentModel(data)
+            {
+                Id = data.Id
+            };
 
             // Add to Storage, the smaller temp student
             DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id, temp, dataSourceEnum);
@@ -155,21 +159,25 @@ namespace _5051.Backend
             }
 
             // Update Storage
-            var temp = new StudentModel(data);
-            temp.Id = data.Id;
-            temp.AvatarComposite = null;
-            temp.AvatarInventory = null;
-            temp.Inventory = null;
-            temp.Attendance = null;
-            temp.Truck = null;
+            var temp = new StudentModel(data)
+            {
+                Id = data.Id,
+                AvatarComposite = null,
+                AvatarInventory = null,
+                Inventory = null,
+                Attendance = null,
+                Truck = null
+            };
 
             // Add to Storage, the smaller temp student
             DataSourceBackendTable.Instance.Create<StudentModel>(tableName, "student", temp.Id, temp);
 
 
             // Sub components
-            var tempData = new StudentModel(data);
-            tempData.Id = data.Id;
+            var tempData = new StudentModel(data)
+            {
+                Id = data.Id
+            };
 
             // Now store each of the Sub Structures as independent rows
             DataSourceBackendTable.Instance.Create<AvatarCompositeModel>(tableName, "composite", tempData.Id, tempData.AvatarComposite);

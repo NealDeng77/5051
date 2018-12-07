@@ -80,8 +80,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new ManageController();
-            var data = new AddPhoneNumberViewModel();
-            data.Number = "123";
+            var data = new AddPhoneNumberViewModel
+            {
+                Number = "123"
+            };
 
             // Act
             var result = controller.AddPhoneNumber(data);
@@ -128,10 +130,12 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new ManageController();
-            var data = new ChangePasswordViewModel();
-            data.ConfirmPassword = "123";
-            data.NewPassword= "123";
-            data.OldPassword = "123";
+            var data = new ChangePasswordViewModel
+            {
+                ConfirmPassword = "123",
+                NewPassword = "123",
+                OldPassword = "123"
+            };
 
             // Act
             var result = controller.ChangePassword(data);
@@ -166,8 +170,10 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new ManageController();
-            var data = new VerifyPhoneNumberViewModel();
-            data.PhoneNumber = "123";
+            var data = new VerifyPhoneNumberViewModel
+            {
+                PhoneNumber = "123"
+            };
 
             // Act
             var result = controller.VerifyPhoneNumber(data);
@@ -202,9 +208,11 @@ namespace _5051.Tests.Controllers
         {
             // Arrange
             var controller = new ManageController();
-            var data = new SetPasswordViewModel();
-            data.NewPassword = "123";
-            data.ConfirmPassword= "123";
+            var data = new SetPasswordViewModel
+            {
+                NewPassword = "123",
+                ConfirmPassword = "123"
+            };
 
             // Act
             var result = controller.SetPassword(data);

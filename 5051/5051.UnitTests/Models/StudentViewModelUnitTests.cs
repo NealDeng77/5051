@@ -37,8 +37,10 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             List<StudentModel> data = new List<StudentModel>();
-            var data1 = new StudentModel();
-            data1.Id = "hi";
+            var data1 = new StudentModel
+            {
+                Id = "hi"
+            };
             data.Add(data1);
             var expect = "hi";
 

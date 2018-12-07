@@ -15,7 +15,7 @@ namespace _5051.Backend
         /// Make into a singleton
         /// </summary>
         private static volatile StudentDataSourceMock instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private StudentDataSourceMock() { }
 

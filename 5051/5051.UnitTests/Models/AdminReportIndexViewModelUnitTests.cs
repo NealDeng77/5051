@@ -27,10 +27,12 @@ namespace _5051.UnitTests.Models
             //arrange
             var studentList = DataSourceBackend.Instance.StudentBackend.Index();
             var expectedLeaderBoard = new List<StudentModel>();
-            var test = new AdminReportIndexViewModel(studentList);
+            var test = new AdminReportIndexViewModel(studentList)
+            {
 
-            //act
-            test.Leaderboard = expectedLeaderBoard;
+                //act
+                Leaderboard = expectedLeaderBoard
+            };
 
             //assert
             Assert.AreEqual(expectedLeaderBoard, test.Leaderboard, TestContext.TestName);

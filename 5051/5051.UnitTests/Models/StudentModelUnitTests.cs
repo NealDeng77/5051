@@ -52,9 +52,11 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             var expect = "test";
-            var data = new StudentDisplayViewModel();
-            data.Name = expect;
-                
+            var data = new StudentDisplayViewModel
+            {
+                Name = expect
+            };
+
             // Act
             var result = new StudentModel(data);
 
@@ -67,8 +69,10 @@ namespace _5051.UnitTests.Models
         {
             // Arrange
             var expect = "test";
-            var data = new StudentModel();
-            data.Name = expect;
+            var data = new StudentModel
+            {
+                Name = expect
+            };
 
             // Act
             var result = new StudentModel(data);
@@ -91,16 +95,18 @@ namespace _5051.UnitTests.Models
             // Set all the fields for a Student
             var data = new StudentModel();
 
-            var test = new StudentModel();
-            test.Id = "Id";
-            test.Name = "Name";
-            test.Password = "Password";
-            test.Status = StudentStatusEnum.Hold;
-            test.Tokens = 1000;
-            test.ExperiencePoints = 1000;
-            test.EmotionCurrent = EmotionStatusEnum.Happy;
+            var test = new StudentModel
+            {
+                Id = "Id",
+                Name = "Name",
+                Password = "Password",
+                Status = StudentStatusEnum.Hold,
+                Tokens = 1000,
+                ExperiencePoints = 1000,
+                EmotionCurrent = EmotionStatusEnum.Happy,
 
-            test.AvatarLevel = 10;
+                AvatarLevel = 10
+            };
 
             var tempAttendance = new AttendanceModel();
             test.Attendance.Add(tempAttendance);
@@ -138,8 +144,10 @@ namespace _5051.UnitTests.Models
 
             var expect = "test";
 
-            var data = new StudentModel();
-            data.Id = "test";
+            var data = new StudentModel
+            {
+                Id = "test"
+            };
 
             // Act
             data.Update(null);

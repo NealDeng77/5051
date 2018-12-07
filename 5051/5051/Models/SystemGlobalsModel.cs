@@ -12,7 +12,7 @@ namespace _5051.Models
         /// Make into a Singleton
         /// </summary>
         private static volatile SystemGlobalsModel instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private SystemGlobalsModel() { }
 

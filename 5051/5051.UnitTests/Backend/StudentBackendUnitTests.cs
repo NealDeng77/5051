@@ -118,9 +118,11 @@ namespace _5051.UnitTests.Backend
         {
             //arrange
             var statusAfterEnum = _5051.Models.StudentStatusEnum.In;
-            var testStudent = new StudentModel();
-            testStudent.Status = statusAfterEnum;
-            testStudent.Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id;
+            var testStudent = new StudentModel
+            {
+                Status = statusAfterEnum,
+                Id = DataSourceBackend.Instance.StudentBackend.GetDefault().Id
+            };
 
             //act
             var updateResult = DataSourceBackend.Instance.StudentBackend.Update(testStudent);
@@ -463,8 +465,10 @@ namespace _5051.UnitTests.Backend
             var student = DataSourceBackend.Instance.StudentBackend.GetDefault();
 
             // Add an Attendance Record
-            var data = new AttendanceModel();
-            data.Out = DateTime.UtcNow;
+            var data = new AttendanceModel
+            {
+                Out = DateTime.UtcNow
+            };
             data.In = data.Out.AddMinutes(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
             data.IsNew = false;
             student.Attendance.Add(data);
@@ -511,8 +515,10 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = 0;
 
-            var data = new AttendanceModel();
-            data.In = DateTime.UtcNow;
+            var data = new AttendanceModel
+            {
+                In = DateTime.UtcNow
+            };
             data.Out = data.In.AddMinutes(-1);  // Make Time out earlier than Time in, resulting in no duration
 
             // Act
@@ -532,10 +538,11 @@ namespace _5051.UnitTests.Backend
             var expect = 0;
 
             var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
-            var data = new AttendanceModel();
-
-            data.Out = firstDay.Date;
-            data.In = firstDay.Date;
+            var data = new AttendanceModel
+            {
+                Out = firstDay.Date,
+                In = firstDay.Date
+            };
 
             data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
             data.Out = data.In.AddMinutes(1);   // Attended class for 1 min.
@@ -559,10 +566,11 @@ namespace _5051.UnitTests.Backend
             var expect = 1;
 
             var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
-            var data = new AttendanceModel();
-
-            data.Out = firstDay.Date;
-            data.In = firstDay.Date;
+            var data = new AttendanceModel
+            {
+                Out = firstDay.Date,
+                In = firstDay.Date
+            };
 
             data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
             data.Out = data.In.AddMinutes(6);   // Attended class for 6 min.
@@ -587,10 +595,11 @@ namespace _5051.UnitTests.Backend
             var expect = 1;
 
             var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
-            var data = new AttendanceModel();
-
-            data.Out = firstDay.Date;
-            data.In = firstDay.Date;
+            var data = new AttendanceModel
+            {
+                Out = firstDay.Date,
+                In = firstDay.Date
+            };
 
             data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
             data.Out = data.In.AddMinutes(60);   // Attended class for 60 min.
@@ -615,10 +624,11 @@ namespace _5051.UnitTests.Backend
             var expect = 2;
 
             var firstDay = DataSourceBackend.Instance.SchoolCalendarBackend.GetDefault();
-            var data = new AttendanceModel();
-
-            data.Out = firstDay.Date;
-            data.In = firstDay.Date;
+            var data = new AttendanceModel
+            {
+                Out = firstDay.Date,
+                In = firstDay.Date
+            };
 
             data.In = data.In.AddMinutes(firstDay.TimeStart.TotalMinutes);
             data.Out = data.In.AddHours(2);   // Attended class for 2 hrs
@@ -642,8 +652,10 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = 0;
 
-            var data = new AttendanceModel();
-            data.Out = DateTime.Parse("1/1/2100");  // Make date out of range, so return null
+            var data = new AttendanceModel
+            {
+                Out = DateTime.Parse("1/1/2100")  // Make date out of range, so return null
+            };
             data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
 
             // Act
@@ -683,8 +695,10 @@ namespace _5051.UnitTests.Backend
             // Arrange
             var expect = TimeSpan.Zero;
 
-            var data = new AttendanceModel();
-            data.Out = DateTime.Parse("1/1/2100");  // Make date out of range, so return null
+            var data = new AttendanceModel
+            {
+                Out = DateTime.Parse("1/1/2100")  // Make date out of range, so return null
+            };
             data.In = data.Out.AddHours(-1);  // Make Time in earlier than Time out, but only 1 minutes, so no tokens
 
             // Act
