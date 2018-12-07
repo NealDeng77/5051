@@ -440,10 +440,12 @@ namespace _5051.Backend
         /// <returns></returns>
         public DataSourceBackendTableEntity ConvertToEntity<T>(T data, string pk, string rk)
         {
-            var entity = new DataSourceBackendTableEntity();
-            entity.PartitionKey = pk;
-            entity.RowKey = rk;
-            entity.Blob = JsonConvert.SerializeObject(data);
+            var entity = new DataSourceBackendTableEntity
+            {
+                PartitionKey = pk,
+                RowKey = rk,
+                Blob = JsonConvert.SerializeObject(data)
+            };
 
             return entity;
         }
