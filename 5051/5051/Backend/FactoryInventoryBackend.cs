@@ -16,7 +16,7 @@ namespace _5051.Backend
         /// Make into a Singleton
         /// </summary>
         private static volatile FactoryInventoryBackend instance;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new Object();
 
         private FactoryInventoryBackend() { }
 
@@ -439,17 +439,18 @@ namespace _5051.Backend
 
         public ShopTruckViewModel GetShopTruckViewModel(StudentModel studentData)
         {
-            var data = new ShopTruckViewModel();
+            var data = new ShopTruckViewModel
+            {
+                StudentId = studentData.Id,
 
-            data.StudentId = studentData.Id;
-
-            // Load the data set for each type
-            data.TruckItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Truck);
-            data.WheelsItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Wheels);
-            data.TopperItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Topper);
-            data.TrailerItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Trailer);
-            data.MenuItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Menu);
-            data.SignItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Sign);
+                // Load the data set for each type
+                TruckItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Truck),
+                WheelsItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Wheels),
+                TopperItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Topper),
+                TrailerItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Trailer),
+                MenuItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Menu),
+                SignItem = GetShopTruckItemViewModel(studentData.Id, studentData.Truck.Sign)
+            };
 
             return data;
         }
