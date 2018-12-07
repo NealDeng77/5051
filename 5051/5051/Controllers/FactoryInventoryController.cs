@@ -36,9 +36,11 @@ namespace _5051.Controllers
             // Load the ones
             foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
             {
-                var temp = new FactoryInventoryViewModel();
-                temp.Category = (FactoryInventoryCategoryEnum)item;
-                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+                var temp = new FactoryInventoryViewModel
+                {
+                    Category = (FactoryInventoryCategoryEnum)item,
+                    FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList()
+                };
 
                 if (temp.FactoryInventoryList.Any())
                 {
