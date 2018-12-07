@@ -109,7 +109,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.Load<AvatarItemModel>(table, pk, null);
@@ -203,7 +203,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.LoadDirect<AvatarItemModel>(table, pk, null);
@@ -429,7 +429,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.Update<AvatarItemModel>(table, pk, null,data);
@@ -549,7 +549,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.UpdateDirect<AvatarItemModel>(table, pk, null,data);
@@ -703,7 +703,7 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.SetTestingMode(true);
 
             var backend = DataSourceBackendTable.Instance;
-            var expectEnum = DataSourceEnum.ServerLive;
+            //var expectEnum = DataSourceEnum.ServerLive;
 
             // Act
             var result = backend.SetDataSourceServerModeDirect("bogus");
@@ -774,7 +774,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.Delete<AvatarItemModel>(table, pk, null);
@@ -868,7 +868,7 @@ namespace _5051.UnitTests.Backend
             var data = new AvatarItemModel();
             var table = "AvatarItemModel".ToLower();
             var pk = table;
-            var rk = "rk";
+            //var rk = "rk";
 
             // Act
             var result = backend.DeleteDirect<AvatarItemModel>(table, pk, null);
@@ -938,9 +938,11 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.SetTestingMode(true);
             var backend = DataSourceBackendTable.Instance;
 
-            var data = new DataSourceBackendTableEntity();
-            data.PartitionKey = "pk";
-            data.RowKey = "rk";
+            var data = new DataSourceBackendTableEntity
+            {
+                PartitionKey = "pk",
+                RowKey = "rk"
+            };
             var datablob = new AvatarItemModel();
 
             var entity = backend.ConvertToEntity<AvatarItemModel>(datablob, data.PartitionKey,data.RowKey);
@@ -985,15 +987,19 @@ namespace _5051.UnitTests.Backend
             DataSourceBackend.SetTestingMode(true);
             var backend = DataSourceBackendTable.Instance;
 
-            var temp = new DataSourceBackendTableEntity();
-            temp.PartitionKey = "pk";
-            temp.RowKey = "rk";
+            var temp = new DataSourceBackendTableEntity
+            {
+                PartitionKey = "pk",
+                RowKey = "rk"
+            };
             var tempblob = new AvatarItemModel();
 
             var entity = backend.ConvertToEntity<AvatarItemModel>(tempblob, temp.PartitionKey, temp.RowKey);
 
-            var data = new List<DataSourceBackendTableEntity>();
-            data.Add(entity);
+            var data = new List<DataSourceBackendTableEntity>
+            {
+                entity
+            };
 
             // Act
             var result = backend.ConvertFromEntityList<AvatarItemModel>(data);
