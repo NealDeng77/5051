@@ -58,9 +58,11 @@ namespace _5051.Controllers
             // Load the ones
             foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
             {
-                var temp = new FactoryInventoryViewModel();
-                temp.Category = (FactoryInventoryCategoryEnum)item;
-                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+                var temp = new FactoryInventoryViewModel
+                {
+                    Category = (FactoryInventoryCategoryEnum)item,
+                    FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList()
+                };
 
                 if (temp.FactoryInventoryList.Any())
                 {
@@ -172,9 +174,11 @@ namespace _5051.Controllers
             myStudent.Inventory.Add(myItem);
 
             // Add info into businessList
-            TransactionModel myTransaction = new TransactionModel();
-            myTransaction.Name = "Buy " + myItem.Name + " by spending " + myItem.Tokens;
-            myTransaction.Uri = null;
+            TransactionModel myTransaction = new TransactionModel
+            {
+                Name = "Buy " + myItem.Name + " by spending " + myItem.Tokens,
+                Uri = null
+            };
             myStudent.Truck.BusinessList.Add(myTransaction);
 
             // Update Student
@@ -228,9 +232,11 @@ namespace _5051.Controllers
 
             foreach (var item in Enum.GetValues(typeof(FactoryInventoryCategoryEnum)))
             {
-                var temp = new FactoryInventoryViewModel();
-                temp.Category = (FactoryInventoryCategoryEnum)item;
-                temp.FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList();
+                var temp = new FactoryInventoryViewModel
+                {
+                    Category = (FactoryInventoryCategoryEnum)item,
+                    FactoryInventoryList = InventoryList.Where(m => m.Category == (FactoryInventoryCategoryEnum)item).ToList()
+                };
 
                 if (temp.FactoryInventoryList.Any())
                 {
@@ -514,10 +520,12 @@ namespace _5051.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var data = new BusinessReportViewModel();
-            data.income = myStudent.Truck.Income;
-            data.outcome = myStudent.Truck.Outcome;
-            data.BusinessList = myStudent.Truck.BusinessList;
+            var data = new BusinessReportViewModel
+            {
+                income = myStudent.Truck.Income,
+                outcome = myStudent.Truck.Outcome,
+                BusinessList = myStudent.Truck.BusinessList
+            };
 
             return View(data);
         }
