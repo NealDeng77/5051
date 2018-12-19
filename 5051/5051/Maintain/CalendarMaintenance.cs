@@ -22,19 +22,26 @@ namespace _5051.Maintain
 
     public class CalendarMaintenance
     {
+        // remove duplicate dates in the calendar set
+        // pre: the calendar set is ordered by date
+        // post: all dates in the calendar set are unique
         public bool ResetCalendar()
         {
-
             var calendarSet = DataSourceBackend.Instance.SchoolCalendarBackend.Index();
-            foreach (var item in calendarSet)
+            var cur = calendarSet[0].Date;
+            for (int i = 1; i < calendarSet.Count(); i++)
             {
-                // Check the calendar against what the default would have been.
-                var temp = new SchoolCalendarModel(item.Date);
-                // Compare Item with Temp, to see what is different ?
-
-                // I noticed the setdefault code in SchoolCalendar is commented out, not sure why, but that would be where I would investigate.
+                var item = calendarSet[i];
+                if (cur.Equals(item.Date))
+                {
+                    DataSourceBackend.Instance.SchoolCalendarBackend.Delete(item.Id);
+                    i--;
+                }
+                else
+                {
+                    cur = item.Date;
+                }
             }
-
             return true;
         }
     }
