@@ -49,5 +49,40 @@ namespace _5051.Tests.Maintenance
             Assert.AreEqual(true, result, TestContext.TestName);
         }
         #endregion Instantiate
+
+        #region TestRemoveDuplicateOrNot
+        [TestMethod]
+        public void Maintenance_Reset_Test_Remove_Duplicate_Or_Not_Should_Pass()
+        {
+            var Maintenance = new CalendarMaintenance();
+
+            var calendarSet = DataSourceBackend.Instance.SchoolCalendarBackend.Index();
+            calendarSet.Clear();
+
+            var calendarModel1 = new SchoolCalendarModel();
+            calendarModel1.Date = new DateTime(2010, 6, 4);
+
+            var calendarModel2 = new SchoolCalendarModel();
+            calendarModel2.Date = new DateTime(2010, 6, 5);
+
+            var calendarModel3 = new SchoolCalendarModel();
+            calendarModel3.Date = new DateTime(2010, 6, 5);
+
+            calendarSet.Add(calendarModel1);
+            calendarSet.Add(calendarModel2);
+            calendarSet.Add(calendarModel3);
+
+            Assert.AreEqual(calendarSet.Count(), 3, TestContext.TestName);
+
+            var result = Maintenance.ResetCalendar();
+
+            // Assert
+            Assert.AreEqual(calendarSet.Count(), 2, TestContext.TestName);
+
+            // reset
+            DataSourceBackend.Instance.SchoolCalendarBackend.Reset();
+        }
+
+        #endregion TestRemoveDuplicateOrNot
     }
 }
