@@ -26,6 +26,19 @@ namespace _5051.UnitTests.Models
         }
 
         [TestMethod]
+        public void Models_AttendanceModel_Default_Instantiate_With_Null_Should_Fail()
+        {
+            // Arange
+            var myData = new AttendanceModel();
+
+            // Act
+            var result = myData.Update(null);
+
+            // Assert
+            Assert.AreEqual(result, null, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void Models_AttendanceModel_Default_Instantiate_Get_Set_Should_Pass()
         {
             //arrange
